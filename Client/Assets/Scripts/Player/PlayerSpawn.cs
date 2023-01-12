@@ -32,6 +32,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         estado = Estados.Juego;
         escPul=false;
         TPul=false;
+
+        chatManager.SetActive(true);
         //We check if it's the first time the user entered the room.
         if(reload == false){
         int randomNumber = Random.Range(0, spawnPoints.Length);
@@ -110,9 +112,9 @@ private void Update() {
     {
         if (Input.GetKeyDown(KeyCode.T) && !TPul)
             {
-                chatManager.GetComponent<PhotonChatManager>().ChatConnectOnClick();
                 Debug.Log("T pulsada");
                 chatManager.SetActive(true);
+                chatManager.GetComponent<PhotonChatManager>().ChatConnectOnClick();
                 playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
 
                 Cursor.visible = true;   

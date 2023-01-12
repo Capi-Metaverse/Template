@@ -908,7 +908,7 @@ PrefabInstance:
     - target: {fileID: 2365219672436742047, guid: f49700300af5a254ebfb8ff8db158be5, type: 3}
       propertyPath: chatManager
       value: 
-      objectReference: {fileID: 612052562393579776, guid: 50146c85af9959548ae72f1b0b0e83dc, type: 3}
+      objectReference: {fileID: 1492387521}
     - target: {fileID: 2365219672436742047, guid: f49700300af5a254ebfb8ff8db158be5, type: 3}
       propertyPath: spawnPoints.Array.data[0]
       value: 
@@ -9850,6 +9850,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50146c85af9959548ae72f1b0b0e83dc, type: 3}
+--- !u!1 &1492387521 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 612052562393579776, guid: 50146c85af9959548ae72f1b0b0e83dc, type: 3}
+  m_PrefabInstance: {fileID: 1492387520}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1501851795
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -45,9 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60df56aa528da1d409e2e9a6e65a3b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joinChatButton: {fileID: 0}
-  username: 
   chatPanel: {fileID: 7535313143914947762}
+  username: Prueba1234
   chatField: {fileID: 1367608062049973836}
   chatDisplay: {fileID: 1049957755262276190}
 --- !u!1 &662633213871552516

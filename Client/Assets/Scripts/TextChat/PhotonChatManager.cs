@@ -12,13 +12,11 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 {
     #region Setup
 
+    [SerializeField] GameObject chatPanel;
     ChatClient chatClient;
     bool isConnected;
     [SerializeField] string username;
-
     Player player;
-
-    
 
     public void ChatConnectOnClick()
     {
@@ -35,7 +33,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     #region General
 
-    [SerializeField] GameObject chatPanel;
     string privateReceiver = "";
     string currentChat;
     [SerializeField] TMP_InputField chatField;
@@ -44,19 +41,15 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     // Start is called before the first frame update
     void Start()
     {
-
+        Debug.Log("Holaaa start");
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
         if (isConnected)
         {
-            
             chatClient.Service();
-            OnConnected();
         }
 
         if (chatField.text != "" && Input.GetKey(KeyCode.Return))
