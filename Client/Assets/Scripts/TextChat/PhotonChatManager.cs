@@ -12,7 +12,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 {
     #region Setup
 
-    [SerializeField] GameObject joinChatButton;
     ChatClient chatClient;
     bool isConnected;
     [SerializeField] string username;
@@ -51,9 +50,13 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     // Update is called once per frame
     void Update()
     {
+
+
         if (isConnected)
         {
+            
             chatClient.Service();
+            OnConnected();
         }
 
         if (chatField.text != "" && Input.GetKey(KeyCode.Return))
@@ -115,7 +118,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         if(state == ChatState.Uninitialized)
         {
             isConnected = false;
-            joinChatButton.SetActive(true);
             chatPanel.SetActive(false);
         }
     }
@@ -123,14 +125,12 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     public void OnConnected()
     {
         Debug.Log("Connected");
-        joinChatButton.SetActive(false);
         chatClient.Subscribe(new string[] { "RegionChannel" });
     }
 
     public void OnDisconnected()
     {
         isConnected = false;
-        joinChatButton.SetActive(true);
         chatPanel.SetActive(false);
     }
 

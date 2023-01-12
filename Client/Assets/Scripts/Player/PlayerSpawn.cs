@@ -12,10 +12,10 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 {
     private Estados estado;
     private TestHome voiceChat;
+    public GameObject chatManager;
     public GameObject[] playerPrefabs;
     public Transform[] spawnPoints;
     public GameObject Pausa;
-    public GameObject Chat;
     public GameObject Settings;
     public string mapName;
    
@@ -110,9 +110,9 @@ private void Update() {
     {
         if (Input.GetKeyDown(KeyCode.T) && !TPul)
             {
+                chatManager.GetComponent<PhotonChatManager>().ChatConnectOnClick();
                 Debug.Log("T pulsada");
-                Chat.SetActive(true);
-                //Time.timeScale = 0;
+                chatManager.SetActive(true);
                 playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
 
                 Cursor.visible = true;   
@@ -131,7 +131,7 @@ private void Update() {
         if (Input.GetKeyDown(KeyCode.T) && !TPul)
         {
            
-            Chat.SetActive(false);
+            chatManager.SetActive(false);
             Time.timeScale = 1;
             playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
             Cursor.visible = false;   
