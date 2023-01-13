@@ -108,6 +108,7 @@ private void Update() {
             Settings.SetActive(false);
             Pausa.SetActive(false);
             chatManager.SetActive(false);
+            TPul=false;
             Time.timeScale = 1;
             playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
             Cursor.visible = false;   
@@ -134,23 +135,6 @@ private void Update() {
             }
     }      
     
-    if (!Input.GetKeyDown(KeyCode.T)) TPul=false; // Detecta si no está pulsado
-
-    //Estado juego
-    if (estado == Estados.Pausa)
-    {
-        if (Input.GetKeyDown(KeyCode.T) && !TPul)
-        {
-           
-            chatManager.SetActive(false);
-            Time.timeScale = 1;
-            playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
-            Cursor.visible = false;   
-            Cursor.lockState = CursorLockMode.Locked; // Menu de opciones, para que se bloquee la camara 
-            estado = Estados.Juego;
-            Debug.Log(estado);  
-        }
-    }
     }
 
     public enum Estados

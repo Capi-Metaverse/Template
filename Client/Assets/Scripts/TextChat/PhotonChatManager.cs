@@ -70,6 +70,10 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
             chatClient.PublishMessage("RegionChannel", currentChat);
             chatField.text = "";
             currentChat = "";
+            
+            chatField.ActivateInputField();
+           
+            
         }
     }
 
@@ -94,6 +98,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
             chatClient.SendPrivateMessage(privateReceiver, currentChat);
             chatField.text = "";
             currentChat = "";
+            chatField.ActivateInputField();
         }
     }
 
@@ -162,6 +167,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     {
         chatPanel.SetActive(true);
         Debug.Log("Aqui llego por tano no esta el error");
+       
     }
 
     public void OnUnsubscribed(string[] channels)
