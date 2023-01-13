@@ -201,6 +201,7 @@ MonoBehaviour:
   rayDistance: 2
   active: 0
   playerSpawner: {fileID: 0}
+  targetTime: 0.5
   canMove: 1
 --- !u!1001 &2274219308998691755
 PrefabInstance:
