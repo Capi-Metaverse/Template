@@ -30,10 +30,13 @@ public class SC_FPSController : MonoBehaviour
 
     [HideInInspector]
     public bool canMove = true;
-    
+
+    Animator anim;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        anim = transform.GetChild(0).GetComponent<Animator>();
         playerSpawner = GameObject.Find("PlayerSpawner").GetComponent<PlayerSpawn>();
 
         // Lock cursor
@@ -85,6 +88,7 @@ public class SC_FPSController : MonoBehaviour
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
             moveDirection.y = jumpSpeed;
+            anim.SetTrigger("Jumping");
         }
         else
         {
@@ -101,6 +105,13 @@ public class SC_FPSController : MonoBehaviour
 
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
+
+        //Animation
+        if ((Input.GetAxis("Vertical")!= 0)|| (Input.GetAxis("Horizontal")!=0))
+            anim.SetBool("Walking",true);
+        else
+            anim.SetBool("Walking",false);
+        anim.SetBool("Running",isRunning);
 
         // Player and Camera rotation
         if (canMove)
