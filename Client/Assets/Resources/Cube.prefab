@@ -259,6 +259,7 @@ MonoBehaviour:
   rayDistance: 3
   active: 0
   playerSpawner: {fileID: 0}
+  targetTime: 0.5
   canMove: 1
 --- !u!114 &11293160675821655
 MonoBehaviour:

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4244024665398537397}
-  - component: {fileID: 8971843587602080996}
+  - component: {fileID: 7162544479267232431}
   m_Layer: 0
   m_Name: ChatManager
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8971843587602080996
+--- !u!114 &7162544479267232431
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatPanel: {fileID: 7535313143914947762}
-  username: Prueba1234
+  username: 
   chatField: {fileID: 1367608062049973836}
   chatDisplay: {fileID: 1049957755262276190}
 --- !u!1 &662633213871552516
@@ -280,7 +280,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8971843587602080996}
+      - m_Target: {fileID: 7162544479267232431}
         m_TargetAssemblyTypeName: PhotonChatManager, Assembly-CSharp
         m_MethodName: SubmitPublicChatOnClick
         m_Mode: 1
@@ -292,7 +292,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8971843587602080996}
+      - m_Target: {fileID: 7162544479267232431}
         m_TargetAssemblyTypeName: PhotonChatManager, Assembly-CSharp
         m_MethodName: SubmitPrivateChatOnClick
         m_Mode: 1
@@ -615,7 +615,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8971843587602080996}
+      - m_Target: {fileID: 7162544479267232431}
         m_TargetAssemblyTypeName: PhotonChatManager, Assembly-CSharp
         m_MethodName: TypeChatOnValueChange
         m_Mode: 0
@@ -1082,7 +1082,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8971843587602080996}
+      - m_Target: {fileID: 7162544479267232431}
         m_TargetAssemblyTypeName: PhotonChatManager, Assembly-CSharp
         m_MethodName: ReceiverOnValueChange
         m_Mode: 0
@@ -1368,8 +1368,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 466582952035817566}
   m_HandleRect: {fileID: 4005724977354073790}
   m_Direction: 2
-  m_Value: -0.0000011475585
-  m_Size: 0.6762776
+  m_Value: -0.0000012750652
+  m_Size: 0.67627764
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

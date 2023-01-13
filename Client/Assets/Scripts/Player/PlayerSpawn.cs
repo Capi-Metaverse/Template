@@ -15,20 +15,14 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     public GameObject[] playerPrefabs;
     public Transform[] spawnPoints;
     public GameObject Pausa;
+    public GameObject chatManager;
     public GameObject Settings;
-    public GameObject[] playerPrefabs;
+  
 
     //Map Variables
     public string mapName;
     bool escPul;
     bool TPul;
-
-    //Other variables
-    private Estados estado;
-    private TestHome voiceChat;
-    
-    public Transform[] spawnPoints;
-
     //Static variables
     static bool reload = false;
     static Vector3 spawnPoint;
@@ -113,6 +107,7 @@ private void Update() {
         {
             Settings.SetActive(false);
             Pausa.SetActive(false);
+            chatManager.SetActive(false);
             Time.timeScale = 1;
             playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
             Cursor.visible = false;   

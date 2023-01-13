@@ -161,6 +161,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     public void OnSubscribed(string[] channels, bool[] results)
     {
         chatPanel.SetActive(true);
+        Debug.Log("Aqui llego por tano no esta el error");
     }
 
     public void OnUnsubscribed(string[] channels)
