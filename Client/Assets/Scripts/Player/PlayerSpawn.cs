@@ -67,7 +67,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             voiceChat.CheckMicroImage();
 
 
-            //PhotonNetwork.IsMessageQueueRunning = true;
+            PhotonNetwork.IsMessageQueueRunning = true;
 
 
 }
@@ -127,12 +127,34 @@ public void OnEvent(EventData photonEvent)
 {
    if(photonEvent.Code == 1)
    {
+    PhotonNetwork.IsMessageQueueRunning = false;
     //We maintain the same state between reloads.
     reload = true;
     spawnPoint = playerToSpawn.transform.position;
    
    //We reload the level
    PhotonNetwork.LoadLevel(mapName);
+   }
+
+    if(photonEvent.Code == 21)
+   {
+         
+    GameObject child = GameObject.Find("/Lamp/Bulb");
+   
+    child.GetComponent<Lamp>().activate();
+
+
+ 
+   }
+}
+
+//Recibir eventos
+public void ChangeRoom(string map)
+{
+   if(map == "Mapa2")
+   {
+   //We reload the level
+   PhotonNetwork.LoadLevel(map);
    }
 }
 }

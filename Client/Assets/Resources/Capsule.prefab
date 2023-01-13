@@ -159,6 +159,10 @@ MonoBehaviour:
   playerCamera: {fileID: 7979366635509001647}
   lookSpeed: 2
   lookXLimit: 45
+  rayDistance: 3
+  active: 0
+  playerSpawner: {fileID: 0}
+  targetTime: 1
   canMove: 1
 --- !u!114 &1293765136400832076
 MonoBehaviour:

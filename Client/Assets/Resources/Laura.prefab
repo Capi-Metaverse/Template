@@ -198,6 +198,9 @@ MonoBehaviour:
   playerCamera: {fileID: 4653904766422305954}
   lookSpeed: 2
   lookXLimit: 45
+  rayDistance: 2
+  active: 0
+  playerSpawner: {fileID: 0}
   canMove: 1
 --- !u!1001 &2274219308998691755
 PrefabInstance:
