@@ -10,7 +10,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 {
-    //GameObjects
+    private Estados estado;
+    private TestHome voiceChat;
+    public GameObject[] playerPrefabs;
+    public Transform[] spawnPoints;
     public GameObject Pausa;
     public GameObject Settings;
     public GameObject[] playerPrefabs;
@@ -18,6 +21,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     //Map Variables
     public string mapName;
     bool escPul;
+    bool TPul;
 
     //Other variables
     private Estados estado;
@@ -37,6 +41,9 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         //States
         estado = Estados.Juego;
         escPul=false;
+        TPul=false;
+
+        chatManager.SetActive(true);
 
         //We check if it's the first time the user entered the room.
         if(reload == false){
@@ -106,6 +113,41 @@ private void Update() {
         {
             Settings.SetActive(false);
             Pausa.SetActive(false);
+            Time.timeScale = 1;
+            playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
+            Cursor.visible = false;   
+            Cursor.lockState = CursorLockMode.Locked; // Menu de opciones, para que se bloquee la camara 
+            estado = Estados.Juego;
+            Debug.Log(estado);  
+        }
+    }
+
+     if (estado == Estados.Juego)
+    {
+        if (Input.GetKeyDown(KeyCode.T) && !TPul)
+            {
+                Debug.Log("T pulsada");
+                chatManager.SetActive(true);
+                chatManager.GetComponent<PhotonChatManager>().ChatConnectOnClick();
+                playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
+
+                Cursor.visible = true;   
+                Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
+                estado = Estados.Pausa;
+                TPul=true; //Escape activado
+                Debug.Log(estado);
+            }
+    }      
+    
+    if (!Input.GetKeyDown(KeyCode.T)) TPul=false; // Detecta si no está pulsado
+
+    //Estado juego
+    if (estado == Estados.Pausa)
+    {
+        if (Input.GetKeyDown(KeyCode.T) && !TPul)
+        {
+           
+            chatManager.SetActive(false);
             Time.timeScale = 1;
             playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
             Cursor.visible = false;   
