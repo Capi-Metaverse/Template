@@ -198,6 +198,10 @@ MonoBehaviour:
   playerCamera: {fileID: 7083322979762619072}
   lookSpeed: 2
   lookXLimit: 45
+  rayDistance: 3
+  active: 0
+  playerSpawner: {fileID: 0}
+  targetTime: 0.5
   canMove: 1
 --- !u!1001 &370284191372645139
 PrefabInstance:
@@ -490,7 +494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2800602913417539097, guid: e84e19ef6702a544180c220988425940, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.72
       objectReference: {fileID: 0}
     - target: {fileID: 2800602913417539097, guid: e84e19ef6702a544180c220988425940, type: 3}
       propertyPath: m_LocalPosition.z

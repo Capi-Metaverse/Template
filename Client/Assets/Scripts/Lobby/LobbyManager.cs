@@ -354,7 +354,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     //CallBack de Photon que se llama al salir de una sala
     public override void OnLeftRoom()
     {
-        playerProperties["playerAvatar"] = 6;
+        playerProperties["playerAvatar"] = 8;
         PhotonNetwork.SetPlayerCustomProperties(playerProperties);
         //Eliminamos la lista de jugadores al salir de la sala
 

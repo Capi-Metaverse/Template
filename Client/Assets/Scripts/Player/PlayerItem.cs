@@ -81,7 +81,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         playerProperties["PlayerAvatar"] = (int)player.CustomProperties["playerAvatar"];
     }else
     {
-        playerProperties["playerAvatar"] = 6;
+        playerProperties["playerAvatar"] = 8;
     }
    }
 } 

@@ -48,7 +48,7 @@ public class Disconnect : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
       Debug.Log("Leaving");
-      playerProperties["playerAvatar"] = 6;
+      playerProperties["playerAvatar"] = 8;
       PhotonNetwork.SetPlayerCustomProperties(playerProperties);
     }
 
