@@ -17,6 +17,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     public GameObject Pausa;
     public GameObject chatManager;
     public GameObject Settings;
+   
   
 
     //Map Variables
@@ -57,9 +58,12 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             
             
         }
-       
+
+        
+        
         //Player instantation
         playerToSpawn = playerPrefabs[(int)PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
+       
         playerToSpawn = (GameObject) PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoint, Quaternion.identity);
         
         //-------------------------ACTIVATING CAM AND MOVEMENT ONLY ON LOCAL PLAYER------------------------//
@@ -72,9 +76,9 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         playerToSpawn.transform.Find("PlayerUIPrefab").gameObject.SetActive(true);
 
         //UI for the Text Chat
-        GameObject NamePlayerObject = GameObject.Find("NameUI");//Find the canvas named NameUI(TMP text generate canvas and inside a tmp text)
-        playerToSpawn.transform.Find("NameUI").gameObject.SetActive(true);//We activate the hole canvas
-        NamePlayerObject.GetComponent<PlayerNameDisplay>().SetPlayerName(playerToSpawn.name);//Getting the PlayerNameDisplay component(script controller) we call the setName method we defined it just change the text value of a variable that corresponds to the text object inside de canvas
+        /*
+        
+        */
         //-------------------------ACTIVATING UI END------------------------//
 
         voiceChat.CheckMicroImage();
@@ -86,6 +90,7 @@ public override void OnConnectedToMaster()
     //Not needed??
     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 }
+
 
 private void Update() {
 

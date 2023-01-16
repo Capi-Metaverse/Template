@@ -63,4 +63,5 @@ MonoBehaviour:
   Pausa: {fileID: 0}
   chatManager: {fileID: 0}
   Settings: {fileID: 0}
+  NameUI: {fileID: 2833113035308492387, guid: e570263512865b24eabcac076398899f, type: 3}
   mapName: 
