@@ -41,14 +41,6 @@ public class SC_FPSController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         anim = transform.GetChild(0).GetComponent<Animator>();
         playerSpawner = GameObject.Find("PlayerSpawner").GetComponent<PlayerSpawn>();
-        
-          // e.g. store this gameobject as this player's charater in Player.TagObject
-         //PlayerNameDisplay NamePlayerObject = GameObject.Find("NameUI").GetComponent<PlayerNameDisplay>();//Find the canvas named NameUI(TMP text generate canvas and inside a tmp text)
-
-         //playerNameGame = NamePlayerObject.SetPlayerName(PhotonNetwork.NickName);
-         //playerNameGame.text = PhotonNetwork.NickName;
-
-         //playerToSpawn.transform.Find("NameUI").gameObject.SetActive(true);//We activate the hole canvas
       
 
         // Lock cursor

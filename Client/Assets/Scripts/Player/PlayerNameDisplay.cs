@@ -10,14 +10,14 @@ public class PlayerNameDisplay : MonoBehaviour
 {
     public Camera playerCamera; // Assign the player's camera in the inspector
     public TMP_Text nameText; // Assign the Text element in the inspector
+    public PhotonView photonView;
 
 
     void Start(){
-         nameText.text = PhotonNetwork.LocalPlayer.NickName;
      
     }
     
 
-    
+
 }
 

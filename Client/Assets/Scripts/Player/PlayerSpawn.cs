@@ -63,12 +63,12 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         
         //Player instantation
         playerToSpawn = playerPrefabs[(int)PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
-       
+       //CS script for movement activated
         playerToSpawn = (GameObject) PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoint, Quaternion.identity);
         
         //-------------------------ACTIVATING CAM AND MOVEMENT ONLY ON LOCAL PLAYER------------------------//
         //this is because we only want the camera and the movement activated for the local player so by default the prefab have both cam and script deactivated. Here is where we activate it right in time, when everithing´s prepared.
-        playerToSpawn.GetComponent<SC_FPSController>().enabled = true; //CS script for movement activated
+        playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
         playerToSpawn.transform.Find("PlayerCamera").gameObject.SetActive(true);//Camera of the player
         
         //-------------------------ACTIVATING UI------------------------//
