@@ -12,6 +12,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 {
     private Estados estado;
     private TestHome voiceChat;
+    public Animator animator;
     public GameObject[] playerPrefabs;
     public Transform[] spawnPoints;
     public GameObject Pausa;
@@ -81,6 +82,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         */
         //-------------------------ACTIVATING UI END------------------------//
 
+        animator = playerToSpawn.transform.GetChild(0).GetComponent<Animator>();
         voiceChat.CheckMicroImage();
         PhotonNetwork.IsMessageQueueRunning = true;
 }
@@ -99,6 +101,7 @@ private void Update() {
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
+                animator.speed=0;
                 Pausa.SetActive(true);
                 //Time.timeScale = 0;
                 playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
@@ -118,6 +121,7 @@ private void Update() {
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !escPul)
         {
+            animator.speed=1;
             Settings.SetActive(false);
             Pausa.SetActive(false);
             chatManager.SetActive(false);
@@ -135,6 +139,7 @@ private void Update() {
     {
         if (Input.GetKeyDown(KeyCode.T) && !TPul)
             {
+                animator.speed=0;
                 Debug.Log("T pulsada");
                 chatManager.SetActive(true);
                 chatManager.GetComponent<PhotonChatManager>().ChatConnectOnClick();
