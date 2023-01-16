@@ -58,19 +58,27 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             
         }
        
-            //Player and camera instantation
-            playerToSpawn = playerPrefabs[(int)PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
-            playerToSpawn = (GameObject) PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoint, Quaternion.identity);
-           
-            playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
-            playerToSpawn.transform.Find("PlayerCamera").gameObject.SetActive(true);
-            playerToSpawn.transform.Find("PlayerUIPrefab").gameObject.SetActive(true);
-            voiceChat.CheckMicroImage();
+        //Player instantation
+        playerToSpawn = playerPrefabs[(int)PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
+        playerToSpawn = (GameObject) PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoint, Quaternion.identity);
+        
+        //-------------------------ACTIVATING CAM AND MOVEMENT ONLY ON LOCAL PLAYER------------------------//
+        //this is because we only want the camera and the movement activated for the local player so by default the prefab have both cam and script deactivated. Here is where we activate it right in time, when everithing´s prepared.
+        playerToSpawn.GetComponent<SC_FPSController>().enabled = true; //CS script for movement activated
+        playerToSpawn.transform.Find("PlayerCamera").gameObject.SetActive(true);//Camera of the player
+        
+        //-------------------------ACTIVATING UI------------------------//
+        //Prefab of the UI for VoiceChat
+        playerToSpawn.transform.Find("PlayerUIPrefab").gameObject.SetActive(true);
 
+        //UI for the Text Chat
+        GameObject NamePlayerObject = GameObject.Find("NameUI");//Find the canvas named NameUI(TMP text generate canvas and inside a tmp text)
+        playerToSpawn.transform.Find("NameUI").gameObject.SetActive(true);//We activate the hole canvas
+        NamePlayerObject.GetComponent<PlayerNameDisplay>().SetPlayerName(playerToSpawn.name);//Getting the PlayerNameDisplay component(script controller) we call the setName method we defined it just change the text value of a variable that corresponds to the text object inside de canvas
+        //-------------------------ACTIVATING UI END------------------------//
 
-            PhotonNetwork.IsMessageQueueRunning = true;
-
-
+        voiceChat.CheckMicroImage();
+        PhotonNetwork.IsMessageQueueRunning = true;
 }
 
 public override void OnConnectedToMaster()
