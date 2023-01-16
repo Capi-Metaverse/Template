@@ -13,7 +13,7 @@ public class PlayerNameDisplay : MonoBehaviour
     void Update()
     {
         // Rotate the canvas to face the player camera
-        nameText.transform.LookAt(nameText.transform.position + playerCamera.transform.rotation * Vector3.forward, playerCamera.transform.rotation * Vector3.up);
+        //nameText.transform.LookAt(nameText.transform.position + playerCamera.transform.rotation * Vector3.forward, playerCamera.transform.rotation * Vector3.up);
     }
 
     public void SetPlayerName(string name)
