@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b6ef91e123303f4e8c08d36b314af63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNameGame: {fileID: 749973574190443865}
   walkingSpeed: 1
   runningSpeed: 2
   jumpSpeed: 4
@@ -786,6 +787,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e570263512865b24eabcac076398899f, type: 3}
+--- !u!114 &749973574190443865 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5816266408517261639, guid: e570263512865b24eabcac076398899f, type: 3}
+  m_PrefabInstance: {fileID: 6548224536208765982}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2706524190455446462 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9173963200597675936, guid: e570263512865b24eabcac076398899f, type: 3}

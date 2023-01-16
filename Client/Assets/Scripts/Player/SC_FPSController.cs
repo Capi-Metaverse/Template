@@ -4,10 +4,12 @@ using UnityEngine;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 [RequireComponent(typeof(CharacterController))]
 
 public class SC_FPSController : MonoBehaviour
 {
+    public TMP_Text playerNameGame;
     public float walkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;
     public float jumpSpeed = 8.0f;
@@ -16,6 +18,7 @@ public class SC_FPSController : MonoBehaviour
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
 
+    
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
@@ -40,9 +43,10 @@ public class SC_FPSController : MonoBehaviour
         playerSpawner = GameObject.Find("PlayerSpawner").GetComponent<PlayerSpawn>();
         
           // e.g. store this gameobject as this player's charater in Player.TagObject
-         PlayerNameDisplay NamePlayerObject = GameObject.Find("NameUI").GetComponent<PlayerNameDisplay>();//Find the canvas named NameUI(TMP text generate canvas and inside a tmp text)
+         //PlayerNameDisplay NamePlayerObject = GameObject.Find("NameUI").GetComponent<PlayerNameDisplay>();//Find the canvas named NameUI(TMP text generate canvas and inside a tmp text)
 
-         NamePlayerObject.SetPlayerName(PhotonNetwork.NickName);
+         //playerNameGame = NamePlayerObject.SetPlayerName(PhotonNetwork.NickName);
+         playerNameGame.text = PhotonNetwork.NickName;
 
          //playerToSpawn.transform.Find("NameUI").gameObject.SetActive(true);//We activate the hole canvas
       
