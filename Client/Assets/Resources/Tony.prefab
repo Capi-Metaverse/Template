@@ -142,6 +142,7 @@ MonoBehaviour:
   observableSearch: 0
   ObservedComponents:
   - {fileID: 3257471248905786467}
+  - {fileID: 3275895311757569114}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -570,7 +571,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6264373557595104634
+--- !u!114 &3275895311757569114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
