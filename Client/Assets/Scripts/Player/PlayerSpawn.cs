@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+using UnityEngine.SceneManagement;
+using UnityEngine.Windows;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 using ExitGames.Client.Photon;
 using TMPro;
-using UnityEngine.SceneManagement;
+
+using System.IO;
 
 public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 {
@@ -18,13 +22,12 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     public GameObject Pausa;
     public GameObject chatManager;
     public GameObject Settings;
-   
-  
 
     //Map Variables
     public string mapName;
     bool escPul;
     bool TPul;
+    bool LPul;
     //Static variables
     static bool reload = false;
     static Vector3 spawnPoint;
@@ -55,12 +58,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             int value = Random.Range(0,5);
             PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] = value;    
            
-            Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] = value);
-            
-            
+            UnityEngine.Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] = value);
         }
-
-        
         
         //Player instantation
         playerToSpawn = playerPrefabs[(int)PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
@@ -96,10 +95,25 @@ public override void OnConnectedToMaster()
 
 private void Update() {
 
+    //File Explorer Press T
+    if (estado == Estados.Juego)
+    {
+        if (UnityEngine.Input.GetKeyDown(KeyCode.L) && !LPul)
+        {
+            LPul=true;
+            playerToSpawn.transform.Find("Canvas").gameObject.SetActive(true);
+            estado = Estados.Pausa;
+        }
+        else if (!UnityEngine.Input.GetKeyDown(KeyCode.L))
+        {
+            LPul=false;
+        }
+    }
+    
     //Pause State
     if (estado == Estados.Juego)
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !escPul)
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
                 animator.speed=0;
                 Pausa.SetActive(true);
@@ -110,16 +124,16 @@ private void Update() {
                 Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
                 estado = Estados.Pausa;
                 escPul=true; //Escape activado
-                Debug.Log(estado);
+                UnityEngine.Debug.Log(estado);
             }
     }      
     
-    if (!Input.GetKeyDown(KeyCode.Escape)) escPul=false; // Detecta si no está pulsado
+    if (!UnityEngine.Input.GetKeyDown(KeyCode.Escape)) escPul=false; // Detecta si no está pulsado
 
     //Game State
     if (estado == Estados.Pausa)
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !escPul)
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
         {
             animator.speed=1;
             Settings.SetActive(false);
@@ -131,16 +145,16 @@ private void Update() {
             Cursor.visible = false;   
             Cursor.lockState = CursorLockMode.Locked; // Menu de opciones, para que se bloquee la camara 
             estado = Estados.Juego;
-            Debug.Log(estado);  
+            UnityEngine.Debug.Log(estado);  
         }
     }
 
      if (estado == Estados.Juego)
     {
-        if (Input.GetKeyDown(KeyCode.T) && !TPul)
+        if (UnityEngine.Input.GetKeyDown(KeyCode.T) && !TPul)
             {
                 animator.speed=0;
-                Debug.Log("T pulsada");
+                UnityEngine.Debug.Log("T pulsada");
                 chatManager.SetActive(true);
                 chatManager.GetComponent<PhotonChatManager>().ChatConnectOnClick();
                 playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
@@ -149,7 +163,7 @@ private void Update() {
                 Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
                 estado = Estados.Pausa;
                 TPul=true; //Escape activado
-                Debug.Log(estado);
+                UnityEngine.Debug.Log(estado);
             }
     }      
     
@@ -182,8 +196,6 @@ public void OnEvent(EventData photonEvent)
    
     child.GetComponent<Lamp>().activate();
 
-
- 
    }
 }
 
