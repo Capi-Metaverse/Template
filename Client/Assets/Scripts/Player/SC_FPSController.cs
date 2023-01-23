@@ -5,6 +5,8 @@ using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+
+
 [RequireComponent(typeof(CharacterController))]
 
 public class SC_FPSController : MonoBehaviour
@@ -17,6 +19,8 @@ public class SC_FPSController : MonoBehaviour
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
+
+    public Sprite imagenPrueba;
 
     
     CharacterController characterController;
@@ -55,27 +59,18 @@ public class SC_FPSController : MonoBehaviour
         targetTime -= Time.deltaTime;
           //Raycast
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rayDistance, LayerMask.GetMask("Interactive"))){ 
-          
-            if(hit.transform.name == "Lamp" && Input.GetButton("Interact")&& targetTime <=0){
-                targetTime=0.5f;
-                Debug.Log("Entro");
-                 GameObject parent = hit.transform.gameObject;
-               
-                 GameObject child = parent.transform.GetChild(0).gameObject;
-               
-                 child.GetComponent<Lamp>().activate();
-                 //Envíamos evento si nos unimos después 
-            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-            PhotonNetwork.RaiseEvent(21, "", raiseEventOptions, SendOptions.SendReliable);
-                
-                
-                 
-                //hit.transform.position = hit.transform.position + new Vector3(0,(float) 0.5,0);
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rayDistance, LayerMask.GetMask("Interactive"))){
 
-            }
-             
+        //If the user interacts, activate the event
+        if (Input.GetButton("Interact") && targetTime <=0){
+           //Cooldown timer
+           targetTime=0.5f;
+
+           //Retrieve Parent Object and call event
+           GameObject eventObject = hit.transform.gameObject;
+           eventObject.GetComponent<IMetaEvent>().activate();
         }
+    }
 
 
 
