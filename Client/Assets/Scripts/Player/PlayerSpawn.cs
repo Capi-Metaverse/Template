@@ -191,10 +191,11 @@ public void OnEvent(EventData photonEvent)
 
     if(photonEvent.Code == 21)
    {
-         
-    GameObject child = GameObject.Find("/Lamp/Bulb");
+    object[] data = (object[])photonEvent.CustomData;
+    
+   GameObject eventObject = GameObject.Find((string) data[0]);
    
-    child.GetComponent<Lamp>().activate();
+   eventObject.GetComponent<Lamp>().activate();
 
    }
 }
