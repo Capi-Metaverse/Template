@@ -118,6 +118,7 @@ MonoBehaviour:
   playerCamera: {fileID: 8889418381686916811}
   lookSpeed: 2
   lookXLimit: 45
+  imagenPrueba: {fileID: 0}
   rayDistance: 2
   active: 0
   playerSpawner: {fileID: 0}
@@ -394,7 +395,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1380b93f9329fa0479d2d1150290522e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  presentation: {fileID: 0}
   image: {fileID: 168157716453002335}
+  Img: []
 --- !u!1001 &656040441094356809
 PrefabInstance:
   m_ObjectHideFlags: 0

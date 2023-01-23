@@ -13,9 +13,13 @@ using Newtonsoft.Json.Linq;
 
 public class FileExplorer : MonoBehaviour
 {
+    public Presentation presentation;
     public RawImage image;
     private string _path;
-
+    List<string> urls = new List<string>();
+    public List<Texture2D> Img = new List<Texture2D>();
+    
+    
 
     // Open file with filter
     //var extensions = new [] {new ExtensionFilter("Image Files", "png", "jpg", "jpeg" ),new ExtensionFilter("Sound Files", "mp3", "wav" ),new ExtensionFilter("All Files", "*" ),};
@@ -28,6 +32,8 @@ public class FileExplorer : MonoBehaviour
         //path = EditorUtility.OpenFilePanel("Overwrite with png, txt", "" , "png;txt");
         WriteResult(StandaloneFileBrowser.OpenFilePanel("Open File", "", "", false));
         Screen.lockCursor = true;//Unity and standalone
+        presentation=GameObject.Find("Presentation").GetComponent<Presentation>();
+        
     }
 
     // Update is called once per frame
@@ -35,7 +41,7 @@ public class FileExplorer : MonoBehaviour
     {
         
     }
-    
+
     [System.Obsolete]
     IEnumerator UpdateImage()
     {
@@ -44,7 +50,7 @@ public class FileExplorer : MonoBehaviour
         yield return www.isDone;
         byte[] bytes = www.bytes;
         Debug.Log(bytes.Length);
-        image.texture = www.texture;
+        //image.texture = www.texture;
         string s = Convert.ToBase64String(bytes);
 
         
@@ -89,13 +95,40 @@ Debug.Log(jsonString);
                     yield return request.SendWebRequest();
                  
                     JObject json = JObject.Parse(request.downloadHandler.text);
-    
+
+                 
                     foreach (var archiv in json["Files"]) {
-                        List<string> urls = new List<string>();
+                        
                         urls.Add(archiv["Url"].ToString());
-                        Debug.Log("Url: " + archiv["Url"].ToString());
-                    }
-                    
+                        Debug.Log(archiv["Url"].ToString());
+
+                    UnityWebRequest GetRequest = UnityWebRequest.Get(archiv["Url"].ToString());
+
+                        yield return GetRequest.SendWebRequest();
+
+                      switch (GetRequest.result){
+                        case UnityWebRequest.Result.ConnectionError:
+                        case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError( "Error: " + GetRequest.error);
+                        break;
+                        case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError("HTTP Error: " + GetRequest.error);
+                        break;
+                        case UnityWebRequest.Result.Success:
+                    Debug.Log("llego aqui Successsssss");
+                            
+                            Texture2D textu = new Texture2D(1, 1);
+                            Debug.Log(GetRequest.downloadHandler.data);
+                            textu.LoadImage(GetRequest.downloadHandler.data);
+                        
+                            Img.Add(textu);
+                            var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2(0.5f, 0.5f)); 
+                            presentation.sprites.Add(nuevoSprite);
+                    break;
+                      }
+                     
+                    } 
+                         
                     
     }
  

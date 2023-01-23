@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Presentation : MonoBehaviour
 {
+    
     public int current = -1;
-    public Sprite[] sprites;
+    public List<Sprite> sprites;
     public SpriteRenderer renderer;
     
     public void OnAdvance(){
     
-    if (current < (sprites.Length - 1))
+    if (current < (sprites.Count - 1))
     current++;
     renderer.sprite = sprites[current];
 
