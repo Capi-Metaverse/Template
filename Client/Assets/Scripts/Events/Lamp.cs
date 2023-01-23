@@ -21,7 +21,7 @@ public class Lamp : MonoBehaviour, IMetaEvent
     
 
         //Se envía el evento a los demás usuarios
-        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
         PhotonNetwork.RaiseEvent(21, content, raiseEventOptions, SendOptions.SendReliable);
 
     }
