@@ -14,10 +14,10 @@ public class Disconnect : MonoBehaviourPunCallbacks
     public GameObject Settings;
     public GameObject Pausa;
     //Voice Chat
-    private TestHome voiceChat;
+    private AudioController voiceChat;
 
     void Start(){
-      voiceChat = GameObject.Find("VoiceManager").GetComponent<TestHome>();
+      voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();
     }
 
     public void OnClickDisconnect()

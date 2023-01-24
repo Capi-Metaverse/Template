@@ -17,7 +17,7 @@ using System.IO;
 public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 {
     private Estados estado;
-    private TestHome voiceChat;
+    private AudioController voiceChat;
     public Animator animator;
     public GameObject[] playerPrefabs;
     public Transform[] spawnPoints;
@@ -52,7 +52,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         int randomNumber = Random.Range(0, spawnPoints.Length);
         spawnPoint = spawnPoints[randomNumber].position;
         }
-        voiceChat=GameObject.Find("VoiceManager").GetComponent<TestHome>();
+        voiceChat=GameObject.Find("VoiceManager").GetComponent<AudioController>();
         
         //Random avatar character
         if(PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] == null || (int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] == 8)

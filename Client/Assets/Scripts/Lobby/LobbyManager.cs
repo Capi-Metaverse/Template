@@ -33,7 +33,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public TMP_Text roomName;
 
     //Voice Chat
-    private TestHome voiceChat;
+    private AudioController voiceChat;
 
     //Listas
     List<RoomItem> roomItemsList = new List<RoomItem>();
@@ -63,7 +63,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
         PhotonNetwork.JoinLobby(TypedLobby.Default);
 
         //find voice chat script
-        voiceChat=GameObject.Find("VoiceManager").GetComponent<TestHome>();
+        voiceChat=GameObject.Find("VoiceManager").GetComponent<AudioController>();
     }
     
 

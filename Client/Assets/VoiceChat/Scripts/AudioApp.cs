@@ -12,7 +12,7 @@ using agora_utilities;
 // How to enable video
 // How to join/leave channel
 // 
-public class TestHelloUnityVideo 
+public class AudioApp 
 {
     //Micro Sprites
     public Sprite MicroOff = Resources.Load<Sprite>("Sprites/micro_off");

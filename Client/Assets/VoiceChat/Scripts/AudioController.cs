@@ -8,16 +8,16 @@ using UnityEngine.Android;
 using System.Collections;
 
 /// <summary>
-///    TestHome serves a game controller object for this application.
+///    AudioController serves a game controller object for this application.
 /// </summary>
-public class TestHome : MonoBehaviour
+public class AudioController : MonoBehaviour
 {
 
     // Use this for initialization
 #if (UNITY_2018_3_OR_NEWER && UNITY_ANDROID)
     private ArrayList permissionList = new ArrayList();
 #endif
-    static TestHelloUnityVideo app = null;
+    static AudioApp app = null;
 
     private string HomeSceneName = "Lobby";
 
@@ -116,7 +116,7 @@ public class TestHome : MonoBehaviour
         // create app if nonexistent
         if (ReferenceEquals(app, null))
         {
-            app = new TestHelloUnityVideo(); // create app
+            app = new AudioApp(); // create app
             app.loadEngine(AppID); // load engine
         }
 
