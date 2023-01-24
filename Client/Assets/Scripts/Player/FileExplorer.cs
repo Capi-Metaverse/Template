@@ -17,7 +17,7 @@ public class FileExplorer : MonoBehaviour
     private string _path;
     List<string> urls = new List<string>();
     public List<Texture2D> Img = new List<Texture2D>();
-    public bool lleno=false;
+    
     
     
 
@@ -128,7 +128,8 @@ Debug.Log(jsonString);
                       }
                      
                     } 
-                  presentation.OnDirect();     
+
+                presentation.OnDirect();     
                     
     }
  
