@@ -33,10 +33,7 @@ public class FileExplorer : MonoBehaviour
     [System.Obsolete]
     void Start()
     {
-        Screen.lockCursor = false;
-        path = EditorUtility.OpenFilePanel("Overwrite with png, txt", "" , "png;txt");
-        WriteResult(StandaloneFileBrowser.OpenFilePanel("Open File", "", "", false));
-        Screen.lockCursor = true;//Unity and standalone
+    
         presentation=GameObject.Find("Presentation").GetComponent<Presentation>();
   
 
@@ -47,6 +44,14 @@ public class FileExplorer : MonoBehaviour
     void Update()
     {
         
+    }
+
+    [Obsolete]
+    public void loco(){
+        Screen.lockCursor = false;//Unity and standalone
+        //path = EditorUtility.OpenFilePanel("Overwrite with png, txt", "" , "png;txt");
+        WriteResult(StandaloneFileBrowser.OpenFilePanel("Open File", "", "", false));
+        Screen.lockCursor = true;//Unity and standalone
     }
 
     [System.Obsolete]
@@ -82,13 +87,13 @@ public class FileExplorer : MonoBehaviour
             }
         };
 
-var jsonObject = new JObject
-{
-    ["Parameters"] = parameters
-};
+        var jsonObject = new JObject
+        {
+        ["Parameters"] = parameters
+        };
 
-string jsonString = jsonObject.ToString();
-Debug.Log(jsonString);
+        string jsonString = jsonObject.ToString();
+        Debug.Log(jsonString);
 
 
     
