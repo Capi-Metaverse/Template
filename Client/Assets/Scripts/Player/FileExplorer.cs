@@ -50,7 +50,8 @@ public class FileExplorer : MonoBehaviour
     public void loco(){
         Screen.lockCursor = false;//Unity and standalone
         //path = EditorUtility.OpenFilePanel("Overwrite with png, txt", "" , "png;txt");
-        WriteResult(StandaloneFileBrowser.OpenFilePanel("Open File", "", "", false));
+        var extensions = new [] {new ExtensionFilter("Powerpoint Files", "pptx", "ppt"),new ExtensionFilter("Excel Files", "xlsx", "xlsm","xlsb"),new ExtensionFilter("Image Files", "png", "jpg", "jpeg" ),new ExtensionFilter("All Files", "*" ),};
+        WriteResult(StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false));
         Screen.lockCursor = true;//Unity and standalone
     }
 
