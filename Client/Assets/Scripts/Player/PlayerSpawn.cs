@@ -230,7 +230,7 @@ public void OnEvent(EventData photonEvent)
     else{
         //Advance presentation
         GameObject eventObject = GameObject.Find("Advance");
-        eventObject.GetComponent<BackPresentation>().activate(false);
+        eventObject.GetComponent<AdvancePresentation>().activate(false);
     }
 
    }
