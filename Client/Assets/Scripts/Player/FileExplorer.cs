@@ -35,7 +35,7 @@ public class FileExplorer : MonoBehaviour
     {
     
         presentation=GameObject.Find("Presentation").GetComponent<Presentation>();
-        presentation.sprites = new List<Sprite>();
+        
         
 
         

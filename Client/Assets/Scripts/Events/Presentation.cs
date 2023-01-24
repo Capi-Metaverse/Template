@@ -7,7 +7,7 @@ public class Presentation : MonoBehaviour
 {
    
     public int current = 0;
-    public List<Sprite> sprites;
+    public List<Sprite> sprites = new List<Sprite>();
     public SpriteRenderer renderer;
 
     
