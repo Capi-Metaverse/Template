@@ -103,7 +103,7 @@ Debug.Log(jsonString);
 
                     //We build the content item
                     
-                    object[] content = new object[] { json}; 
+                    object[] content = new object[] { request.downloadHandler.text}; 
    
     
 
@@ -177,9 +177,11 @@ Debug.Log(jsonString);
         }
     }
 
-    public  IEnumerator downloadImages(JObject images){
+    public  IEnumerator downloadImages(string file){
 
-         foreach (var archiv in images["Files"]) {
+         JObject json = JObject.Parse(file);
+
+         foreach (var archiv in json["Files"]) {
                         
                        
                         Debug.Log(archiv["Url"].ToString());

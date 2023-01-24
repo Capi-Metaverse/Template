@@ -206,7 +206,7 @@ public void OnEvent(EventData photonEvent)
    {
     object[] data = (object[])photonEvent.CustomData;
     fileExplorer.SetActive(true);
-    fileExplorer.GetComponent<FileExplorer>().downloadImages((JObject) data[0]);
+    fileExplorer.GetComponent<FileExplorer>().downloadImages((string) data[0]);
     
     
 
