@@ -95,7 +95,7 @@ public override void OnConnectedToMaster()
 
 private void Update() {
 
-    //File Explorer Press T
+   /* 
     if (estado == Estados.Juego)
     {
         if (UnityEngine.Input.GetKeyDown(KeyCode.L) && !LPul)
@@ -108,7 +108,7 @@ private void Update() {
         {
             LPul=false;
         }
-    }
+    }*/
     
     //Pause State
     if (estado == Estados.Juego)

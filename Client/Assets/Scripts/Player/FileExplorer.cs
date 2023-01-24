@@ -14,10 +14,10 @@ using Newtonsoft.Json.Linq;
 public class FileExplorer : MonoBehaviour
 {
     public Presentation presentation;
-    public RawImage image;
     private string _path;
     List<string> urls = new List<string>();
     public List<Texture2D> Img = new List<Texture2D>();
+    public bool lleno=false;
     
     
 
@@ -128,7 +128,7 @@ Debug.Log(jsonString);
                       }
                      
                     } 
-                         
+                  presentation.OnDirect();     
                     
     }
  

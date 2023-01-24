@@ -1,13 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Presentation : MonoBehaviour
 {
-    
-    public int current = -1;
+   
+    public int current = 0;
     public List<Sprite> sprites;
     public SpriteRenderer renderer;
+
+    
+     public static bool IsEmpty<T>(List<T> list)
+    {
+        if (list == null) {
+            return true;
+        }
+ 
+        return !list.Any();
+    }
+
     
     public void OnAdvance(){
     
@@ -26,5 +38,22 @@ public class Presentation : MonoBehaviour
         }
         
     }
-   
+    public void OnDirect(){
+        bool isEmpty = IsEmpty(sprites);
+ 
+        if (isEmpty) {
+            Debug.Log("List is Empty");
+           
+            renderer.sprite = sprites[0];
+           
+        }
+        else {
+            Debug.Log("List contains elements");
+            renderer.sprite = sprites[0];
+        }
+    
+    
+
+    }
+  
 }
