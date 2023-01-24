@@ -35,6 +35,7 @@ public class FileExplorer : MonoBehaviour
     {
     
         presentation=GameObject.Find("Presentation").GetComponent<Presentation>();
+        presentation.sprites = new List<Sprite>();
         
 
         
@@ -48,7 +49,7 @@ public class FileExplorer : MonoBehaviour
 
     [Obsolete]
     public void loco(){
-        if(presentation.sprites != null) presentation.sprites.Clear();
+        
         Screen.lockCursor = false;//Unity and standalone
         //path = EditorUtility.OpenFilePanel("Overwrite with png, txt", "" , "png;txt");
         var extensions = new [] {new ExtensionFilter("Powerpoint Files", "pptx", "ppt"),new ExtensionFilter("Excel Files", "xlsx", "xlsm","xlsb"),new ExtensionFilter("Image Files", "png", "jpg", "jpeg" ),new ExtensionFilter("All Files", "*" ),};
@@ -121,7 +122,10 @@ public class FileExplorer : MonoBehaviour
                     RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
                     PhotonNetwork.RaiseEvent(22, content, raiseEventOptions, SendOptions.SendReliable);
 
-                 
+                    //Si es nula
+                    if(presentation.sprites != null) presentation.sprites.Clear();
+
+
                     foreach (var archiv in json["Files"]) {
                         
                      
@@ -188,6 +192,7 @@ public class FileExplorer : MonoBehaviour
     }
 
     public  IEnumerator downloadImages(string file){
+
         if(presentation.sprites != null) presentation.sprites.Clear();
         
      Debug.Log("Entr2o");
