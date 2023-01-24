@@ -198,7 +198,7 @@ public void OnEvent(EventData photonEvent)
     
    GameObject eventObject = GameObject.Find((string) data[0]);
    
-   eventObject.GetComponent<Lamp>().activate();
+   eventObject.GetComponent<Lamp>().activate(false);
 
    }
 
@@ -207,13 +207,31 @@ public void OnEvent(EventData photonEvent)
     object[] data = (object[])photonEvent.CustomData;
   
     fileExplorer.SetActive(true);
-    Debug.Log("Pepin");
     StartCoroutine(fileExplorer.GetComponent<FileExplorer>().downloadImages((string) data[0]));
     
-    Debug.Log("HOAL");
+ 
 
     
     
+
+   }
+
+   if(photonEvent.Code == 23)
+   {
+    object[] data = (object[])photonEvent.CustomData;
+    if((string) data[0] == "Back")
+    {
+        //Back presentation
+         GameObject eventObject = GameObject.Find("Back");
+         eventObject.GetComponent<BackPresentation>().activate(false);
+
+    }
+
+    else{
+        //Advance presentation
+        GameObject eventObject = GameObject.Find("Advance");
+        eventObject.GetComponent<BackPresentation>().activate(false);
+    }
 
    }
 }

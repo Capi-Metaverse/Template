@@ -68,7 +68,7 @@ public class SC_FPSController : MonoBehaviour
 
            //Retrieve Parent Object and call event
            GameObject eventObject = hit.transform.gameObject;
-           eventObject.GetComponent<IMetaEvent>().activate();
+           eventObject.GetComponent<IMetaEvent>().activate(true);
         }
     }
 

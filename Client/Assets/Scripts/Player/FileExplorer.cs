@@ -35,7 +35,7 @@ public class FileExplorer : MonoBehaviour
     {
     
         presentation=GameObject.Find("Presentation").GetComponent<Presentation>();
-  
+        
 
         
     }
@@ -48,11 +48,13 @@ public class FileExplorer : MonoBehaviour
 
     [Obsolete]
     public void loco(){
+        presentation.sprites.Clear();
         Screen.lockCursor = false;//Unity and standalone
         //path = EditorUtility.OpenFilePanel("Overwrite with png, txt", "" , "png;txt");
         var extensions = new [] {new ExtensionFilter("Powerpoint Files", "pptx", "ppt"),new ExtensionFilter("Excel Files", "xlsx", "xlsm","xlsb"),new ExtensionFilter("Image Files", "png", "jpg", "jpeg" ),new ExtensionFilter("All Files", "*" ),};
         WriteResult(StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false));
         Screen.lockCursor = true;//Unity and standalone
+       
     }
 
     [System.Obsolete]
@@ -186,6 +188,7 @@ public class FileExplorer : MonoBehaviour
     }
 
     public  IEnumerator downloadImages(string file){
+         presentation.sprites.Clear();
      Debug.Log("Entr2o");
          JObject json = JObject.Parse(file);
         Debug.Log("Entro");
