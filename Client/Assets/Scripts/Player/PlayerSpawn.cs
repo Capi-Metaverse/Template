@@ -10,6 +10,8 @@ using UnityEngine.UI;
 using ExitGames.Client.Photon;
 using TMPro;
 
+using Newtonsoft.Json.Linq;
+
 using System.IO;
 
 public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
@@ -22,6 +24,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     public GameObject Pausa;
     public GameObject chatManager;
     public GameObject Settings;
+    public GameObject fileExplorer;
 
     //Map Variables
     public string mapName;
@@ -196,6 +199,16 @@ public void OnEvent(EventData photonEvent)
    GameObject eventObject = GameObject.Find((string) data[0]);
    
    eventObject.GetComponent<Lamp>().activate();
+
+   }
+
+   if(photonEvent.Code == 22)
+   {
+    object[] data = (object[])photonEvent.CustomData;
+    fileExplorer.SetActive(true);
+    fileExplorer.GetComponent<FileExplorer>().downloadImages((JObject) data[0]);
+    
+    
 
    }
 }

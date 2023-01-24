@@ -11,11 +11,16 @@ using System;
 using System.Text;
 using Newtonsoft.Json.Linq;
 
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
+
+
 public class FileExplorer : MonoBehaviour
 {
     public Presentation presentation;
     private string _path;
-    List<string> urls = new List<string>();
+
     public List<Texture2D> Img = new List<Texture2D>();
     
     
@@ -96,10 +101,20 @@ Debug.Log(jsonString);
                  
                     JObject json = JObject.Parse(request.downloadHandler.text);
 
+                    //We build the content item
+                    
+                    object[] content = new object[] { json}; 
+   
+    
+
+                    //We send the content to the other users
+                    RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+                    PhotonNetwork.RaiseEvent(22, content, raiseEventOptions, SendOptions.SendReliable);
+
                  
                     foreach (var archiv in json["Files"]) {
                         
-                        urls.Add(archiv["Url"].ToString());
+                     
                         Debug.Log(archiv["Url"].ToString());
 
                     UnityWebRequest GetRequest = UnityWebRequest.Get(archiv["Url"].ToString());
@@ -160,5 +175,45 @@ Debug.Log(jsonString);
         {
             Debug.Log("Variable path is null");
         }
+    }
+
+    public  IEnumerator downloadImages(JObject images){
+
+         foreach (var archiv in images["Files"]) {
+                        
+                       
+                        Debug.Log(archiv["Url"].ToString());
+
+                    UnityWebRequest GetRequest = UnityWebRequest.Get(archiv["Url"].ToString());
+
+                        yield return GetRequest.SendWebRequest();
+
+                      switch (GetRequest.result){
+                        case UnityWebRequest.Result.ConnectionError:
+                        case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError( "Error: " + GetRequest.error);
+                        break;
+                        case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError("HTTP Error: " + GetRequest.error);
+                        break;
+                        case UnityWebRequest.Result.Success:
+                    Debug.Log("llego aqui Successsssss");
+                            
+                            Texture2D textu = new Texture2D(1, 1);
+                            Debug.Log(GetRequest.downloadHandler.data);
+                            textu.LoadImage(GetRequest.downloadHandler.data);
+                        
+                            Img.Add(textu);
+                            var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2(0.5f, 0.5f)); 
+                            presentation.sprites.Add(nuevoSprite);
+                    break;
+                      }
+                     
+                    } 
+
+                presentation.OnDirect();
+
+
+
     }
 }
