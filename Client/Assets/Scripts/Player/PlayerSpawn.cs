@@ -205,8 +205,13 @@ public void OnEvent(EventData photonEvent)
    if(photonEvent.Code == 22)
    {
     object[] data = (object[])photonEvent.CustomData;
+  
     fileExplorer.SetActive(true);
-    fileExplorer.GetComponent<FileExplorer>().downloadImages((string) data[0]);
+    Debug.Log("Pepin");
+    StartCoroutine(fileExplorer.GetComponent<FileExplorer>().downloadImages((string) data[0]));
+    
+    Debug.Log("HOAL");
+
     
     
 

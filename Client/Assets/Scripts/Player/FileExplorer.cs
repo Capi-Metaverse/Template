@@ -34,10 +34,12 @@ public class FileExplorer : MonoBehaviour
     void Start()
     {
         Screen.lockCursor = false;
-        //path = EditorUtility.OpenFilePanel("Overwrite with png, txt", "" , "png;txt");
+        path = EditorUtility.OpenFilePanel("Overwrite with png, txt", "" , "png;txt");
         WriteResult(StandaloneFileBrowser.OpenFilePanel("Open File", "", "", false));
         Screen.lockCursor = true;//Unity and standalone
         presentation=GameObject.Find("Presentation").GetComponent<Presentation>();
+  
+
         
     }
 
@@ -178,9 +180,9 @@ Debug.Log(jsonString);
     }
 
     public  IEnumerator downloadImages(string file){
-
+     Debug.Log("Entr2o");
          JObject json = JObject.Parse(file);
-
+        Debug.Log("Entro");
          foreach (var archiv in json["Files"]) {
                         
                        
@@ -206,7 +208,7 @@ Debug.Log(jsonString);
                             textu.LoadImage(GetRequest.downloadHandler.data);
                         
                             Img.Add(textu);
-                            var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2(0.5f, 0.5f)); 
+                            var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width*0.2f, textu.height*0.2f), new Vector2(0.2f, 0.2f)); 
                             presentation.sprites.Add(nuevoSprite);
                     break;
                       }
