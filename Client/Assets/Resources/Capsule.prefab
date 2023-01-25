@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 7834600752938379135}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b6ef91e123303f4e8c08d36b314af63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNameGame: {fileID: 0}
   walkingSpeed: 1
   runningSpeed: 2
   jumpSpeed: 4
@@ -160,6 +161,7 @@ MonoBehaviour:
   playerCamera: {fileID: 7979366635509001647}
   lookSpeed: 2
   lookXLimit: 45
+  imagenPrueba: {fileID: 0}
   rayDistance: 3
   active: 0
   playerSpawner: {fileID: 0}

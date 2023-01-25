@@ -118,7 +118,12 @@ private void Update() {
     {
         if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
+                //Start Animator
                 animator.speed=0;
+                object[] content = new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName, animator.speed};
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+                PhotonNetwork.RaiseEvent(2, content, raiseEventOptions, SendOptions.SendReliable);
+
                 Pausa.SetActive(true);
                 //Time.timeScale = 0;
                 playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
@@ -138,7 +143,13 @@ private void Update() {
     {
         if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
         {
+            //Stop Animation
             animator.speed=1;
+            object[] content = new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName, animator.speed};
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+            PhotonNetwork.RaiseEvent(2, content, raiseEventOptions, SendOptions.SendReliable);
+
+            //Activate Settings Window and stop
             Settings.SetActive(false);
             Pausa.SetActive(false);
             chatManager.SetActive(false);
@@ -156,7 +167,12 @@ private void Update() {
     {
         if (UnityEngine.Input.GetKeyDown(KeyCode.T) && !TPul)
             {
+                //Start Animation
                 animator.speed=0;
+                object[] content = new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName, animator.speed};
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+                PhotonNetwork.RaiseEvent(2, content, raiseEventOptions, SendOptions.SendReliable);
+
                 UnityEngine.Debug.Log("T pulsada");
                 chatManager.SetActive(true);
                 chatManager.GetComponent<PhotonChatManager>().ChatConnectOnClick();
@@ -190,6 +206,19 @@ public void OnEvent(EventData photonEvent)
    
    //We reload the level
    PhotonNetwork.LoadLevel(mapName);
+   }
+
+    if(photonEvent.Code == 2)
+   {
+        object[] data = (object[])photonEvent.CustomData;
+
+        GameObject[] playersInGame = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in playersInGame) {
+            if (player.GetComponent<PhotonView>().Owner.NickName == (string)data[0]){
+                player.transform.GetChild(0).GetComponent<Animator>().speed= (float)data[1];  
+                break;
+            }
+        }
    }
 
     if(photonEvent.Code == 21)
