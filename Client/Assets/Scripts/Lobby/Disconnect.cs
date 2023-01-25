@@ -46,12 +46,12 @@ public class Disconnect : MonoBehaviourPunCallbacks
     }
 
     public override void OnLeftRoom()
+    //When you leave the room set the user properties
     {
       Debug.Log("Leaving");
       playerProperties["playerAvatar"] = 8;
       PhotonNetwork.SetPlayerCustomProperties(playerProperties);
     }
-
     public override void OnConnectedToMaster(){
       SceneManager.LoadScene("Lobby");
     }

@@ -11,16 +11,11 @@ public class ScriptResolution : MonoBehaviour
     Resolution[] resolutions;
 
     void Start(){
-        checkResolution();
-  
+        checkResolution(); 
     }
-
-
      public void onChange()
-    {
-        
-        Screen.fullScreen = !Screen.fullScreen;
-     
+    { 
+        Screen.fullScreen = !Screen.fullScreen; 
     }
 
     public void checkResolution()
@@ -35,13 +30,11 @@ public class ScriptResolution : MonoBehaviour
             string option = resolutions[i].width + " x " + resolutions[i].height + "@" + resolutions[i].refreshRate;
             options.Add(option);
 
-
             if (Screen.fullScreen && resolutions[i].width == Screen.currentResolution.width &&resolutions[i].height == Screen.currentResolution.height)
             {
                 actualResolution = i;
             }
         }
-
         resolutionsDropDown.AddOptions(options);
         resolutionsDropDown.value = actualResolution;
         resolutionsDropDown.RefreshShownValue();

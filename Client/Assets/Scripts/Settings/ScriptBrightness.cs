@@ -12,26 +12,20 @@ public class ScriptBrightness : MonoBehaviour
    public PostProcessLayer layer;
 
    AutoExposure exposure;
-  
-
     // Start is called before the first frame update
     void Start()
     {
         brightness.TryGetSettings(out exposure);
         exposure.keyValue.value = 0.75f;
-   
     }
 
     //Update is called once per frame
    
     public void AdjustBrightness(float value)
     {
-
-       if(value != 0)
-       {
+        if(value != 0)
+        {
         exposure.keyValue.value = value;
-       }
-      
-       
+        } 
     }
 }

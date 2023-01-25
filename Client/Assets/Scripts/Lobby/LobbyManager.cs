@@ -12,13 +12,13 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
 
-       //Constantes
+    //Constantes
     public const int NUMBER_MAPS = 2;
 
     public string[] ROOM_NAMES = {"Mapa1", "Mapa2"};
 
     //Variables
-     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
+    ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
 
     //Paneles UI
     public GameObject lobbyPanel;
@@ -44,7 +44,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public RoomItem roomItemPrefab;
     public PlayerItem playerItemPrefab;
 
-     //Buttons
+    //Buttons
 
     public GameObject leftArrowButton;
     public GameObject rightArrowButton;
@@ -68,89 +68,87 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     
 
     
-     private void Update() {
+    private void Update() 
+    {
         {
-            if (PhotonNetwork.CurrentRoom != null ){
-             
-             if (PhotonNetwork.IsMasterClient || (bool) PhotonNetwork.CurrentRoom.CustomProperties["Init"])
+            //Activate panels
+            if (PhotonNetwork.CurrentRoom != null )
             {
-                playButton.SetActive(true);
-            }else{
-                playButton.SetActive(false);
+                
+                if (PhotonNetwork.IsMasterClient || (bool) PhotonNetwork.CurrentRoom.CustomProperties["Init"])
+                {
+                    playButton.SetActive(true);
+                }
+                else
+                {
+                    playButton.SetActive(false);
+                }
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    mapName.enabled = true;
+                    leftArrowButton.SetActive(true);
+                    rightArrowButton.SetActive(true);
+                }
+                else 
+                {
+                    mapName.enabled = false;
+                    leftArrowButton.SetActive(false);
+                    rightArrowButton.SetActive(false);
+                }
             }
-
-            if (PhotonNetwork.IsMasterClient){
-                 mapName.enabled = true;
-                 leftArrowButton.SetActive(true);
-                 rightArrowButton.SetActive(true);
-            }
-
-            else {
-                 mapName.enabled = false;
-                 leftArrowButton.SetActive(false);
-                 rightArrowButton.SetActive(false);
-            }
-        }
         }
     }
 
-    //Botones
+    //Buttons
 
-    //Método del botón que crea una sala.
+    //Button method that creates a room.
     public void OnClickCreate()
     {
         if(roomInputField.text.Length >=1)
         {
 
-            //Opciones personalizadas de la sala
+            //Custom Room Options
 
             Hashtable customSettings = new Hashtable();
 
-            //Mapa
+            //Map
             customSettings.Add("Map", 0);
             customSettings.Add("Init",false);
 
-
-            //Creamos opciones de la sala
+            //Create options for the room
 
             RoomOptions opciones = new RoomOptions(){MaxPlayers = 4, BroadcastPropsChangeToAll = true, PublishUserId = true, CustomRoomProperties = customSettings};
-
-
-
 
             PhotonNetwork.CreateRoom(roomInputField.text, opciones);
             voiceChat.onJoinButtonClicked(roomInputField.text);
         }
     }
 
-    //Método llamado por el botón RoomItem para unirse a una sala
+    //Method called by the RoomItem button to join a room
     public void OnClickJoinRoom(string roomName)
     {
         PhotonNetwork.JoinRoom(roomName);
         voiceChat.onJoinButtonClicked(roomName);
     }
 
-    //Método del botón para abandonar la sala.
+    //Button method to leave the room.
     public void OnClickLeaveRoom()
     {
      PhotonNetwork.LeaveRoom();
      voiceChat.onLeaveButtonClicked();
-     }
+    }
 
-     //Método del botón de selección de personaje para cargar el mapa
-      public void OnClickPlayButton()
+    //Button method to Choose PJ
+    public void OnClickPlayButton()
     {
-        
-
-        //Si es el cliente principal envía un evento a los demás para que se sincronicen
+        //If it is the main client, it sends an event to the others so that they can be synchronized
         if (PhotonNetwork.IsMasterClient)
         {
-
-            //Enviamos el evento
+            //Send event
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
             PhotonNetwork.RaiseEvent(2, "", raiseEventOptions, SendOptions.SendReliable);
 
-            //Cambiamos la sala a empezada
+            //Change room to start
 
             Hashtable customSettings = PhotonNetwork.CurrentRoom.CustomProperties;
             customSettings["Init"] = true;
@@ -158,93 +156,80 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
         }
         else
         {
-
-
-      
-           //Envíamos evento si nos unimos después 
+           //We send event if we join after
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
             PhotonNetwork.RaiseEvent(1, "", raiseEventOptions, SendOptions.SendReliable);
              
             //PhotonNetwork.IsMessageQueueRunning = false;
             int mapa = (int) PhotonNetwork.CurrentRoom.CustomProperties["Map"];
             PhotonNetwork.LoadLevel(ROOM_NAMES[mapa] );
-       
         }
     } 
 
 
-      //Método del botón para cambiar el mapa a la izquierda.
+    //Button method to switch the map to the left.
     public void OnClickChangeMapLeft()
     {
-        //Obtenemos las propiedades de la sala
-
-            Hashtable customSettings = PhotonNetwork.CurrentRoom.CustomProperties;
-            int mapa = (int) customSettings["Map"];
+        //We get the properties of the room
+        Hashtable customSettings = PhotonNetwork.CurrentRoom.CustomProperties;
+        int mapa = (int) customSettings["Map"];
           
-            //Si ya estamos en el último mapa no lo cambiamos
-            if( mapa == 0) return;
+        //If we are already in the last map we do not change it
+        if( mapa == 0) return;
 
-            customSettings["Map"] = mapa - 1;
-            mapName.text = ROOM_NAMES[mapa - 1];
-            PhotonNetwork.CurrentRoom.SetCustomProperties(customSettings);
-     
-     }
-     
-    //Método del botón para cambiar el mapa a la derecha.
+        customSettings["Map"] = mapa - 1;
+        mapName.text = ROOM_NAMES[mapa - 1];
+        PhotonNetwork.CurrentRoom.SetCustomProperties(customSettings);
+    }
+    //Button method to switch the map to the right.
     public void OnClickChangeMapRight()
     {
+        //We get the properties of the room
 
-        //Obtenemos las propiedades de la sala
-
-            Hashtable customSettings = PhotonNetwork.CurrentRoom.CustomProperties;
-            int mapa = (int) customSettings["Map"];
+        Hashtable customSettings = PhotonNetwork.CurrentRoom.CustomProperties;
+        int mapa = (int) customSettings["Map"];
            
-            //Si ya estamos en el último mapa no lo cambiamos
-            if( mapa == (NUMBER_MAPS - 1) ) return;
+        //If we are already in the last map we do not change it
+        if( mapa == (NUMBER_MAPS - 1) ) return;
 
-            customSettings["Map"] = mapa + 1;
-            mapName.text = ROOM_NAMES[mapa + 1];
-            PhotonNetwork.CurrentRoom.SetCustomProperties(customSettings);
-    
+        customSettings["Map"] = mapa + 1;
+        mapName.text = ROOM_NAMES[mapa + 1];
+        PhotonNetwork.CurrentRoom.SetCustomProperties(customSettings);
      }
-
-
     //Funciones 
 
-     //Función para añadir jugadores a la lista de jugadores que ya estan dentro de la sala
+    //Function to add players to the list of players that are already in the room
 
     public void AddPlayer(Player newPlayer)
     {
-        //Instanciamos el nuevo jugador y lo añadimos a la lista de usuarios
+        //We instantiate the new player and add it to the user list
         PlayerItem playerItem = Instantiate(playerItemPrefab, playerItemParent); 
         playerItem.SetPlayerInfo(newPlayer);
        
-        //Establece(solo para el jugador de la sesion y no para los demas en la sala) las flechas visibles para poder seleccionar el avatar en el selectior
-           if (newPlayer == PhotonNetwork.LocalPlayer)
-           {
-            playerItem.ApplyLocalChanges();//Metodo de PlayerItem.cs, unicamente hace un SetActive(true) en las flechas de seleccion
-           }
-
-           playerItemsList.Add(playerItem);
+        //Sets (only for the session player and not for the others in the room) the visible arrows to be able to select the avatar in the selector
+        if (newPlayer == PhotonNetwork.LocalPlayer)
+        {
+            playerItem.ApplyLocalChanges();//Method of PlayerItem.cs, only does a SetActive(true) on the selection arrows
+        }
+        playerItemsList.Add(playerItem);
     }
 
-    //Función que borra los jugadores de la lista 
+    //Function that deletes the players from the list
    
     public void DeletePlayer(Player oldPlayer)
     {
-        //Recorre la lista y comprueba los ID's de los usuarios para borrarlo
-         foreach(PlayerItem item in playerItemsList)
+        //Go through the list and check the ID's of the users to delete it
+        foreach(PlayerItem item in playerItemsList)
         {
-           if (item.GetPlayerInfo().UserId == oldPlayer.UserId){
-           
-            Destroy(item.gameObject);
-            playerItemsList.Remove(item);
+           if (item.GetPlayerInfo().UserId == oldPlayer.UserId)
+           {
+                Destroy(item.gameObject);
+                playerItemsList.Remove(item);
            }
-
         }
     }
 
-    //Método cuando un usuario entra a una sala por primera vez, le actualiza la lista de jugadores ya en sala
+    //Method when a user enters a room for the first time, it updates the list of players already in the room
     void UpdatePlayerList()
     {
         foreach (KeyValuePair<int,Player> player in PhotonNetwork.CurrentRoom.Players)
@@ -261,8 +246,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
         }
     }
 
-
-
     //Callbacks Photon
 
 
@@ -276,19 +259,19 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     **********
     */
 
-    //CallBack de Photon que se llama una vez de conecta al servidor principal
+    //Photon CallBack that is called once it connects to the main server
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();
     }
 
-    //CallBack de Photon que se llama cada x tiempo con nueva info de las listas.
+    //Photon CallBack that is called every x time with new information from the lists.
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        //Recorremos la nueva lista con información
+        //We go through the new list with information
         foreach (RoomInfo info in roomList)
         {
-            //Si una sala ha sido destruida la eliminamos de la lista y de la interfaz
+            //If a room has been destroyed we remove it from the list and from the interface
             if (info.RemovedFromList)
             {
                 int index = roomItemsList.FindIndex( x => x.RoomInfo.Name == info.Name);
@@ -298,38 +281,35 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
                     roomItemsList.RemoveAt(index);
                 }
             }
-
             else
             {
-                //Probar si este if hace falta.
+                //Test if this if is needed.
                 if (roomItemsList.FindIndex( x => x.RoomInfo.Name == info.Name) == -1)
                 {
-            
-              //Instanciamos el item en la interfaz.
-              RoomItem newRoom = Instantiate(roomItemPrefab,contentObject);
-              if (newRoom != null)
-              {
-                newRoom.SetRoomInfo(info);
-                roomItemsList.Add(newRoom);
-              }
+                    //We instantiate the item in the interface.
+                    RoomItem newRoom = Instantiate(roomItemPrefab,contentObject);
+                    if (newRoom != null)
+                    {
+                        newRoom.SetRoomInfo(info);
+                        roomItemsList.Add(newRoom);
+                    }
                 }
-
             }
         }
     }
 
-    //CallBack de Photon llamado cuando el usuario se une a una sala.
+    //Photon CallBack called when user joins a room.
     public override void OnJoinedRoom()
     {
         lobbyPanel.SetActive(false);
         roomPanel.SetActive(true);
         roomName.text="Room Name: " + PhotonNetwork.CurrentRoom.Name;
 
-        //Método para actualizar la lista de jugadores
+        //Method to update the player list
 
         UpdatePlayerList();
 
-        //Destruimos la lista de rooms ya que no está actualizada y se actualizará cuando nos unamos de nuevo al Lobby.
+        //We destroy the list of rooms as it is not updated and will be updated when we join the Lobby again.
 
          foreach(RoomItem item in roomItemsList)
         {
@@ -338,25 +318,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
         roomItemsList.Clear();    
     } 
 
-     //Callback para cuando falla la conexión a una sala
+    //Callback for when the connection to a room fails
     public override void OnJoinRoomFailed(short returnCode, string message){
 
-        //Comprobar el error de retorno para comprobar distintos fallos
+        //Check return error to check for various failures
         Debug.Log(message);
         errorText.text = "Ya te encuentras en esa sala";
-
-        //TO DO Hacer que sea visible o invisible
-        //TO DO Cambiar error dependiendo del codigo
-
     }
 
-
-    //CallBack de Photon que se llama al salir de una sala
+    //Photon CallBack called when leaving a room
     public override void OnLeftRoom()
     {
         playerProperties["playerAvatar"] = 8;
         PhotonNetwork.SetPlayerCustomProperties(playerProperties);
-        //Eliminamos la lista de jugadores al salir de la sala
+        //We remove the list of players when leaving the room
 
         foreach(PlayerItem item in playerItemsList)
         {
@@ -365,39 +340,33 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
         }
         playerItemsList.Clear();
 
-        //Desactivamos el panel de la room y Activamos lel panel de la interfaz del Lobby.
+        //We deactivate the panel of the room and Activate the panel of the Lobby interface.
         if (roomPanel!=null & lobbyPanel!=null){
             roomPanel.SetActive(false);
             lobbyPanel.SetActive(true);
         }
-
-
     }
 
-
-        //CallBack de Photon cuando un jugador entra en la sala
+    //Photon CallBack when a player enters the room.
     public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             AddPlayer(newPlayer);
         }
 
-    //CallBack de Photon cuando un jugador deja la sala.
+    //Photon CallBack when a player leaves the room.
     public override void OnPlayerLeftRoom(Player otherPlayer)
         {
             DeletePlayer(otherPlayer);
         }
 
-
-public void OnEvent(EventData photonEvent)
-{
-   if(photonEvent.Code == 2)
-   {
-
-
+    public void OnEvent(EventData photonEvent)
+    {
+        if(photonEvent.Code == 2)
+        {
             PhotonNetwork.IsMessageQueueRunning = false;
             int mapa = (int) PhotonNetwork.CurrentRoom.CustomProperties["Map"];
             PhotonNetwork.LoadLevel(ROOM_NAMES[mapa] );
-   }
-}
+        }
+    }
     
 }

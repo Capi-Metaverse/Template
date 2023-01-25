@@ -12,26 +12,16 @@ public class ScriptSound : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-             slider.value = PlayerPrefs.GetFloat("volumenAudio", 0.5f);
+        slider.value = PlayerPrefs.GetFloat("volumenAudio", 0.5f);
         AudioListener.volume = slider.value;
-    
-    
-        
     }
 
     public void ChangeSlider(float value)
     {
-           sliderValue = value;
+        sliderValue = value;
         PlayerPrefs.SetFloat("volumenAudio", sliderValue);
         AudioListener.volume = slider.value;
-     
     }
-
-     void Update() {
-
-     
-        
-    }
-
-    
+     void Update() {   
+    }   
 }

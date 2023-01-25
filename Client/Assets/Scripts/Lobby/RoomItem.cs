@@ -17,10 +17,12 @@ public class RoomItem : MonoBehaviour
    manager = FindObjectOfType<LobbyManager>();
   }
   public void SetRoomName(string _roomName)
+  //Set name of the room
   {
     roomName.text = _roomName;
   }
   public void OnClickItem()
+  //Enter into LobbyRoom
   {
     manager.OnClickJoinRoom(roomName.text);
   }
@@ -30,5 +32,4 @@ public class RoomItem : MonoBehaviour
     RoomInfo = roomInfo;
     roomName.text = roomInfo.Name;
   }
-
-  }
+}

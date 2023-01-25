@@ -23,32 +23,30 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     public void OnClickConnect()
     {
-        //Obtenemos los campos de los inputs
+        //We get the fields of the inputs
         string username = usernameInput.text;
         string password = passwordInput.text;
 
-        //Validación de los campos
+        //Field validation
         if(ValidatePassword(password) && ValidateUsername(username))
         {
             print("Trying to conect to server.");
             TitleText.text = "Validando...";
 
-            //Creamos el diccionario para enviar la petición POST
+            //We create the dictionary to send the POST request
             Dictionary<string, object> userdata = new Dictionary<string, object>();
             //Debug.Log(usernameInput.text);
             //Debug.Log(passwordInput.text);
             userdata.Add("username",usernameInput.text);
             userdata.Add("password",passwordInput.text);
      
-            //Creamos el objeto AuthenticationValues que le pasaremos a Photon
+            //We create the AuthenticationValues ​​object that we will pass to Photon
             AuthenticationValues authValues = new AuthenticationValues();
             authValues.AuthType = CustomAuthenticationType.Custom;
             authValues.SetAuthPostData(userdata);
             PhotonNetwork.AuthValues = authValues;
-
-            //?
             PhotonNetwork.AutomaticallySyncScene = false;
-            //Realizamos la conexión
+            //We make the connection
             PhotonNetwork.NickName = usernameInput.text;
 
             if(PhotonNetwork.ConnectUsingSettings())

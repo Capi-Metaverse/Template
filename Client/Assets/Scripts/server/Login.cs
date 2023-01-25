@@ -11,12 +11,12 @@ using System.Linq;
 
 public class Login :  MonoBehaviourPunCallbacks
 {
-    //Inputs del componente
+    //Component inputs
     [SerializeField] private TMP_InputField usernameInputField;
     [SerializeField] private TMP_InputField passwordInputField;
-    //Texto del componente
+    //Component text
     [SerializeField] private TMP_Text m_TextComponent;
-    //Botones del componente
+    //Component button
     [SerializeField] private Button botonRegistro;
     [SerializeField] private Button botonInicio;
 
@@ -27,58 +27,58 @@ public class Login :  MonoBehaviourPunCallbacks
 
     private IEnumerator TryCreate()
     {
-       //Obtenemos los campos de los inputs
+       //We get the fields of the inputs
        string username = usernameInputField.text;
        string password = passwordInputField.text;
 
        //Checking pass and username validation
         if(ValidatePassword(password) && ValidateUsername(username))
         {
-                m_TextComponent.text = "Validando...";
-            //Construcción del formulario de la petición
-                WWWForm form = new WWWForm();
-                form.AddField("username", username);
-                form.AddField("password", password);
+            m_TextComponent.text = "Validando...";
+            //Construction of the petition form
+            WWWForm form = new WWWForm();
+            form.AddField("username", username);
+            form.AddField("password", password);
                 
-            //Enviamos la petición
-                UnityWebRequest request = UnityWebRequest.Post("https://meta-login.onrender.com/users/create",form);
-                var handler = request.SendWebRequest();
-                m_TextComponent.text = "Conectando...";
+            //Send request
+            UnityWebRequest request = UnityWebRequest.Post("https://meta-login.onrender.com/users/create",form);
+            var handler = request.SendWebRequest();
+            m_TextComponent.text = "Conectando...";
 
-            //Tiempo de conexión con el servidor
-                float startTime = 0.0f;
-                while (!handler.isDone)
+            //Server connection time
+            float startTime = 0.0f;
+            while (!handler.isDone)
+            {
+                startTime += Time.deltaTime;
+                if (startTime > 10.0f)
                 {
-                    startTime += Time.deltaTime;
-
-                    if (startTime > 10.0f)
-                    {
-                        break;
-                    }
-                    yield return null;
-                }
-
-            //Manejo de la respuesta del servidor
-                if (request.result == UnityWebRequest.Result.Success)
-                {
-                        Debug.Log(request.downloadHandler.text);
-                        m_TextComponent.text = "Registro realizado con éxito";
-
-                        //Desactivación de objetos
-                        botonRegistro.gameObject.SetActive(false);
-                        usernameInputField.gameObject.SetActive(false);
-                        passwordInputField.gameObject.SetActive(false);
-
-                        Vector3 anchoredPos = botonInicio.GetComponent<RectTransform>().anchoredPosition;
-                        anchoredPos.x = 0;
-                        botonInicio.GetComponent<RectTransform>().anchoredPosition = anchoredPos;
-                }
-            //Manejo del error del servidor
-                else{
-                    Debug.Log("Unable to connect to the server...");
-                    m_TextComponent.text ="El usuario ya existe";
+                    break;
                 }
                 yield return null;
+            }
+
+            //Control the server response
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                Debug.Log(request.downloadHandler.text);
+                m_TextComponent.text = "Registro realizado con éxito";
+
+                //Desactivación de objetos
+                botonRegistro.gameObject.SetActive(false);
+                usernameInputField.gameObject.SetActive(false);
+                passwordInputField.gameObject.SetActive(false);
+
+                Vector3 anchoredPos = botonInicio.GetComponent<RectTransform>().anchoredPosition;
+                anchoredPos.x = 0;
+                botonInicio.GetComponent<RectTransform>().anchoredPosition = anchoredPos;
+            }
+            //Control de error of the server
+            else
+            {
+                Debug.Log("Unable to connect to the server...");
+                m_TextComponent.text ="El usuario ya existe";
+            }
+            yield return null;
         }
         else
         {

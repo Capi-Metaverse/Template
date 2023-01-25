@@ -20,6 +20,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public void ChatConnectOnClick()
     {
+        //Connect to Photon.Chat Neetwork with and user Authentication
         username=PhotonNetwork.NickName;
         Debug.Log(PhotonNetwork.NickName);
         isConnected = true;
@@ -47,6 +48,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     // Update is called once per frame
     void Update()
     {
+        //Check that it has connected
         if (isConnected)
         {
             chatClient.Service();
@@ -62,7 +64,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     #endregion General
 
     #region PublicChat
-
+    //Send a message through the public chat
     public void SubmitPublicChatOnClick()
     {
         if (privateReceiver == "")
@@ -70,10 +72,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
             chatClient.PublishMessage("RegionChannel", currentChat);
             chatField.text = "";
             currentChat = "";
-            
-            chatField.ActivateInputField();
-           
-            
+            chatField.ActivateInputField(); 
         }
     }
 
@@ -90,7 +89,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     {
         privateReceiver = valueIn;
     }
-
+    //Send a message through the private chat
     public void SubmitPrivateChatOnClick()
     {
         if (privateReceiver != "")
@@ -108,18 +107,19 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
     public void DebugReturn(DebugLevel level, string message)
     {
-        //throw new System.NotImplementedException();
+        //Throw new System.NotImplementedException();
     }
 
     public void OnChatStateChange(ChatState state)
     {
+        //If it doesn't connect
         if(state == ChatState.Uninitialized)
         {
             isConnected = false;
             chatPanel.SetActive(false);
         }
     }
-
+    //If you connect you subscribe
     public void OnConnected()
     {
         Debug.Log("Connected");
@@ -131,7 +131,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
         isConnected = false;
         chatPanel.SetActive(false);
     }
-
+    //Get the messages sent by the players
     public void OnGetMessages(string channelName, string[] senders, object[] messages)
     {
         string msgs = "";
@@ -143,9 +143,8 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
             Debug.Log(msgs);
         }
-
     }
-
+    //Send private messages
     public void OnPrivateMessage(string sender, object message, string channelName)
     {
         string msgs = "";
@@ -154,20 +153,18 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
         chatDisplay.text += "\n " + msgs;
 
-        Debug.Log(msgs);
-        
+        Debug.Log(msgs);   
     }
 
     public void OnStatusUpdate(string user, int status, bool gotMessage, object message)
     {
         throw new System.NotImplementedException();
     }
-
+    //If you connect and subscribe, open the chat panel
     public void OnSubscribed(string[] channels, bool[] results)
     {
         chatPanel.SetActive(true);
-        Debug.Log("Aqui llego por tano no esta el error");
-       
+        Debug.Log("Aqui llego por tano no esta el error");       
     }
 
     public void OnUnsubscribed(string[] channels)
@@ -184,6 +181,5 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     {
         throw new System.NotImplementedException();
     }
-
     #endregion Callbacks
 }

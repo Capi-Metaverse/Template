@@ -5,5 +5,4 @@ using UnityEngine;
 public interface IMetaEvent
 {
     void activate(bool host);
-
 }

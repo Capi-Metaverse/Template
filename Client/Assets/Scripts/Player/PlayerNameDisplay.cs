@@ -8,7 +8,6 @@ public class PlayerNameDisplay : MonoBehaviour
 {
     public Camera playerCamera; // Assign the player's camera in the inspector
     public TMP_Text nameText; // Assign the Text element in the inspector
-
     // Update is called once per frame
     void Update()
     {

@@ -26,7 +26,6 @@ public class ShakeOnHover : MonoBehaviour
         // Stop the coroutine when the mouse exits the object's collider
         shouldShake = false;
         StopCoroutine(Shake());
-
         // Return the object to its original position
         transform.position = originalPosition;
     }

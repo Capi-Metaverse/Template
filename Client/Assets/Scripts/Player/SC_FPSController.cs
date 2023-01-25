@@ -46,11 +46,9 @@ public class SC_FPSController : MonoBehaviour
         anim = transform.GetChild(0).GetComponent<Animator>();
         playerSpawner = GameObject.Find("PlayerSpawner").GetComponent<PlayerSpawn>();
       
-
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
     }
 
     void Update()
@@ -59,18 +57,19 @@ public class SC_FPSController : MonoBehaviour
         targetTime -= Time.deltaTime;
           //Raycast
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rayDistance, LayerMask.GetMask("Interactive"))){
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rayDistance, LayerMask.GetMask("Interactive")))
+        {
+            //If the user interacts, activate the event
+            if (Input.GetButton("Interact") && targetTime <=0)
+            {
+                //Cooldown timer
+                targetTime=0.5f;
 
-        //If the user interacts, activate the event
-        if (Input.GetButton("Interact") && targetTime <=0){
-           //Cooldown timer
-           targetTime=0.5f;
-
-           //Retrieve Parent Object and call event
-           GameObject eventObject = hit.transform.gameObject;
-           eventObject.GetComponent<IMetaEvent>().activate(true);
+                //Retrieve Parent Object and call event
+                GameObject eventObject = hit.transform.gameObject;
+                eventObject.GetComponent<IMetaEvent>().activate(true);
+            }
         }
-    }
 
 
 
@@ -120,11 +119,6 @@ public class SC_FPSController : MonoBehaviour
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
-
         //Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * rayDistance, Color.red );
-
-      
-    }
-
-    
+    } 
 }

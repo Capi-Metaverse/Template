@@ -48,7 +48,6 @@ public class Validation : MonoBehaviour
         if (!hasLowercase || !hasUppercase || !hasNumber || !hasSpecial)
         {
             return false;//Not a secure password
-            Debug.Log("Not secure password");
         }
 
         // Check for forbidden characters
@@ -59,7 +58,7 @@ public class Validation : MonoBehaviour
             if (password.Contains(c))
             {
                 return false; //Pass Invalid return false
-                Debug.Log("Invalid characters");
+                
             }
         }
 
