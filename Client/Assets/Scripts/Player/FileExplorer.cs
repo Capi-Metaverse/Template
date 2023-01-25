@@ -223,7 +223,7 @@ public class FileExplorer : MonoBehaviour
                             textu.LoadImage(GetRequest.downloadHandler.data);
                         
                             Img.Add(textu);
-                            var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width*0.2f, textu.height*0.2f), new Vector2(0.57f, 0.5f)); 
+                            var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2(0.57f, 0.5f)); 
                             presentation.sprites.Add(nuevoSprite);
                     break;
                       }
