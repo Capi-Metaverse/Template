@@ -130,28 +130,29 @@ public class FileExplorer : MonoBehaviour
         string jsonString = jsonObject.ToString();
         Debug.Log(jsonString);
 
-            //POST to ConvertApi
-            UnityWebRequest request = new UnityWebRequest("https://v2.convertapi.com/convert/pptx/to/png?Secret=T0TzTuNoju79aVtJ", "POST");
-            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonString);
-            request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
+        //POST to ConvertApi
+        UnityWebRequest request = new UnityWebRequest("https://v2.convertapi.com/convert/pptx/to/png?Secret=T0TzTuNoju79aVtJ", "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonString);
+        request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
 
-            yield return request.SendWebRequest();
-                 
-            json = JObject.Parse(request.downloadHandler.text);
-
-            //We build the content item
+        yield return request.SendWebRequest();
                     
-            object[] content = new object[] { request.downloadHandler.text}; 
-   
-            //We send the content to the other users
-            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-            PhotonNetwork.RaiseEvent(22, content, raiseEventOptions, SendOptions.SendReliable);
+        json = JObject.Parse(request.downloadHandler.text);
 
-            //Si es nula
-                if(presentation.sprites != null) presentation.sprites.Clear();
-                StartCoroutine(GetRequestFunc());              
+        //We build the content item
+                        
+        object[] content = new object[] { request.downloadHandler.text}; 
+    
+        //We send the content to the other users
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+        PhotonNetwork.RaiseEvent(22, content, raiseEventOptions, SendOptions.SendReliable);
+
+        //Si es nula
+        if(presentation.current >= 1) presentation.current=0;
+        if(presentation.sprites != null) presentation.sprites.Clear();
+        StartCoroutine(GetRequestFunc());              
     }
  
     [System.Obsolete]
@@ -188,6 +189,7 @@ public class FileExplorer : MonoBehaviour
 
     public  void downloadImages(string file)
     {
+        if(presentation.current >= 1) presentation.current=0;
         if(presentation.sprites != null) presentation.sprites.Clear();
         
         Debug.Log("Entr2o");
