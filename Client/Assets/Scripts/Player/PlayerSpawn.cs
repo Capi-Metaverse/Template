@@ -83,7 +83,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         //UI for the Text Chat
         GameObject NamePlayerObject = GameObject.Find("NameUI");//Find the canvas named NameUI(TMP text generate canvas and inside a tmp text)
         playerToSpawn.transform.Find("NameUI").gameObject.SetActive(true);//We activate the hole canvas
-        NamePlayerObject.GetComponent<PlayerNameDisplay>().SetPlayerName(playerToSpawn.name);//Getting the PlayerNameDisplay component(script controller) we call the setName method we defined it just change the text value of a variable that corresponds to the text object inside de canvas
+        NamePlayerObject.GetComponent<PlayerNameDisplay>().SetPlayerName(playerToSpawn.GetComponent<PhotonView>().Owner.NickName);//Getting the PlayerNameDisplay component(script controller) we call the setName method we defined it just change the text value of a variable that corresponds to the text object inside de canvas
         //-------------------------ACTIVATING UI END------------------------//
 
         animator = playerToSpawn.transform.GetChild(0).GetComponent<Animator>();
@@ -103,7 +103,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         //Set UI PlayerName
         GameObject[] playersInGame = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in playersInGame) {
-            if (!player.GetComponent<PhotonView>().IsMine && player.transform.GetChild(3).GetChild(0).GetComponent<TMP_Text>().text=="Name"){
+            if (player.transform.GetChild(3).GetChild(0).GetComponent<TMP_Text>().text=="Name"){
                     Debug.Log("There is someone named: " + player.GetComponent<PhotonView>().Owner.NickName + " in the game!");
                     player.transform.GetChild(3).GetComponent<PlayerNameDisplay>().SetPlayerName(player.GetComponent<PhotonView>().Owner.NickName);
             }

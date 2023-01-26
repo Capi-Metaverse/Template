@@ -46,7 +46,7 @@ public class FileExplorer : MonoBehaviour
         //path = EditorUtility.OpenFilePanel("Overwrite with png, txt", "" , "png;txt");
 
         //Open panel to choose the file and limiting the extensions to choose
-        var extensions = new [] {new ExtensionFilter("Powerpoint Files", "pptx", "ppt"),new ExtensionFilter("Excel Files", "xlsx", "xlsm","xlsb"),new ExtensionFilter("Image Files", "png", "jpg", "jpeg" ),new ExtensionFilter("All Files", "*" ),};
+        var extensions = new [] {new ExtensionFilter("Powerpoint Files", "pptx", "ppt"),new ExtensionFilter("Excel Files", "xlsx", "xlsm","xlsb"),new ExtensionFilter("Image Files", "png", "jpg", "jpeg" ),new ExtensionFilter("Video Files", "mp4","ogv","vp8","webm" ),new ExtensionFilter("All Files", "*" ),};
         WriteResult(StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false));
         Screen.lockCursor = true;//Unity and standalone
     }
