@@ -52,10 +52,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
             if(PhotonNetwork.ConnectUsingSettings())
             {
                 TitleText.text = "Conectando...";
-            }
-
-            
-            
+            }  
         }
         else
         {

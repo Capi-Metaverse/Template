@@ -44,9 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01cff2bf59fee4243b1a0732cb7a20c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   playerPrefabs:
-  - {fileID: 8011505797994797604, guid: be814c03f7e2bf34db1f79fc7abba5d7, type: 3}
-  - {fileID: 7642519349300723566, guid: cc849ba558da3124ebc118defc2b733a, type: 3}
   - {fileID: 5377165238078812753, guid: a754e9cabb8a70448ab839139063d24f, type: 3}
   - {fileID: 7851141500859005482, guid: f4795b67db4c9fc45a2d1d6e6b079ba1, type: 3}
   - {fileID: 1203075567891479248, guid: 1db1a1d79e66c68409005387b860b0c3, type: 3}
@@ -63,5 +62,5 @@ MonoBehaviour:
   Pausa: {fileID: 0}
   chatManager: {fileID: 0}
   Settings: {fileID: 0}
-  NameUI: {fileID: 2833113035308492387, guid: e570263512865b24eabcac076398899f, type: 3}
+  fileExplorer: {fileID: 0}
   mapName: 

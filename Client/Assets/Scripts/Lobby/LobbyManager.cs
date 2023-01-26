@@ -329,7 +329,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     //Photon CallBack called when leaving a room
     public override void OnLeftRoom()
     {
-        playerProperties["playerAvatar"] = 8;
+        playerProperties["playerAvatar"] = 6;
         PhotonNetwork.SetPlayerCustomProperties(playerProperties);
         //We remove the list of players when leaving the room
 

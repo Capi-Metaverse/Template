@@ -58,7 +58,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         voiceChat=GameObject.Find("VoiceManager").GetComponent<AudioController>();
         
         //Random avatar character
-        if(PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] == null || (int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] == 8)
+        if(PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] == null || (int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] == 6)
         {
             int value = Random.Range(0,5);
             PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] = value;    
