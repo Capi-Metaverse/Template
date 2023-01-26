@@ -53,7 +53,6 @@ public class SC_FPSController : MonoBehaviour
 
     void Update()
     {
-        if(!isFalling){
         targetTime -= Time.deltaTime;
           //Raycast
         RaycastHit hit;
@@ -121,10 +120,4 @@ public class SC_FPSController : MonoBehaviour
         }
         //Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * rayDistance, Color.red );
     } 
-    
-    }
-    public void SetIsFalling(bool value)
-    {
-        isFalling=value;
-    }
 }

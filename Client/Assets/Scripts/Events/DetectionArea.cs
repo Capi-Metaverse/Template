@@ -11,6 +11,7 @@ public class DetectionArea : MonoBehaviour
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<SC_FPSController>();
     }
+    //Detect if it in collider
     private void OnTriggerEnter(Collider other) {
         Debug.Log("Contacto");
         if(other.gameObject.CompareTag("Player"))
@@ -19,10 +20,12 @@ public class DetectionArea : MonoBehaviour
             detectionEvent.Invoke();
         }
     }
-     private void OnTriggerExit(Collider other) {
+    //Detect if Exits collider
+    private void OnTriggerExit(Collider other) {
         Debug.Log("Salida");
         playerController.enabled=true;
     }
+    //Change the location
     public void Respawn(Transform pointToSpawn)
     {
         playerController.enabled=false;
