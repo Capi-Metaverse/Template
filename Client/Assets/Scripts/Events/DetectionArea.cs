@@ -13,7 +13,6 @@ public class DetectionArea : MonoBehaviour
     
     private void Update()
     {
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<SC_FPSController>();
         //viewplayer = GameObject.FindGameObjectWithTag("Player").GetComponent<PhotonView>().IsMine;
         GameObject[] viewplayer = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in viewplayer) 
@@ -21,6 +20,7 @@ public class DetectionArea : MonoBehaviour
             if (player.GetComponent<PhotonView>().IsMine)
             {
                 MyPJ=player;
+                playerController=MyPJ.GetComponent<SC_FPSController>();
                 break;  
             }
         }
