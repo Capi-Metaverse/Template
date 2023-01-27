@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 
 
 public class FileExplorer : MonoBehaviour
@@ -21,6 +22,7 @@ public class FileExplorer : MonoBehaviour
     public Presentation presentation;
     private string _path;
     JObject json;
+    public TMP_Text  loadingPressCanvas;
 
     // Open file with filter
     //var extensions = new [] {new ExtensionFilter("Image Files", "png", "jpg", "jpeg" ),new ExtensionFilter("Sound Files", "mp3", "wav" ),new ExtensionFilter("All Files", "*" ),};
@@ -41,7 +43,7 @@ public class FileExplorer : MonoBehaviour
     [Obsolete]
     public void OpenFile()
     {
-        
+        loadingPressCanvas.SetText("Loading");
         Screen.lockCursor = false;//Unity and standalone
         //path = EditorUtility.OpenFilePanel("Overwrite with png, txt", "" , "png;txt");
 
@@ -192,6 +194,7 @@ public class FileExplorer : MonoBehaviour
         if(presentation.current >= 1) presentation.current=0;
         if(presentation.sprites != null) presentation.sprites.Clear();
         
+        loadingPressCanvas.enabled = false;
         Debug.Log("Entr2o");
         json = JObject.Parse(file);
         Debug.Log("Entro");

@@ -34,6 +34,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
     //Map Variables
     public string mapName;
+    public TMP_Text loadingPressCanvas;
 
     bool escPul;
 
@@ -328,6 +329,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             //Event FileExplorer(GET)
             case 22:
                 {
+                    loadingPressCanvas.SetText("Loading");
                     object[] data = (object[]) photonEvent.CustomData;
                     fileExplorer
                         .GetComponent<FileExplorer>()

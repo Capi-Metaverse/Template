@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class Presentation : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Presentation : MonoBehaviour
     public int current = 0;
     public List<Sprite> sprites = new List<Sprite>();
     public new SpriteRenderer renderer;
+    public TMP_Text  loadingPressCanvas;
 
     
     public static bool IsEmpty<T>(List<T> list)
@@ -45,11 +47,14 @@ public class Presentation : MonoBehaviour
         if (isEmpty) 
         {
             Debug.Log("List is Empty");
-            renderer.sprite = sprites[0];   
+            renderer.sprite = sprites[0]; 
+            //Show nothing is in  
+            loadingPressCanvas.SetText("There´s nothing in file");
         }
         else 
         {
             Debug.Log("List contains elements");
+            loadingPressCanvas.enabled = false;
             renderer.sprite = sprites[0];
         }
     }
