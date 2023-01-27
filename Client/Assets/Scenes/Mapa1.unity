@@ -17216,6 +17216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChooseFile: {fileID: 352329479}
   fileExplorer: {fileID: 352329480}
+  loadingPressCanvas: {fileID: 1486074541}
 --- !u!1 &1532514854
 GameObject:
   m_ObjectHideFlags: 0

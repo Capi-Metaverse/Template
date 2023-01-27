@@ -329,6 +329,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             //Event FileExplorer(GET)
             case 22:
                 {
+                    loadingPressCanvas.enabled = true;
                     loadingPressCanvas.SetText("Loading");
                     object[] data = (object[]) photonEvent.CustomData;
                     fileExplorer
