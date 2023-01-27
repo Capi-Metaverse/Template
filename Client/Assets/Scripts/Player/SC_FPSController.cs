@@ -40,6 +40,8 @@ public class SC_FPSController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
+    
+    GameObject eventText;
     Animator anim;
 
     void Start()
@@ -47,7 +49,9 @@ public class SC_FPSController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         anim = transform.GetChild(0).GetComponent<Animator>();
         playerSpawner = GameObject.Find("PlayerSpawner").GetComponent<PlayerSpawn>();
-      
+
+        eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject;
+        Debug.Log(eventText);
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -63,12 +67,14 @@ public class SC_FPSController : MonoBehaviour
             if(raycastObject == null){
             raycastObject = hit.transform.gameObject;
             raycastObject.gameObject.GetComponent<Outline>().enabled = true;
+           eventText.SetActive(true);
             }
             //RaycastObject
             else if(raycastObject != hit.transform.gameObject ){
             raycastObject.GetComponent<Outline>().enabled = false;
             raycastObject = hit.transform.gameObject;
             hit.transform.gameObject.GetComponent<Outline>().enabled = true;
+            eventText.SetActive(true);
             }
             //If the user interacts, activate the event
             if (Input.GetButton("Interact") && targetTime <=0)
@@ -88,6 +94,7 @@ public class SC_FPSController : MonoBehaviour
              if(raycastObject != null){
                 raycastObject.GetComponent<Outline>().enabled = false;
                 raycastObject = null;
+                  eventText.SetActive(false);
             }
         }
 
