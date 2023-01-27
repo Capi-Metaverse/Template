@@ -35,6 +35,8 @@ public class SC_FPSController : MonoBehaviour
     public PlayerSpawn playerSpawner;
     public float targetTime = 0.5f;
 
+    GameObject raycastObject = null;
+
     [HideInInspector]
     public bool canMove = true;
 
@@ -58,6 +60,16 @@ public class SC_FPSController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rayDistance, LayerMask.GetMask("Interactive")))
         {
+            if(raycastObject == null){
+            raycastObject = hit.transform.gameObject;
+            raycastObject.gameObject.GetComponent<Outline>().enabled = true;
+            }
+            //RaycastObject
+            else if(raycastObject != hit.transform.gameObject ){
+            raycastObject.GetComponent<Outline>().enabled = false;
+            raycastObject = hit.transform.gameObject;
+            hit.transform.gameObject.GetComponent<Outline>().enabled = true;
+            }
             //If the user interacts, activate the event
             if (Input.GetButton("Interact") && targetTime <=0)
             {
@@ -66,9 +78,20 @@ public class SC_FPSController : MonoBehaviour
 
                 //Retrieve Parent Object and call event
                 GameObject eventObject = hit.transform.gameObject;
+                
                 eventObject.GetComponent<IMetaEvent>().activate(true);
             }
         }
+
+        else{
+
+             if(raycastObject != null){
+                raycastObject.GetComponent<Outline>().enabled = false;
+                raycastObject = null;
+            }
+        }
+
+        
 
 
 
