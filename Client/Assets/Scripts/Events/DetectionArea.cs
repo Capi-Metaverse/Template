@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,9 +9,21 @@ public class DetectionArea : MonoBehaviour
 {
     private SC_FPSController playerController;
     public UnityEvent detectionEvent;
+    public GameObject MyPJ;
+    
     private void Update()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<SC_FPSController>();
+        //viewplayer = GameObject.FindGameObjectWithTag("Player").GetComponent<PhotonView>().IsMine;
+        GameObject[] viewplayer = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in viewplayer) 
+        {
+            if (player.GetComponent<PhotonView>().IsMine)
+            {
+                MyPJ=player;
+                break;  
+            }
+        }
     }
     //Detect if it in collider
     private void OnTriggerEnter(Collider other) {
@@ -29,7 +43,6 @@ public class DetectionArea : MonoBehaviour
     public void Respawn(Transform pointToSpawn)
     {
         playerController.enabled=false;
-        Debug.Log(playerController.transform.position);
-        playerController.transform.position = pointToSpawn.position;
+        MyPJ.transform.position = pointToSpawn.position;
     }
 }
