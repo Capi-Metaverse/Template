@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - SF_Door
+  - VideoScreen
   layers:
   - Default
   - TransparentFX

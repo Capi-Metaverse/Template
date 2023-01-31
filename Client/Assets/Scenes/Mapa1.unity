@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15015,6 +15015,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 741298286}
     m_Modifications:
+    - target: {fileID: 577462975, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
+      propertyPath: loadingPressCanvas
+      value: 
+      objectReference: {fileID: 1486074541}
     - target: {fileID: 2413975198355197750, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -15081,32 +15085,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
---- !u!1 &577462973 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7420122817405076816, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
-  m_PrefabInstance: {fileID: 577462972}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &577462974 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 3508178217277665341, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
-  m_PrefabInstance: {fileID: 577462972}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &577462975
+--- !u!114 &577462973 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 577462975, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
+  m_PrefabInstance: {fileID: 577462972}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 577462973}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 749078a3d45098046a12de3b19ddb6de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  current: 0
-  sprites: []
-  renderer: {fileID: 577462974}
-  loadingPressCanvas: {fileID: 1486074541}
 --- !u!1 &577462976 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 481312888080255423, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
@@ -23582,7 +23571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6970989a7219b2438bff07613ddb236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  presentation: {fileID: 577462975}
+  presentation: {fileID: 577462973}
 --- !u!4 &1449963136 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3108454442468392478, guid: 3f867dd7956e96f4a90edce652fc7512, type: 3}
@@ -24063,7 +24052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcff3a260539a184a9bef1599029a98a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  presentation: {fileID: 577462975}
+  presentation: {fileID: 577462973}
 --- !u!4 &1488861958 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3108454442468392478, guid: 3f867dd7956e96f4a90edce652fc7512, type: 3}

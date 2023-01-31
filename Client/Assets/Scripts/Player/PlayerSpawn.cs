@@ -360,6 +360,28 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                     }
                     break;
                 }
+            //Event FileExplorer Video
+            case 24:
+                {
+                    loadingPressCanvas.enabled = true;
+                    loadingPressCanvas.SetText("Loading");
+                    object[] data = (object[]) photonEvent.CustomData;
+                    fileExplorer
+                        .GetComponent<FileExplorer>()
+                        .SetVideo((string) data[1],(string) data[2],(byte[]) data[0]);
+                    break;
+                }
+            //Event FileExplorer Video
+            case 25:
+                {
+                    loadingPressCanvas.enabled = true;
+                    loadingPressCanvas.SetText("Loading");
+                    object[] data = (object[]) photonEvent.CustomData;
+                    fileExplorer
+                        .GetComponent<FileExplorer>()
+                        .SetImage((byte[]) data[0]);
+                    break;
+                }
         }
     }
 
