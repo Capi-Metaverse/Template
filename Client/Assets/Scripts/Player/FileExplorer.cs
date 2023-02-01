@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
-using System.IO;
 using UnityEngine.Windows;
 using SFB;
 using UnityEngine.Networking;
@@ -22,6 +21,7 @@ using UnityEngine.Video;
 public class FileExplorer : MonoBehaviour
 {
     public Presentation presentation;
+    private Compressor compressor = new Compressor();
     private string _path;
     JObject json;
     public TMP_Text  loadingPressCanvas;
@@ -125,6 +125,7 @@ public class FileExplorer : MonoBehaviour
     }
     public void SetImage(byte[] bytes){
         //Clear videoScreen
+        presentation.sprites.Clear();
         presentation.transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
         presentation.transform.GetChild(0).GetComponent<VideoPlayer>().url="";
 
@@ -144,13 +145,15 @@ public class FileExplorer : MonoBehaviour
     void VideoUpload(byte[] bytes,string fileExtension){
         string filename = _path.Split("\\").Last().Split('.')[0].Trim();
 
+
+        //Online Video, Will be implemented in the future.
         //We build the content item
-                        
-        object[] content = new object[] { bytes,filename,fileExtension}; 
+        // byte[] Compressed = compressor.Compress(bytes);
+        // object[] content = new object[] {filename, fileExtension,Compressed};
     
-        //We send the content to the other users
-        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-        PhotonNetwork.RaiseEvent(24, content, raiseEventOptions, SendOptions.SendReliable);
+        // //We send the content to the other users
+        // RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+        // PhotonNetwork.RaiseEvent(24, content, raiseEventOptions, SendOptions.SendReliable);
 
         SetVideo(filename,fileExtension,bytes);
     }
@@ -158,6 +161,7 @@ public class FileExplorer : MonoBehaviour
     public void SetVideo(string filename, string fileExtension, byte[] bytes){
         
         //Prepare videoScreen
+        presentation.sprites.Clear();
         presentation.transform.GetChild(0).GetComponent<VideoPlayer>().url="";
         presentation.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = null;
 

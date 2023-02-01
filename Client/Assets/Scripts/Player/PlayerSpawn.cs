@@ -18,6 +18,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
     private AudioController voiceChat;
 
+    private Compressor compressor = new Compressor();
+
     public Animator animator;
 
     public GameObject[] playerPrefabs;
@@ -368,10 +370,10 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                     object[] data = (object[]) photonEvent.CustomData;
                     fileExplorer
                         .GetComponent<FileExplorer>()
-                        .SetVideo((string) data[1],(string) data[2],(byte[]) data[0]);
+                        .SetVideo((string) data[0],(string) data[1],compressor.Decompress((byte[]) data[2]));
                     break;
                 }
-            //Event FileExplorer Video
+            //Event FileExplorer Image
             case 25:
                 {
                     loadingPressCanvas.enabled = true;
