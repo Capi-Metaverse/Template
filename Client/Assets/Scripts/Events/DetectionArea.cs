@@ -7,9 +7,10 @@ using UnityEngine.Events;
 
 public class DetectionArea : MonoBehaviour
 {
-    private SC_FPSController playerController;
+    private CharacterController playerController;
     public UnityEvent detectionEvent;
     public GameObject MyPJ;
+
     
     private void Update()
     {
@@ -20,7 +21,7 @@ public class DetectionArea : MonoBehaviour
             if (player.GetComponent<PhotonView>().IsMine)
             {
                 MyPJ=player;
-                playerController=MyPJ.GetComponent<SC_FPSController>();
+                playerController=player.GetComponent<CharacterController>();
                 break;  
             }
         }
@@ -37,12 +38,13 @@ public class DetectionArea : MonoBehaviour
     //Detect if Exits collider
     private void OnTriggerExit(Collider other) {
         Debug.Log("Salida");
-        playerController.enabled=true;
+        
     }
     //Change the location
     public void Respawn(Transform pointToSpawn)
     {
         playerController.enabled=false;
         MyPJ.transform.position = pointToSpawn.position;
+        playerController.enabled=true;
     }
 }
