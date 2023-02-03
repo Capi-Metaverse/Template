@@ -34,6 +34,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public GameObject fileExplorer;
 
+    public GameObject scope;
+
     //Map Variables
     public string mapName;
     public TMP_Text loadingPressCanvas;
@@ -58,6 +60,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         estado = Estados.Juego;
         escPul = false;
         TPul = false;
+
+        
 
         chatManager.SetActive(true);
 
@@ -115,6 +119,10 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             .gameObject
             .SetActive(true);
 
+        //Scope
+
+        scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;
+
         //UI for the Text Chat
         GameObject NamePlayerObject = GameObject.Find("NameUI"); //Find the canvas named NameUI(TMP text generate canvas and inside a tmp text)
         playerToSpawn.transform.Find("NameUI").gameObject.SetActive(true); //We activate the hole canvas
@@ -171,6 +179,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         {
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
+                //Deactivate scope
+                scope.SetActive(false);
                 //Start Animator
                 animator.speed = 0;
                 object[] content =
@@ -206,6 +216,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         {
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
+                //Activate scope
+                 scope.SetActive(true);
                 //Stop Animation
                 animator.speed = 1;
                 object[] content =
