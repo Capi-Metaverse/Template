@@ -24,6 +24,7 @@ public class FileExplorer : MonoBehaviour
     private Compressor compressor = new Compressor();
     private string _path;
     JObject json;
+    UnityWebRequest GetRequest;
     public TMP_Text  loadingPressCanvas;
 
     // Open file with filter
@@ -227,8 +228,8 @@ public class FileExplorer : MonoBehaviour
         request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-
         yield return request.SendWebRequest();
+        
                     
         json = JObject.Parse(request.downloadHandler.text);
 
@@ -253,35 +254,34 @@ public class FileExplorer : MonoBehaviour
         {
             Debug.Log(archiv["Url"].ToString());
             //Get Request
-            UnityWebRequest GetRequest = UnityWebRequest.Get(archiv["Url"].ToString());
-                yield return GetRequest.SendWebRequest();
-
+            UnityWebRequest GetRequest = UnityWebRequestTexture.GetTexture(archiv["Url"].ToString());
+            yield return GetRequest.SendWebRequest();
+            
+                
                 switch (GetRequest.result)
                 {
 
-                        case UnityWebRequest.Result.ConnectionError:
+                    case UnityWebRequest.Result.ConnectionError:
 
-                        case UnityWebRequest.Result.DataProcessingError:
-                        Debug.LogError( "Error: " + GetRequest.error);
-                        break;
+                    case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError( "Error: " + GetRequest.error);
+                    break;
 
-                        case UnityWebRequest.Result.ProtocolError:
-                        Debug.LogError("HTTP Error: " + GetRequest.error);
-                        break;
+                    case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError("HTTP Error: " + GetRequest.error);
+                    break;
 
-                        case UnityWebRequest.Result.Success:
-                            
-                            Texture2D textu = new Texture2D(1, 1);
-                            Debug.Log(GetRequest.downloadHandler.data);
-                            //transform data into texture
-                            textu.LoadImage(GetRequest.downloadHandler.data);
-                            //transform texture into Sprite
-                            var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2(0.57f, 0.5f)); 
-                            presentation.sprites.Add(nuevoSprite);
+                    case UnityWebRequest.Result.Success:
+                        Texture2D textu = ((DownloadHandlerTexture)GetRequest.downloadHandler).texture;
+                    
+                        var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2(0.57f, 0.5f)); 
+                        presentation.sprites.Add(nuevoSprite);
                     break;
                 }
+            //yield return new WaitForSeconds((float)0.3);
                      
         }
+
         //function in presentation to check if the list is full
         presentation.OnDirect();     
     }
@@ -292,7 +292,6 @@ public class FileExplorer : MonoBehaviour
         if(presentation.sprites != null) presentation.sprites.Clear();
         
         loadingPressCanvas.enabled = false;
-        Debug.Log("Entr2o");
         json = JObject.Parse(file);
         Debug.Log("Entro");
         StartCoroutine(GetRequestFunc());
