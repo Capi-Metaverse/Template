@@ -10,7 +10,9 @@ using Photon.Realtime;
 public class Lamp : MonoBehaviour, IMetaEvent
 {
 
-    public new Light light;
+    public Light light;
+    public Material[] materials;
+    public MeshRenderer meshLamp;
 
     
     public void activate(bool host){
@@ -23,5 +25,8 @@ public class Lamp : MonoBehaviour, IMetaEvent
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
             PhotonNetwork.RaiseEvent(21, content, raiseEventOptions, SendOptions.SendReliable);
         }
+
+        if(!light.enabled) meshLamp.material = materials[0];
+        else meshLamp.material = materials[1];
     }   
 }

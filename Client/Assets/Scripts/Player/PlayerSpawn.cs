@@ -438,13 +438,14 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
         if(camera == null)
         {
-            //We obtain the camera
+            //We deactivate the camera
             presentationCamera = null;
 
             //We activate UI
 
             eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
             eventText.SetActive(false);
+            eventText = null;
 
         }
 
