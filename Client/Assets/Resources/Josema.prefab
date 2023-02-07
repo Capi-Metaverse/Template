@@ -201,6 +201,7 @@ MonoBehaviour:
   playerCamera: {fileID: 7083322979762619072}
   lookSpeed: 2
   lookXLimit: 45
+  sensitibity: 0
   imagenPrueba: {fileID: 0}
   rayDistance: 3
   active: 0
