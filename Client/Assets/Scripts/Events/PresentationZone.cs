@@ -6,7 +6,7 @@ using Photon.Pun;
 public class PresentationZone : MonoBehaviour
 {
     //Camera of the presentation
-    public new Camera camera;
+    public Camera camera;
 
     
     //Detect if it in collider

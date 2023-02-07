@@ -470,6 +470,7 @@ namespace Photon.Realtime
             Stopwatch sw = new Stopwatch();
             for (this.CurrentAttempt = 0; this.CurrentAttempt < Attempts; this.CurrentAttempt++)
             {
+                bool overtime = false;
                 sw.Reset();
                 sw.Start();
 
@@ -488,6 +489,7 @@ namespace Photon.Realtime
                 {
                     if (sw.ElapsedMilliseconds >= MaxMilliseconsPerPing)
                     {
+                        overtime = true;
                         break;
                     }
                     #if !NETFX_CORE
@@ -546,6 +548,7 @@ namespace Photon.Realtime
             Stopwatch sw = new Stopwatch();
             for (this.CurrentAttempt = 0; this.CurrentAttempt < Attempts; this.CurrentAttempt++)
             {
+                bool overtime = false;
                 sw.Reset();
                 sw.Start();
 
@@ -564,6 +567,7 @@ namespace Photon.Realtime
                 {
                     if (sw.ElapsedMilliseconds >= MaxMilliseconsPerPing)
                     {
+                        overtime = true;
                         break;
                     }
 
