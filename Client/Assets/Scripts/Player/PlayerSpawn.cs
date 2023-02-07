@@ -188,6 +188,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         {
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
+                //Deactivate presentation text
+                  if(eventText != null) eventText.SetActive(false);
                 //Deactivate scope
                 scope.SetActive(false);
                 //Start Animator
@@ -216,48 +218,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 escPul = true; //Escape activado
                 UnityEngine.Debug.Log (estado);
             }
-        }
 
-        if (!UnityEngine.Input.GetKeyDown(KeyCode.Escape)) escPul = false; // Detecta si no está pulsado
-
-        //Game State
-        if (estado == Estados.Pausa)
-        {
-            if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
-            {
-                //Activate scope
-                 scope.SetActive(true);
-                //Stop Animation
-                animator.speed = 1;
-                object[] content =
-                    new object[] {
-                        playerToSpawn.GetComponent<PhotonView>().Owner.NickName,
-                        animator.speed
-                    };
-                RaiseEventOptions raiseEventOptions =
-                    new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-                PhotonNetwork
-                    .RaiseEvent(2,
-                    content,
-                    raiseEventOptions,
-                    SendOptions.SendReliable);
-
-                //Activate Settings Window and stop
-                Settings.SetActive(false);
-                Pausa.SetActive(false);
-                chatManager.SetActive(false);
-                TPul = false;
-                Time.timeScale = 1;
-                playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked; // Menu de opciones, para que se bloquee la camara
-                estado = Estados.Juego;
-                UnityEngine.Debug.Log (estado);
-            }
-        }
-
-        if (estado == Estados.Juego)
-        {
             if (UnityEngine.Input.GetKeyDown(KeyCode.T) && !TPul)
             {
                 //Start Animation
@@ -310,6 +271,48 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
             }
         }
+
+        if (!UnityEngine.Input.GetKeyDown(KeyCode.Escape)) escPul = false; // Detecta si no está pulsado
+
+        //Game State
+        if (estado == Estados.Pausa)
+        {
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
+            {
+                //Activate scope
+                 scope.SetActive(true);
+                 //Activate presentation text
+                 if(eventText != null) eventText.SetActive(true);
+                
+                //Stop Animation
+                animator.speed = 1;
+                object[] content =
+                    new object[] {
+                        playerToSpawn.GetComponent<PhotonView>().Owner.NickName,
+                        animator.speed
+                    };
+                RaiseEventOptions raiseEventOptions =
+                    new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+                PhotonNetwork
+                    .RaiseEvent(2,
+                    content,
+                    raiseEventOptions,
+                    SendOptions.SendReliable);
+
+                //Activate Settings Window and stop
+                Settings.SetActive(false);
+                Pausa.SetActive(false);
+                chatManager.SetActive(false);
+                TPul = false;
+                Time.timeScale = 1;
+                playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked; // Menu de opciones, para que se bloquee la camara
+                estado = Estados.Juego;
+                UnityEngine.Debug.Log (estado);
+            }
+        }
+
     }
 
     public enum Estados
@@ -429,29 +432,24 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         }
     }
 
-    //Eventos de colisión
+    //Function to set the Presentation Camera on Room Entered
 
    public void setPresentationCamera(Camera camera) {
 
         if(camera == null)
         {
-
-          
             //We obtain the camera
             presentationCamera = null;
 
             //We activate UI
 
             eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
-
             eventText.SetActive(false);
-
 
         }
 
         else{
 
-        
 
        
             //We obtain the camera
