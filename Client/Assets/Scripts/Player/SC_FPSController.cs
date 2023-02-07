@@ -51,6 +51,7 @@ public class SC_FPSController : MonoBehaviour
         playerSpawner = GameObject.Find("PlayerSpawner").GetComponent<PlayerSpawn>();
 
         eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject;
+        
         Debug.Log(eventText);
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -67,7 +68,11 @@ public class SC_FPSController : MonoBehaviour
             if(raycastObject == null){
             raycastObject = hit.transform.gameObject;
             raycastObject.gameObject.GetComponent<Outline>().enabled = true;
+          
+           
            eventText.SetActive(true);
+
+           
             }
             //RaycastObject
             else if(raycastObject != hit.transform.gameObject ){

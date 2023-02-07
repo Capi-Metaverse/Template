@@ -23,6 +23,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     //Paneles UI
     public GameObject lobbyPanel;
     public GameObject roomPanel;
+    public GameObject loadingPanel;
     public TMP_Text mapName;
     //Inputs
     //Input para crear una sala
@@ -361,8 +362,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public void OnEvent(EventData photonEvent)
     {
+         
         if(photonEvent.Code == 2)
         {
+            roomPanel.SetActive(false);
+            loadingPanel.SetActive(true);
+            
+           
             PhotonNetwork.IsMessageQueueRunning = false;
             int mapa = (int) PhotonNetwork.CurrentRoom.CustomProperties["Map"];
             PhotonNetwork.LoadLevel(ROOM_NAMES[mapa] );
