@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PresentationZone : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PresentationZone : MonoBehaviour
     //Detect if it in collider
     private void OnTriggerEnter(Collider other) {
         Debug.Log("Contacto");
-        if(other.gameObject.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<PhotonView>().IsMine)
         {
             Debug.Log(camera);
             Debug.Log(other.gameObject);
