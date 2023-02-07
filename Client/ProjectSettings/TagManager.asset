@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SF_Door
   - VideoScreen
+  - PresentationZone
   layers:
   - Default
   - TransparentFX

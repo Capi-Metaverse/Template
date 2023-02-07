@@ -36,6 +36,10 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public GameObject scope;
 
+    public Camera presentationCamera;
+
+    
+
     //Map Variables
     public string mapName;
     public TMP_Text loadingPressCanvas;
@@ -399,66 +403,52 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         }
     }
 
-    /*
-        if(photonEvent.Code == 1)
-        {
-            PhotonNetwork.IsMessageQueueRunning = false;
-            //We maintain the same state between reloads.
-            reload = true;
-            spawnPoint = playerToSpawn.transform.position;
-            //We reload the level
-            PhotonNetwork.LoadLevel(mapName);
-        }
-        //Change animator speed
-        if(photonEvent.Code == 2)
-        {
-            object[] data = (object[])photonEvent.CustomData;
+    //Eventos de colisión
 
-            GameObject[] playersInGame = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject player in playersInGame) 
-            {
-                if (player.GetComponent<PhotonView>().Owner.NickName == (string)data[0])
-                {
-                    player.transform.GetChild(0).GetComponent<Animator>().speed = (float)data[1];  
-                    break;
-                }
-            }
-        }
-        //Event Lamp
-        if(photonEvent.Code == 21)
-        {
-            object[] data = (object[])photonEvent.CustomData;
+    void OnTriggerEnter(Collider other) {
+
+        Debug.Log("Entro");
+         if (other.gameObject.tag == "PresentationZone")
+         {
+             Debug.Log("Entro a la presentación");
+            GameObject eventText;
+            //We obtain the camera
+            presentationCamera = other.gameObject.transform.GetChild(0).gameObject.GetComponent<Camera>();
+
+            //We activate UI
+
+            eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+
+            eventText.SetActive(true);
+            
+
+
+         }
+
         
-            GameObject eventObject = GameObject.Find((string) data[0]);
-    
-            eventObject.GetComponent<Lamp>().activate(false);
-        }
-        //Event FileExplorer(GET)
-        if(photonEvent.Code == 22)
-        {
-            object[] data = (object[])photonEvent.CustomData;
-            fileExplorer.GetComponent<FileExplorer>().downloadImages((string) data[0]);
-        }
-        //Event to move slide
-        if(photonEvent.Code == 23)
-        {
-            object[] data = (object[])photonEvent.CustomData;
-
-        if((string) data[0] == "Back")
-        {
-            //Back presentation
-            GameObject eventObject = GameObject.Find("Back");
-            eventObject.GetComponent<BackPresentation>().activate(false);
-        }
-        else
-        {
-            //Advance presentation
-            GameObject eventObject = GameObject.Find("Advance");
-            eventObject.GetComponent<AdvancePresentation>().activate(false);
-        }
-        }
     }
-    */
+
+     void OnTriggerExit(Collider other) {
+
+        if (other.gameObject.tag == "PresentationZone")
+         {
+            GameObject eventText;
+            //We obtain the camera
+            presentationCamera = null;
+
+            //We activate UI
+
+            eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+
+            eventText.SetActive(false);
+            
+
+
+         }
+        
+    }
+
+    
     //Recibir eventos
     public void ChangeRoom(string map)
     {
