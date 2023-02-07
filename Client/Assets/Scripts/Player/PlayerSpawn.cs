@@ -36,7 +36,12 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public GameObject scope;
 
-    public Camera presentationCamera;
+    public Camera presentationCamera = null;
+
+    public GameObject playerCamera;
+
+    public GameObject eventText;
+    public bool onPresentationCamera = false;
 
     
 
@@ -112,9 +117,9 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
         //-------------------------ACTIVATING CAM AND MOVEMENT ONLY ON LOCAL PLAYER------------------------//
         //this is because we only want the camera and the movement activated for the local player so by default the prefab have both cam and script deactivated. Here is where we activate it right in time, when everithing´s prepared.
-        playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
-        playerToSpawn.transform.Find("PlayerCamera").gameObject.SetActive(true); //Camera of the player
-
+        playerToSpawn.GetComponent<SC_FPSController>().enabled = true; //Camera of the player
+        playerCamera =  playerToSpawn.transform.Find("PlayerCamera").gameObject;
+        playerCamera.SetActive(true);
         //-------------------------ACTIVATING UI------------------------//
         //Prefab of the UI for VoiceChat
         playerToSpawn
@@ -283,6 +288,27 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 TPul = true; //Escape activado
                 UnityEngine.Debug.Log (estado);
             }
+
+        
+            if(UnityEngine.Input.GetKeyDown(KeyCode.K) && presentationCamera != null){
+
+                if(onPresentationCamera){
+                    presentationCamera.enabled = false;
+                    playerCamera.SetActive(true);
+                      eventText.SetActive(true);
+                }
+
+                else{
+                     presentationCamera.enabled = true;
+                    playerCamera.SetActive(false);
+                    eventText.SetActive(false);
+                }
+
+                onPresentationCamera = !onPresentationCamera;
+
+
+
+            }
         }
     }
 
@@ -405,34 +431,12 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
     //Eventos de colisión
 
-    void OnTriggerEnter(Collider other) {
+   public void setPresentationCamera(Camera camera) {
 
-        Debug.Log("Entro");
-         if (other.gameObject.tag == "PresentationZone")
-         {
-             Debug.Log("Entro a la presentación");
-            GameObject eventText;
-            //We obtain the camera
-            presentationCamera = other.gameObject.transform.GetChild(0).gameObject.GetComponent<Camera>();
+        if(camera == null)
+        {
 
-            //We activate UI
-
-            eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
-
-            eventText.SetActive(true);
-            
-
-
-         }
-
-        
-    }
-
-     void OnTriggerExit(Collider other) {
-
-        if (other.gameObject.tag == "PresentationZone")
-         {
-            GameObject eventText;
+          
             //We obtain the camera
             presentationCamera = null;
 
@@ -441,12 +445,30 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
 
             eventText.SetActive(false);
+
+
+        }
+
+        else{
+
+        
+
+       
+            //We obtain the camera
+            presentationCamera = camera;
+
+            //We activate UI
+
+            eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+
+            eventText.SetActive(true);
+        }
             
 
-
-         }
         
     }
+
+    
 
     
     //Recibir eventos
