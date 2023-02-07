@@ -134,10 +134,31 @@ public class SC_FPSController : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
 
         //Animation
-        if ((Input.GetAxis("Vertical")!= 0)|| (Input.GetAxis("Horizontal")!=0))
+        if ((Input.GetAxis("Vertical")!= 0)|| (Input.GetAxis("Horizontal")!=0)){
             anim.SetBool("Walking",true);
-        else
+            if (Input.GetAxis("Vertical")>0){
+                anim.SetFloat("Speed",1.0f);
+            } else if (Input.GetAxis("Vertical")<0){
+                anim.SetFloat("Speed",-1.0f);
+            }
+
+            //Update Speed for other Players
+            object[] content =
+                    new object[] {
+                        transform.GetComponent<PhotonView>().Owner.NickName,
+                        anim.speed
+                    };
+                RaiseEventOptions raiseEventOptions =
+                    new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+                PhotonNetwork
+                    .RaiseEvent(2,
+                    content,
+                    raiseEventOptions,
+                    SendOptions.SendReliable);
+                    
+        }else
             anim.SetBool("Walking",false);
+
         anim.SetBool("Running",isRunning);
 
         // Player and Camera rotation
