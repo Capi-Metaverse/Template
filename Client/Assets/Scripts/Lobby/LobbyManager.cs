@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using TMPro;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
+public class LobbyManager : MonoBehaviourPunCallbacks
 {
 
     //Constantes
@@ -70,7 +70,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
             //Map
             customSettings.Add("Map", 0);
-            customSettings.Add("Init",false);
+            customSettings.Add("Init",true);
             
 
         //Return the settings
@@ -164,6 +164,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public void OnClickPlayButton()
     {
         //If it is the main client, it sends an event to the others so that they can be synchronized
+        /*
         if (PhotonNetwork.IsMasterClient)
         {
             //Send event
@@ -177,11 +178,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
             PhotonNetwork.CurrentRoom.SetCustomProperties(customSettings);
         }
         else
-        {
+        {*/
            //We specificate if we are going to another map and leave the room
             newMap = true;
             PhotonNetwork.LeaveRoom();
-        }
+        //}
     } 
 
 
@@ -413,6 +414,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
             DeletePlayer(otherPlayer);
         }
 
+/*
     public void OnEvent(EventData photonEvent)
     {
          
@@ -428,5 +430,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
             
         }
     }
+    */
     
 }
