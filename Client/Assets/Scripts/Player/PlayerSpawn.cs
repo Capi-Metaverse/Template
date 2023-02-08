@@ -63,8 +63,18 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     //Player Character
     GameObject playerToSpawn;
 
-    private void Start()
+     private void Start()
     {
+        //We activate the message Queue again
+        PhotonNetwork.IsMessageQueueRunning = true;
+        
+        
+    }
+
+    public override void OnJoinedRoom()
+    {
+        //We are connected now, so we instantiate everything
+
         //States
         estado = Estados.Juego;
         escPul = false;

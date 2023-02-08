@@ -20,6 +20,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     //Variables
     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
 
+    //New Room Configuration
+    public bool newMap = false;
+    public string currentMap;
+    public int currentMapNumber;
+    public int avatar;
+
     //Paneles UI
     public GameObject lobbyPanel;
     public GameObject roomPanel;
@@ -55,12 +61,31 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public Transform contentObject;
     public Transform playerItemParent;
 
+    //Function to get the customSettings of a room
+    public Hashtable getRoomCustomSettings(){
+
+        //We create the new settings
+
+         Hashtable customSettings = new Hashtable();
+
+            //Map
+            customSettings.Add("Map", 0);
+            customSettings.Add("Init",false);
+            
+
+        //Return the settings
+        return customSettings;
+
+    }
+
   
 
 
 
     private void Start() 
     {
+         //We join to the Lobby
+        //This lobby allow us to have the RoomList
         PhotonNetwork.JoinLobby(TypedLobby.Default);
 
         //find voice chat script
@@ -105,24 +130,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     //Button method that creates a room.
     public void OnClickCreate()
     {
-        if(roomInputField.text.Length >=1)
-        {
+        //CurrentRoomName
+            currentMap = roomInputField.text;
 
-            //Custom Room Options
+            //Room CustomSettings 
 
-            Hashtable customSettings = new Hashtable();
-
-            //Map
-            customSettings.Add("Map", 0);
-            customSettings.Add("Init",false);
+            Hashtable customSettings = getRoomCustomSettings();
 
             //Create options for the room
 
-            RoomOptions opciones = new RoomOptions(){MaxPlayers = 4, BroadcastPropsChangeToAll = true, PublishUserId = true, CustomRoomProperties = customSettings};
-
-            PhotonNetwork.CreateRoom(roomInputField.text, opciones);
-            voiceChat.onJoinButtonClicked(roomInputField.text);
-        }
+            RoomOptions opciones = new RoomOptions(){MaxPlayers = 4, BroadcastPropsChangeToAll = true, PublishUserId = true, CustomRoomProperties = customSettings, IsVisible = true,  EmptyRoomTtl = 50000};
+            
+            //We join or create the new room
+            PhotonNetwork.JoinOrCreateRoom(currentMap, opciones,TypedLobby.Default);
+            voiceChat.onJoinButtonClicked(currentMap);
     }
 
     //Method called by the RoomItem button to join a room
@@ -157,13 +178,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
         }
         else
         {
-           //We send event if we join after
-            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-            PhotonNetwork.RaiseEvent(1, "", raiseEventOptions, SendOptions.SendReliable);
-             
-            //PhotonNetwork.IsMessageQueueRunning = false;
-            int mapa = (int) PhotonNetwork.CurrentRoom.CustomProperties["Map"];
-            PhotonNetwork.LoadLevel(ROOM_NAMES[mapa] );
+           //We specificate if we are going to another map and leave the room
+            newMap = true;
+            PhotonNetwork.LeaveRoom();
         }
     } 
 
@@ -263,7 +280,30 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     //Photon CallBack that is called once it connects to the main server
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.JoinLobby();
+        //It calls this method when we leave the room or change to another
+        PhotonNetwork.JoinLobby(TypedLobby.Default);
+    }
+
+    public override void OnJoinedLobby()
+    {
+
+        //If we are changing the map, we have to join the new 
+        if(newMap == true){
+
+        //Custom Room Options
+            
+            Hashtable customSettings = getRoomCustomSettings();
+
+            //We stop communication to stop new scene events
+            PhotonNetwork.IsMessageQueueRunning = false;
+            PhotonNetwork.JoinOrCreateRoom(currentMap + "Map" + currentMapNumber, new RoomOptions(){MaxPlayers = 4, BroadcastPropsChangeToAll = true, PublishUserId = true,CustomRoomProperties = customSettings, IsVisible = false},TypedLobby.Default);
+            PhotonNetwork.LoadLevel(ROOM_NAMES[currentMapNumber] );
+
+            //Voice Chat
+            voiceChat.onLeaveButtonClicked();
+            voiceChat.onJoinButtonClicked(currentMap+"Map"+currentMapNumber);
+
+        }
     }
 
     //Photon CallBack that is called every x time with new information from the lists.
@@ -304,7 +344,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         lobbyPanel.SetActive(false);
         roomPanel.SetActive(true);
+        //We get the roomName
         roomName.text=PhotonNetwork.CurrentRoom.Name;
+        currentMap = PhotonNetwork.CurrentRoom.Name;
+   
 
         //Method to update the player list
 
@@ -330,6 +373,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     //Photon CallBack called when leaving a room
     public override void OnLeftRoom()
     {
+        //Changes if we aren't leaving the map
+        if (newMap == false)
+        {
         playerProperties["playerAvatar"] = 6;
         PhotonNetwork.SetPlayerCustomProperties(playerProperties);
         //We remove the list of players when leaving the room
@@ -345,6 +391,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
         if (roomPanel!=null & lobbyPanel!=null){
             roomPanel.SetActive(false);
             lobbyPanel.SetActive(true);
+        }
+
+        }
+
+        else{
+             roomPanel.SetActive(false);
+             loadingPanel.SetActive(true);
         }
     }
 
@@ -363,15 +416,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public void OnEvent(EventData photonEvent)
     {
          
-        if(photonEvent.Code == 3)
+         if(photonEvent.Code == 3)
         {
-            roomPanel.SetActive(false);
-            loadingPanel.SetActive(true);
+            //The user moves to the next room
+            newMap = true;
+            avatar = (int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"];
+            currentMapNumber =  (int) PhotonNetwork.CurrentRoom.CustomProperties["Map"];
+            PhotonNetwork.LeaveRoom();
+          
             
-           
-            PhotonNetwork.IsMessageQueueRunning = false;
-            int mapa = (int) PhotonNetwork.CurrentRoom.CustomProperties["Map"];
-            PhotonNetwork.LoadLevel(ROOM_NAMES[mapa] );
+            
         }
     }
     

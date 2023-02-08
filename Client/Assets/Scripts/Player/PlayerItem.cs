@@ -22,7 +22,8 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     private void Start()
     {
     //Set array properties to avatar 0
-        playerProperties["playerAvatar"] = 0;
+        playerProperties["playerAvatar"] = 6;
+          PhotonNetwork.SetPlayerCustomProperties(playerProperties);
     }
 
     public void SetPlayerInfo(Player _player)
