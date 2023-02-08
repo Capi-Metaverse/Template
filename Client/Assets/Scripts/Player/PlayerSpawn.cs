@@ -142,6 +142,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 .Owner
                 .NickName); //Getting the PlayerNameDisplay component(script controller) we call the setName method we defined it just change the text value of a variable that corresponds to the text object inside de canvas
 
+
         //-------------------------ACTIVATING UI END------------------------//
         animator = playerToSpawn.transform.GetChild(0).GetComponent<Animator>();
         voiceChat.CheckMicroImage();
@@ -183,6 +184,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                         .Owner
                         .NickName);
             }
+
+            if (!player.gameObject.GetComponent<PhotonView>().IsMine) player.transform.GetChild(2).gameObject.SetActive(false);
         }
         if (estado == Estados.Juego)
         {
