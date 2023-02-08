@@ -19,7 +19,7 @@ public class SC_FPSController : MonoBehaviour
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
-
+    public float sensitivity;
     public Sprite imagenPrueba;
 
     private bool isFalling;
@@ -73,6 +73,7 @@ public class SC_FPSController : MonoBehaviour
     
     void Update()
     {
+        sensitivity = PlayerPrefs.GetFloat("Sensitivity",1.0f);
         targetTime -= Time.deltaTime;
           //Raycast
         RaycastHit hit;
@@ -174,10 +175,10 @@ public class SC_FPSController : MonoBehaviour
         // Player and Camera rotation
         if (canMove)
         {
-            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed  / sensitivity;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+            playerCamera.transform.localRotation = Quaternion.Euler(rotationX , 0, 0);
+            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed / sensitivity, 0);
         }
         //Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * rayDistance, Color.red );
     } 
