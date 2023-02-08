@@ -32,7 +32,7 @@ public class DetectionArea : MonoBehaviour
 
                     other.gameObject.transform.position = spawnPoints[randomNumber].position;
 
-            //Reactivate player controller
+            //Reactivate player controller2
             playerController.enabled=true;
       
            
