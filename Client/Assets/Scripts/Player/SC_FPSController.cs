@@ -64,7 +64,6 @@ public class SC_FPSController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
     void Update()
     {
         targetTime -= Time.deltaTime;
@@ -89,7 +88,6 @@ public class SC_FPSController : MonoBehaviour
             eventText.SetActive(true);
             }
             //If the user interacts, activate the event
-            if (Input.GetButton("Interact") && targetTime <=0)
             {
                 //Cooldown timer
                 targetTime=0.5f;
