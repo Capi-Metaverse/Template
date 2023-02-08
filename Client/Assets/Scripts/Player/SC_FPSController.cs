@@ -23,7 +23,11 @@ public class SC_FPSController : MonoBehaviour
     public Sprite imagenPrueba;
 
     private bool isFalling;
+<<<<<<< Updated upstream
     private bool isRunning;
+=======
+    
+>>>>>>> Stashed changes
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
@@ -41,6 +45,10 @@ public class SC_FPSController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
+<<<<<<< Updated upstream
+=======
+    InputManager inputManager;
+>>>>>>> Stashed changes
     GameObject eventText;
 
     //Animations
@@ -53,6 +61,7 @@ public class SC_FPSController : MonoBehaviour
 
     void Start()
     {
+        inputManager = GameObject.FindObjectOfType<InputManager>();
         characterController = GetComponent<CharacterController>();
         anim = transform.GetChild(0).GetComponent<Animator>();
         playerSpawner = GameObject.Find("PlayerSpawner").GetComponent<PlayerSpawn>();
@@ -64,6 +73,7 @@ public class SC_FPSController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+    
     void Update()
     {
         targetTime -= Time.deltaTime;
@@ -88,6 +98,7 @@ public class SC_FPSController : MonoBehaviour
             eventText.SetActive(true);
             }
             //If the user interacts, activate the event
+            if (inputManager.GetButtonDawn("Interact") && targetTime <=0)
             {
                 //Cooldown timer
                 targetTime=0.5f;
