@@ -281,7 +281,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public override void OnConnectedToMaster()
     {
         //It calls this method when we leave the room or change to another
-        PhotonNetwork.JoinLobby(TypedLobby.Default);
+        PhotonNetwork.JoinLobby();
     }
 
     public override void OnJoinedLobby()
