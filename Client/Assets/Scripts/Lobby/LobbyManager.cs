@@ -147,7 +147,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
         {
             //Send event
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-            PhotonNetwork.RaiseEvent(2, "", raiseEventOptions, SendOptions.SendReliable);
+            PhotonNetwork.RaiseEvent(3, "", raiseEventOptions, SendOptions.SendReliable);
 
             //Change room to start
 
@@ -363,7 +363,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public void OnEvent(EventData photonEvent)
     {
          
-        if(photonEvent.Code == 2)
+        if(photonEvent.Code == 3)
         {
             roomPanel.SetActive(false);
             loadingPanel.SetActive(true);
