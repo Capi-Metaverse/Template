@@ -23,6 +23,7 @@ public class SC_FPSController : MonoBehaviour
     public Sprite imagenPrueba;
 
     private bool isFalling;
+    private bool isRunning;
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
@@ -40,9 +41,15 @@ public class SC_FPSController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
-    
     GameObject eventText;
+
+    //Animations
     Animator anim;
+    float SpeedAnim;
+    bool WalkingAnim;
+
+    //PhotonEvents
+    object[] content;
 
     void Start()
     {
@@ -103,15 +110,12 @@ public class SC_FPSController : MonoBehaviour
             }
         }
 
-        
-
-
 
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         // Press Left Shift to run
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        isRunning = Input.GetKey(KeyCode.LeftShift);
         float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
@@ -138,33 +142,28 @@ public class SC_FPSController : MonoBehaviour
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
 
-        //Animation
+        //Determine Animation State
         if ((Input.GetAxis("Vertical")!= 0)|| (Input.GetAxis("Horizontal")!=0)){
-            anim.SetBool("Walking",true);
+
+            WalkingAnim = true;
+
             if (Input.GetAxis("Vertical")>0){
-                anim.SetFloat("Speed",1.0f);
+                SpeedAnim = 1.0f;
             } else if (Input.GetAxis("Vertical")<0){
-                anim.SetFloat("Speed",-1.0f);
+                SpeedAnim = -1.0f;
             }
+       
+        } else {
+            WalkingAnim = false;
+        }
 
-            //Update Speed for other Players
-            object[] content =
-                    new object[] {
-                        transform.GetComponent<PhotonView>().Owner.NickName,
-                        anim.speed
-                    };
-                RaiseEventOptions raiseEventOptions =
-                    new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-                PhotonNetwork
-                    .RaiseEvent(2,
-                    content,
-                    raiseEventOptions,
-                    SendOptions.SendReliable);
-                    
-        }else
-            anim.SetBool("Walking",false);
-
+        // Update local Animations
+        anim.SetBool("Walking",WalkingAnim);
+        anim.SetFloat("Speed",SpeedAnim);
         anim.SetBool("Running",isRunning);
+
+        //Update Remote Animations
+        UpdateAnimations();
 
         // Player and Camera rotation
         if (canMove)
@@ -176,4 +175,42 @@ public class SC_FPSController : MonoBehaviour
         }
         //Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * rayDistance, Color.red );
     } 
+
+    /// <summary>
+    /// Updates the Animation State in the screen of other players 
+    /// </summary>
+    void UpdateAnimations(){
+            //Update Walking for other Players
+            content = new object[] {
+                        transform.GetComponent<PhotonView>().Owner.NickName,
+                        WalkingAnim,
+                        "Walking"
+                    };
+            RaiseEventAnimation(content);
+
+            //Update Speed for other Players
+            content = new object[] {
+                        transform.GetComponent<PhotonView>().Owner.NickName,
+                        SpeedAnim,
+                        "SpeedAnim"
+                    };
+            RaiseEventAnimation(content);
+
+            //Update Running for other Players
+            content = new object[] {
+                        transform.GetComponent<PhotonView>().Owner.NickName,
+                        isRunning,
+                        "Running"
+                    };
+            RaiseEventAnimation(content);
+    }
+    void RaiseEventAnimation(object[] content){
+        RaiseEventOptions raiseEventOptions =
+                    new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+                PhotonNetwork
+                    .RaiseEvent(2,
+                    content,
+                    raiseEventOptions,
+                    SendOptions.SendReliable);
+    }
 }

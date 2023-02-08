@@ -598,6 +598,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: Walking
+  - Type: 1
+    SynchronizeType: 1
+    Name: Speed
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

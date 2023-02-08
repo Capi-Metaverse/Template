@@ -197,7 +197,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 object[] content =
                     new object[] {
                         playerToSpawn.GetComponent<PhotonView>().Owner.NickName,
-                        animator.speed
+                        animator.speed,
+                        "Stop&Replay"
                     };
                 RaiseEventOptions raiseEventOptions =
                     new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
@@ -226,7 +227,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 object[] content =
                     new object[] {
                         playerToSpawn.GetComponent<PhotonView>().Owner.NickName,
-                        animator.speed
+                        animator.speed,
+                        "Stop&Replay"
                     };
                 RaiseEventOptions raiseEventOptions =
                     new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
@@ -289,7 +291,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 object[] content =
                     new object[] {
                         playerToSpawn.GetComponent<PhotonView>().Owner.NickName,
-                        animator.speed
+                        animator.speed,
+                        "Stop&Replay"
                     };
                 RaiseEventOptions raiseEventOptions =
                     new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
@@ -353,12 +356,45 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                             (string) data[0]
                         )
                         {
-                            player
-                                .transform
-                                .GetChild(0)
-                                .GetComponent<Animator>()
-                                .speed = (float) data[1];
-                            break;
+                            switch ((string) data[2]){
+
+                                case "Walking":
+                                {
+                                    player
+                                        .transform
+                                        .GetChild(0)
+                                        .GetComponent<Animator>()
+                                        .SetBool("Walking",(bool) data[1]);
+                                    break;
+                                }
+                                case "Running":
+                                {
+                                    player
+                                        .transform
+                                        .GetChild(0)
+                                        .GetComponent<Animator>()
+                                        .SetBool("Running",(bool) data[1]);
+                                    break;
+                                }
+                                case "Stop&Replay":
+                                {
+                                    player
+                                        .transform
+                                        .GetChild(0)
+                                        .GetComponent<Animator>()
+                                        .speed = (float) data[1];
+                                    break;
+                                }
+                                case "SpeedAnim":
+                                {
+                                    player
+                                        .transform
+                                        .GetChild(0)
+                                        .GetComponent<Animator>()
+                                        .SetFloat("Speed",(float) data[1]);
+                                    break;
+                                }
+                            }
                         }
                     }
                     break;

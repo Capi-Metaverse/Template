@@ -672,6 +672,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 1
     Name: Jumping
+  - Type: 1
+    SynchronizeType: 1
+    Name: Speed
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
