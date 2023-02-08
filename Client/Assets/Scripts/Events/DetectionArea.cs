@@ -7,32 +7,35 @@ using UnityEngine.Events;
 
 public class DetectionArea : MonoBehaviour
 {
-    private CharacterController playerController;
-    public UnityEvent detectionEvent;
-    public GameObject MyPJ;
+    //Spawn point to the user
+    public Transform[] spawnPoints;
 
-    
-    private void Update()
-    {
-        //viewplayer = GameObject.FindGameObjectWithTag("Player").GetComponent<PhotonView>().IsMine;
-        GameObject[] viewplayer = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in viewplayer) 
-        {
-            if (player.GetComponent<PhotonView>().IsMine)
-            {
-                MyPJ=player;
-                playerController=player.GetComponent<CharacterController>();
-                break;  
-            }
-        }
-    }
+
     //Detect if it in collider
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("Contacto");
-        if(other.gameObject.CompareTag("Player"))
+      
+     
+      //If the user is the one that provokes the collision
+        if(other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<PhotonView>().IsMine)
         {
-            Debug.Log("La colision fue con el Player");
-            detectionEvent.Invoke();
+            int randomNumber = Random.Range(0, spawnPoints.Length);
+
+    
+             
+            CharacterController playerController = other.gameObject.GetComponent<CharacterController>();
+            
+            //Deactivate player controller
+            playerController.enabled=false;
+           
+
+            //Move the character
+
+                    other.gameObject.transform.position = spawnPoints[randomNumber].position;
+
+            //Reactivate player controller
+            playerController.enabled=true;
+      
+           
         }
     }
     //Detect if Exits collider
@@ -40,11 +43,5 @@ public class DetectionArea : MonoBehaviour
         Debug.Log("Salida");
         
     }
-    //Change the location
-    public void Respawn(Transform pointToSpawn)
-    {
-        playerController.enabled=false;
-        MyPJ.transform.position = pointToSpawn.position;
-        playerController.enabled=true;
-    }
+    
 }
