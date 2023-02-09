@@ -209,13 +209,17 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 if(onPresentationCamera){
                     presentationCamera.enabled = false;
                     playerCamera.SetActive(true);
-                      eventText.SetActive(true);
+                    eventText.SetActive(true);
+                    scope.SetActive(true);
+                    playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
                 }
 
                 else{
                      presentationCamera.enabled = true;
                     playerCamera.SetActive(false);
                     eventText.SetActive(false);
+                    scope.SetActive(false);
+                    playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
                 }
 
                 onPresentationCamera = !onPresentationCamera;
