@@ -96,7 +96,7 @@ public class SC_FPSController : MonoBehaviour
             eventText.SetActive(true);
             }
             //If the user interacts, activate the event
-            if (inputManager.GetButtonDawn("Interact") && targetTime <=0)
+            if (inputManager.GetButtonDown("Interact") && targetTime <=0)
             {
                 //Cooldown timer
                 targetTime=0.5f;

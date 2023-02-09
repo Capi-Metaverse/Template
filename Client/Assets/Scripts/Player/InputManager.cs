@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     {
         buttonKeys = new Dictionary<string, KeyCode>();
         buttonKeys["Interact"] = KeyCode.E;
+        buttonKeys["ChangeCamera"] = KeyCode.K;
     }
 
     // Update is called once per frame
@@ -17,7 +18,7 @@ public class InputManager : MonoBehaviour
     {
         
     }
-    public bool GetButtonDawn(string buttonName)
+    public bool GetButtonDown(string buttonName)
     {
         if(buttonKeys.ContainsKey(buttonName) == false)
         {
