@@ -11,12 +11,14 @@ public class KeyBindDialogueBox : MonoBehaviour
     public GameObject keyList;
     string buttonToRebind = null;
     Dictionary <string, TMP_Text> buttonToLabel;
+    PlayerUiPrefab playerUiPrefab;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        inputManager = GameObject.FindObjectOfType<InputManager>();  
+        inputManager = GameObject.FindObjectOfType<InputManager>(); 
+        playerUiPrefab =  GameObject.FindObjectOfType<PlayerUiPrefab>();
       //Create one "Key List Item"
 
         string[] buttonNames = inputManager.GetButtonNames();
@@ -39,6 +41,7 @@ public class KeyBindDialogueBox : MonoBehaviour
             TMP_Text keyNameText = go.transform.GetChild(1).GetChild(0).GetComponent<TMP_Text>();
             keyNameText.text = inputManager.GetKeyNameForButton(bn);
             buttonToLabel[bn] = keyNameText;
+            
 
             Button keyBindButton = go.transform.GetChild(1).GetComponent<Button>();
             keyBindButton.onClick.AddListener(()=>{StartRebinFor(bn);});
@@ -62,6 +65,7 @@ public class KeyBindDialogueBox : MonoBehaviour
                     {
                         inputManager.SetButtonForKey(buttonToRebind,kc);
                         buttonToLabel[buttonToRebind].text = kc.ToString();
+                        playerUiPrefab.ChangeLetter(kc.ToString());
                         buttonToRebind = null;
                         break;
                     }
