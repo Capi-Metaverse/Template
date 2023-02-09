@@ -17,6 +17,7 @@ HANDLES ALMOST EVERITHING THAT HAS SOMETHING TO DO WITH THE PLAYER(EVENTS, INTER
 */
 public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 {
+    InputManager inputManager;
     /*------------MANAGERS AS GAMEOBJECTS IN SCENE MAP----------------*/
     private AudioController voiceChat;//Manager for the voiceChat, not in scene object
     public Animator animator;//Animation manager
@@ -48,6 +49,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     
      private void Start()
     {
+        inputManager = GameObject.FindObjectOfType<InputManager>();
         //We activate the message Queue again
         PhotonNetwork.IsMessageQueueRunning = true;
     }
@@ -204,7 +206,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             }
 
         
-            if(UnityEngine.Input.GetKeyDown(KeyCode.K) && presentationCamera != null){
+            if(inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null){
 
                 if(onPresentationCamera){
                     presentationCamera.enabled = false;
