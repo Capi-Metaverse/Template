@@ -65,9 +65,18 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //We create the new settings
         Hashtable customSettings = new Hashtable();
 
+<<<<<<< Updated upstream
         //Map
         customSettings.Add("Map", 0);
         customSettings.Add("Init",true);
+=======
+         Hashtable customSettings = new Hashtable();
+
+            //Map
+            customSettings.Add("Map", 0);
+            customSettings.Add("Init",true);
+            customSettings.Add("Name",currentMap);
+>>>>>>> Stashed changes
             
         //Return the settings
         return customSettings;
@@ -185,6 +194,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         customSettings["Map"] = mapa - 1;
         mapName.text = ROOM_NAMES[mapa - 1];
+         currentMapNumber = (mapa - 1);
         PhotonNetwork.CurrentRoom.SetCustomProperties(customSettings);
     }
     //Button method to switch the map to the right.
@@ -199,6 +209,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if( mapa == (NUMBER_MAPS - 1) ) return;
 
         customSettings["Map"] = mapa + 1;
+        currentMapNumber = mapa + 1;
         mapName.text = ROOM_NAMES[mapa + 1];
         PhotonNetwork.CurrentRoom.SetCustomProperties(customSettings);
     }

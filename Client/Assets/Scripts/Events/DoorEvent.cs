@@ -7,32 +7,16 @@ using Photon.Realtime;
 
 public class DoorEvent : MonoBehaviour, IMetaEvent
 {
-    public Transform spawnPoint;
+    
+    public string map;
+    public Disconnect disconnectScript;
+
 
      public void activate(bool host){
 
-       GameObject[] viewplayer = GameObject.FindGameObjectsWithTag("Player");
-
-         
-        foreach (GameObject player in viewplayer) 
-        {
-            Debug.Log(player);
-            Debug.Log(player.transform);
-            Debug.Log(player.transform.position);
-            if (player.GetComponent<PhotonView>().IsMine)
-            {
-               CharacterController playerController=player.GetComponent<CharacterController>();
-               playerController.enabled=false;
-                player.transform.position = spawnPoint.position;
-                playerController.enabled=true;
-                break;  
-            }
-        }
-       //SC_FPSController playerController=user.GetComponent<SC_FPSController>();
-
-
+        Debug.Log("AQUI");
+        disconnectScript.changeRoom(map);
        
-        
     }   
 
  

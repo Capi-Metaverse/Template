@@ -25,6 +25,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     public GameObject chatManager;//Also in scene map is the manager for the TextChat(T to open TextChat)
     public GameObject Settings;//The same as Pausa but for settings, the state will be Pausa too cause the setting are accesible from Pausa
     public GameObject fileExplorer;//Object in scene map, is the manager for the FileExploring system
+    public Disconnect disconnect;
 
     /*--------------------BOOLEANS FOR CONDITIONAL CHECKING---------------------*/
     private Estados estado; //With this we keep track of the current state so we can use it in conditionals. States are (Game, Pause)
@@ -116,7 +117,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     //When you enter this override function means you just call leaveRoom so the game loads the previous scene which is the lobby
     public override void OnConnectedToMaster()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     private void Update()
@@ -186,6 +187,9 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             }
 
             //K key down(PrentationMode)
+            if(presentationCamera != null){
+
+            
             if(inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null){
 
                 if(onPresentationCamera){
@@ -209,6 +213,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
                 onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
             }
+        }
         }
 
         if (!UnityEngine.Input.GetKeyDown(KeyCode.Escape)) 
@@ -374,6 +379,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                     fileExplorer.GetComponent<FileExplorer>().SetImage((byte[]) data[0]);
                     break;
                 }
+
         }
     }
 
@@ -403,6 +409,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             eventText.SetActive(true);
         }   
     }
+
+    
     
     //Cambio de mapa?
     public void ChangeRoom(string map)
