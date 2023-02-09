@@ -47,6 +47,12 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     public GameObject eventText;//A text for displaying when an event happens
     private Compressor compressor = new Compressor();//Class used to compress video when presenting
     
+    public enum Estados
+    {
+        Juego,Pausa
+    }
+    
+    /*-------------METHODS-----------------*/
      private void Start()
     {
         inputManager = GameObject.FindObjectOfType<InputManager>();
@@ -121,51 +127,36 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         {
             if (player.transform.GetChild(3).GetChild(0).GetComponent<TMP_Text>().text =="Name")
             {
-                Debug
-                    .Log("There is someone named: " +
-                    player.GetComponent<PhotonView>().Owner.NickName +
-                    " in the game!");
-                player
-                    .transform
-                    .GetChild(3)
-                    .GetComponent<PlayerNameDisplay>()
-                    .SetPlayerName(player
-                        .GetComponent<PhotonView>()
-                        .Owner
-                        .NickName);
+                Debug.Log("There is someone named: " + player.GetComponent<PhotonView>().Owner.NickName + " in the game!");player.transform.GetChild(3).GetComponent<PlayerNameDisplay>().SetPlayerName(player.GetComponent<PhotonView>().Owner.NickName);
             }
 
-            if (!player.gameObject.GetComponent<PhotonView>().IsMine) player.transform.GetChild(2).gameObject.SetActive(false);
+            if (!player.gameObject.GetComponent<PhotonView>().IsMine) 
+            {
+                player.transform.GetChild(2).gameObject.SetActive(false);
+            }  
         }
+
         if (estado == Estados.Juego)
         {
+            //ESC key down(PauseMenu)
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
                 //Deactivate presentation text
-                  if(eventText != null) eventText.SetActive(false);
+                if(eventText != null) 
+                {
+                    eventText.SetActive(false);
+                }
+                
                 //Deactivate scope
                 scope.SetActive(false);
                 //Start Animator
                 animator.speed = 0;
-                object[] content =
-                    new object[] {
-                        playerToSpawn.GetComponent<PhotonView>().Owner.NickName,
-                        animator.speed,
-                        "Stop&Replay"
-                    };
-                RaiseEventOptions raiseEventOptions =
-                    new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-                PhotonNetwork
-                    .RaiseEvent(2,
-                    content,
-                    raiseEventOptions,
-                    SendOptions.SendReliable);
+                object[] content =new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName,animator.speed,"Stop&Replay"};
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+                PhotonNetwork.RaiseEvent(2,content,raiseEventOptions,SendOptions.SendReliable);
 
                 Pausa.SetActive(true);
-
-                //Time.timeScale = 0;
                 playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
-
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
                 estado = Estados.Pausa;
@@ -173,39 +164,28 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 UnityEngine.Debug.Log (estado);
             }
 
+            //T key down(TextChat)
             if (UnityEngine.Input.GetKeyDown(KeyCode.T) && !TPul)
             {
                 //Start Animation
                 animator.speed = 0;
-                object[] content =
-                    new object[] {
-                        playerToSpawn.GetComponent<PhotonView>().Owner.NickName,
-                        animator.speed,
-                        "Stop&Replay"
-                    };
-                RaiseEventOptions raiseEventOptions =
-                    new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-                PhotonNetwork
-                    .RaiseEvent(2,
-                    content,
-                    raiseEventOptions,
-                    SendOptions.SendReliable);
+                object[] content =new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName,animator.speed,"Stop&Replay"};
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+                PhotonNetwork.RaiseEvent(2,content,raiseEventOptions,SendOptions.SendReliable);
 
                 UnityEngine.Debug.Log("T pulsada");
                 chatManager.SetActive(true);
-                chatManager
-                    .GetComponent<PhotonChatManager>()
-                    .ChatConnectOnClick();
+                chatManager.GetComponent<PhotonChatManager>().ChatConnectOnClick();
                 playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
 
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
                 estado = Estados.Pausa;
-                TPul = true; //Escape activado
+                TPul = true; //Escape is activated, true
                 UnityEngine.Debug.Log (estado);
             }
 
-        
+            //K key down(PrentationMode)
             if(inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null){
 
                 if(onPresentationCamera){
@@ -219,6 +199,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
                 else{
                     presentationCamera.enabled = true;
+                    presentationCamera.enabled = true;
                     playerCamera.SetActive(false);
                     eventText.SetActive(false);
                     scope.SetActive(false);
@@ -226,14 +207,14 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                     playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
                 }
 
-                onPresentationCamera = !onPresentationCamera;
-
-
-
+                onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
             }
         }
 
-        if (!UnityEngine.Input.GetKeyDown(KeyCode.Escape)) escPul = false; // Detecta si no está pulsado
+        if (!UnityEngine.Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            escPul = false; // Detecta si no está pulsado
+        }
 
         //Game State
         if (estado == Estados.Pausa)
@@ -241,25 +222,15 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
                 //Activate scope
-                 scope.SetActive(true);
-                 //Activate presentation text
-                 if(eventText != null) eventText.SetActive(true);
+                scope.SetActive(true);
+                //Activate presentation text
+                if(eventText != null) eventText.SetActive(true);
                 
                 //Stop Animation
                 animator.speed = 1;
-                object[] content =
-                    new object[] {
-                        playerToSpawn.GetComponent<PhotonView>().Owner.NickName,
-                        animator.speed,
-                        "Stop&Replay"
-                    };
-                RaiseEventOptions raiseEventOptions =
-                    new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-                PhotonNetwork
-                    .RaiseEvent(2,
-                    content,
-                    raiseEventOptions,
-                    SendOptions.SendReliable);
+                object[] content = new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName,animator.speed,"Stop&Replay"};
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+                PhotonNetwork.RaiseEvent(2,content,raiseEventOptions,SendOptions.SendReliable);
 
                 //Activate Settings Window and stop
                 Settings.SetActive(false);
@@ -274,13 +245,6 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 UnityEngine.Debug.Log (estado);
             }
         }
-
-    }
-
-    public enum Estados
-    {
-        Juego,
-        Pausa
     }
 
     //Recibir eventos
@@ -306,17 +270,13 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 {
                     object[] data = (object[]) photonEvent.CustomData;
 
-                    GameObject[] playersInGame =
-                        GameObject.FindGameObjectsWithTag("Player");
+                    GameObject[] playersInGame = GameObject.FindGameObjectsWithTag("Player");
                     foreach (GameObject player in playersInGame)
                     {
-                        if (
-                            player.GetComponent<PhotonView>().Owner.NickName ==
-                            (string) data[0]
-                        )
+                        if (player.GetComponent<PhotonView>().Owner.NickName == (string) data[0])
                         {
-                            switch ((string) data[2]){
-
+                            switch ((string) data[2])
+                            {
                                 case "Walking":
                                 {
                                     player
@@ -374,9 +334,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                     loadingPressCanvas.enabled = true;
                     loadingPressCanvas.SetText("Loading");
                     object[] data = (object[]) photonEvent.CustomData;
-                    fileExplorer
-                        .GetComponent<FileExplorer>()
-                        .downloadImages((string) data[0]);
+                    fileExplorer.GetComponent<FileExplorer>().downloadImages((string) data[0]);
                     break;
                 }
             //Event to move slide
@@ -388,17 +346,13 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                     {
                         //Back presentation
                         GameObject eventObject = GameObject.Find("Back");
-                        eventObject
-                            .GetComponent<BackPresentation>()
-                            .activate(false);
+                        eventObject.GetComponent<BackPresentation>().activate(false);
                     }
                     else
                     {
                         //Advance presentation
                         GameObject eventObject = GameObject.Find("Advance");
-                        eventObject
-                            .GetComponent<AdvancePresentation>()
-                            .activate(false);
+                        eventObject.GetComponent<AdvancePresentation>().activate(false);
                     }
                     break;
                 }
@@ -408,9 +362,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                     loadingPressCanvas.enabled = true;
                     loadingPressCanvas.SetText("Loading");
                     object[] data = (object[]) photonEvent.CustomData;
-                    fileExplorer
-                        .GetComponent<FileExplorer>()
-                        .SetVideo((string) data[0],(string) data[1],compressor.Decompress((byte[]) data[2]));
+                    fileExplorer.GetComponent<FileExplorer>().SetVideo((string) data[0],(string) data[1],compressor.Decompress((byte[]) data[2]));
                     break;
                 }
             //Event FileExplorer Image
