@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine.UI;
 public class PlayerItem : MonoBehaviourPunCallbacks
 {
+    /*------------------VARIABLES----------------*/
     public TMP_Text playerName;
     public Color highlightColor;
 
@@ -19,11 +20,12 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
     Player player;
 
+    /*------------------METHODS----------------*/
     private void Start()
     {
-    //Set array properties to avatar 0
+        //Set array properties to avatar 6 which es the random character
         playerProperties["playerAvatar"] = 6;
-          PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+        PhotonNetwork.SetPlayerCustomProperties(playerProperties);
     }
 
     public void SetPlayerInfo(Player _player)
@@ -31,21 +33,20 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     {
         playerName.text = _player.NickName;
         player = _player;
-        UpdatePlayerItem(player);
+        UpdatePlayerItem(player);//Update the list of players in the room
     }
 
     public Player GetPlayerInfo(){
         return player;
     }
 
+    //This is only executed for the current player, activates the arrow for player selection
     public void ApplyLocalChanges()
     {
-    //enable Panels
-    leftArrowButton.SetActive(true);
-    rightArrowButton.SetActive(true);
+        //enable arrows, you´ll only see them on your player preview the other player previews will not have arrows for you
+        leftArrowButton.SetActive(true);
+        rightArrowButton.SetActive(true);
     }
-
-
     public void OnClickLeftArrow()
     {
         //Change Sprite and Avatar to Left
@@ -57,7 +58,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         {
             playerProperties["playerAvatar"] = (int)playerProperties["playerAvatar"] -1;
         }
-            PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+        PhotonNetwork.SetPlayerCustomProperties(playerProperties);
     }
 
     public void OnClickRightArrow()
@@ -71,8 +72,9 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         {
             playerProperties["playerAvatar"] = (int)playerProperties["playerAvatar"] + 1;
         }
-            PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+        PhotonNetwork.SetPlayerCustomProperties(playerProperties);
     }
+    //When some player change its character this aply it to the view
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable playerProperties)
     {
         if (player == targetPlayer)
@@ -83,7 +85,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
     void UpdatePlayerItem(Player player)
     {   
-        //Update sprite and properties when you change with the arrows
+        //Update sprite and properties post you change with the arrows your player
         if (player.CustomProperties.ContainsKey("playerAvatar"))
         {
             playerAvatar.sprite = avatars[(int)player.CustomProperties["playerAvatar"]];

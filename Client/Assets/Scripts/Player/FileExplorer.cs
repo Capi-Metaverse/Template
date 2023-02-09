@@ -1,39 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.Text;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 using UnityEngine.Windows;
 using SFB;
 using UnityEngine.Networking;
-using System;
-using System.Text;
 using Newtonsoft.Json.Linq;
-
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
-
-using System.Linq;
 using UnityEngine.Video;
 
 public class FileExplorer : MonoBehaviour
 {
+    /*---------------------VARIABLES-------------------------*/
     public Presentation presentation;
     private Compressor compressor = new Compressor();
-    private string _path;
+    private string _path;//File path
     JObject json;
     UnityWebRequest GetRequest;
-    public TMP_Text  loadingPressCanvas;
+    public TMP_Text  loadingPressCanvas;//shows when presentation is loading
 
     // Open file with filter
     //var extensions = new [] {new ExtensionFilter("Image Files", "png", "jpg", "jpeg" ),new ExtensionFilter("Sound Files", "mp3", "wav" ),new ExtensionFilter("All Files", "*" ),};
 
+    /*---------------------METHODS-------------------------*/
     // Start is called before the first frame update
     void Start()
     {
-        presentation=GameObject.Find("Presentation").GetComponent<Presentation>();
+        presentation=GameObject.Find("Presentation").GetComponent<Presentation>();//Getting the press from scene
     }
 
     [Obsolete]
@@ -260,26 +260,23 @@ public class FileExplorer : MonoBehaviour
                 
                 switch (GetRequest.result)
                 {
-
+                    //Error cases
                     case UnityWebRequest.Result.ConnectionError:
-
                     case UnityWebRequest.Result.DataProcessingError:
                     Debug.LogError( "Error: " + GetRequest.error);
                     break;
-
                     case UnityWebRequest.Result.ProtocolError:
                     Debug.LogError("HTTP Error: " + GetRequest.error);
                     break;
-
+                    //Success case
                     case UnityWebRequest.Result.Success:
+                        //We create a texture2D with the response data
                         Texture2D textu = ((DownloadHandlerTexture)GetRequest.downloadHandler).texture;
-                    
                         var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2(0.57f, 0.5f)); 
                         presentation.sprites.Add(nuevoSprite);
                     break;
                 }
-            //yield return new WaitForSeconds((float)0.3);
-                     
+            //yield return new WaitForSeconds((float)0.3);        
         }
 
         //function in presentation to check if the list is full
