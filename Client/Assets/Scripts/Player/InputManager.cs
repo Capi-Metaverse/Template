@@ -19,8 +19,6 @@ public class InputManager : MonoBehaviour
     }
     public bool GetButtonDawn(string buttonName)
     {
-    
-
         if(buttonKeys.ContainsKey(buttonName) == false)
         {
             Debug.Log("InputManager::GetButtonDown -- No button named: " + buttonName);

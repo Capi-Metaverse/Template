@@ -12,76 +12,53 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Windows;
 
+/*AT FIRST THIS CLASS WAS ONLY TO MAKE THE PLAYERS SPAWN ON THE MAP BUT BY NOW IT 
+HANDLES ALMOST EVERITHING THAT HAS SOMETHING TO DO WITH THE PLAYER(EVENTS, INTERACTIONS ETC...)
+*/
 public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 {
-    private Estados estado;
+    /*------------MANAGERS AS GAMEOBJECTS IN SCENE MAP----------------*/
+    private AudioController voiceChat;//Manager for the voiceChat, not in scene object
+    public Animator animator;//Animation manager
+    public GameObject Pausa;//Pausa is an object in scene map, you can see it as the manager of the pause state
+    public GameObject chatManager;//Also in scene map is the manager for the TextChat(T to open TextChat)
+    public GameObject Settings;//The same as Pausa but for settings, the state will be Pausa too cause the setting are accesible from Pausa
+    public GameObject fileExplorer;//Object in scene map, is the manager for the FileExploring system
 
-    private AudioController voiceChat;
+    /*--------------------BOOLEANS FOR CONDITIONAL CHECKING---------------------*/
+    private Estados estado; //With this we keep track of the current state so we can use it in conditionals. States are (Game, Pause)
+    public bool onPresentationCamera = false;//Boolean to know if pressMode is on or not
+    static bool reload = false;//For spawn when you fall of the map
+    bool escPul;//Reference if ESC key is pushed or not(ESC opens the Menu and you´ll be on Pause State)
+    bool TPul;//Reference if T key is pushed or not(T opens the TextChat)
+    bool LPul;//Reference if L key is pushed or not(For loading/Uploading items, DEPRECATED)
 
-    private Compressor compressor = new Compressor();
-
-    public Animator animator;
-
-    public GameObject[] playerPrefabs;
-
-    public Transform[] spawnPoints;
-
-    public GameObject Pausa;
-
-    public GameObject chatManager;
-
-    public GameObject Settings;
-
-    public GameObject fileExplorer;
-
-    public GameObject scope;
-
-    public Camera presentationCamera = null;
-
-    public GameObject playerCamera;
-
-    public GameObject eventText;
-    public bool onPresentationCamera = false;
-
-    
-
-    //Map Variables
+    /*-------------UTILITY VARIABLES-----------------*/
     public string mapName;
-    public TMP_Text loadingPressCanvas;
-
-    bool escPul;
-
-    bool TPul;
-
-    bool LPul;
-
-    //Static variables
-    static bool reload = false;
-
-    static Vector3 spawnPoint;
-
-    //Player Character
-    GameObject playerToSpawn;
-
+    public GameObject[] playerPrefabs;//This are the player models(ReadyPlayerMe), all of them in a list
+    public Camera presentationCamera = null;//Outside of the PlayerPrefab. With K you can change from playerCam to this cam that look ortographically to the presentation
+    public GameObject playerCamera;//Inside of the PlayerPrefab
+    public TMP_Text loadingPressCanvas;//Here is where the presentation images appear
+    GameObject playerToSpawn;//Player Character
+    public Transform[] spawnPoints;//Array with points corresponding to points in the map, the players spawn randomly
+    static Vector3 spawnPoint;//A 3 coordinate point where the player must spawn
+    public GameObject scope;//Actually this is the crosshair in game
+    public GameObject eventText;//A text for displaying when an event happens
+    private Compressor compressor = new Compressor();//Class used to compress video when presenting
+    
      private void Start()
     {
         //We activate the message Queue again
         PhotonNetwork.IsMessageQueueRunning = true;
-        
-        
     }
 
     public override void OnJoinedRoom()
     {
-        //We are connected now, so we instantiate everything
-
+        //We are connected now inside of a room, so we instantiate everything
         //States
         estado = Estados.Juego;
         escPul = false;
         TPul = false;
-
-        
-
         chatManager.SetActive(true);
 
         //We check if it's the first time the user entered the room.
@@ -90,75 +67,45 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             int randomNumber = Random.Range(0, spawnPoints.Length);
             spawnPoint = spawnPoints[randomNumber].position;
         }
+        voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();
 
-        voiceChat =
-            GameObject.Find("VoiceManager").GetComponent<AudioController>();
-
-        //Random avatar character
-        if (
-            PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] ==
-            null ||
-            (int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] ==
-            6
-        )
+        //Random avatar character, 6 is the random character
+        if (PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] == null || (int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] == 6)
         {
             int value = Random.Range(0, 5);
             PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] = value;
 
-            UnityEngine
-                .Debug
-                .Log(PhotonNetwork
-                    .LocalPlayer
-                    .CustomProperties["playerAvatar"] = value);
+            UnityEngine.Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"] = value);
         }
 
         //Player instantation
-        playerToSpawn =
-            playerPrefabs[(int)
-            PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
+        playerToSpawn = playerPrefabs[(int)PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
 
         //CS script for movement activated
-        playerToSpawn =
-            (GameObject)
-            PhotonNetwork
-                .Instantiate(playerToSpawn.name,
-                spawnPoint,
-                Quaternion.identity);
+        playerToSpawn =(GameObject)PhotonNetwork.Instantiate(playerToSpawn.name,spawnPoint,Quaternion.identity);
 
         //-------------------------ACTIVATING CAM AND MOVEMENT ONLY ON LOCAL PLAYER------------------------//
         //this is because we only want the camera and the movement activated for the local player so by default the prefab have both cam and script deactivated. Here is where we activate it right in time, when everithing´s prepared.
         playerToSpawn.GetComponent<SC_FPSController>().enabled = true; //Camera of the player
         playerCamera =  playerToSpawn.transform.Find("PlayerCamera").gameObject;
         playerCamera.SetActive(true);
+
         //-------------------------ACTIVATING UI------------------------//
-        //Prefab of the UI for VoiceChat
-        playerToSpawn
-            .transform
-            .Find("PlayerUIPrefab")
-            .gameObject
-            .SetActive(true);
+        playerToSpawn.transform.Find("PlayerUIPrefab").gameObject.SetActive(true);//Prefab of the UI for VoiceChat
+        scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;//Scope
 
-        //Scope
-
-        scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;
-
-        //UI for the Text Chat
+        //UI for the name displaying above the head of the players
         GameObject NamePlayerObject = GameObject.Find("NameUI"); //Find the canvas named NameUI(TMP text generate canvas and inside a tmp text)
         playerToSpawn.transform.Find("NameUI").gameObject.SetActive(true); //We activate the hole canvas
-        NamePlayerObject
-            .GetComponent<PlayerNameDisplay>()
-            .SetPlayerName(playerToSpawn
-                .GetComponent<PhotonView>()
-                .Owner
-                .NickName); //Getting the PlayerNameDisplay component(script controller) we call the setName method we defined it just change the text value of a variable that corresponds to the text object inside de canvas
-
+        NamePlayerObject.GetComponent<PlayerNameDisplay>().SetPlayerName(playerToSpawn.GetComponent<PhotonView>().Owner.NickName); //Getting the PlayerNameDisplay component(script controller) we call the setName method we defined it just change the text value of a variable that corresponds to the text object inside de canvas
 
         //-------------------------ACTIVATING UI END------------------------//
         animator = playerToSpawn.transform.GetChild(0).GetComponent<Animator>();
         voiceChat.CheckMicroImage();
-        PhotonNetwork.IsMessageQueueRunning = true;
+        PhotonNetwork.IsMessageQueueRunning = true;//What is this????????
     }
 
+    //When you enter this override function means you just call leaveRoom so the game loads the previous scene which is the lobby
     public override void OnConnectedToMaster()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
@@ -167,19 +114,10 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     private void Update()
     {
         //Set UI PlayerName
-        GameObject[] playersInGame =
-            GameObject.FindGameObjectsWithTag("Player");
+        GameObject[] playersInGame = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in playersInGame)
         {
-            if (
-                player
-                    .transform
-                    .GetChild(3)
-                    .GetChild(0)
-                    .GetComponent<TMP_Text>()
-                    .text ==
-                "Name"
-            )
+            if (player.transform.GetChild(3).GetChild(0).GetComponent<TMP_Text>().text =="Name")
             {
                 Debug
                     .Log("There is someone named: " +
@@ -473,9 +411,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                     loadingPressCanvas.enabled = true;
                     loadingPressCanvas.SetText("Loading");
                     object[] data = (object[]) photonEvent.CustomData;
-                    fileExplorer
-                        .GetComponent<FileExplorer>()
-                        .SetImage((byte[]) data[0]);
+                    fileExplorer.GetComponent<FileExplorer>().SetImage((byte[]) data[0]);
                     break;
                 }
         }
@@ -485,41 +421,30 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
    public void setPresentationCamera(Camera camera) {
 
+        //When leaving presentation mode?
         if(camera == null)
         {
             //We deactivate the camera
             presentationCamera = null;
 
-            //We activate UI
-
+            //We deactivate UI
             eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
             eventText.SetActive(false);
             eventText = null;
-
         }
 
         else{
 
-
-       
             //We obtain the camera
             presentationCamera = camera;
 
             //We activate UI
-
             eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
-
             eventText.SetActive(true);
-        }
-            
-
-        
+        }   
     }
-
     
-
-    
-    //Recibir eventos
+    //Cambio de mapa?
     public void ChangeRoom(string map)
     {
         if (map == "Mapa2")

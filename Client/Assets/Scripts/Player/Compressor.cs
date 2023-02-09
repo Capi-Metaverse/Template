@@ -4,6 +4,10 @@ using UnityEngine;
 using System.IO;
 using System.IO.Compression;
 
+
+/*
+Stands for the video when presenting
+*/
 public class Compressor
 {
     public byte[] Compress(byte[] data)
