@@ -11,7 +11,6 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
-
     //Constantes
     public const int NUMBER_MAPS = 2;
 
@@ -63,24 +62,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     //Function to get the customSettings of a room
     public Hashtable getRoomCustomSettings(){
-
         //We create the new settings
+        Hashtable customSettings = new Hashtable();
 
-         Hashtable customSettings = new Hashtable();
-
-            //Map
-            customSettings.Add("Map", 0);
-            customSettings.Add("Init",true);
+        //Map
+        customSettings.Add("Map", 0);
+        customSettings.Add("Init",true);
             
-
         //Return the settings
         return customSettings;
-
     }
-
-  
-
-
 
     private void Start() 
     {
@@ -91,8 +82,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //find voice chat script
         voiceChat=GameObject.Find("VoiceManager").GetComponent<AudioController>();
     }
-    
-
     
     private void Update() 
     {
@@ -126,7 +115,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
 
     //Buttons
-
     //Button method that creates a room.
     public void OnClickCreate()
     {
@@ -185,7 +173,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //}
     } 
 
-
     //Button method to switch the map to the left.
     public void OnClickChangeMapLeft()
     {
@@ -214,9 +201,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         customSettings["Map"] = mapa + 1;
         mapName.text = ROOM_NAMES[mapa + 1];
         PhotonNetwork.CurrentRoom.SetCustomProperties(customSettings);
-     }
-    //Funciones 
+    }
 
+    //Funciones 
     //Function to add players to the list of players that are already in the room
 
     public void AddPlayer(Player newPlayer)
@@ -266,15 +253,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
 
     //Callbacks Photon
-
-
     /*
     **********
-
     IMPORTANTE
     COMO FUNCIONA CONEXIÓN PHOTON
     MASTER SERVER (ConnectUsingSettings) -> GAME SERVER (JoinLobby) -> ROOM (JoinOrCreateRoom)
-
     **********
     */
 
@@ -287,12 +270,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-
         //If we are changing the map, we have to join the new 
         if(newMap == true){
 
-        //Custom Room Options
-            
+            //Custom Room Options
             Hashtable customSettings = getRoomCustomSettings();
 
             //We stop communication to stop new scene events
@@ -303,7 +284,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             //Voice Chat
             voiceChat.onLeaveButtonClicked();
             voiceChat.onJoinButtonClicked(currentMap+"Map"+currentMapNumber);
-
         }
     }
 
@@ -348,15 +328,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //We get the roomName
         roomName.text=PhotonNetwork.CurrentRoom.Name;
         currentMap = PhotonNetwork.CurrentRoom.Name;
-   
 
         //Method to update the player list
-
         UpdatePlayerList();
 
         //We destroy the list of rooms as it is not updated and will be updated when we join the Lobby again.
 
-         foreach(RoomItem item in roomItemsList)
+        foreach(RoomItem item in roomItemsList)
         {
             Destroy(item.gameObject);
         }
@@ -377,28 +355,27 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //Changes if we aren't leaving the map
         if (newMap == false)
         {
-        playerProperties["playerAvatar"] = 6;
-        PhotonNetwork.SetPlayerCustomProperties(playerProperties);
-        //We remove the list of players when leaving the room
+            playerProperties["playerAvatar"] = 6;
+            PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+            //We remove the list of players when leaving the room
 
-        foreach(PlayerItem item in playerItemsList)
-        {
-            if (item!=null)
-            Destroy(item.gameObject);
-        }
-        playerItemsList.Clear();
+            foreach(PlayerItem item in playerItemsList)
+            {
+                if (item!=null)
+                Destroy(item.gameObject);
+            }
+            playerItemsList.Clear();
 
-        //We deactivate the panel of the room and Activate the panel of the Lobby interface.
-        if (roomPanel!=null & lobbyPanel!=null){
-            roomPanel.SetActive(false);
-            lobbyPanel.SetActive(true);
-        }
-
+            //We deactivate the panel of the room and Activate the panel of the Lobby interface.
+            if (roomPanel!=null & lobbyPanel!=null){
+                roomPanel.SetActive(false);
+                lobbyPanel.SetActive(true);
+            }
         }
 
         else{
-             roomPanel.SetActive(false);
-             loadingPanel.SetActive(true);
+            roomPanel.SetActive(false);
+            loadingPanel.SetActive(true);
         }
     }
 
@@ -413,7 +390,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             DeletePlayer(otherPlayer);
         }
-
 /*
     public void OnEvent(EventData photonEvent)
     {
@@ -425,11 +401,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             avatar = (int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"];
             currentMapNumber =  (int) PhotonNetwork.CurrentRoom.CustomProperties["Map"];
             PhotonNetwork.LeaveRoom();
-          
-            
-            
         }
     }
     */
-    
 }

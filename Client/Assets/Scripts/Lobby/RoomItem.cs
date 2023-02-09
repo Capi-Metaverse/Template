@@ -7,14 +7,16 @@ using TMPro;
 
 public class RoomItem : MonoBehaviour
 {
+  /*---------------------VARIABLES-----------------*/
   public TMP_Text roomName;
 
   public RoomInfo RoomInfo { get; private set; }
   LobbyManager manager;
 
+  /*---------------------METHODS------------------*/
   private void Start()
   {
-   manager = FindObjectOfType<LobbyManager>();
+    manager = FindObjectOfType<LobbyManager>();//We get the LobbyManager from scene
   }
   public void SetRoomName(string _roomName)
   //Set name of the room

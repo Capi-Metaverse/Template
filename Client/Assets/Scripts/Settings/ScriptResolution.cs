@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using TMPro;
 
 public class ScriptResolution : MonoBehaviour
 {
-
     public TMP_Dropdown resolutionsDropDown;
     Resolution[] resolutions;
 

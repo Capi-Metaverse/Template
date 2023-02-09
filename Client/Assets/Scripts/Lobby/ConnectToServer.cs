@@ -13,7 +13,6 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     public TMP_InputField usernameInput;
     public TMP_InputField passwordInput;
     private LoadBalancingClient lbc;
-
     public TMP_Text TitleText;
 
     private void Start ()

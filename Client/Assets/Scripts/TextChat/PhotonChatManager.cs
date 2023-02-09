@@ -11,7 +11,6 @@ using UnityEngine.UI;
 public class PhotonChatManager : MonoBehaviour, IChatClientListener
 {
     #region Setup
-
     [SerializeField] GameObject chatPanel;
     ChatClient chatClient;
     bool isConnected;
@@ -31,9 +30,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     }
 
     #endregion Setup
-
     #region General
-
     string privateReceiver = "";
     string currentChat;
     [SerializeField] TMP_InputField chatField;
@@ -62,7 +59,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     }
 
     #endregion General
-
     #region PublicChat
     //Send a message through the public chat
     public void SubmitPublicChatOnClick()
@@ -82,9 +78,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     }
 
     #endregion PublicChat
-
     #region PrivateChat
-
     public void ReceiverOnValueChange(string valueIn)
     {
         privateReceiver = valueIn;
@@ -102,9 +96,8 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     }
 
     #endregion PrivateChat
-
     #region Callbacks
-
+    
     public void DebugReturn(DebugLevel level, string message)
     {
         //Throw new System.NotImplementedException();

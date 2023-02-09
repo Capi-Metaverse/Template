@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ScriptSound : MonoBehaviour
 {
-
     public Slider slider;
     public float sliderValue;
 
@@ -22,6 +21,4 @@ public class ScriptSound : MonoBehaviour
         PlayerPrefs.SetFloat("volumenAudio", sliderValue);
         AudioListener.volume = slider.value;
     }
-     void Update() {   
-    }   
 }
