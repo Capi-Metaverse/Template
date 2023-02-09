@@ -63,20 +63,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     //Function to get the customSettings of a room
     public Hashtable getRoomCustomSettings(){
         //We create the new settings
-        Hashtable customSettings = new Hashtable();
 
-<<<<<<< Updated upstream
-        //Map
-        customSettings.Add("Map", 0);
-        customSettings.Add("Init",true);
-=======
          Hashtable customSettings = new Hashtable();
 
             //Map
             customSettings.Add("Map", 0);
             customSettings.Add("Init",true);
             customSettings.Add("Name",currentMap);
->>>>>>> Stashed changes
+
             
         //Return the settings
         return customSettings;
