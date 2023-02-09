@@ -12,6 +12,7 @@ public class KeyBindDialogueBox : MonoBehaviour
     string buttonToRebind = null;
     Dictionary <string, TMP_Text> buttonToLabel;
     PlayerUiPrefab playerUiPrefab;
+    TMP_Text keyNameText;
     
 
     // Start is called before the first frame update
@@ -38,9 +39,10 @@ public class KeyBindDialogueBox : MonoBehaviour
             buttonNameText.text = bn;
            
 
-            TMP_Text keyNameText = go.transform.GetChild(1).GetChild(0).GetComponent<TMP_Text>();
+            keyNameText = go.transform.GetChild(1).GetChild(0).GetComponent<TMP_Text>();
             keyNameText.text = inputManager.GetKeyNameForButton(bn);
             buttonToLabel[bn] = keyNameText;
+          
             
 
             Button keyBindButton = go.transform.GetChild(1).GetComponent<Button>();
@@ -65,7 +67,16 @@ public class KeyBindDialogueBox : MonoBehaviour
                     {
                         inputManager.SetButtonForKey(buttonToRebind,kc);
                         buttonToLabel[buttonToRebind].text = kc.ToString();
-                        playerUiPrefab.ChangeLetter(kc.ToString());
+
+                        if(buttonToRebind == "Interact")
+                        {
+                            playerUiPrefab.ChangeLetter(kc.ToString());
+                        }
+                        
+                        if(buttonToRebind == "ChangeCamera")
+                        {
+                            playerUiPrefab.ChangeLetterK(kc.ToString());
+                        }
                         buttonToRebind = null;
                         break;
                     }
