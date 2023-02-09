@@ -15,8 +15,8 @@ public class PlayerUiPrefab : MonoBehaviour
     {
         eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject.GetComponent<TMP_Text>().text;
         eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject.GetComponent<TMP_Text>().text;
-        eventText = "Press E to interact";
-        eventTextK = "Press K to enable presentation mode";
+        //eventText = "Press E to interact";
+        //eventTextK = "Press K to enable presentation mode";
         pressKey.text = eventText;
         pressKeyK.text = eventTextK;
         Debug.Log(eventText);
