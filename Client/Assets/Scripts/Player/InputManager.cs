@@ -4,10 +4,11 @@ using UnityEngine;
 using System.Linq;
 public class InputManager : MonoBehaviour
 {
-    Dictionary<string, KeyCode> buttonKeys;
+    public Dictionary<string, KeyCode> buttonKeys;
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
         buttonKeys = new Dictionary<string, KeyCode>();
         buttonKeys["Interact"] = KeyCode.E;
         buttonKeys["ChangeCamera"] = KeyCode.K;

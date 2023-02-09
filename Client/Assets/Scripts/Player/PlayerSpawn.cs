@@ -18,6 +18,7 @@ HANDLES ALMOST EVERITHING THAT HAS SOMETHING TO DO WITH THE PLAYER(EVENTS, INTER
 public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 {
     InputManager inputManager;
+    
     /*------------MANAGERS AS GAMEOBJECTS IN SCENE MAP----------------*/
     private AudioController voiceChat;//Manager for the voiceChat, not in scene object
     public Animator animator;//Animation manager
@@ -102,6 +103,12 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         //-------------------------ACTIVATING UI------------------------//
         playerToSpawn.transform.Find("PlayerUIPrefab").gameObject.SetActive(true);//Prefab of the UI for VoiceChat
         scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;//Scope
+
+
+        //Añadir botones
+        PlayerUiPrefab playerUiprefab = GameObject.Find("PlayerUIPrefab").GetComponent<PlayerUiPrefab>();
+        playerUiprefab.ChangeLetter(inputManager.GetKeyNameForButton("Interact"));
+        playerUiprefab.ChangeLetterK(inputManager.GetKeyNameForButton("ChangeCamera"));
 
         //UI for the name displaying above the head of the players
         GameObject NamePlayerObject = GameObject.Find("NameUI"); //Find the canvas named NameUI(TMP text generate canvas and inside a tmp text)
