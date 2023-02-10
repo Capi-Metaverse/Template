@@ -22,6 +22,7 @@ public class Disconnect : MonoBehaviourPunCallbacks
     //Voice Chat
     private AudioController voiceChat;
     private InputManager inputManager;
+    
 
      //Function to get the customSettings of a room
     public Hashtable getRoomCustomSettings(){
@@ -128,7 +129,7 @@ public class Disconnect : MonoBehaviourPunCallbacks
             //Voice Chat
 
             
-
+           
         }
     }
 
