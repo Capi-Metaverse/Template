@@ -11,7 +11,7 @@ namespace OpenAI
         [SerializeField] private Button button;
         [SerializeField] private Image image;
 
-        private OpenAIApi openai = new OpenAIApi();
+        private OpenAIApi openai = new OpenAIApi("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");
 
         private void Start()
         {
