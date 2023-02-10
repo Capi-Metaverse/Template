@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
+
 public class InputManager : MonoBehaviour
 {
     public Dictionary<string, KeyCode> buttonKeys;
@@ -46,5 +48,12 @@ public class InputManager : MonoBehaviour
     public void SetButtonForKey(string buttonName, KeyCode keyCode)
     {
         buttonKeys[buttonName] = keyCode;
+    }
+    public void OnreturnLobbyInput(){
+        if (SceneManager.GetActiveScene().name!="Lobby")
+            {
+                    SceneManager.MoveGameObjectToScene(this.gameObject, SceneManager.GetActiveScene());
+                    Destroy(this.gameObject);
+            }
     }
 }

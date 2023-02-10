@@ -145,7 +145,8 @@ public class AudioController : MonoBehaviour
             app.leave(); // leave channel
             app.unloadEngine(); // delete engine
             app = null; // delete app
-            if (SceneManager.GetActiveScene().name!="Lobby"){
+            if (SceneManager.GetActiveScene().name!="Lobby")
+            {
                     SceneManager.MoveGameObjectToScene(this.gameObject, SceneManager.GetActiveScene());
                     Destroy(this.gameObject);
             }

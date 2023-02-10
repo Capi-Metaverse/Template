@@ -21,6 +21,7 @@ public class Disconnect : MonoBehaviourPunCallbacks
     bool newMap = false;
     //Voice Chat
     private AudioController voiceChat;
+    private InputManager inputManager;
 
      //Function to get the customSettings of a room
     public Hashtable getRoomCustomSettings(){
@@ -40,14 +41,16 @@ public class Disconnect : MonoBehaviourPunCallbacks
 
     }
 
-    void Start(){
-      
+    void Start()
+    {
+      voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();  
+      inputManager = GameObject.Find("Script").GetComponent<InputManager>();
     }
 
     public void OnClickDisconnect()
     {   
         PhotonNetwork.Disconnect();
-        voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();
+       
         voiceChat.OnApplicationQuit();
         Application.Quit();
     }
@@ -67,8 +70,9 @@ public class Disconnect : MonoBehaviourPunCallbacks
       public void OnClickReturnLobby()
     {
       PhotonNetwork.LeaveRoom();
-      voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();
+      inputManager.OnreturnLobbyInput();
       voiceChat.onLeaveButtonClicked();
+      
     }
 
     public override void OnLeftRoom()
@@ -114,7 +118,7 @@ public class Disconnect : MonoBehaviourPunCallbacks
             PhotonNetwork.JoinOrCreateRoom(mapName + "Map" + mapNumber, new RoomOptions(){MaxPlayers = 4, BroadcastPropsChangeToAll = true, PublishUserId = true,CustomRoomProperties = customSettings, IsVisible = false},TypedLobby.Default);
             
             //Voice Chat
-            voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();
+            
             voiceChat.onMapChange();
             voiceChat.onJoinButtonClicked(mapName + "Map" + mapNumber);
             
