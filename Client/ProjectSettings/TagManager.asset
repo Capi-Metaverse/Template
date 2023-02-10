@@ -7,6 +7,8 @@ TagManager:
   - SF_Door
   - VideoScreen
   - PresentationZone
+  - Interact
+  - CanvasGPT
   layers:
   - Default
   - TransparentFX

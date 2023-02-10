@@ -48,6 +48,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     public GameObject scope;//Actually this is the crosshair in game
     public GameObject eventText;//A text for displaying when an event happens
     private Compressor compressor = new Compressor();//Class used to compress video when presenting
+    GameObject canvasGPT;
     
     public enum Estados
     {
@@ -60,6 +61,17 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         inputManager = GameObject.FindObjectOfType<InputManager>();
         //We activate the message Queue again
         PhotonNetwork.IsMessageQueueRunning = true;
+        GameObject[] playersInGame = GameObject.FindGameObjectsWithTag("Player");
+
+        canvasGPT = GameObject.FindGameObjectsWithTag("CanvasGPT")[0];//Getting canvas Object
+
+        foreach (GameObject player in playersInGame)
+        {
+            if (player.gameObject.GetComponent<PhotonView>().IsMine) 
+            {
+                canvasGPT.GetComponent<Canvas>().worldCamera = player.transform.GetChild(1).GetComponent<Camera>();
+            }  
+        }
     }
 
     public override void OnJoinedRoom()
