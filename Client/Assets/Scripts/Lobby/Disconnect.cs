@@ -112,9 +112,12 @@ public class Disconnect : MonoBehaviourPunCallbacks
             Debug.Log(mapNumber);
             Debug.Log(mapName + "Map" + mapNumber);
             PhotonNetwork.JoinOrCreateRoom(mapName + "Map" + mapNumber, new RoomOptions(){MaxPlayers = 4, BroadcastPropsChangeToAll = true, PublishUserId = true,CustomRoomProperties = customSettings, IsVisible = false},TypedLobby.Default);
+            
+            //Voice Chat
             voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();
-            //voiceChat.onLeaveButtonClicked();
-            //voiceChat.onJoinButtonClicked(mapName+"Map"+ mapNumber);
+            voiceChat.onMapChange();
+            voiceChat.onJoinButtonClicked(mapName + "Map" + mapNumber);
+            
             int levelNumber = Convert.ToInt32(mapNumber) + 1;
             PhotonNetwork.LoadLevel("Mapa"+ levelNumber.ToString());
             //PhotonNetwork.IsMessageQueueRunning = true;

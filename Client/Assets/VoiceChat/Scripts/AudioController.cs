@@ -124,6 +124,17 @@ public class AudioController : MonoBehaviour
         app.join(ChannelName, muted);
     }
 
+
+    public void onMapChange()
+    {
+        if (!ReferenceEquals(app, null))
+        {
+            app.leave(); // leave channel
+            app.unloadEngine(); // delete engine
+            app = null; // delete app
+        }
+    }
+
     ///<summary>
     /// Called when the Leave Button is clicked. This method deletes the voice chat room.
     /// </summary>

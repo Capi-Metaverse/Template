@@ -287,7 +287,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             PhotonNetwork.LoadLevel(ROOM_NAMES[currentMapNumber] );
 
             //Voice Chat
-            voiceChat.onLeaveButtonClicked();
+            voiceChat.onMapChange();
+            Debug.Log("Cambio");
             voiceChat.onJoinButtonClicked(currentMap+"Map"+currentMapNumber);
         }
     }
