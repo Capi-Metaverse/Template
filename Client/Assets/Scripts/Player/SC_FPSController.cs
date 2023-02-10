@@ -118,7 +118,7 @@ public class SC_FPSController : MonoBehaviour
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
         //Normalize diagonal speed
-        moveDirection = moveDirection.normalized * Mathf.Clamp(moveDirection.magnitude, 0, curSpeedX);
+        moveDirection = moveDirection.normalized * Mathf.Clamp(moveDirection.magnitude, 0, 50);//Parameters are:(Value,MinX,MaxX)
 
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
