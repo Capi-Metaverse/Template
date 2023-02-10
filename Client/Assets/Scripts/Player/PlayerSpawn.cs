@@ -63,7 +63,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         PhotonNetwork.IsMessageQueueRunning = true;
         GameObject[] playersInGame = GameObject.FindGameObjectsWithTag("Player");
 
-        canvasGPT = GameObject.FindGameObjectsWithTag("CanvasGPT")[0];//Getting canvas Object
+        canvasGPT = GameObject.Find("Enviroment").transform.GetChild(7).gameObject;//Getting canvas Object
 
         foreach (GameObject player in playersInGame)
         {
@@ -398,7 +398,6 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                     fileExplorer.GetComponent<FileExplorer>().SetImage((byte[]) data[0]);
                     break;
                 }
-
         }
     }
 
