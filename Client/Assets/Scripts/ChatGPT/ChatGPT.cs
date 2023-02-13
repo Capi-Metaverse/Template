@@ -9,7 +9,7 @@ namespace OpenAI
         [SerializeField] private Button button;
         [SerializeField] private Text textArea;
 
-        private OpenAIApi openai = new OpenAIApi("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","org-2g1sAWw188atCDLUlSLye4tl");
+        private OpenAIApi openai = new OpenAIApi("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","org-2g1sAWw188atCDLUlSLye4tl");
 
         private string userInput;
         private string Instruction = "Act as a random stranger in a chat room and reply to the questions.\nQ: ";

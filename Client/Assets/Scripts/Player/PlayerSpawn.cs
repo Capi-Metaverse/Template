@@ -67,7 +67,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         PhotonNetwork.IsMessageQueueRunning = true;
         GameObject[] playersInGame = GameObject.FindGameObjectsWithTag("Player");
 
-        canvasGPT = GameObject.Find("Enviroment").transform.GetChild(7).gameObject;//Getting canvas Object
+        canvasGPT = GameObject.Find("Enviroment").transform.Find("CanvasChatGPT").gameObject;//Getting canvas Object
 
         foreach (GameObject player in playersInGame)
         {
