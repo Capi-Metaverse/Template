@@ -7,6 +7,7 @@ namespace OpenAI
     {
         [SerializeField] private InputField inputField;
         [SerializeField] private Button button;
+        [SerializeField] private Button Returnbutton;
         [SerializeField] private Text textArea;
 
         private OpenAIApi openai = new OpenAIApi("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");

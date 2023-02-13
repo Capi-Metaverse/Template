@@ -58,6 +58,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     /*-------------METHODS-----------------*/
      private void Start()
     {
+        
         inputManager = GameObject.FindObjectOfType<InputManager>();
         //We activate the message Queue again
         PhotonNetwork.IsMessageQueueRunning = true;
@@ -168,6 +169,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 }
                 
                 //Deactivate scope
+                
                 scope.SetActive(false);
                 //Start Animator
                 animator.speed = 0;
@@ -175,6 +177,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
                 PhotonNetwork.RaiseEvent(2,content,raiseEventOptions,SendOptions.SendReliable);
 
+                
                 Pausa.SetActive(true);
                 playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
                 Cursor.visible = true;
@@ -257,6 +260,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 PhotonNetwork.RaiseEvent(2,content,raiseEventOptions,SendOptions.SendReliable);
 
                 //Activate Settings Window and stop
+                
                 Settings.SetActive(false);
                 Pausa.SetActive(false);
                 chatManager.SetActive(false);
@@ -438,5 +442,39 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             //We reload the level
             PhotonNetwork.LoadLevel (map);
         }
+    }
+
+    //DesactiveAll
+    public void DesactiveALL()
+    {
+        estado = Estados.Pausa;
+        playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
+    
+    ///DESACTIVAR LAS LETRAS DE PULSA E
+
+        eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+        
+        Cursor.visible = true;
+        scope.SetActive(false);
+        Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
+
+        
+    }
+
+    //ActiveALL
+    public void ActiveALL()
+    {
+        estado = Estados.Juego;
+        playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
+    
+    ///DESACTIVAR LAS LETRAS DE PULSA E
+    
+        eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+        
+        Cursor.visible = false;
+        scope.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked; // Desactiva el bloqueo cursor
+
+        
     }
 }
