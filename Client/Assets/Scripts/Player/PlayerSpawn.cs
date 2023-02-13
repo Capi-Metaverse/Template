@@ -47,6 +47,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     public Transform[] spawnPoints;//Array with points corresponding to points in the map, the players spawn randomly
     static Vector3 spawnPoint;//A 3 coordinate point where the player must spawn
     public GameObject scope;//Actually this is the crosshair in game
+    public GameObject micro;//Actually this is the microphone in game
     public GameObject eventTextK;//A text for displaying when an event happens
     private Compressor compressor = new Compressor();//Class used to compress video when presenting
     GameObject canvasGPT;
@@ -118,6 +119,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         //-------------------------ACTIVATING UI------------------------//
         playerToSpawn.transform.Find("PlayerUIPrefab").gameObject.SetActive(true);//Prefab of the UI for VoiceChat
         scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;//Scope
+        micro = GameObject.Find("PlayerUIPrefab").transform.GetChild(0).gameObject;//Micro
 
 
         //Añadir botones
@@ -172,9 +174,10 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
                 playerToSpawn.GetComponent<SC_FPSController>().eventText.SetActive(false);
                 
-                //Deactivate scope
+                //Deactivate scope and micro
                 
                 scope.SetActive(false);
+                micro.SetActive(false);
                 //Start Animator
                 animator.speed = 0;
                 object[] content =new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName,animator.speed,"Stop&Replay"};
@@ -216,6 +219,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                         playerCamera.SetActive(true);
                         eventTextK.SetActive(true);
                         scope.SetActive(true);
+                        micro.SetActive(true);
                         playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
                     }
 
@@ -225,6 +229,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                         playerCamera.SetActive(false);
                         eventTextK.SetActive(false);
                         scope.SetActive(false);
+                        micro.SetActive(false);
                         playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
                         playerToSpawn.GetComponent<SC_FPSController>().eventText.SetActive(false);
                     }
@@ -246,6 +251,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 //Activate scope
                 chatGPTActive.activate(false);
                 scope.SetActive(true);
+                micro.SetActive(true);
                 //Activate presentation text
                 if(eventTextK != null) eventTextK.SetActive(true);
                 
@@ -447,6 +453,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
         Cursor.visible = true;
         scope.SetActive(false);
+        micro.SetActive(false);
         Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
     }
 
@@ -460,6 +467,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
         Cursor.visible = false;
         scope.SetActive(true);
+        micro.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked; // Desactiva el bloqueo cursor 
     }
 }
