@@ -43,11 +43,11 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     public Camera presentationCamera = null;//Outside of the PlayerPrefab. With K you can change from playerCam to this cam that look ortographically to the presentation
     public GameObject playerCamera;//Inside of the PlayerPrefab
     public TMP_Text loadingPressCanvas;//Here is where the presentation images appear
-    GameObject playerToSpawn;//Player Character
+    public GameObject playerToSpawn;//Player Character
     public Transform[] spawnPoints;//Array with points corresponding to points in the map, the players spawn randomly
     static Vector3 spawnPoint;//A 3 coordinate point where the player must spawn
     public GameObject scope;//Actually this is the crosshair in game
-    public GameObject eventText;//A text for displaying when an event happens
+    public GameObject eventTextK;//A text for displaying when an event happens
     private Compressor compressor = new Compressor();//Class used to compress video when presenting
     GameObject canvasGPT;
     
@@ -165,9 +165,9 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
                 //Deactivate presentation text
-                if(eventText != null) 
+                if(eventTextK != null) 
                 {
-                    eventText.SetActive(false);
+                    eventTextK.SetActive(false);
                 }
 
                 playerToSpawn.GetComponent<SC_FPSController>().eventText.SetActive(false);
@@ -214,9 +214,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                     if(onPresentationCamera){
                         presentationCamera.enabled = false;
                         playerCamera.SetActive(true);
-                        eventText.SetActive(true);
+                        eventTextK.SetActive(true);
                         scope.SetActive(true);
-                        playerToSpawn.transform.GetChild(2).GetChild(2).gameObject.SetActive(true);
                         playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
                     }
 
@@ -224,10 +223,10 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                         presentationCamera.enabled = true;
                         presentationCamera.enabled = true;
                         playerCamera.SetActive(false);
-                        eventText.SetActive(false);
+                        eventTextK.SetActive(false);
                         scope.SetActive(false);
-                        playerToSpawn.transform.GetChild(2).GetChild(2).gameObject.SetActive(false);
                         playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
+                        playerToSpawn.GetComponent<SC_FPSController>().eventText.SetActive(false);
                     }
 
                     onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
@@ -248,7 +247,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 chatGPTActive.activate(false);
                 scope.SetActive(true);
                 //Activate presentation text
-                if(eventText != null) eventText.SetActive(true);
+                if(eventTextK != null) eventTextK.SetActive(true);
                 
                 //Stop Animation
                 animator.speed = 1;
@@ -410,9 +409,9 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             presentationCamera = null;
 
             //We deactivate UI
-            eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
-            eventText.SetActive(false);
-            eventText = null;
+            eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+            eventTextK.SetActive(false);
+            eventTextK = null;
         }
 
         else{
@@ -421,8 +420,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             presentationCamera = camera;
 
             //We activate UI
-            eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
-            eventText.SetActive(true);
+            eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+            eventTextK.SetActive(true);
         }   
     }
 

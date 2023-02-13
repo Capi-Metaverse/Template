@@ -19,7 +19,8 @@ public class ChatGPTActive : MonoBehaviour, IMetaEvent
         if (host == true)
         {
             CanvasChatGPT.SetActive(true);    
-            playerSpawn.DesactiveALL();       
+            playerSpawn.DesactiveALL(); 
+            playerSpawn.playerToSpawn.GetComponent<SC_FPSController>().eventText.SetActive(false);      
         }  
         else 
         {
