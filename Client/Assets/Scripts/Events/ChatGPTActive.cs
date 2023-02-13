@@ -20,11 +20,16 @@ public class ChatGPTActive : MonoBehaviour, IMetaEvent
         {
             CanvasChatGPT.SetActive(true);    
             playerSpawn.DesactiveALL();       
-        }   
+        }  
+        else 
+        {
+            CanvasChatGPT.SetActive(false); 
+            playerSpawn.ActiveALL();
+        } 
     }
-    public void PressReturn()
+    /*public void PressReturn()
     {
        CanvasChatGPT.SetActive(false); 
        playerSpawn.ActiveALL();
-    }
+    }*/
 }

@@ -18,6 +18,7 @@ HANDLES ALMOST EVERITHING THAT HAS SOMETHING TO DO WITH THE PLAYER(EVENTS, INTER
 public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 {
     InputManager inputManager;
+    ChatGPTActive chatGPTActive;
     
     /*------------MANAGERS AS GAMEOBJECTS IN SCENE MAP----------------*/
     private AudioController voiceChat;//Manager for the voiceChat, not in scene object
@@ -60,6 +61,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         
         inputManager = GameObject.FindObjectOfType<InputManager>();
+        chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
         //We activate the message Queue again
         PhotonNetwork.IsMessageQueueRunning = true;
         GameObject[] playersInGame = GameObject.FindGameObjectsWithTag("Player");
@@ -181,10 +183,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
                 
                 Pausa.SetActive(true);
-                playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
-                estado = Estados.Pausa;
+                DesactiveALL();
                 escPul = true; //Escape activado
                 UnityEngine.Debug.Log (estado);
             }
@@ -201,45 +200,40 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 UnityEngine.Debug.Log("T pulsada");
                 chatManager.SetActive(true);
                 chatManager.GetComponent<PhotonChatManager>().ChatConnectOnClick();
-                playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
-
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
-                estado = Estados.Pausa;
+                DesactiveALL();
                 TPul = true; //Escape is activated, true
                 UnityEngine.Debug.Log (estado);
             }
 
             //K key down(PrentationMode)
-            if(presentationCamera != null){
+            if(presentationCamera != null)
+            {
+                if(inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null)
+                {
 
-            
-            if(inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null){
+                    if(onPresentationCamera){
+                        presentationCamera.enabled = false;
+                        playerCamera.SetActive(true);
+                        eventText.SetActive(true);
+                        scope.SetActive(true);
+                        playerToSpawn.transform.GetChild(2).GetChild(2).gameObject.SetActive(true);
+                        playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
+                    }
 
-                if(onPresentationCamera){
-                    presentationCamera.enabled = false;
-                    playerCamera.SetActive(true);
-                    eventText.SetActive(true);
-                    scope.SetActive(true);
-                    playerToSpawn.transform.GetChild(2).GetChild(2).gameObject.SetActive(true);
-                    playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
+                    else{
+                        presentationCamera.enabled = true;
+                        presentationCamera.enabled = true;
+                        playerCamera.SetActive(false);
+                        eventText.SetActive(false);
+                        scope.SetActive(false);
+                        playerToSpawn.transform.GetChild(2).GetChild(2).gameObject.SetActive(false);
+                        playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
+                    }
+
+                    onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
                 }
-
-                else{
-                    presentationCamera.enabled = true;
-                    presentationCamera.enabled = true;
-                    playerCamera.SetActive(false);
-                    eventText.SetActive(false);
-                    scope.SetActive(false);
-                    playerToSpawn.transform.GetChild(2).GetChild(2).gameObject.SetActive(false);
-                    playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
-                }
-
-                onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
             }
         }
-        }
-
         if (!UnityEngine.Input.GetKeyDown(KeyCode.Escape)) 
         {
             escPul = false; // Detecta si no está pulsado
@@ -251,6 +245,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
                 //Activate scope
+                chatGPTActive.activate(false);
                 scope.SetActive(true);
                 //Activate presentation text
                 if(eventText != null) eventText.SetActive(true);
@@ -268,10 +263,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 chatManager.SetActive(false);
                 TPul = false;
                 Time.timeScale = 1;
-                playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked; // Menu de opciones, para que se bloquee la camara
-                estado = Estados.Juego;
+                ActiveALL();
                 UnityEngine.Debug.Log (estado);
             }
         }
@@ -454,13 +446,9 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     
     ///DESACTIVAR LAS LETRAS DE PULSA E
 
-        eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
-        
         Cursor.visible = true;
         scope.SetActive(false);
         Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
-
-        
     }
 
     //ActiveALL
@@ -470,13 +458,9 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
     
     ///DESACTIVAR LAS LETRAS DE PULSA E
-    
-        eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
-        
+
         Cursor.visible = false;
         scope.SetActive(true);
-        Cursor.lockState = CursorLockMode.Locked; // Desactiva el bloqueo cursor
-
-        
+        Cursor.lockState = CursorLockMode.Locked; // Desactiva el bloqueo cursor 
     }
 }

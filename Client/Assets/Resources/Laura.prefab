@@ -208,6 +208,7 @@ MonoBehaviour:
   playerSpawner: {fileID: 0}
   targetTime: 0.5
   canMove: 1
+  eventText: {fileID: 0}
 --- !u!1001 &2274219308998691755
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -26981,6 +26981,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 624909072}
     m_Modifications:
+    - target: {fileID: 1592482248416136704, guid: ef8df16f7d4a47648be713df9d6142d8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7521400143652658567, guid: ef8df16f7d4a47648be713df9d6142d8, type: 3}
       propertyPath: m_Name
       value: CanvasChatGPT
