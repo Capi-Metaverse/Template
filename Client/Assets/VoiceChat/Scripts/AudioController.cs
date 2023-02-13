@@ -51,7 +51,7 @@ public class AudioController : MonoBehaviour
     {
         CheckPermissions();
 
-        if (Input.GetKeyDown("m") && (PlaySceneName.Contains(SceneManager.GetActiveScene().name)  || ((SceneManager.GetActiveScene().name == HomeSceneName) && roomPanel.activeSelf)) && (GameObject.Find("PlayerSpawner").GetComponent<PlayerSpawn>().estado != PlayerSpawn.Estados.Pausa)){
+        if (Input.GetKeyDown("m") && (PlaySceneName.Contains(SceneManager.GetActiveScene().name)  || ((SceneManager.GetActiveScene().name == HomeSceneName) && roomPanel.activeSelf))){
             Debug.Log("M WAS PRESSED");
             app.MuteAudio(SceneManager.GetActiveScene().name);
         }
