@@ -29,7 +29,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     public Disconnect disconnect;
 
     /*--------------------BOOLEANS FOR CONDITIONAL CHECKING---------------------*/
-    private Estados estado; //With this we keep track of the current state so we can use it in conditionals. States are (Game, Pause)
+    public Estados estado; //With this we keep track of the current state so we can use it in conditionals. States are (Game, Pause)
     public bool onPresentationCamera = false;//Boolean to know if pressMode is on or not
     static bool reload = false;//For spawn when you fall of the map
     bool escPul;//Reference if ESC key is pushed or not(ESC opens the Menu and you´ll be on Pause State)
@@ -167,6 +167,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 {
                     eventText.SetActive(false);
                 }
+
+                playerToSpawn.GetComponent<SC_FPSController>().eventText.SetActive(false);
                 
                 //Deactivate scope
                 

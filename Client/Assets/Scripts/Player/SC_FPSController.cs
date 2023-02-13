@@ -40,7 +40,7 @@ public class SC_FPSController : MonoBehaviour
     public bool canMove = true;
     InputManager inputManager;
 
-    GameObject eventText;
+    public GameObject eventText;
 
     //Animations
     Animator anim;
