@@ -50,6 +50,9 @@ public class SC_FPSController : MonoBehaviour
     //PhotonEvents
     object[] content;
 
+    //Detect if Certain Object is being hit
+    bool HittingObject=false;
+
     /*-----------------------METHODS------------------------------*/
     void Start()
     {
@@ -67,6 +70,9 @@ public class SC_FPSController : MonoBehaviour
     
     void Update()
     {
+        if (HittingObject)
+            eventText.SetActive(true);
+
         sensitivity = PlayerPrefs.GetFloat("Sensitivity",1.0f);
         targetTime -= Time.deltaTime;
         //Raycast
@@ -78,6 +84,7 @@ public class SC_FPSController : MonoBehaviour
                 raycastObject = hit.transform.gameObject;
                 //raycastObject.gameObject.GetComponent<Outline>().enabled = true;
                 eventText.SetActive(true);
+                HittingObject=true;
             }
             //RaycastObject
             else if(raycastObject != hit.transform.gameObject )
@@ -86,6 +93,8 @@ public class SC_FPSController : MonoBehaviour
                 raycastObject = hit.transform.gameObject;
                 //hit.transform.gameObject.GetComponent<Outline>().enabled = true;
                 eventText.SetActive(true);
+                HittingObject=true;
+
             }
             //If the user interacts, activate the event
             if (inputManager.GetButtonDown("Interact") && targetTime <=0)
@@ -105,6 +114,7 @@ public class SC_FPSController : MonoBehaviour
                 //raycastObject.GetComponent<Outline>().enabled = false;
                 raycastObject = null;
                 eventText.SetActive(false);
+                HittingObject=false;
             }
         }
 
