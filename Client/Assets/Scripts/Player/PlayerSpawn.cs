@@ -29,7 +29,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     public Disconnect disconnect;
 
     /*--------------------BOOLEANS FOR CONDITIONAL CHECKING---------------------*/
-    private Estados estado; //With this we keep track of the current state so we can use it in conditionals. States are (Game, Pause)
+    public Estados estado; //With this we keep track of the current state so we can use it in conditionals. States are (Game, Pause)
     public bool onPresentationCamera = false;//Boolean to know if pressMode is on or not
     static bool reload = false;//For spawn when you fall of the map
     bool escPul;//Reference if ESC key is pushed or not(ESC opens the Menu and you´ll be on Pause State)
@@ -47,6 +47,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
     static Vector3 spawnPoint;//A 3 coordinate point where the player must spawn
     public GameObject scope;//Actually this is the crosshair in game
     public GameObject eventText;//A text for displaying when an event happens
+    public GameObject eventTextK;//A text for displaying when a player has entered the Presentation Zone
     private Compressor compressor = new Compressor();//Class used to compress video when presenting
     GameObject canvasGPT;
     
@@ -132,6 +133,9 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         animator = playerToSpawn.transform.GetChild(0).GetComponent<Animator>();
         voiceChat.CheckMicroImage();
         PhotonNetwork.IsMessageQueueRunning = true;//What is this????????
+
+        //Find Event Text
+        eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject;
     }
 
     //When you enter this override function means you just call leaveRoom so the game loads the previous scene which is the lobby
@@ -163,11 +167,11 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
                 //Deactivate presentation text
-                if(eventText != null) 
+                if(eventTextK != null) 
                 {
-                    eventText.SetActive(false);
+                    eventTextK.SetActive(false);
                 }
-                
+                eventText.SetActive(false);
                 //Deactivate scope
                 
                 scope.SetActive(false);
@@ -217,7 +221,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 if(onPresentationCamera){
                     presentationCamera.enabled = false;
                     playerCamera.SetActive(true);
-                    eventText.SetActive(true);
+                    eventText.SetActive(false);
+                    eventTextK.SetActive(true);
                     scope.SetActive(true);
                     playerToSpawn.transform.GetChild(2).GetChild(2).gameObject.SetActive(true);
                     playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
@@ -228,6 +233,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                     presentationCamera.enabled = true;
                     playerCamera.SetActive(false);
                     eventText.SetActive(false);
+                    eventTextK.SetActive(false);
                     scope.SetActive(false);
                     playerToSpawn.transform.GetChild(2).GetChild(2).gameObject.SetActive(false);
                     playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
@@ -251,7 +257,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
                 //Activate scope
                 scope.SetActive(true);
                 //Activate presentation text
-                if(eventText != null) eventText.SetActive(true);
+                if(eventTextK != null) eventTextK.SetActive(true);
+                eventText.SetActive(true);
                 
                 //Stop Animation
                 animator.speed = 1;
@@ -416,9 +423,9 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             presentationCamera = null;
 
             //We deactivate UI
-            eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
-            eventText.SetActive(false);
-            eventText = null;
+            eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+            eventTextK.SetActive(false);
+            eventTextK = null;
         }
 
         else{
@@ -427,8 +434,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
             presentationCamera = camera;
 
             //We activate UI
-            eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
-            eventText.SetActive(true);
+            eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+            eventTextK.SetActive(true);
         }   
     }
 
@@ -450,9 +457,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         estado = Estados.Pausa;
         playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
     
-    ///DESACTIVAR LAS LETRAS DE PULSA E
-
-        eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+        eventText.SetActive(false);
         
         Cursor.visible = true;
         scope.SetActive(false);
@@ -467,9 +472,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
         estado = Estados.Juego;
         playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
     
-    ///DESACTIVAR LAS LETRAS DE PULSA E
-    
-        eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+        eventText.SetActive(true);
         
         Cursor.visible = false;
         scope.SetActive(true);
