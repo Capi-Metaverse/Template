@@ -277,7 +277,120 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks
         }
     }
 
-   
+    //Recibir eventos
+    public void OnEvent(EventData photonEvent)
+    {
+        switch (photonEvent.Code)
+        {
+            //New user
+            case 1:
+                {
+                    PhotonNetwork.IsMessageQueueRunning = false;
+
+                    //We maintain the same state between reloads.
+                    reload = true;
+                    spawnPoint = playerToSpawn.transform.position;
+
+                    //We reload the level
+                    PhotonNetwork.LoadLevel (mapName);
+                    break;
+                }
+            //Change animator speed
+            case 2:
+                {
+                    object[] data = (object[]) photonEvent.CustomData;
+
+                    GameObject[] playersInGame = GameObject.FindGameObjectsWithTag("Player");
+                    foreach (GameObject player in playersInGame)
+                    {
+                        if (player.GetComponent<PhotonView>().Owner.NickName == (string) data[0])
+                        {
+                            switch ((string) data[2])
+                            {
+                                case "Walking":
+                                {
+                                    player.transform.GetChild(0).GetComponent<Animator>().SetBool("Walking",(bool) data[1]);
+                                    break;
+                                }
+                                case "Running":
+                                {
+                                    player.transform.GetChild(0).GetComponent<Animator>().SetBool("Running",(bool) data[1]);
+                                    break;
+                                }
+                                case "Stop&Replay":
+                                {
+                                    player.transform.GetChild(0).GetComponent<Animator>().speed = (float) data[1];
+                                    break;
+                                }
+                                case "SpeedAnim":
+                                {
+                                    player.transform.GetChild(0).GetComponent<Animator>().SetFloat("Speed",(float) data[1]);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    break;
+                }
+            //Light Event
+            case 21:
+                {
+                    object[] data = (object[]) photonEvent.CustomData;
+
+                    GameObject eventObject = GameObject.Find((string) data[0]);
+
+                    eventObject.GetComponent<Lamp>().activate(false);
+                    break;
+                }
+            //Event FileExplorer(GET)
+            case 22:
+                {
+                    loadingPressCanvas.enabled = true;
+                    loadingPressCanvas.SetText("Loading");
+                    object[] data = (object[]) photonEvent.CustomData;
+                    fileExplorer.GetComponent<FileExplorer>().downloadImages((string) data[0]);
+                    break;
+                }
+            //Event to move slide
+            case 23:
+                {
+                    object[] data = (object[]) photonEvent.CustomData;
+
+                    if ((string) data[0] == "Back")
+                    {
+                        //Back presentation
+                        GameObject eventObject = GameObject.Find("Back");
+                        eventObject.GetComponent<BackPresentation>().activate(false);
+                    }
+                    else
+                    {
+                        //Advance presentation
+                        GameObject eventObject = GameObject.Find("Advance");
+                        eventObject.GetComponent<AdvancePresentation>().activate(false);
+                    }
+                    break;
+                }
+            //Event FileExplorer Video
+            case 24:
+                {
+                    loadingPressCanvas.enabled = true;
+                    loadingPressCanvas.SetText("Loading");
+                    object[] data = (object[]) photonEvent.CustomData;
+                    fileExplorer.GetComponent<FileExplorer>().SetVideo((string) data[0],(string) data[1],compressor.Decompress((byte[]) data[2]));
+                    break;
+                }
+            //Event FileExplorer Image
+            case 25:
+                {
+                    loadingPressCanvas.enabled = true;
+                    loadingPressCanvas.SetText("Loading");
+                    object[] data = (object[]) photonEvent.CustomData;
+                    fileExplorer.GetComponent<FileExplorer>().SetImage((byte[]) data[0]);
+                    break;
+                }
+        }
+    }
+
     //Function to set the Presentation Camera on Room Entered
 
    public void setPresentationCamera(Camera camera) {

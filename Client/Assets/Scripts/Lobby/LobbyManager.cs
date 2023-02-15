@@ -12,18 +12,17 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     //Constantes
-    public const int NUMBER_MAPS = 2;
+    public const int NUMBER_MAPS = 3;
 
-    public string[] ROOM_NAMES = {"Mapa1", "Mapa2"};
-
+    public string[] ROOM_NAMES = {"LobbyMap", "Mapa1", "Mapa2"};
     //Variables
     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
 
     //New Room Configuration
-    public bool newMap = false;
-    public string currentMap;
-    public int currentMapNumber;
-    public int avatar;
+    private bool newMap = false;
+    private string currentMap = "LobbyMap";
+    private int currentMapNumber;
+    private int avatar;
 
     //Paneles UI
     public GameObject lobbyPanel;
@@ -46,12 +45,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public List<PlayerItem> playerItemsList = new List<PlayerItem>();
 
     //Prefabs
-
     public RoomItem roomItemPrefab;
     public PlayerItem playerItemPrefab;
 
     //Buttons
-
     public GameObject leftArrowButton;
     public GameObject rightArrowButton;
     public GameObject playButton;
@@ -63,14 +60,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     //Function to get the customSettings of a room
     public Hashtable getRoomCustomSettings(int map){
         //We create the new settings
+        Hashtable customSettings = new Hashtable();
 
-         Hashtable customSettings = new Hashtable();
-
-            //Map
-            customSettings.Add("Map", map);
-            customSettings.Add("Init",true);
-            customSettings.Add("Name",currentMap);
-
+        //Map
+        customSettings.Add("Map", map);
+        customSettings.Add("Init",true);
+        customSettings.Add("Name",currentMap);
             
         //Return the settings
         return customSettings;
@@ -78,7 +73,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     private void Start() 
     {
-         //We join to the Lobby
+        //We join to the Lobby
         //This lobby allow us to have the RoomList
         PhotonNetwork.JoinLobby(TypedLobby.Default);
 
@@ -104,14 +99,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                 if (PhotonNetwork.IsMasterClient)
                 {
                     mapName.enabled = true;
-                    leftArrowButton.SetActive(true);
-                    rightArrowButton.SetActive(true);
+                    //leftArrowButton.SetActive(true);
+                    //rightArrowButton.SetActive(true);
                 }
                 else 
                 {
                     mapName.enabled = false;
-                    leftArrowButton.SetActive(false);
-                    rightArrowButton.SetActive(false);
+                    //leftArrowButton.SetActive(false);
+                    //rightArrowButton.SetActive(false);
                 }
             }
         }
@@ -122,19 +117,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void OnClickCreate()
     {
         //CurrentRoomName
-            currentMap = roomInputField.text.ToUpper();
+        currentMap = roomInputField.text.ToUpper();
 
-            //Room CustomSettings 
+        //Room CustomSettings 
+        Hashtable customSettings = getRoomCustomSettings(0);
 
-            Hashtable customSettings = getRoomCustomSettings(0);
-
-            //Create options for the room
-
-            RoomOptions opciones = new RoomOptions(){MaxPlayers = 4, BroadcastPropsChangeToAll = true, PublishUserId = true, CustomRoomProperties = customSettings, IsVisible = true,  EmptyRoomTtl = 50000};
+        //Create options for the room
+        RoomOptions opciones = new RoomOptions(){MaxPlayers = 4, BroadcastPropsChangeToAll = true, PublishUserId = true, CustomRoomProperties = customSettings, IsVisible = true,  EmptyRoomTtl = 50000};
             
-            //We join or create the new room
-            PhotonNetwork.JoinOrCreateRoom(currentMap, opciones,TypedLobby.Default);
-            voiceChat.onJoinButtonClicked(currentMap);
+        //We join or create the new room
+        PhotonNetwork.JoinOrCreateRoom(currentMap, opciones,TypedLobby.Default);
+        voiceChat.onJoinButtonClicked(currentMap);
     }
 
     //Method called by the RoomItem button to join a room
@@ -147,8 +140,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     //Button method to leave the room.
     public void OnClickLeaveRoom()
     {
-     PhotonNetwork.LeaveRoom();
-     voiceChat.onLeaveButtonClicked();
+        PhotonNetwork.LeaveRoom();
+        voiceChat.onLeaveButtonClicked();
     }
 
     //Button method to Choose PJ
@@ -177,7 +170,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     } 
 
     //Button method to switch the map to the left.
-    public void OnClickChangeMapLeft()
+    /*public void OnClickChangeMapLeft()
     {
         //We get the properties of the room
         Hashtable customSettings = PhotonNetwork.CurrentRoom.CustomProperties;
@@ -188,7 +181,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         customSettings["Map"] = mapa - 1;
         mapName.text = ROOM_NAMES[mapa - 1];
-         currentMapNumber = (mapa - 1);
+        currentMapNumber = (mapa - 1);
         PhotonNetwork.CurrentRoom.SetCustomProperties(customSettings);
     }
     //Button method to switch the map to the right.
@@ -206,7 +199,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         currentMapNumber = mapa + 1;
         mapName.text = ROOM_NAMES[mapa + 1];
         PhotonNetwork.CurrentRoom.SetCustomProperties(customSettings);
-    }
+    }*/
 
     //Funciones 
     //Function to add players to the list of players that are already in the room
@@ -275,7 +268,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        //If we are changing the map, we have to join the new 
+        //----------USED WHEN YOU WANT TO SELECT MAP INSIDE THE LOBBY---------------------------
+        /*If we are changing the map, we have to join the new 
         if(newMap == true){
 
             //Custom Room Options
@@ -290,6 +284,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             voiceChat.onMapChange();
             Debug.Log("Cambio");
             voiceChat.onJoinButtonClicked(currentMap+"Map"+currentMapNumber);
+        }*/
+
+        //----------THIS IS FOR THE LOBBY  MAP---------------------------
+        if(newMap == true){
+            //We stop communication to stop new scene events
+            PhotonNetwork.IsMessageQueueRunning = false;
+            //The Map to load is the lobby
+            Hashtable customSettings = getRoomCustomSettings(0);
+            PhotonNetwork.JoinOrCreateRoom("Lobby" + "Map" + 0, new RoomOptions(){MaxPlayers = 4, BroadcastPropsChangeToAll = true, PublishUserId = true,CustomRoomProperties = customSettings, IsVisible = false},TypedLobby.Default);
+            PhotonNetwork.LoadLevel("LobbyMap");
+            voiceChat.onJoinButtonClicked("LobbyMap");
         }
     }
 
