@@ -16,14 +16,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public string[] ROOM_NAMES = {"Mapa1", "Mapa2"};
 
+    //SceneManager
+    public SceneManagerScript sceneManager;
+
     //Variables
     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
 
     //New Room Configuration
-    public bool newMap = false;
     public string currentMap;
     public int currentMapNumber;
-    public int avatar;
+
 
     //Paneles UI
     public GameObject lobbyPanel;
@@ -78,11 +80,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     private void Start() 
     {
-         //We join to the Lobby
-        //This lobby allow us to have the RoomList
-        PhotonNetwork.JoinLobby(TypedLobby.Default);
-
-        //find voice chat script
+        //find voice chat script and the scene manager
+        sceneManager=GameObject.Find("SceneManager").GetComponent<SceneManagerScript>();
         voiceChat=GameObject.Find("VoiceManager").GetComponent<AudioController>();
     }
     
@@ -154,26 +153,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     //Button method to Choose PJ
     public void OnClickPlayButton()
     {
-        //If it is the main client, it sends an event to the others so that they can be synchronized
-        /*
-        if (PhotonNetwork.IsMasterClient)
-        {
-            //Send event
-            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-            PhotonNetwork.RaiseEvent(3, "", raiseEventOptions, SendOptions.SendReliable);
-
-            //Change room to start
-
+        //We specificate if we are going to another map and leave the room
+          
             Hashtable customSettings = PhotonNetwork.CurrentRoom.CustomProperties;
-            customSettings["Init"] = true;
-            PhotonNetwork.CurrentRoom.SetCustomProperties(customSettings);
-        }
-        else
-        {*/
-           //We specificate if we are going to another map and leave the room
-            newMap = true;
+            int mapa = (int) customSettings["Map"];
+
+            sceneManager.onNewMap = true;
+            sceneManager.currentMapNumber = mapa;
+            
             PhotonNetwork.LeaveRoom();
-        //}
+
     } 
 
     //Button method to switch the map to the left.
@@ -267,6 +256,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     */
 
     //Photon CallBack that is called once it connects to the main server
+    /*
     public override void OnConnectedToMaster()
     {
         //It calls this method when we leave the room or change to another
@@ -292,6 +282,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             voiceChat.onJoinButtonClicked(currentMap+"Map"+currentMapNumber);
         }
     }
+    */
 
     //Photon CallBack that is called every x time with new information from the lists.
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -327,24 +318,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
 
     //Photon CallBack called when user joins a room.
+    /*
     public override void OnJoinedRoom()
     {
-        lobbyPanel.SetActive(false);
-        roomPanel.SetActive(true);
-        //We get the roomName
-        roomName.text=PhotonNetwork.CurrentRoom.Name;
-        currentMap = PhotonNetwork.CurrentRoom.Name;
-
-        //Method to update the player list
-        UpdatePlayerList();
-
-        //We destroy the list of rooms as it is not updated and will be updated when we join the Lobby again.
-
-        foreach(RoomItem item in roomItemsList)
-        {
-            Destroy(item.gameObject);
-        }
-        roomItemsList.Clear();    
+           
     } 
 
     //Callback for when the connection to a room fails
@@ -384,6 +361,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             loadingPanel.SetActive(true);
         }
     }
+    */
 
     //Photon CallBack when a player enters the room.
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -396,5 +374,47 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             DeletePlayer(otherPlayer);
         }
+
+    public void setRoomPanel()
+    {
+        
+        lobbyPanel.SetActive(false);
+        roomPanel.SetActive(true);
+        //We get the roomName
+        roomName.text=PhotonNetwork.CurrentRoom.Name;
+        currentMap = PhotonNetwork.CurrentRoom.Name;
+
+        //Method to update the player list
+        UpdatePlayerList();
+
+        //We destroy the list of rooms as it is not updated and will be updated when we join the Lobby again.
+
+        foreach(RoomItem item in roomItemsList)
+        {
+            Destroy(item.gameObject);
+        }
+        roomItemsList.Clear(); 
+    }
+
+    public void setLobbyPanel()
+    {
+        foreach(PlayerItem item in playerItemsList)
+            {
+                if (item!=null)
+                Destroy(item.gameObject);
+            }
+            playerItemsList.Clear();
+
+            //We deactivate the panel of the room and Activate the panel of the Lobby interface.
+            if (roomPanel!=null & lobbyPanel!=null){
+                roomPanel.SetActive(false);
+                lobbyPanel.SetActive(true);
+            }
+    }
+
+    public void setLoadingPanel(){
+        roomPanel.SetActive(false);
+        loadingPanel.SetActive(true);
+    }
 
 }

@@ -14555,7 +14555,6 @@ GameObject:
   - component: {fileID: 558796787}
   - component: {fileID: 558796786}
   - component: {fileID: 558796790}
-  - component: {fileID: 558796791}
   m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
@@ -14591,7 +14590,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: 1
-  disconnectScript: {fileID: 558796791}
 --- !u!65 &558796787
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14673,20 +14671,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &558796791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558796784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6dc201afe25b845a16cb3c4c5ce96d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Settings: {fileID: 1738651829}
-  Pausa: {fileID: 1738651826}
 --- !u!1 &573134229
 GameObject:
   m_ObjectHideFlags: 0
@@ -26951,11 +26935,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1738651829 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2095543376414275622, guid: 556983b212072f64985b2e370fc7bff7, type: 3}
-  m_PrefabInstance: {fileID: 1738651825}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1749625226
 PrefabInstance:
   m_ObjectHideFlags: 0
