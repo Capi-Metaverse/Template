@@ -396,18 +396,5 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             DeletePlayer(otherPlayer);
         }
-/*
-    public void OnEvent(EventData photonEvent)
-    {
-         
-         if(photonEvent.Code == 3)
-        {
-            //The user moves to the next room
-            newMap = true;
-            avatar = (int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"];
-            currentMapNumber =  (int) PhotonNetwork.CurrentRoom.CustomProperties["Map"];
-            PhotonNetwork.LeaveRoom();
-        }
-    }
-    */
+
 }

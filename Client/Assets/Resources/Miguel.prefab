@@ -124,6 +124,7 @@ MonoBehaviour:
   playerSpawner: {fileID: 0}
   targetTime: 1
   canMove: 1
+  eventText: {fileID: 0}
 --- !u!1 &3117257475707892600
 GameObject:
   m_ObjectHideFlags: 0
