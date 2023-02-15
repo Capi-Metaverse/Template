@@ -2340,9 +2340,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ROOM_NAMES:
+  - Mapa0
   - Mapa1
   - Mapa2
-  - Lobby
   onMap: 0
   onNewMap: 0
   currentMapNumber: 0

@@ -12,14 +12,14 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class SceneManagerScript : MonoBehaviourPunCallbacks
 {
     //RoomNames
-    public string[] ROOM_NAMES = {"Mapa1", "Mapa2","Lobby"};
+    public string[] ROOM_NAMES = {"Mapa0","Mapa1", "Mapa2"};
     
 
     public bool onMap = false; //Boolean that specifies if the user is on a Map
     public bool onNewMap = false; //Boolean that specifies if the user is on a Map
     
     //Number of the actual map
-    public int currentMapNumber;
+    public int currentMapNumber = 0;
     public string currentMap;
 
      //Voice Chat
@@ -91,6 +91,7 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
             PhotonNetwork.IsMessageQueueRunning = false;
             //We change to a map
             onMap = true;
+            Debug.Log(currentMapNumber);
             PhotonNetwork.JoinOrCreateRoom(currentMap + "Map" + currentMapNumber, new RoomOptions(){MaxPlayers = 4, BroadcastPropsChangeToAll = true, PublishUserId = true,CustomRoomProperties = customSettings, IsVisible = false},TypedLobby.Default);
             PhotonNetwork.LoadLevel(ROOM_NAMES[currentMapNumber] );
 

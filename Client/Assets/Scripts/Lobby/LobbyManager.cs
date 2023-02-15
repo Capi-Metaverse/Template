@@ -12,9 +12,9 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     //Constantes
-    public const int NUMBER_MAPS = 2;
+    public const int NUMBER_MAPS = 3;
 
-    public string[] ROOM_NAMES = {"Mapa1", "Mapa2"};
+    public string[] ROOM_NAMES = {"Mapa0","Mapa1", "Mapa2"};
 
     //SceneManager
     public SceneManagerScript sceneManager;
@@ -103,8 +103,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                 if (PhotonNetwork.IsMasterClient)
                 {
                     mapName.enabled = true;
-                    leftArrowButton.SetActive(true);
-                    rightArrowButton.SetActive(true);
+                   // leftArrowButton.SetActive(true);
+                    //rightArrowButton.SetActive(true);
                 }
                 else 
                 {
