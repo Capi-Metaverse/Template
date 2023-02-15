@@ -61,13 +61,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Transform playerItemParent;
 
     //Function to get the customSettings of a room
-    public Hashtable getRoomCustomSettings(){
+    public Hashtable getRoomCustomSettings(int map){
         //We create the new settings
 
          Hashtable customSettings = new Hashtable();
 
             //Map
-            customSettings.Add("Map", 0);
+            customSettings.Add("Map", map);
             customSettings.Add("Init",true);
             customSettings.Add("Name",currentMap);
 
@@ -122,11 +122,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void OnClickCreate()
     {
         //CurrentRoomName
-            currentMap = roomInputField.text;
+            currentMap = roomInputField.text.ToUpper();
 
             //Room CustomSettings 
 
-            Hashtable customSettings = getRoomCustomSettings();
+            Hashtable customSettings = getRoomCustomSettings(0);
 
             //Create options for the room
 
@@ -279,7 +279,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if(newMap == true){
 
             //Custom Room Options
-            Hashtable customSettings = getRoomCustomSettings();
+            Hashtable customSettings = getRoomCustomSettings(currentMapNumber);
 
             //We stop communication to stop new scene events
             PhotonNetwork.IsMessageQueueRunning = false;

@@ -186,6 +186,9 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks, IOnEventCallback
 
                 
                 Pausa.SetActive(true);
+                GameObject SalaText = Pausa.transform.Find("RoomName").gameObject;
+                Scene scene = SceneManager.GetActiveScene();
+                SalaText.GetComponent<TMP_Text>().text = ((string) PhotonNetwork.CurrentRoom.CustomProperties["Name"]) + " " + scene.name;
                 DesactiveALL();
                 escPul = true; //Escape activado
                 UnityEngine.Debug.Log (estado);
