@@ -20,7 +20,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mapa2.unity
     guid: bc4a49f583879a143859b41e561151b9
-  - enabled: 1
-    path: Assets/Scenes/Museum.unity
-    guid: 672cbf57b9f20134d8853223689ac23f
   m_configObjects: {}
