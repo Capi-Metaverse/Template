@@ -1,5 +1,9 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.Networking;
+
 
 namespace OpenAI
 {
@@ -9,20 +13,21 @@ namespace OpenAI
         [SerializeField] private Button button;
         [SerializeField] private Text textArea;
 
-        private OpenAIApi openai = new OpenAIApi("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","org-2g1sAWw188atCDLUlSLye4tl");
-
         private string userInput;
         private string Instruction = "Act as a random stranger in a chat room and reply to the questions.\nQ: ";
 
         private void Start()
         {
-            button.onClick.AddListener(SendReply);
+            button.onClick.AddListener(SendReplyCoroutine);
         }
 
-        private async void SendReply()
+        private void SendReplyCoroutine(){
+            StartCoroutine(SendReply());
+        }
+
+        private IEnumerator SendReply()
         {
             userInput = inputField.text;
-            Instruction += $"{userInput}\nA: ";
             
             textArea.text = "...";
             inputField.text = "";
@@ -30,17 +35,39 @@ namespace OpenAI
             button.enabled = false;
             inputField.enabled = false;
 
-            // Complete the instruction
-            var completionResponse = await openai.CreateCompletion(new CreateCompletionRequest()
-            {
-                Prompt = Instruction,
-                Model = "text-davinci-003",
-                MaxTokens = 128
-            });
-            Debug.Log(completionResponse);
+            WWWForm form = new WWWForm();
+            form.AddField("message", userInput);
 
-            textArea.text = completionResponse.Choices[0].Text;
-            Instruction += $"{completionResponse.Choices[0].Text}\nQ: ";
+            //Send request
+            UnityWebRequest request = UnityWebRequest.Post("https://server-pruebas.onrender.com/chatgpt",form);
+            var handler = request.SendWebRequest();
+
+            //Server connection time
+            float startTime = 0.0f;
+            while (!handler.isDone)
+            {
+                startTime += Time.deltaTime;
+                if (startTime > 10.0f)
+                {
+                    break;
+                }
+                yield return null;
+            }
+
+            //Control the server response
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                Debug.Log(request.downloadHandler.text);
+            }
+            //Control de error of the server
+            else
+            {
+                Debug.Log("Unable to connect to the server...");
+            }
+
+
+            textArea.text = request.downloadHandler.text;
+            Instruction += $"{request.downloadHandler.text}\nQ: ";
 
             button.enabled = true;
             inputField.enabled = true;
