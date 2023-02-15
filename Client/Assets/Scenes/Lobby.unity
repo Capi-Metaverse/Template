@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3296,72 +3296,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247754355}
   m_CullTransparentMesh: 1
---- !u!1 &1295563033
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1295563034}
-  - component: {fileID: 1295563035}
-  m_Layer: 0
-  m_Name: LobbyManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1295563034
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1295563033}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 410.60132, y: 141.92487, z: 1.7728286}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1295563035
+--- !u!114 &1295563035 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6361416584109480443, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+  m_PrefabInstance: {fileID: 6361416583120117984}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1295563033}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01a0521ed26769444b68238f40f7f359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ROOM_NAMES:
-  - Mapa1
-  - Mapa2
-  newMap: 0
-  currentMap: 
-  currentMapNumber: 0
-  avatar: 0
-  lobbyPanel: {fileID: 385119111}
-  roomPanel: {fileID: 119749431}
-  loadingPanel: {fileID: 885590918}
-  mapName: {fileID: 219677158}
-  roomInputField: {fileID: 1566258455}
-  errorText: {fileID: 606129895}
-  roomName: {fileID: 628324908}
-  playerItemsList: []
-  roomItemPrefab: {fileID: 8922691446385320113, guid: 55d0b644a90a14240882d68456f289a8, type: 3}
-  playerItemPrefab: {fileID: 2092567773323835745, guid: 4a4143cc9112a434082be24511d92ced, type: 3}
-  leftArrowButton: {fileID: 1199266846}
-  rightArrowButton: {fileID: 1134296848}
-  playButton: {fileID: 109756424}
-  contentObject: {fileID: 1644937402}
-  playerItemParent: {fileID: 916206103}
 --- !u!1 &1315910545
 GameObject:
   m_ObjectHideFlags: 0
@@ -4465,3 +4410,108 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054636847}
   m_CullTransparentMesh: 1
+--- !u!1001 &6361416583120117984
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6361416584109480441, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: m_Name
+      value: LobbyManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6361416584109480442, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6361416584109480442, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 410.60132
+      objectReference: {fileID: 0}
+    - target: {fileID: 6361416584109480442, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 141.92487
+      objectReference: {fileID: 0}
+    - target: {fileID: 6361416584109480442, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.7728286
+      objectReference: {fileID: 0}
+    - target: {fileID: 6361416584109480442, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6361416584109480442, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6361416584109480442, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6361416584109480442, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6361416584109480442, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6361416584109480442, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6361416584109480442, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6361416584109480443, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: mapName
+      value: 
+      objectReference: {fileID: 219677158}
+    - target: {fileID: 6361416584109480443, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: roomName
+      value: 
+      objectReference: {fileID: 628324908}
+    - target: {fileID: 6361416584109480443, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: errorText
+      value: 
+      objectReference: {fileID: 606129895}
+    - target: {fileID: 6361416584109480443, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: roomPanel
+      value: 
+      objectReference: {fileID: 119749431}
+    - target: {fileID: 6361416584109480443, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: lobbyPanel
+      value: 
+      objectReference: {fileID: 385119111}
+    - target: {fileID: 6361416584109480443, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: playButton
+      value: 
+      objectReference: {fileID: 109756424}
+    - target: {fileID: 6361416584109480443, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: loadingPanel
+      value: 
+      objectReference: {fileID: 885590918}
+    - target: {fileID: 6361416584109480443, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: contentObject
+      value: 
+      objectReference: {fileID: 1644937402}
+    - target: {fileID: 6361416584109480443, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: roomInputField
+      value: 
+      objectReference: {fileID: 1566258455}
+    - target: {fileID: 6361416584109480443, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: leftArrowButton
+      value: 
+      objectReference: {fileID: 1199266846}
+    - target: {fileID: 6361416584109480443, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: playerItemParent
+      value: 
+      objectReference: {fileID: 916206103}
+    - target: {fileID: 6361416584109480443, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}
+      propertyPath: rightArrowButton
+      value: 
+      objectReference: {fileID: 1134296848}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 242778a8a6ae22041881d52646ce0df7, type: 3}

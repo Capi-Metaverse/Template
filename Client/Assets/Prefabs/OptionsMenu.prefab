@@ -4244,7 +4244,7 @@ GameObject:
   - component: {fileID: 1014543201567420738}
   - component: {fileID: 3629561779824605351}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: SettingsTap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
