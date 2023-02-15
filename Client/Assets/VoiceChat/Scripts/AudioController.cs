@@ -22,7 +22,7 @@ public class AudioController : MonoBehaviour
     private string HomeSceneName = "Lobby";
 
     // List that contains all the PlayScenes, needs to be updated. Same values as LobbyManager.ROOM_NAMES
-    private string[] PlaySceneName = new string[]{"Mapa1","Mapa2"}; 
+    private string[] PlaySceneName = new string[]{"LobbyMap","Mapa1","Mapa2"}; 
 
     public GameObject roomPanel;
 
