@@ -47,7 +47,7 @@ public class SC_FPSController : MonoBehaviour
     float SpeedAnim;
     bool WalkingAnim;
 
-    //PhotonEvents
+   
     object[] content;
 
     //Detect if Certain Object is being hit
