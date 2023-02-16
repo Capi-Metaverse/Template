@@ -39,7 +39,7 @@ namespace OpenAI
             form.AddField("message", userInput);
 
             //Send request
-            UnityWebRequest request = UnityWebRequest.Post("https://server-pruebas.onrender.com/chatgpt",form);
+            UnityWebRequest request = UnityWebRequest.Post("https://meta-login.onrender.com/chatgpt",form);
             var handler = request.SendWebRequest();
 
             //Server connection time
