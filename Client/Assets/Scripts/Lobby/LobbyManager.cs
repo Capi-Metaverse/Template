@@ -51,7 +51,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Transform playerItemParent;
     private void Start() 
     {
-        //find voice chat script and the scene manager
+        //Find voice chat script and the scene manager
         sceneManager=GameObject.Find("SceneManager").GetComponent<SceneManagerScript>();
         voiceChat=GameObject.Find("VoiceManager").GetComponent<AudioController>();
     }
@@ -90,9 +90,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             Hashtable customSettings = PhotonNetwork.CurrentRoom.CustomProperties;
             int mapa = (int) customSettings["Map"];
 
+            //We activate that we go to another map
             sceneManager.onNewMap = true;
-            sceneManager.currentMapNumber = mapa;
-            
             PhotonNetwork.LeaveRoom();
 
     } 
@@ -206,8 +205,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         roomPanel.SetActive(true);
         //We get the roomName
         roomName.text=PhotonNetwork.CurrentRoom.Name;
-        currentMap = PhotonNetwork.CurrentRoom.Name;
-
         //Method to update the player list
         UpdatePlayerList();
 
