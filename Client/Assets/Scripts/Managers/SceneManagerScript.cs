@@ -59,6 +59,23 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
         return customSettings;
     }
 
+    public void createNewRoom(string mapName)
+    {
+
+        
+            //Room CustomSettings 
+
+            Hashtable customSettings = getRoomCustomSettings(0);
+
+            //Create options for the room
+
+            RoomOptions opciones = new RoomOptions(){MaxPlayers = 4, BroadcastPropsChangeToAll = true, PublishUserId = true, CustomRoomProperties = customSettings, IsVisible = true,  EmptyRoomTtl = 50000};
+            
+            //We join or create the new room
+            PhotonNetwork.JoinOrCreateRoom(mapName, opciones,TypedLobby.Default);
+
+    }
+
 
     //Photon state when a user connects to Photon
      public override void OnConnectedToMaster()
