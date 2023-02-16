@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1137,7 +1137,7 @@ GameObject:
   - component: {fileID: 110560450}
   - component: {fileID: 110560449}
   - component: {fileID: 110560448}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2323,7 +2323,7 @@ GameObject:
   - component: {fileID: 645609131}
   - component: {fileID: 645609133}
   - component: {fileID: 645609132}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: TextMap1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4812,6 +4812,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8712780547611829762, guid: 7d89e6787b799674e9066a54b11120c6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 9199261849990390558, guid: 7d89e6787b799674e9066a54b11120c6, type: 3}
 --- !u!4 &1538565642 stripped
@@ -6275,6 +6279,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538565780}
   m_Mesh: {fileID: 6210637094559143849, guid: 7d89e6787b799674e9066a54b11120c6, type: 3}
+--- !u!1 &1830429346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8712780547611829762, guid: 7d89e6787b799674e9066a54b11120c6, type: 3}
+  m_PrefabInstance: {fileID: 1538565641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1830429347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830429346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0678e4e1e7df8f245b894455ddc6eb3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: 3
+--- !u!65 &1830429348
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830429346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 17.644081, y: 194.67604, z: 274.54843}
+  m_Center: {x: -269.1142, y: -5.9167914, z: -21.33045}
 --- !u!64 &1845229836
 MeshCollider:
   m_ObjectHideFlags: 0
