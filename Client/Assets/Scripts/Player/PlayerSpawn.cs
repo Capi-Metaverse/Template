@@ -30,10 +30,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks
     /*--------------------BOOLEANS FOR CONDITIONAL CHECKING---------------------*/
     public Estados estado; //With this we keep track of the current state so we can use it in conditionals. States are (Game, Pause)
     public bool onPresentationCamera = false;//Boolean to know if pressMode is on or not
-    static bool reload = false;//For spawn when you fall of the map
     bool escPul;//Reference if ESC key is pushed or not(ESC opens the Menu and you´ll be on Pause State)
     bool TPul;//Reference if T key is pushed or not(T opens the TextChat)
-    bool LPul;//Reference if L key is pushed or not(For loading/Uploading items, DEPRECATED)
 
     /*-------------UTILITY VARIABLES-----------------*/
     public GameObject[] playerPrefabs;//This are the player models(ReadyPlayerMe), all of them in a list
@@ -90,42 +88,47 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks
             }  
         }
 
-        if (estado == Estados.Juego)
+        if (!UnityEngine.Input.GetKeyDown(KeyCode.Escape)) 
         {
+            escPul = false; // Detecta si no está pulsado
+        }
+
+        switch (estado)
+        {
+            case Estados.Juego:
+            {
             //ESC key down(PauseMenu)
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
-                //Deactivate presentation text
-                if(eventTextK != null) 
-                {
-                    eventTextK.SetActive(false);
-                }
-
+               
+                escPul = true;
                 playerToSpawn.GetComponent<SC_FPSController>().eventText.SetActive(false);
                 
-                //Deactivate scope and micro
-                
-                scope.SetActive(false);
-                micro.SetActive(false);
                 //Start Animator
                 animator.speed = 0;
                 object[] content =new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName,animator.speed,"Stop&Replay"};
                 RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
                 PhotonNetwork.RaiseEvent(2,content,raiseEventOptions,SendOptions.SendReliable);
 
+                //Pause canvas
                 
                 Pausa.SetActive(true);
+                //RoomName on Settings
                 GameObject SalaText = Pausa.transform.Find("RoomName").gameObject;
                 Scene scene = SceneManager.GetActiveScene();
                 SalaText.GetComponent<TMP_Text>().text = ((string) PhotonNetwork.CurrentRoom.CustomProperties["Name"]) + " " + scene.name;
+                //State and Cursor
+                estado = Estados.Pausa;
+                Cursor.visible = true;
                 DesactiveALL();
-                escPul = true; //Escape activado
+                 //Escape activado
                 UnityEngine.Debug.Log (estado);
             }
 
             //T key down(TextChat)
             if (UnityEngine.Input.GetKeyDown(KeyCode.T) && !TPul)
             {
+                TPul = true; //Escape is activated, true
                 //Start Animation
                 animator.speed = 0;
                 object[] content =new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName,animator.speed,"Stop&Replay"};
@@ -135,8 +138,11 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks
                 UnityEngine.Debug.Log("T pulsada");
                 chatManager.SetActive(true);
                 chatManager.GetComponent<PhotonChatManager>().ChatConnectOnClick();
+                 //State and Cursor
+                estado = Estados.Pausa;
+                Cursor.visible = true;
                 DesactiveALL();
-                TPul = true; //Escape is activated, true
+               
                 UnityEngine.Debug.Log (estado);
             }
 
@@ -149,44 +155,29 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks
                     if(onPresentationCamera){
                         presentationCamera.enabled = false;
                         playerCamera.SetActive(true);
-                        eventTextK.SetActive(true);
-                        scope.SetActive(true);
-                        micro.SetActive(true);
-                        playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
+                        ActiveALL();
                     }
 
                     else{
-                        presentationCamera.enabled = true;
+                        
                         presentationCamera.enabled = true;
                         playerCamera.SetActive(false);
-                        eventTextK.SetActive(false);
-                        scope.SetActive(false);
-                        micro.SetActive(false);
-                        playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
                         playerToSpawn.GetComponent<SC_FPSController>().eventText.SetActive(false);
+                        DesactiveALL();
+                       
                     }
 
                     onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
                 }
             }
-        }
-        if (!UnityEngine.Input.GetKeyDown(KeyCode.Escape)) 
-        {
-            escPul = false; // Detecta si no está pulsado
-        }
-
-        //Game State
-        if (estado == Estados.Pausa)
+            break;
+        }  
+        case Estados.Pausa:
         {
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
                 //Activate scope
                 chatGPTActive.activate(false);
-                scope.SetActive(true);
-                micro.SetActive(true);
-                //Activate presentation text
-                if(eventTextK != null) eventTextK.SetActive(true);
-                
                 //Stop Animation
                 animator.speed = 1;
                 object[] content = new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName,animator.speed,"Stop&Replay"};
@@ -198,12 +189,20 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks
                 Settings.SetActive(false);
                 Pausa.SetActive(false);
                 chatManager.SetActive(false);
+                Cursor.visible = false;
                 TPul = false;
-                Time.timeScale = 1;
+                //States and Reactivate all
+                estado = Estados.Juego;
                 ActiveALL();
                 UnityEngine.Debug.Log (estado);
             }
+            break;
         }
+
+            default:
+                break;
+        }
+            
     }
 
    
@@ -234,27 +233,21 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks
         }   
     }
 
-    
-    
-    //Cambio de mapa?
-    public void ChangeRoom(string map)
-    {
-        if (map == "Mapa2")
-        {
-            //We reload the level
-            PhotonNetwork.LoadLevel (map);
-        }
-    }
-
     //DesactiveAll
     public void DesactiveALL()
     {
-        estado = Estados.Pausa;
+        
         playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
+
+         //Deactivate presentation text
+        if(eventTextK != null) 
+        {
+            eventTextK.SetActive(false);
+        }
     
     ///DESACTIVAR LAS LETRAS DE PULSA E
 
-        Cursor.visible = true;
+        
         scope.SetActive(false);
         micro.SetActive(false);
         Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
@@ -263,8 +256,14 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks
     //ActiveALL
     public void ActiveALL()
     {
-        estado = Estados.Juego;
+        
         playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
+
+          //Deactivate presentation text
+        if(eventTextK != null) 
+        {
+            eventTextK.SetActive(true);
+        }
     
     ///DESACTIVAR LAS LETRAS DE PULSA E
 
@@ -284,11 +283,9 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks
         chatManager.SetActive(true);
 
         //We check if it's the first time the user entered the room.
-        if (reload == false)
-        {
-            int randomNumber = Random.Range(0, spawnPoints.Length);
-            spawnPoint = spawnPoints[randomNumber].position;
-        }
+        int randomNumber = Random.Range(0, spawnPoints.Length);
+        spawnPoint = spawnPoints[randomNumber].position;
+        
         voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();
 
         //Random avatar character, 6 is the random character
