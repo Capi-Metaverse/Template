@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1605,6 +1605,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7401333659998300727, guid: 200307d3af272824389f524607c70e0f, type: 3}
+      propertyPath: CanvasChatGPT
+      value: 
+      objectReference: {fileID: 2082254320}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 200307d3af272824389f524607c70e0f, type: 3}
 --- !u!64 &621275307
@@ -6400,6 +6404,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2082254320 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7521400143652658567, guid: ef8df16f7d4a47648be713df9d6142d8, type: 3}
+  m_PrefabInstance: {fileID: 2082254315}
+  m_PrefabAsset: {fileID: 0}
 --- !u!33 &2085358630
 MeshFilter:
   m_ObjectHideFlags: 0
