@@ -19,10 +19,7 @@ public class AudioController : MonoBehaviour
 #endif
     static AudioApp app = null;
 
-    private string HomeSceneName = "Lobby";
-
-    // List that contains all the PlayScenes, needs to be updated. Same values as LobbyManager.ROOM_NAMES
-    private string[] PlaySceneName = new string[]{"Mapa0","Mapa1","Mapa2","Mapa3"}; 
+    private int activeScene;
 
     public GameObject roomPanel;
 
@@ -51,9 +48,10 @@ public class AudioController : MonoBehaviour
     {
         CheckPermissions();
 
-        if (Input.GetKeyDown("m") && (PlaySceneName.Contains(SceneManager.GetActiveScene().name)  || ((SceneManager.GetActiveScene().name == HomeSceneName) && roomPanel.activeSelf))&&(GameObject.Find("PlayerSpawner").GetComponent<PlayerSpawn>().estado != PlayerSpawn.Estados.Pausa)){
+        activeScene = SceneManager.GetActiveScene().buildIndex;
+        if (Input.GetKeyDown("m") && (activeScene > 1)&&(GameObject.Find("PlayerSpawner").GetComponent<PlayerSpawn>().estado != PlayerSpawn.Estados.Pausa)){
             Debug.Log("M WAS PRESSED");
-            app.MuteAudio(SceneManager.GetActiveScene().name);
+            app.MuteAudio();
         }
     }
 
