@@ -52,7 +52,7 @@ public class MusicManager : MonoBehaviour
         if (_audioSource.isPlaying)
             _trackTimer += 1 * Time.deltaTime;
 
-        if (!_audioSource.isPlaying || Input.GetButtonDown("Jump") || _trackTimer >= _audioSource.clip.length)
+        if (!_audioSource.isPlaying || _trackTimer >= _audioSource.clip.length)
         {
             ChangeSong(Random.Range(0,songs.Length));
         }

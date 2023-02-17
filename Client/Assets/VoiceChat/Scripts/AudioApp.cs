@@ -111,20 +111,18 @@ public class AudioApp
     /// <summary>
     ///   Changes the state of the audio
     /// </summary>
-    public void MuteAudio(string activeScene){
+    public void MuteAudio(){
         if (AudioVideoState.pubAudio == true){
             mRtcEngine.MuteLocalAudioStream(true);
             AudioVideoState.pubAudio = false;
             Debug.Log("MicroOff");
-            
-            if (activeScene != "Lobby")
+
             GameObject.Find("Micro").GetComponent<Image>().sprite = MicroOff;
         } else {
             mRtcEngine.MuteLocalAudioStream(false);
             AudioVideoState.pubAudio = true;
             Debug.Log("MicroOn");
 
-            if (activeScene != "Lobby")
             GameObject.Find("Micro").GetComponent<Image>().sprite = MicroOn;
         }
     }
