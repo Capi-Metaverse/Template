@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEngine.UI;
 using UnityEngine.Windows;
 using SFB;
+using System.Runtime.InteropServices;
 using UnityEngine.Networking;
 using Newtonsoft.Json.Linq;
 using ExitGames.Client.Photon;
@@ -26,9 +27,13 @@ public class FileExplorer : MonoBehaviour
     UnityWebRequest GetRequest;
     public TMP_Text  loadingPressCanvas;//shows when presentation is loading
 
-    // Open file with filter
-    //var extensions = new [] {new ExtensionFilter("Image Files", "png", "jpg", "jpeg" ),new ExtensionFilter("Sound Files", "mp3", "wav" ),new ExtensionFilter("All Files", "*" ),};
-
+    #if UNITY_WEBGL && !UNITY_EDITOR
+    //
+    // WebGL
+    //
+    [DllImport("__Internal")]
+    private static extern void UploadFile(string gameObjectName, string methodName, string filter, bool multiple);
+    #endif
     /*---------------------METHODS-------------------------*/
     // Start is called before the first frame update
     void Start()
@@ -41,12 +46,26 @@ public class FileExplorer : MonoBehaviour
     {
         loadingPressCanvas.SetText("Loading");
         Screen.lockCursor = false;//Unity and standalone
-        //path = EditorUtility.OpenFilePanel("Overwrite with png, txt", "" , "png;txt");
 
         //Open panel to choose the file and limiting the extensions to choose
         var extensions = new [] {new ExtensionFilter("Powerpoint Files", "pptx", "ppt"),new ExtensionFilter("Excel Files", "xlsx", "xlsm","xlsb"),new ExtensionFilter("Image Files", "png", "jpg", "jpeg" ),new ExtensionFilter("Video Files", "mp4","ogv","vp8","webm" ),new ExtensionFilter("All Files", "*" ),};
-        WriteResult(StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false));
+        
+        #if UNITY_WEBGL && !UNITY_EDITOR
+            UploadFile(gameObject.name, "OnFileUpload", ".pptx", false);
+        #else
+            WriteResult(StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false));
+        #endif
         Screen.lockCursor = true;//Unity and standalone
+    }
+
+    // Called from browser
+    public void OnFileUpload(string url) {
+        //string to string[]
+        List<string> list = new List<string>();
+        list.Add(url);
+        String[] urls = list.ToArray();
+        //output
+        WriteResult(urls);
     }
 
     [System.Obsolete]
@@ -60,18 +79,31 @@ public class FileExplorer : MonoBehaviour
         foreach (var p in paths) 
         {
             _path += p + "\n";
-            StartCoroutine(UpdateFile());
+            Debug.Log("WriteResultPath: " + _path);
         }
+
+        StartCoroutine(UpdateFile());
     }
-    
+
     [System.Obsolete]
     IEnumerator UpdateFile()
     {
-        WWW www = new WWW("file://" + _path);
-        yield return www.isDone;
-        byte[] bytes = www.bytes;
+        #if UNITY_WEBGL && !UNITY_EDITOR
+           UnityWebRequest www = UnityWebRequest.Get(_path);
+            yield return www.SendWebRequest();
+            Debug.Log(www.downloadHandler.text);
+            byte[] bytes = www.downloadHandler.data;
+        #else
+            WWW www = new WWW("file://" + _path);
+            yield return www.isDone;
+            Debug.Log("www.data : " + www.data);
+            byte[] bytes = www.bytes;
+        #endif
         Debug.Log(bytes.Length);
-
+        #if UNITY_WEBGL && !UNITY_EDITOR
+            Debug.Log("PresentationWebGL");
+            StartCoroutine(PresentationUpload(bytes,"pptx",$"https://v2.convertapi.com/convert/{"pptx"}/to/png?Secret=T0TzTuNoju79aVtJ"));
+        #else
         //Determine file extension
         var fileExtension = _path.Split('.').Last().Trim();
         Debug.Log($"Extension: {fileExtension}");
@@ -110,7 +142,8 @@ public class FileExplorer : MonoBehaviour
             default:
                 Debug.Log("Format file not allowed");
                 break;
-        }            
+        }   
+        #endif         
     }
 
     //Upload the image file and share it with other users
