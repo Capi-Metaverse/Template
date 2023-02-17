@@ -330,4 +330,21 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks
         voiceChat.CheckMicroImage();
 
     }
+
+    public void setState(int number){
+
+        switch(number){
+            case 0: 
+                estado = Estados.Juego;
+                break;
+            case 1: 
+                estado = Estados.Pausa;
+                break;
+            default:
+                break;
+        }
+
+        
+
+    }
 }
