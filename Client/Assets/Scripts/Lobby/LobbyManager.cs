@@ -64,14 +64,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //CurrentRoomName
             currentMap = roomInputField.text.ToUpper();
             sceneManager.createNewRoom(currentMap);
-            voiceChat.onJoinButtonClicked(currentMap);
+            //voiceChat.onJoinButtonClicked(currentMap);
     }
 
     //Method called by the RoomItem button to join a room
     public void OnClickJoinRoom(string roomName)
     {
         PhotonNetwork.JoinRoom(roomName);
-        voiceChat.onJoinButtonClicked(roomName);
+        //voiceChat.onJoinButtonClicked(roomName);
         playButton.SetActive(true);
     }
 
@@ -79,7 +79,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void OnClickLeaveRoom()
     {
      PhotonNetwork.LeaveRoom();
-     voiceChat.onLeaveButtonClicked();
+     //voiceChat.onLeaveButtonClicked();
     }
 
     //Button method to Choose PJ
@@ -93,6 +93,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             //We activate that we go to another map
             sceneManager.onNewMap = true;
             PhotonNetwork.LeaveRoom();
+            //voiceChat.onLeaveButtonClicked();
 
     } 
 
