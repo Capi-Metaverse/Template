@@ -20,6 +20,7 @@ public class ChatGPTActive : MonoBehaviour, IMetaEvent
         {
             CanvasChatGPT.SetActive(true);    
             playerSpawn.DesactiveALL();
+            Cursor.visible = true;
             playerSpawn.setState(1);
             playerSpawn.playerToSpawn.GetComponent<SC_FPSController>().eventText.SetActive(false); 
 

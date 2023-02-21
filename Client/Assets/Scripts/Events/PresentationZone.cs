@@ -6,7 +6,7 @@ using Photon.Pun;
 public class PresentationZone : MonoBehaviour
 {
     //Camera of the presentation
-    public Camera presentationCamera;
+    public Camera camera;
 
     
     //Detect if it in collider
@@ -19,7 +19,7 @@ public class PresentationZone : MonoBehaviour
        
             PlayerSpawn playerSpawn = player.playerSpawner;
      
-            playerSpawn.setPresentationCamera(presentationCamera);
+            playerSpawn.setPresentationCamera(camera);
 
             MusicManager musicController = GameObject.Find("MusicManager").GetComponent<MusicManager>();
             musicController.ChangeAudioState();
