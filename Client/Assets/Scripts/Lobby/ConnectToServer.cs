@@ -27,8 +27,10 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         string password = passwordInput.text;
 
         //Field validation
+    
         if(ValidatePassword(password) && ValidateUsername(username))
         {
+                /*
             print("Trying to conect to server.");
             TitleText.text = "Validando...";
 
@@ -46,8 +48,9 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
             PhotonNetwork.AuthValues = authValues;
             PhotonNetwork.AutomaticallySyncScene = false;
             //We make the connection
+            */
             PhotonNetwork.NickName = usernameInput.text;
-
+   
             if(PhotonNetwork.ConnectUsingSettings())
             {
                 TitleText.text = "Conectando...";
