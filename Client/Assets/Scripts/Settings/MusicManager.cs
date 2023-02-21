@@ -13,6 +13,7 @@ public class MusicManager : MonoBehaviour
         }
     }
     private AudioSource _audioSource;
+    public bool StopAudio = false;
     public Object[] songs;
     public float volume = 0.04f;
     [SerializeField] private float _trackTimer;
@@ -52,7 +53,7 @@ public class MusicManager : MonoBehaviour
         if (_audioSource.isPlaying)
             _trackTimer += 1 * Time.deltaTime;
 
-        if (!_audioSource.isPlaying || _trackTimer >= _audioSource.clip.length)
+        if ((!_audioSource.isPlaying || _trackTimer >= _audioSource.clip.length) && StopAudio == false)
         {
             ChangeSong(Random.Range(0,songs.Length));
         }
@@ -91,8 +92,12 @@ public class MusicManager : MonoBehaviour
 
     public void ChangeAudioState(){
         if (_audioSource.isPlaying == true)
+        {
             _audioSource.Stop();
-        else
-            _audioSource.Play();
+            StopAudio = true;
+        } else
+        {    _audioSource.Play();
+            StopAudio = false;
+        }
     }
 }
