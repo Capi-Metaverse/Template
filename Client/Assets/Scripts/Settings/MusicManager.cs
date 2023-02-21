@@ -88,4 +88,11 @@ public class MusicManager : MonoBehaviour
             }
         }
     }
+
+    public void ChangeAudioState(){
+        if (_audioSource.isPlaying == true)
+            _audioSource.Stop();
+        else
+            _audioSource.Play();
+    }
 }
