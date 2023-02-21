@@ -14,11 +14,13 @@ public class Disconnect : MonoBehaviourPunCallbacks
     //Voice Chat
     private AudioController voiceChat;
     private InputManager inputManager;
+    private MusicManager musicController;
     
     void Start()
     {
       voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();  
       inputManager = GameObject.Find("Script").GetComponent<InputManager>();
+      musicController = GameObject.Find("MusicManager").GetComponent<MusicManager>();
     }
 
     public void OnClickDisconnect()
@@ -48,6 +50,7 @@ public class Disconnect : MonoBehaviourPunCallbacks
       PhotonNetwork.LeaveRoom();
       inputManager.OnreturnLobbyInput();
       voiceChat.onLeaveButtonClicked();
+      musicController.ActivateAudio();
       
     }
 

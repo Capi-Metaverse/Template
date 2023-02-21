@@ -100,4 +100,10 @@ public class MusicManager : MonoBehaviour
             StopAudio = false;
         }
     }
+
+    public void ActivateAudio()
+    {
+        _audioSource.Play();
+        StopAudio = false;
+    }
 }
