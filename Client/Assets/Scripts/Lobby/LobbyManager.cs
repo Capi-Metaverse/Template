@@ -54,6 +54,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //Find voice chat script and the scene manager
         sceneManager=GameObject.Find("SceneManager").GetComponent<SceneManagerScript>();
         voiceChat=GameObject.Find("VoiceManager").GetComponent<AudioController>();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
     
 
