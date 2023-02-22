@@ -43,12 +43,7 @@ public class MoveTabs : MonoBehaviour , IInRoomCallbacks
         TabPanelPlayers.SetActive(true);
     }
 
-    void OnMasterClientSwitched(Player newMasterClient){
-         if (PhotonNetwork.IsMasterClient)
-        {
-          TabTabPlayers.SetActive(true);
-        } 
-    }
+
 
     public void OnPlayerEnteredRoom(Player newPlayer)
     {
@@ -72,7 +67,12 @@ public class MoveTabs : MonoBehaviour , IInRoomCallbacks
 
     void IInRoomCallbacks.OnMasterClientSwitched(Player newMasterClient)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Cambiosssss");
+         if (PhotonNetwork.IsMasterClient)
+        {
+          TabTabPlayers.SetActive(true);
+        } 
+        //throw new System.NotImplementedException();
     }
 }
 

@@ -66,6 +66,10 @@ MonoBehaviour:
     m_Localized: "Cl\xE9s"
     m_Metadata:
       m_Items: []
+  - m_Id: 50800667598848
+    m_Localized: Joueurs
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

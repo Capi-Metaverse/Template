@@ -63,6 +63,10 @@ MonoBehaviour:
     m_Key: SettingsKeysText
     m_Metadata:
       m_Items: []
+  - m_Id: 50800667598848
+    m_Key: SettingsPlayerText
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

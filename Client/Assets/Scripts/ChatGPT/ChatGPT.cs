@@ -14,6 +14,7 @@ namespace OpenAI
         [SerializeField] private Text textArea;
 
         private string userInput;
+        private List<string> chatList = new List<string>();
         private string Instruction = @"Act as a random stranger in a chat room and reply to the questions. 
                                     If someone asks you about how to change between rooms, you'll answer  
                                     that they need to go near a door and press the key E. If someone asks  
@@ -39,6 +40,7 @@ namespace OpenAI
         private IEnumerator SendReply()
         {
             userInput = inputField.text;
+            chatList.Add(userInput);
             Instruction += $"{userInput} \nA: ";
             
             inputField.text = "";
