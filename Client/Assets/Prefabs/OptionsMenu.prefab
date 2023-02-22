@@ -687,6 +687,7 @@ MonoBehaviour:
   PlayerKeys: []
   PlayerItemPrefabSettings: {fileID: 5579281195357421886, guid: 2bf2d61890fe7494783d1555035f1d11, type: 3}
   PlayerListSettings: {fileID: 8114877012828975565}
+  Kickbutton: {fileID: 0}
 --- !u!1 &4656795815476379570
 GameObject:
   m_ObjectHideFlags: 0

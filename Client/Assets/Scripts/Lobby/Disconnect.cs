@@ -36,7 +36,7 @@ public class Disconnect : MonoBehaviourPunCallbacks
       Pausa.SetActive(false);
       Settings.SetActive(true);
       playerList = GameObject.Find("TabPlayer").GetComponent<PlayerList>();
-      playerList.listPlayer();
+      playerList.listadoPlayer();
       
     }
 

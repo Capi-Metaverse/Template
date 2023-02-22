@@ -13,7 +13,7 @@ public string[] PlayerKeys;
 public GameObject PlayerItemPrefabSettings;
 public GameObject PlayerListSettings;
 [SerializeField] private Button Kickbutton;
-Player[] otherPlayers = PhotonNetwork.PlayerListOthers;
+
 Dictionary <string, int> PlayerToActor;
     
 
@@ -21,14 +21,18 @@ Dictionary <string, int> PlayerToActor;
         {
             //Kickbutton.onClick.AddListener();
         }
-    public void listPlayer()
+    public void listadoPlayer()
     {
+
+        Player[] otherPlayers = PhotonNetwork.PlayerListOthers;
         
-            for (int i = 0; i < otherPlayers.Length; ++i)
+            for (int i = 0; i < otherPlayers.Length; i++)
             {
                 PlayerKeys = new string[]{otherPlayers[i].NickName.ToString()} ;
+
+                Debug.Log(otherPlayers[i].NickName.ToString());
                
-                PlayerToActor[otherPlayers[i].NickName] = otherPlayers[i].ActorNumber;
+            
                 // TODO: I need to show a popup message saying the master client left to the other clients
             string bn;
             bn = PlayerKeys[i];
