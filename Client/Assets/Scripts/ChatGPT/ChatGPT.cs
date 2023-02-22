@@ -19,6 +19,7 @@ namespace OpenAI
         private void Start()
         {
             button.onClick.AddListener(SendReplyCoroutine);
+            textArea.text = "You can ask me a question in the input below!";
         }
 
         private void SendReplyCoroutine(){
@@ -30,7 +31,6 @@ namespace OpenAI
             userInput = inputField.text;
             Instruction += $"{userInput} \nA: ";
             
-            textArea.text = "...";
             inputField.text = "";
 
             button.enabled = false;
@@ -47,6 +47,12 @@ namespace OpenAI
             float startTime = 0.0f;
             while (!handler.isDone)
             {
+                if(textArea.text.Length < 3)
+                textArea.text = textArea.text + ".";
+                else{
+                    textArea.text = ".";
+                }
+
                 startTime += Time.deltaTime;
                 if (startTime > 10.0f)
                 {
@@ -76,3 +82,6 @@ namespace OpenAI
         }
     }
 }
+
+
+
