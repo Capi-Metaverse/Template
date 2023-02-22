@@ -170,7 +170,7 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
             {
                 playerProperties["playerAvatar"] = 6;
                 PhotonNetwork.SetPlayerCustomProperties (playerProperties);
-
+  
                 //We remove the list of players when leaving the room
                 lobbyManager.setLobbyPanel();
             }
@@ -189,7 +189,9 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
                 onMap = false;
                 onNewMap = false;
                 currentMapNumber = 0;
+                voiceChat.onLeaveButtonClicked();
                 SceneManager.LoadScene("Lobby");
+                
             }
         }
     }
