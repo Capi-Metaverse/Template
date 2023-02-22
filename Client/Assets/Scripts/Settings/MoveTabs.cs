@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
-public class MoveTabs : MonoBehaviour
+public class MoveTabs : MonoBehaviour , IInRoomCallbacks
 {
     public GameObject TabPanel;
     public GameObject TabPanelKeys;
@@ -15,10 +16,15 @@ public class MoveTabs : MonoBehaviour
          if (PhotonNetwork.IsMasterClient)
         {
           TabTabPlayers.SetActive(true);
-        }
+        } 
         TabPanel.SetActive(true);
         TabPanelKeys.SetActive(false);
         TabPanelPlayers.SetActive(false);
+    }
+
+    void Update()
+    {
+      
     }
     public void ChangeToPanel(){
         TabPanel.SetActive(true);
@@ -37,6 +43,36 @@ public class MoveTabs : MonoBehaviour
         TabPanelPlayers.SetActive(true);
     }
 
-    
- 
+    void OnMasterClientSwitched(Player newMasterClient){
+         if (PhotonNetwork.IsMasterClient)
+        {
+          TabTabPlayers.SetActive(true);
+        } 
+    }
+
+    public void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    void IInRoomCallbacks.OnMasterClientSwitched(Player newMasterClient)
+    {
+        throw new System.NotImplementedException();
+    }
 }
+
