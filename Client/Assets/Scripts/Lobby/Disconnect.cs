@@ -5,6 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using ExitGames.Client.Photon;
 
 public class Disconnect : MonoBehaviourPunCallbacks
 {
@@ -43,7 +44,9 @@ public class Disconnect : MonoBehaviourPunCallbacks
             {
                 Debug.Log(otherPlayers[i]);
                 Debug.Log("entro en leave");
-                PhotonNetwork.CloseConnection(otherPlayers[i]);
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
+                PhotonNetwork.RaiseEvent(26,"", raiseEventOptions, SendOptions.SendReliable);
+
                 // TODO: I need to show a popup message saying the master client left to the other clients
             }
         }

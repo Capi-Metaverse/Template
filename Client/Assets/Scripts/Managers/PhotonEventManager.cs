@@ -140,10 +140,12 @@ public class PhotonEventManager : MonoBehaviourPunCallbacks, IOnEventCallback
                     fileExplorer.GetComponent<FileExplorer>().SetImage((byte[]) data[0]);
                     break;
                 }
-                case 203:
+                case 26:
                 {
-                   sceneManagerScript.onMap = false;
                    sceneManagerScript.onNewMap = false; 
+                   Debug.Log("llega a caso 203");
+                   Debug.Log(sceneManagerScript.onNewMap);
+                   PhotonNetwork.LeaveRoom();
                    break;
                 }
         }
