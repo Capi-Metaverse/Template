@@ -14,7 +14,16 @@ namespace OpenAI
         [SerializeField] private Text textArea;
 
         private string userInput;
-        private string Instruction = "Act as a random stranger in a chat room and reply to the questions. If someone asks you about how to change between rooms, you'll answer that they need to go near a door and press the key E \nQ: ";
+        private string Instruction = @"Act as a random stranger in a chat room and reply to the questions. 
+                                    If someone asks you about how to change between rooms, you'll answer  
+                                    that they need to go near a door and press the key E. If someone asks  
+                                    you about how to interact with an element, reply that they need to go 
+                                    near it and press E. If someone asks you about how to mute and unmute 
+                                    the voice chat, respond that they need to press the key M. If someone 
+                                    asks you about how to open the Settings window, reply that they need to
+                                    press Esc. If someone asks you about how to play a presentation, answer 
+                                    that they need to go to the map1 or map2 and interact with the yellow block
+                                    placed in the Presentation Zone.\nQ: ";
 
         private void Start()
         {
