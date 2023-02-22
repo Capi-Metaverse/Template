@@ -30,6 +30,25 @@ public class Disconnect : MonoBehaviourPunCallbacks
         voiceChat.OnApplicationQuit();
         Application.Quit();
     }
+    
+    public void Leave()
+    {
+      Debug.Log("Funciona");
+      Debug.Log(PhotonNetwork.IsMasterClient);
+    if (PhotonNetwork.IsMasterClient == true)
+        {
+          Debug.Log("entro en leave");
+            Player[] otherPlayers = PhotonNetwork.PlayerListOthers;
+            for (int i = 0; i < otherPlayers.Length; ++i)
+            {
+                Debug.Log(otherPlayers[i]);
+                Debug.Log("entro en leave");
+                PhotonNetwork.CloseConnection(otherPlayers[i]);
+                // TODO: I need to show a popup message saying the master client left to the other clients
+            }
+        }
+    }
+
 
     public void OnClickSettings()
     {   

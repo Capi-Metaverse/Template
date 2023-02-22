@@ -18,6 +18,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     private void Start ()
     {
         PhotonNetwork.GameVersion = "0.0.1";
+        PhotonNetwork.EnableCloseConnection = true;
     }
 
     public void OnClickConnect()

@@ -11,6 +11,7 @@ public class PhotonEventManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public GameObject fileExplorer;//Object in scene map, is the manager for the FileExploring system
     public TMP_Text loadingPressCanvas;
     private Compressor compressor = new Compressor();//Class used to compress video when presenting
+    SceneManagerScript sceneManagerScript;
 
 
     void Start()
@@ -138,6 +139,12 @@ public class PhotonEventManager : MonoBehaviourPunCallbacks, IOnEventCallback
                     fileExplorer = GameObject.Find("ChooseFile");
                     fileExplorer.GetComponent<FileExplorer>().SetImage((byte[]) data[0]);
                     break;
+                }
+                case 203:
+                {
+                   sceneManagerScript.onMap = false;
+                   sceneManagerScript.onNewMap = false; 
+                   break;
                 }
         }
     }
