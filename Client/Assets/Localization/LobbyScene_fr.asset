@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: LobbyScene_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: b2ae5e7f1e21b8245963b6a3d21f50a9, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 16884498432
+    m_Localized: "CR\xC9EZ UNE CHAMBRE OU REJOIGNEZ-EN UNE AVEC VOS AMIS"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 493990772736
+    m_Localized: "Introduisez le nom de la pi\xE8ce"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1049115295744
+    m_Localized: "cr\xE9er"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1379639033856
+    m_Localized: "Rafra\xEEchir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2472959868928
+    m_Localized: 'Chambre:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3199346212864
+    m_Localized: Partir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3457111359488
+    m_Localized: Rejoins une partie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5675071897600
+    m_Localized: Chargement
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

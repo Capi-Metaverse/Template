@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Map1Scene Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Map1Scene
+  m_TableCollectionNameGuidString: 4b90d92175d793540a0b8d961ce58b17
+  m_Entries:
+  - m_Id: 7535394816
+    m_Key: WelcomePresentation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509396451328
+    m_Key: LoadingPresentationText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1391995453440
+    m_Key: PauseLobbyText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1614838824960
+    m_Key: PauseDisconnectText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2039742791680
+    m_Key: SettingsTitleText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2281141764096
+    m_Key: SettingsSensitivityText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2669509148672
+    m_Key: SettingsVolumeText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2844428402688
+    m_Key: SettingsResolutionText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3037706125312
+    m_Key: SettingsReturnButtonText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3287321739264
+    m_Key: SettingsFullScreenText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3751920599040
+    m_Key: SettingsSettingsText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3933219389440
+    m_Key: SettingsKeysText
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5063239457994178564
+  references:
+    version: 2
+    RefIds:
+    - rid: 5063239457994178564
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1677058476271

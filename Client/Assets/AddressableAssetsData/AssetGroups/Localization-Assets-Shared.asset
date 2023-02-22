@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-Shared
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Assets-Shared
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 3926c2138d94f5449809aca84ebfa96c
+  m_SerializeEntries:
+  - m_GUID: f88e1ad5cf593324eb36b864e8427aa1
+    m_Address: f88e1ad5cf593324eb36b864e8427aa1
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: b2ae5e7f1e21b8245963b6a3d21f50a9
+    m_Address: Assets/Localization/LobbyScene Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 5f7ddcf5e5cd0c04c93d4882399a05fb
+    m_Address: Assets/Localization/LobbyMapScene Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 4b90d92175d793540a0b8d961ce58b17
+    m_Address: Assets/Localization/Map1Scene Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 72fbad147e0fb7e45b4132796fb81ef7, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 47d6fc9322031f04a9dba32dac31e09f, type: 2}
+    - {fileID: 11400000, guid: afac73daa9e16f3428bf1c0dfaccc9de, type: 2}

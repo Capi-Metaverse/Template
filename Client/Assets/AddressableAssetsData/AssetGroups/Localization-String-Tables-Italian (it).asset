@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-String-Tables-Italian (it)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-String-Tables-Italian (it)
+  m_Data:
+    m_SerializedData: []
+  m_GUID: f61e5f07f2027f345b24cecabbfb5581
+  m_SerializeEntries:
+  - m_GUID: 5bf716af1af0de247aa245e2634ed5b3
+    m_Address: LoginScene_it
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-it
+    - Preload
+  - m_GUID: 6c800943b78a99f4fac0f0d2acb4ecc4
+    m_Address: LobbyScene_it
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-it
+    - Preload
+  - m_GUID: e7c8be00514dc3644810526b479a6c59
+    m_Address: LobbyMapScene_it
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-it
+    - Preload
+  - m_GUID: d16e8a493ee5bc84d92768e453f1b814
+    m_Address: Map1Scene_it
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-it
+    - Preload
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 72fbad147e0fb7e45b4132796fb81ef7, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 829090d092337b349abe20103bf4b129, type: 2}
+    - {fileID: 11400000, guid: 53d57c1b35d59ef4cae9d5dce3f62d28, type: 2}

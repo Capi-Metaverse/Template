@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: LobbyScene Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: LobbyScene
+  m_TableCollectionNameGuidString: b2ae5e7f1e21b8245963b6a3d21f50a9
+  m_Entries:
+  - m_Id: 16884498432
+    m_Key: TitleText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 493990772736
+    m_Key: PlaceHolderText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1049115295744
+    m_Key: CreateButtonText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1379639033856
+    m_Key: RefreshButtonText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2472959868928
+    m_Key: RoomNameText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3199346212864
+    m_Key: LeaveRoomButtonText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3457111359488
+    m_Key: JoinButtonText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5675071897600
+    m_Key: LoadingText
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5063239457994178560
+  references:
+    version: 2
+    RefIds:
+    - rid: 5063239457994178560
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1677056159587
