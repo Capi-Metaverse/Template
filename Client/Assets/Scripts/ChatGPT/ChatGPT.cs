@@ -19,6 +19,7 @@ namespace OpenAI
         private void Start()
         {
             button.onClick.AddListener(SendReplyCoroutine);
+            inputField.onSubmit.AddListener((string text) => SendReplyCoroutine());
             textArea.text = "You can ask me a question in the input below!";
         }
 
