@@ -16,10 +16,11 @@ public class Disconnect : MonoBehaviourPunCallbacks
     private AudioController voiceChat;
     private InputManager inputManager;
     private MusicManager musicController;
-    
+    PlayerList playerList;
     void Start()
     {
       voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();  
+      
     }
 
     public void OnClickDisconnect()
@@ -54,6 +55,9 @@ public class Disconnect : MonoBehaviourPunCallbacks
     {   
       Pausa.SetActive(false);
       Settings.SetActive(true);
+      playerList = GameObject.Find("TabPlayer").GetComponent<PlayerList>();
+      playerList.listadoJugadores();
+      
     }
 
     public void OnClickBackToPause()

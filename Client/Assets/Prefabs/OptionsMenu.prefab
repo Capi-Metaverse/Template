@@ -634,6 +634,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4111939098991759778}
   - component: {fileID: 994364612811100981}
+  - component: {fileID: 1022233853684132223}
   m_Layer: 5
   m_Name: TabPlayer
   m_TagString: Untagged
@@ -671,6 +672,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4637335234425442998}
   m_CullTransparentMesh: 1
+--- !u!114 &1022233853684132223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4637335234425442998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05a8afa7edaf8cd449a5dbb7669eba96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerKeys: []
+  PlayerItemPrefabSettings: {fileID: 5579281195357421886, guid: 2bf2d61890fe7494783d1555035f1d11, type: 3}
+  PlayerListSettings: {fileID: 8114877012828975565}
 --- !u!1 &4656795815476379570
 GameObject:
   m_ObjectHideFlags: 0
@@ -4236,6 +4252,7 @@ MonoBehaviour:
   TabPanelKeys: {fileID: 4385679606799607588}
   TabPanelPlayers: {fileID: 6316380765104090055}
   TabTabPlayers: {fileID: 2297685355914262234}
+  PlayerKeys: []
 --- !u!1 &5587160888753052147
 GameObject:
   m_ObjectHideFlags: 0
@@ -5135,8 +5152,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 40.46277, y: 17.718994}
-  m_SizeDelta: {x: -1403.9556, y: -35.4379}
+  m_AnchoredPosition: {x: 50, y: 0}
+  m_SizeDelta: {x: -1323.9031, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2049622383134940136
 MonoBehaviour:
