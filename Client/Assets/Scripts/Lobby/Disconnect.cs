@@ -20,8 +20,6 @@ public class Disconnect : MonoBehaviourPunCallbacks
     void Start()
     {
       voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();  
-      inputManager = GameObject.Find("Script").GetComponent<InputManager>();
-      musicController = GameObject.Find("MusicManager").GetComponent<MusicManager>();
     }
 
     public void OnClickDisconnect()
@@ -40,15 +38,14 @@ public class Disconnect : MonoBehaviourPunCallbacks
         {
           Debug.Log("entro en leave");
             Player[] otherPlayers = PhotonNetwork.PlayerListOthers;
-            for (int i = 0; i < otherPlayers.Length; ++i)
-            {
-                Debug.Log(otherPlayers[i]);
+            
+               
                 Debug.Log("entro en leave");
                 RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
-                PhotonNetwork.RaiseEvent(26,"", raiseEventOptions, SendOptions.SendReliable);
+                PhotonNetwork.RaiseEvent(26,"", raiseEventOptions, SendOptions.SendUnreliable);
 
                 // TODO: I need to show a popup message saying the master client left to the other clients
-            }
+            
         }
     }
 
@@ -70,9 +67,6 @@ public class Disconnect : MonoBehaviourPunCallbacks
       SceneManagerScript  sceneManager=GameObject.Find("SceneManager").GetComponent<SceneManagerScript>();
       sceneManager.onNewMap = false;
       PhotonNetwork.LeaveRoom();
-      inputManager.OnreturnLobbyInput();
-      voiceChat.onLeaveButtonClicked();
-      musicController.ActivateAudio();
       
     }
 

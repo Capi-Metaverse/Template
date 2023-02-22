@@ -36,10 +36,15 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
     //PlayerManager
     public PlayerSpawn playerManager;
 
+    
+    private InputManager inputManager;
+    private MusicManager musicController;
+
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+        musicController = GameObject.Find("MusicManager").GetComponent<MusicManager>();
     }
 
     public Hashtable getRoomCustomSettings(int map)
@@ -95,6 +100,9 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
                 GameObject.Find("LobbyManager").GetComponent<LobbyManager>();
             voiceChat =
                 GameObject.Find("VoiceManager").GetComponent<AudioController>();
+            inputManager = 
+                GameObject.Find("Script").GetComponent<InputManager>();   
+                
         }
 
         //If we are changing the map, we have to join the new //RoomChanging
@@ -189,7 +197,9 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
                 onMap = false;
                 onNewMap = false;
                 currentMapNumber = 0;
+                inputManager.OnreturnLobbyInput();
                 voiceChat.onLeaveButtonClicked();
+                musicController.ActivateAudio();
                 SceneManager.LoadScene("Lobby");
                 
             }
