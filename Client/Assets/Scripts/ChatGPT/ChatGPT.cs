@@ -14,7 +14,7 @@ namespace OpenAI
         [SerializeField] private Text textArea;
 
         private string userInput;
-        private string Instruction = "Act as a random stranger in a chat room and reply to the questions.\nQ: ";
+        private string Instruction = "Act as a random stranger in a chat room and reply to the questions. If someone asks you about how to change between rooms, you'll answer that they need to go near a door and press the key E \nQ: ";
 
         private void Start()
         {
@@ -28,6 +28,7 @@ namespace OpenAI
         private IEnumerator SendReply()
         {
             userInput = inputField.text;
+            Instruction += $"{userInput} \nA: ";
             
             textArea.text = "...";
             inputField.text = "";
@@ -36,7 +37,7 @@ namespace OpenAI
             inputField.enabled = false;
 
             WWWForm form = new WWWForm();
-            form.AddField("message", userInput);
+            form.AddField("message", Instruction);
 
             //Send request
             UnityWebRequest request = UnityWebRequest.Post("https://meta-login.onrender.com/chatgpt",form);
@@ -63,6 +64,7 @@ namespace OpenAI
             else
             {
                 Debug.Log("Unable to connect to the server...");
+                textArea.text = "Unable to connect to the server...";
             }
 
 
