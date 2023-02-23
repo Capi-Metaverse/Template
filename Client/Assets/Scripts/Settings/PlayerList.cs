@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class PlayerList : MonoBehaviour
 {
-public string[] PlayerKeys;
+
 public GameObject PlayerItemPrefabSettings;
 public GameObject PlayerListSettings;
 [SerializeField] private Button Kickbutton;
@@ -23,12 +23,12 @@ Dictionary <string, int> PlayerToActor;
         }
     public void listadoPlayer()
     {
-
-        Player[] otherPlayers = PhotonNetwork.PlayerListOthers;
         
+        Player[] otherPlayers = PhotonNetwork.PlayerListOthers;
+        string[] PlayerKeys = new string[otherPlayers.Length];
             for (int i = 0; i < otherPlayers.Length; i++)
             {
-                PlayerKeys = new string[]{otherPlayers[i].NickName.ToString()} ;
+                PlayerKeys[i] = otherPlayers[i].NickName.ToString();
 
                 Debug.Log(otherPlayers[i].NickName.ToString());
             }
