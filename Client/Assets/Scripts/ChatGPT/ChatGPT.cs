@@ -14,7 +14,7 @@ namespace OpenAI
         [SerializeField] private Text textArea;
 
         private string userInput;
-        private List<string> chatList = new List<string>();
+        private string chatText = "";
         private string Instruction = @"Act as a random stranger in a chat room and reply to the questions. 
                                     If someone asks you about how to change between rooms, you'll answer  
                                     that they need to go near a door and press the key E. If someone asks  
@@ -40,8 +40,14 @@ namespace OpenAI
         private IEnumerator SendReply()
         {
             userInput = inputField.text;
-            chatList.Add(userInput);
             Instruction += $"{userInput} \nA: ";
+
+            if (chatText == "")
+                chatText = $"Q: {userInput}";
+            else
+                chatText += $"\n\nQ: {userInput}";
+            
+            textArea.text = chatText;
             
             inputField.text = "";
 
@@ -77,6 +83,19 @@ namespace OpenAI
             if (request.result == UnityWebRequest.Result.Success)
             {
                 Debug.Log(request.downloadHandler.text);
+                string textReceived = request.downloadHandler.text;
+
+                if (textReceived.StartsWith("\nA:"))
+                {
+                    Instruction += $"{request.downloadHandler.text}";
+                    chatText += $"{request.downloadHandler.text}";
+                    
+                } else{
+                    Instruction += $"\nA: {request.downloadHandler.text}";
+                    chatText += $"\nA: {request.downloadHandler.text}";
+                }
+                textArea.text = chatText;
+
             }
             //Control de error of the server
             else
@@ -84,11 +103,7 @@ namespace OpenAI
                 Debug.Log("Unable to connect to the server...");
                 textArea.text = "Unable to connect to the server...";
             }
-
-
-            textArea.text = request.downloadHandler.text;
-            Instruction += $"{request.downloadHandler.text}\nQ: ";
-
+            
             button.enabled = true;
             inputField.enabled = true;
         }
