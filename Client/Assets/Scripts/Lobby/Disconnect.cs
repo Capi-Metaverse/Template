@@ -35,8 +35,13 @@ public class Disconnect : MonoBehaviourPunCallbacks
     {   
       Pausa.SetActive(false);
       Settings.SetActive(true);
-      playerList = GameObject.Find("TabPlayer").GetComponent<PlayerList>();
-      playerList.listadoPlayer();
+      //If the user is master  it will search the player list
+      if (PhotonNetwork.IsMasterClient)
+        {
+          playerList = GameObject.Find("TabPlayer").GetComponent<PlayerList>();
+          playerList.playerList();
+        } 
+      
       
     }
 

@@ -14,5 +14,7 @@ public class UserListitem : MonoBehaviour
         int[] myNum = {numActor};
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others , TargetActors = myNum};
         PhotonNetwork.RaiseEvent(26,"", raiseEventOptions, SendOptions.SendUnreliable);
+
+        Destroy(this.gameObject);
     }
 }

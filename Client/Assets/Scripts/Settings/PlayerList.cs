@@ -13,40 +13,32 @@ public class PlayerList : MonoBehaviour
 public GameObject PlayerItemPrefabSettings;
 public GameObject PlayerListSettings;
 
-
-Dictionary <string, int> PlayerToActor;
-    
-
-     private void Start()
-        {
-            //Kickbutton.onClick.AddListener();
-        }
-    public void listadoPlayer()
+    //Function to get the List of players and Kick them
+    public void playerList()
     {
+        //Destroys the former list
         foreach(Transform child in PlayerListSettings.transform)
             {
             Destroy(child.gameObject);
             }
+        //Get the list of players from Photon.
         Player[] otherPlayers = PhotonNetwork.PlayerListOthers;
-        string[] PlayerKeys = new string[otherPlayers.Length];
+
+        //Iterate players to get Nickname && ActorNumber
             for (int i = 0; i < otherPlayers.Length; i++)
             {
-                PlayerKeys[i] = otherPlayers[i].NickName.ToString();
+                //We create the userItem object
+                GameObject userItem = (GameObject)Instantiate(PlayerItemPrefabSettings);
+                
+                userItem.transform.SetParent( PlayerListSettings.transform);
+                userItem.transform.localScale = Vector3.one;
 
-                Debug.Log(otherPlayers[i].NickName.ToString());
-            }
-             for(int i = 0; i<PlayerKeys.Length; i++)
-            {    // TODO: I need to show a popup message saying the master client left to the other clients
-            string bn;
-            bn = PlayerKeys[i];
+                //We configure the Nickname
+                TMP_Text PlayerNameText = userItem.transform.GetChild(0).GetComponent<TMP_Text>();
+                PlayerNameText.text = otherPlayers[i].NickName.ToString();
 
-            GameObject go = (GameObject)Instantiate(PlayerItemPrefabSettings);
-            go.GetComponent<UserListitem>().numActor = otherPlayers[i].ActorNumber;
-            go.transform.SetParent( PlayerListSettings.transform);
-            go.transform.localScale = Vector3.one;
-
-            TMP_Text PlayerNameText = go.transform.GetChild(0).GetComponent<TMP_Text>();
-            PlayerNameText.text = bn;
+                //We configure the ActorNumber
+                userItem.GetComponent<UserListitem>().numActor = otherPlayers[i].ActorNumber;
             }
     }
 }
