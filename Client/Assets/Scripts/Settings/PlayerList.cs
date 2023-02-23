@@ -12,7 +12,7 @@ public class PlayerList : MonoBehaviour
 
 public GameObject PlayerItemPrefabSettings;
 public GameObject PlayerListSettings;
-[SerializeField] private Button Kickbutton;
+
 
 Dictionary <string, int> PlayerToActor;
     
@@ -23,7 +23,10 @@ Dictionary <string, int> PlayerToActor;
         }
     public void listadoPlayer()
     {
-        
+        foreach(Transform child in PlayerListSettings.transform)
+            {
+            Destroy(child.gameObject);
+            }
         Player[] otherPlayers = PhotonNetwork.PlayerListOthers;
         string[] PlayerKeys = new string[otherPlayers.Length];
             for (int i = 0; i < otherPlayers.Length; i++)
