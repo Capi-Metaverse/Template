@@ -22,7 +22,9 @@ public class ChatGPTActive : MonoBehaviour, IMetaEvent
             playerSpawn.DesactiveALL();
             Cursor.visible = true;
             playerSpawn.setState(1);
-            playerSpawn.playerToSpawn.GetComponent<SC_FPSController>().eventText.SetActive(false); 
+            playerSpawn.playerToSpawn.GetComponent<SC_FPSController>().eventText.SetActive(false);
+            playerSpawn.playerToSpawn.transform.GetChild(1).gameObject.SetActive(false); 
+            GameObject.Find("adam").transform.GetChild(2).gameObject.SetActive(true); 
 
             //Start Animator
             playerSpawn.animator.speed = 0;
@@ -34,8 +36,10 @@ public class ChatGPTActive : MonoBehaviour, IMetaEvent
         {
             CanvasChatGPT.SetActive(false); 
             playerSpawn.ActiveALL();
-             playerSpawn.setState(0);
-            playerSpawn.estado = 0; 
+            playerSpawn.setState(0);
+            playerSpawn.estado = 0;
+            playerSpawn.playerToSpawn.transform.GetChild(1).gameObject.SetActive(true); 
+            GameObject.Find("adam").transform.GetChild(2).gameObject.SetActive(false); 
 
             //Stop Animation
             playerSpawn.animator.speed = 1;
