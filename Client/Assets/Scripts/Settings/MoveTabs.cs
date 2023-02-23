@@ -30,7 +30,7 @@ public class MoveTabs : MonoBehaviour , IInRoomCallbacks
     public void ChangeToPanel()
     {
         TabPanel.SetActive(true);
-        Lenguages.SetActive(false);
+        Lenguages.SetActive(true);
         TabPanelKeys.SetActive(false);
         TabPanelPlayers.SetActive(false);
     }
