@@ -31,9 +31,9 @@ Dictionary <string, int> PlayerToActor;
                 PlayerKeys = new string[]{otherPlayers[i].NickName.ToString()} ;
 
                 Debug.Log(otherPlayers[i].NickName.ToString());
-               
-            
-                // TODO: I need to show a popup message saying the master client left to the other clients
+            }
+             for(int i = 0; i<PlayerKeys.Length; i++)
+            {    // TODO: I need to show a popup message saying the master client left to the other clients
             string bn;
             bn = PlayerKeys[i];
 
