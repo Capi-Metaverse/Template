@@ -220,7 +220,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764232019966225870}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5099,6 +5099,7 @@ MonoBehaviour:
   TabPanelKeys: {fileID: 4385679606799607588}
   TabPanelPlayers: {fileID: 6316380765104090055}
   TabTabPlayers: {fileID: 2297685355914262234}
+  Lenguages: {fileID: 764232019966225870}
   PlayerKeys: []
 --- !u!1 &5587160888753052147
 GameObject:
