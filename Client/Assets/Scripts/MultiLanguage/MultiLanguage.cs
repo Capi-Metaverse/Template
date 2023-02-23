@@ -18,7 +18,6 @@ public class MultiLanguage : MonoBehaviour
         Language(number);
     }
 
-    // Update is called once per frame
     public void Language(int lang)
     {
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[lang];
