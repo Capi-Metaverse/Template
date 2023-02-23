@@ -10,7 +10,7 @@ using Photon.Realtime;
 public class Lamp : MonoBehaviour, IMetaEvent
 {
 
-    public Light light;
+    public new Light light;
     public Material[] materials;
     public MeshRenderer meshLamp;
 

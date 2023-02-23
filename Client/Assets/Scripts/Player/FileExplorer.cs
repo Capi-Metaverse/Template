@@ -59,6 +59,7 @@ public class FileExplorer : MonoBehaviour
     }
 
     // Called from browser
+    [Obsolete]
     public void OnFileUpload(string url) {
         //string to string[]
         List<string> list = new List<string>();
