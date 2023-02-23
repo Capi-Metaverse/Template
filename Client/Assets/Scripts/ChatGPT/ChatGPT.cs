@@ -87,8 +87,8 @@ namespace OpenAI
 
                 if (textReceived.StartsWith("\nA:"))
                 {
-                    Instruction += $"{request.downloadHandler.text}";
-                    chatText += $"{request.downloadHandler.text}";
+                    Instruction += $" {request.downloadHandler.text}";
+                    chatText += $" {request.downloadHandler.text}";
                     
                 } else{
                     Instruction += $"\nA: {request.downloadHandler.text}";

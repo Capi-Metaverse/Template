@@ -100,19 +100,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1362545592067805618}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9147691082073501625}
-  m_Father: {fileID: 7521400143835830016}
-  m_RootOrder: 0
+  m_Father: {fileID: 7521400143652658571}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 33, y: 11}
-  m_SizeDelta: {x: 941.2197, y: 289.03}
+  m_AnchoredPosition: {x: 43.589905, y: 53.519012}
+  m_SizeDelta: {x: 523.8842, y: 284.2231}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5841454613802375147
 MonoBehaviour:
@@ -165,8 +165,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -193, y: -0}
-  m_SizeDelta: {x: 469.8221, y: 289.03}
+  m_AnchoredPosition: {x: -20.715311, y: -1.2025}
+  m_SizeDelta: {x: 482.4515, y: 286.63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7966921659849315642
 CanvasRenderer:
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 7521400144987292246}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -425,6 +425,7 @@ RectTransform:
   - {fileID: 7521400143518122485}
   - {fileID: 7521400143751307780}
   - {fileID: 7521400143835830016}
+  - {fileID: 6016368839667368}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -654,19 +655,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7521400143835830017}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6016368839667368}
+  m_Children: []
   m_Father: {fileID: 7521400143652658571}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 35}
-  m_SizeDelta: {x: -80, y: -150}
+  m_AnchoredPosition: {x: 19.18396, y: 51.116028}
+  m_SizeDelta: {x: -118.36755, y: -150.00012}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7521400143835830018
 CanvasRenderer:
@@ -696,7 +696,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 5c3d6e2c6fab1eb47a5a2070453dd9a8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -981,8 +981,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 137.33653, y: -322.24905}
-  m_SizeDelta: {x: 298.72696, y: 644.49774}
+  m_AnchoredPosition: {x: -7.5065155, y: -280.6972}
+  m_SizeDelta: {x: -67.356, y: 561.394}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7521400144987292248
 CanvasRenderer:
@@ -1025,7 +1025,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: Ask Adam a question!
 --- !u!1 &7722601515142917419
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,7 +1063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 531.61, y: 0}
+  m_AnchoredPosition: {x: 266.14, y: 0}
   m_SizeDelta: {x: 20, y: 289.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8578482853607611019
@@ -1147,8 +1147,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 327290181670284659}
   m_HandleRect: {fileID: 4203677670405521772}
   m_Direction: 2
-  m_Value: 1.0000001
-  m_Size: 0.3096105
+  m_Value: 1.0000005
+  m_Size: 0.33799753
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
