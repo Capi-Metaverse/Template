@@ -215,7 +215,7 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.IsMasterClient)
         {    
-            playerList = GameObject.Find("Menus").transform.GetChild(1).GetChild(0).GetChild(2).GetComponent<PlayerList>();
+            playerList = GameObject.Find("Menus").transform.GetChild(1).GetChild(0).GetChild(3).GetComponent<PlayerList>();
             playerList.playerList();
         } 
         }
@@ -224,7 +224,7 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
         if(Settings.activeSelf == true){
         if (PhotonNetwork.IsMasterClient)
         { 
-            playerList = GameObject.Find("Menus").transform.GetChild(1).GetChild(0).GetChild(2).GetComponent<PlayerList>();
+            playerList = GameObject.Find("Menus").transform.GetChild(1).GetChild(0).GetChild(3).GetComponent<PlayerList>();
             playerList.playerList();
         } 
         }
