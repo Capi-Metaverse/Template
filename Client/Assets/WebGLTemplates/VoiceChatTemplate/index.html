@@ -52,12 +52,12 @@
 	<script src="AgoraWebSDK/vendor/materialize.min.js"></script>
 	<script src="AgoraRTC_N.js"></script>
 	<script src="AgoraWebSDK/vendor/jquery.min.js"></script>
-
 </head>
 
 <body>
 	<div id="gameContainer">
 		<canvas id="unity-canvas" data-pixel-art="{{{ OPTIMIZE_FOR_PIXEL_ART }}}"></canvas>
+		<script src="web3/index.js"></script>
 		<script src="Build/{{{ LOADER_FILENAME }}}"></script>
 		<script>
 			var canvas = document.querySelector("#unity-canvas");
