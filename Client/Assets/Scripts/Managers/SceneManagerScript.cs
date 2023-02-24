@@ -40,6 +40,10 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
     private InputManager inputManager;
     private MusicManager musicController;
 
+    PlayerList playerList;
+    public GameObject Settings;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -205,4 +209,26 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
             }
         }
     }
+     public override void OnPlayerEnteredRoom(Player newPlayer){
+        Settings.SetActive(true);
+        if(Settings.activeSelf == true){
+
+        if (PhotonNetwork.IsMasterClient)
+        {    
+            playerList = GameObject.Find("Menus").transform.GetChild(1).GetChild(0).GetChild(2).GetComponent<PlayerList>();
+            playerList.playerList();
+        } 
+        }
+    }
+    public override void OnPlayerLeftRoom(Player newPlayer){
+        if(Settings.activeSelf == true){
+        if (PhotonNetwork.IsMasterClient)
+        { 
+            playerList = GameObject.Find("Menus").transform.GetChild(1).GetChild(0).GetChild(2).GetComponent<PlayerList>();
+            playerList.playerList();
+        } 
+        }
+        Settings.SetActive(false);
+    }
+
 }
