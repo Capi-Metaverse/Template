@@ -210,9 +210,7 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
         }
     }
      public override void OnPlayerEnteredRoom(Player newPlayer){
-        Settings.SetActive(true);
         if(Settings.activeSelf == true){
-
         if (PhotonNetwork.IsMasterClient)
         {    
             playerList = GameObject.Find("Menus").transform.GetChild(1).GetChild(0).GetChild(3).GetComponent<PlayerList>();
@@ -228,7 +226,6 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
             playerList.playerList();
         } 
         }
-        Settings.SetActive(false);
     }
 
 }
