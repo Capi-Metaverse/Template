@@ -20,7 +20,7 @@ public class AdvancePresentation : MonoBehaviour, IMetaEvent
 
       object[] content = new object[] { "Advance"}; 
       //The event is sent to the other users
-      RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+      RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others, CachingOption = EventCaching.AddToRoomCacheGlobal }; // You would have to set the Receivers to All in order to receive this event on the local client as well
       PhotonNetwork.RaiseEvent(23, content, raiseEventOptions, SendOptions.SendReliable);
         }
      }
