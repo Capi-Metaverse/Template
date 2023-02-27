@@ -152,7 +152,7 @@ public class FileExplorer : MonoBehaviour
         object[] content = new object[] { bytes}; 
     
         //We send the content to the other users
-        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others, CachingOption = EventCaching.AddToRoomCacheGlobal }; // You would have to set the Receivers to All in order to receive this event on the local client as well
         PhotonNetwork.RaiseEvent(25, content, raiseEventOptions, SendOptions.SendReliable);
 
         SetImage(bytes);
@@ -271,7 +271,7 @@ public class FileExplorer : MonoBehaviour
         object[] content = new object[] { request.downloadHandler.text}; 
     
         //We send the content to the other users
-        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others, CachingOption = EventCaching.AddToRoomCacheGlobal}; // You would have to set the Receivers to All in order to receive this event on the local client as well
         PhotonNetwork.RaiseEvent(22, content, raiseEventOptions, SendOptions.SendReliable);
 
         //Si es nula
