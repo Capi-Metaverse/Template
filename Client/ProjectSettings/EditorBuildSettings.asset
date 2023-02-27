@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mapa4.unity
     guid: 6db01cda3fd48274b97633f476714969
+  - enabled: 1
+    path: Assets/Scenes/Mapa5.unity
+    guid: ed37fef22d92cb540a35f5143a98a5ae
   - enabled: 0
     path: Assets/Web3Unity/Scenes/WebLogin.unity
     guid: a1b2001e782bb47659732d7e2bcdc35f
