@@ -2963,6 +2963,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8143214409484530587, guid: 7d89e6787b799674e9066a54b11120c6, type: 3}
   m_PrefabInstance: {fileID: 1538565641}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1109564924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538565770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0678e4e1e7df8f245b894455ddc6eb3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: 4
 --- !u!64 &1126293529
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3173,7 +3186,7 @@ GameObject:
   - component: {fileID: 1217805676}
   - component: {fileID: 1217805675}
   - component: {fileID: 1217805677}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: TextMap1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4248,9 +4261,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1722591129}
     m_Modifications:
+    - target: {fileID: -8150617973696830446, guid: 7d89e6787b799674e9066a54b11120c6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -5609321221556402741, guid: 7d89e6787b799674e9066a54b11120c6, type: 3}
       propertyPath: m_Name
       value: star_wars_the_clone_wars_venator_prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: -5068623765101109246, guid: 7d89e6787b799674e9066a54b11120c6, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -3667395810878932446, guid: 7d89e6787b799674e9066a54b11120c6, type: 3}
       propertyPath: m_Layer
@@ -5199,7 +5220,7 @@ GameObject:
   - component: {fileID: 1587919487}
   - component: {fileID: 1587919486}
   - component: {fileID: 1587919485}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
