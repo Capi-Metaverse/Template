@@ -19,6 +19,13 @@ public class DoorEvent : MonoBehaviourPunCallbacks, IMetaEvent
 
       sceneManager=GameObject.Find("SceneManager").GetComponent<SceneManagerScript>();
       sceneManager.currentMapNumber = Convert.ToInt32(map) ;
+
+      //Activate the loading UI
+
+      GameObject Loading = GameObject.Find("PlayerUIPrefab").transform.GetChild(4).gameObject;
+      Loading.SetActive(true);
+
+
         PhotonNetwork.LeaveRoom();
       
      
