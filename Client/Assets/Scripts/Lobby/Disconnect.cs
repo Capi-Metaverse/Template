@@ -16,10 +16,13 @@ public class Disconnect : MonoBehaviourPunCallbacks
     private AudioController voiceChat;
     private InputManager inputManager;
     private MusicManager musicController;
+
+    private PlayerSpawn playerManager;
     PlayerList playerList;
     void Start()
     {
-      voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();  
+      voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();
+      playerManager = GameObject.Find("PlayerSpawner").GetComponent<PlayerSpawn>();  
       
     }
 
@@ -57,6 +60,11 @@ public class Disconnect : MonoBehaviourPunCallbacks
       sceneManager.onNewMap = false;
       PhotonNetwork.LeaveRoom();
       
+    }
+
+    public void OnClickReturnGame()
+    {
+      playerManager.setJuego();
     }
 
 }

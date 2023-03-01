@@ -5900,7 +5900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: 3
-  instance: 
+  instance: 0
 --- !u!65 &1830429348
 BoxCollider:
   m_ObjectHideFlags: 0

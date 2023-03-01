@@ -3850,11 +3850,12 @@ MonoBehaviour:
   - Mapa1
   - Mapa2
   - Mapa3
-  - Mapa4
-  - Mapa5
+  - HUBValencia
+  - Oficinas
   onMap: 0
   onNewMap: 0
   currentMapNumber: 0
+  currentInstance: 0
   currentMap: 
   lobbyManager: {fileID: 0}
   playerManager: {fileID: 0}

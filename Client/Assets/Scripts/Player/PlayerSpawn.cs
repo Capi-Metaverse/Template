@@ -30,7 +30,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks
     /*--------------------BOOLEANS FOR CONDITIONAL CHECKING---------------------*/
     public Estados estado; //With this we keep track of the current state so we can use it in conditionals. States are (Game, Pause)
     public bool onPresentationCamera = false;//Boolean to know if pressMode is on or not
-    bool escPul;//Reference if ESC key is pushed or not(ESC opens the Menu and you´ll be on Pause State)
+    public bool escPul;//Reference if ESC key is pushed or not(ESC opens the Menu and you´ll be on Pause State)
     bool TPul;//Reference if T key is pushed or not(T opens the TextChat)
 
     /*-------------UTILITY VARIABLES-----------------*/
@@ -100,29 +100,8 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks
             //ESC key down(PauseMenu)
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
+               setPausa();
                
-                escPul = true;
-                playerToSpawn.GetComponent<SC_FPSController>().eventText.SetActive(false);
-                
-                //Start Animator
-                animator.speed = 0;
-                object[] content =new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName,animator.speed,"Stop&Replay"};
-                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-                PhotonNetwork.RaiseEvent(2,content,raiseEventOptions,SendOptions.SendReliable);
-
-                //Pause canvas
-                
-                Pausa.SetActive(true);
-                //RoomName on Settings
-                GameObject SalaText = Pausa.transform.Find("RoomName").gameObject;
-                Scene scene = SceneManager.GetActiveScene();
-                SalaText.GetComponent<TMP_Text>().text = ((string) PhotonNetwork.CurrentRoom.CustomProperties["Name"]) + " " + scene.name;
-                //State and Cursor
-                estado = Estados.Pausa;
-                Cursor.visible = true;
-                DesactiveALL();
-                 //Escape activado
-                UnityEngine.Debug.Log (estado);
             }
 
             //T key down(TextChat)
@@ -176,25 +155,7 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks
         {
             if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !escPul)
             {
-                //Activate scope
-                chatGPTActive.activate(false);
-                //Stop Animation
-                animator.speed = 1;
-                object[] content = new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName,animator.speed,"Stop&Replay"};
-                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-                PhotonNetwork.RaiseEvent(2,content,raiseEventOptions,SendOptions.SendReliable);
-
-                //Activate Settings Window and stop
-                
-                Settings.SetActive(false);
-                Pausa.SetActive(false);
-                chatManager.SetActive(false);
-                Cursor.visible = false;
-                TPul = false;
-                //States and Reactivate all
-                estado = Estados.Juego;
-                ActiveALL();
-                UnityEngine.Debug.Log (estado);
+               setJuego();
             }
             break;
         }
@@ -346,5 +307,56 @@ public class PlayerSpawn : MonoBehaviourPunCallbacks
 
         
 
+    }
+
+    public void setPausa(){
+
+         escPul = true;
+                playerToSpawn.GetComponent<SC_FPSController>().eventText.SetActive(false);
+                
+                //Start Animator
+                animator.speed = 0;
+                object[] content =new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName,animator.speed,"Stop&Replay"};
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+                PhotonNetwork.RaiseEvent(2,content,raiseEventOptions,SendOptions.SendReliable);
+
+                //Pause canvas
+                
+                Pausa.SetActive(true);
+                //RoomName on Settings
+                GameObject SalaText = Pausa.transform.Find("RoomName").gameObject;
+                Scene scene = SceneManager.GetActiveScene();
+                SalaText.GetComponent<TMP_Text>().text = ((string) PhotonNetwork.CurrentRoom.CustomProperties["Name"]) + " " + scene.name;
+                //State and Cursor
+                estado = Estados.Pausa;
+                Cursor.visible = true;
+                DesactiveALL();
+                 //Escape activado
+                UnityEngine.Debug.Log (estado);
+
+    }
+
+    public void setJuego(){
+
+         //Activate scope
+                chatGPTActive.activate(false);
+                //Stop Animation
+                animator.speed = 1;
+                object[] content = new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName,animator.speed,"Stop&Replay"};
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+                PhotonNetwork.RaiseEvent(2,content,raiseEventOptions,SendOptions.SendReliable);
+
+                //Activate Settings Window and stop
+                
+                Settings.SetActive(false);
+                Pausa.SetActive(false);
+                chatManager.SetActive(false);
+                Cursor.visible = false;
+                TPul = false;
+                //States and Reactivate all
+                estado = Estados.Juego;
+                ActiveALL();
+                UnityEngine.Debug.Log (estado);
+        
     }
 }
