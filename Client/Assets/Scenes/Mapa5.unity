@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: 0
+  instance: 0
 --- !u!65 &213156963
 BoxCollider:
   m_ObjectHideFlags: 0

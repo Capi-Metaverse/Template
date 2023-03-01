@@ -22,6 +22,10 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
     //Number of the actual map
     public int currentMapNumber = 0;
 
+    //Instance of the map
+
+    public int currentInstance = 0;
+
     public string currentMap; //Name of the map
 
     //Voice Chat
@@ -121,7 +125,7 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
             //We change to a map
             onMap = true;
             PhotonNetwork
-                .JoinOrCreateRoom(currentMap + "Map" + currentMapNumber,
+                .JoinOrCreateRoom(currentMap + "Map" + currentMapNumber + "-" + currentInstance,
                 new RoomOptions()
                 {
                     MaxPlayers = 4,
@@ -137,7 +141,7 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
             voiceChat.onMapChange();
             Debug.Log("Cambio");
             voiceChat
-                .onJoinButtonClicked(currentMap + "Map" + currentMapNumber);
+                .onJoinButtonClicked(currentMap + "Map" + currentMapNumber + "-" + currentInstance);
         }
     }
 

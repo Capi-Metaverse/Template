@@ -10,6 +10,7 @@ public class DoorEvent : MonoBehaviourPunCallbacks, IMetaEvent
 {
     
     public string map;
+    public string instance;
     SceneManagerScript sceneManager;
 
    
@@ -19,6 +20,7 @@ public class DoorEvent : MonoBehaviourPunCallbacks, IMetaEvent
 
       sceneManager=GameObject.Find("SceneManager").GetComponent<SceneManagerScript>();
       sceneManager.currentMapNumber = Convert.ToInt32(map) ;
+      sceneManager.currentInstance = Convert.ToInt32(instance) ;
 
       //Activate the loading UI
 

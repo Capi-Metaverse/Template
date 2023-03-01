@@ -875,6 +875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: 5
+  instance: 1
 --- !u!64 &318310300
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2465,6 +2466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: 2
+  instance: 0
 --- !u!64 &869443105
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2989,6 +2991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: 4
+  instance: 0
 --- !u!64 &1126293529
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5897,6 +5900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: 3
+  instance: 
 --- !u!65 &1830429348
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6011,6 +6015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: 1
+  instance: 0
 --- !u!64 &1888204984
 MeshCollider:
   m_ObjectHideFlags: 0
