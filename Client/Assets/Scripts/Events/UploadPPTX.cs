@@ -10,12 +10,13 @@ public class UploadPPTX : MonoBehaviour, IMetaEvent
     bool activao=false;
     public TMP_Text loadingPressCanvas;
 
+
     [System.Obsolete]
     public void activate(bool host)
     {
         ChooseFile.SetActive(!activao);
         loadingPressCanvas.enabled = true;
-        loadingPressCanvas.SetText("Loading"); 
+        loadingPressCanvas.SetText("Loading");
         fileExplorer.OpenFile();   
     }  
 }

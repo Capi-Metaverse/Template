@@ -26,6 +26,7 @@ public class FileExplorer : MonoBehaviour
     JObject json;
     UnityWebRequest GetRequest;
     public TMP_Text  loadingPressCanvas;//shows when presentation is loading
+    public float size;
 
     #if UNITY_WEBGL && !UNITY_EDITOR
     //
@@ -171,7 +172,7 @@ public class FileExplorer : MonoBehaviour
 
         //transform texture into Sprite
         loadingPressCanvas.enabled = false;
-        var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2(0.57f, 0.5f)); 
+        var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2((float) size, (float) (size - 0.07))); 
         presentation.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = nuevoSprite;
     }
 
@@ -305,7 +306,7 @@ public class FileExplorer : MonoBehaviour
                     case UnityWebRequest.Result.Success:
                         //We create a texture2D with the response data
                         Texture2D textu = ((DownloadHandlerTexture)GetRequest.downloadHandler).texture;
-                        var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2(0.57f, 0.5f)); 
+                        var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2((float) size, (float) (size - 0.07))); 
                         presentation.sprites.Add(nuevoSprite);
                     break;
                 }

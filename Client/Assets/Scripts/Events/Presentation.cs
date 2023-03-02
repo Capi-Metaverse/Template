@@ -11,6 +11,7 @@ public class Presentation : MonoBehaviour
     public List<Sprite> sprites = new List<Sprite>();
     public new SpriteRenderer renderer;
     public TMP_Text  loadingPressCanvas;
+   
 
     
     public static bool IsEmpty<T>(List<T> list)
