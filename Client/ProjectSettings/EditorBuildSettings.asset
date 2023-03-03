@@ -29,12 +29,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Oficinas.unity
     guid: ed37fef22d92cb540a35f5143a98a5ae
-  - enabled: 0
-    path: Assets/Web3Unity/Scenes/WebLogin.unity
-    guid: a1b2001e782bb47659732d7e2bcdc35f
-  - enabled: 0
-    path: Assets/Web3Unity/Scenes/WalletLogin.unity
-    guid: cc28e1075e9584f1698219d041278648
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 41407aaaad68c76459d0dbd97e3ab2a1, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 569df3d431c1217479027bf2db99b9a2, type: 2}
