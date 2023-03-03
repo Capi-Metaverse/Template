@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class MusicManager : MonoBehaviour
 {
     private static MusicManager _instance;
@@ -13,8 +15,13 @@ public class MusicManager : MonoBehaviour
         }
     }
     private AudioSource _audioSource;
+    private GameObject MusicController;
+    private TMP_Text SongText;
+    private Button LeftArrow;
+    private Button RightArrow;
     public bool StopAudio = false;
     public Object[] songs;
+    public string CurrentSong;
     public float volume = 0.04f;
     [SerializeField] private float _trackTimer;
     [SerializeField] private float _songsPlayed;
@@ -50,6 +57,19 @@ public class MusicManager : MonoBehaviour
     {
         _audioSource.volume = volume;
 
+        if (SceneManager.GetActiveScene().buildIndex > 1 && SongText==null)
+        {
+            MusicController = GameObject.Find("Menus").transform.GetChild(1).GetChild(0).GetChild(0).GetChild(1).GetChild(9).gameObject;
+            SongText = MusicController.transform.GetChild(2).GetComponent<TMP_Text>();
+            SongText.text = CurrentSong;
+
+            LeftArrow = MusicController.transform.GetChild(0).GetComponent<Button>();
+            RightArrow = MusicController.transform.GetChild(1).GetComponent<Button>();
+
+            LeftArrow.onClick.AddListener( () => ChangeSong(Random.Range(0,songs.Length)));
+            RightArrow.onClick.AddListener( () => ChangeSong(Random.Range(0,songs.Length)));
+        }
+
         if (_audioSource.isPlaying)
             _trackTimer += 1 * Time.deltaTime;
 
@@ -69,6 +89,10 @@ public class MusicManager : MonoBehaviour
             _beenPlayed[songPicked] = true;
             _audioSource.clip = (AudioClip)songs[songPicked];
             _audioSource.Play();
+            CurrentSong = songs[songPicked].name;
+
+            if (SongText!=null)
+                SongText.text = CurrentSong;
         }
         else{
             _audioSource.Stop();
