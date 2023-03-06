@@ -214,6 +214,15 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
         }
     }
      public override void OnPlayerEnteredRoom(Player newPlayer){
+
+        if(onMap == false){
+            lobbyManager.AddPlayer(newPlayer);
+        }
+        else{
+
+        
+
+
         if(Settings.activeSelf == true){
         if (PhotonNetwork.IsMasterClient)
         {    
@@ -221,14 +230,20 @@ public class SceneManagerScript : MonoBehaviourPunCallbacks
             playerList.playerList();
         } 
         }
+        }
     }
     public override void OnPlayerLeftRoom(Player newPlayer){
+        if(onMap == false){
+            lobbyManager.DeletePlayer(newPlayer);
+        }
+        else{
         if(Settings.activeSelf == true){
         if (PhotonNetwork.IsMasterClient)
         { 
             playerList = GameObject.Find("Menus").transform.GetChild(1).GetChild(0).GetChild(3).GetComponent<PlayerList>();
             playerList.playerList();
         } 
+        }
         }
     }
 

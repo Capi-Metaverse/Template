@@ -189,6 +189,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     }
 
+/*
     //Photon CallBack when a player enters the room.
     public override void OnPlayerEnteredRoom(Player newPlayer)
         {
@@ -200,7 +201,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             DeletePlayer(otherPlayer);
         }
-
+*/
     public void setRoomPanel()
     {
         
