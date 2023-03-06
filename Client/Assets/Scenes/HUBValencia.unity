@@ -733,6 +733,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: espejo (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6122089395049059358, guid: 40164752509994c4bbb52023beb4d3f7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7388291099056152291, guid: 40164752509994c4bbb52023beb4d3f7, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -9259,7 +9263,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh69752
+  m_Name: pb_Mesh110182
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11963,7 +11967,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh69118
+  m_Name: pb_Mesh109540
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12473,6 +12477,10 @@ PrefabInstance:
     - target: {fileID: 4583501222654563545, guid: 40164752509994c4bbb52023beb4d3f7, type: 3}
       propertyPath: m_Name
       value: espejo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6122089395049059358, guid: 40164752509994c4bbb52023beb4d3f7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7388291099056152291, guid: 40164752509994c4bbb52023beb4d3f7, type: 3}
       propertyPath: m_RootOrder
