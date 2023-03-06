@@ -39,11 +39,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3392821067776
-    m_Localized: Non hai un account?, registrati
+    m_Localized: Non hai un account?
     m_Metadata:
       m_Items: []
   - m_Id: 4101427757056
-    m_Localized: Qui
+    m_Localized: "\rClicca qui"
     m_Metadata:
       m_Items: []
   references:
