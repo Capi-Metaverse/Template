@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1587318866}
-  m_IndirectSpecularColor: {r: 0.6793613, g: 0.7328877, b: 0.80468684, a: 1}
+  m_IndirectSpecularColor: {r: 0.6809351, g: 0.73544115, b: 0.805953, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2118,7 +2118,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh73430
+  m_Name: pb_Mesh36088
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6799,7 +6799,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh73392
+  m_Name: pb_Mesh36050
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7594,7 +7594,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh73300
+  m_Name: pb_Mesh35958
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7758,7 +7758,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh73730
+  m_Name: pb_Mesh36394
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8104,7 +8104,7 @@ GameObject:
   - component: {fileID: 1029697830}
   - component: {fileID: 1029697829}
   m_Layer: 0
-  m_Name: Sarameonbliga
+  m_Name: LogoCapgemini2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8565,7 +8565,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh73406
+  m_Name: pb_Mesh36064
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9621,7 +9621,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh73884
+  m_Name: pb_Mesh36548
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10183,7 +10183,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh73744
+  m_Name: pb_Mesh36408
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12163,7 +12163,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh73228
+  m_Name: pb_Mesh35886
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
