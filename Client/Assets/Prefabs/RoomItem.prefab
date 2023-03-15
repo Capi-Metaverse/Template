@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 5320455821331221236}
   - component: {fileID: 726749000933761731}
   - component: {fileID: 5826062066408323217}
-  - component: {fileID: 8922691446385320113}
+  - component: {fileID: 3553842892826626922}
   m_Layer: 5
   m_Name: RoomItem
   m_TagString: Untagged
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8922691446385320113}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RoomItem, Assembly-CSharp
         m_MethodName: OnClickItem
         m_Mode: 1
@@ -270,7 +270,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8922691446385320113
+--- !u!114 &3553842892826626922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7948750784574347407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13f6bcf0b23968c4bbd5507102dc7d71, type: 3}
+  m_Script: {fileID: 11500000, guid: 894022d18dc5f3d449aa7bbf0be6b1ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   roomName: {fileID: 727716125859959911}
