@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5409617174746456961}
   - component: {fileID: 5919007077336826675}
   - component: {fileID: 39869907292705766}
-  - component: {fileID: 2092567773323835745}
+  - component: {fileID: 6571602323266590305}
+  - component: {fileID: 1584111202032195970}
   m_Layer: 5
   m_Name: PlayerItem 1
   m_TagString: Untagged
@@ -79,7 +80,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2092567773323835745
+--- !u!114 &6571602323266590305
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,22 +89,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 1609656552115267542}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2f95a92a31c1174986a0d45de299243, type: 3}
+  m_Script: {fileID: 11500000, guid: 978fe53f8f22d2847baed7074217e628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
   playerName: {fileID: 3671804204259196208}
-  highlightColor: {r: 0.5849056, g: 0.1401566, b: 0.20203055, a: 0}
+  highlightColor: {r: 0, g: 0, b: 0, a: 0}
   leftArrowButton: {fileID: 6048991375444348040}
   rightArrowButton: {fileID: 7860851910535484405}
   playerAvatar: {fileID: 8542411148283099701}
-  avatars:
-  - {fileID: 21300000, guid: 09ef9d382f7c7b9429a3c7640c73a909, type: 3}
-  - {fileID: 21300000, guid: 33ff595089f1d084cb0d1c4d6eef4c27, type: 3}
-  - {fileID: 21300000, guid: 300a9869ec3f4db46860ba870b3f63a0, type: 3}
-  - {fileID: 21300000, guid: 0e55abed790991e4580aaf9fa20c9906, type: 3}
-  - {fileID: 21300000, guid: b796deea8d35ac94cbba30ed22edfca8, type: 3}
-  - {fileID: 21300000, guid: b3e6a0effabfd6f43ac9967dde471aa8, type: 3}
-  - {fileID: 21300000, guid: 82ead583b16ddb04180772c9ea3f0553, type: 3}
+  avatars: []
+--- !u!114 &1584111202032195970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609656552115267542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectInterest: 1
+  DefaultInterestGroups: []
+  DestroyWhenStateAuthorityLeaves: 0
+  AllowStateAuthorityOverride: 1
+  AoiPositionSource: {fileID: 0}
+  Flags: 2305
+  NetworkGuid:
+    RawGuidValue: 4a4143cc9112a434082be24511d92ced
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 6571602323266590305}
+  SimulationBehaviours: []
 --- !u!1 &2797455912652379118
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +457,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2092567773323835745}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerItem, Assembly-CSharp
         m_MethodName: OnClickLeftArrow
         m_Mode: 1
@@ -571,7 +590,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2092567773323835745}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerItem, Assembly-CSharp
         m_MethodName: OnClickRightArrow
         m_Mode: 1

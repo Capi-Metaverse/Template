@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ConnectToLobby.unity
     guid: 8f5ee7e476db1d542bcabdae842aecae
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/0.Launch.unity
     guid: d2f3c7bf4beb29a41bf88eab25533189
   - enabled: 1

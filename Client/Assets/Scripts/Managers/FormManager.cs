@@ -38,7 +38,7 @@ public class FormManager : MonoBehaviour
 
     }
 
-    public async void onLogin()
+    public void onLogin()
     {
         if (email.text == "" || password.text == "") {
 

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5061078270007157729
+--- !u!1 &2625177154707920351
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5061078270007157731}
-  - component: {fileID: 5061078270007157730}
-  - component: {fileID: 5061078270007157732}
+  - component: {fileID: 2625177154707920349}
+  - component: {fileID: 2625177154707920348}
+  - component: {fileID: 2625177154707920346}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -18,59 +18,77 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5061078270007157731
+--- !u!4 &2625177154707920349
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5061078270007157729}
+  m_GameObject: {fileID: 2625177154707920351}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.990894, y: -7.7785664, z: -0.30280486}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4647166606309959767}
+  - {fileID: 2462345301995167337}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5061078270007157730
+--- !u!114 &2625177154707920348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5061078270007157729}
+  m_GameObject: {fileID: 2625177154707920351}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c9726cca4fdd1c4ea5c5e56e938be4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startScene: 1.Start
-  _sharedMode: 0
+  _startScene:
+    sceneAsset: {fileID: 102900000, guid: abbdffdcc4569e5489bf4c08727b5820, type: 3}
+    scenePath: Assets/Scenes/1.Start.unity
+  _loader: {fileID: 0}
   _runner: {fileID: 0}
---- !u!114 &5061078270007157732
+  _lobbyManager: {fileID: 0}
+  username: Pepito
+--- !u!114 &2625177154707920346
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5061078270007157729}
+  m_GameObject: {fileID: 2625177154707920351}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08bebbc4dbe8bd64ca6d88cf9021dccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowHierarchyWindowOverlay: 1
-  _loadScreen: {fileID: 0}
-  _lobby: 
-  _maps: []
---- !u!1001 &7754924266951528329
+  _loadScreen: {fileID: 2462345301995167336}
+  _lobby:
+    sceneAsset: {fileID: 102900000, guid: 2fd6410cecde61944b2669a77a270fe3, type: 3}
+    scenePath: Assets/Scenes/Lobby.unity
+  _maps:
+  - sceneAsset: {fileID: 102900000, guid: d5a3218ea9a0bf34c950bfc8a0b2aa36, type: 3}
+    scenePath: Assets/Scenes/Mapa0.unity
+  - sceneAsset: {fileID: 102900000, guid: f464382776cf42545908cfd39d6aac3c, type: 3}
+    scenePath: Assets/Scenes/Mapa1.unity
+  - sceneAsset: {fileID: 102900000, guid: bc4a49f583879a143859b41e561151b9, type: 3}
+    scenePath: Assets/Scenes/Mapa2.unity
+  - sceneAsset: {fileID: 102900000, guid: 672cbf57b9f20134d8853223689ac23f, type: 3}
+    scenePath: Assets/Scenes/Mapa3.unity
+  - sceneAsset: {fileID: 102900000, guid: 6db01cda3fd48274b97633f476714969, type: 3}
+    scenePath: Assets/Scenes/HUBValencia.unity
+  - sceneAsset: {fileID: 102900000, guid: ed37fef22d92cb540a35f5143a98a5ae, type: 3}
+    scenePath: Assets/Scenes/Oficinas.unity
+--- !u!1001 &706231579031927223
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5061078270007157731}
+    m_TransformParent: {fileID: 2625177154707920349}
     m_Modifications:
     - target: {fileID: 1266836448882533313, guid: 1cfc3ccfa381ef44780d9bf1d48e402b, type: 3}
       propertyPath: m_UiScaleMode
@@ -204,6 +222,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 3161821472550971359, guid: 1cfc3ccfa381ef44780d9bf1d48e402b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3161821472611732354, guid: 1cfc3ccfa381ef44780d9bf1d48e402b, type: 3}
       propertyPath: m_SizeDelta.x
       value: 449.1442
@@ -278,8 +300,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cfc3ccfa381ef44780d9bf1d48e402b, type: 3}
---- !u!224 &4647166606309959767 stripped
+--- !u!1 &2462345301995167336 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3161821472550971359, guid: 1cfc3ccfa381ef44780d9bf1d48e402b, type: 3}
+  m_PrefabInstance: {fileID: 706231579031927223}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &2462345301995167337 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3161821472550971358, guid: 1cfc3ccfa381ef44780d9bf1d48e402b, type: 3}
-  m_PrefabInstance: {fileID: 7754924266951528329}
+  m_PrefabInstance: {fileID: 706231579031927223}
   m_PrefabAsset: {fileID: 0}
