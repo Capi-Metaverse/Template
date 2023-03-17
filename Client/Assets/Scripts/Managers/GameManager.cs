@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Fusion;
 using Fusion.Sockets;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -156,7 +157,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     public void CreateSession(SessionProps props)
     {
-        StartSession( GameMode.Host, props);
+        StartSession( GameMode.Shared, props);
     }
 
     public void JoinSession(SessionInfo info)
@@ -164,7 +165,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         SessionProps props = new SessionProps(info.Properties);
         props.PlayerLimit = info.MaxPlayers;
         props.RoomName = info.Name;
-        StartSession( GameMode.Client, props);
+        StartSession( GameMode.Shared, props);
     }
 
     //Function to create the session / room
@@ -197,9 +198,12 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
         //If the user is not in the Lobby Room, it change to Lobby Status
 
+        
 
         //Indicate LobbyManager to change the panel
         _lobbyManager.setPlayerPanel();
+        _lobbyManager.addPlayer();
+        
 
 
 
@@ -252,7 +256,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     public void spawnPlayerItem(PlayerItem player)
     {
-        _runner.Spawn(player);
+     player.Spawn(_runner, player);
 
     }
     
@@ -321,7 +325,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         {
             Debug.Log("HOLA");
             //We indicate to the LobbyManager that he has a new user
-            _lobbyManager.addPlayer(player);
+            
 
         }
     }

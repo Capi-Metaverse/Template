@@ -104,7 +104,7 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public void addPlayer(PlayerRef player)
+    public void addPlayer()
     {
 
         gameManager.spawnPlayerItem(playerItemPrefab);

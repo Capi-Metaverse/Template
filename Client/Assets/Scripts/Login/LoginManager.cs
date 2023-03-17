@@ -1,19 +1,12 @@
 using PlayFab;
 using PlayFab.ClientModels;
-using System;
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.UI;
+
 using TMPro;
-using UnityEditor.PackageManager.Requests;
-using PlayFab.GroupsModels;
+
 using EntityKey = PlayFab.GroupsModels.EntityKey;
-using EmptyResponse = PlayFab.GroupsModels.EmptyResponse;
-using PlayFab.Internal;
-using static UnityEngine.EventSystems.EventTrigger;
-using UnityEditor.PackageManager;
-using PlayFab.AuthenticationModels;
-using PlayFab.CloudScriptModels;
+
 using UnityEngine.SceneManagement;
 
 public class LoginManager : MonoBehaviour
@@ -22,6 +15,8 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField usernameInput;
     public TMP_InputField emailInput;
     public TMP_InputField passwordInput;
+
+    private GameManager gameManager;
 
 
     private EntityKey groupAdminEntity;
@@ -37,7 +32,7 @@ public class LoginManager : MonoBehaviour
     }
     private void Start()
     {
-        GameManager gameManager = GameManager.FindInstance();
+        gameManager = GameManager.FindInstance();
     }
 
 
@@ -158,6 +153,7 @@ public class LoginManager : MonoBehaviour
         };
 
         PlayFabClientAPI.ExecuteCloudScript(GetID, OnIDSuccess, OnError);
+         
 
         SceneManager.LoadSceneAsync("Lobby");
     }
@@ -197,6 +193,8 @@ public class LoginManager : MonoBehaviour
         PlayerDataUsername playerDataUsername = JsonUtility.FromJson<PlayerDataUsername>(jsonString);
 
         string username = playerDataUsername.getPlayerUsername;
+
+        gameManager.username = username;
 
         Debug.Log("El Master Nombre es = " + username); // output: "prueba1"
 

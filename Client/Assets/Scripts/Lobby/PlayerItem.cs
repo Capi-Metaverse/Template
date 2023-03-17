@@ -4,10 +4,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Fusion;
+using UnityEngine.SocialPlatforms;
 
-public class PlayerItem : NetworkBehaviour
+public class PlayerItem : NetworkBehaviour, ISpawned
 {
     /*------------------VARIABLES----------------*/
+
     public TMP_Text playerName;
     public Color highlightColor;
 
@@ -15,6 +17,8 @@ public class PlayerItem : NetworkBehaviour
     public GameObject rightArrowButton;
 
     
+
+
     public Image playerAvatar;
 
     [Networked]
@@ -30,23 +34,78 @@ public class PlayerItem : NetworkBehaviour
     GameManager gameManager;
 
     /*------------------METHODS----------------*/
-    private void Awake()
-    {
-        //We got the game manager
-        gameManager = GameManager.FindInstance();
-        username = gameManager.username;
-    }
+    
     private void Start()
     {
         //Set array properties to avatar 6 which es the random character
         playerAvatarNumber = 6;
-       
+
     }
+
+    public void Spawn(NetworkRunner runner, PlayerItem player)
+    {
+
+        runner.Spawn(
+        player,
+        Vector3.zero,
+        Quaternion.identity,
+        inputAuthority: runner.LocalPlayer,
+        BeforeSpawn,
+        predictionKey: null
+        );
+    }
+
+    private void BeforeSpawn(NetworkRunner runner, NetworkObject obj)
+    {
+        gameManager = GameManager.FindInstance();
+        PlayerItem item = obj.GetComponent<PlayerItem>();
+
+        Debug.Log("user");
+        item.username = gameManager.username;
+        item.playerName.text = gameManager.username;
+    
+
+    }
+
+    public override void Spawned()
+    {
+        base.Spawned();
+
+        //Transform.SetParent();
+       
+        transform.SetParent(GameObject.Find("PlayerListener").transform);
+
+        playerName.text = this.username;
+
+        if (Object.HasInputAuthority)
+        {
+            gameManager = GameManager.FindInstance();
+           
+           
+            Rpc_SetNickname(gameManager.username);
+        }
+
+
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    void Rpc_SetNickname(string nick)
+    {
+        Debug.Log("Cambiando");
+        Debug.Log(nick);
+        username = nick;
+        playerName.text = nick;
+    }
+
+
+
+
+
 
     public void SetPlayerInfo(PlayerRef _player)
     //When enter to lobby register your name
     {
-        playerName.text = username;
+     
         player = _player;
         //UpdatePlayerItem(player);//Update the list of players in the room
     }
