@@ -168,6 +168,7 @@ public class LoginManager : MonoBehaviour
         string IDMaster = playerDataId.getPlayerId;
 
         Debug.Log("El Master ID es = " + IDMaster);
+        gameManager.userID = IDMaster;
     }
     //Cuando añadir miembtro funciona
     private void OnAddMemberSuccess(PlayFab.ClientModels.ExecuteCloudScriptResult result)

@@ -6,6 +6,7 @@ using Fusion.Sockets;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static Unity.Collections.Unicode;
 
 
 //Status of the connection WIP (Some status are not necessary)
@@ -59,6 +60,12 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     //User username
     public string username = "Pepito";
+    //User ID
+    public string userID;
+
+    //Current Game Object
+
+    public GameObject current;
 
     //Static function to get the singleton
     public static GameManager FindInstance()
@@ -215,7 +222,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
         //If the user is not in the Lobby Room, it change to Lobby Status
 
-        
+        Debug.Log(_runner.LocalPlayer);
 
         //Indicate LobbyManager to change the panel
         _lobbyManager.setPlayerPanel();
@@ -258,18 +265,9 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     //Function that updates the list of sessions
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {
-        foreach (SessionInfo sessionInfo in sessionList)
-        {
-            
-            if (!sessionInfo.IsValid)
-            {
-                _lobbyManager.deleteSession(sessionInfo);
-            }
-            else
-            {
-                _lobbyManager.addSession(sessionInfo);
-            }
-        }
+        //Because it seems this doesn't work like PUN2, i think is better update the whole panel
+
+        _lobbyManager.setSessionList(sessionList);
     }
 
     public void spawnPlayerItem(PlayerItem player)
@@ -278,11 +276,17 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     }
 
+    public void despawnPlayerItem(PlayerItem player)
+    {
+        _runner.Despawn(player.networkObject);
+    }
+
     //Function to Leave Room
 
     public async void LeaveSession()
     {
         Disconnect();
+        _lobbyManager.cleanSessions();
         await EnterLobby(_lobbyId);
     }
     
@@ -358,10 +362,13 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
+     
         if (UserStatus == UserStatus.InLobby)
         {
+            Debug.Log("ENtro");
+            Debug.Log(UserStatus);
             //We indicate to the LobbyManager that a user has left
-            //LobbyManager.removePlayer(player);
+            _lobbyManager.removePlayer(player);
 
         }
     }

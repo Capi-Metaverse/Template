@@ -17,30 +17,34 @@ public class PlayerItem : NetworkBehaviour, ISpawned
 
     public GameObject leftArrowButton;
     public GameObject rightArrowButton;
+    [Networked]
+    public NetworkObject networkObject { get; set; }
 
-    
 
 
     public Image playerAvatar;
 
     [Networked]
-    private int playerAvatarNumber { get; set; }
+    [SerializeField] private int playerAvatarNumber { get; set; }
 
     [Networked]
     private string username { get; set; }
 
     public Sprite[] avatars;
 
-    PlayerRef player;
+    [Networked]
+    PlayerRef player { get; set; }
 
     GameManager gameManager;
+
+   
 
     /*------------------METHODS----------------*/
     
     private void Start()
     {
         //Set array properties to avatar 6 which es the random character
-        playerAvatarNumber = 6;
+        playerAvatarNumber = 0;
 
     }
 
@@ -65,6 +69,12 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         Debug.Log("user");
         item.username = gameManager.username;
         item.playerName.text = gameManager.username;
+        Debug.Log("ID:" + runner.LocalPlayer);
+        item.SetPlayerInfo(runner.LocalPlayer);
+        item.networkObject = obj;
+
+        item.leftArrowButton.SetActive(true);
+        item.rightArrowButton.SetActive(true);
     
 
     }
@@ -74,7 +84,8 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         base.Spawned();
 
         //Transform.SetParent();
-       
+
+        Debug.Log(this.GetPlayerInfo().PlayerId);
         transform.SetParent(GameObject.Find("PlayerListener").transform);
 
         playerName.text = this.username;
@@ -86,6 +97,10 @@ public class PlayerItem : NetworkBehaviour, ISpawned
            
             Rpc_SetNickname(gameManager.username);
         }
+
+        LobbyManager _lobbyManager = GameObject.Find("LobbyManager").GetComponent<LobbyManager>();
+        _lobbyManager.addPlayerToList(this);
+        
 
 
     }
@@ -135,6 +150,8 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         {
             playerAvatarNumber = playerAvatarNumber - 1;
         }
+
+        playerAvatar.sprite = avatars[playerAvatarNumber];
         //Dont know if you have to send a RPC
     }
 
@@ -150,8 +167,17 @@ public class PlayerItem : NetworkBehaviour, ISpawned
             playerAvatarNumber = playerAvatarNumber - 1;
         }
         //Dont know if you have to send a RPC
+        playerAvatar.sprite = avatars[playerAvatarNumber];
+        Rpc_SetImage(playerAvatarNumber);
     }
 
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    void Rpc_SetImage(int playerNumber)
+    {
+
+        playerAvatar.sprite = avatars[playerAvatarNumber];
+ 
+    }
     //Treat RPC conn
 
     /*

@@ -1,5 +1,5 @@
 using Fusion;
-
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using TMPro;
@@ -62,28 +62,22 @@ public class LobbyManager : MonoBehaviour
     }
 
     //Function to add the new sessions to the list of sessions
-    public void addSession(SessionInfo sessionInfo)
+    public void setSessionList(List<SessionInfo> sessionList)
     {
-        //We instantiate the item in the interface.
-        RoomItem newRoom = Instantiate(roomItemPrefab, contentObject);
-        if (newRoom != null)
+        //We clean the list
+        cleanSessions();
+        //We instantiate the items in the interface.
+
+        foreach(SessionInfo session in sessionList)
         {
-            newRoom.SetSessionInfo(sessionInfo);
+            RoomItem newRoom = Instantiate(roomItemPrefab, contentObject);
+            newRoom.SetSessionInfo(session);
             sessionItemsList.Add(newRoom);
-        }
 
+        }
+     
     }
 
-    public void deleteSession(SessionInfo sessionInfo)
-    {
-        int index = sessionItemsList.FindIndex(x => x.sessionInfo.Name == sessionInfo.Name);
-        if (index != -1)
-        {
-            Destroy(sessionItemsList[index].gameObject);
-            sessionItemsList.RemoveAt(index);
-        }
-
-    }
 
     //It sets the panel of players when you enter a session
     public void setPlayerPanel()
@@ -125,7 +119,11 @@ public class LobbyManager : MonoBehaviour
 
         //Sets (only for the session player and not for the others in the room) the visible arrows to be able to select the avatar in the selector
         
-        //playerItemsList.Add(playerItem);
+    }
+
+    public void addPlayerToList(PlayerItem player)
+    {
+        playerItemsList.Add(player);
     }
 
     //Function when a user leaves the session
@@ -133,6 +131,37 @@ public class LobbyManager : MonoBehaviour
     {
         setLobbyPanel();
         gameManager.LeaveSession();
+        playerItemsList.Clear();
     }
 
+    public void cleanSessions()
+    {
+
+        foreach (RoomItem item in sessionItemsList)
+        {
+            if (item != null)
+                Destroy(item.gameObject);
+        }
+        sessionItemsList.Clear();
+       
+    }
+
+    public void removePlayer(PlayerRef player)
+    {
+        PlayerItem itemDeleted = null;
+        foreach (PlayerItem item in playerItemsList)
+        {
+
+            Debug.Log(item.GetPlayerInfo() == player);
+            Debug.Log(item.networkObject);
+            if (item.GetPlayerInfo() == player)
+            {
+                itemDeleted = item;
+
+                gameManager.despawnPlayerItem(item);
+                break;
+            }
+        }
+        playerItemsList.Remove(itemDeleted);
+    }
 }

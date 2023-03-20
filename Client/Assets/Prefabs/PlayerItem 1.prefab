@@ -97,8 +97,12 @@ MonoBehaviour:
   highlightColor: {r: 0, g: 0, b: 0, a: 0}
   leftArrowButton: {fileID: 6048991375444348040}
   rightArrowButton: {fileID: 7860851910535484405}
+  _networkObject: {fileID: 0}
   playerAvatar: {fileID: 8542411148283099701}
-  avatars: []
+  _playerAvatarNumber: 0
+  avatars:
+  - {fileID: 21300000, guid: 33ff595089f1d084cb0d1c4d6eef4c27, type: 3}
+  - {fileID: 21300000, guid: 09ef9d382f7c7b9429a3c7640c73a909, type: 3}
 --- !u!114 &1584111202032195970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectInterest: 1
   DefaultInterestGroups: []
-  DestroyWhenStateAuthorityLeaves: 0
+  DestroyWhenStateAuthorityLeaves: 1
   AllowStateAuthorityOverride: 1
   AoiPositionSource: {fileID: 0}
   Flags: 2305
@@ -457,7 +461,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6571602323266590305}
         m_TargetAssemblyTypeName: PlayerItem, Assembly-CSharp
         m_MethodName: OnClickLeftArrow
         m_Mode: 1
@@ -590,7 +594,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6571602323266590305}
         m_TargetAssemblyTypeName: PlayerItem, Assembly-CSharp
         m_MethodName: OnClickRightArrow
         m_Mode: 1
