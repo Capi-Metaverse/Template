@@ -1,13 +1,17 @@
 using Fusion;
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using TMPro;
 
 using UnityEngine;
 
 public class LobbyManager : MonoBehaviour
 {
+    //Name of the session/room
     [SerializeField] private TMP_Text sessionName;
+
+    //Game Manager of the game
     private GameManager gameManager;
 
     //List of rooms
@@ -28,12 +32,15 @@ public class LobbyManager : MonoBehaviour
 
     [SerializeField] private Transform playerItemParent;
 
+    //When the Lobby awakes, it tries to find the game manager
     private void Awake()
     {
         gameManager = GameManager.FindInstance();
         gameManager.setLobbyManager(this);
         
     }
+
+    //Function when the user clicks on a session/room to join.
     public void OnClickJoinSession(SessionInfo sessionInfo)
     {
 
@@ -41,9 +48,11 @@ public class LobbyManager : MonoBehaviour
         
     }
 
+    //Function when the user creates a room/session.
     public void OnClickCreateSession()
     {
         Debug.Log("Creating session");
+        //Properties of the room WIP
         SessionProps props = new SessionProps();
         props.StartMap = "Mapa0";
         props.RoomName = sessionName.text;
@@ -52,6 +61,7 @@ public class LobbyManager : MonoBehaviour
         gameManager.CreateSession(props);
     }
 
+    //Function to add the new sessions to the list of sessions
     public void addSession(SessionInfo sessionInfo)
     {
         //We instantiate the item in the interface.
@@ -75,6 +85,7 @@ public class LobbyManager : MonoBehaviour
 
     }
 
+    //It sets the panel of players when you enter a session
     public void setPlayerPanel()
     {
 
@@ -87,6 +98,7 @@ public class LobbyManager : MonoBehaviour
 
     }
 
+    //It sets the LobbyPanel when the user leaves a session.
     public void setLobbyPanel()
     {
         foreach (PlayerItem item in playerItemsList)
@@ -104,6 +116,7 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
+    //Add a new player to the room (Don't know if it works good 100% rn)
     public void addPlayer()
     {
 
@@ -113,6 +126,13 @@ public class LobbyManager : MonoBehaviour
         //Sets (only for the session player and not for the others in the room) the visible arrows to be able to select the avatar in the selector
         
         //playerItemsList.Add(playerItem);
+    }
+
+    //Function when a user leaves the session
+    public void onClickLeaveSession()
+    {
+        setLobbyPanel();
+        gameManager.LeaveSession();
     }
 
 }

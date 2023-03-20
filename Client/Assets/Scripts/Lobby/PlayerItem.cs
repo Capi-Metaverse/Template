@@ -8,6 +8,8 @@ using UnityEngine.SocialPlatforms;
 
 public class PlayerItem : NetworkBehaviour, ISpawned
 {
+
+    //WIP
     /*------------------VARIABLES----------------*/
 
     public TMP_Text playerName;

@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
+//Status of the connection WIP (Some status are not necessary)
 public enum ConnectionStatus
 {
     Disconnected,
@@ -19,6 +20,8 @@ public enum ConnectionStatus
     Started,
     Failed,
 }
+
+//Status of the location of the user WIP (It can increase)
 public enum UserStatus
 {
     PreLobby,
@@ -27,35 +30,43 @@ public enum UserStatus
 
 }
 
+//Require adds the component as a dependency
 [RequireComponent(typeof(NetworkSceneManagerBase))]
 public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 {
 
-    //Managers
-    public static GameManager Instance { get; private set; }
-    //public static GameState State { get; private set; }
-    //public static ResourcesManager rm { get; private set; }
-    //public static InterfaceManager im { get; private set; }
-    //public static VoiceManager vm { get; private set; }
+    /*
+     * The game manager is the main of the App, it controls all the user connections.
+     * 
+     * 
+     * 
+     */
 
+    //Managers
+
+    //Init scene of the game (Not need it right now)
     [SerializeField] private SceneReference _startScene;
 
+    //This SceneManager is going to change between scenes and is going to put a loading screen between them.
     [SerializeField] private NetworkSceneManagerBase _loader;
 
-    //Runner
+    //Runner, JUST ONE PER USER/ROOM
+    //It's like PhotonNetwork.somefunction() in PUN2
     [SerializeField] private NetworkRunner _runner;
 
+    //The Lobby Manager from Lobby Scene
     public LobbyManager _lobbyManager;
 
     //User username
     public string username = "Pepito";
 
-
+    //Static function to get the singleton
     public static GameManager FindInstance()
     {
         return FindObjectOfType<GameManager>();
     }
 
+    //Name of the Lobby of the game
     private string _lobbyId = "Lobbyprueba";
 
 
@@ -69,6 +80,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     //Initialization
     private void Awake()
     {
+        //When this component awake, it get the others game managers
         GameManager[] managers = FindObjectsOfType<GameManager>();
       
         //Check if there is more managers
@@ -92,12 +104,13 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
             //To indicate we are not in the Lobby
             SetUserStatus(UserStatus.PreLobby);
 
-            //Change to the login scene
+            //Change to the login scene ONLY IF THE LOGIN IS NOT THE FIRST SCENE
             //SceneManager.LoadSceneAsync( _startScene);
        
         }
     }
-
+    
+    //This function sets the LobbyManager
     public async void setLobbyManager(LobbyManager lobbyManager)
     {
         this._lobbyManager = lobbyManager;
@@ -121,6 +134,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         }
     }
 
+    //Disconnects the runner
     public void Disconnect()
     {
         if (_runner != null)
@@ -128,6 +142,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
             //Disconnects the runner
             SetConnectionStatus(ConnectionStatus.Disconnected);
             _runner.Shutdown();
+            _runner = null;
         }
     }
 
@@ -155,11 +170,13 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         }
     }
 
+    //Create a session/room
     public void CreateSession(SessionProps props)
     {
         StartSession( GameMode.Shared, props);
     }
 
+    //Join a session/room
     public void JoinSession(SessionInfo info)
     {
         SessionProps props = new SessionProps(info.Properties);
@@ -238,6 +255,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
        UserStatus = status;
     }
 
+    //Function that updates the list of sessions
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {
         foreach (SessionInfo sessionInfo in sessionList)
@@ -258,6 +276,14 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     {
      player.Spawn(_runner, player);
 
+    }
+
+    //Function to Leave Room
+
+    public async void LeaveSession()
+    {
+        Disconnect();
+        await EnterLobby(_lobbyId);
     }
     
 
