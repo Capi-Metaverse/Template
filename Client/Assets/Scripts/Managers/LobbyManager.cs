@@ -35,7 +35,7 @@ public class LobbyManager : MonoBehaviour
     private void Awake()
     {
         gameManager = GameManager.FindInstance();
-        gameManager.setLobbyManager(this);
+        gameManager.SetLobbyManager(this);
 
         
     }
@@ -43,7 +43,7 @@ public class LobbyManager : MonoBehaviour
     //Function when the user clicks on a session/room to join.
     public void OnClickJoinSession(SessionInfo sessionInfo)
     {
-
+        Debug.Log("Joining session");
         gameManager.JoinSession(sessionInfo);
         
     }
@@ -54,9 +54,10 @@ public class LobbyManager : MonoBehaviour
         Debug.Log("Creating session");
         //Properties of the room WIP
         SessionProps props = new SessionProps();
-        props.StartMap = "Mapa0";
+        props.StartMap = "HUBValencia";
         props.RoomName = sessionName.text;
         props.AllowLateJoin = true;
+        props.PlayerLimit = 10;
         
         gameManager.CreateSession(props);
     }
@@ -66,7 +67,7 @@ public class LobbyManager : MonoBehaviour
     {
         //We clean the list
         Debug.Log("Setting session list");
-        cleanSessions();
+        CleanSessions();
         //We instantiate the items in the interface.
 
         foreach(SessionInfo session in sessionList)
@@ -96,8 +97,6 @@ public class LobbyManager : MonoBehaviour
     //It sets the LobbyPanel when the user leaves a session.
     public void setLobbyPanel()
     {
-   
- 
         //We deactivate the panel of the room and Activate the panel of the Lobby interface.
         if (roomPanel != null & lobbyPanel != null)
         {
@@ -111,21 +110,19 @@ public class LobbyManager : MonoBehaviour
     {
 
         gameManager.spawnPlayerItem(playerItemPrefab);
-    
-
-        //Sets (only for the session player and not for the others in the room) the visible arrows to be able to select the avatar in the selector
         
     }
 
     
     //Function when a user leaves the session
-    public void onClickLeaveSession()
+    public void OnClickLeaveSession()
     {
         setLobbyPanel();
         gameManager.LeaveSession();
     }
 
-    public void cleanSessions()
+    //Function that cleans the session list
+    public void CleanSessions()
     {
 
         foreach (RoomItem item in sessionItemsList)

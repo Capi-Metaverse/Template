@@ -159,13 +159,13 @@ public class PlayerItem : NetworkBehaviour, ISpawned
     public void OnClickRightArrow()
     {
         //Change Sprite and Avatar to Left
-        if (playerAvatarNumber == 0)
+        if (playerAvatarNumber == avatars.Length - 1)
         {
-            playerAvatarNumber = avatars.Length - 1;
+            playerAvatarNumber = 0;
         }
         else
         {
-            playerAvatarNumber = playerAvatarNumber - 1;
+            playerAvatarNumber = playerAvatarNumber + 1;
         }
         //Dont know if you have to send a RPC
         playerAvatar.sprite = avatars[playerAvatarNumber];

@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Fusion;
 using Fusion.Sockets;
-using Photon.Realtime;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using static Unity.Collections.Unicode;
 
 
 //Status of the connection WIP (Some status are not necessary)
@@ -56,7 +53,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     [SerializeField] private NetworkRunner _runner;
 
     //The Lobby Manager from Lobby Scene
-    public LobbyManager _lobbyManager;
+    private LobbyManager _lobbyManager;
 
     //User username
     public string username = "Pepito";
@@ -74,7 +71,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     }
 
     //Name of the Lobby of the game
-    private string _lobbyId = "Lobbyprueba";
+    private const string LOBBY_NAME = "Main";
 
 
     //Connection Status
@@ -97,7 +94,6 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
             Destroy(gameObject);
             return;
 
-
         }
 
         //If the scene loader is null, initializates it and change to the start scene.
@@ -117,11 +113,11 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         }
     }
     
-    //This function sets the LobbyManager
-    public async void setLobbyManager(LobbyManager lobbyManager)
+    //This function sets the LobbyManager and enter the Lobby
+    public async void SetLobbyManager(LobbyManager lobbyManager)
     {
         this._lobbyManager = lobbyManager;
-        await EnterLobby("Main");
+        await EnterLobby();
     }
     //AWAKE -> Intro -> Lobby -> Session
 
@@ -154,26 +150,20 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     }
 
     //Function to enter the Lobby
-    public async Task EnterLobby(string lobbyId)
+    public async Task EnterLobby()
     {
        
         //We connect to photonFusion
         Connect();
-
-        //We get the LobbyID to connect
-        _lobbyId = lobbyId;
         
-
         //We connect to the Lobby
         SetConnectionStatus(ConnectionStatus.EnteringLobby);
-        var result = await _runner.JoinSessionLobby(SessionLobby.Custom, lobbyId);
+        var result = await _runner.JoinSessionLobby(SessionLobby.Custom, LOBBY_NAME);
         
         //If the connection fails...
         if (!result.Ok)
         {
-         
             SetConnectionStatus(ConnectionStatus.Failed);
-           
         }
     }
 
@@ -212,17 +202,14 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         StartGameResult result = await _runner.StartGame(new StartGameArgs
         {
             GameMode = mode,
-            CustomLobbyName = _lobbyId,
+            CustomLobbyName = LOBBY_NAME,
             SceneManager = _loader,
             SessionName = props.RoomName,
-            PlayerCount = 4,
+            PlayerCount = 10,
             SessionProperties = props.Properties,
            
         });
 
-        //If the user is not in the Lobby Room, it change to Lobby Status
-
-        Debug.Log(_runner.LocalPlayer);
 
         //Indicate LobbyManager to change the panel
         _lobbyManager.setPlayerPanel(props.RoomName);
@@ -270,24 +257,19 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         _lobbyManager.setSessionList(sessionList);
     }
 
+
+    //Refactor??
     public void spawnPlayerItem(PlayerItem player)
     {
      player.Spawn(_runner, player);
 
     }
 
-    public void despawnPlayerItem(PlayerItem player)
-    {
-        _runner.Despawn(player.networkObject);
-    }
-
     //Function to Leave Room
-
     public async void LeaveSession()
     {
         Disconnect();
-        _lobbyManager.cleanSessions();
-        await EnterLobby(_lobbyId);
+        await EnterLobby();
     }
     
 
@@ -353,7 +335,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
        
         if(UserStatus == UserStatus.InLobby)
         {
-            Debug.Log("HOLA");
+            Debug.Log("A user has joined to the room");
             //We indicate to the LobbyManager that he has a new user
             
 

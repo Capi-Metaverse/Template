@@ -101,8 +101,13 @@ MonoBehaviour:
   playerAvatar: {fileID: 8542411148283099701}
   _playerAvatarNumber: 0
   avatars:
+  - {fileID: 21300000, guid: 82ead583b16ddb04180772c9ea3f0553, type: 3}
   - {fileID: 21300000, guid: 33ff595089f1d084cb0d1c4d6eef4c27, type: 3}
   - {fileID: 21300000, guid: 09ef9d382f7c7b9429a3c7640c73a909, type: 3}
+  - {fileID: 21300000, guid: 0e55abed790991e4580aaf9fa20c9906, type: 3}
+  - {fileID: 21300000, guid: 300a9869ec3f4db46860ba870b3f63a0, type: 3}
+  - {fileID: 21300000, guid: b3e6a0effabfd6f43ac9967dde471aa8, type: 3}
+  - {fileID: 21300000, guid: b796deea8d35ac94cbba30ed22edfca8, type: 3}
 --- !u!114 &1584111202032195970
 MonoBehaviour:
   m_ObjectHideFlags: 0

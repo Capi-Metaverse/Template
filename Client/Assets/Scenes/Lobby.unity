@@ -3472,7 +3472,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 366290958}
         m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
-        m_MethodName: onClickLeaveSession
+        m_MethodName: OnClickLeaveSession
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
