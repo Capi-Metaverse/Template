@@ -225,7 +225,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         Debug.Log(_runner.LocalPlayer);
 
         //Indicate LobbyManager to change the panel
-        _lobbyManager.setPlayerPanel();
+        _lobbyManager.setPlayerPanel(props.RoomName);
         _lobbyManager.addPlayer();
         
 
@@ -292,7 +292,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     
 
 
-
+    public NetworkRunner GetRunner() { return _runner; }
 
 
 
@@ -362,15 +362,11 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
-     
-        if (UserStatus == UserStatus.InLobby)
-        {
-            Debug.Log("ENtro");
-            Debug.Log(UserStatus);
-            //We indicate to the LobbyManager that a user has left
-            _lobbyManager.removePlayer(player);
 
-        }
+    
+            Debug.Log("A user has disconnected from the room");
+
+       
     }
 
     public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ArraySegment<byte> data)

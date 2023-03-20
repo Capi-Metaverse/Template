@@ -1266,6 +1266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sessionName: {fileID: 1055654332}
+  sessionNamePanel: {fileID: 628324908}
   roomItemPrefab: {fileID: 3553842892826626922, guid: 55d0b644a90a14240882d68456f289a8, type: 3}
   contentObject: {fileID: 1644937402}
   lobbyPanel: {fileID: 385119111}

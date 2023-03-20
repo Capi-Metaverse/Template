@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Fusion;
-using UnityEngine.SocialPlatforms;
+
 
 public class PlayerItem : NetworkBehaviour, ISpawned
 {
@@ -98,8 +97,10 @@ public class PlayerItem : NetworkBehaviour, ISpawned
             Rpc_SetNickname(gameManager.username);
         }
 
+        playerAvatar.sprite = avatars[playerAvatarNumber];
+
         LobbyManager _lobbyManager = GameObject.Find("LobbyManager").GetComponent<LobbyManager>();
-        _lobbyManager.addPlayerToList(this);
+     
         
 
 

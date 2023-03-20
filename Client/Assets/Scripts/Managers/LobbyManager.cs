@@ -1,7 +1,7 @@
 using Fusion;
-using System;
+
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+
 using TMPro;
 
 using UnityEngine;
@@ -10,15 +10,14 @@ public class LobbyManager : MonoBehaviour
 {
     //Name of the session/room
     [SerializeField] private TMP_Text sessionName;
+    [SerializeField] private TMP_Text sessionNamePanel;
 
     //Game Manager of the game
     private GameManager gameManager;
 
+
     //List of rooms
     private List<RoomItem> sessionItemsList = new List<RoomItem>();
-
-    //List of players
-    private List<PlayerItem> playerItemsList = new List<PlayerItem>();
 
     //Lobby panel
     [SerializeField] private RoomItem roomItemPrefab;
@@ -37,6 +36,7 @@ public class LobbyManager : MonoBehaviour
     {
         gameManager = GameManager.FindInstance();
         gameManager.setLobbyManager(this);
+
         
     }
 
@@ -65,6 +65,7 @@ public class LobbyManager : MonoBehaviour
     public void setSessionList(List<SessionInfo> sessionList)
     {
         //We clean the list
+        Debug.Log("Setting session list");
         cleanSessions();
         //We instantiate the items in the interface.
 
@@ -80,9 +81,9 @@ public class LobbyManager : MonoBehaviour
 
 
     //It sets the panel of players when you enter a session
-    public void setPlayerPanel()
+    public void setPlayerPanel(string sessionName)
     {
-
+        this.sessionNamePanel.text = sessionName;
         //We deactivate the panel of the room and Activate the panel of the Lobby interface.
         if (roomPanel != null & lobbyPanel != null)
         {
@@ -95,13 +96,8 @@ public class LobbyManager : MonoBehaviour
     //It sets the LobbyPanel when the user leaves a session.
     public void setLobbyPanel()
     {
-        foreach (PlayerItem item in playerItemsList)
-        {
-            if (item != null)
-                Destroy(item.gameObject);
-        }
-        playerItemsList.Clear();
-
+   
+ 
         //We deactivate the panel of the room and Activate the panel of the Lobby interface.
         if (roomPanel != null & lobbyPanel != null)
         {
@@ -121,17 +117,12 @@ public class LobbyManager : MonoBehaviour
         
     }
 
-    public void addPlayerToList(PlayerItem player)
-    {
-        playerItemsList.Add(player);
-    }
-
+    
     //Function when a user leaves the session
     public void onClickLeaveSession()
     {
         setLobbyPanel();
         gameManager.LeaveSession();
-        playerItemsList.Clear();
     }
 
     public void cleanSessions()
@@ -146,22 +137,5 @@ public class LobbyManager : MonoBehaviour
        
     }
 
-    public void removePlayer(PlayerRef player)
-    {
-        PlayerItem itemDeleted = null;
-        foreach (PlayerItem item in playerItemsList)
-        {
-
-            Debug.Log(item.GetPlayerInfo() == player);
-            Debug.Log(item.networkObject);
-            if (item.GetPlayerInfo() == player)
-            {
-                itemDeleted = item;
-
-                gameManager.despawnPlayerItem(item);
-                break;
-            }
-        }
-        playerItemsList.Remove(itemDeleted);
-    }
+   
 }
