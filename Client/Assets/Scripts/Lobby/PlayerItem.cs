@@ -3,7 +3,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Fusion;
-using static Unity.Collections.Unicode;
 
 
 public class PlayerItem : NetworkBehaviour, ISpawned
@@ -11,9 +10,6 @@ public class PlayerItem : NetworkBehaviour, ISpawned
 
 
     /*------------------VARIABLES----------------*/
-
-    //GameManager
-    private GameManager gameManager;
 
     //PlayerName Text
     [SerializeField] private TMP_Text playerName;
@@ -26,7 +22,7 @@ public class PlayerItem : NetworkBehaviour, ISpawned
 
     //Networked attributes
     [Networked]
-    public NetworkObject networkObject { get; set; }
+    private NetworkObject networkObject { get; set; }
 
     [Networked]
     [SerializeField] private int playerAvatarNumber { get; set; }
@@ -35,7 +31,7 @@ public class PlayerItem : NetworkBehaviour, ISpawned
     private string username { get; set; }
 
     [Networked]
-    PlayerRef player { get; set; }
+    private PlayerRef player { get; set; }
 
 
     //Avatar Image Related
@@ -88,9 +84,6 @@ public class PlayerItem : NetworkBehaviour, ISpawned
     {
         base.Spawned();
 
-        //Transform.SetParent();
-
-
         Debug.Log("ID:" + player + "has spawned a item.");
 
         transform.SetParent(GameObject.Find("PlayerListener").transform);
@@ -99,11 +92,6 @@ public class PlayerItem : NetworkBehaviour, ISpawned
 
         playerName.text = this.username;
         playerAvatar.sprite = avatars[playerAvatarNumber];
-
-        LobbyManager _lobbyManager = GameObject.Find("LobbyManager").GetComponent<LobbyManager>();
-     
-        
-
 
     }
 
