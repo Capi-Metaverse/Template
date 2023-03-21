@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
             SetConnectionStatus(ConnectionStatus.Failed);
         }
 
-        _lobbyManager.setCreateButton(true);
+        _lobbyManager.setLobbyButtons(true);
     }
 
     //Create a session/room
@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
         //Indicate LobbyManager to change the panel
         _lobbyManager.SetPlayerPanel(props.RoomName);
-        _lobbyManager.setCreateButton(false);
+        _lobbyManager.setLobbyButtons(false);
         _lobbyManager.AddPlayer();
         
 

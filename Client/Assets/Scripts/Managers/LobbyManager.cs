@@ -31,11 +31,12 @@ public class LobbyManager : MonoBehaviour
 
     [SerializeField] private Transform playerItemParent;
 
-    //Button
+    //LobbyButtons
     [SerializeField] private Button createButton;
+    
 
-   //When the Lobby awakes, it tries to find the game manager
-   private void Awake()
+    //When the Lobby awakes, it tries to find the game manager
+    private void Awake()
     {
         gameManager = GameManager.FindInstance();
         gameManager.SetLobbyManager(this);
@@ -82,6 +83,8 @@ public class LobbyManager : MonoBehaviour
         }
      
     }
+
+    
 
 
     //It sets the panel of players when you enter a session
@@ -137,9 +140,10 @@ public class LobbyManager : MonoBehaviour
        
     }
 
-    public void setCreateButton(bool active)
+    public void setLobbyButtons(bool active)
     {
         createButton.gameObject.SetActive(active);
+        contentObject.gameObject.SetActive(active);
     }
 
    
