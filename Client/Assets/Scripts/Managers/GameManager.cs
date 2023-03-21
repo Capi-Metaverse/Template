@@ -212,8 +212,8 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
 
         //Indicate LobbyManager to change the panel
-        _lobbyManager.setPlayerPanel(props.RoomName);
-        _lobbyManager.addPlayer();
+        _lobbyManager.SetPlayerPanel(props.RoomName);
+        _lobbyManager.AddPlayer();
         
 
 
@@ -254,15 +254,14 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     {
         //Because it seems this doesn't work like PUN2, i think is better update the whole panel
 
-        _lobbyManager.setSessionList(sessionList);
+        _lobbyManager.SetSessionList(sessionList);
     }
 
 
     //Refactor??
-    public void spawnPlayerItem(PlayerItem player)
+    public void SpawnPlayerItem(PlayerItem player)
     {
-     player.Spawn(_runner, player);
-
+     PlayerItem.Spawn(_runner, player);
     }
 
     //Function to Leave Room

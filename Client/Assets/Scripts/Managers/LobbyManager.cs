@@ -63,7 +63,7 @@ public class LobbyManager : MonoBehaviour
     }
 
     //Function to add the new sessions to the list of sessions
-    public void setSessionList(List<SessionInfo> sessionList)
+    public void SetSessionList(List<SessionInfo> sessionList)
     {
         //We clean the list
         Debug.Log("Setting session list");
@@ -82,7 +82,7 @@ public class LobbyManager : MonoBehaviour
 
 
     //It sets the panel of players when you enter a session
-    public void setPlayerPanel(string sessionName)
+    public void SetPlayerPanel(string sessionName)
     {
         this.sessionNamePanel.text = sessionName;
         //We deactivate the panel of the room and Activate the panel of the Lobby interface.
@@ -95,7 +95,7 @@ public class LobbyManager : MonoBehaviour
     }
 
     //It sets the LobbyPanel when the user leaves a session.
-    public void setLobbyPanel()
+    public void SetLobbyPanel()
     {
         //We deactivate the panel of the room and Activate the panel of the Lobby interface.
         if (roomPanel != null & lobbyPanel != null)
@@ -106,10 +106,10 @@ public class LobbyManager : MonoBehaviour
     }
 
     //Add a new player to the room (Don't know if it works good 100% rn)
-    public void addPlayer()
+    public void AddPlayer()
     {
 
-        gameManager.spawnPlayerItem(playerItemPrefab);
+        gameManager.SpawnPlayerItem(playerItemPrefab);
         
     }
 
@@ -117,7 +117,7 @@ public class LobbyManager : MonoBehaviour
     //Function when a user leaves the session
     public void OnClickLeaveSession()
     {
-        setLobbyPanel();
+        SetLobbyPanel();
         gameManager.LeaveSession();
     }
 

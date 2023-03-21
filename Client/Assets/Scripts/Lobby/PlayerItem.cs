@@ -3,25 +3,30 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Fusion;
+using static Unity.Collections.Unicode;
 
 
 public class PlayerItem : NetworkBehaviour, ISpawned
 {
 
-    //WIP
+
     /*------------------VARIABLES----------------*/
 
-    public TMP_Text playerName;
-    public Color highlightColor;
+    //GameManager
+    private GameManager gameManager;
 
-    public GameObject leftArrowButton;
-    public GameObject rightArrowButton;
+    //PlayerName Text
+    [SerializeField] private TMP_Text playerName;
+ 
+
+    //Buttons
+
+    [SerializeField] private GameObject leftArrowButton;
+    [SerializeField] private GameObject rightArrowButton;
+
+    //Networked attributes
     [Networked]
     public NetworkObject networkObject { get; set; }
-
-
-
-    public Image playerAvatar;
 
     [Networked]
     [SerializeField] private int playerAvatarNumber { get; set; }
@@ -29,14 +34,14 @@ public class PlayerItem : NetworkBehaviour, ISpawned
     [Networked]
     private string username { get; set; }
 
-    public Sprite[] avatars;
-
     [Networked]
     PlayerRef player { get; set; }
 
-    GameManager gameManager;
 
-   
+    //Avatar Image Related
+
+    [SerializeField] private Image playerAvatar;
+    [SerializeField] private Sprite[] avatars;
 
     /*------------------METHODS----------------*/
     
@@ -47,7 +52,7 @@ public class PlayerItem : NetworkBehaviour, ISpawned
 
     }
 
-    public void Spawn(NetworkRunner runner, PlayerItem player)
+    public static void Spawn(NetworkRunner runner, PlayerItem player)
     {
 
         runner.Spawn(
@@ -60,21 +65,22 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         );
     }
 
-    private void BeforeSpawn(NetworkRunner runner, NetworkObject obj)
+    //Function that initializes the object on the first user
+    public static void BeforeSpawn(NetworkRunner runner, NetworkObject obj)
     {
-        gameManager = GameManager.FindInstance();
+        //We get the GameManager for username
+        GameManager gameManager = GameManager.FindInstance();
+
+        //We get the network object
         PlayerItem item = obj.GetComponent<PlayerItem>();
 
-        Debug.Log("user");
+     
         item.username = gameManager.username;
         item.playerName.text = gameManager.username;
-        Debug.Log("ID:" + runner.LocalPlayer);
-        item.SetPlayerInfo(runner.LocalPlayer);
+        item.player = runner.LocalPlayer;
         item.networkObject = obj;
-
         item.leftArrowButton.SetActive(true);
         item.rightArrowButton.SetActive(true);
-    
 
     }
 
@@ -84,19 +90,14 @@ public class PlayerItem : NetworkBehaviour, ISpawned
 
         //Transform.SetParent();
 
-        Debug.Log(this.GetPlayerInfo().PlayerId);
+
+        Debug.Log("ID:" + player + "has spawned a item.");
+
         transform.SetParent(GameObject.Find("PlayerListener").transform);
 
+        //We set the text && the avatar in all the users.
+
         playerName.text = this.username;
-
-        if (Object.HasInputAuthority)
-        {
-            gameManager = GameManager.FindInstance();
-           
-           
-            Rpc_SetNickname(gameManager.username);
-        }
-
         playerAvatar.sprite = avatars[playerAvatarNumber];
 
         LobbyManager _lobbyManager = GameObject.Find("LobbyManager").GetComponent<LobbyManager>();
@@ -106,40 +107,7 @@ public class PlayerItem : NetworkBehaviour, ISpawned
 
     }
 
-    [Rpc(RpcSources.All, RpcTargets.All)]
-    void Rpc_SetNickname(string nick)
-    {
-        Debug.Log("Cambiando");
-        Debug.Log(nick);
-        username = nick;
-        playerName.text = nick;
-    }
-
-
-
-
-
-
-    public void SetPlayerInfo(PlayerRef _player)
-    //When enter to lobby register your name
-    {
-     
-        player = _player;
-        //UpdatePlayerItem(player);//Update the list of players in the room
-    }
-
-    public PlayerRef GetPlayerInfo()
-    {
-        return player;
-    }
-
-    //This is only executed for the current player, activates the arrow for player selection
-    public void ApplyLocalChanges()
-    {
-        //enable arrows, you´ll only see them on your player preview the other player previews will not have arrows for you
-        leftArrowButton.SetActive(true);
-        rightArrowButton.SetActive(true);
-    }
+    //Image Button Left
     public void OnClickLeftArrow()
     {
         //Change Sprite and Avatar to Left
@@ -153,12 +121,13 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         }
 
         playerAvatar.sprite = avatars[playerAvatarNumber];
-        //Dont know if you have to send a RPC
-    }
+        Rpc_SetImage(playerAvatarNumber);
 
+    }
+    //Image Button Right
     public void OnClickRightArrow()
     {
-        //Change Sprite and Avatar to Left
+        //Change Sprite and Avatar to Right
         if (playerAvatarNumber == avatars.Length - 1)
         {
             playerAvatarNumber = 0;
@@ -172,6 +141,7 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         Rpc_SetImage(playerAvatarNumber);
     }
 
+    //Function that executes when a user change their image
     [Rpc(RpcSources.All, RpcTargets.All)]
     void Rpc_SetImage(int playerNumber)
     {
@@ -179,30 +149,5 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         playerAvatar.sprite = avatars[playerAvatarNumber];
  
     }
-    //Treat RPC conn
-
-    /*
-    //When some player change its character this aply it to the view
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable playerProperties)
-    {
-        if (player == targetPlayer)
-        {
-            UpdatePlayerItem(targetPlayer);
-        }
-    }
-
-    void UpdatePlayerItem(Player player)
-    {
-        //Update sprite and properties post you change with the arrows your player
-        if (player.CustomProperties.ContainsKey("playerAvatar"))
-        {
-            playerAvatar.sprite = avatars[(int)player.CustomProperties["playerAvatar"]];
-            playerProperties["PlayerAvatar"] = (int)player.CustomProperties["playerAvatar"];
-        }
-        else
-        {
-            playerProperties["playerAvatar"] = 6;
-        }
-    }
-    */
+  
 }
