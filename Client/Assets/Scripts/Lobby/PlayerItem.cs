@@ -7,8 +7,6 @@ using Fusion;
 
 public class PlayerItem : NetworkBehaviour, ISpawned
 {
-
-
     /*------------------VARIABLES----------------*/
 
     //PlayerName Text

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using TMPro;
 using Fusion;
@@ -7,15 +6,15 @@ using Fusion;
 public class RoomItem : MonoBehaviour
 {
     /*---------------------VARIABLES-----------------*/
-    public TMP_Text roomName;
+    [SerializeField] private TMP_Text roomName;
+    [SerializeField] private LobbyManager _lobbyManager;
 
     public SessionInfo sessionInfo { get; private set; }
-    LobbyManager manager;
 
     /*---------------------METHODS------------------*/
     private void Start()
     {
-        manager = FindObjectOfType<LobbyManager>();//We get the LobbyManager from scene
+        _lobbyManager = FindObjectOfType<LobbyManager>();//We get the LobbyManager from scene
     }
     public void SetRoomName(string _roomName)
     //Set name of the room
@@ -25,7 +24,7 @@ public class RoomItem : MonoBehaviour
     public void OnClickItem()
     //Enter into LobbyRoom
     {
-        manager.OnClickJoinSession(sessionInfo);
+        _lobbyManager.OnClickJoinSession(sessionInfo);
     }
 
     public void SetSessionInfo(SessionInfo sessionInfo)
