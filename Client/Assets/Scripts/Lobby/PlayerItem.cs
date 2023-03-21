@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Fusion;
+using ExitGames.Client.Photon.StructWrapping;
 
 
 public class PlayerItem : NetworkBehaviour, ISpawned
@@ -37,8 +38,12 @@ public class PlayerItem : NetworkBehaviour, ISpawned
     [SerializeField] private Image playerAvatar;
     [SerializeField] private Sprite[] avatars;
 
+    //LobbyManager
+    [SerializeField] private LobbyManager _lobbyManager;
+
+
     /*------------------METHODS----------------*/
-    
+
     private void Start()
     {
         //Set array properties to avatar 6 which es the random character
@@ -64,11 +69,12 @@ public class PlayerItem : NetworkBehaviour, ISpawned
     {
         //We get the GameManager for username
         GameManager gameManager = GameManager.FindInstance();
-
+       
         //We get the network object
         PlayerItem item = obj.GetComponent<PlayerItem>();
+        item._lobbyManager = GameObject.FindObjectOfType<LobbyManager>();
 
-     
+
         item.username = gameManager.username;
         item.playerName.text = gameManager.username;
         item.player = runner.LocalPlayer;
@@ -107,6 +113,7 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         }
 
         playerAvatar.sprite = avatars[playerAvatarNumber];
+        _lobbyManager.SetAvatarNumber(playerAvatarNumber);
         Rpc_SetImage(playerAvatarNumber);
 
     }
@@ -124,6 +131,7 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         }
         //Dont know if you have to send a RPC
         playerAvatar.sprite = avatars[playerAvatarNumber];
+        _lobbyManager.SetAvatarNumber(playerAvatarNumber);
         Rpc_SetImage(playerAvatarNumber);
     }
 

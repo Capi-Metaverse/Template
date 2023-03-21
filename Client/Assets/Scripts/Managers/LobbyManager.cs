@@ -1,5 +1,5 @@
 using Fusion;
-
+using System;
 using System.Collections.Generic;
 using TMPro;
 
@@ -33,7 +33,11 @@ public class LobbyManager : MonoBehaviour
 
     //LobbyButtons
     [SerializeField] private Button createButton;
-    
+
+    //Avatar number
+
+    private int avatarNumber = 0;
+
 
     //When the Lobby awakes, it tries to find the game manager
     private void Awake()
@@ -125,6 +129,12 @@ public class LobbyManager : MonoBehaviour
     {
         SetLobbyPanel();
         gameManager.LeaveSession();
+
+    }
+
+    public void OnClickJoinRoom()
+    {
+        gameManager.StartGame(sessionName.text,avatarNumber);
     }
 
     //Function that cleans the session list
@@ -146,5 +156,8 @@ public class LobbyManager : MonoBehaviour
         contentObject.gameObject.SetActive(active);
     }
 
-   
+ public void SetAvatarNumber(int number)
+    {
+        avatarNumber = number;
+    }
 }

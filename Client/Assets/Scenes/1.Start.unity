@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -964,9 +964,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8da4363d99223342a3a3695589fb9a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  email: {fileID: 2082988908}
-  password: {fileID: 688476428}
-  error: {fileID: 758073474}
 --- !u!1 &235823506
 GameObject:
   m_ObjectHideFlags: 0
@@ -3942,6 +3939,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
+      propertyPath: current
+      value: 
+      objectReference: {fileID: 3318805414273165572, guid: 29fefa80d317c894b86bb956c65688e3, type: 3}
+    - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
+      propertyPath: playerPrefabs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
+      propertyPath: playerPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: -3915082565821610680, guid: f473450ed07080c41bc861586d86cc9e, type: 3}
+    - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
+      propertyPath: playerPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: -3915082565821610680, guid: e84e19ef6702a544180c220988425940, type: 3}
+    - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
+      propertyPath: playerPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: -3915082565821610680, guid: 4d3929c6ae096684d9b13fbb88f9e832, type: 3}
+    - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
+      propertyPath: playerPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: -3915082565821610680, guid: a9561826c922a76459b99f2f589cad7e, type: 3}
+    - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
+      propertyPath: playerPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: -3915082565821610680, guid: c6004deba5390ed4784fdec07fb6b29e, type: 3}
+    - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
+      propertyPath: playerPrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: -3915082565821610680, guid: d610150337f0d054b9c1ad13aab73346, type: 3}
     - target: {fileID: 2625177154707920349, guid: b26056e9b2f585845acdaf876c801654, type: 3}
       propertyPath: m_RootOrder
       value: 7

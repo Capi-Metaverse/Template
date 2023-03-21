@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Fusion;
 using Fusion.Sockets;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static Unity.Collections.Unicode;
 
 
 //Status of the connection WIP (Some status are not necessary)
@@ -62,7 +64,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     //Current Game Object
 
-    public GameObject current;
+    public PlayerManager current;
 
     //Static function to get the singleton
     public static GameManager FindInstance()
@@ -78,6 +80,9 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     public ConnectionStatus ConnectionStatus { get; private set; }
 
     public UserStatus UserStatus { get; private set; }
+
+    public int avatarNumber = 0;
+    public GameObject[] playerPrefabs;
 
 
 
@@ -128,6 +133,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         
         if (_runner == null)
         {
+           
             //Initializes the runner
             SetConnectionStatus(ConnectionStatus.Connecting);
             GameObject go = new GameObject("Session");
@@ -135,6 +141,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
             _runner = go.AddComponent<NetworkRunner>();
             _runner.AddCallbacks(this);
+            
         }
     }
 
@@ -147,6 +154,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
             SetConnectionStatus(ConnectionStatus.Disconnected);
             _runner.Shutdown();
             _runner = null;
+
         }
     }
 
@@ -168,37 +176,30 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         }
 
         _lobbyManager.setLobbyButtons(true);
+        SetUserStatus(UserStatus.PreLobby);
     }
 
     //Create a session/room
-    public void CreateSession(SessionProps props)
+    public async void CreateSession(SessionProps props)
     {
-        StartSession( GameMode.Shared, props);
+        await StartSession( GameMode.Shared, props);
     }
 
     //Join a session/room
-    public void JoinSession(SessionInfo info)
+    public async void JoinSession(SessionInfo info)
     {
         SessionProps props = new SessionProps(info.Properties);
         props.PlayerLimit = info.MaxPlayers;
         props.RoomName = info.Name;
-        StartSession( GameMode.Shared, props);
+       await StartSession( GameMode.Shared, props);
     }
 
     //Function to create the session / room
-    public async void StartSession(GameMode mode, SessionProps props, bool disableClientSessionCreation = true)
+    public async Task StartSession(GameMode mode, SessionProps props, bool disableClientSessionCreation = true)
     {
-        Connect();
+       Connect();
 
         SetConnectionStatus(ConnectionStatus.Starting);
-
-        if (UserStatus == UserStatus.PreLobby)
-        {
-
-            SetUserStatus(UserStatus.InLobby);
-           
-        }
-        
 
         Debug.Log($"Starting game with session {props.RoomName}, player limit {props.PlayerLimit}");
         _runner.ProvideInput = mode != GameMode.Server;
@@ -213,12 +214,21 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
            
         });
 
+        if (UserStatus == UserStatus.PreLobby)
+        {
+            Debug.Log("Entering Lobby");
+            //Indicate LobbyManager to change the panel
+            _lobbyManager.SetPlayerPanel(props.RoomName);
+            _lobbyManager.setLobbyButtons(false);
+            _lobbyManager.AddPlayer();
 
-        //Indicate LobbyManager to change the panel
-        _lobbyManager.SetPlayerPanel(props.RoomName);
-        _lobbyManager.setLobbyButtons(false);
-        _lobbyManager.AddPlayer();
-        
+            SetUserStatus(UserStatus.InLobby);
+        }
+
+        else if (UserStatus == UserStatus.InLobby)
+        {
+            //Lógica para entrar a SalaLobby
+        }
 
 
 
@@ -271,8 +281,32 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     //Function to Leave Room
     public async void LeaveSession()
     {
-        Disconnect();
+       Disconnect();
         await EnterLobby();
+
+       
+    }
+
+    public async void StartGame(string sessionName, int avatarNumber)
+    {
+        //We disconnect the actual runner
+         Disconnect();
+        //We change to the new map
+        SceneManager.LoadSceneAsync("HUBValencia");
+        Debug.Log("Creating session");
+        //Properties of the room WIP
+        SessionProps props = new SessionProps();
+        props.StartMap = "HUBValencia";
+        props.RoomName = sessionName + "-" + props.StartMap;
+        props.AllowLateJoin = true;
+        props.PlayerLimit = 10;
+        Debug.Log("AQUI");
+       await StartSession(GameMode.Shared, props);
+        Debug.Log("AQUI NO");
+    
+        PlayerManager.SpawnPlayer(_runner, current);
+
+
     }
     
 
