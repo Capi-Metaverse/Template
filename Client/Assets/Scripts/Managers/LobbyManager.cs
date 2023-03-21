@@ -1,10 +1,10 @@
 using Fusion;
 
 using System.Collections.Generic;
-
 using TMPro;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -31,8 +31,11 @@ public class LobbyManager : MonoBehaviour
 
     [SerializeField] private Transform playerItemParent;
 
-    //When the Lobby awakes, it tries to find the game manager
-    private void Awake()
+    //Button
+    [SerializeField] private Button createButton;
+
+   //When the Lobby awakes, it tries to find the game manager
+   private void Awake()
     {
         gameManager = GameManager.FindInstance();
         gameManager.SetLobbyManager(this);
@@ -132,6 +135,11 @@ public class LobbyManager : MonoBehaviour
         }
         sessionItemsList.Clear();
        
+    }
+
+    public void setCreateButton(bool active)
+    {
+        createButton.gameObject.SetActive(active);
     }
 
    

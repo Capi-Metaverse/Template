@@ -1273,6 +1273,7 @@ MonoBehaviour:
   playerItemPrefab: {fileID: 6571602323266590305, guid: 4a4143cc9112a434082be24511d92ced, type: 3}
   roomPanel: {fileID: 119749431}
   playerItemParent: {fileID: 119749432}
+  createButton: {fileID: 1946407129}
 --- !u!1 &385119111
 GameObject:
   m_ObjectHideFlags: 0
@@ -3937,7 +3938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1946407128
 RectTransform:
   m_ObjectHideFlags: 0
