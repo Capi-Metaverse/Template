@@ -86,6 +86,19 @@ public class LoginManager : MonoBehaviour
         messageText.text = "Registered and logged in!";
         LoginPanel.SetActive(true);
         RegisterPanel.SetActive(false);
+
+        //Añadir miembro
+        var AddMem = new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "addMember",
+            FunctionParameter = new
+            {
+                GroupId = "77569033BA83F38B",
+            },
+            //GeneratePlayStreamEvent = true
+        };
+
+        PlayFabClientAPI.ExecuteCloudScript(AddMem, OnAddMemberSuccess, OnAddMemberFailure);
     }  
       
 
@@ -124,18 +137,6 @@ public class LoginManager : MonoBehaviour
     void OnLoginSuccess(LoginResult result)
     {
         messageText.text = "logged in!";
-        //Añadir miembro
-        var AddMem = new ExecuteCloudScriptRequest()
-        {
-            FunctionName = "addMember",
-            FunctionParameter = new
-            {
-                GroupId = "77569033BA83F38B",
-            },
-            //GeneratePlayStreamEvent = true
-        };
-
-        PlayFabClientAPI.ExecuteCloudScript(AddMem, OnAddMemberSuccess, OnAddMemberFailure);
 
 
         //Obtener Nombre
@@ -153,13 +154,25 @@ public class LoginManager : MonoBehaviour
         };
 
         PlayFabClientAPI.ExecuteCloudScript(GetID, OnIDSuccess, OnError);
-         
+
+        //Confirmar si es Admin
+        var ConfirmRole = new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "checkRole",
+            FunctionParameter = new
+            {
+                GroupId = "77569033BA83F38B"
+            }
+        };
+
+        PlayFabClientAPI.ExecuteCloudScript(ConfirmRole, OnAdmin, OnError);
+
 
         SceneManager.LoadSceneAsync("Lobby");
     }
 
     //Cuando Obtener ID funciona
-    private void OnIDSuccess(PlayFab.ClientModels.ExecuteCloudScriptResult result)
+    private void OnIDSuccess(ExecuteCloudScriptResult result)
     {
         string jsonString = result.FunctionResult.ToString();
 
@@ -171,7 +184,7 @@ public class LoginManager : MonoBehaviour
         gameManager.userID = IDMaster;
     }
     //Cuando añadir miembtro funciona
-    private void OnAddMemberSuccess(PlayFab.ClientModels.ExecuteCloudScriptResult result)
+    private void OnAddMemberSuccess(ExecuteCloudScriptResult result)
     {
         Debug.Log("Member added to group successfully." + result.ToJson());
     }
@@ -179,6 +192,12 @@ public class LoginManager : MonoBehaviour
     private void OnAddMemberFailure(PlayFabError error)
     {
         Debug.LogError("Error adding member to group: " + error.ErrorMessage);
+    }
+
+    //Cuando confirmar el rol funciona
+    private void OnAdmin(ExecuteCloudScriptResult result)
+    {
+        Debug.Log("Role Admin:" + result.ToJson());
     }
 
     //Cuando Username funciona
@@ -208,7 +227,7 @@ public class LoginManager : MonoBehaviour
         messageText.text = error.ErrorMessage;
         Debug.Log(error.GenerateErrorReport());
     }
-    void OnSucces(PlayFab.ClientModels.ExecuteCloudScriptResult result)
+    void OnSucces(ExecuteCloudScriptResult result)
     {
         Debug.Log(result.ToJson());
     }
