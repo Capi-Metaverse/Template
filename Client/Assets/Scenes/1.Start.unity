@@ -3950,27 +3950,27 @@ PrefabInstance:
     - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
       propertyPath: playerPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: -3915082565821610680, guid: f473450ed07080c41bc861586d86cc9e, type: 3}
+      objectReference: {fileID: 5377165238078812753, guid: a754e9cabb8a70448ab839139063d24f, type: 3}
     - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
       propertyPath: playerPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: -3915082565821610680, guid: e84e19ef6702a544180c220988425940, type: 3}
+      objectReference: {fileID: 5377165238078812753, guid: a754e9cabb8a70448ab839139063d24f, type: 3}
     - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
       propertyPath: playerPrefabs.Array.data[2]
       value: 
-      objectReference: {fileID: -3915082565821610680, guid: 4d3929c6ae096684d9b13fbb88f9e832, type: 3}
+      objectReference: {fileID: 5377165238078812753, guid: a754e9cabb8a70448ab839139063d24f, type: 3}
     - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
       propertyPath: playerPrefabs.Array.data[3]
       value: 
-      objectReference: {fileID: -3915082565821610680, guid: a9561826c922a76459b99f2f589cad7e, type: 3}
+      objectReference: {fileID: 5377165238078812753, guid: a754e9cabb8a70448ab839139063d24f, type: 3}
     - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
       propertyPath: playerPrefabs.Array.data[4]
       value: 
-      objectReference: {fileID: -3915082565821610680, guid: c6004deba5390ed4784fdec07fb6b29e, type: 3}
+      objectReference: {fileID: 5377165238078812753, guid: a754e9cabb8a70448ab839139063d24f, type: 3}
     - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
       propertyPath: playerPrefabs.Array.data[5]
       value: 
-      objectReference: {fileID: -3915082565821610680, guid: d610150337f0d054b9c1ad13aab73346, type: 3}
+      objectReference: {fileID: 5377165238078812753, guid: a754e9cabb8a70448ab839139063d24f, type: 3}
     - target: {fileID: 2625177154707920349, guid: b26056e9b2f585845acdaf876c801654, type: 3}
       propertyPath: m_RootOrder
       value: 7

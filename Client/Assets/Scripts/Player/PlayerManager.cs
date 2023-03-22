@@ -49,38 +49,41 @@ public class PlayerManager : NetworkBehaviour
         Debug.Log("SpawningPlayer");
         Debug.Log(player);
 
-        Debug.Log(runner.State);
-        runner.Spawn(player,
-        Vector3.zero,
-        Quaternion.identity,
-        inputAuthority: runner.LocalPlayer,
-        BeforeSpawnPlayer,
-        predictionKey: null);
-        
+        //Spawn
+        GameObject spawnPoints = GameObject.Find("SpawnPoints");
 
-    }
-
-    public override void Spawned()
-    {
-        base.Spawned();
-     
-
-    }
+        int randomNumber = Random.Range(0, spawnPoints.transform.childCount);
+        spawnPoint = spawnPoints.transform.GetChild(randomNumber).position;
 
 
+      Debug.Log(runner.State);
+      runner.Spawn(player,
+      spawnPoint,
+      Quaternion.identity,
+      inputAuthority: runner.LocalPlayer,
+      BeforeSpawnPlayer,
+      predictionKey: null);
 
-    public static void BeforeSpawnPlayer(NetworkRunner runner, NetworkObject obj)
-    {
 
-        //Calculate the model
-        PlayerManager player = obj.GetComponent<PlayerManager>();
-        player.avatar = GameManager.FindInstance().avatarNumber;
+  }
 
-        /*
-        int randomNumber = Random.Range(0, spawnPoints.Length);
-        spawnPoint = spawnPoints[randomNumber].position;
+  public override void Spawned()
+  {
+      base.Spawned();
 
-        */
+
+  }
+
+
+
+  public static void BeforeSpawnPlayer(NetworkRunner runner, NetworkObject obj)
+  {
+
+      //Calculate the model
+      PlayerManager player = obj.GetComponent<PlayerManager>();
+      player.avatar = GameManager.FindInstance().avatarNumber;
+
+
 
         if (player.avatar == 0) player.avatar = Random.Range(1, 6);
 
@@ -88,11 +91,19 @@ public class PlayerManager : NetworkBehaviour
         GameObject[] playerPrefabs = GameManager.FindInstance().playerPrefabs;
 
   
-        GameObject model = Instantiate(playerPrefabs[player.avatar]);
-        model.transform.SetParent(obj.transform);
+        //We instantiate the model and assign to the network object
+        GameObject model = Instantiate(playerPrefabs[player.avatar], obj.transform.position, Quaternion.identity,obj.transform);
+     
+        model.AddComponent<SC_FPSController>();
 
 
-        obj.GetComponent<NetworkCharacterControllerPrototype>().InterpolationTarget = obj.transform.GetChild(0);
+        //We activate the camera
+        model.transform.GetChild(1).gameObject.SetActive(true);
+
+        model.AddComponent<NetworkTransform>();
+        model.GetComponent<NetworkTransform>().InterpolationTarget = model.transform;
+        
+       
 
 
 
