@@ -5,10 +5,7 @@ using UnityEngine;
 
 public class CharacterMovementHandler : NetworkBehaviour
 {
-    Vector2 viewInput;
-
-    //Rotation
-    float cameraRotationX = 0;
+  
     //Other components
     NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
     Camera localCamera;
@@ -25,21 +22,16 @@ public class CharacterMovementHandler : NetworkBehaviour
         localCamera = GetComponentInChildren<Camera>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        cameraRotationX += viewInput.y * Time.deltaTime * networkCharacterControllerPrototypeCustom.viewUpDownRotationSpeed;
-        cameraRotationX = Mathf.Clamp(cameraRotationX, -90, 90);
-        
-        localCamera.transform.localRotation = Quaternion.Euler(cameraRotationX, 0, 0);
-    }
 
     public override void FixedUpdateNetwork()
     {
         if (GetInput(out NetworkInputData networkInputData))
         {
-            //Rotate the view
-            networkCharacterControllerPrototypeCustom.Rotate(networkInputData.rotationInput);
+            transform.forward = networkInputData.aimForwardVector;
+
+            Quaternion rotation = transform.rotation;
+            rotation.eulerAngles = new Vector3(0, rotation.eulerAngles.y, rotation.eulerAngles.z);
+            transform.rotation = rotation;
          
             //Move
             Vector3 moveDirection = transform.forward * networkInputData.movementInput.y + transform.right * networkInputData.movementInput.x;
@@ -55,10 +47,7 @@ public class CharacterMovementHandler : NetworkBehaviour
         }
     }
 
-    public void SetViewInputVector(Vector2 viewInput)
-    {
-        this.viewInput = viewInput;
-    }
+ 
 
 
 }
