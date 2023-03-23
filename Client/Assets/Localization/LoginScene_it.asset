@@ -50,6 +50,18 @@ MonoBehaviour:
     m_Localized: registrati
     m_Metadata:
       m_Items: []
+  - m_Id: 10866740143915008
+    m_Localized: Compila il form con i tuoi dati
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10867086543093760
+    m_Localized: e-mail
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10867530535337984
+    m_Localized: Hai un account?
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

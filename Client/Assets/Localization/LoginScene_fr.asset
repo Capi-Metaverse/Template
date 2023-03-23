@@ -50,6 +50,18 @@ MonoBehaviour:
     m_Localized: chanter
     m_Metadata:
       m_Items: []
+  - m_Id: 10866740143915008
+    m_Localized: "Remplissez le formulaire avec vos donn\xE9es"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10867086543093760
+    m_Localized: e-mail
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10867530535337984
+    m_Localized: Avez-vous un compte?
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -47,6 +47,18 @@ MonoBehaviour:
     m_Key: SingUpButtonText
     m_Metadata:
       m_Items: []
+  - m_Id: 10866740143915008
+    m_Key: FillForm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10867086543093760
+    m_Key: EmailFieldText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10867530535337984
+    m_Key: HaveAnAccount
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

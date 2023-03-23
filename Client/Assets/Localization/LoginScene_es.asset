@@ -50,6 +50,18 @@ MonoBehaviour:
     m_Localized: Registrarse
     m_Metadata:
       m_Items: []
+  - m_Id: 10866740143915008
+    m_Localized: Rellena el formulario con tus datos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10867086543093760
+    m_Localized: Correo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10867530535337984
+    m_Localized: "\xBFYa tienes una cuenta?"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
