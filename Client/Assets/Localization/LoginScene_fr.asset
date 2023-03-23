@@ -39,11 +39,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3392821067776
-    m_Localized: "\rVous n'avez pas de compte?"
+    m_Localized: "\rVous ne vous souvenez pas de votre mot de passe ?"
     m_Metadata:
       m_Items: []
   - m_Id: 4101427757056
     m_Localized: "\rCliquez ici"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10863528947023872
+    m_Localized: chanter
     m_Metadata:
       m_Items: []
   references:

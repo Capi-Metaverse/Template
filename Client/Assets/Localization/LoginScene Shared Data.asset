@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: HereButtonText
     m_Metadata:
       m_Items: []
+  - m_Id: 10863528947023872
+    m_Key: SingUpButtonText
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
