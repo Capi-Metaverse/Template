@@ -1,5 +1,6 @@
 
 using Fusion;
+using Photon.Realtime;
 using UnityEngine;
 
 
@@ -26,7 +27,6 @@ public class PlayerManager : NetworkBehaviour
     public GameObject playerCamera;//Inside of the PlayerPrefab
     public GameObject playerToSpawn;//Player Character
     public Transform[] spawnPoints;//Array with points corresponding to points in the map, the players spawn randomly
-    static Vector3 spawnPoint;//A 3 coordinate point where the player must spawn
     public GameObject scope;//Actually this is the crosshair in game
     public GameObject micro;//Actually this is the microphone in game
     public GameObject eventTextK;//A text for displaying when an event happens
@@ -36,6 +36,9 @@ public class PlayerManager : NetworkBehaviour
 
     [Networked]
     private int avatar { get; set; }
+
+    [Networked]
+    private Vector3 spawnPoint { get; set; }
 
     public enum Estados
     {
@@ -53,7 +56,7 @@ public class PlayerManager : NetworkBehaviour
         GameObject spawnPoints = GameObject.Find("SpawnPoints");
 
         int randomNumber = Random.Range(0, spawnPoints.transform.childCount);
-        spawnPoint = spawnPoints.transform.GetChild(randomNumber).position;
+        Vector3 spawnPoint = spawnPoints.transform.GetChild(randomNumber).position;
 
 
       Debug.Log(runner.State);
@@ -70,6 +73,21 @@ public class PlayerManager : NetworkBehaviour
   public override void Spawned()
   {
       base.Spawned();
+
+        if(!this.HasInputAuthority)
+        {
+            //We set the model as a child
+
+            GameObject[] playerPrefabs = GameManager.FindInstance().playerPrefabs;
+
+
+            //We instantiate the model and assign to the network object
+            GameObject model = Instantiate(playerPrefabs[avatar], this.spawnPoint, Quaternion.identity, this.transform);
+
+            model.AddComponent<NetworkTransform>();
+            model.GetComponent<NetworkTransform>().InterpolationTarget = model.transform;
+
+        }
 
 
   }
@@ -88,9 +106,10 @@ public class PlayerManager : NetworkBehaviour
         if (player.avatar == 0) player.avatar = Random.Range(1, 6);
 
         //We set the model as a child
+        
         GameObject[] playerPrefabs = GameManager.FindInstance().playerPrefabs;
+        player.spawnPoint = obj.transform.position;
 
-  
         //We instantiate the model and assign to the network object
         GameObject model = Instantiate(playerPrefabs[player.avatar], obj.transform.position, Quaternion.identity,obj.transform);
      
@@ -100,8 +119,8 @@ public class PlayerManager : NetworkBehaviour
         //We activate the camera
         model.transform.GetChild(1).gameObject.SetActive(true);
 
-        model.AddComponent<NetworkTransform>();
-        model.GetComponent<NetworkTransform>().InterpolationTarget = model.transform;
+
+        obj.GetComponent<NetworkCharacterControllerPrototype>().InterpolationTarget = model.transform;
         
        
 

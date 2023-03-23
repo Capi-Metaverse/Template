@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/0.Launch.unity
     guid: d2f3c7bf4beb29a41bf88eab25533189
   - enabled: 1
+    path: Assets/Scenes/Mapa1.unity
+    guid: f464382776cf42545908cfd39d6aac3c
+  - enabled: 1
     path: Assets/Scenes/1.Start.unity
     guid: abbdffdcc4569e5489bf4c08727b5820
   - enabled: 1
@@ -20,9 +23,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Mapa0.unity
     guid: d5a3218ea9a0bf34c950bfc8a0b2aa36
-  - enabled: 1
-    path: Assets/Scenes/Mapa1.unity
-    guid: f464382776cf42545908cfd39d6aac3c
   - enabled: 0
     path: Assets/Scenes/Mapa2.unity
     guid: bc4a49f583879a143859b41e561151b9

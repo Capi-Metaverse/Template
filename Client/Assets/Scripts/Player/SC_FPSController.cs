@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Fusion;
 
-[RequireComponent(typeof(CharacterController))]
+
 
 public class SC_FPSController : NetworkBehaviour
 {
@@ -54,7 +54,7 @@ public class SC_FPSController : NetworkBehaviour
 
     private void Awake()
     {
-       characterController =  this.gameObject.GetComponent<CharacterController>();
+       characterController =  this.gameObject.GetComponentInParent<CharacterController>();
        playerCamera = this.gameObject.transform.GetChild(1).gameObject.GetComponent<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -78,7 +78,7 @@ public class SC_FPSController : NetworkBehaviour
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
             moveDirection.y = jumpSpeed;
-            anim.SetTrigger("Jumping");
+            //anim.SetTrigger("Jumping");
         }
         else
         {

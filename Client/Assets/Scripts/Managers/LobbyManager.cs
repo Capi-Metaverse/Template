@@ -95,6 +95,7 @@ public class LobbyManager : MonoBehaviour
     public void SetPlayerPanel(string sessionName)
     {
         this.sessionNamePanel.text = sessionName;
+        this.sessionName.text = sessionName;
         //We deactivate the panel of the room and Activate the panel of the Lobby interface.
         if (roomPanel != null & lobbyPanel != null)
         {
@@ -134,6 +135,7 @@ public class LobbyManager : MonoBehaviour
 
     public void OnClickJoinRoom()
     {
+        
         gameManager.StartGame(sessionName.text,avatarNumber);
     }
 

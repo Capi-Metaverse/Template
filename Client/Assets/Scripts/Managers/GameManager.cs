@@ -296,7 +296,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         //Properties of the room WIP
         SessionProps props = new SessionProps();
         props.StartMap = "HUBValencia";
-        props.RoomName = sessionName + "-" + props.StartMap;
+        props.RoomName = sessionName + "- 1";
         props.AllowLateJoin = true;
         props.PlayerLimit = 10;
         Debug.Log("AQUI");
