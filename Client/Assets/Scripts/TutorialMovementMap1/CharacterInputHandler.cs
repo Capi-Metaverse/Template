@@ -16,7 +16,6 @@ public class CharacterInputHandler : MonoBehaviour
     private void Awake()
     {
         
-        localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
     }
 
 
@@ -29,6 +28,7 @@ public class CharacterInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(localCameraHandler == null) localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
 
         //View input
         viewInputVector.x = Input.GetAxis("Mouse X");
@@ -43,7 +43,7 @@ public class CharacterInputHandler : MonoBehaviour
         if (Input.GetButton("Jump"))
             isJumpButtonPressed = true;
 
-        localCameraHandler.SetViewInputVector(viewInputVector);
+        if (localCameraHandler != null) localCameraHandler.SetViewInputVector(viewInputVector);
 
     }
 
