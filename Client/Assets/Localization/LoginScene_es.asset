@@ -62,6 +62,18 @@ MonoBehaviour:
     m_Localized: "\xBFYa tienes una cuenta?"
     m_Metadata:
       m_Items: []
+  - m_Id: 10870885638799360
+    m_Localized: "Introduce aqu\xED tu correo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10871242527932416
+    m_Localized: Recuperar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10873362257870848
+    m_Localized: Volver a Inicio
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

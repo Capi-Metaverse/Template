@@ -62,6 +62,18 @@ MonoBehaviour:
     m_Localized: Have you got an account?
     m_Metadata:
       m_Items: []
+  - m_Id: 10870885638799360
+    m_Localized: Enter your mail here
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10871242527932416
+    m_Localized: Reset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10873362257870848
+    m_Localized: Back to login
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -59,6 +59,18 @@ MonoBehaviour:
     m_Key: HaveAnAccount
     m_Metadata:
       m_Items: []
+  - m_Id: 10870885638799360
+    m_Key: EnterMailText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10871242527932416
+    m_Key: ResetButtonText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10873362257870848
+    m_Key: BackToLoginText
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -62,6 +62,18 @@ MonoBehaviour:
     m_Localized: Avez-vous un compte?
     m_Metadata:
       m_Items: []
+  - m_Id: 10870885638799360
+    m_Localized: Entrez votre mail ici
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10871242527932416
+    m_Localized: "R\xE9initialiser"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10873362257870848
+    m_Localized: Retour connexion
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
