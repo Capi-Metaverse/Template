@@ -27,7 +27,6 @@ public enum UserStatus
     PreLobby,
     InLobby,
     InGame,
-
 }
 
 //Require adds the component as a dependency
