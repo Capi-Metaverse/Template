@@ -1032,8 +1032,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Disconnect, Assembly-CSharp
+      - m_Target: {fileID: 7001790000651846235}
+        m_TargetAssemblyTypeName: PauseMenuSettings, Assembly-CSharp
         m_MethodName: OnClickSettings
         m_Mode: 1
         m_Arguments:
@@ -1162,7 +1162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Settings: {fileID: 0}
-  Pausa: {fileID: 0}
+  Pause: {fileID: 0}
 --- !u!1 &2095543376944702584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,7 +1284,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2095543376944702589}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7001790000651846235}
+        m_TargetAssemblyTypeName: PauseMenuSettings, Assembly-CSharp
+        m_MethodName: OnClickDisconnect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4073431595071493824
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
     //public GameObject TabTabPlayers;
     public GameObject Lenguages;
     public string[] PlayerKeys;
+    GameObject Settings;
+    GameObject Pause;
 
 
     // Start is called before the first frame update
@@ -25,6 +27,8 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
         TabPanel.SetActive(true);
         Lenguages.SetActive(true);
         TabPanelKeys.SetActive(false);
+        Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
+        Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
         //  TabPanelPlayers.SetActive(false);
     }
     public void ChangeToPanel()
@@ -50,7 +54,11 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
         // TabPanelPlayers.SetActive(true);
     }
 
-
+    public void OnClickBackToPause()
+    {
+        Pause.SetActive(true);
+        Settings.SetActive(false);
+    }
 
     /* public void OnPlayerEnteredRoom(Player newPlayer)
      {
