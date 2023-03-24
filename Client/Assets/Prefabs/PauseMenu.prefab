@@ -344,7 +344,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8129485727804837716}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: WebLogin, Assembly-CSharp
         m_MethodName: OnLogin
         m_Mode: 1
@@ -477,19 +477,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2095543375972205019}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2095543376706389881}
-        m_TargetAssemblyTypeName: Disconnect, Assembly-CSharp
-        m_MethodName: OnClickReturnLobby
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &2095543376182462601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,7 +1032,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2095543376706389881}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Disconnect, Assembly-CSharp
         m_MethodName: OnClickSettings
         m_Mode: 1
@@ -1068,7 +1056,7 @@ GameObject:
   - component: {fileID: 2095543376706389886}
   - component: {fileID: 2095543376706389887}
   - component: {fileID: 2095543376706389880}
-  - component: {fileID: 2095543376706389881}
+  - component: {fileID: 7001790000651846235}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -1161,7 +1149,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2095543376706389881
+--- !u!114 &7001790000651846235
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1170,7 +1158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2095543376706389882}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6dc201afe25b845a16cb3c4c5ce96d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e8502726c484a141a3bb81bde6a1d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Settings: {fileID: 0}
@@ -1296,19 +1284,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2095543376944702589}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2095543376706389881}
-        m_TargetAssemblyTypeName: Disconnect, Assembly-CSharp
-        m_MethodName: OnClickDisconnect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &4073431595071493824
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,7 +1617,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2095543376706389881}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Disconnect, Assembly-CSharp
         m_MethodName: OnClickReturnGame
         m_Mode: 1
@@ -1964,19 +1940,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2194706195508530946, guid: df9a31028ce2ace47b0bb64f82f33a55, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: df9a31028ce2ace47b0bb64f82f33a55, type: 3}
---- !u!114 &8129485727804837716 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2194706195508530946, guid: df9a31028ce2ace47b0bb64f82f33a55, type: 3}
-  m_PrefabInstance: {fileID: 7972661732059955286}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afa6e5a3cdd404aeebca024db9afeae7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &8925558316123548840 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1547380531012513022, guid: df9a31028ce2ace47b0bb64f82f33a55, type: 3}

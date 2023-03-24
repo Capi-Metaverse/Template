@@ -615,7 +615,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1996074793382588801}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MultiLanguage, Assembly-CSharp
         m_MethodName: Language
         m_Mode: 3
@@ -1060,7 +1060,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 505503804108018661}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MoveTabs, Assembly-CSharp
         m_MethodName: ChangeToPanelPlayer
         m_Mode: 1
@@ -1329,7 +1329,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1996074793382588801}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MultiLanguage, Assembly-CSharp
         m_MethodName: Language
         m_Mode: 3
@@ -1584,7 +1584,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 505503804108018661}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MoveTabs, Assembly-CSharp
         m_MethodName: ChangeToPanelKeys
         m_Mode: 1
@@ -1723,7 +1723,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4111939098991759778}
   - component: {fileID: 994364612811100981}
-  - component: {fileID: 1022233853684132223}
   m_Layer: 5
   m_Name: TabPlayer
   m_TagString: Untagged
@@ -1761,20 +1760,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4637335234425442998}
   m_CullTransparentMesh: 1
---- !u!114 &1022233853684132223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4637335234425442998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05a8afa7edaf8cd449a5dbb7669eba96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerItemPrefabSettings: {fileID: 5579281195357421886, guid: 2bf2d61890fe7494783d1555035f1d11, type: 3}
-  PlayerListSettings: {fileID: 8114877012828975565}
 --- !u!1 &4656795815476379570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,7 +1855,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 804143603578278229}
-  - component: {fileID: 471726826745718449}
   m_Layer: 0
   m_Name: Sensitivity
   m_TagString: Untagged
@@ -1893,21 +1877,6 @@ Transform:
   m_Father: {fileID: 5587160888839851944}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &471726826745718449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513707294765617242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bcca0f8f8a320c44afd87254dd6427c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 5587160887701732912}
-  sliderValue: 1
-  sensi: 1
 --- !u!1 &5587160886932921316
 GameObject:
   m_ObjectHideFlags: 0
@@ -2492,19 +2461,7 @@ MonoBehaviour:
   m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5587160888736372203}
-        m_TargetAssemblyTypeName: ScriptSound, Assembly-CSharp
-        m_MethodName: ChangeSlider
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &5587160887674470279
 GameObject:
   m_ObjectHideFlags: 0
@@ -2877,7 +2834,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 471726826745718449}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ControllerSensi, Assembly-CSharp
         m_MethodName: ChangeSlider
         m_Mode: 0
@@ -3086,19 +3043,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5587160887741390801}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Disconnect, Assembly-CSharp
-        m_MethodName: OnClickBackToPause
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &5587160887868686450
 GameObject:
   m_ObjectHideFlags: 0
@@ -4001,19 +3946,7 @@ MonoBehaviour:
   - eventID: 4
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5587160888736372200}
-          m_TargetAssemblyTypeName: ScriptResolution, Assembly-CSharp
-          m_MethodName: onChange
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
 --- !u!1 &5587160888165403329
 GameObject:
   m_ObjectHideFlags: 0
@@ -5313,9 +5246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5587160888736372202}
-  - component: {fileID: 5587160888736372203}
-  - component: {fileID: 5587160888736372200}
-  - component: {fileID: 505503804108018661}
+  - component: {fileID: 9152157433715293231}
   m_Layer: 0
   m_Name: ControladorOpciones
   m_TagString: Untagged
@@ -5338,34 +5269,7 @@ Transform:
   m_Father: {fileID: 5587160888839851944}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5587160888736372203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5587160888736372212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6079820c91918e241a607cbf9a2a78e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 5587160887627639635}
-  sliderValue: 0.5
---- !u!114 &5587160888736372200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5587160888736372212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b99351aa92060d64d9e74abfb53dfe56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resolutionsDropDown: {fileID: 5587160888753052145}
---- !u!114 &505503804108018661
+--- !u!114 &9152157433715293231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5377,11 +5281,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d752b6cfb0e7646b8c2f749eb52302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TabPanel: {fileID: 5587160888456876868}
-  TabPanelKeys: {fileID: 4385679606799607588}
-  TabPanelPlayers: {fileID: 6316380765104090055}
-  TabTabPlayers: {fileID: 2297685355914262234}
-  Lenguages: {fileID: 764232019966225870}
+  TabPanel: {fileID: 0}
+  TabPanelKeys: {fileID: 0}
+  TabPanelPlayers: {fileID: 0}
+  TabTabPlayers: {fileID: 0}
+  Lenguages: {fileID: 0}
   PlayerKeys: []
 --- !u!1 &5587160888753052147
 GameObject:
@@ -5522,7 +5426,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5587160888736372200}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ScriptResolution, Assembly-CSharp
         m_MethodName: CambiarResolucion
         m_Mode: 0
@@ -5612,7 +5516,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5587160888888234052}
   - component: {fileID: 5587160888888234053}
-  - component: {fileID: 5587160888888234106}
   m_Layer: 3
   m_Name: Brightness
   m_TagString: Untagged
@@ -5652,21 +5555,6 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
---- !u!114 &5587160888888234106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5587160888888234055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce596ed269caec4ebe44b6422bfec8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 5587160887701732912}
-  brightness: {fileID: 11400000, guid: ee6e50a3b24c19e4c816975126695e18, type: 2}
-  layer: {fileID: 0}
 --- !u!1 &5587160888900270942
 GameObject:
   m_ObjectHideFlags: 0
@@ -6330,7 +6218,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1996074793382588801}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MultiLanguage, Assembly-CSharp
         m_MethodName: Language
         m_Mode: 3
@@ -6838,7 +6726,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 505503804108018661}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MoveTabs, Assembly-CSharp
         m_MethodName: ChangeToPanel
         m_Mode: 1
@@ -6860,7 +6748,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3139020891075101066}
   - component: {fileID: 4928898230841292980}
-  - component: {fileID: 5946218345380311068}
   m_Layer: 5
   m_Name: TabPanelKeys
   m_TagString: Untagged
@@ -6898,20 +6785,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8874203641678117840}
   m_CullTransparentMesh: 1
---- !u!114 &5946218345380311068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8874203641678117840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beac0d7f08881624abb2fa91827555e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyItemPrefab: {fileID: 5579281195357421886, guid: eb33c5f52c01c504c9ae2a2609011e5b, type: 3}
-  keyList: {fileID: 321677986668598538}
 --- !u!1001 &1272195735254012380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6967,19 +6840,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: LocalizationManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 726421171963895901, guid: 53a40b19e3c15d147a3ab87803238bd8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 53a40b19e3c15d147a3ab87803238bd8, type: 3}
---- !u!114 &1996074793382588801 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 726421171963895901, guid: 53a40b19e3c15d147a3ab87803238bd8, type: 3}
-  m_PrefabInstance: {fileID: 1272195735254012380}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f9a010afa9606541bd74dae610ce7cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1996074793382588806 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 726421171963895898, guid: 53a40b19e3c15d147a3ab87803238bd8, type: 3}
