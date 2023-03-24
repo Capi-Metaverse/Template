@@ -8,13 +8,13 @@ using UnityEngine;
 // ReSharper disable once CheckNamespace
 public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
   [Header("Character Controller Settings")]
-  public float gravity       = -20.0f;
-  public float jumpImpulse   = 8.0f;
-  public float acceleration  = 10.0f;
-  public float braking       = 10.0f;
-  public float maxSpeed      = 2.0f;
-  public float rotationSpeed = 15.0f;
-    public float viewUpDownRotationSpeed = 50.0f;
+  private float gravity       = -20.0f;
+  private float jumpImpulse   = 4.0f;
+  private float acceleration  = 5.0f;
+  private float braking       = 100.0f;//how much vel is decremented when stopped moving
+  private float maxSpeed      = 2.0f;
+  private float rotationSpeed = 50.0f;
+  public float viewUpDownRotationSpeed = 50.0f;
 
   [Networked]
   [HideInInspector]
@@ -91,11 +91,12 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
 
     direction = direction.normalized;
 
+    //If is in the ground and his velocity on Y is negative it means that keeps falling so we put velocity(Y) to 0.
     if (IsGrounded && moveVelocity.y < 0) {
-      moveVelocity.y = 0f;
+      moveVelocity.y = 0f;//Stop falling when touch the ground
     }
 
-    moveVelocity.y += gravity * Runner.DeltaTime;
+    moveVelocity.y += gravity * deltaTime;
 
     var horizontalVel = default(Vector3);
     horizontalVel.x = moveVelocity.x;
@@ -104,7 +105,7 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     if (direction == default) {
       horizontalVel = Vector3.Lerp(horizontalVel, default, braking * deltaTime);
     } else {
-      horizontalVel      = Vector3.ClampMagnitude(horizontalVel + direction * acceleration * deltaTime, maxSpeed);
+      horizontalVel = Vector3.ClampMagnitude(horizontalVel + direction * acceleration * deltaTime, maxSpeed);
      
     }
 

@@ -16,7 +16,7 @@ public class CharacterInputHandler : MonoBehaviour
     bool isJumpButtonPressed = false;
 
     LocalCameraHandler localCameraHandler;
-    public bool escPul;//Reference if ESC key is pushed or not(ESC opens the Menu and you´ll be on Pause State)
+    public bool escPul;//Reference if ESC key is pushed or not(ESC opens the Menu and youï¿½ll be on Pause State)
     UserStatus estado; //With this we keep track of the current state so we can use it in conditionals. States are (Game, Pause)
     public GameObject Pause;//Pause is an object in scene map, you can see it as the manager of the pause state
     public GameObject Settings;//The same as Pause but for settings, the state will be Pause too cause the setting are accesible from Pause
@@ -47,7 +47,7 @@ public class CharacterInputHandler : MonoBehaviour
         //Pause
         if (!Input.GetKeyDown(KeyCode.Escape))
         {
-            escPul = false; // Detecta si no está pulsado
+            escPul = false; // Detecta si no estï¿½ pulsado
         }
 
         switch (estado)
@@ -80,8 +80,6 @@ public class CharacterInputHandler : MonoBehaviour
         viewInputVector.x = Input.GetAxis("Mouse X");
         viewInputVector.y = Input.GetAxis("Mouse Y") * -1; //Invert the mouse look
 
-    
-
         //Move Input
         moveInputVector.x = Input.GetAxis("Horizontal");
         moveInputVector.y = Input.GetAxis("Vertical");
@@ -92,7 +90,6 @@ public class CharacterInputHandler : MonoBehaviour
         if (localCameraHandler != null) localCameraHandler.SetViewInputVector(viewInputVector);
 
     }
-
 
     public NetworkInputData GetNetworkInput()
     {

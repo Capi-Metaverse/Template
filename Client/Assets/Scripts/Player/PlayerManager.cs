@@ -60,14 +60,7 @@ public class PlayerManager : NetworkBehaviour
 
 
       Debug.Log(runner.State);
-      runner.Spawn(player,
-      spawnPoint,
-      Quaternion.identity,
-      inputAuthority: runner.LocalPlayer,
-      BeforeSpawnPlayer,
-      predictionKey: null);
-
-
+      runner.Spawn(player,spawnPoint,Quaternion.identity,inputAuthority: runner.LocalPlayer,BeforeSpawnPlayer, predictionKey: null);
   }
 
   public override void Spawned()
@@ -88,20 +81,13 @@ public class PlayerManager : NetworkBehaviour
             model.GetComponent<NetworkTransform>().InterpolationTarget = model.transform;
 
         }
-
-
   }
-
-
 
   public static void BeforeSpawnPlayer(NetworkRunner runner, NetworkObject obj)
   {
-
       //Calculate the model
       PlayerManager player = obj.GetComponent<PlayerManager>();
       player.avatar = GameManager.FindInstance().avatarNumber;
-
-
 
         if (player.avatar == 0) player.avatar = Random.Range(1, 6);
 
@@ -115,16 +101,9 @@ public class PlayerManager : NetworkBehaviour
      
         model.AddComponent<SC_FPSController>();
 
-
         //We activate the camera
         model.transform.GetChild(1).gameObject.SetActive(true);
 
-
         obj.GetComponent<NetworkCharacterControllerPrototype>().InterpolationTarget = model.transform;
-        
-       
-
-
-
     }
 }

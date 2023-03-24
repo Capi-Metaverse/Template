@@ -56,8 +56,7 @@ public class SC_FPSController : NetworkBehaviour
     {
        characterController =  this.gameObject.GetComponentInParent<CharacterController>();
        playerCamera = this.gameObject.transform.GetChild(1).gameObject.GetComponent<Camera>();
-        Cursor.lockState = CursorLockMode.Locked;
-
+       Cursor.lockState = CursorLockMode.Locked;
     }
 
 

@@ -110,9 +110,9 @@ GameObject:
   - component: {fileID: 6375041898627056944}
   - component: {fileID: 6981261108554447023}
   - component: {fileID: 5435614696623482846}
-  - component: {fileID: 8457579754274068436}
   - component: {fileID: 2599899280333629975}
   - component: {fileID: 2853171854339703617}
+  - component: {fileID: 3733141498773839185}
   m_Layer: 0
   m_Name: Josema
   m_TagString: Player
@@ -194,46 +194,9 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 6981261108554447023}
-  - {fileID: 8457579754274068436}
   - {fileID: 2853171854339703617}
+  - {fileID: 3733141498773839185}
   SimulationBehaviours: []
---- !u!114 &8457579754274068436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5377165238078812753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71a3e547ed05e59428d3808c5b5f6793, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
-  InterpolationSpace: 0
-  InterpolationTarget: {fileID: 0}
-  InterpolateErrorCorrection: 1
-  InterpolatedErrorCorrectionSettings:
-    MinRate: 3.3
-    MaxRate: 10
-    PosBlendStart: 0.25
-    PosBlendEnd: 1
-    PosMinCorrection: 0.025
-    PosTeleportDistance: 2
-    RotBlendStart: 0.1
-    RotBlendEnd: 0.5
-    RotTeleportRadians: 1.5
-  UseLegacySharedModeInterpolation: 0
-  TargetInterpolationDelay: 0.03
-  gravity: -20
-  jumpImpulse: 8
-  acceleration: 50
-  braking: 30
-  maxSpeed: 6
-  rotationSpeed: 80
-  viewUpDownRotationSpeed: 60
-  _IsGrounded: 0
-  _Velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &2599899280333629975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +222,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+--- !u!114 &3733141498773839185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5377165238078812753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a3e547ed05e59428d3808c5b5f6793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  InterpolationSpace: 0
+  InterpolationTarget: {fileID: 1323847369074286262}
+  InterpolateErrorCorrection: 1
+  InterpolatedErrorCorrectionSettings:
+    MinRate: 3.3
+    MaxRate: 10
+    PosBlendStart: 0.25
+    PosBlendEnd: 1
+    PosMinCorrection: 0.025
+    PosTeleportDistance: 2
+    RotBlendStart: 0.1
+    RotBlendEnd: 0.5
+    RotTeleportRadians: 1.5
+  UseLegacySharedModeInterpolation: 0
+  TargetInterpolationDelay: 0.03
+  gravity: -20
+  jumpImpulse: 4
+  acceleration: 5
+  braking: 100
+  maxSpeed: 2
+  rotationSpeed: 50
+  viewUpDownRotationSpeed: 50
+  _IsGrounded: 0
+  _Velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &8425398613531851932
 GameObject:
   m_ObjectHideFlags: 0
