@@ -287,24 +287,24 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
        
     }
 
-    public async void StartGame(string sessionName, int avatarNumber)
+    public void StartGame(string sessionName, int avatarNumber)
     {
         //We disconnect the actual runner
          Disconnect();
         //We change to the new map
-        SceneManager.LoadSceneAsync("HUBValencia");
+        SceneManager.LoadSceneAsync("Mapa1");
         Debug.Log("Creating session");
         //Properties of the room WIP
         SessionProps props = new SessionProps();
-        props.StartMap = "HUBValencia";
+        props.StartMap = "Mapa1";
         props.RoomName = sessionName + "- 1";
         props.AllowLateJoin = true;
         props.PlayerLimit = 10;
         Debug.Log("AQUI");
-       await StartSession(GameMode.Shared, props);
+       //await StartSession(GameMode.Shared, props);
         Debug.Log("AQUI NO");
     
-        PlayerManager.SpawnPlayer(_runner, current);
+        //PlayerManager.SpawnPlayer(_runner, current);
 
 
     }
