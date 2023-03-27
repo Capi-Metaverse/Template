@@ -26,13 +26,13 @@ public class ManageData : MonoBehaviour
     public Keys currentkeys;
 
     // Save User Data
-    public void SaveData()
+    public void SaveData(int interactkey, int changecamerakey)
     {
         var request = new UpdateUserDataRequest
         {
             Data = new Dictionary<string, string>
             {
-                {"Keys", JsonConvert.SerializeObject(new Keys(102, 108))}
+                {"Keys", JsonConvert.SerializeObject(new Keys(interactkey, changecamerakey))}
             }
         };
         PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
@@ -56,8 +56,9 @@ public class ManageData : MonoBehaviour
         if (result.Data != null && result.Data.ContainsKey("Keys"))
         {
             currentkeys = JsonConvert.DeserializeObject<Keys>(result.Data["Keys"].Value);
-    
-            
+            returncurrentkeys();
+
+
         }
        
     }

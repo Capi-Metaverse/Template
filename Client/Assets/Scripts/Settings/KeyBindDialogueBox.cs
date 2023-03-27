@@ -13,6 +13,11 @@ public class KeyBindDialogueBox : MonoBehaviour
     Dictionary<string, TMP_Text> buttonToLabel;
     PlayerUiPrefab playerUiPrefab;
     TMP_Text keyNameText;
+    Keys keys;
+
+    ManageData manageData;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +25,10 @@ public class KeyBindDialogueBox : MonoBehaviour
         inputManager = GameObject.FindObjectOfType<InputManager>();
         playerUiPrefab = GameObject.FindObjectOfType<PlayerUiPrefab>();
         //Create one "Key List Item"
+
+        manageData = new ManageData();
+
+
 
         string[] buttonNames = inputManager.GetButtonNames();
         buttonToLabel = new Dictionary<string, TMP_Text>();
@@ -65,12 +74,17 @@ public class KeyBindDialogueBox : MonoBehaviour
 
                         if (buttonToRebind == "Interact")
                         {
+                           
                             playerUiPrefab.ChangeLetter(kc.ToString());
+                            inputManager.a = ((int)kc);
+                            manageData.SaveData(((int)kc), inputManager.b);
                         }
 
                         if (buttonToRebind == "ChangeCamera")
                         {
                             playerUiPrefab.ChangeLetterK(kc.ToString());
+                            inputManager.b = ((int)kc);
+                            manageData.SaveData(inputManager.a, ((int)kc));
                         }
                         buttonToRebind = null;
                         break;

@@ -7,14 +7,17 @@ using UnityEngine.SceneManagement;
 public class InputManager : MonoBehaviour
 {
     public Dictionary<string, KeyCode> buttonKeys;
-    ManageData manageData;
+    public ManageData manageData;
+   
+    public int a;
+    public int b;
     IEnumerator MyFunction()
     {
         // Do some work here...
         yield return null; // Wait one frame
 
         // Do some more work here...
-        yield return new WaitForSeconds(10); // Wait for 2 seconds
+        yield return new WaitForSeconds(4); // Wait for 2 seconds
         
         buttonKeys = new Dictionary<string, KeyCode>();
         if (manageData.currentkeys == null)
@@ -27,6 +30,10 @@ public class InputManager : MonoBehaviour
             Debug.Log("entro al else");
             buttonKeys["Interact"] = (KeyCode)manageData.currentkeys.interact;
             buttonKeys["ChangeCamera"] = (KeyCode)manageData.currentkeys.presentationMode;
+          
+            
+            
+          
         }
         // Function is finished
     }
