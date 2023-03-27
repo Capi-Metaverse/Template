@@ -17,8 +17,7 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField passwordInput;
 
     private GameManager gameManager;
-
-
+    ManageData manageData;
     private EntityKey groupAdminEntity;
 
     [System.Serializable]
@@ -136,6 +135,9 @@ public class LoginManager : MonoBehaviour
     //Cuando Login Funciona
     void OnLoginSuccess(LoginResult result)
     {
+
+     
+       
         messageText.text = "logged in!";
 
 

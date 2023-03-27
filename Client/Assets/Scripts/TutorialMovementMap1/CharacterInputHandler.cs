@@ -16,7 +16,7 @@ public class CharacterInputHandler : MonoBehaviour
     public GameObject Settings;//The same as Pause but for settings, the state will be Pause too cause the setting are accesible from Pause
     GameObject scope;
     CharacterMovementHandler characterMovementHandler;
-
+    
 
     private void Awake()
     {
@@ -131,7 +131,7 @@ public class CharacterInputHandler : MonoBehaviour
 
         //Deactivate presentation text
         /*if (eventTextK != null) 
-        {
+        {v
             eventTextK.SetActive(false);
         }*/
 

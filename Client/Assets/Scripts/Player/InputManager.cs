@@ -7,17 +7,38 @@ using UnityEngine.SceneManagement;
 public class InputManager : MonoBehaviour
 {
     public Dictionary<string, KeyCode> buttonKeys;
+    ManageData manageData;
+    IEnumerator MyFunction()
+    {
+        // Do some work here...
+        yield return null; // Wait one frame
 
+        // Do some more work here...
+        yield return new WaitForSeconds(10); // Wait for 2 seconds
+        
+        buttonKeys = new Dictionary<string, KeyCode>();
+        if (manageData.currentkeys == null)
+        {
+            buttonKeys["Interact"] = KeyCode.E;
+            buttonKeys["ChangeCamera"] = KeyCode.K;
+        }
+        else
+        {
+            Debug.Log("entro al else");
+            buttonKeys["Interact"] = (KeyCode)manageData.currentkeys.interact;
+            buttonKeys["ChangeCamera"] = (KeyCode)manageData.currentkeys.presentationMode;
+        }
+        // Function is finished
+    }
     // Start is called before the first frame update
     void Start()
     {
+        manageData = new ManageData();
        
-
-        
+        manageData.LoadData();
         DontDestroyOnLoad(this.gameObject);
-        buttonKeys = new Dictionary<string, KeyCode>();
-        buttonKeys["Interact"] = KeyCode.E; 
-        buttonKeys["ChangeCamera"] = KeyCode.K;
+        StartCoroutine(MyFunction());
+       
     }
 
     // Update is called once per frame

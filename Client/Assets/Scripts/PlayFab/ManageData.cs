@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using PlayFab;
@@ -9,10 +11,10 @@ using UnityEngine;
 
 public class Keys
 {
-    public string interact;
-    public string presentationMode;
+    public int interact;
+    public int presentationMode;
 
-    public Keys(string interact, string presentationMode)
+    public Keys(int interact, int presentationMode)
     {
         this.interact = interact;
         this.presentationMode = presentationMode;
@@ -30,7 +32,7 @@ public class ManageData : MonoBehaviour
         {
             Data = new Dictionary<string, string>
             {
-                {"Keys", JsonConvert.SerializeObject(new Keys("E", "K"))}
+                {"Keys", JsonConvert.SerializeObject(new Keys(102, 108))}
             }
         };
         PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
@@ -54,10 +56,18 @@ public class ManageData : MonoBehaviour
         if (result.Data != null && result.Data.ContainsKey("Keys"))
         {
             currentkeys = JsonConvert.DeserializeObject<Keys>(result.Data["Keys"].Value);
-            Debug.Log(currentkeys.interact + currentkeys.presentationMode);
-      
+    
+            
         }
+       
     }
+    public void returncurrentkeys()
+    {
+        Debug.Log(currentkeys.interact);
+        Debug.Log(currentkeys.presentationMode);
+    }
+
+ 
 
     public void OnError(PlayFabError obj)
     {
