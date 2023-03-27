@@ -12,11 +12,16 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     private float jumpImpulse   = 4.0f;
     private float acceleration  = 100.0f;
     private float braking       = 50.0f;//how much vel is decremented when stopped moving
-    private float maxSpeed      = 2.0f;
+    private float maxSpeed      = 3.0f;
     private float rotationSpeed = 50.0f;
     public float viewUpDownRotationSpeed = 50.0f;
+    //Run
+    public float Speed;
+    public float RunSpeed = 3.0f;
+    public float NormalSpeed = 1.0f;
+    public bool isRunning = false;
 
-  [Networked]
+    [Networked]
   [HideInInspector]
   public bool IsGrounded { get; set; }
 
@@ -89,30 +94,42 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     var previousPos  = transform.position;
     var moveVelocity = Velocity;
 
-    direction = direction.normalized;
-
     //If is in the ground and his velocity on Y is negative it means that keeps falling so we put velocity(Y) to 0.
     if (IsGrounded && moveVelocity.y < 0) {
-      moveVelocity.y = 0f;//Stop falling when touch the ground
+      direction = Transform.up * 0;//Stop falling when touch the ground
     }
 
-    moveVelocity.y += gravity * deltaTime;
+    if (Input.GetKey(KeyCode.LeftShift))
+    {
+        isRunning = true;
+        Speed = RunSpeed;
+        print("Running");
 
-    var horizontalVel = default(Vector3);
-    horizontalVel.x = moveVelocity.x;
-    horizontalVel.z = moveVelocity.z;
-
-    if (direction == default) {
-      horizontalVel = Vector3.Lerp(horizontalVel, default, braking * deltaTime);
-    } else {
-      horizontalVel = Vector3.ClampMagnitude(horizontalVel + direction * acceleration * deltaTime, maxSpeed);
-     
+    }
+    else
+    {
+        isRunning = false;
+        Speed = NormalSpeed;
+        print("Not Running");
     }
 
-    moveVelocity.x = horizontalVel.x;
-    moveVelocity.z = horizontalVel.z;
+    if (Input.GetKey("w"))
+        direction += Transform.forward * Speed;
+    if (Input.GetKey("s"))
+        direction += Transform.forward * -Speed;
+    if (Input.GetKey("a"))
+        direction += Transform.right * -Speed;
+    if (Input.GetKey("d"))
+        direction += Transform.right * Speed;
 
-    Controller.Move(moveVelocity * deltaTime);
+    direction += Transform.up * gravity;
+
+    if (Input.GetKeyDown(KeyCode.Space))
+    {
+        direction -= Transform.up * 10f;
+    }
+
+    Controller.Move(direction * deltaTime);
 
     Velocity   = (transform.position - previousPos) * Runner.Simulation.Config.TickRate;
     IsGrounded = Controller.isGrounded;
