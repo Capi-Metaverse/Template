@@ -9,12 +9,12 @@ using UnityEngine;
 public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
   [Header("Character Controller Settings")]
   private float gravity       = -20.0f;
-  private float jumpImpulse   = 4.0f;
-  private float acceleration  = 5.0f;
-  private float braking       = 100.0f;//how much vel is decremented when stopped moving
-  private float maxSpeed      = 2.0f;
-  private float rotationSpeed = 50.0f;
-  public float viewUpDownRotationSpeed = 50.0f;
+    private float jumpImpulse   = 4.0f;
+    private float acceleration  = 100.0f;
+    private float braking       = 50.0f;//how much vel is decremented when stopped moving
+    private float maxSpeed      = 2.0f;
+    private float rotationSpeed = 50.0f;
+    public float viewUpDownRotationSpeed = 50.0f;
 
   [Networked]
   [HideInInspector]
