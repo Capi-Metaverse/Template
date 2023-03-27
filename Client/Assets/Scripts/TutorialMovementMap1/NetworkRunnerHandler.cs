@@ -13,6 +13,12 @@ public class NetworkRunnerHandler : MonoBehaviour
     public NetworkRunner networkRunnerPrefab;
 
     NetworkRunner networkRunner;
+    GameManager gameManager;
+
+    private void Awake()
+    {
+        gameManager = GameManager.FindInstance();
+    }
 
     private void Start()
     {
@@ -41,7 +47,7 @@ public class NetworkRunnerHandler : MonoBehaviour
             GameMode = gameMode,
             Address = address,
             Scene = scene,
-            SessionName = "TestRoom",
+            SessionName = gameManager.mapName,
             Initialized = initialized,
             SceneManager = sceneManager
         });

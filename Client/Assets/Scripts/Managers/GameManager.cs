@@ -66,6 +66,8 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     public PlayerManager current;
 
+    public string mapName;
+
     //Static function to get the singleton
     public static GameManager FindInstance()
     {
@@ -292,6 +294,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         //We disconnect the actual runner
          Disconnect();
         this.avatarNumber = avatarNumber;
+        this.mapName = sessionName;
         //We change to the new map
         SceneManager.LoadSceneAsync("Mapa1");
         Debug.Log("Creating session");
@@ -301,9 +304,8 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         props.RoomName = sessionName + "- 1";
         props.AllowLateJoin = true;
         props.PlayerLimit = 10;
-        Debug.Log("AQUI");
+
        //await StartSession(GameMode.Shared, props);
-        Debug.Log("AQUI NO");
     
         //PlayerManager.SpawnPlayer(_runner, current);
 
