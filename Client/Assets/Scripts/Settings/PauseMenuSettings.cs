@@ -2,7 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-//using Photon.Pun;
+using UnityEngine.SceneManagement;
 //using Photon.Realtime;
 using UnityEngine.UI;
 //using ExitGames.Client.Photon;
@@ -34,10 +34,9 @@ public class PauseMenuSettings : MonoBehaviour
 
     public void OnClickDisconnect()
     {
-        // PhotonNetwork.Disconnect();
 
-        // voiceChat.OnApplicationQuit();
-        Application.Quit();
+        SceneManager.LoadSceneAsync("1.Start");
+
     }
 
     public void OnClickSettings()
