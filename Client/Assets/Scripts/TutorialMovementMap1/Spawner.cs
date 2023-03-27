@@ -5,6 +5,7 @@ using Fusion;
 using Fusion.Sockets;
 using System;
 using UnityEngine.Diagnostics;
+using Photon.Realtime;
 
 public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 {
@@ -13,7 +14,14 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     //Other components
     CharacterInputHandler characterInputHandler;
 
+    GameManager gameManager;
+
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        gameManager = GameManager.FindInstance();
+    }
     void Start()
     {
 
@@ -25,7 +33,8 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
         {
 
             Debug.Log("Spawning Player");
-            runner.Spawn(playerPrefab, Utils.GetRandomSpawnPoint(), Quaternion.identity, player);
+            
+            runner.Spawn(playerPrefab, Utils.GetRandomSpawnPoint(), Quaternion.identity, player,OnBeforeSpawn);
         }
     }
 
@@ -41,6 +50,15 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
             Debug.Log("seteado");
         }
     }
+
+
+    public void OnBeforeSpawn(NetworkRunner runner, NetworkObject obj)
+    {
+        obj.GetComponent<NetworkPlayer>().avatar = gameManager.avatarNumber;
+    }
+
+
+
 
 
 
@@ -118,8 +136,6 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     {
         throw new NotImplementedException();
     }
-
-  
 
     
 }

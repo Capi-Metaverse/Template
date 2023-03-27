@@ -57,4 +57,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4596662eb55374aac8800a223016ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 6981261108554447023, guid: 5fde252687a158e40859a39b3ca343cc, type: 3}
+  playerPrefab: {fileID: 5801750036806435754, guid: 706914ff1dfe50645b4906f848f4c330, type: 3}
+  playerPrefabs:
+  - {fileID: -3915082565821610680, guid: e84e19ef6702a544180c220988425940, type: 3}
+  - {fileID: -3915082565821610680, guid: f473450ed07080c41bc861586d86cc9e, type: 3}
+  - {fileID: -3915082565821610680, guid: 4d3929c6ae096684d9b13fbb88f9e832, type: 3}
+  - {fileID: -3915082565821610680, guid: a9561826c922a76459b99f2f589cad7e, type: 3}
+  - {fileID: -3915082565821610680, guid: c6004deba5390ed4784fdec07fb6b29e, type: 3}
+  - {fileID: -3915082565821610680, guid: d610150337f0d054b9c1ad13aab73346, type: 3}

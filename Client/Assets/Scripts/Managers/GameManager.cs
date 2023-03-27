@@ -291,6 +291,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     {
         //We disconnect the actual runner
          Disconnect();
+        this.avatarNumber = avatarNumber;
         //We change to the new map
         SceneManager.LoadSceneAsync("Mapa1");
         Debug.Log("Creating session");
