@@ -30,7 +30,7 @@ public class MusicManager : MonoBehaviour
     {
         _audiosource.volume = volume;
 
-        if (!_audiosource.isPlaying || _trackTimer>= _audiosource.clip.length || Input.GetKeyDown(KeyCode.Space))
+        if (!_audiosource.isPlaying || _trackTimer>= _audiosource.clip.length)
         {
             ChangeSong(Random.Range(0, songs.Length));
         }
