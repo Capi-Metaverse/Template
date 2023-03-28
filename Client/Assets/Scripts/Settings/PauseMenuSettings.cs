@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class PauseMenuSettings : MonoBehaviour
 {
+    GameManager gameManager;
     public GameObject Settings;
     public GameObject Pause;
 
@@ -17,8 +18,8 @@ public class PauseMenuSettings : MonoBehaviour
       private InputManager inputManager;
       private MusicManager musicController;*/
 
-    /*   private PlayerSpawn playerManager;
-       PlayerList playerList;*/
+    /*   private PlayerSpawn playerManager;*/
+      // PlayerList playerList;
     /* void Start()
      {
        voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();
@@ -30,12 +31,14 @@ public class PauseMenuSettings : MonoBehaviour
     {
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
         Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
+        gameManager = GameManager.FindInstance();
     }
 
     public void OnClickDisconnect()
     {
-
+        gameManager.DisconnectSession();
         SceneManager.LoadSceneAsync("1.Start");
+
 
     }
 
@@ -59,13 +62,14 @@ public class PauseMenuSettings : MonoBehaviour
         Settings.SetActive(false);
     }
 
-    /*public void OnClickReturnLobby()
+    public void OnClickReturnLobby()
     {
-      SceneManagerScript  sceneManager=GameObject.Find("SceneManager").GetComponent<SceneManagerScript>();
-      sceneManager.onNewMap = false;
-      PhotonNetwork.LeaveRoom();
-      
-    }*/
+        gameManager.LeaveSession();
+       
+        SceneManager.LoadSceneAsync("Lobby");
+       
+
+    }
 
     /* public void OnClickReturnGame()
      {

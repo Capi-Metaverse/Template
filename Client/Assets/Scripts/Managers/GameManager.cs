@@ -177,6 +177,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         _lobbyManager.setLobbyButtons(true);
         SetUserStatus(UserStatus.PreLobby);
     }
+  
 
     //Create a session/room
     public async void CreateSession(SessionProps props)
@@ -255,7 +256,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     }
 
     //Debug function to know the user status
-    private void SetUserStatus(UserStatus status, string reason = "")
+    public void SetUserStatus(UserStatus status, string reason = "")
     {
         if (UserStatus == status)
             return;
@@ -284,6 +285,11 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         await EnterLobby();
 
        
+    }
+    public void DisconnectSession()
+    {
+        Disconnect();
+      
     }
     //Function that executes when a user clicks on Join in the Lobby
     public void StartGame(string sessionName, int avatarNumber)

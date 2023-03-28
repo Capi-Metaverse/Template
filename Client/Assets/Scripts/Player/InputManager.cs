@@ -39,12 +39,30 @@ public class InputManager : MonoBehaviour
         // Function is finished
     }
     // Start is called before the first frame update
+
+    public static InputManager FindInstance()
+    {
+        return FindObjectOfType<InputManager>();
+    }
+
+    private void Awake()
+    {
+        InputManager[] managers = FindObjectsOfType<InputManager>();
+
+        //Check if there is more managers
+        if (managers != null && managers.Length > 1)
+        {
+            // There should never be more than a single App container in the context of this sample.
+            Destroy(gameObject);
+            return;
+
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
     void Start()
     {
         manageData = new ManageData();
-       
         manageData.LoadData();
-        DontDestroyOnLoad(this.gameObject);
         StartCoroutine(LoadInitialKeys());
        
     }
