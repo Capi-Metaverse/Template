@@ -263,8 +263,8 @@ MonoBehaviour:
   TargetInterpolationDelay: 0.03
   viewUpDownRotationSpeed: 50
   canMove: 1
-  walkingSpeed: 3.5
-  runningSpeed: 5.5
+  walkingSpeed: 1.5
+  runningSpeed: 3.5
   jumpSpeed: 4
   lookSpeed: 2
   lookXLimit: 45

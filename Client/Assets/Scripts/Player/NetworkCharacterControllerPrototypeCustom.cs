@@ -16,8 +16,8 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     public bool canMove = true;
     private bool isFalling;
     private bool isRunning;
-    public float walkingSpeed = 0.01f;
-    public float runningSpeed = 0.5f;
+    public float walkingSpeed = 3.5f;
+    public float runningSpeed = 5.5f;
     public float jumpSpeed = 4.0f;
     private float gravity = 55.0f;
     public float lookSpeed = 2.0f;
