@@ -62,9 +62,6 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     //User ID
     public string userID;
 
-    //Current Game Object
-
-    public PlayerManager current;
 
     public string mapName;
 
