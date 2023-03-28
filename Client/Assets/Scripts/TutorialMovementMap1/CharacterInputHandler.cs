@@ -9,6 +9,20 @@ public class CharacterInputHandler : MonoBehaviour
     Vector2 viewInputVector = Vector2.zero;
     bool isJumpButtonPressed = false;
 
+
+    //Raycast
+
+    //Raycast distance
+    public float rayDistance = 3;
+    //Raycast active
+    public bool active = false;
+    public float targetTime = 0.5f;
+    public GameObject raycastObject = null;
+    public GameObject eventText;
+    //Detect if Certain Object is being hit
+    bool HittingObject = false;
+    public Camera playerCamera;
+
     LocalCameraHandler localCameraHandler;
     public bool escPul;//Reference if ESC key is pushed or not(ESC opens the Menu and you�ll be on Pause State)
     UserStatus estado; //With this we keep track of the current state so we can use it in conditionals. States are (Game, Pause)
@@ -33,6 +47,7 @@ public class CharacterInputHandler : MonoBehaviour
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
         Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
         scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;//Scope
+        eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject;
         Debug.Log(Pause);
 
         //seteamos el estado para que este InGame, esto hay que cambiarlo
@@ -42,7 +57,59 @@ public class CharacterInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(localCameraHandler == null) localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
+        if (localCameraHandler == null) { 
+            localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
+            playerCamera = localCameraHandler.gameObject.GetComponent<Camera>();
+
+        }
+
+        targetTime -= Time.deltaTime;
+        //Raycast
+        RaycastHit hit;
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rayDistance, LayerMask.GetMask("Interactive")))
+        {
+            if (raycastObject == null)
+            {
+                raycastObject = hit.transform.gameObject;
+               
+                eventText.SetActive(true);
+                HittingObject = true;
+            }
+            //RaycastObject
+            else if (raycastObject != hit.transform.gameObject)
+            {
+               
+                raycastObject = hit.transform.gameObject;
+              
+                eventText.SetActive(true);
+                HittingObject = true;
+
+            }
+            //If the user interacts, activate the event
+            //if (inputManager.GetButtonDown("Interact") && targetTime <= 0)
+            if (Input.GetKeyDown(KeyCode.E) && targetTime <= 0)
+            {
+                //Cooldown timer
+                targetTime = 0.5f;
+
+                //Retrieve Parent Object and call event
+                GameObject eventObject = hit.transform.gameObject;
+                Debug.Log("Activado");
+                //eventObject.GetComponent<IMetaEvent>().activate(true);
+            }
+        }
+
+        else
+        {
+
+            if (raycastObject != null)
+            {
+                //raycastObject.GetComponent<Outline>().enabled = false;
+                raycastObject = null;
+                eventText.SetActive(false);
+                HittingObject = false;
+            }
+        }
 
         //Pause
         if (!Input.GetKeyDown(KeyCode.Escape))
