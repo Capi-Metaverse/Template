@@ -171,6 +171,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+  _avatar: 0
+  playerPrefabs: []
 --- !u!114 &5435614696623482846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +211,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f699857f188ed2347bd9f90638a1b757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rayDistance: 3
+  active: 0
+  targetTime: 0.5
+  raycastObject: {fileID: 0}
+  eventText: {fileID: 0}
+  playerCamera: {fileID: 7083322979762619072}
   escPul: 0
   Pause: {fileID: 0}
   Settings: {fileID: 0}
@@ -253,13 +261,15 @@ MonoBehaviour:
     RotTeleportRadians: 1.5
   UseLegacySharedModeInterpolation: 0
   TargetInterpolationDelay: 0.03
-  gravity: -20
-  jumpImpulse: 4
-  acceleration: 5
-  braking: 100
-  maxSpeed: 2
-  rotationSpeed: 50
   viewUpDownRotationSpeed: 50
+  canMove: 1
+  walkingSpeed: 3.5
+  runningSpeed: 5.5
+  jumpSpeed: 4
+  lookSpeed: 2
+  lookXLimit: 45
+  sensitivity: 1
+  playerCamera: {fileID: 0}
   _IsGrounded: 0
   _Velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &8425398613531851932

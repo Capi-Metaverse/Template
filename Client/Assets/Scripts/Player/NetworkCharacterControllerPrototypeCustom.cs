@@ -8,18 +8,24 @@ using UnityEngine;
 // ReSharper disable once CheckNamespace
 public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
   [Header("Character Controller Settings")]
-  private float gravity       = -20.0f;
+  
     private float jumpImpulse   = 4.0f;
-    private float acceleration  = 100.0f;
-    private float braking       = 50.0f;//how much vel is decremented when stopped moving
-    private float maxSpeed      = 3.0f;
     private float rotationSpeed = 50.0f;
     public float viewUpDownRotationSpeed = 50.0f;
     //Run
-    public float Speed;
-    public float RunSpeed = 3.0f;
-    public float NormalSpeed = 1.0f;
-    public bool isRunning = false;
+    public bool canMove = true;
+    private bool isFalling;
+    private bool isRunning;
+    public float walkingSpeed = 0.01f;
+    public float runningSpeed = 0.5f;
+    public float jumpSpeed = 4.0f;
+    private float gravity = 55.0f;
+    public float lookSpeed = 2.0f;
+    public float lookXLimit = 45.0f;
+    public float sensitivity = 10.0f;
+    Vector3 moveDirection = Vector3.zero;
+    float rotationX = 0;
+    public Camera playerCamera;
 
     [Networked]
   [HideInInspector]
@@ -90,49 +96,52 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
   /// <param name="direction">Intended movement direction, subject to movement query, acceleration and max speed values.</param>
   /// </summary>
   public virtual void Move(Vector3 direction) {
-    var deltaTime    = Runner.DeltaTime;
-    var previousPos  = transform.position;
-    var moveVelocity = Velocity;
+        var deltaTime    = Runner.DeltaTime;
+        var previousPos  = transform.position;
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
+        Vector3 right = transform.TransformDirection(Vector3.right);
+        // Press Left Shift to run
+        isRunning = Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.S);
+        float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
+        float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
+        float movementDirectionY = moveDirection.y;
+        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        //Normalize diagonal speed
+        moveDirection = moveDirection.normalized * Mathf.Clamp(moveDirection.magnitude, 0, 50);//Parameters are:(Value,MinX,MaxX)
 
-    //If is in the ground and his velocity on Y is negative it means that keeps falling so we put velocity(Y) to 0.
-    if (IsGrounded && moveVelocity.y < 0) {
-      direction = Transform.up * 0;//Stop falling when touch the ground
-    }
+        if (Input.GetButton("Jump") && canMove && Controller.isGrounded)
+        {
+            moveDirection.y = jumpSpeed;
+            //anim.SetTrigger("Jumping");
+        }
+        else
+        {
+            moveDirection.y = movementDirectionY;
+        }
 
-    if (Input.GetKey(KeyCode.LeftShift))
-    {
-        isRunning = true;
-        Speed = RunSpeed;
-        print("Running");
+        // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
+        // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
+        // as an acceleration (ms^-2)
+        if (!Controller.isGrounded)
+        {
+            moveDirection.y -= gravity * Time.deltaTime;
+        }
 
-    }
-    else
-    {
-        isRunning = false;
-        Speed = NormalSpeed;
-        print("Not Running");
-    }
+        direction = moveDirection;
 
-    if (Input.GetKey("w"))
-        direction += Transform.forward * Speed;
-    if (Input.GetKey("s"))
-        direction += Transform.forward * -Speed;
-    if (Input.GetKey("a"))
-        direction += Transform.right * -Speed;
-    if (Input.GetKey("d"))
-        direction += Transform.right * Speed;
+        Controller.Move(direction * deltaTime);
 
-    direction += Transform.up * gravity;
+        if (canMove)
+        {
+            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed / sensitivity;
 
-    if (Input.GetKeyDown(KeyCode.Space))
-    {
-        direction -= Transform.up * 10f;
-    }
+            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed / sensitivity, 0);
+        }
 
-    Controller.Move(direction * deltaTime);
-
-    Velocity   = (transform.position - previousPos) * Runner.Simulation.Config.TickRate;
-    IsGrounded = Controller.isGrounded;
+        Velocity   = (transform.position - previousPos) * Runner.Simulation.Config.TickRate;
+        IsGrounded = Controller.isGrounded;
   }
 
     public void Rotate(float rotationY)
