@@ -1,26 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class MusicManager : MonoBehaviour
 {
-    private AudioSource _audiosource;
-    public AudioClip[] songs;
-    public float volume;
+    private static MusicManager _instance;
+    public static MusicManager Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+    private AudioSource _audioSource;
+    private GameObject MusicController;
+    private TMP_Text SongText;
+    private Button LeftArrow;
+    private Button RightArrow;
+    public bool StopAudio = false;
+    public Object[] songs;
+    public string CurrentSong;
+    public float volume = 0.04f;
     [SerializeField] private float _trackTimer;
     [SerializeField] private float _songsPlayed;
     [SerializeField] private bool[] _beenPlayed;
 
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(_instance);
+        }
+        else
+            Destroy(this.gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        _audiosource = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
+        songs = Resources.LoadAll("Audios/Music", typeof(AudioClip));
 
-        _beenPlayed= new bool[songs.Length];
+        _beenPlayed = new bool[songs.Length];
 
-        if (!_audiosource.isPlaying)
+        if (!_audioSource.isPlaying)
         {
-            Debug.Log("DebugLog: No music playing");
             ChangeSong(Random.Range(0, songs.Length));
         }
     }
@@ -28,22 +55,57 @@ public class MusicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _audiosource.volume = volume;
+        _audioSource.volume = volume;
 
-        if (!_audiosource.isPlaying || _trackTimer>= _audiosource.clip.length)
+        //if (SceneManager.GetActiveScene().buildIndex > 1 && SongText == null)
+        //{
+        //    MusicController = GameObject.Find("Menus").transform.GetChild(1).GetChild(0).GetChild(0).GetChild(1).GetChild(9).gameObject;
+        //    SongText = MusicController.transform.GetChild(2).GetComponent<TMP_Text>();
+        //    SongText.text = CurrentSong;
+
+        //    LeftArrow = MusicController.transform.GetChild(0).GetComponent<Button>();
+        //    RightArrow = MusicController.transform.GetChild(1).GetComponent<Button>();
+
+        //    LeftArrow.onClick.AddListener(() => ChangeSong(Random.Range(0, songs.Length)));
+        //    RightArrow.onClick.AddListener(() => ChangeSong(Random.Range(0, songs.Length)));
+        //}
+
+        if (_audioSource.isPlaying)
+            _trackTimer += 1 * Time.deltaTime;
+
+        if ((!_audioSource.isPlaying || _trackTimer >= _audioSource.clip.length) && StopAudio == false)
         {
             ChangeSong(Random.Range(0, songs.Length));
         }
-        if (_audiosource.isPlaying)
-        {
-            _trackTimer += 1 * Time.deltaTime;
-            Debug.Log("DebugLog: Music playing..."); 
-        }
+        ResetShuffle();
+    }
 
-        if (_songsPlayed==songs.Length)
+    public void ChangeSong(int songPicked)
+    {
+        if (!_beenPlayed[songPicked])
+        {
+            _trackTimer = 0;
+            _songsPlayed++;
+            _beenPlayed[songPicked] = true;
+            _audioSource.clip = (AudioClip)songs[songPicked];
+            _audioSource.Play();
+            CurrentSong = songs[songPicked].name;
+
+            //if (SongText != null)
+            //    SongText.text = CurrentSong;
+        }
+        else
+        {
+            _audioSource.Stop();
+        }
+    }
+
+    private void ResetShuffle()
+    {
+        if (_songsPlayed == songs.Length)
         {
             _songsPlayed = 0;
-            for(int i = 0; i < songs.Length; i++)
+            for (int i = 0; i < songs.Length; i++)
             {
                 if (i == songs.Length)
                     break;
@@ -52,20 +114,24 @@ public class MusicManager : MonoBehaviour
             }
         }
     }
-    public void ChangeSong(int songPicked)
+
+    public void ChangeAudioState()
     {
-        if (!_beenPlayed[songPicked])
+        if (_audioSource.isPlaying == true)
         {
-            _trackTimer = 0;
-            _songsPlayed++;
-            _beenPlayed[songPicked] = true;
-            _audiosource.clip = songs[songPicked];
-            _audiosource.Play();
+            _audioSource.Stop();
+            StopAudio = true;
         }
         else
         {
-            _audiosource.Stop();
+            _audioSource.Play();
+            StopAudio = false;
         }
-        
+    }
+
+    public void ActivateAudio()
+    {
+        _audioSource.Play();
+        StopAudio = false;
     }
 }

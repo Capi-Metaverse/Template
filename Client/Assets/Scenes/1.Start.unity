@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3966,6 +3966,22 @@ PrefabInstance:
     - target: {fileID: 2625177154707920351, guid: b26056e9b2f585845acdaf876c801654, type: 3}
       propertyPath: m_Name
       value: Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583057240042044856, guid: b26056e9b2f585845acdaf876c801654, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583057240042044856, guid: b26056e9b2f585845acdaf876c801654, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233368660990679665, guid: b26056e9b2f585845acdaf876c801654, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233368660990679665, guid: b26056e9b2f585845acdaf876c801654, type: 3}
+      propertyPath: songs.Array.size
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2462345301921755696, guid: b26056e9b2f585845acdaf876c801654, type: 3}
