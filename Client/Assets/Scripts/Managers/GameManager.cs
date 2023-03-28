@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     //Runner, JUST ONE PER USER/ROOM
     //It's like PhotonNetwork.somefunction() in PUN2
-    [SerializeField] public NetworkRunner _runner;
+    [SerializeField] private NetworkRunner _runner;
 
     //The Lobby Manager from Lobby Scene
     private LobbyManager _lobbyManager;
@@ -274,7 +274,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     }
 
 
-    //Refactor??
+    //Function that spawns the Player Item
     public void SpawnPlayerItem(PlayerItem player)
     {
      PlayerItem.Spawn(_runner, player);
@@ -288,33 +288,44 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
        
     }
-
+    //Function that executes when a user clicks on Join in the Lobby
     public void StartGame(string sessionName, int avatarNumber)
     {
         //We disconnect the actual runner
          Disconnect();
         this.avatarNumber = avatarNumber;
-        this.mapName = sessionName;
+        mapName = sessionName;
         //We change to the new map
         SceneManager.LoadSceneAsync("Mapa1");
         Debug.Log("Creating session");
-        //Properties of the room WIP
-        SessionProps props = new SessionProps();
-        props.StartMap = "Mapa1";
-        props.RoomName = sessionName + "- 1";
-        props.AllowLateJoin = true;
-        props.PlayerLimit = 10;
-
-       //await StartSession(GameMode.Shared, props);
-    
-        //PlayerManager.SpawnPlayer(_runner, current);
 
 
     }
-    
 
+    /* Function that changes the map to another
+     * For example Map1 --> Map2 // Lobby --> HUBValencia
+     * 
+     * It disconnects the current Network Runner and change the scene to the new map.
+     * It's not needed to start the new Runner because the Runner Handler of the scene is responsible for initialising it.
+     * 
+     */
+    public void ChangeMap(string map)
+    {
+        Disconnect();
+        SceneManager.LoadSceneAsync(map);
+
+    }
+
+
+
+    //Runner Get Set
 
     public NetworkRunner GetRunner() { return _runner; }
+
+    public void SetRunner(NetworkRunner runner)
+    {
+        _runner = runner;
+    }
 
 
 
@@ -418,10 +429,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         throw new NotImplementedException();
     }
 
-   public void ChangeMap(string map)
-    {
-        Disconnect();
-        SceneManager.LoadSceneAsync(map);
 
-    }
+
+    
 }
