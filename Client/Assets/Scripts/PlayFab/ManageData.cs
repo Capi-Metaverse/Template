@@ -9,6 +9,28 @@ using PlayFab.ClientModels;
 using UnityEngine;
 
 
+public class InteractKey
+{
+    public int interactkey;
+
+    public InteractKey(int interactkey)
+    {
+        this.interactkey = interactkey;
+    }
+}
+
+
+
+public class PresentationKey
+{
+    public int presentation;
+
+    public PresentationKey(int presentation)
+    {
+        this.presentation = presentation;
+    }
+}
+
 public class Keys
 {
     public int interact;
@@ -26,13 +48,13 @@ public class ManageData : MonoBehaviour
     public Keys currentkeys;
 
     // Save User Data
-    public void SaveData(int interactkey, int changecamerakey)
+    public void SaveData(Keys keys)
     {
         var request = new UpdateUserDataRequest
         {
             Data = new Dictionary<string, string>
             {
-                {"Keys", JsonConvert.SerializeObject(new Keys(interactkey, changecamerakey))}
+                {"Keys", JsonConvert.SerializeObject(keys)}
             }
         };
         PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);

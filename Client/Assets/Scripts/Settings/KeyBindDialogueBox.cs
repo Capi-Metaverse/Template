@@ -25,7 +25,6 @@ public class KeyBindDialogueBox : MonoBehaviour
         inputManager = GameObject.FindObjectOfType<InputManager>();
         playerUiPrefab = GameObject.FindObjectOfType<PlayerUiPrefab>();
         //Create one "Key List Item"
-
         manageData = new ManageData();
 
 
@@ -72,20 +71,22 @@ public class KeyBindDialogueBox : MonoBehaviour
                         inputManager.SetButtonForKey(buttonToRebind, kc);
                         buttonToLabel[buttonToRebind].text = kc.ToString();
 
-                        if (buttonToRebind == "Interact")
+                        switch (buttonToRebind)
                         {
-                           
-                            playerUiPrefab.ChangeLetter(kc.ToString());
-                            inputManager.a = ((int)kc);
-                            manageData.SaveData(((int)kc), inputManager.b);
+                            case "Interact":
+                                {
+                                    playerUiPrefab.ChangeLetter(kc.ToString());
+                                    inputManager.currentKeys.interact = ((int)kc);
+                                }
+                                break;
+                            case "ChangeCamera":
+                                {
+                                    playerUiPrefab.ChangeLetterK(kc.ToString());
+                                    inputManager.currentKeys.presentationMode = ((int)kc);
+                                }
+                                break;
                         }
-
-                        if (buttonToRebind == "ChangeCamera")
-                        {
-                            playerUiPrefab.ChangeLetterK(kc.ToString());
-                            inputManager.b = ((int)kc);
-                            manageData.SaveData(inputManager.a, ((int)kc));
-                        }
+                        manageData.SaveData(inputManager.currentKeys);
                         buttonToRebind = null;
                         break;
                     }

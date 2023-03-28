@@ -8,10 +8,10 @@ public class InputManager : MonoBehaviour
 {
     public Dictionary<string, KeyCode> buttonKeys;
     public ManageData manageData;
-   
-    public int a;
-    public int b;
-    IEnumerator MyFunction()
+
+    public Keys currentKeys;
+
+    IEnumerator LoadInitialKeys()
     {
         // Do some work here...
         yield return null; // Wait one frame
@@ -24,17 +24,18 @@ public class InputManager : MonoBehaviour
         {
             buttonKeys["Interact"] = KeyCode.E;
             buttonKeys["ChangeCamera"] = KeyCode.K;
+
+            manageData.currentkeys = new Keys((int)KeyCode.E, (int)KeyCode.K);
+            manageData.SaveData(manageData.currentkeys);
         }
         else
         {
             Debug.Log("entro al else");
             buttonKeys["Interact"] = (KeyCode)manageData.currentkeys.interact;
             buttonKeys["ChangeCamera"] = (KeyCode)manageData.currentkeys.presentationMode;
-          
-            
-            
-          
+
         }
+        currentKeys = manageData.currentkeys;
         // Function is finished
     }
     // Start is called before the first frame update
@@ -44,7 +45,7 @@ public class InputManager : MonoBehaviour
        
         manageData.LoadData();
         DontDestroyOnLoad(this.gameObject);
-        StartCoroutine(MyFunction());
+        StartCoroutine(LoadInitialKeys());
        
     }
 
