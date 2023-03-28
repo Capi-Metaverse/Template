@@ -14,6 +14,7 @@ public class NetworkRunnerHandler : MonoBehaviour
 
     NetworkRunner networkRunner;
     GameManager gameManager;
+    public string map;
 
     private void Awake()
     {
@@ -41,13 +42,14 @@ public class NetworkRunnerHandler : MonoBehaviour
         }
 
         runner.ProvideInput = true;
+        GameManager.FindInstance()._runner = runner;
 
         return runner.StartGame(new StartGameArgs
         {
             GameMode = gameMode,
             Address = address,
             Scene = scene,
-            SessionName = gameManager.mapName,
+            SessionName = gameManager.mapName + "-" + map ,
             Initialized = initialized,
             SceneManager = sceneManager
         });

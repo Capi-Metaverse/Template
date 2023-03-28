@@ -95,7 +95,7 @@ public class CharacterInputHandler : MonoBehaviour
                 //Retrieve Parent Object and call event
                 GameObject eventObject = hit.transform.gameObject;
                 Debug.Log("Activado");
-                //eventObject.GetComponent<IMetaEvent>().activate(true);
+                eventObject.GetComponent<IMetaEvent>().activate(true);
             }
         }
 

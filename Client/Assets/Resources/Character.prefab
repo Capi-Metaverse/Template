@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  avatar: 0
+  _avatar: 0
   playerPrefabs:
   - {fileID: 0}
   - {fileID: -3915082565821610680, guid: f473450ed07080c41bc861586d86cc9e, type: 3}
@@ -132,6 +132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f699857f188ed2347bd9f90638a1b757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rayDistance: 3
+  active: 0
+  targetTime: 0.5
+  raycastObject: {fileID: 0}
+  eventText: {fileID: 0}
+  playerCamera: {fileID: 0}
   escPul: 0
   Pause: {fileID: 0}
   Settings: {fileID: 5587160888839851947, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
@@ -195,6 +201,10 @@ MonoBehaviour:
   UseLegacySharedModeInterpolation: 0
   TargetInterpolationDelay: 0.03
   viewUpDownRotationSpeed: 50
+  Speed: 0
+  RunSpeed: 3
+  NormalSpeed: 1
+  isRunning: 0
   _IsGrounded: 0
   _Velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &8062771405473327188
@@ -392,7 +402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8464196530687960134, guid: 6656e180177ec6746ab1e8248c512cfd, type: 3}
       propertyPath: m_text
-      value: 
+      value: Press E to interact
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2648901319380380238, guid: 6656e180177ec6746ab1e8248c512cfd, type: 3}

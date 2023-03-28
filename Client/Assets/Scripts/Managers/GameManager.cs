@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     //Runner, JUST ONE PER USER/ROOM
     //It's like PhotonNetwork.somefunction() in PUN2
-    [SerializeField] private NetworkRunner _runner;
+    [SerializeField] public NetworkRunner _runner;
 
     //The Lobby Manager from Lobby Scene
     private LobbyManager _lobbyManager;
@@ -418,5 +418,10 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         throw new NotImplementedException();
     }
 
+   public void ChangeMap(string map)
+    {
+        Disconnect();
+        SceneManager.LoadSceneAsync(map);
 
+    }
 }
