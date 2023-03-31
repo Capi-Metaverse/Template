@@ -19,7 +19,7 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
     {
 
         if (this.avatar == 0) this.avatar = Random.Range(1, 6);
-        GameObject model = Instantiate(playerPrefabs[this.avatar], gameObject.transform.position, Quaternion.identity, gameObject.transform);
+        GameObject model = Instantiate(playerPrefabs[this.avatar], gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
         model.transform.SetAsFirstSibling();
 
         if (Object.HasInputAuthority)
