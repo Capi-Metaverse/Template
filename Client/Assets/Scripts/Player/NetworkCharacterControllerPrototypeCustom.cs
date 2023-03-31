@@ -25,7 +25,7 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     public float sensitivity = 10.0f;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
-    public Camera playerCamera;
+ 
 
     [Networked]
   [HideInInspector]
@@ -136,7 +136,7 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed / sensitivity;
 
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+      
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed / sensitivity, 0);
         }
 
