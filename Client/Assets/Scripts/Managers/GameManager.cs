@@ -145,13 +145,13 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     }
 
     //Disconnects the runner
-    public void Disconnect()
+    public async void Disconnect()
     {
         if (_runner != null)
         {
             //Disconnects the runner
             SetConnectionStatus(ConnectionStatus.Disconnected);
-            _runner.Shutdown();
+            await _runner.Shutdown();
             _runner = null;
 
         }
@@ -282,6 +282,9 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     public async void LeaveSession()
     {
        Disconnect();
+      
+
+        
         await EnterLobby();
 
        

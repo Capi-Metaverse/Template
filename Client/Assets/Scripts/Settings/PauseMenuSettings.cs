@@ -64,7 +64,7 @@ public class PauseMenuSettings : MonoBehaviour
 
     public void OnClickReturnLobby()
     {
-        gameManager.LeaveSession();
+        gameManager.Disconnect();
        
         SceneManager.LoadSceneAsync("Lobby");
        

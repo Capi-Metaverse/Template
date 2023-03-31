@@ -43,7 +43,10 @@ public class LobbyManager : MonoBehaviour
     private void Awake()
     {
         gameManager = GameManager.FindInstance();
+       
         gameManager.SetLobbyManager(this);
+        
+     
 
         
     }
