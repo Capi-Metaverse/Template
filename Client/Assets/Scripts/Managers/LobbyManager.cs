@@ -135,8 +135,8 @@ public class LobbyManager : MonoBehaviour
 
     public void OnClickJoinRoom()
     {
-        
-        gameManager.StartGame(sessionName.text,avatarNumber);
+        Debug.Log(sessionName.text);
+        gameManager.StartGame(sessionNamePanel.text,avatarNumber);
     }
 
     //Function that cleans the session list
