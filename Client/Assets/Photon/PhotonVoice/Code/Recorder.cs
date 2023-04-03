@@ -59,7 +59,7 @@ namespace Photon.Voice.Unity
         private bool encrypt;
 
         [SerializeField]
-        private bool transmitEnabled = true;
+        public bool transmitEnabled = true;
 
         [SerializeField]
         private SamplingRate samplingRate = SamplingRate.Sampling24000;
@@ -83,7 +83,7 @@ namespace Photon.Voice.Unity
         private bool loopAudioClip = true;
 
         [SerializeField]
-        private bool recordingEnabled = true;
+        private bool recordingEnabled = false;
 
         private Func<IAudioDesc> inputFactory;
 
@@ -132,7 +132,7 @@ namespace Photon.Voice.Unity
         private bool useMicrophoneTypeFallback = true;
 
         [SerializeField]
-        private bool recordWhenJoined = true;
+        private bool recordWhenJoined = false;
 
         private DeviceInfo microphoneDevice = DeviceInfo.Default;
 

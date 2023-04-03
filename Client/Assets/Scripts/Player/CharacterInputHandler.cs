@@ -29,6 +29,8 @@ public class CharacterInputHandler : MonoBehaviour
     public GameObject Pause;//Pause is an object in scene map, you can see it as the manager of the pause state
     public GameObject Settings;//The same as Pause but for settings, the state will be Pause too cause the setting are accesible from Pause
     GameObject scope;
+    public GameObject micro;//Actually this is the microphone in game
+    private VoiceManager voiceChat = new VoiceManager();//Manager for the voiceChat, not in scene object
     CharacterMovementHandler characterMovementHandler;
     
 
@@ -40,13 +42,17 @@ public class CharacterInputHandler : MonoBehaviour
 
     void Start()
     {
+        voiceChat.GetGameObjects();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        voiceChat.recorder.TransmitEnabled = false;
 
         characterMovementHandler = this.gameObject.GetComponent<CharacterMovementHandler>();
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
         Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
         scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;//Scope
+        micro = GameObject.Find("PlayerUIPrefab").transform.GetChild(0).gameObject;//Micro
+
         eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject;
         Debug.Log(Pause);
 
@@ -57,6 +63,9 @@ public class CharacterInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown("m") && estado == UserStatus.InGame)
+            voiceChat.MuteAudio(estado);
+
         if (localCameraHandler == null) { 
             localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
             playerCamera = localCameraHandler.gameObject.GetComponent<Camera>();
@@ -206,9 +215,8 @@ public class CharacterInputHandler : MonoBehaviour
 
 
 
-
-         scope.SetActive(false);
-        // micro.SetActive(false);
+        micro.SetActive(false);
+        scope.SetActive(false);
         Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
     }
 
@@ -235,10 +243,10 @@ public class CharacterInputHandler : MonoBehaviour
         ///DESACTIVAR LAS LETRAS DE PULSA E
 
 
-
+        
         Cursor.visible = false;
         scope.SetActive(true);
-        //micro.SetActive(true);
+        micro.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked; // Desactiva el bloqueo cursor 
     }
 
