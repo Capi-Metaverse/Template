@@ -70,6 +70,10 @@ MonoBehaviour:
     m_Localized: Giocatrici
     m_Metadata:
       m_Items: []
+  - m_Id: 14559762069196800
+    m_Localized: Invia
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

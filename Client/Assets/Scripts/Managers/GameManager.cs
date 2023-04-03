@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     //It's like PhotonNetwork.somefunction() in PUN2
     [SerializeField] private NetworkRunner _runner;
 
+    public GameObject currentPlayer;
+
     //The Lobby Manager from Lobby Scene
     private LobbyManager _lobbyManager;
 
@@ -435,7 +437,8 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         throw new NotImplementedException();
     }
 
-
-
-    
+    public GameObject GetCurrentPlayer()
+    {
+        return currentPlayer;
+    }
 }

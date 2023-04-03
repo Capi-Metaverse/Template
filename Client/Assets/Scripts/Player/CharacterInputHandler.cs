@@ -198,7 +198,8 @@ public class CharacterInputHandler : MonoBehaviour
         //playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
 
 
-
+        estado = UserStatus.InPause;
+        Cursor.visible = true;
         //AQUI IRA EL FIND DEL CHARACTER CONTROL PARA DESACTIVAR
         //AQUI IRA EL FIND DEL PLAYERCAMERA PARA DESACTIVARLA
         characterMovementHandler.enabled=false;
@@ -274,8 +275,7 @@ public class CharacterInputHandler : MonoBehaviour
         //Scene scene = SceneManager.GetActiveScene();
         //SalaText.GetComponent<TMP_Text>().text = ((string) PhotonNetwork.CurrentRoom.CustomProperties["Name"]) + " " + scene.name;
         //State and Cursor
-        estado = UserStatus.InPause;
-        Cursor.visible = true;  
+       
         DeactivateALL();
         //Escape activado
         //UnityEngine.Debug.Log (estado);

@@ -38,9 +38,15 @@ public class DoorEvent : MonoBehaviour, IMetaEvent
 
         else
         {
+
+            //We get CharacterInputHandler
+            
+
+
             //Password
             if (!lastPassword.Equals(password))
             {
+                
                 passwordScript.OpenUI(this);
             }
 

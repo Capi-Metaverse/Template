@@ -67,6 +67,10 @@ MonoBehaviour:
     m_Key: SettingsPlayerText
     m_Metadata:
       m_Items: []
+  - m_Id: 14559762069196800
+    m_Key: PasswordSubmitButton
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
