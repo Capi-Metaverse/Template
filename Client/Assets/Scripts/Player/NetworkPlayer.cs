@@ -9,6 +9,7 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
     [Networked]
     public int avatar { get; set; }
     public GameObject[] playerPrefabs;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +19,15 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
     public override void Spawned()
     {
 
+        var controller = Resources.Load("Animations/Character") as RuntimeAnimatorController;
+
+        //Add animator
         if (this.avatar == 0) this.avatar = Random.Range(1, 6);
         GameObject model = Instantiate(playerPrefabs[this.avatar], gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
         model.transform.SetAsFirstSibling();
+        model.AddComponent<Animator>();
+        model.GetComponent<Animator>().runtimeAnimatorController = controller;
+
 
         if (Object.HasInputAuthority)
         {

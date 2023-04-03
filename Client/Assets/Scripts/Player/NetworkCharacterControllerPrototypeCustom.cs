@@ -14,8 +14,10 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     public float viewUpDownRotationSpeed = 50.0f;
     //Run
     public bool canMove = true;
-    private bool isFalling;
-    private bool isRunning;
+    [Networked]
+    private bool isFalling { get; set; }
+    [Networked]
+    private bool isRunning { get; set; }
     public float walkingSpeed = 3.5f;
     public float runningSpeed = 5.5f;
     public float jumpSpeed = 4.0f;
@@ -25,6 +27,8 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     public float sensitivity = 10.0f;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
+
+    public Animator animator = null;
  
 
     [Networked]
@@ -52,6 +56,7 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
   protected override void Awake() {
     base.Awake();
     CacheController();
+  
   }
 
   public override void Spawned() {
@@ -147,5 +152,24 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     public void Rotate(float rotationY)
     {
         transform.Rotate(0, rotationY * Runner.DeltaTime * rotationSpeed, 0);
+    }
+
+
+    public override void Render()
+    {
+
+        if(animator == null) { animator = this.gameObject.GetComponentInChildren<Animator>(); }
+
+
+        if (Velocity.magnitude > 0) {
+            animator.SetBool("Walking", true);
+            
+        }
+        else
+        {
+            animator.SetBool("Walking", false);
+        }
+        animator.SetBool("Running", isRunning);
+
     }
 }

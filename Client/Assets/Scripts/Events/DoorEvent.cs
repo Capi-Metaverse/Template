@@ -12,6 +12,8 @@ public class DoorEvent : MonoBehaviour, IMetaEvent
     
    [SerializeField] private bool isPublic = true;
    [SerializeField] private string password;
+    
+   [SerializeField] private PasswordScript passwordScript;
     public string lastPassword = "";
     GameManager gameManager;
 
@@ -39,7 +41,7 @@ public class DoorEvent : MonoBehaviour, IMetaEvent
             //Password
             if (!lastPassword.Equals(password))
             {
-                //We open the UI
+                passwordScript.OpenUI(this);
             }
 
             else

@@ -243,6 +243,7 @@ MonoBehaviour:
   - {fileID: -3915082565821610680, guid: a9561826c922a76459b99f2f589cad7e, type: 3}
   - {fileID: -3915082565821610680, guid: c6004deba5390ed4784fdec07fb6b29e, type: 3}
   - {fileID: -3915082565821610680, guid: d610150337f0d054b9c1ad13aab73346, type: 3}
+  animator: {fileID: 8161174919126568394, guid: 57f6953ce52c19147b49af395f0446ec, type: 3}
 --- !u!114 &4409362525915276883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,10 +352,13 @@ MonoBehaviour:
   UseLegacySharedModeInterpolation: 0
   TargetInterpolationDelay: 0.03
   viewUpDownRotationSpeed: 50
-  Speed: 0
-  RunSpeed: 3
-  NormalSpeed: 1
-  isRunning: 0
+  canMove: 1
+  walkingSpeed: 3.5
+  runningSpeed: 5.5
+  jumpSpeed: 4
+  lookSpeed: 2
+  lookXLimit: 45
+  sensitivity: 10
   _IsGrounded: 0
   _Velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &5389401787901867171
