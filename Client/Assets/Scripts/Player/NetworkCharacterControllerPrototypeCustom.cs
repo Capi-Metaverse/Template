@@ -1,5 +1,6 @@
 using System;
 using Fusion;
+using Photon.Realtime;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -18,6 +19,10 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     private bool isFalling { get; set; }
     [Networked]
     private bool isRunning { get; set; }
+
+    [Networked]
+    private int jumpCount { get; set; } = 0;
+    private int _lastVisibleJump = 0;
     public float walkingSpeed = 3.5f;
     public float runningSpeed = 5.5f;
     public float jumpSpeed = 4.0f;
@@ -147,6 +152,8 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
 
         Velocity   = (transform.position - previousPos) * Runner.Simulation.Config.TickRate;
         IsGrounded = Controller.isGrounded;
+        if (IsGrounded) jumpCount++;
+        
   }
 
     public void Rotate(float rotationY)
@@ -160,16 +167,34 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
 
         if(animator == null) { animator = this.gameObject.GetComponentInChildren<Animator>(); }
 
+        if (IsGrounded)
+        {
+            if (Velocity.magnitude > 0 && Controller.isGrounded)
+            {
+                animator.SetBool("Walking", true);
 
-        if (Velocity.magnitude > 0) {
-            animator.SetBool("Walking", true);
-            
+            }
+            else
+            {
+                animator.SetBool("Walking", false);
+            }
+            animator.SetBool("Running", isRunning);
         }
+
         else
         {
-            animator.SetBool("Walking", false);
+            if (jumpCount > _lastVisibleJump)
+            {
+                animator.SetTrigger("Jumping");
+                // Play jump sound/particle effect
+                _lastVisibleJump = jumpCount;
+            }
+
         }
-        animator.SetBool("Running", isRunning);
+
+      
 
     }
+
+
 }
