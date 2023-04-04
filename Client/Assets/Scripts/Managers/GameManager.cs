@@ -71,8 +71,6 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     public string username = "Pepito";
     //User ID
     public string userID;
-    //User Role
-    public UserRole currentUserRole;
 
 
     public string mapName;
@@ -92,7 +90,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     public UserStatus UserStatus { get; private set; }
 
-    public UserRole UserRole { get; private set; }
+    public UserRole UserRole { get; set; }
 
     public int avatarNumber = 0;
     public GameObject[] playerPrefabs;
