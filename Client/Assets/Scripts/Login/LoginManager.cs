@@ -8,6 +8,11 @@ using TMPro;
 using EntityKey = PlayFab.GroupsModels.EntityKey;
 
 using UnityEngine.SceneManagement;
+using Fusion;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Collections;
 
 public class LoginManager : MonoBehaviour
 {
@@ -19,6 +24,10 @@ public class LoginManager : MonoBehaviour
     private GameManager gameManager;
     ManageData manageData;
     private EntityKey groupAdminEntity;
+
+    //Variable related to roles
+    Dictionary<string, bool> roles = new Dictionary<string, bool>();
+    public string UserRole;
 
     [System.Serializable]
     public class PlayerDataUsername
@@ -157,20 +166,10 @@ public class LoginManager : MonoBehaviour
 
         PlayFabClientAPI.ExecuteCloudScript(GetID, OnIDSuccess, OnError);
 
-        //Confirmar si es Admin
-        var ConfirmRole = new ExecuteCloudScriptRequest()
-        {
-            FunctionName = "checkRole",
-            FunctionParameter = new
-            {
-                GroupId = "77569033BA83F38B"
-            }
-        };
+        //Detemine the role of the user
+        StartCoroutine(DetermineRole());
 
-        PlayFabClientAPI.ExecuteCloudScript(ConfirmRole, OnAdmin, OnError);
-
-
-        SceneManager.LoadSceneAsync("Lobby");
+        //The load scene is inside determineRole for now
     }
 
     //Cuando Obtener ID funciona
@@ -196,11 +195,63 @@ public class LoginManager : MonoBehaviour
         Debug.LogError("Error adding member to group: " + error.ErrorMessage);
     }
 
-    //Cuando confirmar el rol funciona
+    /*------------------------------------------------------------------------*/
+
+    IEnumerator DetermineRole()
+    {
+        //Confirm if admin
+        ConfirmRole("admins");
+
+        //Confirm if moderator
+        ConfirmRole("moderators");
+
+        //Confirm if client
+        ConfirmRole("clients");
+
+        //Confirm if employee
+        ConfirmRole("members");
+
+        yield return new WaitForSeconds(4);
+
+        gameManager.UserRole = roles.FirstOrDefault(x => x.Value == true).Key;
+        Debug.Log("UserRole: " + gameManager.UserRole);
+
+        //Change to the next scene
+        SceneManager.LoadSceneAsync("Lobby");
+    }
+
+    //Comfirm which is the role of the user
+    public void ConfirmRole(string role)
+    {
+        var ConfirmRole = new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "checkRole",
+            FunctionParameter = new
+            {
+                GroupId = "77569033BA83F38B",
+                RoleId = role
+            }
+        };
+
+        PlayFabClientAPI.ExecuteCloudScript(ConfirmRole, OnAdmin, OnError);
+    }
+
+    //Confirm which role has the user
     private void OnAdmin(ExecuteCloudScriptResult result)
     {
-        Debug.Log("Role Admin:" + result.ToJson());
+        //Determine which role is being analyzed
+        var Request = result.Request.ToJson().Split('"');
+        var role = Request[Array.IndexOf(Request, "RoleId") + 2];
+
+        //Confirm if the user has the role
+        var functionresult = result.FunctionResult.ToString();
+        var isRole = functionresult.Contains("true");
+
+        roles.Add(role, isRole);
     }
+
+
+    /*------------------------------------------------------------------------*/
 
     //Cuando Username funciona
     void OnUsernameSuccess(PlayFab.ClientModels.ExecuteCloudScriptResult result)

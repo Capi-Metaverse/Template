@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     public string username = "Pepito";
     //User ID
     public string userID;
+    //User Role
+    public string UserRole;
 
 
     public string mapName;
