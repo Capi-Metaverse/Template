@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5729302982257982552}
   - component: {fileID: 8021269115405755264}
   - component: {fileID: 3369865205766407877}
-  - component: {fileID: 8470806742765731438}
+  - component: {fileID: 1945561161894460959}
   m_Layer: 0
   m_Name: ChooseFile
   m_TagString: Untagged
@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.1, y: 2.76}
+  m_AnchoredPosition: {x: -0.099975586, y: 2.7600098}
   m_SizeDelta: {x: 0.9, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5729302982257982552
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8470806742765731438
+--- !u!114 &1945561161894460959
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,4 +114,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   presentation: {fileID: 0}
-  Img: []
+  loadingPressCanvas: {fileID: 0}
+  size: 0

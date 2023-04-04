@@ -300,4 +300,6 @@ public class CharacterInputHandler : MonoBehaviour
         Debug.Log(estado);
 
     }
+
+ 
 }
