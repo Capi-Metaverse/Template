@@ -27,7 +27,7 @@ public class LoginManager : MonoBehaviour
 
     //Variable related to roles
     Dictionary<string, bool> roles = new Dictionary<string, bool>();
-    public string UserRole;
+    public string UserRolePlayFab;
 
     [System.Serializable]
     public class PlayerDataUsername
@@ -213,8 +213,23 @@ public class LoginManager : MonoBehaviour
 
         yield return new WaitForSeconds(4);
 
-        gameManager.UserRole = roles.FirstOrDefault(x => x.Value == true).Key;
-        Debug.Log("UserRole: " + gameManager.UserRole);
+        UserRolePlayFab = roles.FirstOrDefault(x => x.Value == true).Key;
+        switch (UserRolePlayFab)
+        {
+            case "admins":
+                gameManager.currentUserRole = UserRole.Admin;
+                break;
+            case "members":
+                gameManager.currentUserRole = UserRole.Employee;
+                break;
+            case "clients":
+                gameManager.currentUserRole = UserRole.Client;
+                break;
+            case "moderators":
+                gameManager.currentUserRole = UserRole.Moderator;
+                break;
+        }
+        Debug.Log("UserRole: " + gameManager.currentUserRole);
 
         //Change to the next scene
         SceneManager.LoadSceneAsync("Lobby");
