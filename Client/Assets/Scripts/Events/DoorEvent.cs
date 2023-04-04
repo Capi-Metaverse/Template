@@ -66,5 +66,10 @@ public class DoorEvent : MonoBehaviour, IMetaEvent
 
     }
 
+    public void setPassword(string password)
+    {
+        this.password = password;
+    }
+
 
 }
