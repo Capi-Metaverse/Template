@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using Fusion;
 
-
-public class DoorEvent : MonoBehaviour, IMetaEvent
+public class DoorEvent : NetworkBehaviour, IMetaEvent
 {
 
     public string map;
 
     
    [SerializeField] private bool isPublic = true;
-   [SerializeField] private string password;
+
+    [Networked]
+   [SerializeField] private string password {  get; set; }
     
    [SerializeField] private PasswordScript passwordScript;
     public string lastPassword = "";
@@ -19,12 +21,13 @@ public class DoorEvent : MonoBehaviour, IMetaEvent
 
     public void activate(bool host)
     {
+        gameManager = GameManager.FindInstance();
 
         //If the room is public, we change the map
-        if (isPublic)
+        if (isPublic || gameManager.UserRole == UserRole.Admin )
         {
 
-            gameManager = GameManager.FindInstance();
+            
 
             //Activate the loading UI
 

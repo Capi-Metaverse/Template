@@ -30,6 +30,14 @@ public enum UserStatus
     InPause
 }
 
+public enum UserRole
+{
+    Admin,
+    Moderator,
+    Client,
+    Employee
+}
+
 //Require adds the component as a dependency
 [RequireComponent(typeof(NetworkSceneManagerBase))]
 public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
@@ -81,6 +89,8 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     public ConnectionStatus ConnectionStatus { get; private set; }
 
     public UserStatus UserStatus { get; private set; }
+
+    public UserRole UserRole { get; private set; }
 
     public int avatarNumber = 0;
     public GameObject[] playerPrefabs;
@@ -263,6 +273,13 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         if (UserStatus == status)
             return;
        UserStatus = status;
+    }
+
+    public void SetUserRole(UserRole role, string reason = "")
+    {
+        if (UserRole == role)
+            return;
+        UserRole = role;
     }
 
     //Function that updates the list of sessions

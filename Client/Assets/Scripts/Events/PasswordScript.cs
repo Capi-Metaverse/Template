@@ -40,16 +40,16 @@ public class PasswordScript : MonoBehaviour
     //Method to open the Password Menu UI
     public void OpenUI(DoorEvent doorEvent)
     {
-
-        GameObject player = GameManager.FindInstance().GetCurrentPlayer();
+        GameManager gameManager = GameManager.FindInstance();
+        GameObject player = gameManager.GetCurrentPlayer();
 
         player.GetComponent<CharacterInputHandler>().DeactivateALL();
 
         this.gameObject.SetActive(true);
 
         //If this user is admin, activate changePasswordbutton
+        if(gameManager.UserRole == UserRole.Admin) changeButton.gameObject.SetActive(true);
 
-        changeButton.gameObject.SetActive(true);
 
 
         this.doorEvent = doorEvent;
