@@ -57,8 +57,8 @@ public class PlayerItem : NetworkBehaviour, ISpawned
 
        this._lobbyManager = GameObject.FindObjectOfType<LobbyManager>();
 
-        this.username = gameManager.username;
-        this.playerName.text = gameManager.username;
+        this.username = gameManager.GetUsername();
+        this.playerName.text = gameManager.GetUsername();
         this.player = runner.LocalPlayer;
         this.networkObject = obj;
         this.leftArrowButton.SetActive(true);

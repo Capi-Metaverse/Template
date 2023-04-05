@@ -51,7 +51,7 @@ public class NetworkRunnerHandler : MonoBehaviour
             GameMode = gameMode,
             Address = address,
             Scene = scene,
-            SessionName = gameManager.mapName + "-" + map ,
+            SessionName = gameManager.GetMapName() + "-" + map ,
             Initialized = initialized,
             SceneManager = sceneManager
         });

@@ -184,7 +184,7 @@ public class LoginManager : MonoBehaviour
         string IDMaster = playerDataId.getPlayerId;
 
         Debug.Log("El Master ID es = " + IDMaster);
-        gameManager.userID = IDMaster;
+        gameManager.SetUserID(IDMaster);
     }
     //Cuando añadir miembtro funciona
     private void OnAddMemberSuccess(ExecuteCloudScriptResult result)
@@ -299,7 +299,7 @@ public class LoginManager : MonoBehaviour
 
         string username = playerDataUsername.getPlayerUsername;
 
-        gameManager.username = username;
+        gameManager.SetUsername(username);
 
         Debug.Log("El Master Nombre es = " + username); // output: "prueba1"
 

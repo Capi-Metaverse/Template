@@ -63,12 +63,12 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     private LobbyManager _lobbyManager;
 
     //User username
-    public string username = "Anon";
+    private string username = "Anon";
     //User ID
-    public string userID;
+    private string userID;
 
 
-    public string mapName;
+    private string mapName;
 
     //Static function to get the singleton
     public static GameManager FindInstance()
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     private UserRole UserRole { get; set; }
 
-    public int avatarNumber = 0;
+    private int avatarNumber = 0;
 
     //Initialization Correct
     private void Awake() 
@@ -353,6 +353,48 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     public void SetCurrentPlayer(GameObject currentPlayer)
     {
        this.currentPlayer = currentPlayer;
+    }
+
+    //AvatarNumber Get Set
+
+    public int GetAvatarNumber()
+    {
+        return this.avatarNumber;
+    }
+
+    public void SetAvatarNumber(int avatarNumber)
+    {
+       this.avatarNumber = avatarNumber;
+    }
+
+    public string GetUserID()
+    {
+        return this.userID;
+    }
+
+    public void SetUserID(string userID)
+    {
+        this.userID = userID;
+    }
+
+    public string GetUsername()
+    {
+        return this.username;
+    }
+
+    public void SetUsername(string username)
+    {
+        this.username = username;
+    }
+
+    public string GetMapName()
+    {
+        return this.mapName;
+    }
+
+    public void SetMapName(string mapName)
+    {
+        this.mapName = mapName;
     }
 
 

@@ -54,7 +54,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnBeforeSpawn(NetworkRunner runner, NetworkObject obj)
     {
-        obj.GetComponent<NetworkPlayer>().avatar = gameManager.avatarNumber;
+        obj.GetComponent<NetworkPlayer>().avatar = gameManager.GetAvatarNumber();
         gameManager.SetCurrentPlayer(obj.gameObject);
     }
 
