@@ -38,8 +38,6 @@ public enum UserRole
     Employee
 }
 
-//Require adds the component as a dependency
-[RequireComponent(typeof(NetworkSceneManagerBase))]
 public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 {
 
@@ -68,7 +66,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     private LobbyManager _lobbyManager;
 
     //User username
-    public string username = "Pepito";
+    public string username = "Anon";
     //User ID
     public string userID;
 
@@ -97,8 +95,8 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
 
 
-    //Initialization
-    private void Awake()
+    //Initialization Correct
+    private void Awake() 
     {
         //When this component awake, it get the others game managers
         GameManager[] managers = FindObjectsOfType<GameManager>();
@@ -115,7 +113,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         //If the scene loader is null, initializates it and change to the start scene.
         if (_loader == null)
         {
-            _loader = GetComponent<NetworkSceneManagerBase>();
+            _loader = new NetworkSceneManagerDefault();
 
             //Don't destroy the Game Manager
             DontDestroyOnLoad(gameObject);
@@ -130,6 +128,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     }
     
     //This function sets the LobbyManager and enter the Lobby
+    //Correct
     public async void SetLobbyManager(LobbyManager lobbyManager)
     {
         this._lobbyManager = lobbyManager;
@@ -138,7 +137,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     }
     //AWAKE -> Intro -> Lobby -> Session
 
-    //Add the NetworkRunner to this object
+    //Add the NetworkRunner to this object Correct
     private void Connect()
     {
         
@@ -156,7 +155,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         }
     }
 
-    //Disconnects the runner
+    //Disconnects the runner Correct
     public async void Disconnect()
     {
         if (_runner != null)
@@ -184,20 +183,23 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         if (!result.Ok)
         {
             SetConnectionStatus(ConnectionStatus.Failed);
+            
+            //Make error scenario
+
         }
 
         _lobbyManager.setLobbyButtons(true);
         SetUserStatus(UserStatus.PreLobby);
     }
-  
 
-    //Create a session/room
+
+    //Create a session/room Correct
     public async void CreateSession(SessionProps props)
     {
         await StartSession( GameMode.Shared, props);
     }
 
-    //Join a session/room
+    //Join a session/room Correct, Maybe improve props in the future
     public async void JoinSession(SessionInfo info)
     {
         SessionProps props = new SessionProps(info.Properties);
@@ -226,23 +228,16 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
            
         });
 
+        //Maybe refactor this part Add Player in setPlayerPanel?
+
         if (UserStatus == UserStatus.PreLobby)
         {
             Debug.Log("Entering Lobby");
             //Indicate LobbyManager to change the panel
             _lobbyManager.SetPlayerPanel(props.RoomName);
-            _lobbyManager.setLobbyButtons(false);
             _lobbyManager.AddPlayer();
-
             SetUserStatus(UserStatus.InLobby);
         }
-
-        else if (UserStatus == UserStatus.InLobby)
-        {
-            //Lógica para entrar a SalaLobby
-        }
-
-
 
         if (!result.Ok)
             SetConnectionStatus(ConnectionStatus.Failed, result.ShutdownReason.ToString());
@@ -250,24 +245,19 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
 
 
-    //Debug function to know the user connection
+    //Debug function to set the user connection
+    //Correct
     private void SetConnectionStatus(ConnectionStatus status, string reason = "")
     {
         if (ConnectionStatus == status)
             return;
         ConnectionStatus = status;
 
-        /*
-        if (!string.IsNullOrWhiteSpace(reason) && reason != "Ok")
-        {
-            _errorBox.Show(status, reason);
-        }
-        */
-
         Debug.Log($"ConnectionStatus={status} {reason}");
     }
 
-    //Debug function to know the user status
+    //Debug function to set the user status
+    //Correct
     public void SetUserStatus(UserStatus status, string reason = "")
     {
         if (UserStatus == status)
@@ -275,6 +265,8 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
        UserStatus = status;
     }
 
+    //Debug function to set the user role
+    //Correct
     public void SetUserRole(UserRole role, string reason = "")
     {
         if (UserRole == role)
@@ -283,6 +275,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     }
 
     //Function that updates the list of sessions
+    //Correct
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {
         //Because it seems this doesn't work like PUN2, i think is better update the whole panel
@@ -292,9 +285,11 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
 
     //Function that spawns the Player Item
+    //Refactor possibly
     public void SpawnPlayerItem(PlayerItem player)
     {
-     PlayerItem.Spawn(_runner, player);
+     //PlayerItem.Spawn(_runner, player);
+    _lobbyManager.Spawn(_runner, player);
     }
 
     //Function to Leave Room
@@ -308,12 +303,16 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
        
     }
+
+    //Disconnect???
     public void DisconnectSession()
     {
         Disconnect();
       
     }
+
     //Function that executes when a user clicks on Join in the Lobby
+    //Refactor
     public void StartGame(string sessionName, int avatarNumber)
     {
         //We disconnect the actual runner
@@ -334,6 +333,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
      * It's not needed to start the new Runner because the Runner Handler of the scene is responsible for initialising it.
      * 
      */
+    //Correct
     public void ChangeMap(string map)
     {
         Disconnect();
@@ -344,12 +344,18 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
 
     //Runner Get Set
-
+    //Correct
     public NetworkRunner GetRunner() { return _runner; }
 
     public void SetRunner(NetworkRunner runner)
     {
         _runner = runner;
+    }
+
+    //Current player is needed?
+    public GameObject GetCurrentPlayer()
+    {
+        return currentPlayer;
     }
 
 
@@ -391,14 +397,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
-        if(UserStatus == UserStatus.InLobby)
-        {
-            //Do nothing
-        }
-        else
-        {
-            //In game input
-        }
+        //Do nothing
     }
 
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)
@@ -454,8 +453,5 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         throw new NotImplementedException();
     }
 
-    public GameObject GetCurrentPlayer()
-    {
-        return currentPlayer;
-    }
+    
 }

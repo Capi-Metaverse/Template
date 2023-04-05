@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.UI;
 using Fusion;
 using ExitGames.Client.Photon.StructWrapping;
+using static Unity.Collections.Unicode;
 
 
 public class PlayerItem : NetworkBehaviour, ISpawned
@@ -50,7 +51,7 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         playerAvatarNumber = 0;
 
     }
-
+    /*
     public static void Spawn(NetworkRunner runner, PlayerItem player)
     {
 
@@ -63,8 +64,10 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         predictionKey: null
         );
     }
+    */
 
     //Function that initializes the object on the first user
+    /*
     public static void BeforeSpawn(NetworkRunner runner, NetworkObject obj)
     {
         //We get the GameManager for username
@@ -82,6 +85,20 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         item.leftArrowButton.SetActive(true);
         item.rightArrowButton.SetActive(true);
 
+    }
+    */
+
+    public void setInfo( GameManager gameManager, NetworkRunner runner, NetworkObject obj)
+    {
+
+       this._lobbyManager = GameObject.FindObjectOfType<LobbyManager>();
+
+        this.username = gameManager.username;
+        this.playerName.text = gameManager.username;
+        this.player = runner.LocalPlayer;
+        this.networkObject = obj;
+        this.leftArrowButton.SetActive(true);
+        this.rightArrowButton.SetActive(true);
     }
 
     public override void Spawned()

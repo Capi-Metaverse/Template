@@ -2,7 +2,7 @@ using Fusion;
 using System;
 using System.Collections.Generic;
 using TMPro;
-
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -104,6 +104,7 @@ public class LobbyManager : MonoBehaviour
         {
             roomPanel.SetActive(true);
             lobbyPanel.SetActive(false);
+            setLobbyButtons(false);
         }
 
     }
@@ -165,4 +166,39 @@ public class LobbyManager : MonoBehaviour
     {
         avatarNumber = number;
     }
+
+
+
+
+    //PlayerItemSpawn
+    public void Spawn(NetworkRunner runner, PlayerItem player)
+    {
+        runner.Spawn(
+        player,
+        Vector3.zero,
+        Quaternion.identity,
+        inputAuthority: runner.LocalPlayer,
+        BeforeSpawn,
+        predictionKey: null
+        );
+    }
+
+    //Function that initializes the object on the first user
+    public static void BeforeSpawn(NetworkRunner runner, NetworkObject obj)
+    {
+        //We get the GameManager for username
+        GameManager gameManager = GameManager.FindInstance();
+
+        //We get the network object
+        PlayerItem item = obj.GetComponent<PlayerItem>();
+
+        //Set item
+        item.setInfo(gameManager,runner,obj);
+        
+
+
+       
+
+    }
+
 }

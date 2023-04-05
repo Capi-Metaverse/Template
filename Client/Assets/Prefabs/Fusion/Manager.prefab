@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2625177154707920349}
   - component: {fileID: 2625177154707920348}
-  - component: {fileID: 2625177154707920346}
   - component: {fileID: 6547827779422490544}
   - component: {fileID: 7233368660990679665}
   - component: {fileID: 5583057240042044856}
@@ -54,41 +53,12 @@ MonoBehaviour:
     scenePath: Assets/Scenes/1.Start.unity
   _loader: {fileID: 0}
   _runner: {fileID: 0}
+  currentPlayer: {fileID: 0}
   username: Pepito
   userID: 
-  current: {fileID: 0}
+  mapName: 
   avatarNumber: 0
   playerPrefabs: []
---- !u!114 &2625177154707920346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2625177154707920351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08bebbc4dbe8bd64ca6d88cf9021dccb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowHierarchyWindowOverlay: 1
-  _loadScreen: {fileID: 2462345301995167336}
-  _lobby:
-    sceneAsset: {fileID: 102900000, guid: 2fd6410cecde61944b2669a77a270fe3, type: 3}
-    scenePath: Assets/Scenes/Lobby.unity
-  _maps:
-  - sceneAsset: {fileID: 102900000, guid: d5a3218ea9a0bf34c950bfc8a0b2aa36, type: 3}
-    scenePath: Assets/Scenes/Mapa0.unity
-  - sceneAsset: {fileID: 102900000, guid: f464382776cf42545908cfd39d6aac3c, type: 3}
-    scenePath: Assets/Scenes/Mapa1.unity
-  - sceneAsset: {fileID: 102900000, guid: bc4a49f583879a143859b41e561151b9, type: 3}
-    scenePath: Assets/Scenes/Mapa2.unity
-  - sceneAsset: {fileID: 102900000, guid: 672cbf57b9f20134d8853223689ac23f, type: 3}
-    scenePath: Assets/Scenes/Mapa3.unity
-  - sceneAsset: {fileID: 102900000, guid: 6db01cda3fd48274b97633f476714969, type: 3}
-    scenePath: Assets/Scenes/HUBValencia.unity
-  - sceneAsset: {fileID: 102900000, guid: ed37fef22d92cb540a35f5143a98a5ae, type: 3}
-    scenePath: Assets/Scenes/Oficinas.unity
 --- !u!114 &6547827779422490544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de2cadcd39537f4ca1a43aeaa2bb26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StopAudio: 0
   songs:
   - {fileID: 8300000, guid: b03bfc8da7d056d4c8bd3f0df4bc316d, type: 3}
   - {fileID: 8300000, guid: 2e6cb4a0a4ba39d42ad7fc55f750544f, type: 3}
@@ -120,6 +91,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 019aca8fcaa10f448854411e835f23b6, type: 3}
   - {fileID: 8300000, guid: b658ec41985851c45b4fbdf4f3c4812c, type: 3}
   - {fileID: 8300000, guid: ea846c0233e6c954da108cfd3e5d2fd3, type: 3}
+  CurrentSong: 
   volume: 0.1
   _trackTimer: 0
   _songsPlayed: 0
@@ -437,11 +409,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cfc3ccfa381ef44780d9bf1d48e402b, type: 3}
---- !u!1 &2462345301995167336 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3161821472550971359, guid: 1cfc3ccfa381ef44780d9bf1d48e402b, type: 3}
-  m_PrefabInstance: {fileID: 706231579031927223}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2462345301995167337 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3161821472550971358, guid: 1cfc3ccfa381ef44780d9bf1d48e402b, type: 3}
