@@ -8,27 +8,27 @@ using Fusion;
 public class AdvancePresentation : NetworkBehaviour, IMetaEvent
 {
    public Presentation presentation;
-    object[] content;
 
    public void activate(bool host)
    {
-
       presentation.OnAdvance();
 
       if (host)
       {
 
-      object[] content = new object[] { "Advance"};
             //The event is sent to the other users
-            //RPC_AdvancePress(content);
+            RPC_AdvancePress("Advance");
         }
      }
 
-    /*[Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
-    public void RPC_AdvancePress(object[] content, RpcInfo info = default)
+    [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.All)]
+    public void RPC_AdvancePress(string content, RpcInfo info = default)
     {
         Debug.Log("RPC: " + content);
-        this.content = content;
+        //Local invoke client
+        if (info.IsInvokeLocal)
+            Debug.Log("Debug: InvokeLocal");
+        else
+        activate(false);//Executed on clients
     }
-    */
 }

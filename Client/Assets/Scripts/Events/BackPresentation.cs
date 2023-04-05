@@ -8,7 +8,6 @@ using Photon.Realtime;
 public class BackPresentation : NetworkBehaviour, IMetaEvent
 {
    public Presentation presentation;
-   object[] content;
 
    public void activate(bool host)
    {
@@ -17,18 +16,19 @@ public class BackPresentation : NetworkBehaviour, IMetaEvent
 
       if (host)
       {
-
-      object[] content = new object[] { "Back"};
             //The event is sent to the other users
-            //RPC_BackPress(content);
+            RPC_BackPress("Back");
       }
    }
 
-    /*[Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
-    public void RPC_BackPress(object[] content, RpcInfo info = default)
+    [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.All)]
+    public void RPC_BackPress(string content, RpcInfo info = default)
     {
+
         Debug.Log("RPC: " + content);
-        this.content = content;
+        if (info.IsInvokeLocal)
+            Debug.Log("Debug: InvokeLocal");
+        else    
+        activate(false);//All clients except who invoked it
     }
-    */
 }

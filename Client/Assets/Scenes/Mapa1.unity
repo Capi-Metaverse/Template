@@ -22553,7 +22553,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d27b1f2a72c038048b3c751d6b5b1b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
   presentation: {fileID: 2143715370}
+--- !u!114 &1449963138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449963134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectInterest: 1
+  DefaultInterestGroups: []
+  DestroyWhenStateAuthorityLeaves: 0
+  AllowStateAuthorityOverride: 1
+  AoiPositionSource: {fileID: 0}
+  Flags: 2561
+  NetworkGuid:
+    RawGuidValue: 08629829f4704e66baaebdbf028fb8ee
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1449963137}
+  SimulationBehaviours: []
 --- !u!43 &1469316141
 Mesh:
   m_ObjectHideFlags: 0
@@ -22983,7 +23008,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8709da8a5bae5b542bf94347012b7532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
   presentation: {fileID: 2143715370}
+--- !u!114 &1488861960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488861956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectInterest: 1
+  DefaultInterestGroups: []
+  DestroyWhenStateAuthorityLeaves: 0
+  AllowStateAuthorityOverride: 1
+  AoiPositionSource: {fileID: 0}
+  Flags: 2561
+  NetworkGuid:
+    RawGuidValue: 5578abafbf09446b8845894dfc32bdad
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1488861959}
+  SimulationBehaviours: []
 --- !u!43 &1514603017
 Mesh:
   m_ObjectHideFlags: 0
@@ -31638,6 +31688,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1380b93f9329fa0479d2d1150290522e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1991568358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991568356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectInterest: 1
+  DefaultInterestGroups: []
+  DestroyWhenStateAuthorityLeaves: 0
+  AllowStateAuthorityOverride: 1
+  AoiPositionSource: {fileID: 0}
+  Flags: 2561
+  NetworkGuid:
+    RawGuidValue: 3d263d332f984f2d9cd8ca4b22025d6a
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1991568357}
+  SimulationBehaviours: []
 --- !u!1 &2132424553
 GameObject:
   m_ObjectHideFlags: 0

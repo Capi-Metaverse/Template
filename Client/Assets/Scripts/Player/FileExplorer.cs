@@ -12,6 +12,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Video;
 using Fusion;
+using ExitGames.Client.Photon.StructWrapping;
 
 public class FileExplorer : NetworkBehaviour
 {
@@ -25,7 +26,7 @@ public class FileExplorer : NetworkBehaviour
     public float size;
     object[] content;
 
-    #if UNITY_WEBGL && !UNITY_EDITOR
+#if UNITY_WEBGL && !UNITY_EDITOR
     //
     // WebGL
     //
@@ -147,11 +148,9 @@ public class FileExplorer : NetworkBehaviour
     //Upload the image file and share it with other users
     void ImageUpload(byte[] bytes){
         //We build the content item            
-        object[] content = new object[] { bytes}; 
     
         //We send the content to the other users
-        //RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others, CachingOption = EventCaching.AddToRoomCacheGlobal }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-        //PhotonNetwork.RaiseEvent(25, content, raiseEventOptions, SendOptions.SendReliable);
+        //RPC.
 
         SetImage(bytes);
     }
@@ -263,13 +262,16 @@ public class FileExplorer : NetworkBehaviour
         
                     
         json = JObject.Parse(request.downloadHandler.text);
-
+        Debug.Log("Json: " + json);
         //We build the content item
                         
         object[] content = new object[] { request.downloadHandler.text};
 
+        string[] stringArray = Array.ConvertAll(content, x => x.ToString());
+
+        Debug.Log("Finaliza Conversion" + stringArray[0]);
         //We send the content to the other users
-        //RPC_PressInfo(content);
+        RPC_PressInfo(stringArray);
 
         //Si es nula
         if (presentation.current >= 1) presentation.current=0;
@@ -324,12 +326,17 @@ public class FileExplorer : NetworkBehaviour
         StartCoroutine(GetRequestFunc());
     }
 
-    /*[Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
-    public void RPC_PressInfo(object[] content, RpcInfo info = default)
+    [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.All)]
+    public void RPC_PressInfo(string[] content, RpcInfo info = default)
     {
-        Debug.Log("RPC: " + content);
-        this.content = content;
+        Debug.Log("RPC: " + content[0].ToString());
+        //Local invoke client
+        if (info.IsInvokeLocal)
+            Debug.Log("Debug: InvokeLocal fileexplorer");
+        else
+        {
+            downloadImages(content[0]);
+        }
     }
-    */
 }
 
