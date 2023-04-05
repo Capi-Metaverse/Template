@@ -60,7 +60,6 @@ public class CharacterInputHandler : MonoBehaviour
         eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject;
         eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
 
-        eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject;
         Debug.Log(Pause);
 
         //seteamos el estado para que este InGame, esto hay que cambiarlo
@@ -78,6 +77,8 @@ public class CharacterInputHandler : MonoBehaviour
             playerCamera = localCameraHandler.gameObject.GetComponent<Camera>();
 
         }
+        if (HittingObject)
+            eventText.SetActive(true);
 
         targetTime -= Time.deltaTime;
         //Raycast
@@ -131,7 +132,7 @@ public class CharacterInputHandler : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.Escape))
         {
 
-            escPul = false; // Detecta si no est� pulsado
+            escPul = false; // Detecta si no esta pulsado
 
         }
 
@@ -216,12 +217,6 @@ public class CharacterInputHandler : MonoBehaviour
             eventTextK.SetActive(false);
         }
 
-        ///DESACTIVAR LAS LETRAS DE PULSA E
-        if (eventText != null)
-        {
-            eventText.SetActive(false);
-        }
-
 
         micro.SetActive(false);
         scope.SetActive(false);
@@ -246,12 +241,6 @@ public class CharacterInputHandler : MonoBehaviour
         if (eventTextK != null)
         {
             eventTextK.SetActive(true);
-        }
-
-        ///DESACTIVAR LAS LETRAS DE PULSA E
-        if (eventText != null)
-        {
-            eventText.SetActive(true);
         }
 
 
