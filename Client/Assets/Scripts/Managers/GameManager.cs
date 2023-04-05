@@ -234,8 +234,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         {
             Debug.Log("Entering Lobby");
             //Indicate LobbyManager to change the panel
-            _lobbyManager.SetPlayerPanel(props.RoomName);
-            _lobbyManager.AddPlayer();
+            _lobbyManager.SetPlayerPanel(props.RoomName,_runner);
             SetUserStatus(UserStatus.InLobby);
         }
 
@@ -283,14 +282,6 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         _lobbyManager.SetSessionList(sessionList);
     }
 
-
-    //Function that spawns the Player Item
-    //Refactor possibly
-    public void SpawnPlayerItem(PlayerItem player)
-    {
-     //PlayerItem.Spawn(_runner, player);
-    _lobbyManager.Spawn(_runner, player);
-    }
 
     //Function to Leave Room
     public async void LeaveSession()

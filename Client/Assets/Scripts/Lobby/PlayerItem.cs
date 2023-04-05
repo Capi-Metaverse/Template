@@ -51,42 +51,6 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         playerAvatarNumber = 0;
 
     }
-    /*
-    public static void Spawn(NetworkRunner runner, PlayerItem player)
-    {
-
-        runner.Spawn(
-        player,
-        Vector3.zero,
-        Quaternion.identity,
-        inputAuthority: runner.LocalPlayer,
-        BeforeSpawn,
-        predictionKey: null
-        );
-    }
-    */
-
-    //Function that initializes the object on the first user
-    /*
-    public static void BeforeSpawn(NetworkRunner runner, NetworkObject obj)
-    {
-        //We get the GameManager for username
-        GameManager gameManager = GameManager.FindInstance();
-       
-        //We get the network object
-        PlayerItem item = obj.GetComponent<PlayerItem>();
-        item._lobbyManager = GameObject.FindObjectOfType<LobbyManager>();
-
-
-        item.username = gameManager.username;
-        item.playerName.text = gameManager.username;
-        item.player = runner.LocalPlayer;
-        item.networkObject = obj;
-        item.leftArrowButton.SetActive(true);
-        item.rightArrowButton.SetActive(true);
-
-    }
-    */
 
     public void setInfo( GameManager gameManager, NetworkRunner runner, NetworkObject obj)
     {

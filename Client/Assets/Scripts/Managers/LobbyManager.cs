@@ -95,7 +95,7 @@ public class LobbyManager : MonoBehaviour
 
 
     //It sets the panel of players when you enter a session
-    public void SetPlayerPanel(string sessionName)
+    public void SetPlayerPanel(string sessionName, NetworkRunner runner)
     {
         this.sessionNamePanel.text = sessionName;
         this.sessionName.text = sessionName;
@@ -106,6 +106,8 @@ public class LobbyManager : MonoBehaviour
             lobbyPanel.SetActive(false);
             setLobbyButtons(false);
         }
+
+        SpawnPlayerItem(runner,playerItemPrefab);
 
     }
 
@@ -120,15 +122,6 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    //Add a new player to the room (Don't know if it works good 100% rn)
-    public void AddPlayer()
-    {
-
-        gameManager.SpawnPlayerItem(playerItemPrefab);
-        
-    }
-
-    
     //Function when a user leaves the session
     public void OnClickLeaveSession()
     {
@@ -171,7 +164,7 @@ public class LobbyManager : MonoBehaviour
 
 
     //PlayerItemSpawn
-    public void Spawn(NetworkRunner runner, PlayerItem player)
+    public void SpawnPlayerItem(NetworkRunner runner, PlayerItem player)
     {
         runner.Spawn(
         player,
