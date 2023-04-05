@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
+using System.Threading.Tasks;
 
 public class LoginManager : MonoBehaviour
 {
@@ -148,7 +149,8 @@ public class LoginManager : MonoBehaviour
      
        
         messageText.text = "logged in!";
-
+        //Determine the role of the user
+        DetermineRole();
 
         //Obtener Nombre
         var GetNa = new ExecuteCloudScriptRequest()
@@ -166,8 +168,8 @@ public class LoginManager : MonoBehaviour
 
         PlayFabClientAPI.ExecuteCloudScript(GetID, OnIDSuccess, OnError);
 
-        //Detemine the role of the user
-        StartCoroutine(DetermineRole());
+        //Assign the role of the user
+        AssignRole();
 
         //The load scene is inside determineRole for now
     }
@@ -197,7 +199,7 @@ public class LoginManager : MonoBehaviour
 
     /*------------------------------------------------------------------------*/
 
-    IEnumerator DetermineRole()
+    void DetermineRole()
     {
         //Confirm if admin
         ConfirmRole("admins");
@@ -211,7 +213,19 @@ public class LoginManager : MonoBehaviour
         //Confirm if employee
         ConfirmRole("members");
 
-        yield return new WaitForSeconds(4);
+        //yield return new WaitForSeconds(4);
+
+    }
+
+    public async void AssignRole()
+    {
+
+        // Wait until roles dictionary contains "members" key
+        while (!roles.ContainsKey("members"))
+        {
+            // Wait for 100 milliseconds before checking again
+            await Task.Delay(100);
+        }
 
         UserRolePlayFab = roles.FirstOrDefault(x => x.Value == true).Key;
         switch (UserRolePlayFab)
@@ -229,11 +243,14 @@ public class LoginManager : MonoBehaviour
                 gameManager.UserRole = UserRole.Moderator;
                 break;
         }
-        Debug.Log("UserRole: " + gameManager.UserRole);
+        Debug.Log("UserRole: " + UserRolePlayFab);
+        Debug.Log("UserRole2: " + gameManager.UserRole);
 
         //Change to the next scene
         SceneManager.LoadSceneAsync("Lobby");
     }
+
+
 
     //Comfirm which is the role of the user
     public void ConfirmRole(string role)
