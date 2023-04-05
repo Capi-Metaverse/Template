@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using Fusion;
 
-public class DoorEvent : NetworkBehaviour, IMetaEvent
+public class DoorEvent : MonoBehaviour, IMetaEvent
 {
 
     public string map;
@@ -12,7 +12,7 @@ public class DoorEvent : NetworkBehaviour, IMetaEvent
     
    [SerializeField] private bool isPublic = true;
 
-    [Networked]
+  
    [SerializeField] private string password {  get; set; }
     
    [SerializeField] private PasswordScript passwordScript;
