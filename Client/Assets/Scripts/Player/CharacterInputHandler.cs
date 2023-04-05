@@ -238,10 +238,10 @@ public class CharacterInputHandler : MonoBehaviour
 
 
         //Deactivate presentation text
-        if (eventTextK != null)
-        {
-            eventTextK.SetActive(true);
-        }
+        //if (eventTextK != null)
+        //{
+        //    eventTextK.SetActive(true);
+        //}
 
 
         Cursor.visible = false;
