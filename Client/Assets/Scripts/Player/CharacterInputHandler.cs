@@ -19,6 +19,7 @@ public class CharacterInputHandler : MonoBehaviour
     public float targetTime = 0.5f;
     public GameObject raycastObject = null;
     public GameObject eventText;
+    public GameObject eventTextK;
     //Detect if Certain Object is being hit
     bool HittingObject = false;
     public Camera playerCamera;
@@ -50,8 +51,12 @@ public class CharacterInputHandler : MonoBehaviour
         characterMovementHandler = this.gameObject.GetComponent<CharacterMovementHandler>();
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
         Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
-        scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;//Scope
+
+        //PlayerUIPrefab
         micro = GameObject.Find("PlayerUIPrefab").transform.GetChild(0).gameObject;//Micro
+        scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;//Scope
+        eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject;
+        eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
 
         eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject;
         Debug.Log(Pause);
@@ -136,8 +141,6 @@ public class CharacterInputHandler : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.Escape) && !escPul)
                     {
                         setPause();
-                        
-
                     }
                     break;
                 }
@@ -207,13 +210,16 @@ public class CharacterInputHandler : MonoBehaviour
 
 
         //Deactivate presentation text
-        /*if (eventTextK != null) 
-        {v
-            eventTextK.SetActive(false);
-        }*/
+        if (eventTextK != null)
+        {
+            eventTextK.SetActive(false);
+        }
 
         ///DESACTIVAR LAS LETRAS DE PULSA E
-
+        if (eventText != null)
+        {
+            eventText.SetActive(false);
+        }
 
 
         micro.SetActive(false);
@@ -236,15 +242,18 @@ public class CharacterInputHandler : MonoBehaviour
 
 
         //Deactivate presentation text
-        /*if (eventTextK != null) 
-        {
-            eventTextK.SetActive(true);
-        }*/
+        if (eventTextK != null)
+        {
+            eventTextK.SetActive(true);
+        }
 
         ///DESACTIVAR LAS LETRAS DE PULSA E
+        if (eventText != null)
+        {
+            eventText.SetActive(true);
+        }
 
 
-        
         Cursor.visible = false;
         scope.SetActive(true);
         micro.SetActive(true);
