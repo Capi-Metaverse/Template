@@ -24,7 +24,7 @@ public class DoorEvent : NetworkBehaviour, IMetaEvent
         gameManager = GameManager.FindInstance();
 
         //If the room is public, we change the map
-        if (isPublic || gameManager.UserRole == UserRole.Admin )
+        if (isPublic || gameManager.GetUserRole() == UserRole.Admin )
         {
 
             

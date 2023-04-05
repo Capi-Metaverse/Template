@@ -48,7 +48,7 @@ public class PasswordScript : MonoBehaviour
         this.gameObject.SetActive(true);
 
         //If this user is admin, activate changePasswordbutton
-        if(gameManager.UserRole == UserRole.Admin) changeButton.gameObject.SetActive(true);
+        if(gameManager.GetUserRole() == UserRole.Admin) changeButton.gameObject.SetActive(true);
 
 
 

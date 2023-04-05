@@ -231,20 +231,20 @@ public class LoginManager : MonoBehaviour
         switch (UserRolePlayFab)
         {
             case "admins":
-                gameManager.UserRole = UserRole.Admin;
+                gameManager.SetUserRole(UserRole.Admin);
                 break;
             case "members":
-                gameManager.UserRole = UserRole.Employee;
+                gameManager.SetUserRole(UserRole.Employee);
                 break;
             case "clients":
-                gameManager.UserRole = UserRole.Client;
+                gameManager.SetUserRole(UserRole.Client);
                 break;
             case "moderators":
-                gameManager.UserRole = UserRole.Moderator;
+                gameManager.SetUserRole(UserRole.Moderator);
                 break;
         }
         Debug.Log("UserRole: " + UserRolePlayFab);
-        Debug.Log("UserRole2: " + gameManager.UserRole);
+        Debug.Log("UserRole2: " + gameManager.GetUserRole());
 
         //Change to the next scene
         SceneManager.LoadSceneAsync("Lobby");

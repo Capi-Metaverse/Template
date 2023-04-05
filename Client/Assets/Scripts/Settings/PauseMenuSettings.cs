@@ -36,7 +36,7 @@ public class PauseMenuSettings : MonoBehaviour
 
     public void OnClickDisconnect()
     {
-        gameManager.DisconnectSession();
+        gameManager.Disconnect();
         SceneManager.LoadSceneAsync("1.Start");
 
 

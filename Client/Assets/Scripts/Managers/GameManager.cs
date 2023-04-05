@@ -50,9 +50,6 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     //Managers
 
-    //Init scene of the game (Not need it right now)
-    [SerializeField] private SceneReference _startScene;
-
     //This SceneManager is going to change between scenes and is going to put a loading screen between them.
     [SerializeField] private NetworkSceneManagerBase _loader;
 
@@ -60,7 +57,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     //It's like PhotonNetwork.somefunction() in PUN2
     [SerializeField] private NetworkRunner _runner;
 
-    public GameObject currentPlayer;
+    private GameObject currentPlayer;
 
     //The Lobby Manager from Lobby Scene
     private LobbyManager _lobbyManager;
@@ -84,16 +81,13 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
 
     //Connection Status
-    public ConnectionStatus ConnectionStatus { get; private set; }
+    private ConnectionStatus ConnectionStatus { get; set; }
 
-    public UserStatus UserStatus { get; private set; }
+    private UserStatus UserStatus { get; set; }
 
-    public UserRole UserRole { get; set; }
+    private UserRole UserRole { get; set; }
 
     public int avatarNumber = 0;
-    public GameObject[] playerPrefabs;
-
-
 
     //Initialization Correct
     private void Awake() 
@@ -255,6 +249,12 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         Debug.Log($"ConnectionStatus={status} {reason}");
     }
 
+    public ConnectionStatus GetConnectionStatus()
+    {
+        return this.ConnectionStatus;
+
+    }
+
     //Debug function to set the user status
     //Correct
     public void SetUserStatus(UserStatus status, string reason = "")
@@ -264,6 +264,12 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
        UserStatus = status;
     }
 
+    public UserStatus GetUserStatus()
+    {
+        return this.UserStatus;
+
+    }
+
     //Debug function to set the user role
     //Correct
     public void SetUserRole(UserRole role, string reason = "")
@@ -271,6 +277,12 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         if (UserRole == role)
             return;
         UserRole = role;
+    }
+
+    public UserRole GetUserRole()
+    {
+            return this.UserRole;
+
     }
 
     //Function that updates the list of sessions
@@ -284,26 +296,13 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
 
     //Function to Leave Room
+    //Correct
     public async void LeaveSession()
     {
        Disconnect();
-      
-
-        
-        await EnterLobby();
-
-       
+       await EnterLobby(); 
     }
-
-    //Disconnect???
-    public void DisconnectSession()
-    {
-        Disconnect();
-      
-    }
-
     //Function that executes when a user clicks on Join in the Lobby
-    //Refactor
     public void StartGame(string sessionName, int avatarNumber)
     {
         //We disconnect the actual runner
@@ -311,6 +310,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         this.avatarNumber = avatarNumber;
         mapName = sessionName;
         //We change to the new map
+        //THIS WILL BE THE LOBBY WHEN IT'S ENDED
         SceneManager.LoadSceneAsync("Mapa1");
         Debug.Log("Creating session");
 
@@ -343,10 +343,16 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         _runner = runner;
     }
 
-    //Current player is needed?
+    //CurrentPlayer Get Set 
+    //This is the GameObject IN-GAME
     public GameObject GetCurrentPlayer()
     {
         return currentPlayer;
+    }
+
+    public void SetCurrentPlayer(GameObject currentPlayer)
+    {
+       this.currentPlayer = currentPlayer;
     }
 
 
