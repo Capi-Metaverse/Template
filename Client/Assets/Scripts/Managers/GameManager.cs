@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     }
 
     //Disconnects the runner Correct
-    public async void Disconnect()
+    public async Task Disconnect()
     {
         if (_runner != null)
         {
@@ -170,11 +170,12 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     //Function to enter the Lobby
     public async Task EnterLobby()
     {
-       
-       
+
+
         //We connect to photonFusion
+        Debug.Log(_runner == null);
         Connect();
-        
+        Debug.Log(_runner == null);
         //We connect to the Lobby
         SetConnectionStatus(ConnectionStatus.EnteringLobby);
         var result = await _runner.JoinSessionLobby(SessionLobby.Custom, LOBBY_NAME);
@@ -305,14 +306,14 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     //Correct
     public async void LeaveSession()
     {
-       Disconnect();
+       await Disconnect();
        await EnterLobby(); 
     }
     //Function that executes when a user clicks on Join in the Lobby
-    public void StartGame(string sessionName, int avatarNumber)
+    public async void StartGame(string sessionName, int avatarNumber)
     {
         //We disconnect the actual runner
-         Disconnect();
+         await Disconnect();
         this.avatarNumber = avatarNumber;
         mapName = sessionName;
         //We change to the new map
@@ -331,9 +332,9 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
      * 
      */
     //Correct
-    public void ChangeMap(string map)
+    public async void ChangeMap(string map)
     {
-        Disconnect();
+        await Disconnect();
         SceneManager.LoadSceneAsync(map);
 
     }
