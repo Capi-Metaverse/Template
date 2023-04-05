@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 //using Photon.Realtime;
 using UnityEngine.UI;
+using TMPro;
 //using ExitGames.Client.Photon;
 
 public class PauseMenuSettings : MonoBehaviour
@@ -12,6 +13,7 @@ public class PauseMenuSettings : MonoBehaviour
     GameManager gameManager;
     public GameObject Settings;
     public GameObject Pause;
+    [SerializeField] private TMP_Text roomName;
 
     //Voice Chat
     /*  private AudioController voiceChat;
@@ -29,9 +31,11 @@ public class PauseMenuSettings : MonoBehaviour
 
     private void Start()
     {
+        
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
         Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
         gameManager = GameManager.FindInstance();
+        roomName.text = gameManager.GetMapName();
     }
 
     public void OnClickDisconnect()

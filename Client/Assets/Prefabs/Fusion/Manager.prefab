@@ -48,17 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9726cca4fdd1c4ea5c5e56e938be4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startScene:
-    sceneAsset: {fileID: 102900000, guid: abbdffdcc4569e5489bf4c08727b5820, type: 3}
-    scenePath: Assets/Scenes/1.Start.unity
   _loader: {fileID: 0}
   _runner: {fileID: 0}
-  currentPlayer: {fileID: 0}
-  username: Pepito
-  userID: 
-  mapName: 
-  avatarNumber: 0
-  playerPrefabs: []
+  inputManager: {fileID: 0}
 --- !u!114 &6547827779422490544
 MonoBehaviour:
   m_ObjectHideFlags: 0

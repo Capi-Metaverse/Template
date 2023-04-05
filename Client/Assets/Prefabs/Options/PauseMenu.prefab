@@ -1175,6 +1175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Settings: {fileID: 0}
   Pause: {fileID: 0}
+  roomName: {fileID: 6010165624540977102}
 --- !u!1 &2095543376944702584
 GameObject:
   m_ObjectHideFlags: 0

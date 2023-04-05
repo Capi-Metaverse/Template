@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     //It's like PhotonNetwork.somefunction() in PUN2
     [SerializeField] private NetworkRunner _runner;
 
+    [SerializeField] private InputManager inputManager;
+
     private GameObject currentPlayer;
 
     //The Lobby Manager from Lobby Scene
@@ -125,6 +127,9 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     //Correct
     public async void SetLobbyManager(LobbyManager lobbyManager)
     {
+        if(inputManager == null) inputManager = this.gameObject.AddComponent<InputManager>();
+
+
         this._lobbyManager = lobbyManager;
         await EnterLobby();
         
@@ -165,6 +170,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
     //Function to enter the Lobby
     public async Task EnterLobby()
     {
+       
        
         //We connect to photonFusion
         Connect();

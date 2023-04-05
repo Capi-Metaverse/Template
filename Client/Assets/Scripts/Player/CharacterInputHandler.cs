@@ -33,11 +33,13 @@ public class CharacterInputHandler : MonoBehaviour
     public GameObject micro;//Actually this is the microphone in game
     private VoiceManager voiceChat = new VoiceManager();//Manager for the voiceChat, not in scene object
     CharacterMovementHandler characterMovementHandler;
+
+    private InputManager inputManager;
     
 
     private void Awake()
     {
-        
+        inputManager = GameManager.FindInstance().GetComponent<InputManager>();
     }
 
 
@@ -101,7 +103,7 @@ public class CharacterInputHandler : MonoBehaviour
             }
             //If the user interacts, activate the event
             //if (inputManager.GetButtonDown("Interact") && targetTime <= 0)
-            if (Input.GetKeyDown(KeyCode.E) && targetTime <= 0)
+            if (inputManager.GetButtonDown("Interact") && targetTime <= 0)
             {
                 //Cooldown timer
                 targetTime = 0.5f;
