@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class LobbyManager : MonoBehaviour
 
     //LobbyButtons
     [SerializeField] private Button createButton;
-
+    [SerializeField] private Button JoinButton;
     //Avatar number
 
     private int avatarNumber = 0;
@@ -132,6 +133,8 @@ public class LobbyManager : MonoBehaviour
 
     public void OnClickJoinRoom()
     {
+        JoinButton.interactable = false;
+        //JoinButton.gameObject.SetActive(false);
         Debug.Log(sessionName.text);
         gameManager.StartGame(sessionNamePanel.text,avatarNumber);
     }
