@@ -35,11 +35,6 @@ public class InputManager : MonoBehaviour
             buttonKeys["Interact"] = (KeyCode)manageData.currentkeys.interact;
             buttonKeys["ChangeCamera"] = (KeyCode)manageData.currentkeys.presentationMode;
 
-            //Change UI keys
-            if (playerUiPrefab==null) FindObjectOfType<PlayerUiPrefab>();
-            playerUiPrefab.ChangeLetter(buttonKeys["Interact"].ToString());
-            playerUiPrefab.ChangeLetterK(buttonKeys["ChangeCamera"].ToString());
-
         }
         currentKeys = manageData.currentkeys;
         // Function is finished

@@ -10,15 +10,23 @@ public class PlayerUiPrefab : MonoBehaviour
     string eventText;
     string eventTextK;
     string change;
+
+    private InputManager inputManager;
     // Start is called before the first frame update
     void Start()
     {
+
+        inputManager = GameManager.FindInstance().GetComponentInChildren<InputManager>();
+
+
         eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject.GetComponent<TMP_Text>().text;
         eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject.GetComponent<TMP_Text>().text;
         //eventText = "Press E to interact";
         //eventTextK = "Press K to enable presentation mode";
-        pressKey.text = eventText;
-        pressKeyK.text = eventTextK;
+
+        ChangeLetter(inputManager.buttonKeys["Interact"].ToString());
+        ChangeLetterK(inputManager.buttonKeys["ChangeCamera"].ToString());
+
         Debug.Log(eventText);
 
     }
