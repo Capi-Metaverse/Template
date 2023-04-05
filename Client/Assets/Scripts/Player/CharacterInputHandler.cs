@@ -203,7 +203,6 @@ public class CharacterInputHandler : MonoBehaviour
         //playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
 
 
-        estado = UserStatus.InPause;
         Cursor.visible = true;
         //AQUI IRA EL FIND DEL CHARACTER CONTROL PARA DESACTIVAR
         //AQUI IRA EL FIND DEL PLAYERCAMERA PARA DESACTIVARLA
@@ -279,7 +278,7 @@ public class CharacterInputHandler : MonoBehaviour
 
 
         //Pause canvas
-
+        estado = UserStatus.InPause;
         Pause.SetActive(true);
         //RoomName on Settings
         //GameObject SalaText = Pausa.transform.Find("RoomName").gameObject;

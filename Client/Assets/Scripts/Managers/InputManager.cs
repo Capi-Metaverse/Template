@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
 {
     public Dictionary<string, KeyCode> buttonKeys;
     public ManageData manageData;
+    private PlayerUiPrefab playerUiPrefab;
 
     public Keys currentKeys;
 
@@ -30,9 +31,14 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("entro al else");
+            //Assign key values from PlayFab
             buttonKeys["Interact"] = (KeyCode)manageData.currentkeys.interact;
             buttonKeys["ChangeCamera"] = (KeyCode)manageData.currentkeys.presentationMode;
+
+            //Change UI keys
+            if (playerUiPrefab==null) FindObjectOfType<PlayerUiPrefab>();
+            playerUiPrefab.ChangeLetter(buttonKeys["Interact"].ToString());
+            playerUiPrefab.ChangeLetterK(buttonKeys["ChangeCamera"].ToString());
 
         }
         currentKeys = manageData.currentkeys;
