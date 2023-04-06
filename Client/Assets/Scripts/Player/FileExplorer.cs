@@ -329,7 +329,7 @@ public class FileExplorer : NetworkBehaviour
     [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.All)]
     public void RPC_PressInfo(string[] content, RpcInfo info = default)
     {
-        Debug.Log("RPC: " + content[0].ToString());
+        Debug.Log("RPC: " + content[0]);
         //Local invoke client
         if (info.IsInvokeLocal)
             Debug.Log("Debug: InvokeLocal fileexplorer");
