@@ -12,12 +12,8 @@ public class PresentationZone : MonoBehaviour
     //Detect if it in collider
     private void OnTriggerEnter(Collider other) {
 
-        Debug.Log("Enter");
-        //Debug.Log(other.gameObject.CompareTag("Player"));
-        //Debug.Log();
         if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<NetworkObject>())
         {
-            Debug.Log("Enter2");
             CharacterMovementHandler player = other.gameObject.GetComponent<CharacterMovementHandler>();
 
             //CharacterMovementHandler playerSpawn = player.playerSpawner;
@@ -26,17 +22,13 @@ public class PresentationZone : MonoBehaviour
 
             MusicManager musicController = GameObject.Find("Manager").GetComponent<MusicManager>();
             musicController.ChangeAudioState();
-        
-            
         }
     }
     //Detect if Exits collider
     private void OnTriggerExit(Collider other) {
 
-        Debug.Log("Exit");
         if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<NetworkObject>())
         {
-            Debug.Log("Exit2");
             CharacterMovementHandler player = other.gameObject.GetComponent<CharacterMovementHandler>();
            
             //PlayerSpawn playerSpawn =  player.playerSpawner;
@@ -44,8 +36,6 @@ public class PresentationZone : MonoBehaviour
         
             MusicManager musicController = GameObject.Find("Manager").GetComponent<MusicManager>();
             musicController.ChangeAudioState();
-            
         }
-        
     }
 }

@@ -51,7 +51,7 @@ public class LobbyManager : MonoBehaviour
     //Function when the user clicks on a session/room to join.
     public void OnClickJoinSession(SessionInfo sessionInfo)
     {
-        Debug.Log("Joining session");
+        Debug.Log("[Photon-LobbyManager] Joining session");
         gameManager.JoinSession(sessionInfo);
         
     }
@@ -59,7 +59,7 @@ public class LobbyManager : MonoBehaviour
     //Function when the user creates a room/session.
     public void OnClickCreateSession()
     {
-        Debug.Log("Creating session");
+        Debug.Log("[Photon-LobbyManager] Creating session");
         //Properties of the room WIP
         SessionProps props = new SessionProps();
         props.StartMap = "HUBValencia";
@@ -74,7 +74,7 @@ public class LobbyManager : MonoBehaviour
     public void SetSessionList(List<SessionInfo> sessionList)
     {
         //We clean the list
-        Debug.Log("Setting session list");
+        Debug.Log("[Photon-LobbyManager] Setting session list");
         CleanSessions();
         //We instantiate the items in the interface.
 
@@ -131,7 +131,7 @@ public class LobbyManager : MonoBehaviour
     {
         JoinButton.interactable = false;
         //JoinButton.gameObject.SetActive(false);
-        Debug.Log(sessionName.text);
+        Debug.Log("[Photon-LobbyManager]" + sessionName.text);
         gameManager.StartGame(sessionNamePanel.text,avatarNumber);
     }
 

@@ -7,12 +7,9 @@ using UnityEngine;
 using SFB;
 using UnityEngine.Networking;
 using Newtonsoft.Json.Linq;
-using ExitGames.Client.Photon;
-using UnityEngine;
 using TMPro;
 using UnityEngine.Video;
 using Fusion;
-using ExitGames.Client.Photon.StructWrapping;
 
 public class FileExplorer : NetworkBehaviour
 {

@@ -21,7 +21,6 @@ public class VoiceManager
     private AudioVideoStates AudioVideoState = new AudioVideoStates();
 
     public Photon.Voice.Unity.Recorder recorder;
-    // Start is called before the first frame update
 
     public void GetGameObjects()
     {
@@ -32,13 +31,12 @@ public class VoiceManager
 
     public void MuteAudio(UserStatus estado)
     {
-        Debug.Log("mute");
+        
         if (AudioVideoState.pubAudio == true)
         {
             recorder.TransmitEnabled = false;
-            //mRtcEngine.MuteLocalAudioStream(true);
             AudioVideoState.pubAudio = false;
-            Debug.Log("MicroOff");
+            Debug.Log("[PhotonVoice-VoiceManager] Micro Off");
 
             if (estado==UserStatus.InGame)
                 GameObject.Find("Micro").GetComponent<Image>().sprite = MicroOff;
@@ -46,9 +44,8 @@ public class VoiceManager
         else
         {
             recorder.TransmitEnabled = true;
-            //mRtcEngine.MuteLocalAudioStream(false);
             AudioVideoState.pubAudio = true;
-            Debug.Log("MicroOn");
+            Debug.Log("[PhotonVoice-VoiceManager] Micro On");
 
             if (estado == UserStatus.InGame)
                 GameObject.Find("Micro").GetComponent<Image>().sprite = MicroOn;

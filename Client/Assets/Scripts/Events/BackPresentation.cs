@@ -25,9 +25,9 @@ public class BackPresentation : NetworkBehaviour, IMetaEvent
     public void RPC_BackPress(string content, RpcInfo info = default)
     {
 
-        Debug.Log("RPC: " + content);
+        Debug.Log("[Photon-BackPresentation] RPC: " + content);
         if (info.IsInvokeLocal)
-            Debug.Log("Debug: InvokeLocal");
+            Debug.Log("[Photon-BackPresentation] Debug: InvokeLocal");
         else    
         activate(false);//All clients except who invoked it
     }

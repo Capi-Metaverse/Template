@@ -24,10 +24,10 @@ public class AdvancePresentation : NetworkBehaviour, IMetaEvent
     [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.All)]
     public void RPC_AdvancePress(string content, RpcInfo info = default)
     {
-        Debug.Log("RPC: " + content);
+        Debug.Log("[Photon-AdvancePresentation] RPC: " + content);
         //Local invoke client
         if (info.IsInvokeLocal)
-            Debug.Log("Debug: InvokeLocal");
+            Debug.Log("[Photon-AdvancePresentation] Debug: InvokeLocal");
         else
         activate(false);//Executed on clients
     }

@@ -24,8 +24,6 @@ public class PlayerUiPrefab : MonoBehaviour
         ChangeLetter(inputManager.buttonKeys["Interact"].ToString());
         ChangeLetterK(inputManager.buttonKeys["ChangeCamera"].ToString());
 
-        Debug.Log(eventText);
-
     }
 
     public void ChangeLetter(string change)

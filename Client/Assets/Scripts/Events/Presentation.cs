@@ -44,14 +44,14 @@ public class Presentation : MonoBehaviour
  
         if (isEmpty) 
         {
-            Debug.Log("List is Empty");
+            Debug.Log("[Presentation] List is Empty");
             renderer.sprite = sprites[0]; 
             //Show nothing is in  
             loadingPressCanvas.SetText("There´s nothing in file");
         }
         else 
         {
-            Debug.Log("List contains elements");
+            Debug.Log("[Presentation] List contains elements");
             loadingPressCanvas.enabled = false;
             renderer.sprite = sprites[0];
         }

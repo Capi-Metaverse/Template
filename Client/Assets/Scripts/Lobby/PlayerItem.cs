@@ -69,7 +69,7 @@ public class PlayerItem : NetworkBehaviour, ISpawned
     {
         base.Spawned();
 
-        Debug.Log("ID:" + player + "has spawned a item.");
+        Debug.Log("[PlayerItem] ID:" + player + "has spawned a item.");
 
         transform.SetParent(GameObject.Find("PlayerListener").transform);
 
