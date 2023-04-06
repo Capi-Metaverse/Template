@@ -32,7 +32,7 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
         model.transform.SetAsFirstSibling();
         model.AddComponent<Animator>();
         model.GetComponent<Animator>().runtimeAnimatorController = controller;
-
+        this.gameObject.tag = "Player";
 
         if (Object.HasInputAuthority)
         {

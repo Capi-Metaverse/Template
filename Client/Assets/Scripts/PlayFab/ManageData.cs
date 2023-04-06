@@ -62,7 +62,7 @@ public class ManageData : MonoBehaviour
 
     public void OnDataSend(UpdateUserDataResult obj)
     {
-        Debug.Log("Data Sent");
+        Debug.Log("[PlayFab-ManageData] Data Sent");
     }
 
 
@@ -74,26 +74,18 @@ public class ManageData : MonoBehaviour
 
     void OnCharactersDataReceived(GetUserDataResult result)
     {
-        Debug.Log("Received characters data!");
+        Debug.Log("[PlayFab-ManageData] Received characters data!");
         if (result.Data != null && result.Data.ContainsKey("Keys"))
         {
             currentkeys = JsonConvert.DeserializeObject<Keys>(result.Data["Keys"].Value);
-            returncurrentkeys();
-
-
         }
        
-    }
-    public void returncurrentkeys()
-    {
-        Debug.Log(currentkeys.interact);
-        Debug.Log(currentkeys.presentationMode);
     }
 
  
 
     public void OnError(PlayFabError obj)
     {
-        Debug.Log("Error");
+        Debug.Log("[PlayFab-ManageData] Error");
     }
 }

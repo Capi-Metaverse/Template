@@ -6,22 +6,25 @@ using Fusion;
 public class PresentationZone : MonoBehaviour
 {
     //Camera of the presentation
-    public Camera camera;
+    public Camera cameraObject;
 
     
     //Detect if it in collider
     private void OnTriggerEnter(Collider other) {
-       
-        if(other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<NetworkObject>())
+
+        Debug.Log("Enter");
+        //Debug.Log(other.gameObject.CompareTag("Player"));
+        //Debug.Log();
+        if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<NetworkObject>())
         {
-         
+            Debug.Log("Enter2");
             CharacterMovementHandler player = other.gameObject.GetComponent<CharacterMovementHandler>();
 
             //CharacterMovementHandler playerSpawn = player.playerSpawner;
-     
-            //playerSpawn.setPresentationCamera(camera);
 
-            MusicManager musicController = GameObject.Find("MusicManager").GetComponent<MusicManager>();
+            //playerSpawn.setPresentationCamera(cameraObject);
+
+            MusicManager musicController = GameObject.Find("Manager").GetComponent<MusicManager>();
             musicController.ChangeAudioState();
         
             
@@ -29,16 +32,17 @@ public class PresentationZone : MonoBehaviour
     }
     //Detect if Exits collider
     private void OnTriggerExit(Collider other) {
-     
 
-         if(other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<NetworkObject>())
+        Debug.Log("Exit");
+        if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<NetworkObject>())
         {
+            Debug.Log("Exit2");
             CharacterMovementHandler player = other.gameObject.GetComponent<CharacterMovementHandler>();
            
             //PlayerSpawn playerSpawn =  player.playerSpawner;
             //playerSpawn.setPresentationCamera(null);
         
-            MusicManager musicController = GameObject.Find("MusicManager").GetComponent<MusicManager>();
+            MusicManager musicController = GameObject.Find("Manager").GetComponent<MusicManager>();
             musicController.ChangeAudioState();
             
         }

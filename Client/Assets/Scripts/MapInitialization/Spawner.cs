@@ -47,7 +47,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
         if(characterInputHandler != null)
         {
             input.Set(characterInputHandler.GetNetworkInput());
-            Debug.Log("seteado");
+            //Debug.Log("seteado");
         }
     }
 

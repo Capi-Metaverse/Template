@@ -18,27 +18,35 @@ public class CharacterInputHandler : MonoBehaviour
     public bool active = false;
     public float targetTime = 0.5f;
     public GameObject raycastObject = null;
-    public GameObject eventText;
-    public GameObject eventTextK;
     //Detect if Certain Object is being hit
     bool HittingObject = false;
     public Camera playerCamera;
 
     LocalCameraHandler localCameraHandler;
     public bool escPul;//Reference if ESC key is pushed or not(ESC opens the Menu and you�ll be on Pause State)
-    UserStatus estado; //With this we keep track of the current state so we can use it in conditionals. States are (Game, Pause)
     public GameObject Pause;//Pause is an object in scene map, you can see it as the manager of the pause state
     public GameObject Settings;//The same as Pause but for settings, the state will be Pause too cause the setting are accesible from Pause
+    
+    //PlayerUIPrefab
     GameObject scope;
-    public GameObject micro;//Actually this is the microphone in game
-    private VoiceManager voiceChat = new VoiceManager();//Manager for the voiceChat, not in scene object
+    GameObject micro;//Actually this is the microphone in game
+    GameObject eventText;
+    GameObject eventTextK;
+
+
+    VoiceManager voiceChat = new VoiceManager();//Manager for the voiceChat, not in scene object
     CharacterMovementHandler characterMovementHandler;
 
-    private InputManager inputManager;
-    
+    GameManager gameManager;
+    InputManager inputManager;
+
+    //Presentation
+    public Camera presentationCamera = null;
+    public bool onPresentationCamera = false;
 
     private void Awake()
     {
+        gameManager = GameManager.FindInstance().GetComponent<GameManager>();
         inputManager = GameManager.FindInstance().GetComponent<InputManager>();
     }
 
@@ -63,14 +71,14 @@ public class CharacterInputHandler : MonoBehaviour
         Debug.Log(Pause);
 
         //seteamos el estado para que este InGame, esto hay que cambiarlo
-        estado = UserStatus.InGame;
+        gameManager.SetUserStatus(UserStatus.InGame);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("m") && estado == UserStatus.InGame)
-            voiceChat.MuteAudio(estado);
+        if (Input.GetKeyDown("m") && gameManager.GetUserStatus() == UserStatus.InGame)
+            voiceChat.MuteAudio(gameManager.GetUserStatus());
 
         if (localCameraHandler == null) { 
             localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
@@ -136,12 +144,12 @@ public class CharacterInputHandler : MonoBehaviour
 
         }
 
-        switch (estado)
+        switch (gameManager.GetUserStatus())
         {
             case UserStatus.InGame:
                 {
                     //ESC key down(PauseMenu)
-                    if (Input.GetKeyDown(KeyCode.Escape) && !escPul)
+                    if ((Input.GetKeyDown(KeyCode.Escape) && !escPul))
                     {
                         setPause();
                     }
@@ -157,7 +165,7 @@ public class CharacterInputHandler : MonoBehaviour
                 }
 
             default:
-                Debug.Log(estado);
+                Debug.Log(gameManager.GetUserStatus());
                 break;
         }
 
@@ -195,6 +203,34 @@ public class CharacterInputHandler : MonoBehaviour
 
         return networkInputData;
 
+    }
+
+
+    public void setPresentationCamera(Camera camera)
+    {
+
+        //When leaving presentation mode?
+        if (camera == null)
+        {
+            //We deactivate the camera
+            presentationCamera = null;
+
+            //We deactivate UI
+            eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+            eventTextK.SetActive(false);
+            eventTextK = null;
+        }
+
+        else
+        {
+
+            //We obtain the camera
+            presentationCamera = camera;
+
+            //We activate UI
+            eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+            eventTextK.SetActive(true);
+        }
     }
 
     //DeactivateALL
@@ -267,7 +303,7 @@ public class CharacterInputHandler : MonoBehaviour
 
 
         //Pause canvas
-        estado = UserStatus.InPause;
+        gameManager.SetUserStatus(UserStatus.InPause);
         Pause.SetActive(true);
         //RoomName on Settings
         //GameObject SalaText = Pausa.transform.Find("RoomName").gameObject;
@@ -277,9 +313,6 @@ public class CharacterInputHandler : MonoBehaviour
        
         DeactivateALL();
         //Escape activado
-        //UnityEngine.Debug.Log (estado);
-
-
 
     }
     
@@ -294,9 +327,9 @@ public class CharacterInputHandler : MonoBehaviour
         Cursor.visible = false;
         //States and Reactivate all
       
-        estado = UserStatus.InGame;
+        gameManager.SetUserStatus(UserStatus.InGame);
         ActiveALL();
-        Debug.Log(estado);
+        Debug.Log(gameManager.GetUserStatus());
 
     }
 

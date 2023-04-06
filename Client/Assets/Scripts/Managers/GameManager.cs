@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
         SetConnectionStatus(ConnectionStatus.Starting);
 
-        Debug.Log($"Starting game with session {props.RoomName}, player limit {props.PlayerLimit}");
+        Debug.Log($"[Photon-GameManager] Starting game with session {props.RoomName}, player limit {props.PlayerLimit}");
         _runner.ProvideInput = mode != GameMode.Server;
         StartGameResult result = await _runner.StartGame(new StartGameArgs
         {
@@ -233,7 +233,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
         if (UserStatus == UserStatus.PreLobby)
         {
-            Debug.Log("Entering Lobby");
+            Debug.Log("[Photon-GameManager] Entering Lobby");
             //Indicate LobbyManager to change the panel
             _lobbyManager.SetPlayerPanel(props.RoomName,_runner);
             SetUserStatus(UserStatus.InLobby);
@@ -253,7 +253,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
             return;
         ConnectionStatus = status;
 
-        Debug.Log($"ConnectionStatus={status} {reason}");
+        Debug.Log($"[Photon-GameManager] ConnectionStatus={status} {reason}");
     }
 
     public ConnectionStatus GetConnectionStatus()

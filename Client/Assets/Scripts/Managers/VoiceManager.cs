@@ -25,8 +25,8 @@ public class VoiceManager
 
     public void GetGameObjects()
     {
-        MicroOff = Resources.Load<Sprite>("Sprites/micro_off");
-        MicroOn = Resources.Load<Sprite>("Sprites/micro_on");
+        MicroOff = Resources.Load<Sprite>("Sprites/UI/micro_off");
+        MicroOn = Resources.Load<Sprite>("Sprites/UI/micro_on");
         recorder = GameObject.Find("Network runner").GetComponent<Photon.Voice.Unity.Recorder>();
     }
 
