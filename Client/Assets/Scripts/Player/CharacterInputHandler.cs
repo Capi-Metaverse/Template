@@ -30,8 +30,8 @@ public class CharacterInputHandler : MonoBehaviour
     //PlayerUIPrefab
     GameObject scope;
     GameObject micro;//Actually this is the microphone in game
-    GameObject eventText;
-    GameObject eventTextK;
+    public GameObject eventText;
+    public GameObject eventTextK;
 
 
     VoiceManager voiceChat = new VoiceManager();//Manager for the voiceChat, not in scene object
@@ -85,7 +85,7 @@ public class CharacterInputHandler : MonoBehaviour
             playerCamera = localCameraHandler.gameObject.GetComponent<Camera>();
 
         }
-        if (HittingObject)
+        if (HittingObject && gameManager.GetUserStatus()!=UserStatus.InPause)
             eventText.SetActive(true);
 
         targetTime -= Time.deltaTime;
@@ -110,6 +110,7 @@ public class CharacterInputHandler : MonoBehaviour
                 HittingObject = true;
 
             }
+
             //If the user interacts, activate the event
             //if (inputManager.GetButtonDown("Interact") && targetTime <= 0)
             if (inputManager.GetButtonDown("Interact") && targetTime <= 0)
@@ -152,6 +153,34 @@ public class CharacterInputHandler : MonoBehaviour
                     if ((Input.GetKeyDown(KeyCode.Escape) && !escPul))
                     {
                         setPause();
+                    }
+
+                    //K key down(PrentationMode)
+                    if (presentationCamera != null)
+                    {
+                        if (inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null)
+                        {
+
+                            if (onPresentationCamera)
+                            {
+                                presentationCamera.enabled = false;
+                                playerCamera.enabled = true;
+                                eventTextK.SetActive(true);
+                                ActiveALL();
+                            }
+
+                            else
+                            {
+
+                                presentationCamera.enabled = true;
+                                playerCamera.enabled = false;
+                                eventText.SetActive(false);
+                                DeactivateALL();
+
+                            }
+
+                            onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
+                        }
                     }
                     break;
                 }
@@ -216,19 +245,15 @@ public class CharacterInputHandler : MonoBehaviour
             presentationCamera = null;
 
             //We deactivate UI
-            eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
             eventTextK.SetActive(false);
-            eventTextK = null;
         }
 
         else
         {
-
             //We obtain the camera
             presentationCamera = camera;
 
             //We activate UI
-            eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
             eventTextK.SetActive(true);
         }
     }
@@ -248,11 +273,8 @@ public class CharacterInputHandler : MonoBehaviour
 
 
         //Deactivate presentation text
-        if (eventTextK != null)
-        {
-            eventTextK.SetActive(false);
-        }
-
+        eventTextK.SetActive(false);
+        eventText.SetActive(false);
 
         micro.SetActive(false);
         scope.SetActive(false);
@@ -274,10 +296,8 @@ public class CharacterInputHandler : MonoBehaviour
 
 
         //Deactivate presentation text
-        //if (eventTextK != null)
-        //{
-        //    eventTextK.SetActive(true);
-        //}
+        if (presentationCamera!=null)
+            eventTextK.SetActive(true);
 
 
         Cursor.visible = false;
