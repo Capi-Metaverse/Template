@@ -292,6 +292,11 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     }
 
+    public GameManager GetGameManager()
+    {
+        return this;
+    }
+
     //Function that updates the list of sessions
     //Correct
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)

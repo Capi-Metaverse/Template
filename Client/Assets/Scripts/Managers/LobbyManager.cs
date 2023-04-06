@@ -45,11 +45,7 @@ public class LobbyManager : MonoBehaviour
     {
         gameManager = GameManager.FindInstance();
        
-        gameManager.SetLobbyManager(this);
-        
-     
-
-        
+        gameManager.SetLobbyManager(this);  
     }
 
     //Function when the user clicks on a session/room to join.
@@ -163,9 +159,6 @@ public class LobbyManager : MonoBehaviour
         avatarNumber = number;
     }
 
-
-
-
     //PlayerItemSpawn
     public void SpawnPlayerItem(NetworkRunner runner, PlayerItem player)
     {
@@ -190,11 +183,6 @@ public class LobbyManager : MonoBehaviour
 
         //Set item
         item.setInfo(gameManager,runner,obj);
-        
-
-
-       
-
     }
 
 }
