@@ -9,34 +9,36 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
 {
     public GameObject TabPanel;
     public GameObject TabPanelKeys;
-    //public GameObject TabPanelPlayers;
-    //public GameObject TabTabPlayers;
+    public GameObject TabPanelPlayers;
+    public GameObject TabTabPlayers;
     public GameObject Lenguages;
     public string[] PlayerKeys;
     GameObject Settings;
     GameObject Pause;
 
-
+    GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        /* if (PhotonNetwork.IsMasterClient)
+        gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
+        
+        if (gameManager.GetUserRole() == UserRole.Admin)
         {
           TabTabPlayers.SetActive(true);
-        } */
+        }
         TabPanel.SetActive(true);
         Lenguages.SetActive(true);
         TabPanelKeys.SetActive(false);
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
         Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
-        //  TabPanelPlayers.SetActive(false);
+        TabPanelPlayers.SetActive(false);
     }
     public void ChangeToPanel()
     {
         TabPanel.SetActive(true);
         Lenguages.SetActive(true);
         TabPanelKeys.SetActive(false);
-        // TabPanelPlayers.SetActive(false);
+        TabPanelPlayers.SetActive(false);
     }
 
     public void ChangeToPanelKeys()
@@ -44,14 +46,14 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
         TabPanel.SetActive(false);
         Lenguages.SetActive(false);
         TabPanelKeys.SetActive(true);
-        // TabPanelPlayers.SetActive(false);
+        TabPanelPlayers.SetActive(false);
     }
     public void ChangeToPanelPlayer()
     {
         TabPanel.SetActive(false);
         Lenguages.SetActive(false);
         TabPanelKeys.SetActive(false);
-        // TabPanelPlayers.SetActive(true);
+        TabPanelPlayers.SetActive(true);
     }
 
     public void OnClickBackToPause()
