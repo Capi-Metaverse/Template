@@ -44,10 +44,15 @@ public class CharacterInputHandler : MonoBehaviour
     public Camera presentationCamera = null;
     public bool onPresentationCamera = false;
 
+    public bool otherPlayer = true;
+
+    public string nickname;
+
     private void Awake()
     {
         gameManager = GameManager.FindInstance().GetComponent<GameManager>();
         inputManager = GameManager.FindInstance().GetComponent<InputManager>();
+       
     }
 
 
@@ -79,140 +84,144 @@ public class CharacterInputHandler : MonoBehaviour
     {
         if (Input.GetKeyDown("m") && gameManager.GetUserStatus() == UserStatus.InGame)
             voiceChat.MuteAudio(gameManager.GetUserStatus());
-
-        if (localCameraHandler == null && gameManager.CameraBool == false ) {
-            gameManager.CameraBool = true;
+        nickname = this.gameObject.GetComponent<NetworkPlayer>().nickname.ToString();
+       
+        if (localCameraHandler == null && gameManager.GetUsername().Equals(nickname)) {
+            otherPlayer = false;
             localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
             playerCamera = localCameraHandler.gameObject.GetComponent<Camera>();
 
         }
-        if (HittingObject && gameManager.GetUserStatus()!=UserStatus.InPause)
-            eventText.SetActive(true);
 
-        targetTime -= Time.deltaTime;
-        //Raycast
-        RaycastHit hit;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rayDistance, LayerMask.GetMask("Interactive")))
+        if (!otherPlayer)
         {
-            if (raycastObject == null)
-            {
-                raycastObject = hit.transform.gameObject;
-               
+            if (HittingObject && gameManager.GetUserStatus() != UserStatus.InPause)
                 eventText.SetActive(true);
-                HittingObject = true;
-            }
-            //RaycastObject
-            else if (raycastObject != hit.transform.gameObject)
+
+            targetTime -= Time.deltaTime;
+            //Raycast
+            RaycastHit hit;
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rayDistance, LayerMask.GetMask("Interactive")))
             {
-               
-                raycastObject = hit.transform.gameObject;
-              
-                eventText.SetActive(true);
-                HittingObject = true;
-
-            }
-
-            //If the user interacts, activate the event
-            //if (inputManager.GetButtonDown("Interact") && targetTime <= 0)
-            if (inputManager.GetButtonDown("Interact") && targetTime <= 0)
-            {
-                //Cooldown timer
-                targetTime = 0.5f;
-
-                //Retrieve Parent Object and call event
-                GameObject eventObject = hit.transform.gameObject;
-                Debug.Log("Activado");
-                eventObject.GetComponent<IMetaEvent>().activate(true);
-            }
-        }
-
-        else
-        {
-
-            if (raycastObject != null)
-            {
-                //raycastObject.GetComponent<Outline>().enabled = false;
-                raycastObject = null;
-                eventText.SetActive(false);
-                HittingObject = false;
-            }
-        }
-
-        //Pause
-        if (!Input.GetKeyDown(KeyCode.Escape))
-        {
-
-            escPul = false; // Detecta si no esta pulsado
-
-        }
-
-        switch (gameManager.GetUserStatus())
-        {
-            case UserStatus.InGame:
+                if (raycastObject == null)
                 {
-                    //ESC key down(PauseMenu)
-                    if ((Input.GetKeyDown(KeyCode.Escape) && !escPul))
-                    {
-                        setPause();
-                    }
+                    raycastObject = hit.transform.gameObject;
 
-                    //K key down(PrentationMode)
-                    if (presentationCamera != null)
+                    eventText.SetActive(true);
+                    HittingObject = true;
+                }
+                //RaycastObject
+                else if (raycastObject != hit.transform.gameObject)
+                {
+
+                    raycastObject = hit.transform.gameObject;
+
+                    eventText.SetActive(true);
+                    HittingObject = true;
+
+                }
+
+                //If the user interacts, activate the event
+                //if (inputManager.GetButtonDown("Interact") && targetTime <= 0)
+                if (inputManager.GetButtonDown("Interact") && targetTime <= 0)
+                {
+                    //Cooldown timer
+                    targetTime = 0.5f;
+
+                    //Retrieve Parent Object and call event
+                    GameObject eventObject = hit.transform.gameObject;
+                    Debug.Log("Activado");
+                    eventObject.GetComponent<IMetaEvent>().activate(true);
+                }
+            }
+
+            else
+            {
+
+                if (raycastObject != null)
+                {
+                    //raycastObject.GetComponent<Outline>().enabled = false;
+                    raycastObject = null;
+                    eventText.SetActive(false);
+                    HittingObject = false;
+                }
+            }
+
+            //Pause
+            if (!Input.GetKeyDown(KeyCode.Escape))
+            {
+
+                escPul = false; // Detecta si no esta pulsado
+
+            }
+
+            switch (gameManager.GetUserStatus())
+            {
+                case UserStatus.InGame:
                     {
-                        if (inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null)
+                        //ESC key down(PauseMenu)
+                        if ((Input.GetKeyDown(KeyCode.Escape) && !escPul))
                         {
-
-                            if (onPresentationCamera)
-                            {
-                                presentationCamera.enabled = false;
-                                playerCamera.enabled = true;
-                                eventTextK.SetActive(true);
-                                ActiveALL();
-                            }
-
-                            else
-                            {
-
-                                presentationCamera.enabled = true;
-                                playerCamera.enabled = false;
-                                eventText.SetActive(false);
-                                DeactivateALL();
-
-                            }
-
-                            onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
+                            setPause();
                         }
+
+                        //K key down(PrentationMode)
+                        if (presentationCamera != null)
+                        {
+                            if (inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null)
+                            {
+
+                                if (onPresentationCamera)
+                                {
+                                    presentationCamera.enabled = false;
+                                    playerCamera.enabled = true;
+                                    eventTextK.SetActive(true);
+                                    ActiveALL();
+                                }
+
+                                else
+                                {
+
+                                    presentationCamera.enabled = true;
+                                    playerCamera.enabled = false;
+                                    eventText.SetActive(false);
+                                    DeactivateALL();
+
+                                }
+
+                                onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
+                            }
+                        }
+                        break;
                     }
-                    break;
-                }
-            case UserStatus.InPause:
-                {
-                    if (Input.GetKeyDown(KeyCode.Escape) && !escPul)
+                case UserStatus.InPause:
                     {
-                        setJuego();
+                        if (Input.GetKeyDown(KeyCode.Escape) && !escPul)
+                        {
+                            setJuego();
+                        }
+                        break;
                     }
+
+                default:
+                    Debug.Log(gameManager.GetUserStatus());
                     break;
-                }
+            }
 
-            default:
-                Debug.Log(gameManager.GetUserStatus());
-                break;
+
+            //View input
+            viewInputVector.x = Input.GetAxis("Mouse X");
+            viewInputVector.y = Input.GetAxis("Mouse Y") * -1; //Invert the mouse look
+
+            //Move Input
+            moveInputVector.x = Input.GetAxis("Horizontal");
+            moveInputVector.y = Input.GetAxis("Vertical");
+
+            if (Input.GetButton("Jump"))
+                isJumpButtonPressed = true;
+
+            if (localCameraHandler != null) localCameraHandler.SetViewInputVector(viewInputVector);
         }
-
-
-        //View input
-        viewInputVector.x = Input.GetAxis("Mouse X");
-        viewInputVector.y = Input.GetAxis("Mouse Y") * -1; //Invert the mouse look
-
-        //Move Input
-        moveInputVector.x = Input.GetAxis("Horizontal");
-        moveInputVector.y = Input.GetAxis("Vertical");
-
-        if (Input.GetButton("Jump"))
-            isJumpButtonPressed = true;
-
-        if (localCameraHandler != null) localCameraHandler.SetViewInputVector(viewInputVector);
-
     }
 
     public NetworkInputData GetNetworkInput()
@@ -220,7 +229,7 @@ public class CharacterInputHandler : MonoBehaviour
         NetworkInputData networkInputData = new NetworkInputData();
 
         //Aim data
-
+        if(!otherPlayer)
         networkInputData.aimForwardVector = localCameraHandler.transform.forward;
 
         //Move data
