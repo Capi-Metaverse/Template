@@ -34,6 +34,7 @@ public class PlayerItem : NetworkBehaviour, ISpawned
     private PlayerRef player { get; set; }
 
 
+
     //Avatar Image Related
 
     [SerializeField] private Image playerAvatar;

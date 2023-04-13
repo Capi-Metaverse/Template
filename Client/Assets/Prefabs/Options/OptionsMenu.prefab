@@ -1723,6 +1723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4111939098991759778}
   - component: {fileID: 994364612811100981}
+  - component: {fileID: 7021994442630750976}
   m_Layer: 5
   m_Name: TabPlayer
   m_TagString: Untagged
@@ -1761,6 +1762,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4637335234425442998}
   m_CullTransparentMesh: 1
+--- !u!114 &7021994442630750976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4637335234425442998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f7a61b54f8a934994c60939cbb985f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerItemPrefabSettings: {fileID: 5579281195357421886, guid: 2bf2d61890fe7494783d1555035f1d11, type: 3}
+  PlayerListSettings: {fileID: 8114877012828975565}
+  _runner: {fileID: 0}
 --- !u!1 &4656795815476379570
 GameObject:
   m_ObjectHideFlags: 0

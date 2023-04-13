@@ -18,16 +18,15 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
     [Networked(OnChanged = nameof(OnNickNameChanged))]
     public NetworkString<_16> nickname { get; set; }
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Networked] public int ActorID { get; set; }
+
 
     public override void Spawned()
     {
-
+      
         var controller = Resources.Load("Animations/Character") as RuntimeAnimatorController;
 
+        
         //Add animator
         if (this.avatar == 0) this.avatar = Random.Range(1, 6);
         GameObject model = Instantiate(playerPrefabs[this.avatar], gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);

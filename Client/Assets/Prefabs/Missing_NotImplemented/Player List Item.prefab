@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &315950256420453817
 RectTransform:
   m_ObjectHideFlags: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1757507275222063671}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UserListitem, Assembly-CSharp
         m_MethodName: KickPlayer
         m_Mode: 5
@@ -144,7 +144,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5543892803843011875}
   - component: {fileID: 8046526943821368050}
-  - component: {fileID: 1757507275222063671}
   m_Layer: 5
   m_Name: Player List Item
   m_TagString: Untagged
@@ -194,19 +193,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &1757507275222063671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5579281195357421886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcdbd683b78249641a946ee714d840d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numActor: 0
 --- !u!1 &6585054332563038537
 GameObject:
   m_ObjectHideFlags: 0

@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
 
     private int avatarNumber = 0;
 
+    public bool CameraBool = false;
     //Initialization Correct
     private void Awake() 
     {

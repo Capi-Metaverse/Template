@@ -80,7 +80,8 @@ public class CharacterInputHandler : MonoBehaviour
         if (Input.GetKeyDown("m") && gameManager.GetUserStatus() == UserStatus.InGame)
             voiceChat.MuteAudio(gameManager.GetUserStatus());
 
-        if (localCameraHandler == null) { 
+        if (localCameraHandler == null && gameManager.CameraBool == false ) {
+            gameManager.CameraBool = true;
             localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
             playerCamera = localCameraHandler.gameObject.GetComponent<Camera>();
 

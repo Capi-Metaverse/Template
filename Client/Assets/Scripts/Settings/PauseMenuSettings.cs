@@ -21,7 +21,7 @@ public class PauseMenuSettings : MonoBehaviour
       private MusicManager musicController;*/
 
     /*   private PlayerSpawn playerManager;*/
-      // PlayerList playerList;
+     PlayerList playerList;
     /* void Start()
      {
        voiceChat = GameObject.Find("VoiceManager").GetComponent<AudioController>();
@@ -51,11 +51,11 @@ public class PauseMenuSettings : MonoBehaviour
         Pause.SetActive(false);
         Settings.SetActive(true);
         //If the user is master  it will search the player list
-        /*  if (PhotonNetwork.IsMasterClient)
+         if (gameManager.GetUserRole() == UserRole.Admin)
             {
               playerList = GameObject.Find("TabPlayer").GetComponent<PlayerList>();
               playerList.playerList();
-    } */
+    } 
 
 
     }
