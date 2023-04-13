@@ -11,13 +11,13 @@ public class PlayerList : MonoBehaviour
     public GameObject PlayerItemPrefabSettings;
     public GameObject PlayerListSettings;
     List<string> NamePlayer = new List<string>();
-    [Networked] NetworkPlayer networkPlayer { get; set; }
 
+    public int IDPlayer;
     private NetworkRunner _runner;
     // Start is called before the first frame update
     //Function to get the List of players and Kick them
 
-    
+    public Dictionary<int, string> PlayerDict;
     public void playerList()
     {
         //Destroys the former list
@@ -27,16 +27,22 @@ public class PlayerList : MonoBehaviour
         }
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
+        PlayerDict = new Dictionary<int, string>();
         foreach (GameObject player in players) 
         {
-            NamePlayer.Add(player.GetComponent<NetworkPlayer>().nickname.ToString());
+
+            // NamePlayer.Add(player.GetComponent<NetworkPlayer>().nickname.ToString());
+            IDPlayer = player.GetComponent<NetworkPlayer>().ActorID;
             Debug.Log(player.GetComponent<NetworkPlayer>().nickname.ToString());
+
+            PlayerDict[IDPlayer] = player.GetComponent<NetworkPlayer>().nickname.ToString();
+            //Debug.Log(PlayerDict);
         }
 
         Debug.Log("ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp");
 
         //Iterate players to get Nickname && ActorNumber
-        /*for (int i = 0; i < a.Length; i++)
+        for (int i = 0; i < PlayerDict.Count; i++)
         {
             //We create the userItem object
             GameObject userItem = (GameObject)Instantiate(PlayerItemPrefabSettings);
@@ -44,16 +50,18 @@ public class PlayerList : MonoBehaviour
             userItem.transform.SetParent(PlayerListSettings.transform);
             userItem.transform.localScale = Vector3.one;
 
+           
+
 
 
             //We configure the Nickname
             TMP_Text PlayerNameText = userItem.transform.GetChild(0).GetComponent<TMP_Text>();
-            PlayerNameText.text = otherPlayers[i].NickName.ToString();
+            PlayerNameText.text = PlayerDict[i];
 
 
-
+            List<int> keys = new List<int>(PlayerDict.Keys);
             //We configure the ActorNumber
-            userItem.GetComponent<UserListitem>().numActor = otherPlayers[i].ActorNumber;
-        }*/
+            userItem.GetComponent<UserListItem>().numActor = keys[i];
+        }
     }
 }

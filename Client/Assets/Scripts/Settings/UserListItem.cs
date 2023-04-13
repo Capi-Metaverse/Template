@@ -1,25 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using ExitGames.Client.Photon;
-
+using Fusion;
+using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-
-
-public class UserListitem : MonoBehaviour
+public class UserListItem : MonoBehaviour
 {
+    GameManager gameManager;
     public int numActor;
 
+    public void Start()
+    {
+        gameManager = GameManager.FindInstance();
+    }
 
-
-   /* public void KickPlayer(string name)
+    [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.All)]
+    public void KickPlayer()
     {
         int[] myNum = { numActor };
-        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others, TargetActors = myNum };
-        PhotonNetwork.RaiseEvent(26, "", raiseEventOptions, SendOptions.SendUnreliable);
+        var juan = gameManager.GetCurrentPlayer().GetComponent<NetworkPlayer>().ActorID;
+
+        if (numActor == juan)
+        {
+            gameManager.Disconnect();
+
+            SceneManager.LoadSceneAsync("Lobby");
 
 
+            Destroy(this.gameObject);
 
-        Destroy(this.gameObject);
-    }*/
+        }
+
+
+       
+    }
 }
