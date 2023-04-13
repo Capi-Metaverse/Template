@@ -39,7 +39,7 @@ public class PlayerList : MonoBehaviour
             //Debug.Log(PlayerDict);
         }
 
-        Debug.Log("ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp");
+       
 
         //Iterate players to get Nickname && ActorNumber
         for (int i = 0; i < PlayerDict.Count; i++)
@@ -62,6 +62,7 @@ public class PlayerList : MonoBehaviour
             List<int> keys = new List<int>(PlayerDict.Keys);
             //We configure the ActorNumber
             userItem.GetComponent<UserListItem>().numActor = keys[i];
+            Debug.Log(keys[i]);
         }
     }
 }

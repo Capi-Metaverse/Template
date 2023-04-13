@@ -19,20 +19,27 @@ public class UserListItem : MonoBehaviour
     [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.All)]
     public void KickPlayer()
     {
-        int[] myNum = { numActor };
+        
         var juan = gameManager.GetCurrentPlayer().GetComponent<NetworkPlayer>().ActorID;
+        Debug.Log(juan);
+        Debug.Log(numActor);
 
-        if (numActor == juan)
-        {
-            gameManager.Disconnect();
+            if (numActor == juan)
+            {
+                gameManager.Disconnect();
 
-            SceneManager.LoadSceneAsync("Lobby");
+                SceneManager.LoadSceneAsync("Lobby");
 
 
-            Destroy(this.gameObject);
+                Destroy(this.gameObject);
 
         }
+        else
+        {
+            Debug.Log("ERORRRRRRRRR");
+        }
 
+        
 
        
     }
