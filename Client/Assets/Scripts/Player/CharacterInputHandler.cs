@@ -67,11 +67,15 @@ public class CharacterInputHandler : MonoBehaviour
         Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
 
         //PlayerUIPrefab
-        micro = GameObject.Find("PlayerUIPrefab").transform.GetChild(0).gameObject;//Micro
-        scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;//Scope
-        eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject;
-        eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
-
+        //micro = GameObject.Find("PlayerUIPrefab").transform.GetChild(0).gameObject;//Micro
+        //scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;//Scope
+        //eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject;
+        //eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+        //Debug.Log(GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3));
+        micro = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(0).gameObject;//Micro
+        scope = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(1).gameObject;//Scope
+        eventText = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(2).gameObject;
+        eventTextK = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(3).gameObject;
         Debug.Log(Pause);
 
         //seteamos el estado para que este InGame, esto hay que cambiarlo
