@@ -63,6 +63,7 @@ namespace POpusCodec
         {
             if (Wrapper.AsyncAPI)
             {
+                /*
                 if (TisFloat)
                 {
                     Wrapper.opus_decode_float_async(handle, data.Ptr, data.Length, decodeFEC, endOfStream);
@@ -71,6 +72,7 @@ namespace POpusCodec
                 {
                     Wrapper.opus_decode_async(handle, data.Ptr, data.Length, decodeFEC, endOfStream);
                 }
+                */
             }
             else
             {

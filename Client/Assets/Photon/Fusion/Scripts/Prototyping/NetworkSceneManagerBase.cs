@@ -13,7 +13,6 @@ namespace Fusion {
   public abstract class NetworkSceneManagerBase : Fusion.Behaviour, INetworkSceneManager {
 
     private static WeakReference<NetworkSceneManagerBase> s_currentlyLoading = new WeakReference<NetworkSceneManagerBase>(null);
-
     /// <summary>
     /// When enabled, a small info button overlays will be added to the Hierarchy Window 
     /// for each active <see cref="NetworkRunner"/> and for its associated scene.

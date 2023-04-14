@@ -165,7 +165,7 @@ namespace Photon.Voice
                 {
                     if (Wrapper.AsyncAPI)
                     {
-                        decoder = new OpusDecoderAsync<T>(output, (SamplingRate)i.SamplingRate, (Channels)i.Channels, i.FrameDurationSamples);
+                        //decoder = new OpusDecoderAsync<T>(output, (SamplingRate)i.SamplingRate, (Channels)i.Channels, i.FrameDurationSamples);
                     }
                     else
                     {

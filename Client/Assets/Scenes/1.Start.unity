@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1341,7 +1341,6 @@ MonoBehaviour:
   usernameInput: {fileID: 0}
   emailInput: {fileID: 1654513123}
   passwordInput: {fileID: 0}
-  UserRolePlayFab: 
   LoginPanel: {fileID: 1210460668}
   RegisterPanel: {fileID: 602019936}
   ResetPanel: {fileID: 367055714}
@@ -1977,7 +1976,6 @@ MonoBehaviour:
   usernameInput: {fileID: 1379404881}
   emailInput: {fileID: 1991867528}
   passwordInput: {fileID: 1737751448}
-  UserRolePlayFab: 
   LoginPanel: {fileID: 1210460668}
   RegisterPanel: {fileID: 602019936}
   ResetPanel: {fileID: 367055714}
@@ -2877,7 +2875,6 @@ GameObject:
   - component: {fileID: 884191508}
   - component: {fileID: 884191507}
   - component: {fileID: 884191506}
-  - component: {fileID: 884191505}
   m_Layer: 5
   m_Name: ResetButton
   m_TagString: Untagged
@@ -2906,18 +2903,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1, y: -22.1}
   m_SizeDelta: {x: 41.0371, y: 11.2}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &884191505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884191503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52e7d4c50b89cbc42a65196349ee6f36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &884191506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3686,7 +3671,6 @@ GameObject:
   - component: {fileID: 984693140}
   - component: {fileID: 984693139}
   - component: {fileID: 984693138}
-  - component: {fileID: 984693137}
   m_Layer: 5
   m_Name: RegisterButton
   m_TagString: Untagged
@@ -3715,18 +3699,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1, y: -41.2}
   m_SizeDelta: {x: 41.0371, y: 11.2}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &984693137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984693135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52e7d4c50b89cbc42a65196349ee6f36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &984693138
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4527,7 +4499,6 @@ GameObject:
   - component: {fileID: 1161801410}
   - component: {fileID: 1161801409}
   - component: {fileID: 1161801408}
-  - component: {fileID: 1161801407}
   m_Layer: 5
   m_Name: RegisterButton
   m_TagString: Untagged
@@ -4556,18 +4527,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.3, y: -39}
   m_SizeDelta: {x: 27.2901, y: 11.2}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1161801407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161801405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52e7d4c50b89cbc42a65196349ee6f36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1161801408
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5222,7 +5181,6 @@ MonoBehaviour:
   usernameInput: {fileID: 0}
   emailInput: {fileID: 2082988908}
   passwordInput: {fileID: 688476428}
-  UserRolePlayFab: 
   LoginPanel: {fileID: 1210460668}
   RegisterPanel: {fileID: 602019936}
   ResetPanel: {fileID: 367055714}
@@ -7354,7 +7312,6 @@ GameObject:
   - component: {fileID: 1725698867}
   - component: {fileID: 1725698866}
   - component: {fileID: 1725698871}
-  - component: {fileID: 1725698872}
   m_Layer: 5
   m_Name: LoginButton
   m_TagString: Untagged
@@ -7490,18 +7447,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 39.77472, y: 9.188032, z: 1}
   m_Center: {x: -0.1420784, y: -0.13659, z: 0}
---- !u!114 &1725698872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725698865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52e7d4c50b89cbc42a65196349ee6f36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1737751447
 GameObject:
   m_ObjectHideFlags: 0
