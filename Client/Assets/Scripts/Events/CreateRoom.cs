@@ -29,7 +29,15 @@ public class CreateRoom : MonoBehaviour
         this.gameObject.SetActive(true);
         gameManager = GameManager.FindInstance();
         GameObject player = gameManager.GetCurrentPlayer();
+        player.GetComponent<CharacterInputHandler>().changeRoomPanel = this.gameObject;
         player.GetComponent<CharacterInputHandler>().DeactivateALL();
 
+    }
+
+    public void CloseUI()
+    {
+        this.gameObject.SetActive(false);
+        GameObject player = gameManager.GetCurrentPlayer();
+        player.GetComponent<CharacterInputHandler>().ActiveALL();
     }
 }

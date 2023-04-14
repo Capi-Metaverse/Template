@@ -32,6 +32,7 @@ public class CharacterInputHandler : MonoBehaviour
     GameObject micro;//Actually this is the microphone in game
     public GameObject eventText;
     public GameObject eventTextK;
+    public GameObject changeRoomPanel = null;
 
 
     VoiceManager voiceChat = new VoiceManager();//Manager for the voiceChat, not in scene object
@@ -200,7 +201,10 @@ public class CharacterInputHandler : MonoBehaviour
                         if (Input.GetKeyDown(KeyCode.Escape) && !escPul)
                         {
                             setJuego();
-                        }
+                        if(changeRoomPanel != null)
+                          changeRoomPanel.SetActive(false);
+
+}
                         break;
                     }
 
@@ -271,14 +275,17 @@ public class CharacterInputHandler : MonoBehaviour
     //DeactivateALL
     public void DeactivateALL()
     {
+        escPul = true;
+        gameManager.SetUserStatus(UserStatus.InPause);
+        
+    //playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
 
-        //playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
 
-
-        Cursor.visible = true;
+    Cursor.visible = true;
         //AQUI IRA EL FIND DEL CHARACTER CONTROL PARA DESACTIVAR
         //AQUI IRA EL FIND DEL PLAYERCAMERA PARA DESACTIVARLA
         characterMovementHandler.enabled=false;
+       
         localCameraHandler.enabled=false;
 
 
@@ -318,28 +325,11 @@ public class CharacterInputHandler : MonoBehaviour
 
     public void setPause()
     {
-        escPul = true;
-        //playerToSpawn.GetComponent<SC_FPSController>().eventText.SetActive(false);
-
-
-
-
-        //Start Animator
-        //animator.speed = 0;
-        //object[] content =new object[] {playerToSpawn.GetComponent<PhotonView>().Owner.NickName,animator.speed,"Stop&Replay"};
-        //RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-        //PhotonNetwork.RaiseEvent(2,content,raiseEventOptions,SendOptions.SendReliable);
-
-
+       
 
         //Pause canvas
-        gameManager.SetUserStatus(UserStatus.InPause);
+        
         Pause.SetActive(true);
-        //RoomName on Settings
-        //GameObject SalaText = Pausa.transform.Find("RoomName").gameObject;
-        //Scene scene = SceneManager.GetActiveScene();
-        //SalaText.GetComponent<TMP_Text>().text = ((string) PhotonNetwork.CurrentRoom.CustomProperties["Name"]) + " " + scene.name;
-        //State and Cursor
        
         DeactivateALL();
         //Escape activado
