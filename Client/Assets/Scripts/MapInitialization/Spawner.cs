@@ -56,6 +56,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     {
         obj.GetComponent<NetworkPlayer>().avatar = gameManager.GetAvatarNumber();
         obj.GetComponent<NetworkPlayer>().ActorID = gameManager.GetRunner().LocalPlayer;
+        obj.GetComponent<NetworkPlayer>().nickname = gameManager.GetUsername();
         gameManager.SetCurrentPlayer(obj.gameObject);
     }
 

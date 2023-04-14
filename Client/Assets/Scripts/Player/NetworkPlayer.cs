@@ -20,6 +20,8 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
     // Start is called before the first frame update
     [Networked] public int ActorID { get; set; }
 
+    public CharacterInputHandler inputHandler;
+
 
     public override void Spawned()
     {
@@ -39,14 +41,14 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
         {
             Local = this;
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
-
+            this.inputHandler.enabled = true;
             //Looks in scene for the GameManager and store it
             SetGameManager(GameObject.Find("/Manager").GetComponent<GameManager>());
             string auxiliar = gameManager.GetUsername();//loginManager sets nickname on GameManager and we can retrieve it
             Debug.Log("Spawned local player : " + auxiliar);
 
             //RPC to Send the name to host/server to have it networked
-            RPC_SetNickName(auxiliar);
+            //RPC_SetNickName(auxiliar);
         }
 
         else Debug.Log("Spawned remote player");

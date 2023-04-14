@@ -44,7 +44,6 @@ public class CharacterInputHandler : MonoBehaviour
     public Camera presentationCamera = null;
     public bool onPresentationCamera = false;
 
-    public bool otherPlayer = true;
 
     public string nickname;
 
@@ -85,16 +84,16 @@ public class CharacterInputHandler : MonoBehaviour
         if (Input.GetKeyDown("m") && gameManager.GetUserStatus() == UserStatus.InGame)
             voiceChat.MuteAudio(gameManager.GetUserStatus());
         nickname = this.gameObject.GetComponent<NetworkPlayer>().nickname.ToString();
+
        
-        if (localCameraHandler == null && gameManager.GetUsername().Equals(nickname)) {
-            otherPlayer = false;
+        if (localCameraHandler == null) {
+            
             localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
             playerCamera = localCameraHandler.gameObject.GetComponent<Camera>();
 
         }
 
-        if (!otherPlayer)
-        {
+     
             if (HittingObject && gameManager.GetUserStatus() != UserStatus.InPause)
                 eventText.SetActive(true);
 
@@ -222,14 +221,13 @@ public class CharacterInputHandler : MonoBehaviour
 
             if (localCameraHandler != null) localCameraHandler.SetViewInputVector(viewInputVector);
         }
-    }
+    
 
     public NetworkInputData GetNetworkInput()
     {
         NetworkInputData networkInputData = new NetworkInputData();
 
         //Aim data
-        if(!otherPlayer)
         networkInputData.aimForwardVector = localCameraHandler.transform.forward;
 
         //Move data
