@@ -94,7 +94,7 @@ public class CharacterInputHandler : MonoBehaviour
         }
 
      
-            if (HittingObject && gameManager.GetUserStatus() != UserStatus.InPause)
+            if (HittingObject && gameManager.GetUserStatus() != UserStatus.InPause && onPresentationCamera==false)
                 eventText.SetActive(true);
 
             targetTime -= Time.deltaTime;
@@ -129,7 +129,6 @@ public class CharacterInputHandler : MonoBehaviour
 
                     //Retrieve Parent Object and call event
                     GameObject eventObject = hit.transform.gameObject;
-                    Debug.Log("Activado");
                     eventObject.GetComponent<IMetaEvent>().activate(true);
                 }
             }
@@ -164,7 +163,7 @@ public class CharacterInputHandler : MonoBehaviour
                             setPause();
                         }
 
-                        //K key down(PrentationMode)
+                        //K key down(PresentationMode)
                         if (presentationCamera != null)
                         {
                             if (inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null)
@@ -180,7 +179,6 @@ public class CharacterInputHandler : MonoBehaviour
 
                                 else
                                 {
-
                                     presentationCamera.enabled = true;
                                     playerCamera.enabled = false;
                                     eventText.SetActive(false);
