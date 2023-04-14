@@ -7,19 +7,18 @@ public class PresentationZone : MonoBehaviour
 {
     //Camera of the presentation
     public Camera cameraObject;
-    CharacterMovementHandler player;
-    CharacterInputHandler playerInputs;
 
+    CharacterInputHandler playerInputs;
 
 
     //Detect if it in collider
     private void OnTriggerEnter(Collider other) {
 
-        if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<NetworkObject>())
+        if (other.gameObject.Equals(GameManager.FindInstance().GetCurrentPlayer().gameObject))
         {
-            if (player == null) player = other.gameObject.GetComponent<CharacterMovementHandler>();
-            if (playerInputs == null) playerInputs = other.gameObject.GetComponent<CharacterInputHandler>();
 
+
+            playerInputs = GameManager.FindInstance().GetCurrentPlayer().GetComponent<CharacterInputHandler>();
             playerInputs.setPresentationCamera(cameraObject);
 
             MusicManager musicController = GameObject.Find("Manager").GetComponent<MusicManager>();
@@ -29,11 +28,10 @@ public class PresentationZone : MonoBehaviour
     //Detect if Exits collider
     private void OnTriggerExit(Collider other) {
 
-        if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<NetworkObject>())
+        if (other.gameObject.Equals(GameManager.FindInstance().GetCurrentPlayer().gameObject))
         {
-            if (player == null) player = other.gameObject.GetComponent<CharacterMovementHandler>();
-            if (playerInputs == null) playerInputs = other.gameObject.GetComponent<CharacterInputHandler>();
 
+            playerInputs = GameManager.FindInstance().GetCurrentPlayer().GetComponent<CharacterInputHandler>();
             playerInputs.setPresentationCamera(null);
 
             MusicManager musicController = GameObject.Find("Manager").GetComponent<MusicManager>();
