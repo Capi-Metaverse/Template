@@ -207,8 +207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e81f82e5a3bf9847a5e28c9d4179fc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
-  numActor: 0
 --- !u!114 &6375988137861596068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,8 +228,7 @@ MonoBehaviour:
   NetworkGuid:
     RawGuidValue: 2bf2d61890fe7494783d1555035f1d11
   NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 1601363260803767663}
+  NetworkedBehaviours: []
   SimulationBehaviours: []
 --- !u!1 &6585054332563038537
 GameObject:

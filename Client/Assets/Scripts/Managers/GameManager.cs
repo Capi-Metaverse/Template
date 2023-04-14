@@ -38,7 +38,7 @@ public enum UserRole
     Employee
 }
 
-public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
+public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 {
 
     /*
@@ -505,5 +505,26 @@ public class GameManager : MonoBehaviour, INetworkRunnerCallbacks
         throw new NotImplementedException();
     }
 
-    
+
+    [Rpc]
+    public static async void RPC_onKick(NetworkRunner runner, int numActor)
+    {
+
+
+
+        Debug.Log(numActor);
+
+        int juan = GameManager.FindInstance().GetCurrentPlayer().GetComponent<NetworkPlayer>().ActorID;
+        Debug.Log(juan);
+        if (numActor == juan)
+        {
+            await GameManager.FindInstance().Disconnect();
+
+            SceneManager.LoadSceneAsync("Lobby");
+
+        }
+
+    }
+
+
 }

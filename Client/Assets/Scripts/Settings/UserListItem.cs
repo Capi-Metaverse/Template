@@ -6,38 +6,19 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UserListItem : NetworkBehaviour
+public class UserListItem : MonoBehaviour
 {
     GameManager gameManager;
-    public int numActor;
+    public int numActor { get; set; }
 
     public void Start()
     {
         gameManager = GameManager.FindInstance();
     }
     public void KickPlayer() { 
-        RPC_onKick(numActor);  
+        GameManager.RPC_onKick(gameManager.GetRunner(),numActor);  
     }
 
 
-    [Rpc(RpcSources.All, RpcTargets.All)]
-    public void RPC_onKick(int numActor)
-    {
-
-        Debug.Log(numActor);
-       
-        var juan = gameManager.GetCurrentPlayer().GetComponent<NetworkPlayer>().ActorID;
-        Debug.Log(juan);
-        if (numActor == juan)
-        {
-            gameManager.Disconnect();
-
-            SceneManager.LoadSceneAsync("Lobby");
-
-
-            Destroy(this.gameObject);
-
-        }
-
-    }
+  
 }
