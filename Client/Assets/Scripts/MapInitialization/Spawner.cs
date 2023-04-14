@@ -36,25 +36,34 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
         {
 
             Debug.Log("Spawning Player");
-            gameManager.SetUserStatus(UserStatus.InGame);
-
-           
-               
-            
-
             runner.Spawn(playerPrefab, Utils.GetRandomSpawnPoint(), Quaternion.identity, player,OnBeforeSpawn);
         }
-        if (gameManager.GetUserStatus() == UserStatus.InPause)
-        {
-            if (gameManager.GetUserRole() == UserRole.Admin)
-            {
-                Debug.Log("llegooooooooooooooooooooooooooooooooooooo");
-                playerList = GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(3).GetComponent<PlayerList>();
-                playerList.playerList();
-            }
-        }
+        Debug.Log(gameManager.GetUserStatus());
+
+        StartCoroutine(WaitPlayer());
+    }
+    public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
+    {
+        StartCoroutine(WaitPlayer());
     }
 
+    IEnumerator WaitPlayer()
+    {
+        yield return new WaitForSeconds(2);
+        if (gameManager.GetUserStatus() == UserStatus.InPause)
+        {
+
+            if (gameManager.GetUserRole() == UserRole.Admin)
+            {
+
+                Debug.Log("llegooooooooooooooooooooooooooooooooooooo");
+                playerList = GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(3).GetComponent<PlayerList>();
+                Debug.Log(GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(3));
+                playerList.playerList();
+            }
+
+        }
+    }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         Debug.Log("Llega input" +  input.ToString());
@@ -123,10 +132,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 
     
 
-    public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
-    {
-        throw new NotImplementedException();
-    }
+   
 
     public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ArraySegment<byte> data)
     {

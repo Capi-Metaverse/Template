@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5801750036806435754, guid: 706914ff1dfe50645b4906f848f4c330, type: 3}
+  Settings: {fileID: 5587160888839851947, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
 --- !u!114 &5535535865367102106
 MonoBehaviour:
   m_ObjectHideFlags: 0

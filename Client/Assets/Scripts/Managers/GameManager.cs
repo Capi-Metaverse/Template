@@ -469,28 +469,13 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         {
             Debug.Log("A user has joined to the room");
             //We indicate to the LobbyManager that he has a new user
-
-           
+  
         }
-       
-
-
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
-
-    
             Debug.Log("A user has disconnected from the room");
-
-        if (Settings.activeSelf == true)
-        {
-            if (GetUserRole() == UserRole.Admin)
-            {
-                playerList = GameObject.Find("Menus").transform.GetChild(1).GetChild(0).GetChild(3).GetComponent<PlayerList>();
-                playerList.playerList();
-            }
-        }
     }
 
     public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ArraySegment<byte> data)
@@ -529,13 +514,15 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
         Debug.Log(numActor);
 
-        int juan = GameManager.FindInstance().GetCurrentPlayer().GetComponent<NetworkPlayer>().ActorID;
-        Debug.Log(juan);
-        if (numActor == juan)
+        int PlayerID = GameManager.FindInstance().GetCurrentPlayer().GetComponent<NetworkPlayer>().ActorID;
+        Debug.Log(PlayerID);
+        if (numActor == PlayerID)
         {
             await GameManager.FindInstance().Disconnect();
 
             SceneManager.LoadSceneAsync("Lobby");
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
 
         }
 
