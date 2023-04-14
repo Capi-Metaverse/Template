@@ -54,7 +54,7 @@ public class PauseMenuSettings : MonoBehaviour
          if (gameManager.GetUserRole() == UserRole.Admin)
             {
               playerList = GameObject.Find("TabPlayer").GetComponent<PlayerList>();
-              playerList.playerList();
+              playerList.ListPlayers();
     } 
 
 

@@ -96,7 +96,6 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
     public bool CameraBool = false;
 
-    PlayerList playerList;
     //Initialization Correct
     private void Awake() 
     {
