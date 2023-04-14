@@ -6,6 +6,7 @@ using Fusion.Sockets;
 using System;
 using UnityEngine.Diagnostics;
 using Photon.Realtime;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 {
@@ -15,6 +16,8 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     CharacterInputHandler characterInputHandler;
 
     GameManager gameManager;
+    public GameObject Settings;
+    PlayerList playerList;
 
     // Start is called before the first frame update
 
@@ -33,8 +36,22 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
         {
 
             Debug.Log("Spawning Player");
+            gameManager.SetUserStatus(UserStatus.InGame);
+
+           
+               
             
+
             runner.Spawn(playerPrefab, Utils.GetRandomSpawnPoint(), Quaternion.identity, player,OnBeforeSpawn);
+        }
+        if (gameManager.GetUserStatus() == UserStatus.InPause)
+        {
+            if (gameManager.GetUserRole() == UserRole.Admin)
+            {
+                Debug.Log("llegooooooooooooooooooooooooooooooooooooo");
+                playerList = GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(3).GetComponent<PlayerList>();
+                playerList.playerList();
+            }
         }
     }
 
