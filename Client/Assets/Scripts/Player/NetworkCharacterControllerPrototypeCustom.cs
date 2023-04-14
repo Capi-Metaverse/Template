@@ -166,11 +166,13 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     {
 
         if(animator == null) { animator = this.gameObject.GetComponentInChildren<Animator>(); }
-
+       
         if (IsGrounded)
         {
-            if (Velocity.magnitude > 0 && Controller.isGrounded)
+           
+            if (Velocity.magnitude > 0 && IsGrounded)
             {
+                
                 animator.SetBool("Walking", true);
 
             }
