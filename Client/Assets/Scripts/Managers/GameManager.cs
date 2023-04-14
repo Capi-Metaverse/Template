@@ -5,6 +5,7 @@ using Fusion;
 using Fusion.Sockets;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static Unity.Collections.Unicode;
 
 
@@ -72,6 +73,8 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
     private string mapName;
 
+    public GameObject Settings;
+
     //Static function to get the singleton
     public static GameManager FindInstance()
     {
@@ -92,6 +95,8 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     private int avatarNumber = 0;
 
     public bool CameraBool = false;
+
+    PlayerList playerList;
     //Initialization Correct
     private void Awake() 
     {
@@ -464,9 +469,12 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         {
             Debug.Log("A user has joined to the room");
             //We indicate to the LobbyManager that he has a new user
-            
 
+           
         }
+       
+
+
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
@@ -475,7 +483,14 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     
             Debug.Log("A user has disconnected from the room");
 
-       
+        if (Settings.activeSelf == true)
+        {
+            if (GetUserRole() == UserRole.Admin)
+            {
+                playerList = GameObject.Find("Menus").transform.GetChild(1).GetChild(0).GetChild(3).GetComponent<PlayerList>();
+                playerList.playerList();
+            }
+        }
     }
 
     public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ArraySegment<byte> data)
