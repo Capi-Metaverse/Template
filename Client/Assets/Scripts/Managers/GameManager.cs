@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Fusion;
 using Fusion.Sockets;
@@ -323,9 +324,10 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     public async void StartGame(string sessionName, int avatarNumber)
     {
         //We disconnect the actual runner
-         await Disconnect();
+        await Disconnect();
         this.avatarNumber = avatarNumber;
-        mapName = sessionName;
+
+        mapName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
         //We change to the new map
         //THIS WILL BE THE LOBBY WHEN IT'S ENDED
         SceneManager.LoadSceneAsync("Mapa1");
