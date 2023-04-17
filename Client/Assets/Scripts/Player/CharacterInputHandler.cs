@@ -103,7 +103,8 @@ public class CharacterInputHandler : MonoBehaviour
      
             if (HittingObject && gameManager.GetUserStatus() != UserStatus.InPause && onPresentationCamera==false)
                 eventText.SetActive(true);
-
+        if (gameManager.GetUserStatus() != UserStatus.InPause)
+        {
             targetTime -= Time.deltaTime;
             //Raycast
             RaycastHit hit;
@@ -151,6 +152,7 @@ public class CharacterInputHandler : MonoBehaviour
                     HittingObject = false;
                 }
             }
+        }
 
             //Pause
             if (!Input.GetKeyDown(KeyCode.Escape))
@@ -312,6 +314,7 @@ public class CharacterInputHandler : MonoBehaviour
         //AQUI IRA EL FIND DEL PLAYERCAMERA PARA ACTIVAR
         characterMovementHandler.enabled = true;
         localCameraHandler.enabled = true;
+        gameManager.SetUserStatus(UserStatus.InGame);
 
 
         //Deactivate presentation text
@@ -349,7 +352,7 @@ public class CharacterInputHandler : MonoBehaviour
         Cursor.visible = false;
         //States and Reactivate all
       
-        gameManager.SetUserStatus(UserStatus.InGame);
+   
         ActiveALL();
         Debug.Log(gameManager.GetUserStatus());
 

@@ -23,6 +23,7 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
     public CharacterInputHandler inputHandler;
 
 
+
     public override void Spawned()
     {
       
@@ -31,6 +32,8 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
         
         //Add animator
         if (this.avatar == 0) this.avatar = Random.Range(1, 6);
+        gameManager = GameManager.FindInstance();
+        gameManager.SetAvatarNumber(avatar);
         GameObject model = Instantiate(playerPrefabs[this.avatar], gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
         model.transform.SetAsFirstSibling();
         model.AddComponent<Animator>();
