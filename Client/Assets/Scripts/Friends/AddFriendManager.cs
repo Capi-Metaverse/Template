@@ -1,10 +1,12 @@
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
+using Unity.VisualScripting;
+using TMPro;
 
 public class AddFriendManager : MonoBehaviour
 {
-    public string friendUsername = "prueba12345"; // The username of the friend to be added
+    public TMP_InputField inputFriendUsername; // The username of the friend to be added
 
     public void AddFriend()
     {
@@ -12,7 +14,7 @@ public class AddFriendManager : MonoBehaviour
         ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
         {
             FunctionName = "AddFriend", // Replace with the name of your Cloud Script function
-            FunctionParameter = new { friendUsername }, // Pass in any required parameters
+            FunctionParameter = new { friendUsername = inputFriendUsername.text }, // Pass in any required parameters
             GeneratePlayStreamEvent = true // Set to true if you want PlayStream events to be generated for this API call
         };
 

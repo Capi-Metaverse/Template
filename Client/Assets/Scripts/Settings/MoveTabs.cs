@@ -10,6 +10,7 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
     public GameObject TabPanel;
     public GameObject TabPanelKeys;
     public GameObject TabPanelPlayers;
+    public GameObject TabPanelFriends;
     public GameObject TabTabPlayers;
     public GameObject Lenguages;
     public string[] PlayerKeys;
@@ -39,6 +40,7 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
         Lenguages.SetActive(true);
         TabPanelKeys.SetActive(false);
         TabPanelPlayers.SetActive(false);
+        TabPanelFriends.SetActive(false);
     }
 
     public void ChangeToPanelKeys()
@@ -47,6 +49,7 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
         Lenguages.SetActive(false);
         TabPanelKeys.SetActive(true);
         TabPanelPlayers.SetActive(false);
+        TabPanelFriends.SetActive(false);
     }
     public void ChangeToPanelPlayer()
     {
@@ -54,6 +57,15 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
         Lenguages.SetActive(false);
         TabPanelKeys.SetActive(false);
         TabPanelPlayers.SetActive(true);
+        TabPanelFriends.SetActive(false);
+    }
+    public void ChangeToPanelFriends()
+    {
+        TabPanel.SetActive(false);
+        Lenguages.SetActive(false);
+        TabPanelKeys.SetActive(false);
+        TabPanelPlayers.SetActive(false);
+        TabPanelFriends.SetActive(true);
     }
 
     public void OnClickBackToPause()
