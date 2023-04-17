@@ -28,6 +28,7 @@ public class NetworkRunnerHandler : MonoBehaviour
 
         var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Shared, NetAddress.Any(), SceneManager.GetActiveScene().buildIndex, null);
 
+       
         Debug.Log("Server NetworkRunner Started");
     }
 
@@ -46,14 +47,23 @@ public class NetworkRunnerHandler : MonoBehaviour
         runner.ProvideInput = true;
         GameManager.FindInstance().SetRunner(runner);
 
+         SessionProps props = new SessionProps();
+        props.StartMap = gameManager.currentMap;
+        props.RoomName = gameManager.GetMapName();
+        props.AllowLateJoin = true;
+        props.PlayerLimit = gameManager.playerCount;
+
         return runner.StartGame(new StartGameArgs
         {
             GameMode = gameMode,
             Address = address,
             Scene = scene,
-            SessionName = gameManager.GetMapName() + "-" + map ,
+            SessionName = gameManager.GetMapName() + "-" + map,
+            PlayerCount = gameManager.playerCount,
             Initialized = initialized,
-            SceneManager = sceneManager
-        });
+            SceneManager = sceneManager,
+            SessionProperties = props.Properties
+        }); ;
+
     }
 }

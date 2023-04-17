@@ -52,6 +52,8 @@ public class CharacterInputHandler : MonoBehaviour
     {
         gameManager = GameManager.FindInstance().GetComponent<GameManager>();
         inputManager = GameManager.FindInstance().GetComponent<InputManager>();
+
+        
        
     }
 

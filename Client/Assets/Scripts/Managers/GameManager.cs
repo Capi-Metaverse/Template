@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Fusion;
 using Fusion.Sockets;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
@@ -73,8 +74,11 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
 
     private string mapName;
+    public int playerCount;
+    public string currentMap;
 
     public GameObject Settings;
+
 
     //Static function to get the singleton
     public static GameManager FindInstance()
@@ -235,6 +239,10 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
            
         });
 
+        playerCount = 10;
+        currentMap = "Mapa1";
+        mapName = props.RoomName;
+
         //Maybe refactor this part Add Player in setPlayerPanel?
 
         if (UserStatus == UserStatus.PreLobby)
@@ -334,6 +342,16 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         Debug.Log("Creating session");
 
 
+    }
+
+    public async void StartCustomGame(string sessionName, int playerNumber, string map)
+    {
+        await Disconnect();
+        mapName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
+        currentMap = map;
+        playerCount = playerNumber;
+        //We change to the respective map
+        SceneManager.LoadSceneAsync(map);
     }
 
     /* Function that changes the map to another
