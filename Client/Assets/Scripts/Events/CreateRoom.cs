@@ -9,7 +9,10 @@ using UnityEngine.UI;
 public class CreateRoom : MonoBehaviour
 {
 
-   [SerializeField] private TMP_InputField inputName;
+   [SerializeField] private TMP_InputField inputNameCreate;
+
+
+    [SerializeField] private TMP_InputField inputNameJoin;
 
     [SerializeField] private TMP_InputField inputPlayers;
 
@@ -28,6 +31,11 @@ public class CreateRoom : MonoBehaviour
     [SerializeField] private Button leftMap;
     [SerializeField] private Button rightMap;
 
+    //Panels
+
+    [SerializeField] private GameObject choosePanel;
+    [SerializeField] private GameObject joinPanel;
+    [SerializeField] private GameObject createPanel;
 
 
 
@@ -45,15 +53,25 @@ public class CreateRoom : MonoBehaviour
 
         Debug.Log("Entro");
         Debug.Log(gameManager);
-        gameManager.StartCustomGame(inputName.text, Int32.Parse(inputPlayers.text), map.text);
+        gameManager.StartCustomGame(inputNameCreate.text, Int32.Parse(inputPlayers.text), map.text);
        
 
+    }
+
+    public void JoinNewRoom()
+    {
+        Debug.Log("Entro");
+        Debug.Log(gameManager);
+        gameManager.JoinCustomGame(inputNameJoin.text);
     }
 
 
     public void OpenUI()
     {
         this.gameObject.SetActive(true);
+        choosePanel.SetActive(true);
+        createPanel.SetActive(false);
+        joinPanel.SetActive(false);
         gameManager = GameManager.FindInstance();
         GameObject player = gameManager.GetCurrentPlayer();
         player.GetComponent<CharacterInputHandler>().changeRoomPanel = this.gameObject;
@@ -66,6 +84,18 @@ public class CreateRoom : MonoBehaviour
         this.gameObject.SetActive(false);
         GameObject player = gameManager.GetCurrentPlayer();
         player.GetComponent<CharacterInputHandler>().ActiveALL();
+    }
+
+    public void OpenJoinUI()
+    {
+         choosePanel.SetActive(false);
+        joinPanel.SetActive(true);
+    }
+
+    public void OpenCreateUI()
+    {
+        choosePanel.SetActive(false);
+        createPanel.SetActive(true);
     }
 
 

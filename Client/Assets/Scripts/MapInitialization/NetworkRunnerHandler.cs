@@ -58,6 +58,7 @@ public class NetworkRunnerHandler : MonoBehaviour
             GameMode = gameMode,
             Address = address,
             Scene = scene,
+            CustomLobbyName = "Lobby_Play",
             SessionName = gameManager.GetMapName() + "-" + map,
             PlayerCount = gameManager.playerCount,
             Initialized = initialized,

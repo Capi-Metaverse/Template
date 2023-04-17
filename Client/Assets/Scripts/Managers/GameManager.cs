@@ -67,6 +67,8 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     //The Lobby Manager from Lobby Scene
     private LobbyManager _lobbyManager;
 
+    private List<SessionInfo> sessionList;
+
     //User username
     private string username = "Anon";
     //User ID
@@ -318,6 +320,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         //Because it seems this doesn't work like PUN2, i think is better update the whole panel
 
         _lobbyManager.SetSessionList(sessionList);
+        this.sessionList = sessionList;
     }
 
 
@@ -352,6 +355,38 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         playerCount = playerNumber;
         //We change to the respective map
         SceneManager.LoadSceneAsync(map);
+    }
+
+    public async void JoinCustomGame(string sessionName)
+    {
+        await Disconnect();
+        mapName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
+        currentMap = "Mapa1";
+        playerCount = 4;
+        Connect();
+
+        //Nos unimos al lobby de custom
+        var result = await _runner.JoinSessionLobby(SessionLobby.Custom, "Lobby_Play");
+
+        foreach (SessionInfo item in sessionList) {
+
+            Debug.Log(item.Properties.ToString());
+
+            if (item.Properties["RoomName"].Equals(sessionName))
+            {
+                currentMap = item.Properties["StartMap"];
+                playerCount = item.Properties["PlayerLimit"];
+                break;
+            }
+        
+        }
+
+
+
+
+
+        //We change to the respective map
+        SceneManager.LoadSceneAsync(currentMap);
     }
 
     /* Function that changes the map to another

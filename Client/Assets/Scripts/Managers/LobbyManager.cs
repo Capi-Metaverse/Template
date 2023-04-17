@@ -62,10 +62,11 @@ public class LobbyManager : MonoBehaviour
         Debug.Log("[Photon-LobbyManager] Creating session");
         //Properties of the room WIP
         SessionProps props = new SessionProps();
-        props.StartMap = "HUBValencia";
+        props.StartMap = "Mapa1";
         props.RoomName = sessionName.text;
         props.AllowLateJoin = true;
         props.PlayerLimit = 10;
+        
         
         gameManager.CreateSession(props);
     }
