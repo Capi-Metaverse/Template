@@ -34,6 +34,8 @@ public class CharacterInputHandler : MonoBehaviour
     public GameObject eventTextK;
     public GameObject changeRoomPanel = null;
 
+    public GameObject emoteWheel;
+
 
     VoiceManager voiceChat = new VoiceManager();//Manager for the voiceChat, not in scene object
     CharacterMovementHandler characterMovementHandler;
@@ -68,7 +70,7 @@ public class CharacterInputHandler : MonoBehaviour
         characterMovementHandler = this.gameObject.GetComponent<CharacterMovementHandler>();
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
         Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
-
+        emoteWheel = GameObject.Find("Menus").transform.GetChild(4).gameObject;
         //PlayerUIPrefab
         //micro = GameObject.Find("PlayerUIPrefab").transform.GetChild(0).gameObject;//Micro
         //scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;//Scope
@@ -79,6 +81,8 @@ public class CharacterInputHandler : MonoBehaviour
         scope = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(1).gameObject;//Scope
         eventText = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(2).gameObject;
         eventTextK = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(3).gameObject;
+
+       
         Debug.Log(Pause);
 
         //seteamos el estado para que este InGame, esto hay que cambiarlo
@@ -172,8 +176,13 @@ public class CharacterInputHandler : MonoBehaviour
                             setPause();
                         }
 
-                        //K key down(PresentationMode)
-                        if (presentationCamera != null)
+                        if ((Input.GetKeyDown(KeyCode.B) && !escPul))
+                        {
+                        setEmoteWheel();
+                        }
+
+                    //K key down(PresentationMode)
+                    if (presentationCamera != null)
                         {
                             if (inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null)
                             {
@@ -208,7 +217,18 @@ public class CharacterInputHandler : MonoBehaviour
                         if(changeRoomPanel != null)
                           changeRoomPanel.SetActive(false);
 
-}
+                        }
+
+                    if (Input.GetKeyDown(KeyCode.B) && !escPul)
+                    {
+                        setJuego();
+
+                        if (emoteWheel.activeSelf)
+                            emoteWheel.SetActive(false);
+
+                    }
+
+
                         break;
                     }
 
@@ -340,7 +360,21 @@ public class CharacterInputHandler : MonoBehaviour
         //Escape activado
 
     }
-    
+
+
+    public void setEmoteWheel()
+    {
+
+
+        //Pause canvas
+
+        emoteWheel.SetActive(true);
+
+        DeactivateALL();
+        //Escape activado
+
+    }
+
 
     public void setJuego()
     {
