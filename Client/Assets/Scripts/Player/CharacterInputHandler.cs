@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 
@@ -70,7 +71,8 @@ public class CharacterInputHandler : MonoBehaviour
         characterMovementHandler = this.gameObject.GetComponent<CharacterMovementHandler>();
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
         Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
-        emoteWheel = GameObject.Find("Menus").transform.GetChild(4).gameObject;
+        emoteWheel = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(6).gameObject;
+        Debug.Log(emoteWheel);
         //PlayerUIPrefab
         //micro = GameObject.Find("PlayerUIPrefab").transform.GetChild(0).gameObject;//Micro
         //scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;//Scope

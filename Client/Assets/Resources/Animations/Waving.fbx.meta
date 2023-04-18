@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 4e9d09866a5b8d143bd0914a95c586e1
+guid: 29ba17c238a366741aec2798c4217d70
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Capoeira
+    second: Waving
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Capoeira
+      name: Waving
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 103
+      lastFrame: 31
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
