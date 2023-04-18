@@ -43,7 +43,8 @@ public class AddFriendManager : MonoBehaviour
         PlayFabClientAPI.ExecuteCloudScript(request, OnGetFriendsListSuccess, OnGetFriendsListFailure);
     }
 
-    // Callback for successful CloudScript function call
+
+    // Callback for successful CloudScript function call // llamamiento a la funcion getList de Cloud
     private void OnGetFriendsListSuccess(ExecuteCloudScriptResult result)
     {
      
@@ -58,6 +59,74 @@ public class AddFriendManager : MonoBehaviour
 
     // Callback for failed CloudScript function call
     private void OnGetFriendsListFailure(PlayFabError error)
+    {
+        Debug.LogError("Failed to retrieve Friends List: " + error.ErrorMessage);
+    }
+
+
+
+
+
+    //Obtener el IDS de los amigos
+    public void GetFriendsIds()
+    {
+        ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
+        {
+            FunctionName = "getFriendsIDS",
+            GeneratePlayStreamEvent = true
+        };
+
+        PlayFabClientAPI.ExecuteCloudScript(request, OnGetFriendsIdsSuccess, OnGetFriendsIdsFailure);
+    }
+
+    // Callback for successful CloudScript function call
+    private void OnGetFriendsIdsSuccess(ExecuteCloudScriptResult result)
+    {
+
+        if (result.FunctionResult != null)
+        {
+
+            Debug.Log(result.FunctionResult);
+            // Access the Friends List from 'result.FunctionResult["Friends"]'
+
+        }
+    }
+
+    // Callback for failed CloudScript function call
+    private void OnGetFriendsIdsFailure(PlayFabError error)
+    {
+        Debug.LogError("Failed to retrieve Friends List: " + error.ErrorMessage);
+    }
+
+
+    //Eliminar Amigos
+
+    public void RemoveFriends()
+    {
+        ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
+        {
+            FunctionName = "RemoveFriends",
+            FunctionParameter = new { RemoveFriendId = "6452852E8B630026" },
+            GeneratePlayStreamEvent = true
+        };
+
+        PlayFabClientAPI.ExecuteCloudScript(request, OnRemoveFriendsSuccess, OnRemoveFriendsFailure);
+    }
+
+    // Callback for successful CloudScript function call
+    private void OnRemoveFriendsSuccess(ExecuteCloudScriptResult result)
+    {
+
+       
+
+            Debug.Log(result);
+          
+
+        
+    }
+
+    // Callback for failed CloudScript function call
+    private void OnRemoveFriendsFailure(PlayFabError error)
     {
         Debug.LogError("Failed to retrieve Friends List: " + error.ErrorMessage);
     }
