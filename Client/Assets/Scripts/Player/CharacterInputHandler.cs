@@ -385,6 +385,7 @@ public class CharacterInputHandler : MonoBehaviour
 
         Settings.SetActive(false);
         Pause.SetActive(false);
+        emoteWheel.SetActive(false);
         Cursor.visible = false;
         //States and Reactivate all
       
