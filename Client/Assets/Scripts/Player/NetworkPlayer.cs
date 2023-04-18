@@ -49,6 +49,11 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
             SetGameManager(GameObject.Find("/Manager").GetComponent<GameManager>());
             string auxiliar = gameManager.GetUsername();//loginManager sets nickname on GameManager and we can retrieve it
             Debug.Log("Spawned local player : " + auxiliar);
+            gameObject.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("LocalPlayer");
+            foreach (Transform child in gameObject.transform.GetChild(0))
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("LocalPlayer");
+            }
 
             //RPC to Send the name to host/server to have it networked
             //RPC_SetNickName(auxiliar);
