@@ -180,7 +180,7 @@ public class CharacterInputHandler : MonoBehaviour
 
                         if ((Input.GetKeyDown(KeyCode.B) && !escPul))
                         {
-                        setEmoteWheel();
+                            setEmoteWheel();
                         }
 
                     //K key down(PresentationMode)
@@ -307,11 +307,10 @@ public class CharacterInputHandler : MonoBehaviour
     //playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
 
 
-    Cursor.visible = true;
+    
         //AQUI IRA EL FIND DEL CHARACTER CONTROL PARA DESACTIVAR
         //AQUI IRA EL FIND DEL PLAYERCAMERA PARA DESACTIVARLA
         characterMovementHandler.enabled=false;
-       
         localCameraHandler.enabled=false;
 
 
@@ -321,6 +320,7 @@ public class CharacterInputHandler : MonoBehaviour
 
         micro.SetActive(false);
         scope.SetActive(false);
+        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
     }
 
