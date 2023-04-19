@@ -11,21 +11,28 @@ using System.Text.RegularExpressions;
 public class AddFriendManager : MonoBehaviour
 {
     public TMP_InputField inputFriendUsername; // The username of the friend to be added
+    public GameObject panelMessageCheckName; // The panel of the validation message
+    public TextMeshProUGUI validationMessage;// The validation message
     public List<string> listFriends;
     public List<string> listFriendsIds;
 
 
     public void AddFriend()
     {
-        // Call the PlayFab Cloud Script function to add the friend
-        ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
+        if(ValidarUserNameFriend(inputFriendUsername.text))
         {
-            FunctionName = "AddFriend", // Replace with the name of your Cloud Script function
-            FunctionParameter = new { friendUsername = inputFriendUsername.text }, // Pass in any required parameters
-            GeneratePlayStreamEvent = true // Set to true if you want PlayStream events to be generated for this API call
-        };
+            // Call the PlayFab Cloud Script function to add the friend
+            ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
+            {
+                FunctionName = "AddFriend", // Replace with the name of your Cloud Script function
+                FunctionParameter = new { friendUsername = inputFriendUsername.text }, // Pass in any required parameters
+                GeneratePlayStreamEvent = true // Set to true if you want PlayStream events to be generated for this API call
+            };
 
-        PlayFabClientAPI.ExecuteCloudScript(request, OnAddFriendSuccess, OnAddFriendFailure);
+            PlayFabClientAPI.ExecuteCloudScript(request, OnAddFriendSuccess, OnAddFriendFailure);
+        }
+
+        inputFriendUsername.text = null; // Clean the friend name field
     }
 
     private void OnAddFriendSuccess(ExecuteCloudScriptResult result)
@@ -105,4 +112,70 @@ public class AddFriendManager : MonoBehaviour
         Debug.LogError("Failed to retrieve Friends List: " + error.ErrorMessage);
     }
     //Eliminar Amigos
+
+    //Check if the friend name input is accurate
+    public bool ValidarUserNameFriend(string str)
+    {
+        validationMessage.color = Color.red;
+        validationMessage.text = " ";
+        panelMessageCheckName.SetActive(true);
+        // Check if string is null or empty
+        if (string.IsNullOrEmpty(str))
+        {
+            validationMessage.text = "El nombre de usuario no puede estar vacío";
+            return false;
+        }
+        // Check if string starts with a space
+        if (str.StartsWith(" "))
+        {
+            validationMessage.text = "El nombre de usuario no puede empezar por un espacio en blanco";
+            return false;
+        }
+        // Check if string is only spaces
+        if (str.Trim().Length == 0)
+        {
+            validationMessage.text = "El nombre de usuario no debe estar contenido solo por espacios";
+            return false;
+        }
+        // Check minimum length
+        if (str.Length < 3)
+        {
+            validationMessage.text = "El nombre de usuario debe contener más de 3 caracteres";
+            return false;
+        }
+        // Check maximum length
+        if (str.Length > 20)
+        {
+            validationMessage.text = "El nombre de usuario debe contener menos de 20 caracteres";
+            return false;
+        }
+        // Check forbidden characters
+        string forbidden = "!@#$%^&*()+=";
+        foreach (char c in forbidden)
+        {
+            if (str.Contains(c))
+            {
+                validationMessage.text = "El nombre de usuario contiene un carácter no permitido";
+                return false;
+            }
+        }
+        // Check reserved words
+        string[] reserved = { "admin", "root", "system" };
+        if (reserved.Contains(str.ToLower()))
+        {
+            validationMessage.text = "El nombre de usuario no debe contener palabras restringidas";
+            return false;
+        }
+        // String is valid
+        validationMessage.color = Color.green;
+        validationMessage.text = "Amigo añadido correctamente";
+        return true;
+    }
+
+    //Clean the message panel
+    public void CleanMessagePanel()
+    {
+        panelMessageCheckName.SetActive(false);
+        validationMessage.text = " ";
+    }
 }
