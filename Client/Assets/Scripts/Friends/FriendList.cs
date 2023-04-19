@@ -34,8 +34,6 @@ List<string> IDS = new List<string>();
         
         while (Addfriendmanager.listFriends.Count == 0)
         {
-            Debug.Log("eeeeeeeeeeeeeeeeeeee");
-            // Wait for 100 milliseconds before checking again
             await Task.Delay(100);
         }
 
@@ -44,7 +42,7 @@ List<string> IDS = new List<string>();
     IEnumerator Waitunesecon()
     {
         yield return new WaitForSeconds(1);
-             NamePlayer = Addfriendmanager.listFriends;
+        NamePlayer = Addfriendmanager.listFriends;
         IDS = Addfriendmanager.listFriendsIds;
 
         //Iterate players to get Nickname && ActorNumber
@@ -60,9 +58,11 @@ List<string> IDS = new List<string>();
             TMP_Text PlayerNameText = userItem.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
             removefriend = userItem.GetComponent<RemoveFriend>();
 
+            PlayerNameText.text = NamePlayer[i];
             removefriend.Username = NamePlayer[i];
             removefriend.ID = IDS[i];
-            PlayerNameText.text = NamePlayer[i];
+            
+     
         }
     }
 }

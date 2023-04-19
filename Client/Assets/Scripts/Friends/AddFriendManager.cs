@@ -55,6 +55,7 @@ public class AddFriendManager : MonoBehaviour
     private void OnGetFriendsListSuccess(ExecuteCloudScriptResult result)
     {
      listFriends.Clear();
+     listFriendsIds.Clear();
         if (result.FunctionResult != null)
         {
 
@@ -73,7 +74,7 @@ public class AddFriendManager : MonoBehaviour
                     listFriends.Add(username);
                 }
             }
-            //listFriends = (objectString.Replace("[", "").Replace("]", "").Replace("\"", "").Split("").ToList());
+           
             for (int i = 0; i < listFriends.Count; i++) {
                 Debug.Log(listFriends[i].ToString());
             }
@@ -89,7 +90,7 @@ public class AddFriendManager : MonoBehaviour
                     listFriendsIds.Add(Ids);
                 }
             }
-            //listFriends = (objectString.Replace("[", "").Replace("]", "").Replace("\"", "").Split("").ToList());
+         
             for (int i = 0; i < listFriendsIds.Count; i++)
             {
                 Debug.Log(listFriendsIds[i].ToString());
