@@ -47,6 +47,10 @@ MonoBehaviour:
     m_Key: LoadingText
     m_Metadata:
       m_Items: []
+  - m_Id: 20287731349651456
+    m_Key: AddFriendText
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

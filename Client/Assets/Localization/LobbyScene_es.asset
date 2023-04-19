@@ -50,6 +50,10 @@ MonoBehaviour:
     m_Localized: Cargando
     m_Metadata:
       m_Items: []
+  - m_Id: 20287731349651456
+    m_Localized: "A\xF1adir"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
