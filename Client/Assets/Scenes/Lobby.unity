@@ -2166,7 +2166,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 755767530}
         m_TargetAssemblyTypeName: AddFriendManager, Assembly-CSharp
-        m_MethodName: GetFriendsList
+        m_MethodName: RemoveFriends
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

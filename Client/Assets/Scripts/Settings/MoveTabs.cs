@@ -28,7 +28,6 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
           TabTabPlayers.SetActive(true);
         }
         TabPanel.SetActive(true);
-        Lenguages.SetActive(true);
         TabPanelKeys.SetActive(false);
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
         Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
@@ -37,7 +36,6 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
     public void ChangeToPanel()
     {
         TabPanel.SetActive(true);
-        Lenguages.SetActive(true);
         TabPanelKeys.SetActive(false);
         TabPanelPlayers.SetActive(false);
         TabPanelFriends.SetActive(false);
@@ -46,7 +44,7 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
     public void ChangeToPanelKeys()
     {
         TabPanel.SetActive(false);
-        Lenguages.SetActive(false);
+      
         TabPanelKeys.SetActive(true);
         TabPanelPlayers.SetActive(false);
         TabPanelFriends.SetActive(false);
@@ -54,7 +52,7 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
     public void ChangeToPanelPlayer()
     {
         TabPanel.SetActive(false);
-        Lenguages.SetActive(false);
+      
         TabPanelKeys.SetActive(false);
         TabPanelPlayers.SetActive(true);
         TabPanelFriends.SetActive(false);
@@ -62,7 +60,7 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
     public void ChangeToPanelFriends()
     {
         TabPanel.SetActive(false);
-        Lenguages.SetActive(false);
+       
         TabPanelKeys.SetActive(false);
         TabPanelPlayers.SetActive(false);
         TabPanelFriends.SetActive(true);
