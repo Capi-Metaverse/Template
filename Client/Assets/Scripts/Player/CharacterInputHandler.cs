@@ -35,6 +35,8 @@ public class CharacterInputHandler : MonoBehaviour
     public GameObject eventTextK;
     public GameObject changeRoomPanel = null;
 
+    ChatGPTActive chatGPTActive;
+
     public GameObject emoteWheel;
 
 
@@ -74,17 +76,15 @@ public class CharacterInputHandler : MonoBehaviour
         emoteWheel = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(6).gameObject;
         Debug.Log(emoteWheel);
         //PlayerUIPrefab
-        //micro = GameObject.Find("PlayerUIPrefab").transform.GetChild(0).gameObject;//Micro
-        //scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;//Scope
-        //eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject;
-        //eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
-        //Debug.Log(GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3));
         micro = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(0).gameObject;//Micro
         scope = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(1).gameObject;//Scope
         eventText = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(2).gameObject;
         eventTextK = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(3).gameObject;
 
-       
+        //ChatGPT
+        chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
+
+
         Debug.Log(Pause);
 
         //seteamos el estado para que este InGame, esto hay que cambiarlo
@@ -382,7 +382,7 @@ public class CharacterInputHandler : MonoBehaviour
     {
 
         //Activate Settings Window and stop
-
+        chatGPTActive.activate(false);
         Settings.SetActive(false);
         Pause.SetActive(false);
         emoteWheel.SetActive(false);
