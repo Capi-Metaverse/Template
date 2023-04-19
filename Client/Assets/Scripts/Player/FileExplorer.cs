@@ -22,6 +22,8 @@ public class FileExplorer : NetworkBehaviour
     public TMP_Text  loadingPressCanvas;//shows when presentation is loading
     public float size;
     object[] content;
+    [Networked(OnChanged = nameof(OnPresentationChanged))]
+    public NetworkString<_16> urls { get; set; }
 
 #if UNITY_WEBGL && !UNITY_EDITOR
     //
@@ -96,10 +98,10 @@ public class FileExplorer : NetworkBehaviour
             byte[] bytes = www.bytes;
         #endif
         Debug.Log(bytes.Length);
-        #if UNITY_WEBGL && !UNITY_EDITOR
+#if UNITY_WEBGL && !UNITY_EDITOR
             Debug.Log("PresentationWebGL");
-            StartCoroutine(PresentationUpload(bytes,"pptx",$"https://v2.convertapi.com/convert/{"pptx"}/to/png?Secret=T0TzTuNoju79aVtJ"));
-        #else
+            StartCoroutine(PresentationUpload(bytes,"pptx",$"https://v2.convertapi.com/convert/{"pptx"}/to/png?Secret=vCDWYMLnubBCLVDo"));
+#else
         //Determine file extension
         var fileExtension = _path.Split('.').Last().Trim();
         Debug.Log($"Extension: {fileExtension}");
@@ -133,7 +135,7 @@ public class FileExplorer : NetworkBehaviour
             case "pptx":
             case "ppt":
                 Debug.Log("Presentation");
-                StartCoroutine(PresentationUpload(bytes,fileExtension,$"https://v2.convertapi.com/convert/{fileExtension}/to/png?Secret=T0TzTuNoju79aVtJ"));
+                StartCoroutine(PresentationUpload(bytes,fileExtension,$"https://v2.convertapi.com/convert/{fileExtension}/to/png?Secret=vCDWYMLnubBCLVDo"));
                 break;
             default:
                 Debug.Log("Format file not allowed");
@@ -323,17 +325,25 @@ public class FileExplorer : NetworkBehaviour
         StartCoroutine(GetRequestFunc());
     }
 
+    static void OnPresentationChanged(Changed<FileExplorer> changed)
+    {
+        Debug.Log($"{Time.time} OnHPChanged value {changed.Behaviour.urls}");
+
+        changed.Behaviour.OnPresentationChanged();
+    }
+
+    //Here we put the name to our local player, we don´t need to do more because our nerworked nickname is also setted so since is networked nickname will be load in every client 
+    private void OnPresentationChanged()
+    {
+        Debug.Log($"Presentation changed uploading");
+
+        //downloadImages(urls);
+    }
+
     [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.All)]
     public void RPC_PressInfo(string[] content, RpcInfo info = default)
     {
-        Debug.Log("RPC: " + content[0]);
-        //Local invoke client
-        if (info.IsInvokeLocal)
-            Debug.Log("Debug: InvokeLocal fileexplorer");
-        else
-        {
-            downloadImages(content[0]);
-        }
+        //this.urls = content;
     }
 }
 
