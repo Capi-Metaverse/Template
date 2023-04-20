@@ -220,7 +220,7 @@ public class CharacterInputHandler : MonoBehaviour
                           changeRoomPanel.SetActive(false);
 
                         }
-
+                    /*
                     if (Input.GetKeyDown(KeyCode.B) && !escPul)
                     {
                         setJuego();
@@ -229,7 +229,7 @@ public class CharacterInputHandler : MonoBehaviour
                             emoteWheel.SetActive(false);
 
                     }
-
+                    */
 
                         break;
                     }

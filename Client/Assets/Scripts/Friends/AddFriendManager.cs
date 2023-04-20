@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System;
 using System.Text.RegularExpressions;
 using UnityEditor.Localization.Plugins.XLIFF.V12;
+using System.Threading.Tasks;
 
 public class AddFriendManager : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class AddFriendManager : MonoBehaviour
     public TextMeshProUGUI validationMessage;// The validation message
     public List<string> listFriendsConfirmed;
     public List<string> listFriendsIdsConfirmed;
-    public string userId;
+    public string userId = "";
 
     public void idPlayer()
     {
@@ -25,8 +26,9 @@ public class AddFriendManager : MonoBehaviour
             var result = new GetAccountInfoRequest { Username = inputFriendUsername.text };
 
             PlayFabClientAPI.GetAccountInfo(result, OnGetAccountInfoSuccess, OnGetAccountInfoFailure);
+        
         }
-        inputFriendUsername.text = null;
+       
     }
     private void OnGetAccountInfoSuccess(GetAccountInfoResult result)
     {
@@ -40,23 +42,31 @@ public class AddFriendManager : MonoBehaviour
     {
         Debug.LogError("GetAccountInfo failed: " + error.ErrorMessage);
     }
-    public void AddFriend()
+    public async void AddFriend()
     {
         if(ValidarUserNameFriend(inputFriendUsername.text))
         {
+            idPlayer();
+            Debug.Log(userId);
+           while(userId.Equals(""))
+            {
+                await Task.Delay(100);
+            }
+          
+            
             // Call the PlayFab Cloud Script function to add the friend
             ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
             {
                 FunctionName = "SendFriendRequest", // Replace with the name of your Cloud Script function
                 FunctionParameter = new { friendUsername = inputFriendUsername.text,
-                                          friendplayfabid = "6452852E8B630026"
+                                          friendplayfabid = userId
                 }, // Pass in any required parameters
                 GeneratePlayStreamEvent = true // Set to true if you want PlayStream events to be generated for this API call
             };
 
             PlayFabClientAPI.ExecuteCloudScript(request, OnAddFriendSuccess, OnAddFriendFailure);
         }
-
+        userId = "";
         inputFriendUsername.text = null; // Clean the friend name field
     }
     private void OnAddFriendSuccess(ExecuteCloudScriptResult result)
