@@ -32,9 +32,9 @@ List<string> IDS = new List<string>();
             Destroy(child.gameObject);
         }
         
-        while (Addfriendmanager.listFriends.Count == 0)
+        while (Addfriendmanager.listFriendsConfirmed.Count == 0)
         {
-            await Task.Delay(100);
+            await Task.Delay(100);
         }
 
         StartCoroutine(Waitunesecon());
@@ -42,8 +42,8 @@ List<string> IDS = new List<string>();
     IEnumerator Waitunesecon()
     {
         yield return new WaitForSeconds(1);
-        NamePlayer = Addfriendmanager.listFriends;
-        IDS = Addfriendmanager.listFriendsIds;
+        NamePlayer = Addfriendmanager.listFriendsConfirmed;
+        IDS = Addfriendmanager.listFriendsIdsConfirmed;
 
         //Iterate players to get Nickname && ActorNumber
         for (int i = 0; i < NamePlayer.Count; i++)

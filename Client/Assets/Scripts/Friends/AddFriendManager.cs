@@ -13,8 +13,8 @@ public class AddFriendManager : MonoBehaviour
     public TMP_InputField inputFriendUsername; // The username of the friend to be added
     public GameObject panelMessageCheckName; // The panel of the validation message
     public TextMeshProUGUI validationMessage;// The validation message
-    public List<string> listFriends;
-    public List<string> listFriendsIds;
+    public List<string> listFriendsConfirmed;
+    public List<string> listFriendsIdsConfirmed;
 
 
     public void AddFriend()
@@ -24,8 +24,9 @@ public class AddFriendManager : MonoBehaviour
             // Call the PlayFab Cloud Script function to add the friend
             ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
             {
-                FunctionName = "AddFriend", // Replace with the name of your Cloud Script function
-                FunctionParameter = new { friendUsername = inputFriendUsername.text }, // Pass in any required parameters
+                FunctionName = "SendFriendRequest", // Replace with the name of your Cloud Script function
+                FunctionParameter = new { friendUsername = inputFriendUsername.text ,
+                                          friendplayfabid = "76CEE0B9316C54B6"}, // Pass in any required parameters
                 GeneratePlayStreamEvent = true // Set to true if you want PlayStream events to be generated for this API call
             };
 
@@ -46,23 +47,24 @@ public class AddFriendManager : MonoBehaviour
         Debug.LogError("Failed to add friend: " + error.ErrorMessage);
         // Handle failure, if necessary
     }
-    public void GetFriendsList()
+
+    public void GetFriendsConfirmedList()
     {
         ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
         {
-            FunctionName = "getFriendsList",
+            FunctionName = "getFriendsListRequester",
             GeneratePlayStreamEvent = true
         };
 
-        PlayFabClientAPI.ExecuteCloudScript(request, OnGetFriendsListSuccess, OnGetFriendsListFailure);
+        PlayFabClientAPI.ExecuteCloudScript(request, OnGetFriendsConfirmedListSuccess, OnGetFriendsListFailure);
     }
 
 
     // Callback for successful CloudScript function call // llamamiento a la funcion getList de Cloud
-    private void OnGetFriendsListSuccess(ExecuteCloudScriptResult result)
+    private void OnGetFriendsConfirmedListSuccess(ExecuteCloudScriptResult result)
     {
-     listFriends.Clear();
-     listFriendsIds.Clear();
+     listFriendsConfirmed.Clear();
+     listFriendsIdsConfirmed.Clear();
         if (result.FunctionResult != null)
         {
 
@@ -78,12 +80,12 @@ public class AddFriendManager : MonoBehaviour
                 if (match.Groups.Count > 1)
                 {
                     string username = match.Groups[1].Value;
-                    listFriends.Add(username);
+                    listFriendsConfirmed.Add(username);
                 }
             }
            
-            for (int i = 0; i < listFriends.Count; i++) {
-                Debug.Log(listFriends[i].ToString());
+            for (int i = 0; i < listFriendsConfirmed.Count; i++) {
+                Debug.Log(listFriendsConfirmed[i].ToString());
             }
 
             string IdsPatter = "\"IDS\":\"(.*?)\"";
@@ -94,13 +96,13 @@ public class AddFriendManager : MonoBehaviour
                 if (match.Groups.Count > 1)
                 {
                     string Ids = match.Groups[1].Value;
-                    listFriendsIds.Add(Ids);
+                    listFriendsIdsConfirmed.Add(Ids);
                 }
             }
          
-            for (int i = 0; i < listFriendsIds.Count; i++)
+            for (int i = 0; i < listFriendsIdsConfirmed.Count; i++)
             {
-                Debug.Log(listFriendsIds[i].ToString());
+                Debug.Log(listFriendsIdsConfirmed[i].ToString());
             }
 
         }
