@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using System.Text.RegularExpressions;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 public class AddFriendManager : MonoBehaviour
 {
@@ -15,8 +16,30 @@ public class AddFriendManager : MonoBehaviour
     public TextMeshProUGUI validationMessage;// The validation message
     public List<string> listFriendsConfirmed;
     public List<string> listFriendsIdsConfirmed;
+    public string userId;
+
+    public void idPlayer()
+    {
+        if (ValidarUserNameFriend(inputFriendUsername.text))
+        {
+            var result = new GetAccountInfoRequest { Username = inputFriendUsername.text };
+
+            PlayFabClientAPI.GetAccountInfo(result, OnGetAccountInfoSuccess, OnGetAccountInfoFailure);
+        }
+        inputFriendUsername.text = null;
+    }
+    private void OnGetAccountInfoSuccess(GetAccountInfoResult result)
+    {
+        userId = result.AccountInfo.PlayFabId;
+        Debug.Log("User ID: " + userId);
+    }
 
 
+
+    private void OnGetAccountInfoFailure(PlayFabError error)
+    {
+        Debug.LogError("GetAccountInfo failed: " + error.ErrorMessage);
+    }
     public void AddFriend()
     {
         if(ValidarUserNameFriend(inputFriendUsername.text))
@@ -25,8 +48,9 @@ public class AddFriendManager : MonoBehaviour
             ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
             {
                 FunctionName = "SendFriendRequest", // Replace with the name of your Cloud Script function
-                FunctionParameter = new { friendUsername = inputFriendUsername.text ,
-                                          friendplayfabid = "76CEE0B9316C54B6"}, // Pass in any required parameters
+                FunctionParameter = new { friendUsername = inputFriendUsername.text,
+                                          friendplayfabid = "6452852E8B630026"
+                }, // Pass in any required parameters
                 GeneratePlayStreamEvent = true // Set to true if you want PlayStream events to be generated for this API call
             };
 
@@ -35,10 +59,9 @@ public class AddFriendManager : MonoBehaviour
 
         inputFriendUsername.text = null; // Clean the friend name field
     }
-
     private void OnAddFriendSuccess(ExecuteCloudScriptResult result)
     {
-        Debug.Log("Friend added successfully!");
+        Debug.Log(result.FunctionResult);
         // Handle success, if necessary
     }
 
