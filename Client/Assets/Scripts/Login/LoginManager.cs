@@ -85,8 +85,13 @@ public class LoginManager : MonoBehaviour
     /// </summary>
     public void RegisterButton()
     {
+        if (!ValidarUserName(usernameInput.text))
+        {
+            return;
+        }
         if (passwordInput.text.Length < 6)
         {
+            messageText.color = Color.red;
             messageText.text = "Password too Short!";
             return;
         }
@@ -386,5 +391,67 @@ public class LoginManager : MonoBehaviour
     {
         messageText.text = error.ErrorMessage;
         Debug.Log("[PlayFab-LoginManager] Error:" + error.GenerateErrorReport());
+    }
+
+    /*Username Validation Message*/
+
+    public bool ValidarUserName(string str)
+    {
+        // Check if string is null or empty
+        if (string.IsNullOrEmpty(str))
+        {
+            NameErrorMessage("El nombre de usuario no puede estar vacío");
+            return false;
+        }
+        // Check if string starts with a space
+        if (str.StartsWith(" "))
+        {
+            NameErrorMessage("El nombre de usuario no puede empezar por un espacio en blanco");
+            return false;
+        }
+        // Check if string is only spaces
+        if (str.Trim().Length == 0)
+        {
+            NameErrorMessage("El nombre de usuario no debe estar contenido solo por espacios");
+            return false;
+        }
+        // Check minimum length
+        if (str.Length < 3)
+        {
+            NameErrorMessage("El nombre de usuario debe contener más de 3 caracteres");
+            return false;
+        }
+        // Check maximum length
+        if (str.Length > 20)
+        {
+            NameErrorMessage("El nombre de usuario debe contener menos de 20 caracteres");
+            return false;
+        }
+        // Check forbidden characters
+        string forbidden = "!@#$%^&*()+=";
+        foreach (char c in forbidden)
+        {
+            if (str.Contains(c))
+            {
+                NameErrorMessage("El nombre de usuario contiene un carácter no permitido");
+                return false;
+            }
+        }
+        // Check reserved words
+        string[] reserved = { "admin", "root", "system" };
+        if (reserved.Contains(str.ToLower()))
+        {
+            NameErrorMessage("El nombre de usuario no debe contener palabras restringidas");
+            return false;
+        }
+        // String is valid
+        return true;
+    }
+
+    public void NameErrorMessage(string message)
+    {
+        messageText.fontSize = 4;
+        messageText.color = Color.red;
+        messageText.text = message;
     }
 }
