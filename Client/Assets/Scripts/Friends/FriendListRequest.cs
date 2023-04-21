@@ -7,21 +7,20 @@ using UnityEngine;
 public class FriendListRequest : MonoBehaviour
 {
 
-public GameObject FriendItemRequestPrefabSettings;
-public GameObject FriendRequestListSettings;
-AddFriendManager Addfriendmanager;
-PlayerRequest playerrequest;
-List<string> NamePlayer = new List<string>();
-List<string> IDS = new List<string>();
+    public GameObject FriendItemRequestPrefabSettings;
+    public GameObject FriendRequestListSettings;
+    FriendManager FriendManager;
+    FriendRequest playerRequest;
+    List<Friend> friends;
 
-// Start is called before the first frame update
-//Function to get the List of players and Kick them
+    // Start is called before the first frame update
+    //Function to get the List of players and Kick them
 
-void Start()
-{
-
-    Addfriendmanager = gameObject.GetComponent<AddFriendManager>();
-}
+    void Start()
+    {
+        FriendManager = gameObject.GetComponent<FriendManager>();
+        friends = FriendManager.Friends;
+    }
 public async void ListPlayersRequest()
 {
 
@@ -30,7 +29,7 @@ public async void ListPlayersRequest()
         Destroy(child.gameObject);
     }
 
-    while (Addfriendmanager.listFriendsConfirmed.Count == 0)
+    while (friends.Count == 0)
     {
         await Task.Delay(100);
     }
@@ -40,11 +39,9 @@ public async void ListPlayersRequest()
 IEnumerator Waitunesecon()
 {
     yield return new WaitForSeconds(1);
-    NamePlayer = Addfriendmanager.listFriendsConfirmed;
-    IDS = Addfriendmanager.listFriendsIdsConfirmed;
 
     //Iterate players to get Nickname && ActorNumber
-    for (int i = 0; i < NamePlayer.Count; i++)
+    for (int i = 0; i < friends.Count; i++)
     {
         //We create the userItem object
         GameObject userItem = (GameObject)Instantiate(FriendItemRequestPrefabSettings);
@@ -54,12 +51,10 @@ IEnumerator Waitunesecon()
 
         //We configure the Nickname
         TMP_Text PlayerNameText = userItem.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
-            playerrequest = userItem.GetComponent<PlayerRequest>();
+            playerRequest = userItem.GetComponent<FriendRequest>();
 
-        PlayerNameText.text = NamePlayer[i];
-            playerrequest.ID = IDS[i];
-
-
+        PlayerNameText.text = friends[i].Username;
+            playerRequest.ID = friends[i].Id;
     }
 }
 }

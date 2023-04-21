@@ -10,14 +10,28 @@ using System.Text.RegularExpressions;
 using UnityEditor.Localization.Plugins.XLIFF.V12;
 using System.Threading.Tasks;
 
-public class AddFriendManager : MonoBehaviour
+
+public class Friend
+{
+    private string username;
+    private string id;
+    private string tags;
+
+    public string Username { get => username; set => username = value; }
+    public string Id { get => id; set => id = value; }
+    public string Tags { get => tags; set => tags = value; }
+}
+
+public class FriendManager : MonoBehaviour
 {
     public TMP_InputField inputFriendUsername; // The username of the friend to be added
     public GameObject panelMessageCheckName; // The panel of the validation message
     public TextMeshProUGUI validationMessage;// The validation message
-    public List<string> listFriendsConfirmed;
-    public List<string> listFriendsIdsConfirmed;
+
+    private List<Friend> friends = new List<Friend>();
     public string userId = "";
+
+    public List<Friend> Friends { get => friends; set => friends = value; }
 
     public void idPlayer()
     {
@@ -26,9 +40,7 @@ public class AddFriendManager : MonoBehaviour
             var result = new GetAccountInfoRequest { Username = inputFriendUsername.text };
 
             PlayFabClientAPI.GetAccountInfo(result, OnGetAccountInfoSuccess, OnGetAccountInfoFailure);
-        
         }
-       
     }
     private void OnGetAccountInfoSuccess(GetAccountInfoResult result)
     {
@@ -36,30 +48,30 @@ public class AddFriendManager : MonoBehaviour
         Debug.Log("User ID: " + userId);
     }
 
-
-
     private void OnGetAccountInfoFailure(PlayFabError error)
     {
         Debug.LogError("GetAccountInfo failed: " + error.ErrorMessage);
     }
+
     public async void AddFriend()
     {
-        if(ValidarUserNameFriend(inputFriendUsername.text))
+        if (ValidarUserNameFriend(inputFriendUsername.text))
         {
             idPlayer();
             Debug.Log(userId);
-           while(userId.Equals(""))
+            while (userId.Equals(""))
             {
                 await Task.Delay(100);
             }
-          
-            
+
             // Call the PlayFab Cloud Script function to add the friend
             ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
             {
                 FunctionName = "SendFriendRequest", // Replace with the name of your Cloud Script function
-                FunctionParameter = new { friendUsername = inputFriendUsername.text,
-                                          friendplayfabid = userId
+                FunctionParameter = new
+                {
+                    friendUsername = inputFriendUsername.text,
+                    friendplayfabid = userId
                 }, // Pass in any required parameters
                 GeneratePlayStreamEvent = true // Set to true if you want PlayStream events to be generated for this API call
             };
@@ -96,8 +108,8 @@ public class AddFriendManager : MonoBehaviour
     // Callback for successful CloudScript function call // llamamiento a la funcion getList de Cloud
     private void OnGetFriendsConfirmedListSuccess(ExecuteCloudScriptResult result)
     {
-     listFriendsConfirmed.Clear();
-     listFriendsIdsConfirmed.Clear();
+        friends.Clear();
+
         if (result.FunctionResult != null)
         {
 
@@ -105,39 +117,25 @@ public class AddFriendManager : MonoBehaviour
             // Access the Friends List from 'result.FunctionResult["Friends"]'
             string objectString = result.FunctionResult.ToString();
 
+
+            //Patterns Regular Expressions
             string pattern = "\"Username\":\"(.*?)\"";
-            MatchCollection matches = Regex.Matches(objectString, pattern);
-
-            foreach (Match match in matches)
-            {
-                if (match.Groups.Count > 1)
-                {
-                    string username = match.Groups[1].Value;
-                    listFriendsConfirmed.Add(username);
-                }
-            }
-           
-            for (int i = 0; i < listFriendsConfirmed.Count; i++) {
-                Debug.Log(listFriendsConfirmed[i].ToString());
-            }
-
             string IdsPatter = "\"IDS\":\"(.*?)\"";
+            string TagsPatter = "\"Tags\":\"(.*?)\"";
+
+            MatchCollection matches = Regex.Matches(objectString, pattern);
             MatchCollection matche = Regex.Matches(objectString, IdsPatter);
+            MatchCollection matchTag = Regex.Matches(objectString, TagsPatter);
 
-            foreach (Match match in matche)
+            for (int i = 0; i < matches.Count; i++)
             {
-                if (match.Groups.Count > 1)
-                {
-                    string Ids = match.Groups[1].Value;
-                    listFriendsIdsConfirmed.Add(Ids);
-                }
-            }
-         
-            for (int i = 0; i < listFriendsIdsConfirmed.Count; i++)
-            {
-                Debug.Log(listFriendsIdsConfirmed[i].ToString());
-            }
+                Friend newFriend = new Friend();
+                newFriend.Username = matches[i].Groups[1].Value;
+                newFriend.Id = matche[i].Groups[1].Value;
+                newFriend.Tags = matchTag[i].Groups[1].Value;
 
+                Friends.Add(newFriend);
+            }
         }
     }
 

@@ -4,23 +4,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RemoveFriend : MonoBehaviour
+public class FriendItem : MonoBehaviour
 {
     public string Username;
     public string ID;
-    AddFriendManager Addfriendmanager;
+    FriendManager FriendManager;
     void Start()
     {
 
-        Addfriendmanager = gameObject.GetComponent<AddFriendManager>();
+        FriendManager = gameObject.GetComponent<FriendManager>();
     }
 
     public void Removefriends()
     {
         ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
         {
-            FunctionName = "RemoveFriends",
-            FunctionParameter = new { RemoveFriendId = ID },
+            FunctionName = "DenyFriendRequest",
+            FunctionParameter = new { friendplayfabid = ID },
             GeneratePlayStreamEvent = true
         };
 

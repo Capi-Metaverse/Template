@@ -4,14 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRequest : MonoBehaviour { 
+public class FriendRequest : MonoBehaviour { 
 
 public string ID;
-AddFriendManager Addfriendmanager;
+FriendManager FriendManager;
 void Start()
 {
 
-    Addfriendmanager = gameObject.GetComponent<AddFriendManager>();
+    FriendManager = gameObject.GetComponent<FriendManager>();
 }
 
     public void acceptRequest()
