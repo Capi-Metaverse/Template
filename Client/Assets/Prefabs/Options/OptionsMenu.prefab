@@ -9141,18 +9141,6 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1442107820706898414}
         m_TargetAssemblyTypeName: FriendList, Assembly-CSharp
-        m_MethodName: ListPlayers
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1442107820706898414}
-        m_TargetAssemblyTypeName: FriendList, Assembly-CSharp
         m_MethodName: set_DisplayMode
         m_Mode: 6
         m_Arguments:
@@ -9621,18 +9609,6 @@ MonoBehaviour:
       - m_Target: {fileID: 3568877231533172023}
         m_TargetAssemblyTypeName: AddFriendManager, Assembly-CSharp
         m_MethodName: GetFriendsConfirmedList
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1442107820706898414}
-        m_TargetAssemblyTypeName: FriendList, Assembly-CSharp
-        m_MethodName: ListPlayers
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

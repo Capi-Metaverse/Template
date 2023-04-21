@@ -27,11 +27,17 @@ public class FriendManager : MonoBehaviour
     public TMP_InputField inputFriendUsername; // The username of the friend to be added
     public GameObject panelMessageCheckName; // The panel of the validation message
     public TextMeshProUGUI validationMessage;// The validation message
+    private FriendList friendList;
 
     private List<Friend> friends = new List<Friend>();
     public string userId = "";
 
     public List<Friend> Friends { get => friends; set => friends = value; }
+
+    public void Start()
+    {
+        friendList = gameObject.GetComponent<FriendList>();
+    }
 
     public void idPlayer()
     {
@@ -136,6 +142,8 @@ public class FriendManager : MonoBehaviour
 
                 Friends.Add(newFriend);
             }
+
+            friendList.InstanceFriendItem();
         }
     }
 

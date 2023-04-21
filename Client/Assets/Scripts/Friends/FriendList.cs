@@ -30,7 +30,7 @@ public class FriendList : MonoBehaviour {
         FriendManager = gameObject.GetComponent<FriendManager>();
         friends = FriendManager.Friends;
     }
-    public async void ListPlayers()
+    public void CleanFriendsPanel()
     {
         foreach (Transform child in FriendListSettings.transform)
         {
@@ -41,18 +41,10 @@ public class FriendList : MonoBehaviour {
         {
             Destroy(child.gameObject);
         }
-
-        while (friends.Count == 0)
-        {
-            await Task.Delay(100);
-        }
-
-        StartCoroutine(Waitunesecon());
     }
-    IEnumerator Waitunesecon()
+    public void InstanceFriendItem()
     {
-        yield return new WaitForSeconds(1);
-
+        CleanFriendsPanel();
         switch (DisplayMode)
         {
             case true:  
