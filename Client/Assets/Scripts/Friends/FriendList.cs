@@ -36,7 +36,12 @@ public class FriendList : MonoBehaviour {
         {
             Destroy(child.gameObject);
         }
-        
+
+        foreach (Transform child in FriendRequestListSettings.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         while (friends.Count == 0)
         {
             await Task.Delay(100);
@@ -77,6 +82,7 @@ public class FriendList : MonoBehaviour {
                 };
             case false:
                 {
+
                     for (int i = 0; i < friends.Count; i++)
                     {
                         if (friends[i].Tags == "requester")
