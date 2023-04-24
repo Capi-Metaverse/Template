@@ -94,12 +94,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   playerName: {fileID: 3671804204259196208}
-  highlightColor: {r: 0, g: 0, b: 0, a: 0}
   leftArrowButton: {fileID: 6048991375444348040}
   rightArrowButton: {fileID: 7860851910535484405}
-  _networkObject: {fileID: 0}
-  playerAvatar: {fileID: 8542411148283099701}
   _playerAvatarNumber: 0
+  playerAvatar: {fileID: 8542411148283099701}
   avatars:
   - {fileID: 21300000, guid: 82ead583b16ddb04180772c9ea3f0553, type: 3}
   - {fileID: 21300000, guid: 33ff595089f1d084cb0d1c4d6eef4c27, type: 3}
@@ -108,6 +106,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 300a9869ec3f4db46860ba870b3f63a0, type: 3}
   - {fileID: 21300000, guid: b3e6a0effabfd6f43ac9967dde471aa8, type: 3}
   - {fileID: 21300000, guid: b796deea8d35ac94cbba30ed22edfca8, type: 3}
+  _lobbyManager: {fileID: 0}
 --- !u!114 &1584111202032195970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,7 +357,7 @@ GameObject:
   - component: {fileID: 1195948591978490665}
   - component: {fileID: 4126402548125147996}
   m_Layer: 5
-  m_Name: Izquierda
+  m_Name: LeftArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -491,7 +490,7 @@ GameObject:
   - component: {fileID: 6484972252136329866}
   - component: {fileID: 6265412869700890698}
   m_Layer: 5
-  m_Name: Derecha
+  m_Name: RightArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

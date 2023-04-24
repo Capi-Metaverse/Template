@@ -495,7 +495,7 @@ GameObject:
   - component: {fileID: 8715050930216732115}
   - component: {fileID: 7012594816794469350}
   m_Layer: 5
-  m_Name: Aceptar
+  m_Name: Accept
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -681,7 +681,7 @@ GameObject:
   - component: {fileID: 7032017797218118618}
   - component: {fileID: 4408064227438802898}
   m_Layer: 5
-  m_Name: Rechazar
+  m_Name: Deny
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

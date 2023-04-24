@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 2479814456557706341}
   - component: {fileID: 122411300431333755}
   m_Layer: 5
-  m_Name: Izquierda
+  m_Name: LeftArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2008,7 +2008,7 @@ GameObject:
   - component: {fileID: 1678344583985627648}
   - component: {fileID: 6470079941538373896}
   m_Layer: 5
-  m_Name: Derecha
+  m_Name: RightArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2540,7 +2540,7 @@ GameObject:
   - component: {fileID: 2948339155753542955}
   - component: {fileID: 5018274593250772390}
   m_Layer: 5
-  m_Name: Derecha (1)
+  m_Name: RightArrow (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3554,7 +3554,7 @@ GameObject:
   - component: {fileID: 5854524013675373703}
   - component: {fileID: 3290020303601396098}
   m_Layer: 5
-  m_Name: Izquierda (1)
+  m_Name: LeftArrow (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
