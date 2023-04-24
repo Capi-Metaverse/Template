@@ -19,6 +19,7 @@ public class FriendList : MonoBehaviour {
     private FriendItem FriendItem;
     private FriendRequest playerRequest;
     private List<Friend> friends;
+
     [SerializeField] private bool displayMode;
 
     public bool DisplayMode { get => displayMode; set => displayMode = value; }
