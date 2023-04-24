@@ -51,18 +51,25 @@ public class CreateRoom : MonoBehaviour
     public void CreateNewRoom()
     {
 
-        Debug.Log("Entro");
-        Debug.Log(gameManager);
-        gameManager.StartCustomGame(inputNameCreate.text, Int32.Parse(inputPlayers.text), map.text);
-       
+        if (!inputNameCreate.text.Equals("") && !inputPlayers.text.Equals(""))
+        {
+            Debug.Log("Creando a una nueva sala");
+            gameManager.StartCustomGame(inputNameCreate.text, Int32.Parse(inputPlayers.text), map.text);
+        }
+
+        //Else mensaje de error
 
     }
 
     public void JoinNewRoom()
     {
-        Debug.Log("Entro");
-        Debug.Log(gameManager);
-        gameManager.JoinCustomGame(inputNameJoin.text);
+        if (!inputNameJoin.text.Equals(""))
+        {
+            Debug.Log("Uniendose a una nueva sala");
+            gameManager.JoinCustomGame(inputNameJoin.text);
+        }
+
+        //Else mensaje de error
     }
 
 
