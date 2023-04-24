@@ -11,6 +11,7 @@ using UnityEditor.Localization.Plugins.XLIFF.V12;
 using System.Threading.Tasks;
 
 
+//Class that represents a friend of the current user in the application
 public class Friend
 {
     private string username;
@@ -24,13 +25,13 @@ public class Friend
 
 public class FriendManager : MonoBehaviour
 {
-    public TMP_InputField inputFriendUsername; // The username of the friend to be added
-    public GameObject panelMessageCheckName; // The panel of the validation message
-    public TextMeshProUGUI validationMessage;// The validation message
+    [SerializeField] private TMP_InputField inputFriendUsername; // The username of the friend to be added
+    [SerializeField] private GameObject panelMessageCheckName; // The panel of the validation message
+    [SerializeField] private TextMeshProUGUI validationMessage;// The validation message
     private FriendList friendList;
 
     private List<Friend> friends = new List<Friend>();
-    public string userId = "";
+    private string userId = "";
 
     public List<Friend> Friends { get => friends; set => friends = value; }
 
@@ -39,6 +40,7 @@ public class FriendManager : MonoBehaviour
         friendList = gameObject.GetComponent<FriendList>();
     }
 
+    //Method that gets the ID of a player from PlayFab
     public void RequestIDPlayer()
     {
         if (ValidarUserNameFriend(inputFriendUsername.text))
@@ -48,6 +50,7 @@ public class FriendManager : MonoBehaviour
             PlayFabClientAPI.GetAccountInfo(result, OnGetAccountInfoSuccess, OnGetAccountInfoFailure);
         }
     }
+    //Callback from a successfull Request ID Player 
     private void OnGetAccountInfoSuccess(GetAccountInfoResult result)
     {
         userId = result.AccountInfo.PlayFabId;
@@ -56,11 +59,13 @@ public class FriendManager : MonoBehaviour
         SendFriendRequest();
     }
 
+    //Callback from a failed Request ID Player 
     private void OnGetAccountInfoFailure(PlayFabError error)
     {
         Debug.LogError("GetAccountInfo failed: " + error.ErrorMessage);
     }
 
+    //Method assigned to the Add Friend Button
     public void AddFriend()
     {
         if (ValidarUserNameFriend(inputFriendUsername.text))
@@ -69,10 +74,10 @@ public class FriendManager : MonoBehaviour
            
         }
 
-        //Else mensaje de error
+        //Else Error Message
     }
 
-
+    //Method that sends the Friend Request on PlayFab
     public void SendFriendRequest()
     {
             // Call the PlayFab Cloud Script function to add the friend
@@ -94,18 +99,21 @@ public class FriendManager : MonoBehaviour
 
     }
 
+    //Callback from a successfull SendFriendRequest
     private void OnAddFriendSuccess(ExecuteCloudScriptResult result)
     {
         Debug.Log(result.FunctionResult);
         // Handle success, if necessary
     }
 
+    //Callback from a failed SendFriendRequest
     private void OnAddFriendFailure(PlayFabError error)
     {
         Debug.LogError("Failed to add friend: " + error.ErrorMessage);
         // Handle failure, if necessary
     }
 
+    //Method that returns the list of friends from Playfab
     public void GetFriendsConfirmedList()
     {
         ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
@@ -118,7 +126,7 @@ public class FriendManager : MonoBehaviour
     }
 
 
-    // Callback for successful CloudScript function call // llamamiento a la funcion getList de Cloud
+    // Callback for successful GetFriendsList 
     private void OnGetFriendsConfirmedListSuccess(ExecuteCloudScriptResult result)
     {
         friends.Clear();
@@ -154,12 +162,12 @@ public class FriendManager : MonoBehaviour
         }
     }
 
-    // Callback for failed CloudScript function call
+    // Callback for failed GetFriendsList 
     private void OnGetFriendsListFailure(PlayFabError error)
     {
         Debug.LogError("Failed to retrieve Friends List: " + error.ErrorMessage);
     }
-    //Eliminar Amigos
+
 
     //Check if the friend name input is accurate
     public bool ValidarUserNameFriend(string str)
