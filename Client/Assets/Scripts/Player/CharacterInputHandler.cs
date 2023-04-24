@@ -178,7 +178,7 @@ public class CharacterInputHandler : MonoBehaviour
                             setPause();
                         }
 
-                        if ((Input.GetKeyDown(KeyCode.B) && !escPul))
+                        if (inputManager.GetButtonDown("Wheel") && !escPul)
                         {
                             setEmoteWheel();
                         }

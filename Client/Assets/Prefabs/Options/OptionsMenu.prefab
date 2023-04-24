@@ -3049,7 +3049,6 @@ MonoBehaviour:
   inputFriendUsername: {fileID: 2551948338601988629}
   panelMessageCheckName: {fileID: 5716512702306607238}
   validationMessage: {fileID: 8462411391889756237}
-  userId: 
 --- !u!114 &1442107820706898414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3341,7 +3340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7811161137118350332
 RectTransform:
   m_ObjectHideFlags: 0

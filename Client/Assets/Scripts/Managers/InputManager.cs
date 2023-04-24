@@ -18,15 +18,16 @@ public class InputManager : MonoBehaviour
         yield return null; // Wait one frame
 
         // Do some more work here...
-        yield return new WaitForSeconds(4); // Wait for 2 seconds
+        yield return new WaitForSeconds(4); // Wait for 4 seconds
         
         buttonKeys = new Dictionary<string, KeyCode>();
         if (manageData.currentkeys == null)
         {
             buttonKeys["Interact"] = KeyCode.E;
             buttonKeys["ChangeCamera"] = KeyCode.K;
+            buttonKeys["Wheel"] = KeyCode.B;
 
-            manageData.currentkeys = new Keys((int)KeyCode.E, (int)KeyCode.K);
+            manageData.currentkeys = new Keys((int)KeyCode.E, (int)KeyCode.K, (int)KeyCode.B);
             manageData.SaveData(manageData.currentkeys);
         }
         else
@@ -34,6 +35,7 @@ public class InputManager : MonoBehaviour
             //Assign key values from PlayFab
             buttonKeys["Interact"] = (KeyCode)manageData.currentkeys.interact;
             buttonKeys["ChangeCamera"] = (KeyCode)manageData.currentkeys.presentationMode;
+            buttonKeys["Wheel"] = (KeyCode)manageData.currentkeys.wheel;
 
         }
         currentKeys = manageData.currentkeys;
