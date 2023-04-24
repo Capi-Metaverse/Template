@@ -56,7 +56,7 @@ public class Keys
     }
 }
 
-public class ManageData : MonoBehaviour
+public class ManageData 
 {
     public Keys currentkeys;
 
