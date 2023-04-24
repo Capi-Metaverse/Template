@@ -2997,7 +2997,6 @@ GameObject:
   - component: {fileID: 4696179530396141994}
   - component: {fileID: 3568877231533172023}
   - component: {fileID: 1442107820706898414}
-  - component: {fileID: 3090163988616534403}
   m_Layer: 5
   m_Name: TabFriends
   m_TagString: Untagged
@@ -3068,20 +3067,6 @@ MonoBehaviour:
   FriendItemPrefabSettings: {fileID: 7680741457055669170, guid: 62672f36f4343ed4eb022433a4e860ac, type: 3}
   FriendListSettings: {fileID: 4196776855793782887}
   displayMode: 1
---- !u!114 &3090163988616534403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4260924214363332052}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc09e0e7f72c5df4cab9b75d70be61f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FriendItemRequestPrefabSettings: {fileID: 7680741457055669170, guid: b2a797345361e9d4f8bd92090dc48f03, type: 3}
-  FriendRequestListSettings: {fileID: 6555235886008596939}
 --- !u!1 &4357447645965685498
 GameObject:
   m_ObjectHideFlags: 0
