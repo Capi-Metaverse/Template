@@ -39,7 +39,7 @@ public class FriendManager : MonoBehaviour
         friendList = gameObject.GetComponent<FriendList>();
     }
 
-    public void idPlayer()
+    public void RequestIDPlayer()
     {
         if (ValidarUserNameFriend(inputFriendUsername.text))
         {
@@ -52,6 +52,8 @@ public class FriendManager : MonoBehaviour
     {
         userId = result.AccountInfo.PlayFabId;
         Debug.Log("User ID: " + userId);
+
+        SendFriendRequest();
     }
 
     private void OnGetAccountInfoFailure(PlayFabError error)
@@ -59,17 +61,20 @@ public class FriendManager : MonoBehaviour
         Debug.LogError("GetAccountInfo failed: " + error.ErrorMessage);
     }
 
-    public async void AddFriend()
+    public void AddFriend()
     {
         if (ValidarUserNameFriend(inputFriendUsername.text))
         {
-            idPlayer();
-            Debug.Log(userId);
-            while (userId.Equals(""))
-            {
-                await Task.Delay(100);
-            }
+            RequestIDPlayer();
+           
+        }
 
+        //Else mensaje de error
+    }
+
+
+    public void SendFriendRequest()
+    {
             // Call the PlayFab Cloud Script function to add the friend
             ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
             {
@@ -83,10 +88,12 @@ public class FriendManager : MonoBehaviour
             };
 
             PlayFabClientAPI.ExecuteCloudScript(request, OnAddFriendSuccess, OnAddFriendFailure);
-        }
+        
         userId = "";
         inputFriendUsername.text = null; // Clean the friend name field
+
     }
+
     private void OnAddFriendSuccess(ExecuteCloudScriptResult result)
     {
         Debug.Log(result.FunctionResult);

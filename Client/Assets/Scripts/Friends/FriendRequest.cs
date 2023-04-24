@@ -46,7 +46,7 @@ void Start()
     // Callback for successful CloudScript function call
     private void OnAddFriendSuccess(ExecuteCloudScriptResult result)
 {
-        Debug.Log("YEAAAAAAA");
+        Debug.Log("User added or denied successfully");
 }
 
 // Callback for failed CloudScript function call
