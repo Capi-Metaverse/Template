@@ -10,14 +10,15 @@ using UnityEngine;
 
 public class FriendList : MonoBehaviour {
 
-    public GameObject FriendItemRequestPrefabSettings;
-    public GameObject FriendRequestListSettings;
-    public GameObject FriendItemPrefabSettings;
-    public GameObject FriendListSettings;
-    FriendManager FriendManager;
-    FriendItem FriendItem;
-    FriendRequest playerRequest;
-    List<Friend> friends;
+    [SerializeField] private GameObject FriendItemRequestPrefabSettings;
+    [SerializeField] private GameObject FriendRequestListSettings;
+    [SerializeField] private GameObject FriendItemPrefabSettings;
+    [SerializeField] private GameObject FriendListSettings;
+
+   private FriendManager FriendManager;
+    private FriendItem FriendItem;
+    private FriendRequest playerRequest;
+    private List<Friend> friends;
     [SerializeField] private bool displayMode;
 
     public bool DisplayMode { get => displayMode; set => displayMode = value; }
@@ -67,7 +68,7 @@ public class FriendList : MonoBehaviour {
 
                             PlayerNameText.text = friends[i].Username;
                             FriendItem.Username = friends[i].Username;
-                            FriendItem.ID = friends[i].Id;
+                            FriendItem.Id = friends[i].Id;
                         }
                     }
                     break;
@@ -90,7 +91,7 @@ public class FriendList : MonoBehaviour {
                             playerRequest = userItem.GetComponent<FriendRequest>();
 
                             PlayerNameText.text = friends[i].Username;
-                            playerRequest.ID = friends[i].Id;
+                            playerRequest.Id = friends[i].Id;
                         }
 
                     }

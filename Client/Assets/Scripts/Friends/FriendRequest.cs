@@ -6,27 +6,23 @@ using UnityEngine;
 
 public class FriendRequest : MonoBehaviour { 
 
-public string ID;
-FriendManager FriendManager;
-void Start()
-{
+    private string id;
 
-    FriendManager = gameObject.GetComponent<FriendManager>();
-}
+    public string Id { get => id; set => id = value; }
 
-    public void acceptRequest()
+    public void AcceptRequest()
     {
         ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
         {
             FunctionName = "AcceptFriendRequest",
             FunctionParameter = new
             {
-                friendplayfabid = ID
+                friendplayfabid = id
             },
             GeneratePlayStreamEvent = true
         };
 
-        PlayFabClientAPI.ExecuteCloudScript(request, OnAddFriendSuccess, OnGetFriendsListFailure);
+        PlayFabClientAPI.ExecuteCloudScript(request, OnAddFriendSuccess, OnAddFriendFailure);
     }
 
     public void DenyRequest()
@@ -36,23 +32,25 @@ void Start()
             FunctionName = "DenyFriendRequest",
             FunctionParameter = new
             {
-                friendplayfabid = ID
+                friendplayfabid = id
             },
             GeneratePlayStreamEvent = true
         };
 
-        PlayFabClientAPI.ExecuteCloudScript(request, OnAddFriendSuccess, OnGetFriendsListFailure);
+        PlayFabClientAPI.ExecuteCloudScript(request, OnAddFriendSuccess, OnAddFriendFailure);
     }
     // Callback for successful CloudScript function call
     private void OnAddFriendSuccess(ExecuteCloudScriptResult result)
 {
         Debug.Log("User added or denied successfully");
+        Destroy(this.gameObject);
 }
 
 // Callback for failed CloudScript function call
-private void OnGetFriendsListFailure(PlayFabError error)
+private void OnAddFriendFailure(PlayFabError error)
 {
     Debug.LogError("Failed to retrieve Friends List: " + error.ErrorMessage);
-}
+    Destroy(this.gameObject);
+    }
     
 }

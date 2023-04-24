@@ -6,21 +6,18 @@ using UnityEngine;
 
 public class FriendItem : MonoBehaviour
 {
-    public string Username;
-    public string ID;
-    FriendManager FriendManager;
-    void Start()
-    {
+    private string username;
+    private string id;
 
-        FriendManager = gameObject.GetComponent<FriendManager>();
-    }
+    public string Username { get => username; set => username = value; }
+    public string Id { get => id; set => id = value; }
 
     public void Removefriends()
     {
         ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
         {
             FunctionName = "DenyFriendRequest",
-            FunctionParameter = new { friendplayfabid = ID },
+            FunctionParameter = new { friendplayfabid = id },
             GeneratePlayStreamEvent = true
         };
 

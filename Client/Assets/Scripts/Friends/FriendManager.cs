@@ -80,6 +80,7 @@ public class FriendManager : MonoBehaviour
     //Method that sends the Friend Request on PlayFab
     public void SendFriendRequest()
     {
+        Debug.Log("Send info");
             // Call the PlayFab Cloud Script function to add the friend
             ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
             {
