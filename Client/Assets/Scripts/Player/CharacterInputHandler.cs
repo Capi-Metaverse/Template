@@ -10,6 +10,8 @@ public class CharacterInputHandler : MonoBehaviour
     Vector2 viewInputVector = Vector2.zero;
     bool isJumpButtonPressed = false;
 
+    public float sensitivity;
+    public float lookSpeed = 2.0f;
 
     //Raycast
 
@@ -94,6 +96,8 @@ public class CharacterInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
+
         if (Input.GetKeyDown("m") && gameManager.GetUserStatus() == UserStatus.InGame)
             voiceChat.MuteAudio(gameManager.GetUserStatus());
         nickname = this.gameObject.GetComponent<NetworkPlayer>().nickname.ToString();
@@ -241,8 +245,8 @@ public class CharacterInputHandler : MonoBehaviour
 
 
             //View input
-            viewInputVector.x = Input.GetAxis("Mouse X");
-            viewInputVector.y = Input.GetAxis("Mouse Y") * -1; //Invert the mouse look
+            viewInputVector.x = Input.GetAxis("Mouse X") / sensitivity;
+            viewInputVector.y = Input.GetAxis("Mouse Y") * -1 / sensitivity; //Invert the mouse look
 
             //Move Input
             moveInputVector.x = Input.GetAxis("Horizontal");
