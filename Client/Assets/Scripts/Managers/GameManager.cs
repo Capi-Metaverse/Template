@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Fusion;
 using Fusion.Sockets;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -182,12 +183,9 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     //Function to enter the Lobby
     public async Task EnterLobby()
     {
-
-
         //We connect to photonFusion
-        Debug.Log(_runner == null);
         Connect();
-        Debug.Log(_runner == null);
+
         //We connect to the Lobby
         SetConnectionStatus(ConnectionStatus.EnteringLobby);
         var result = await _runner.JoinSessionLobby(SessionLobby.Custom, LOBBY_NAME);
@@ -196,8 +194,13 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         if (!result.Ok)
         {
             SetConnectionStatus(ConnectionStatus.Failed);
-            
-            //Make error scenario
+
+            await Disconnect();
+            //Mostrar error screen
+            SceneManager.LoadScene("1.Start");
+
+            return;
+     
 
         }
 
@@ -235,7 +238,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
             GameMode = mode,
             CustomLobbyName = LOBBY_NAME,
             SceneManager = _loader,
-            SessionName = props.RoomName,
+            SessionName = props.RoomName.ToUpper(),
             PlayerCount = 10,
             SessionProperties = props.Properties,
            
@@ -243,9 +246,21 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
         playerCount = 10;
         currentMap = "Mapa1";
-        mapName = props.RoomName;
+        mapName = props.RoomName.ToUpper();
 
         //Maybe refactor this part Add Player in setPlayerPanel?
+
+
+        if (!result.Ok)
+        {
+            SetConnectionStatus(ConnectionStatus.Failed, result.ShutdownReason.ToString());
+
+             await Disconnect();
+
+            SceneManager.LoadScene("1.Start");
+
+            return;
+        }
 
         if (UserStatus == UserStatus.PreLobby)
         {
@@ -255,8 +270,6 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
             SetUserStatus(UserStatus.InLobby);
         }
 
-        if (!result.Ok)
-            SetConnectionStatus(ConnectionStatus.Failed, result.ShutdownReason.ToString());
     }
 
 
@@ -339,6 +352,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         this.avatarNumber = avatarNumber;
 
         mapName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
+        mapName = mapName.ToUpper();
         //We change to the new map
         //THIS WILL BE THE LOBBY WHEN IT'S ENDED
         SceneManager.LoadSceneAsync("Mapa1");
@@ -351,6 +365,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     {
         await Disconnect();
         mapName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
+        mapName = mapName.ToUpper();
         currentMap = map;
         playerCount = playerNumber;
         //We change to the respective map

@@ -46,6 +46,10 @@ public class LoginManager : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.FindInstance();
+        if (gameManager.GetConnectionStatus() == ConnectionStatus.Failed)
+        {
+            messageText.text = "An error has occurred. Try Again";
+        }
     }
 
 

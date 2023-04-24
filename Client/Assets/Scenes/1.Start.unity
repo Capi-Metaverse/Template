@@ -3826,6 +3826,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5587160888839851947, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
     - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
+      propertyPath: startText
+      value: 
+      objectReference: {fileID: 758073474}
+    - target: {fileID: 2625177154707920348, guid: b26056e9b2f585845acdaf876c801654, type: 3}
       propertyPath: playerPrefabs.Array.size
       value: 6
       objectReference: {fileID: 0}
