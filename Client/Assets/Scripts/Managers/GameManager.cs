@@ -122,7 +122,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         //If the scene loader is null, initializates it and change to the start scene.
         if (_loader == null)
         {
-            //_loader = NetworkSceneManagerDefault();
+           
 
             //Don't destroy the Game Manager
             DontDestroyOnLoad(gameObject);
@@ -159,7 +159,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
             //Initializes the runner
             SetConnectionStatus(ConnectionStatus.Connecting);
             GameObject go = new GameObject("Session");
-            //go.transform.SetParent(transform);
+          
 
             _runner = go.AddComponent<NetworkRunner>();
             _runner.AddCallbacks(this);
