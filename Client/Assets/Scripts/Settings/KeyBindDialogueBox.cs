@@ -85,6 +85,12 @@ public class KeyBindDialogueBox : MonoBehaviour
                                     inputManager.currentKeys.presentationMode = ((int)kc);
                                 }
                                 break;
+                            case "Wheel":
+                                {
+                                    playerUiPrefab.ChangeLetter(kc.ToString());
+                                    inputManager.currentKeys.wheel = ((int)kc);
+                                }
+                                break;
                         }
                         manageData.SaveData(inputManager.currentKeys);
                         buttonToRebind = null;

@@ -31,15 +31,28 @@ public class PresentationKey
     }
 }
 
+public class WheelKey
+{
+    public int wheel;
+
+    public WheelKey(int wheel)
+    {
+        this.wheel = wheel;
+    }
+}
+
+
 public class Keys
 {
     public int interact;
     public int presentationMode;
+    public int wheel;
 
-    public Keys(int interact, int presentationMode)
+    public Keys(int interact, int presentationMode, int wheel)
     {
         this.interact = interact;
         this.presentationMode = presentationMode;
+        this.wheel = wheel;
     }
 }
 
