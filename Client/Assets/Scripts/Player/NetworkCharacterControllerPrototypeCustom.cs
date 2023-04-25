@@ -26,7 +26,7 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     public float walkingSpeed = 3.5f;
     public float runningSpeed = 5.5f;
     public float jumpSpeed = 4.0f;
-    private float gravity = 55.0f;
+   [SerializeField] private float gravity = 55.0f;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
     public float sensitivity = 10.0f;
@@ -134,7 +134,7 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
         // as an acceleration (ms^-2)
         if (!Controller.isGrounded)
         {
-            moveDirection.y -= gravity * Time.deltaTime;
+            moveDirection.y -= gravity * deltaTime;
         }
 
         direction = moveDirection;
