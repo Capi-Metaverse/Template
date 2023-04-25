@@ -7,8 +7,6 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using System.Text.RegularExpressions;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
-using System.Threading.Tasks;
 
 
 //Class that represents a friend of the current user in the application

@@ -1,11 +1,8 @@
-using Fusion;
-using Photon.Realtime;
-using System.Collections;
+
 using System.Collections.Generic;
-using System.Threading.Tasks;
+
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Search;
+
 using UnityEngine;
 
 public class FriendList : MonoBehaviour {

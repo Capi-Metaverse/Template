@@ -14,8 +14,6 @@ public class PauseMenuSettings : MonoBehaviour
     private GameObject Pause;
     [SerializeField] private TMP_Text roomName;
 
-     PlayerList playerList;
-
     private void Start()
     {
         //We find the GameObjects
@@ -40,15 +38,6 @@ public class PauseMenuSettings : MonoBehaviour
         //Change visibility of menus
         Pause.SetActive(false);
         Settings.SetActive(true);
-
-
-        //If the user is master  it will search the player list
-         if (gameManager.GetUserRole() == UserRole.Admin)
-            {
-              playerList = GameObject.Find("TabPlayer").GetComponent<PlayerList>();
-              playerList.ListPlayers();
-            } 
-
 
     }
 

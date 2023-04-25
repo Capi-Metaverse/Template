@@ -1,22 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
-using ExitGames.Client.Photon;
-using Fusion;
-using Photon.Realtime;
+
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UserListItem : MonoBehaviour
 {
-    GameManager gameManager;
-    public int numActor { get; set; }
+    private GameManager gameManager;
+    [SerializeField] private Button kickButton;
+    private int numActor;
+
+    public int NumActor { get => numActor; set => numActor = value; }
 
     public void Start()
     {
         gameManager = GameManager.FindInstance();
+
+        if (gameManager.GetUserRole() == UserRole.Admin)
+        {
+            kickButton.gameObject.SetActive(true);
+            
+
+        }
+
+        
     }
     public void KickPlayer() { 
-        GameManager.RPC_onKick(gameManager.GetRunner(),numActor);  
+        GameManager.RPC_onKick(gameManager.GetRunner(),NumActor);  
     }
 
 

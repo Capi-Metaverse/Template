@@ -4,6 +4,7 @@ using System.Collections.Generic;
 //using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
 {
@@ -22,11 +23,17 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
     void Start()
     {
         gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
-        
+
+        /*
         if (gameManager.GetUserRole() == UserRole.Admin)
         {
           TabTabPlayers.SetActive(true);
         }
+        */
+
+      
+
+        TabTabPlayers.SetActive(true);
         TabPanel.SetActive(true);
         TabPanelKeys.SetActive(false);
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
@@ -51,6 +58,11 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
     }
     public void ChangeToPanelPlayer()
     {
+
+        //We initialize the player list
+        PlayerList playerList = GameObject.Find("TabPlayer").GetComponent<PlayerList>();
+        playerList.ListPlayers();
+
         TabPanel.SetActive(false);
       
         TabPanelKeys.SetActive(false);
@@ -59,11 +71,15 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
     }
     public void ChangeToPanelFriends()
     {
+        
+
+        
         TabPanel.SetActive(false);
        
         TabPanelKeys.SetActive(false);
         TabPanelPlayers.SetActive(false);
         TabPanelFriends.SetActive(true);
+        
     }
 
     public void OnClickBackToPause()
