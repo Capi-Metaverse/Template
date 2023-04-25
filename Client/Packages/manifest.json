@@ -1,7 +1,6 @@
 {
   "dependencies": {
-    "com.mochineko.whisper-api": "https://github.com/mochi-neko/Whisper-API-unity.git?path=/Assets/Mochineko/Whisper_API#0.1.0",
-    "com.srcnalt.openai-unity": "file:C:/Users/mcocerap/Downloads/OpenAI-Unity-0.1.12",
+    "com.srcnalt.openai-unity": "https://github.com/srcnalt/OpenAI-Unity.git",
     "com.unity.collab-proxy": "1.17.2",
     "com.unity.entities": "0.51.1-preview.21",
     "com.unity.feature.development": "1.0.1",

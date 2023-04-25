@@ -1,19 +1,13 @@
 {
   "dependencies": {
-    "com.mochineko.whisper-api": {
-      "version": "https://github.com/mochi-neko/Whisper-API-unity.git?path=/Assets/Mochineko/Whisper_API#0.1.0",
+    "com.srcnalt.openai-unity": {
+      "version": "https://github.com/srcnalt/OpenAI-Unity.git",
       "depth": 0,
       "source": "git",
-      "dependencies": {},
-      "hash": "92c5d243484b848ff1ceb2518dff5c6b3b136087"
-    },
-    "com.srcnalt.openai-unity": {
-      "version": "file:C:/Users/mcocerap/Downloads/OpenAI-Unity-0.1.12",
-      "depth": 0,
-      "source": "local",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.1.0"
-      }
+      },
+      "hash": "fb8af0a6f6869081d8c4c2a6143d7152a2694d61"
     },
     "com.unity.addressables": {
       "version": "1.19.19",
