@@ -72,33 +72,4 @@ public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
         Settings.SetActive(false);
     }
 
-    /* public void OnPlayerEnteredRoom(Player newPlayer)
-     {
-         throw new System.NotImplementedException();
-     }
-
-     public void OnPlayerLeftRoom(Player otherPlayer)
-     {
-         throw new System.NotImplementedException();
-     }
-
-     public void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
-     {
-         throw new System.NotImplementedException();
-     }
-
-     public void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
-     {
-         throw new System.NotImplementedException();
-     }
-
-     void IInRoomCallbacks.OnMasterClientSwitched(Player newMasterClient)
-     {
-         Debug.Log("Cambiosssss");
-          if (PhotonNetwork.IsMasterClient)
-         {
-           TabTabPlayers.SetActive(true);
-         } 
-         //throw new System.NotImplementedException();
-     }*/
 }
