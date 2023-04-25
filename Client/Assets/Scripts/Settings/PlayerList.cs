@@ -42,6 +42,7 @@ public class PlayerList : MonoBehaviour
             //We get the userItem component
 
             userItem.GetComponent<UserListItem>().NumActor = networkPlayer.ActorID;
+            userItem.GetComponent<UserListItem>().GameObjectPlayer = player;
 
 
 
