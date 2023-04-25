@@ -1,37 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-//using Photon.Pun;
-//using Photon.Realtime;
-using TMPro;
-using UnityEngine;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
-public class MoveTabs : MonoBehaviour //,IInRoomCallbacks
+using UnityEngine;
+
+
+public class MoveTabs : MonoBehaviour 
 {
-    public GameObject TabPanel;
-    public GameObject TabPanelKeys;
-    public GameObject TabPanelPlayers;
-    public GameObject TabPanelFriends;
-    public GameObject TabTabPlayers;
-    public GameObject Lenguages;
+    [SerializeField] private GameObject TabPanel;
+    [SerializeField] private GameObject TabPanelKeys;
+    [SerializeField] private GameObject TabPanelPlayers;
+    [SerializeField] private GameObject TabPanelFriends;
+    [SerializeField] private GameObject TabTabPlayers;
+    [SerializeField] private GameObject Lenguages;
+
+    
+    private GameObject Settings;
+    private GameObject Pause;
+
+    //Maybe improvement in player keys
     public string[] PlayerKeys;
-    GameObject Settings;
-    GameObject Pause;
 
     GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
-
-        /*
-        if (gameManager.GetUserRole() == UserRole.Admin)
-        {
-          TabTabPlayers.SetActive(true);
-        }
-        */
-
-      
 
         TabTabPlayers.SetActive(true);
         TabPanel.SetActive(true);
