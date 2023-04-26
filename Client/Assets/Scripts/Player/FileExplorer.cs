@@ -342,11 +342,5 @@ public class FileExplorer : NetworkBehaviour
 
         //downloadImages(urls);
     }
-
-    [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.All)]
-    public void RPC_PressInfo(string[] content, RpcInfo info = default)
-    {
-        //this.urls = content;
-    }
 }
 
