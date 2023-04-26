@@ -399,7 +399,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &819620952
 PrefabInstance:
@@ -562,7 +562,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &1049912488
 PrefabInstance:
@@ -759,7 +759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4641922850309669932, guid: 200307d3af272824389f524607c70e0f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.533
+      value: 1.45
       objectReference: {fileID: 0}
     - target: {fileID: 4641922850309669932, guid: 200307d3af272824389f524607c70e0f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1398,9 +1398,11 @@ GameObject:
   - component: {fileID: 8679612907448217472}
   - component: {fileID: 1642095102335984934}
   - component: {fileID: 7508311030902387485}
-  m_Layer: 0
+  - component: {fileID: 8679612907448217474}
+  - component: {fileID: 8679612907448217473}
+  m_Layer: 6
   m_Name: puerta.004
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1764,9 +1766,11 @@ GameObject:
   - component: {fileID: 6671876031259837400}
   - component: {fileID: 6272375667470724975}
   - component: {fileID: 4285172583605424387}
-  m_Layer: 0
+  - component: {fileID: 6671876031259837402}
+  - component: {fileID: 6671876031259837401}
+  m_Layer: 6
   m_Name: puerta.006
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2022,9 +2026,11 @@ GameObject:
   - component: {fileID: 4561084702331967977}
   - component: {fileID: 5953829142044484379}
   - component: {fileID: 5462025824722341373}
-  m_Layer: 0
+  - component: {fileID: 5953829142044484381}
+  - component: {fileID: 5953829142044484380}
+  m_Layer: 6
   m_Name: puerta.007
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2235,9 +2241,11 @@ GameObject:
   - component: {fileID: 1886752804651956505}
   - component: {fileID: 3314981903135884553}
   - component: {fileID: 217140441475711738}
-  m_Layer: 0
+  - component: {fileID: 3314981903135884555}
+  - component: {fileID: 3314981903135884554}
+  m_Layer: 6
   m_Name: puerta.003
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2313,9 +2321,11 @@ GameObject:
   - component: {fileID: 3435474868775928609}
   - component: {fileID: 2642626691938179568}
   - component: {fileID: 4053690043022248928}
-  m_Layer: 0
+  - component: {fileID: 4053690043022248930}
+  - component: {fileID: 4053690043022248929}
+  m_Layer: 6
   m_Name: puerta.001
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2582,6 +2592,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3314981903135884554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2640519987859835941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f49f43b6f9312d4d8a62db4fdcd1395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: HUBValencia
+  isPublic: 1
+  passwordScript: {fileID: 0}
+  lastPassword: 
+--- !u!64 &3314981903135884555
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2640519987859835941}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8552134717624371188, guid: 2e6a48dd2f90374429374a1946fd23ba, type: 3}
 --- !u!1 &3415246899955244301
 GameObject:
   m_ObjectHideFlags: 0
@@ -2830,6 +2870,36 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2888513734498609063}
   m_Mesh: {fileID: 2212009239438826721, guid: 2e6a48dd2f90374429374a1946fd23ba, type: 3}
+--- !u!114 &4053690043022248929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2888513734498609063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f49f43b6f9312d4d8a62db4fdcd1395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: HUBValencia
+  isPublic: 1
+  passwordScript: {fileID: 0}
+  lastPassword: 
+--- !u!64 &4053690043022248930
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2888513734498609063}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2212009239438826721, guid: 2e6a48dd2f90374429374a1946fd23ba, type: 3}
 --- !u!33 &4226204390497985256
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2938,9 +3008,11 @@ GameObject:
   - component: {fileID: 5223331483684633564}
   - component: {fileID: 8163520320722638849}
   - component: {fileID: 99126024527524536}
-  m_Layer: 0
+  - component: {fileID: 8163520320722638851}
+  - component: {fileID: 8163520320722638850}
+  m_Layer: 6
   m_Name: puerta
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3548,6 +3620,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5953829142044484380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2188888665310729001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f49f43b6f9312d4d8a62db4fdcd1395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: HUBValencia
+  isPublic: 1
+  passwordScript: {fileID: 0}
+  lastPassword: 
+--- !u!64 &5953829142044484381
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2188888665310729001}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5741174448488666723, guid: 2e6a48dd2f90374429374a1946fd23ba, type: 3}
 --- !u!23 &6026857889887516837
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3878,9 +3980,11 @@ GameObject:
   - component: {fileID: 6726156542405906328}
   - component: {fileID: 1940824010820149156}
   - component: {fileID: 5089165112994873497}
-  m_Layer: 0
+  - component: {fileID: 6726156542405906330}
+  - component: {fileID: 6726156542405906329}
+  m_Layer: 6
   m_Name: puerta.005
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3933,6 +4037,36 @@ Transform:
   m_Father: {fileID: 6098457613104032920}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6671876031259837401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723328733446559370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f49f43b6f9312d4d8a62db4fdcd1395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: HUBValencia
+  isPublic: 1
+  passwordScript: {fileID: 0}
+  lastPassword: 
+--- !u!64 &6671876031259837402
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723328733446559370}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -153830957423991239, guid: 2e6a48dd2f90374429374a1946fd23ba, type: 3}
 --- !u!4 &6695316835155586283
 Transform:
   m_ObjectHideFlags: 0
@@ -3963,6 +4097,36 @@ Transform:
   m_Father: {fileID: 6098457613104032920}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6726156542405906329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6476967654054554117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f49f43b6f9312d4d8a62db4fdcd1395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: HUBValencia
+  isPublic: 1
+  passwordScript: {fileID: 0}
+  lastPassword: 
+--- !u!64 &6726156542405906330
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6476967654054554117}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8385836491182413749, guid: 2e6a48dd2f90374429374a1946fd23ba, type: 3}
 --- !u!33 &6736434332536064103
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4752,6 +4916,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8163520320722638850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4558508338790096870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f49f43b6f9312d4d8a62db4fdcd1395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: HUBValencia
+  isPublic: 1
+  passwordScript: {fileID: 0}
+  lastPassword: 
+--- !u!64 &8163520320722638851
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4558508338790096870}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3329902420748629119, guid: 2e6a48dd2f90374429374a1946fd23ba, type: 3}
 --- !u!33 &8199298056301767409
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4848,9 +5042,11 @@ GameObject:
   - component: {fileID: 8736635026775785042}
   - component: {fileID: 1795889863377672499}
   - component: {fileID: 5847055165001944120}
-  m_Layer: 0
+  - component: {fileID: 8736635026775785044}
+  - component: {fileID: 8736635026775785043}
+  m_Layer: 6
   m_Name: puerta.002
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5067,6 +5263,36 @@ Transform:
   m_Father: {fileID: 6098457613104032920}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8679612907448217473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539581987243151470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f49f43b6f9312d4d8a62db4fdcd1395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: HUBValencia
+  isPublic: 1
+  passwordScript: {fileID: 0}
+  lastPassword: 
+--- !u!64 &8679612907448217474
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539581987243151470}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2477511411847689622, guid: 2e6a48dd2f90374429374a1946fd23ba, type: 3}
 --- !u!4 &8736635026775785042
 Transform:
   m_ObjectHideFlags: 0
@@ -5082,6 +5308,36 @@ Transform:
   m_Father: {fileID: 6098457613104032920}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8736635026775785043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359910093740376873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f49f43b6f9312d4d8a62db4fdcd1395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: HUBValencia
+  isPublic: 1
+  passwordScript: {fileID: 0}
+  lastPassword: 
+--- !u!64 &8736635026775785044
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359910093740376873}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2228417370725966487, guid: 2e6a48dd2f90374429374a1946fd23ba, type: 3}
 --- !u!4 &8749555643540034908
 Transform:
   m_ObjectHideFlags: 0
