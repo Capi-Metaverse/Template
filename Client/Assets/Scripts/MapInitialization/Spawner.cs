@@ -34,9 +34,9 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     {
         if (player == runner.LocalPlayer)
         {
-
+            GameObject handler = GameObject.Find("NetworkRunnerHandler");
             Debug.Log("Spawning Player");
-            runner.Spawn(playerPrefab, Utils.GetRandomSpawnPoint(), Quaternion.identity, player,OnBeforeSpawn);
+            runner.Spawn(playerPrefab, handler.transform.position, Quaternion.identity, player,OnBeforeSpawn);
             Debug.Log(gameManager.GetRunner().SessionInfo.ToString());
         }
         Debug.Log(gameManager.GetUserStatus());

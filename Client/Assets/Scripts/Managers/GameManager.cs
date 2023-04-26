@@ -245,7 +245,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         });
 
         playerCount = 10;
-        currentMap = "Mapa1";
+        currentMap = "LobbyOficial";
         mapName = props.RoomName.ToUpper();
 
         //Maybe refactor this part Add Player in setPlayerPanel?
@@ -355,7 +355,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         mapName = mapName.ToUpper();
         //We change to the new map
         //THIS WILL BE THE LOBBY WHEN IT'S ENDED
-        SceneManager.LoadSceneAsync("Mapa1");
+        SceneManager.LoadSceneAsync("LobbyOficial");
         Debug.Log("Creating session");
 
 
@@ -376,7 +376,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     {
         await Disconnect();
         mapName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
-        currentMap = "Mapa1";
+        currentMap = "LobbyOficial";   
         playerCount = 4;
         Connect();
 

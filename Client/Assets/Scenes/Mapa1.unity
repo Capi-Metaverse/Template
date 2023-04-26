@@ -14700,8 +14700,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f49f43b6f9312d4d8a62db4fdcd1395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: Mapa2
-  isPublic: 0
+  map: LobbyOficial
+  isPublic: 1
   passwordScript: {fileID: 1573320064}
   lastPassword: 
 --- !u!1 &573134229
@@ -16881,7 +16881,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerItemPrefabSettings: {fileID: 5579281195357421886, guid: 2bf2d61890fe7494783d1555035f1d11, type: 3}
   PlayerListSettings: {fileID: 775600364}
-  IDPlayer: 0
 --- !u!1 &775600364 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8114877012828975565, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
