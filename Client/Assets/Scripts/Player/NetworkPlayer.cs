@@ -35,6 +35,7 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
         gameManager = GameManager.FindInstance();
         gameManager.SetAvatarNumber(avatar);
         GameObject model = Instantiate(playerPrefabs[this.avatar], gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
+        model.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         model.transform.SetAsFirstSibling();
         model.AddComponent<Animator>();
         model.GetComponent<Animator>().runtimeAnimatorController = controller;
