@@ -597,6 +597,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         }
 
     }
+    [Rpc]
     public static async void RPC_DownloadImages(NetworkRunner runner, string[] routes)
     {
         Debug.Log(routes.Length);

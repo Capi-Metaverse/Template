@@ -270,7 +270,6 @@ public class FileExplorer : NetworkBehaviour
 
         string[] stringArray = Array.ConvertAll(content, x => x.ToString());
 
-        Debug.Log("Finaliza Conversion" + stringArray[0]);
         //We send the content to the other users
         GameManager.RPC_DownloadImages(gameManager.GetRunner(), stringArray);
 
