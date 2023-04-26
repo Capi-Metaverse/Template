@@ -17,7 +17,7 @@ public class FileExplorer : NetworkBehaviour
     public Presentation presentation;
     private Compressor compressor = new Compressor();
     private string _path;//File path
-    JObject json;
+    public JObject json;
     UnityWebRequest GetRequest;
     public TMP_Text  loadingPressCanvas;//shows when presentation is loading
     public float size;
@@ -25,6 +25,7 @@ public class FileExplorer : NetworkBehaviour
     [Networked(OnChanged = nameof(OnPresentationChanged))]
     public NetworkString<_16> urls { get; set; }
     public GameManager gameManager;
+
 
 #if UNITY_WEBGL && !UNITY_EDITOR
     //
@@ -266,12 +267,9 @@ public class FileExplorer : NetworkBehaviour
         Debug.Log("Json: " + json);
         //We build the content item
                         
-        object[] content = new object[] { request.downloadHandler.text};
-
-        string[] stringArray = Array.ConvertAll(content, x => x.ToString());
-
+      
         //We send the content to the other users
-        GameManager.RPC_DownloadImages(gameManager.GetRunner(), stringArray);
+        GameManager.RPC_DownloadImages(gameManager.GetRunner(), request.downloadHandler.text);
 
 
         //Si es nula
