@@ -9,26 +9,8 @@ public class AdvancePresentation : NetworkBehaviour, IMetaEvent
 {
    public Presentation presentation;
 
-   public void activate(bool host)
-   {
-      presentation.OnAdvance();
-
-      if (host)
-      {
-
-            //The event is sent to the other users
-            RPC_AdvancePress("Advance");
-        }
-     }
-
-    [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.All)]
-    public void RPC_AdvancePress(string content, RpcInfo info = default)
+    public void activate(bool host)
     {
-        Debug.Log("[Photon-AdvancePresentation] RPC: " + content);
-        //Local invoke client
-        if (info.IsInvokeLocal)
-            Debug.Log("[Photon-AdvancePresentation] Debug: InvokeLocal");
-        else
-        activate(false);//Executed on clients
+        GameManager.RPC_AdvancePress(GameManager.FindInstance().GetRunner());
     }
 }

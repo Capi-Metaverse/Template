@@ -9,26 +9,8 @@ public class BackPresentation : NetworkBehaviour, IMetaEvent
 {
    public Presentation presentation;
 
-   public void activate(bool host)
-   {
-
-      presentation.OnReturn();
-
-      if (host)
-      {
-            //The event is sent to the other users
-            RPC_BackPress("Back");
-      }
-   }
-
-    [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.All)]
-    public void RPC_BackPress(string content, RpcInfo info = default)
+    public void activate(bool host)
     {
-
-        Debug.Log("[Photon-BackPresentation] RPC: " + content);
-        if (info.IsInvokeLocal)
-            Debug.Log("[Photon-BackPresentation] Debug: InvokeLocal");
-        else    
-        activate(false);//All clients except who invoked it
+        GameManager.RPC_BackPress(GameManager.FindInstance().GetRunner());
     }
 }

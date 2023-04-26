@@ -614,4 +614,21 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         fileExplorer.StartCoroutine();
 
     }
+
+    [Rpc]
+    public static void RPC_BackPress(NetworkRunner runner)
+    {
+        Presentation presentation = GameObject.Find("Presentation").GetComponent<Presentation>();
+        presentation.OnReturn();
+    
+    }
+    [Rpc]
+    public static void RPC_AdvancePress(NetworkRunner runner)
+    {
+        Presentation presentation = GameObject.Find("Presentation").GetComponent<Presentation>();
+        presentation.OnAdvance();
+
+    }
 }
+
+
