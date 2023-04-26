@@ -82,6 +82,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
     public GameObject Settings;
 
+    public FileExplorer fileExplorer;
 
     //Static function to get the singleton
     public static GameManager FindInstance()
@@ -596,6 +597,12 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         }
 
     }
+    public static async void RPC_DownloadImages(NetworkRunner runner, string[] routes)
+    {
+        Debug.Log(routes.Length);
+    }
+
+
 
 
 }

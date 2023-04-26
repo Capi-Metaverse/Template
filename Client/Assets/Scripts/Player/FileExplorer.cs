@@ -24,6 +24,7 @@ public class FileExplorer : NetworkBehaviour
     object[] content;
     [Networked(OnChanged = nameof(OnPresentationChanged))]
     public NetworkString<_16> urls { get; set; }
+    public GameManager gameManager;
 
 #if UNITY_WEBGL && !UNITY_EDITOR
     //
@@ -37,6 +38,7 @@ public class FileExplorer : NetworkBehaviour
     void Start()
     {
         presentation=GameObject.Find("Presentation").GetComponent<Presentation>();//Getting the press from scene
+        gameManager = GameManager.FindInstance();
     }
 
     [Obsolete]
@@ -270,7 +272,8 @@ public class FileExplorer : NetworkBehaviour
 
         Debug.Log("Finaliza Conversion" + stringArray[0]);
         //We send the content to the other users
-        RPC_PressInfo(stringArray);
+        GameManager.RPC_DownloadImages(gameManager.GetRunner(), stringArray);
+
 
         //Si es nula
         if (presentation.current >= 1) presentation.current=0;
