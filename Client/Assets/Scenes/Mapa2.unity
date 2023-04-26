@@ -13218,15 +13218,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7846708733413619095, guid: 4e4b47312f3ecb24695d12e5303d0ab5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.63699
+      value: 2.01
       objectReference: {fileID: 0}
     - target: {fileID: 7846708733413619095, guid: 4e4b47312f3ecb24695d12e5303d0ab5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.0872002
+      value: 0.619
       objectReference: {fileID: 0}
     - target: {fileID: 7846708733413619095, guid: 4e4b47312f3ecb24695d12e5303d0ab5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.63837
+      value: -1.6
       objectReference: {fileID: 0}
     - target: {fileID: 7846708733413619095, guid: 4e4b47312f3ecb24695d12e5303d0ab5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15731,6 +15731,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: Mapa1
+  isPublic: 1
+  passwordScript: {fileID: 0}
+  lastPassword: 
 --- !u!43 &1937669965
 Mesh:
   m_ObjectHideFlags: 0
