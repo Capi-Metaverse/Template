@@ -611,7 +611,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
         FileExplorer fileExplorer = GameObject.Find("ChooseFile").GetComponent<FileExplorer>();
         fileExplorer.json = JsonRoutes;
-        fileExplorer.GetRequestFunc();
+        fileExplorer.StartCoroutine();
 
     }
 }

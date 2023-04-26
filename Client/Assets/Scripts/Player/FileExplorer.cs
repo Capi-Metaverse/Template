@@ -277,7 +277,12 @@ public class FileExplorer : NetworkBehaviour
         if(presentation.sprites != null) presentation.sprites.Clear();
         StartCoroutine(GetRequestFunc());
     }
- 
+
+    public void StartCoroutine()
+    {
+        StartCoroutine(GetRequestFunc());
+    }
+
     //Function to make a Get request
     public IEnumerator GetRequestFunc()
     {
