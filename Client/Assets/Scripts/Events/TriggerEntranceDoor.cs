@@ -5,21 +5,24 @@ using UnityEngine;
 public class TriggerEntranceDoor : MonoBehaviour
 {
     [SerializeField] private Animator EntranceDoor = null;
-    private bool isOpen = false;
+    private int usersInTrigger = 0;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isOpen == false)
+        usersInTrigger++;
+        if (usersInTrigger == 1)
         {
             EntranceDoor.Play("OfficeEntranceGlassDoor", 0, 0.0f);
-            isOpen = true;
         }
 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        EntranceDoor.Play("OfficeEntranceGlassDoorInverse", 0, 0.0f);
-        isOpen = false;
+        usersInTrigger--;
+        if (usersInTrigger == 0)
+        {
+            EntranceDoor.Play("OfficeEntranceGlassDoorInverse", 0, 0.0f);
+        }
     }
 }
