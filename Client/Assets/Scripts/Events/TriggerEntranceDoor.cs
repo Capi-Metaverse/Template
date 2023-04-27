@@ -1,42 +1,54 @@
+using Fusion;
 using UnityEngine;
 
 public class TriggerEntranceDoor : MonoBehaviour
 {
     [SerializeField] private Animator EntranceDoor = null;
 
-    public bool MemberInside = false;
+    public int membersInside = 0;
 
     float startTime = 0.0f;
 
+    GameManager gameManager;
 
-    private void OnTriggerStay(Collider other)
+    private void Start()
     {
-        if (MemberInside == false)
-        {
-            EntranceDoor.Play("OfficeEntranceGlassDoor", 0, 0.0f);
-        }
-        MemberInside = true;
-       
-
+        gameManager = GameManager.FindInstance();
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.GetComponent<NetworkPlayer>().ActorID == gameManager.GetRunner().LocalPlayer.PlayerId) 
+        {
+            GameManager.RPC_OpenDoor(gameManager.GetRunner());
+ 
+        }
+        
+    }
+
+    
 
     private void OnTriggerExit(Collider other)
     {
-        MemberInside = false;
-
-        startTime = 5.0f;
-        while (startTime > 0)
+        if (other.gameObject.GetComponent<NetworkPlayer>().ActorID == gameManager.GetRunner().LocalPlayer.PlayerId)
         {
-
-            startTime -= Time.deltaTime;
+            GameManager.RPC_CloseDoor(gameManager.GetRunner());
+            
+            
         }
 
-        if(MemberInside == false)
-        {
-            EntranceDoor.Play("OfficeEntranceGlassDoorInverse", 0, 0.0f);
-        }
+    }
 
 
+    public void OpenDoor()
+    {
+        EntranceDoor.Play("OfficeEntranceGlassDoor", 0, 0.0f);
+    }
+
+    public void CloseDoor()
+    {
+        EntranceDoor.Play("OfficeEntranceGlassDoorInverse", 0, 0.0f);
     }
 
 }

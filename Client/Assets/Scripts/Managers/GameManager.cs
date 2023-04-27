@@ -629,6 +629,27 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         presentation.OnAdvance();
 
     }
+
+    [Rpc]
+    public static void RPC_OpenDoor(NetworkRunner runner)
+    {
+        TriggerEntranceDoor door = GameObject.Find("GlassEntrance").GetComponentInChildren<TriggerEntranceDoor>();
+        if (door.membersInside == 0) door.OpenDoor();
+        door.membersInside++;
+
+    }
+
+    [Rpc]
+    public static void RPC_CloseDoor(NetworkRunner runner)
+    {
+        TriggerEntranceDoor door = GameObject.Find("GlassEntrance").GetComponentInChildren<TriggerEntranceDoor>();
+        door.membersInside--;
+        if(door.membersInside == 0)
+        {
+            door.CloseDoor();
+        }
+
+    }
 }
 
 
