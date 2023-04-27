@@ -1,28 +1,43 @@
+using ExitGames.Client.Photon.StructWrapping;
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerEntranceDoor : MonoBehaviour
+public class TriggerEntranceDoor : NetworkBehaviour
 {
     [SerializeField] private Animator EntranceDoor = null;
-    private int usersInTrigger = 0;
 
-    private void OnTriggerEnter(Collider other)
+    [Networked(OnChanged = nameof(OnChangedMemberInside))]
+    public bool MemberInside { get; set; } = false;
+
+    float startTime = 0.0f;
+
+    private void OnTriggerStay(Collider other)
     {
-        usersInTrigger++;
-        if (usersInTrigger == 1)
+        
+        MemberInside = true;
+        startTime = 5;
+
+        
+        while (startTime>0)
         {
-            EntranceDoor.Play("OfficeEntranceGlassDoor", 0, 0.0f);
+            startTime -= Time.deltaTime;
         }
+        MemberInside = false;
 
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnChangedMemberInside()
     {
-        usersInTrigger--;
-        if (usersInTrigger == 0)
+        if (MemberInside)
+        {
+            EntranceDoor.Play("OfficeEntranceGlassDoor", 0, 0.0f);
+        }
+        else
         {
             EntranceDoor.Play("OfficeEntranceGlassDoorInverse", 0, 0.0f);
         }
     }
+
 }
