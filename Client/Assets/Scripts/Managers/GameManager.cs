@@ -650,6 +650,21 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         }
 
     }
+
+    [Rpc]
+    public static void RPC_PrimarySpeaker(NetworkRunner runner, int actorID)
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach(GameObject player in players)
+        {
+            if(player.GetComponent<NetworkPlayer>().ActorID == actorID)
+            {
+                player.GetComponentInChildren<AudioSource>().maxDistance = 500;
+            }
+        }
+
+    }
 }
 
 

@@ -1163,7 +1163,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineMaterial: {fileID: 2100000, guid: 68f4aaeb1b929ca468210339dbc42106, type: 2}
-  lineWidth: 0.2
   planeLayer:
     serializedVersion: 2
     m_Bits: 2147483647
@@ -1258,9 +1257,10 @@ GameObject:
   - component: {fileID: 1793179071}
   - component: {fileID: 1793179073}
   - component: {fileID: 1793179072}
-  m_Layer: 0
+  - component: {fileID: 1793179074}
+  m_Layer: 6
   m_Name: puerta.025 (1)
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1330,6 +1330,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1793179074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793179070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89527ed4f37870947af3beac7135b7fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1932244113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4811,9 +4823,10 @@ GameObject:
   - component: {fileID: 8550938753790839660}
   - component: {fileID: 1752708710436165342}
   - component: {fileID: 4865687550457130304}
-  m_Layer: 0
+  - component: {fileID: 8550938753790839661}
+  m_Layer: 6
   m_Name: puerta.027
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5345,6 +5358,18 @@ Transform:
   m_Father: {fileID: 6098457613104032920}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8550938753790839661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7657772717590036165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89527ed4f37870947af3beac7135b7fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &8573642897321333771
 MeshFilter:
   m_ObjectHideFlags: 0
