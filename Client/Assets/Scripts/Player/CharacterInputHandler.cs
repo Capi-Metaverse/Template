@@ -111,8 +111,9 @@ public class CharacterInputHandler : MonoBehaviour
         }
 
      
-            if (HittingObject && gameManager.GetUserStatus() != UserStatus.InPause && onPresentationCamera==false)
-                eventText.SetActive(true);
+        if (HittingObject && gameManager.GetUserStatus() != UserStatus.InPause && onPresentationCamera==false)
+            eventText.SetActive(true);
+
         if (gameManager.GetUserStatus() != UserStatus.InPause)
         {
             targetTime -= Time.deltaTime;
@@ -187,8 +188,8 @@ public class CharacterInputHandler : MonoBehaviour
                             setEmoteWheel();
                         }
 
-                    //K key down(PresentationMode)
-                    if (presentationCamera != null)
+                        //K key down(PresentationMode)
+                        if (presentationCamera != null)
                         {
                             if (inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null)
                             {
@@ -207,8 +208,8 @@ public class CharacterInputHandler : MonoBehaviour
                                     playerCamera.enabled = false;
                                     eventText.SetActive(false);
                                     DeactivateALL();
-
-                                }
+                                    gameManager.SetUserStatus(UserStatus.InGame);
+                            }
 
                                 onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
                             }
@@ -220,9 +221,9 @@ public class CharacterInputHandler : MonoBehaviour
                         if (Input.GetKeyDown(KeyCode.Escape) && !escPul)
                         {
                             setJuego();
-                        if(changeRoomPanel != null)
-                          changeRoomPanel.SetActive(false);
 
+                            if(changeRoomPanel != null)
+                              changeRoomPanel.SetActive(false);
                         }
                     /*
                     if (Input.GetKeyDown(KeyCode.B) && !escPul)
