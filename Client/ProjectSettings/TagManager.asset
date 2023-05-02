@@ -9,6 +9,7 @@ TagManager:
   - PresentationZone
   - Interact
   - CanvasGPT
+  - Paint
   layers:
   - Default
   - TransparentFX

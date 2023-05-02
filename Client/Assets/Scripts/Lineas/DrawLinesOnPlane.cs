@@ -30,6 +30,13 @@ public class DrawLinesOnPlane : MonoBehaviour
                 linePoints.Add(hit.point);
             }
         }
+        if ((Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)) && Input.GetKey(KeyCode.Z))
+        {
+            if (linePoints.Count > 0)
+            {
+                linePoints.RemoveAt(linePoints.Count - 1);
+            }
+        }
 
         lineRenderer.positionCount = linePoints.Count;
         lineRenderer.widthMultiplier = lineWidth;
