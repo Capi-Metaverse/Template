@@ -19,9 +19,9 @@ public class SC_FPSController : MonoBehaviour
     public float lookXLimit = 45.0f;
     public float sensitivity;
     public Sprite imagenPrueba;
-    private bool isFalling;
+  
     private bool isRunning;
-    private bool isWaving;
+
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
@@ -35,6 +35,8 @@ public class SC_FPSController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
     InputManager inputManager;
+
+    public PauseMenu pauseMenu;
 
     public GameObject eventText;
 
@@ -74,9 +76,9 @@ public class SC_FPSController : MonoBehaviour
             //RaycastObject
             else if (raycastObject != hit.transform.gameObject)
             {
-                //raycastObject.GetComponent<Outline>().enabled = false;
+           
                 raycastObject = hit.transform.gameObject;
-                //hit.transform.gameObject.GetComponent<Outline>().enabled = true;
+             
                 eventText.SetActive(true);
                 HittingObject = true;
 
@@ -126,6 +128,13 @@ public class SC_FPSController : MonoBehaviour
             moveDirection.y = movementDirectionY;
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //Open pause menu and disable this
+            pauseMenu.enabled = true;
+            pauseMenu.OpenMenu();
+
+        }
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
         // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
         // as an acceleration (ms^-2)
