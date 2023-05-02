@@ -14,17 +14,18 @@ public class DrawLinesOnPlane : MonoBehaviour
     {
         lineRenderer = gameObject.AddComponent<LineRenderer>();
         lineRenderer.material = lineMaterial;
-        lineRenderer.widthMultiplier = lineWidth ;
+        lineRenderer.widthMultiplier = lineWidth;
         lineRenderer.positionCount = 0;
         lineRenderer.useWorldSpace = true;
     }
- 
+
     void Update()
     {
+      
         if (Input.GetMouseButton(0))
         {
             RaycastHit hit;
-            
+
             if (Physics.Raycast(Camera.ScreenPointToRay(Input.mousePosition), out hit, float.PositiveInfinity, planeLayer) && hit.transform.tag == "Paint")
             {
                 linePoints.Add(hit.point);
@@ -42,5 +43,9 @@ public class DrawLinesOnPlane : MonoBehaviour
         lineRenderer.widthMultiplier = lineWidth;
         lineRenderer.SetPositions(linePoints.ToArray());
 
+    }
+    public void Clear()
+    {
+        linePoints.Clear();
     }
 }
