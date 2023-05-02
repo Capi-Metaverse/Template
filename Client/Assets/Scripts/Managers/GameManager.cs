@@ -82,7 +82,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     private string userID;
 
 
-    private string mapName;
+    private string roomName; //This is the RoomName
     public int playerCount;
     public string currentMap;
 
@@ -253,7 +253,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
         playerCount = 10;
         currentMap = "LobbyOficial";
-        mapName = props.RoomName.ToUpper();
+        roomName = props.RoomName.ToUpper();
 
         //Maybe refactor this part Add Player in setPlayerPanel?
 
@@ -358,8 +358,8 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         await Disconnect();
         this.avatarNumber = avatarNumber;
 
-        mapName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
-        mapName = mapName.ToUpper();
+        roomName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
+        roomName = roomName.ToUpper();
         //We change to the new map
         //THIS WILL BE THE LOBBY WHEN IT'S ENDED
         SceneManager.LoadSceneAsync("LobbyOficial");
@@ -371,8 +371,8 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     public async void StartCustomGame(string sessionName, int playerNumber, string map)
     {
         await Disconnect();
-        mapName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
-        mapName = mapName.ToUpper();
+        roomName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
+        roomName = roomName.ToUpper();
         currentMap = map;
         playerCount = playerNumber;
         //We change to the respective map
@@ -382,7 +382,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     public async void JoinCustomGame(string sessionName)
     {
         await Disconnect();
-        mapName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
+        roomName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
         currentMap = "LobbyOficial";   
         playerCount = 4;
         Connect();
@@ -481,14 +481,14 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         this.username = username;
     }
 
-    public string GetMapName()
+    public string GetRoomName()
     {
-        return this.mapName;
+        return this.roomName;
     }
 
-    public void SetMapName(string mapName)
+    public void SetRoomName(string roomName)
     {
-        this.mapName = mapName;
+        this.roomName = roomName;
     }
 
 

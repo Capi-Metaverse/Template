@@ -28,6 +28,7 @@ public class FriendManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI validationMessage;// The validation message
     private FriendList friendList;
 
+    private GameManager gameManager;
     private List<Friend> friends = new List<Friend>();
     private string userId = "";
 
@@ -35,6 +36,7 @@ public class FriendManager : MonoBehaviour
 
     public void Start()
     {
+        gameManager = GameManager.FindInstance();
         friendList = gameObject.GetComponent<FriendList>();
     }
 
@@ -233,4 +235,40 @@ public class FriendManager : MonoBehaviour
         panelMessageCheckName.SetActive(false);
         validationMessage.text = " ";
     }
+
+    //Called when the button is pressed from the UI
+    public void Invite()
+    {
+        Debug.Log("Sending message invitation...");
+        SendMessageInvitation("6452852E8B630026", gameManager.GetRoomName());//Cloudscript
+    }
+
+    //The message is the room name to enter if accepted, the playerID is the player invited
+    public void SendMessageInvitation(string playerId, string message)
+    {
+        var request = new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "sendMessageInvitation",
+            FunctionParameter = new
+            {
+                playerId = playerId,
+                message = message
+            }
+        };
+
+        PlayFabClientAPI.ExecuteCloudScript(request, OnSendMessageInvitationSuccess, OnSendMessageInvitationFailure);
+    }
+
+    private void OnSendMessageInvitationSuccess(ExecuteCloudScriptResult result)
+    {
+        Debug.Log("Message Invitation sent successfully!");
+        Debug.Log(result.FunctionResult.ToString());
+        Debug.Log(result.Error.Message);
+    }
+
+    private void OnSendMessageInvitationFailure(PlayFabError error)
+    {
+        Debug.LogError("Failed to send message Invitation: " + error.GenerateErrorReport());
+    }
+
 }

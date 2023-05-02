@@ -12,7 +12,8 @@ public class FriendList : MonoBehaviour {
     [SerializeField] private GameObject FriendItemPrefabSettings;
     [SerializeField] private GameObject FriendListSettings;
 
-   private FriendManager FriendManager;
+    private GameManager gameManager;
+    private FriendManager FriendManager;
     private FriendItem FriendItem;
     private FriendRequest playerRequest;
     private List<Friend> friends;
@@ -26,6 +27,7 @@ public class FriendList : MonoBehaviour {
 
     void Start()
     {
+        gameManager = GameManager.FindInstance();
         FriendManager = gameObject.GetComponent<FriendManager>();
         friends = FriendManager.Friends;
     }

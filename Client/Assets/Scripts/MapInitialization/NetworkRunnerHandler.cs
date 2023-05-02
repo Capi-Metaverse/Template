@@ -49,7 +49,7 @@ public class NetworkRunnerHandler : MonoBehaviour
 
          SessionProps props = new SessionProps();
         props.StartMap = gameManager.currentMap;
-        props.RoomName = gameManager.GetMapName();
+        props.RoomName = gameManager.GetRoomName();
         props.AllowLateJoin = true;
         props.PlayerLimit = gameManager.playerCount;
 
@@ -59,7 +59,7 @@ public class NetworkRunnerHandler : MonoBehaviour
             Address = address,
             Scene = scene,
             CustomLobbyName = "Lobby_Play",
-            SessionName = gameManager.GetMapName() + "-" + map,
+            SessionName = gameManager.GetRoomName() + "-" + map,
             PlayerCount = gameManager.playerCount,
             Initialized = initialized,
             SceneManager = sceneManager,

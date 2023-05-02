@@ -20,7 +20,7 @@ public class PauseMenuSettings : MonoBehaviour
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
         Pause = this.gameObject;
         gameManager = GameManager.FindInstance();
-        roomName.text = gameManager.GetMapName();
+        roomName.text = gameManager.GetRoomName();
     }
 
     //Method to disconnect the User
