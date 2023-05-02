@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class DrawLinesOnPlane : MonoBehaviour
 {
@@ -21,7 +22,11 @@ public class DrawLinesOnPlane : MonoBehaviour
 
     void Update()
     {
-      
+        if (Input.GetMouseButtonUp(0))
+        {
+            linePoints.Add(Vector3.zero); // Add a null point to separate line segments
+        }
+
         if (Input.GetMouseButton(0))
         {
             RaycastHit hit;
@@ -41,11 +46,25 @@ public class DrawLinesOnPlane : MonoBehaviour
 
         lineRenderer.positionCount = linePoints.Count;
         lineRenderer.widthMultiplier = lineWidth;
-        lineRenderer.SetPositions(linePoints.ToArray());
 
+        Vector3[] nonNullPoints = new Vector3[linePoints.Count];
+        int i = 0;
+        foreach (Vector3 point in linePoints)
+        {
+            if (point != null)
+            {
+                nonNullPoints[i] = point;
+                i++;
+            }
+        }
+        lineRenderer.SetPositions(nonNullPoints);
     }
+
     public void Clear()
     {
         linePoints.Clear();
     }
 }
+
+
+
