@@ -1,10 +1,20 @@
+using ExitGames.Client.Photon.StructWrapping;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum DialogueStatus
+{
+    InDialogue,
+    InGame
+}
+
 public class Dialogue : MonoBehaviour
 {
+    private DialogueStatus dialogueStatus = DialogueStatus.InDialogue;
+    public DialogueStatus DialogueStatus { get => dialogueStatus; set => dialogueStatus = value; }
+
     public TextMeshProUGUI textComponent;
     public string[] lines;
     public float textSpeed;
@@ -25,7 +35,6 @@ public class Dialogue : MonoBehaviour
             {
                 NextLine();
             }
-
             else
             {
                 StopAllCoroutines();
@@ -34,7 +43,7 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    void StartDialogue()
+    public void StartDialogue()
     {
         index = 0;
         StartCoroutine(TypeLine());
@@ -61,6 +70,7 @@ public class Dialogue : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+            dialogueStatus = DialogueStatus.InGame;
         }
     }
 }
