@@ -1,8 +1,11 @@
-
 using UnityEngine;
-
 using TMPro;
 
+public enum GameStatus
+{
+    InPause,
+    InGame,
+}
 
 [RequireComponent(typeof(CharacterController))]
 
@@ -51,8 +54,6 @@ public class SC_FPSController : MonoBehaviour
     public GameObject eventText;
     public GameObject eventTextK;
 
-    
-    
 
     /*-----------------------METHODS------------------------------*/
     void Start()
@@ -62,12 +63,6 @@ public class SC_FPSController : MonoBehaviour
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        //PlayerUIPrefab
-        //micro = GameObject.Find("PlayerUIPrefab").transform.GetChild(0).gameObject;
-        //scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;
-        //eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject;
-        //eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
 
     }
 
@@ -148,8 +143,11 @@ public class SC_FPSController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+
             //Open pause menu and disable this
             pauseMenu.SetActive(true);
+            micro.SetActive(false);
+            scope.SetActive(false);
 
         }
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below

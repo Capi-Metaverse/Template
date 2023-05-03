@@ -21,7 +21,6 @@ public class MoveTabsTutorial : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         TabTabPlayers.SetActive(true);
         TabPanel.SetActive(true);
         TabPanelKeys.SetActive(false);
