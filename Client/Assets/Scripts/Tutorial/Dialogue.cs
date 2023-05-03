@@ -48,6 +48,8 @@ public class Dialogue : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        fpsController.micro.SetActive(false);
+        fpsController.scope.SetActive(false);
         fpsController.enabled = false;
         index = 0;
         StartCoroutine(TypeLine());
@@ -77,6 +79,8 @@ public class Dialogue : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             gameObject.SetActive(false);
             dialogueStatus = DialogueStatus.InGame;
+            fpsController.micro.SetActive(true);
+            fpsController.scope.SetActive(true);
             fpsController.enabled = true;
         }
     }

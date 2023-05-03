@@ -38,10 +38,21 @@ public class SC_FPSController : MonoBehaviour
 
     public PauseMenu pauseMenu;
 
-    public GameObject eventText;
-
     //Detect if Certain Object is being hit
     bool HittingObject = false;
+
+    //Presentation
+    public Camera presentationCamera = null;
+    public bool onPresentationCamera = false;
+
+    //PlayerUIPrefab
+    public GameObject scope;
+    public GameObject micro;//Actually this is the microphone in game
+    public GameObject eventText;
+    public GameObject eventTextK;
+
+    
+    
 
     /*-----------------------METHODS------------------------------*/
     void Start()
@@ -51,6 +62,13 @@ public class SC_FPSController : MonoBehaviour
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        //PlayerUIPrefab
+        //micro = GameObject.Find("PlayerUIPrefab").transform.GetChild(0).gameObject;
+        //scope = GameObject.Find("PlayerUIPrefab").transform.GetChild(1).gameObject;
+        //eventText = GameObject.Find("PlayerUIPrefab").transform.GetChild(2).gameObject;
+        //eventTextK = GameObject.Find("PlayerUIPrefab").transform.GetChild(3).gameObject;
+
     }
 
     void Update()
@@ -159,5 +177,28 @@ public class SC_FPSController : MonoBehaviour
 
     }
 
-    
+    public void setPresentationCamera(Camera camera)
+    {
+
+        //When leaving presentation mode?
+        if (camera == null)
+        {
+            //We deactivate the camera
+            presentationCamera = null;
+
+            //We deactivate UI
+            eventTextK.SetActive(false);
+        }
+
+        else
+        {
+            //We obtain the camera
+            presentationCamera = camera;
+
+            //We activate UI
+            eventTextK.SetActive(true);
+        }
+    }
+
+
 }
