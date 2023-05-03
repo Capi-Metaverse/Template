@@ -24,7 +24,7 @@ public class DrawLinesOnPlane : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            linePoints.Add(Vector3.zero); // Add a null point to separate line segments
+            linePoints.Add(Vector3.zero);
         }
 
         if (Input.GetMouseButton(0))

@@ -67,6 +67,7 @@ public class EventWheel : NetworkTransform
         }
         else
         {
+            if (animator == null) { animator = this.gameObject.transform.parent.GetComponentInChildren<Animator>(); };
             animator.SetInteger("AnimationWheel", (int)animationToPlay);
         }
     }
