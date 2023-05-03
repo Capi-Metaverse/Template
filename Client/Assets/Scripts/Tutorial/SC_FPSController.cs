@@ -36,7 +36,7 @@ public class SC_FPSController : MonoBehaviour
     public bool canMove = true;
     InputManager inputManager;
 
-    public PauseMenu pauseMenu;
+    public GameObject pauseMenu;
 
     //Detect if Certain Object is being hit
     bool HittingObject = false;
@@ -149,8 +149,7 @@ public class SC_FPSController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             //Open pause menu and disable this
-            pauseMenu.enabled = true;
-            pauseMenu.OpenMenu();
+            pauseMenu.SetActive(true);
 
         }
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
