@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using static System.Windows.Forms.LinkLabel;
@@ -19,7 +20,7 @@ public enum TutorialStatus
 public class TriggerDetector : MonoBehaviour
 {
 
-    [SerializeField]private Canvas canvasDialogue;
+    [SerializeField] private Canvas canvasDialogue;
     private Dialogue dialogueScript;
 
     private TutorialStatus tutorialStatus = TutorialStatus.Movement;
@@ -27,8 +28,15 @@ public class TriggerDetector : MonoBehaviour
     public TutorialStatus TutorialStatus { get => tutorialStatus; set => tutorialStatus = value; }
 
     //Set flags dictionary
-    private Dictionary<string,bool> flags = new Dictionary<string,bool>();
-    
+    private Dictionary<string, bool> flags = new Dictionary<string, bool>();
+
+    public TMP_Text objective1;
+    public TMP_Text objective2;
+    public TMP_Text objective3;
+    public TMP_Text objective4;
+
+    public TMP_Text tutorialNumber;
+
     public void Start()
     {
         dialogueScript = canvasDialogue.GetComponentInChildren<Dialogue>();
@@ -54,23 +62,52 @@ public class TriggerDetector : MonoBehaviour
             {
                 case TutorialStatus.Movement:
                     {
-                        if (Input.GetKey("w")) flags["W"] = true;
-                        if (Input.GetKey("a")) flags["A"] = true;
-                        if (Input.GetKey("s")) flags["S"] = true;
-                        if (Input.GetKey("d")) flags["D"] = true;
+                        if (Input.GetKey("w")) { flags["W"] = true; objective1.color = Color.green; }
+                        if (Input.GetKey("a"))
+                        {
+                            flags["A"] = true; objective3.color = Color.green;
+                        }
+                        if (Input.GetKey("s"))
+                        {
+                            flags["S"] = true; objective2.color = Color.green;
+                        }
+                        if (Input.GetKey("d")) { flags["D"] = true; objective4.color = Color.green; }
 
                         if (flags["W"] && flags["A"] && flags["S"] && flags["D"])
+
                         {
-                            RestartDialogue(TutorialStatus.Jumping,new string[2] { "Hello again", "Press Space to Jump" });
+                            objective1.text = "";
+                            objective1.color = Color.black;
+                            objective1.text = "Press space to jump.";
+                            tutorialNumber.text = "2";
+                            objective2.text = "";
+                            objective3.text = "";
+                            objective4.text = "";
+                            RestartDialogue(TutorialStatus.Jumping, new string[2] { "Congratulations! In the metaverse you can jump too.", "Press Space to Jump" });
+                           
                         }
                         break;
                     }
                 case TutorialStatus.Jumping:
                     {
-                        if (Input.GetKey("space")) {
+                        if (!this.gameObject.GetComponent<CharacterController>().isGrounded)
+                        {
                             flags["Space"] = true;
-                            RestartDialogue(TutorialStatus.Interaction, new string[2] { "Hello again again", "Go near a lamp and press e to interact with it" });
-                        };
+                            objective1.color = Color.green;
+
+                 
+                           
+                        }
+                        else
+                        {
+                            if (flags["Space"] && this.gameObject.GetComponent<CharacterController>().isGrounded)
+                            {
+                                RestartDialogue(TutorialStatus.Interaction, new string[2] { "Hello again again", "Go near a lamp and press e to interact with it" });
+                                objective1.text = "";
+                                objective1.color = Color.black;
+                                objective1.text = "Press e with an interactable object.";
+                            }
+                        }
                         break;
                     }
                 case TutorialStatus.Interaction:
@@ -78,7 +115,12 @@ public class TriggerDetector : MonoBehaviour
                         if (Input.GetKey("e"))
                         {
                             flags["E"] = true;
+                            objective1.color = Color.green;
                             RestartDialogue(TutorialStatus.Voice, new string[2] { "Hello again again again", "Press M to mute and unmute the voice chat" });
+                            objective1.text = "";
+                            objective1.color = Color.black;
+                            objective1.text = "Press m to activate the chat.";
+
                         };
                         break;
                     }
@@ -87,7 +129,11 @@ public class TriggerDetector : MonoBehaviour
                         if (Input.GetKey("m"))
                         {
                             flags["M"] = true;
+                            objective1.color = Color.green;
                             RestartDialogue(TutorialStatus.Settings, new string[2] { "Hello again again again again", "Press ESC to show the Pause and Settings Menus" });
+                            objective1.text = "";
+                            objective1.color = Color.black;
+                            objective1.text = "Press Escape to open the pause menu";
                         };
                         break;
                     }
@@ -133,7 +179,7 @@ public class TriggerDetector : MonoBehaviour
         }
     }
 
-    public void RestartDialogue(TutorialStatus tutorialStatusValue,string[] lines)
+    public void RestartDialogue(TutorialStatus tutorialStatusValue, string[] lines)
     {
         tutorialStatus = tutorialStatusValue;
         dialogueScript.DialogueStatus = DialogueStatus.InDialogue;
@@ -141,7 +187,8 @@ public class TriggerDetector : MonoBehaviour
         dialogueScript.lines = lines;
         dialogueScript.textComponent.text = string.Empty;
         dialogueScript.gameObject.SetActive(true);
+
         dialogueScript.StartDialogue();
     }
-    
+
 }

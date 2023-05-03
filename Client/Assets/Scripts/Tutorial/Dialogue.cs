@@ -16,6 +16,7 @@ public class Dialogue : MonoBehaviour
     public DialogueStatus DialogueStatus { get => dialogueStatus; set => dialogueStatus = value; }
 
     public TextMeshProUGUI textComponent;
+    public SC_FPSController fpsController;
     public string[] lines;
     public float textSpeed;
     private int index;
@@ -45,6 +46,9 @@ public class Dialogue : MonoBehaviour
 
     public void StartDialogue()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        fpsController.enabled = false;
         index = 0;
         StartCoroutine(TypeLine());
     }
@@ -69,8 +73,11 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             gameObject.SetActive(false);
             dialogueStatus = DialogueStatus.InGame;
+            fpsController.enabled = true;
         }
     }
 }
