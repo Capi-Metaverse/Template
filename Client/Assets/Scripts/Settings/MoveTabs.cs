@@ -51,8 +51,7 @@ public class MoveTabs : MonoBehaviour
     {
 
         //We initialize the player list
-        PlayerList playerList = GameObject.Find("TabPlayer").GetComponent<PlayerList>();
-        playerList.ListPlayers();
+    
 
         TabPanel.SetActive(false);
       

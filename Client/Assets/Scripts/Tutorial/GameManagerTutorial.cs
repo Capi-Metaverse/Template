@@ -8,6 +8,7 @@ public enum TutorialStatus
     Jumping,
     Interaction,
     Voice,
+    PreSettings,
     Settings,
     Presentation,
     Animations,
@@ -29,7 +30,7 @@ public enum GameStatus
 public class GameManagerTutorial : MonoBehaviour
 {
     //TutorialStatus
-    private TutorialStatus tutorialStatus = TutorialStatus.Movement;
+    [SerializeField]  private TutorialStatus tutorialStatus = TutorialStatus.Movement;
     public TutorialStatus TutorialStatus { get => tutorialStatus; set => tutorialStatus = value; }
 
     //DialogueStatus

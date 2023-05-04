@@ -116,14 +116,14 @@ public class TriggerDetector : MonoBehaviour
                         {
                             flags["M"] = true;
                             objective1.color = Color.green;
-                            RestartDialogue(TutorialStatus.Settings, new string[2] { "Hello again again again again", "Press ESC to show the Pause and Settings Menus" });
+                            RestartDialogue(TutorialStatus.PreSettings, new string[2] { "Hello again again again again", "Press ESC to show the Pause and Settings Menus" });
                             objective1.text = "";
                             objective1.color = Color.black;
                             objective1.text = "Press Escape to open the pause menu";
                         };
                         break;
                     }
-                case TutorialStatus.Settings:
+                case TutorialStatus.PreSettings:
                     {
                         if (Input.GetKey("escape"))
                         {

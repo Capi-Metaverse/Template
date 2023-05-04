@@ -1,6 +1,17 @@
 
+using System.Windows.Forms;
 using UnityEngine;
+using static System.Windows.Forms.LinkLabel;
 
+public enum SettingsStatus
+{
+    None,
+   Settings,
+   Keys,
+   Friends,
+   Players,
+    Finished
+}
 
 public class MoveTabsTutorial : MonoBehaviour
 {
@@ -16,6 +27,8 @@ public class MoveTabsTutorial : MonoBehaviour
 
     private GameObject Settings;
     private GameObject Pause;
+
+    public SettingsStatus settingsStatus = SettingsStatus.None;
 
     //Maybe improvement in player keys
     public string[] PlayerKeys;
@@ -50,8 +63,6 @@ public class MoveTabsTutorial : MonoBehaviour
     {
 
         //We initialize the player list
-        PlayerList playerList = GameObject.Find("TabPlayer").GetComponent<PlayerList>();
-        playerList.ListPlayers();
 
         TabPanel.SetActive(false);
 
@@ -82,18 +93,82 @@ public class MoveTabsTutorial : MonoBehaviour
     {
         //Dialogo settings
 
+        string[] lines = new string[1] { "This is the settings menu. You can change some options like Volume or Sensivity." };
+        dialogueScript.lines = lines;
+        dialogueScript.textComponent.text = string.Empty;
+        dialogueScript.gameObject.SetActive(true);
+        settingsStatus = SettingsStatus.Settings;
+        dialogueScript.StartDialogue();
         //Mover tab
-        ChangeToPanelKeys();
+    }
+
+    public void NextTutorial()
+    {
+        settingsStatus++;
+
+        switch (settingsStatus)
+        {
+            case SettingsStatus.Keys:
+                {
+                    ChangeToPanelKeys();
+
+                    string[] lines = new string[1] { "This is the Key menu. You can change the input keys from here." };
+                    dialogueScript.lines = lines;
+                    dialogueScript.textComponent.text = string.Empty;
+                    dialogueScript.gameObject.SetActive(true);
+
+                    dialogueScript.StartDialogue();
+                    break;
+                }
+
+            case SettingsStatus.Friends:
+                {
+                    ChangeToPanelFriends();
+
+                    string[] lines = new string[1] { "This is the Friends menu. You can see the friends that you add here." };
+                    dialogueScript.lines = lines;
+                    dialogueScript.textComponent.text = string.Empty;
+                    dialogueScript.gameObject.SetActive(true);
+
+                    dialogueScript.StartDialogue();
+                    break;
+                }
+
+            case SettingsStatus.Players:
+                {
+                    ChangeToPanelPlayer();
+                    string[] lines = new string[1] { "This is the Player menu. You can see the list of players here." };
+                    dialogueScript.lines = lines;
+                    dialogueScript.textComponent.text = string.Empty;
+                    dialogueScript.gameObject.SetActive(true);
+
+                    dialogueScript.StartDialogue();
+                    break;
+                }
+
+            case SettingsStatus.Finished:
+                {
+                    Pause.SetActive(true);
+                    Settings.SetActive(false);
+                    break;
+                }
+        }
+    }
+        
+       
+        /*
         //Dialogo Keys
 
         //mover tab
-        ChangeToPanelFriends();
+       
 
         //...
 
         ChangeToPanelPlayer();
 
+        
+        */
         //Volver al controller
-    }
+    
 
 }

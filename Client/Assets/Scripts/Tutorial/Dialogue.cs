@@ -11,6 +11,7 @@ public class Dialogue : MonoBehaviour
     private GameManagerTutorial gameManager;
     public TextMeshProUGUI textComponent;
     public SC_FPSController fpsController;
+    public MoveTabsTutorial moveTabs;
     public string[] lines;
     public float textSpeed;
     private int index;
@@ -71,6 +72,7 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
+
             if (gameManager.TutorialStatus != TutorialStatus.Settings)
             {
                 Cursor.visible = false;
@@ -84,7 +86,14 @@ public class Dialogue : MonoBehaviour
             else
             {
                 gameObject.SetActive(false);
+                if(moveTabs.settingsStatus >= SettingsStatus.Settings)
+                moveTabs.NextTutorial();
+
+                
             }
+
+              
+          
         }
     }
 }

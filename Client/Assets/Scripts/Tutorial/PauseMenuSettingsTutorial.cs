@@ -59,7 +59,7 @@ public class PauseMenuSettingsTutorial : MonoBehaviour
         {
             Pause.SetActive(false);
             Settings.SetActive(true);
-            Settings.GetComponent<MoveTabsTutorial>().StartTutorial();
+            Settings.GetComponentInChildren<MoveTabsTutorial>().StartTutorial();
             isTutorial = false;
         }
 

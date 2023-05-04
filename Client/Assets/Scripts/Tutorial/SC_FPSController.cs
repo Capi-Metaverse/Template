@@ -138,18 +138,23 @@ public class SC_FPSController : MonoBehaviour
             moveDirection.y = movementDirectionY;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && (gameManager.TutorialStatus == TutorialStatus.Settings || gameManager.TutorialStatus == TutorialStatus.Finished) )
+        if (Input.GetKeyDown(KeyCode.Escape) && (gameManager.TutorialStatus == TutorialStatus.PreSettings || gameManager.TutorialStatus == TutorialStatus.Finished) )
         {
 
             //Open pause menu and disable this
             gameManager.GameStatus = GameStatus.InPause;
+            
             pauseMenu.SetActive(true);
             micro.SetActive(false);
             scope.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            if (gameManager.TutorialStatus == TutorialStatus.Settings) pauseMenu.GetComponent<PauseMenuSettingsTutorial>().StartTutorial();
+            if (gameManager.TutorialStatus == TutorialStatus.PreSettings)
+            {
+                gameManager.TutorialStatus = TutorialStatus.Settings;
+                pauseMenu.GetComponent<PauseMenuSettingsTutorial>().StartTutorial();
+            }
 
             this.enabled = false;
 
