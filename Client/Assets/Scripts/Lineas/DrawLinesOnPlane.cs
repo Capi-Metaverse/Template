@@ -1,51 +1,57 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
+using UnityEngine.UI;
 
 public class DrawLinesOnPlane : MonoBehaviour
 {
     public Material lineMaterial;
-    private float lineWidth = 0.1f;
     public LayerMask planeLayer;
+    public Camera camera;
+    public Slider sliderGross;
+
+    private float lineWidth = 0.05f;
+    private float gross = 1;
     private List<Vector3> linePoints = new List<Vector3>();
-    private LineRenderer lineRenderer;
-    public Camera Camera;
+    private LineRenderer currentLineRenderer;
 
     void Start()
     {
-        lineRenderer = gameObject.AddComponent<LineRenderer>();
-        lineRenderer.material = lineMaterial;
-        lineRenderer.widthMultiplier = lineWidth;
-        lineRenderer.positionCount = 0;
-        lineRenderer.useWorldSpace = true;
+        CreateNewLineRenderer();
     }
 
     void Update()
     {
         if (Input.GetMouseButtonUp(0))
         {
-            linePoints.Add(Vector3.zero);
+            CreateNewLineRenderer();
         }
 
         if (Input.GetMouseButton(0))
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(Camera.ScreenPointToRay(Input.mousePosition), out hit, float.PositiveInfinity, planeLayer) && hit.transform.tag == "Paint")
+            if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit, float.PositiveInfinity, planeLayer) && hit.transform.tag == "Paint")
             {
                 linePoints.Add(hit.point);
             }
         }
         if ((Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)) && Input.GetKey(KeyCode.Z))
         {
-            if (linePoints.Count > 0)
+            int childCount = transform.childCount;
+            Debug.Log(childCount);
+            if (childCount > 0)
             {
-                linePoints.RemoveAt(linePoints.Count - 1);
+                Transform lastChild = transform.GetChild(childCount - 1);
+                Destroy(lastChild.gameObject);
             }
+
         }
 
-        lineRenderer.positionCount = linePoints.Count;
-        lineRenderer.widthMultiplier = lineWidth;
+        currentLineRenderer.positionCount = linePoints.Count;
+        currentLineRenderer.widthMultiplier = lineWidth * gross;
 
         Vector3[] nonNullPoints = new Vector3[linePoints.Count];
         int i = 0;
@@ -57,14 +63,33 @@ public class DrawLinesOnPlane : MonoBehaviour
                 i++;
             }
         }
-        lineRenderer.SetPositions(nonNullPoints);
+        currentLineRenderer.SetPositions(nonNullPoints);
+    }
+
+    private void CreateNewLineRenderer()
+    {
+        GameObject newLineObject = new GameObject("LineRenderer");
+        newLineObject.transform.SetParent(transform);
+        currentLineRenderer = newLineObject.AddComponent<LineRenderer>();
+        currentLineRenderer.material = lineMaterial;
+        currentLineRenderer.widthMultiplier = lineWidth;
+        currentLineRenderer.positionCount = 0;
+        currentLineRenderer.useWorldSpace = true;
+        linePoints.Clear();
     }
 
     public void Clear()
     {
-        linePoints.Clear();
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        CreateNewLineRenderer();
     }
+
+    public void ChangeGross()
+    {
+        gross = sliderGross.value;
+    }
+   
 }
-
-
-
