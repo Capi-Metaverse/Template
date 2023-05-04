@@ -73,47 +73,50 @@ public class SC_FPSController : MonoBehaviour
         sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
         targetTime -= Time.deltaTime;
         //Raycast
-        RaycastHit hit;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rayDistance, LayerMask.GetMask("Interactive")))
+        if (gameManager.TutorialStatus >= TutorialStatus.Interaction)
         {
-            if (raycastObject == null)
+            RaycastHit hit;
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rayDistance, LayerMask.GetMask("Interactive")))
             {
-                raycastObject = hit.transform.gameObject;
-                //raycastObject.gameObject.GetComponent<Outline>().enabled = true;
-                eventText.SetActive(true);
-                HittingObject = true;
+                if (raycastObject == null)
+                {
+                    raycastObject = hit.transform.gameObject;
+                    //raycastObject.gameObject.GetComponent<Outline>().enabled = true;
+                    eventText.SetActive(true);
+                    HittingObject = true;
+                }
+                //RaycastObject
+                else if (raycastObject != hit.transform.gameObject)
+                {
+
+                    raycastObject = hit.transform.gameObject;
+
+                    eventText.SetActive(true);
+                    HittingObject = true;
+
+                }
+                //If the user interacts, activate the event
+                if (Input.GetKey(KeyCode.E) && targetTime <= 0)
+                {
+                    //Cooldown timer
+                    targetTime = 0.5f;
+
+                    //Retrieve Parent Object and call event
+                    GameObject eventObject = hit.transform.gameObject;
+                    eventObject.GetComponent<IMetaEvent>().activate(true);
+                }
             }
-            //RaycastObject
-            else if (raycastObject != hit.transform.gameObject)
+
+            else
             {
-           
-                raycastObject = hit.transform.gameObject;
-             
-                eventText.SetActive(true);
-                HittingObject = true;
 
-            }
-            //If the user interacts, activate the event
-            if (inputManager.GetButtonDown("Interact") && targetTime <= 0)
-            {
-                //Cooldown timer
-                targetTime = 0.5f;
-
-                //Retrieve Parent Object and call event
-                GameObject eventObject = hit.transform.gameObject;
-                eventObject.GetComponent<IMetaEvent>().activate(true);
-            }
-        }
-
-        else
-        {
-
-            if (raycastObject != null)
-            {
-                //raycastObject.GetComponent<Outline>().enabled = false;
-                raycastObject = null;
-                eventText.SetActive(false);
-                HittingObject = false;
+                if (raycastObject != null)
+                {
+                    //raycastObject.GetComponent<Outline>().enabled = false;
+                    raycastObject = null;
+                    eventText.SetActive(false);
+                    HittingObject = false;
+                }
             }
         }
 

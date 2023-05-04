@@ -21,6 +21,8 @@ public class TriggerDetector : MonoBehaviour
     public TMP_Text objective3;
     public TMP_Text objective4;
 
+    private int interaction = 0;
+
     public TMP_Text tutorialNumber;
 
     public void Start()
@@ -91,21 +93,27 @@ public class TriggerDetector : MonoBehaviour
                                 RestartDialogue(TutorialStatus.Interaction, new string[2] { "Hello again again", "Go near a lamp and press e to interact with it" });
                                 objective1.text = "";
                                 objective1.color = Color.black;
-                                objective1.text = "Press e with an interactable object.";
+                                objective1.text = "Press e with an interactable object. 0/2";
                             }
                         }
                         break;
                     }
                 case TutorialStatus.Interaction:
                     {
-                        if (Input.GetKey("e"))
+                        if (Input.GetKeyDown("e"))
                         {
-                            flags["E"] = true;
-                            objective1.color = Color.green;
-                            RestartDialogue(TutorialStatus.Voice, new string[2] { "Hello again again again", "Press M to mute and unmute the voice chat" });
-                            objective1.text = "";
-                            objective1.color = Color.black;
-                            objective1.text = "Press m to activate the chat.";
+                            ++interaction;
+                            Debug.Log(interaction);
+                            objective1.text = "Press e with an interactable object."+ interaction+"/2";
+                            if (interaction == 2) {
+                                flags["E"] = true;
+                                objective1.color = Color.green;
+                                RestartDialogue(TutorialStatus.Voice, new string[2] { "Hello again again again", "Press M to mute and unmute the voice chat" });
+                                objective1.text = "";
+                                objective1.color = Color.black;
+                                objective1.text = "Press m to activate the chat.";
+                            }
+                            
 
                         };
                         break;
