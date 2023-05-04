@@ -3,30 +3,40 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
 
 public class DrawLinesOnPlane : MonoBehaviour
 {
-    public Material lineMaterial;
+    public Material materialLinea;
     public LayerMask planeLayer;
     public Camera camera;
     public Slider sliderGross;
-
     private float lineWidth = 0.05f;
     private float gross = 1;
     private List<Vector3> linePoints = new List<Vector3>();
     private LineRenderer currentLineRenderer;
+    public List<Material> materialsList;
+
 
     void Start()
     {
+        materialLinea = materialsList[0];
         CreateNewLineRenderer();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            CreateNewLineRenderer();
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Paint"))
+            {
+                // Perform action on object with "yourTag"
+                CreateNewLineRenderer();
+            }
         }
 
         if (Input.GetMouseButton(0))
@@ -71,7 +81,7 @@ public class DrawLinesOnPlane : MonoBehaviour
         GameObject newLineObject = new GameObject("LineRenderer");
         newLineObject.transform.SetParent(transform);
         currentLineRenderer = newLineObject.AddComponent<LineRenderer>();
-        currentLineRenderer.material = lineMaterial;
+        currentLineRenderer.material = materialLinea;
         currentLineRenderer.widthMultiplier = lineWidth;
         currentLineRenderer.positionCount = 0;
         currentLineRenderer.useWorldSpace = true;
@@ -91,5 +101,13 @@ public class DrawLinesOnPlane : MonoBehaviour
     {
         gross = sliderGross.value;
     }
-   
+
+    public void ChangeYellow()
+    {
+        materialLinea= materialsList[1];
+    }
+
+
+
+
 }
