@@ -38,13 +38,13 @@ public class DrawLinesOnPlane : MonoBehaviour
                 linePoints.Add(hit.point);
             }
         }
-        if ((Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)) && Input.GetKey(KeyCode.Z))
+        if ((Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)) && Input.GetKeyDown(KeyCode.Z))
         {
             int childCount = transform.childCount;
             Debug.Log(childCount);
-            if (childCount > 0)
+            if (childCount > 1)
             {
-                Transform lastChild = transform.GetChild(childCount - 1);
+                Transform lastChild = transform.GetChild(childCount - 2);
                 Destroy(lastChild.gameObject);
             }
 

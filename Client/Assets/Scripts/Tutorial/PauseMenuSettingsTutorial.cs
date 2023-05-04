@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using static System.Windows.Forms.LinkLabel;
 
 
 public class PauseMenuSettingsTutorial : MonoBehaviour
@@ -14,6 +15,10 @@ public class PauseMenuSettingsTutorial : MonoBehaviour
 
     public SC_FPSController controller;
     private GameManagerTutorial gameManager;
+
+    [SerializeField] private Dialogue dialogueScript;
+
+    private bool isTutorial = false;
 
 
     private void Start()
@@ -42,10 +47,37 @@ public class PauseMenuSettingsTutorial : MonoBehaviour
     //Method to open the settings menu
     public void OnClickSettings()
     {
-        //Change visibility of menus
-        Debug.Log("OnClickSettings");
-        Pause.SetActive(false);
-        Settings.SetActive(true);
+        if (isTutorial == false)
+        {
+            //Change visibility of menus
+      
+            Pause.SetActive(false);
+            Settings.SetActive(true);
+        }
+
+        else
+        {
+            Pause.SetActive(false);
+            Settings.SetActive(true);
+            Settings.GetComponent<MoveTabsTutorial>().StartTutorial();
+            isTutorial = false;
+        }
+
+    }
+
+    public void StartTutorial()
+    {
+        //Diálogo
+        string[] lines = new string[2] { "This is the pause menu. You can disconnect from the application here.", "You can enter the settings menu from here too! Click on the gear icon in the top of the panel." };
+        dialogueScript.lines = lines;
+        dialogueScript.textComponent.text = string.Empty;
+        dialogueScript.gameObject.SetActive(true);
+
+        dialogueScript.StartDialogue();
+
+
+
+        isTutorial = true;
 
     }
 
@@ -59,8 +91,8 @@ public class PauseMenuSettingsTutorial : MonoBehaviour
         controller.gameObject.SetActive(true);
         controller.micro.SetActive(true);
         controller.scope.SetActive(true);
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
     }
 }

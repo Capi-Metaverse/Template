@@ -128,7 +128,7 @@ public class TriggerDetector : MonoBehaviour
                         if (Input.GetKey("escape"))
                         {
                             flags["ESC"] = true;
-                            RestartDialogue(TutorialStatus.Presentation, new string[2] { "Hello again again again again again", "Go upstairs and interact with the podium to view a presentation" });
+                            //RestartDialogue(TutorialStatus.Presentation, new string[2] { "Hello again again again again again", "Go upstairs and interact with the podium to view a presentation" });
                         };
                         break;
                     }

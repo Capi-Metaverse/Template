@@ -2480,7 +2480,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35078
+  m_Name: pb_Mesh38294
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9793,8 +9793,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1006334350}
   - component: {fileID: 1006334353}
-  - component: {fileID: 1006334352}
-  - component: {fileID: 1006334351}
   m_Layer: 0
   m_Name: CameraObject
   m_TagString: Untagged
@@ -9817,26 +9815,6 @@ Transform:
   m_Father: {fileID: 1138596541}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1006334351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006334349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97301419d97e7d439a1afa882bb6a02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!81 &1006334352
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006334349}
-  m_Enabled: 0
 --- !u!20 &1006334353
 Camera:
   m_ObjectHideFlags: 0
@@ -10273,6 +10251,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2095543376414275620, guid: 556983b212072f64985b2e370fc7bff7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1039993762}
+    - target: {fileID: 2095543376414275620, guid: 556983b212072f64985b2e370fc7bff7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickSettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095543376414275620, guid: 556983b212072f64985b2e370fc7bff7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenuSettingsTutorial, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2095543376706389882, guid: 556983b212072f64985b2e370fc7bff7, type: 3}
       propertyPath: m_Name
       value: PauseMenu
@@ -10365,6 +10355,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2095543376944702584, guid: 556983b212072f64985b2e370fc7bff7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095543376944702590, guid: 556983b212072f64985b2e370fc7bff7, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804644339984749410, guid: 556983b212072f64985b2e370fc7bff7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6010165624540977102, guid: 556983b212072f64985b2e370fc7bff7, type: 3}
       propertyPath: m_text
       value: Tutorial
@@ -10390,6 +10392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 5874118889009996889}
+  dialogueScript: {fileID: 48820402}
 --- !u!1 &1066139872
 GameObject:
   m_ObjectHideFlags: 0
@@ -26193,6 +26196,7 @@ MonoBehaviour:
   TabPanelFriends: {fileID: 469436030}
   TabTabPlayers: {fileID: 1697925260}
   Lenguages: {fileID: 0}
+  dialogueScript: {fileID: 0}
   PlayerKeys: []
 --- !u!43 &1804209313
 Mesh:
@@ -26364,7 +26368,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35734
+  m_Name: pb_Mesh38956
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

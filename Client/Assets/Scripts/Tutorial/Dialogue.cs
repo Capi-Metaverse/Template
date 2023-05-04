@@ -71,13 +71,20 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            gameObject.SetActive(false);
-            gameManager.DialogueStatus = DialogueStatus.InGame;
-            fpsController.micro.SetActive(true);
-            fpsController.scope.SetActive(true);
-            fpsController.enabled = true;
+            if (gameManager.TutorialStatus != TutorialStatus.Settings)
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                gameObject.SetActive(false);
+                gameManager.DialogueStatus = DialogueStatus.InGame;
+                fpsController.micro.SetActive(true);
+                fpsController.scope.SetActive(true);
+                fpsController.enabled = true;
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

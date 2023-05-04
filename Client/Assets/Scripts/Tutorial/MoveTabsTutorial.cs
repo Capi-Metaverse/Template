@@ -11,6 +11,8 @@ public class MoveTabsTutorial : MonoBehaviour
     [SerializeField] private GameObject TabTabPlayers;
     [SerializeField] private GameObject Lenguages;
 
+    [SerializeField] private Dialogue dialogueScript;
+
 
     private GameObject Settings;
     private GameObject Pause;
@@ -74,6 +76,24 @@ public class MoveTabsTutorial : MonoBehaviour
     {
         Pause.SetActive(true);
         Settings.SetActive(false);
+    }
+
+    public void StartTutorial()
+    {
+        //Dialogo settings
+
+        //Mover tab
+        ChangeToPanelKeys();
+        //Dialogo Keys
+
+        //mover tab
+        ChangeToPanelFriends();
+
+        //...
+
+        ChangeToPanelPlayer();
+
+        //Volver al controller
     }
 
 }
