@@ -1,11 +1,6 @@
 using UnityEngine;
 using TMPro;
 
-public enum GameStatus
-{
-    InPause,
-    InGame,
-}
 
 [RequireComponent(typeof(CharacterController))]
 
@@ -53,11 +48,13 @@ public class SC_FPSController : MonoBehaviour
     public GameObject micro;//Actually this is the microphone in game
     public GameObject eventText;
     public GameObject eventTextK;
+    private GameManagerTutorial gameManager;
 
 
     /*-----------------------METHODS------------------------------*/
     void Start()
     {
+        gameManager = GameObject.Find("Manager").GetComponent<GameManagerTutorial>();
         characterController = GetComponent<CharacterController>();
 
         // Lock cursor
@@ -145,9 +142,11 @@ public class SC_FPSController : MonoBehaviour
         {
 
             //Open pause menu and disable this
+            gameManager.GameStatus = GameStatus.InPause;
             pauseMenu.SetActive(true);
             micro.SetActive(false);
             scope.SetActive(false);
+            this.enabled = false;
 
         }
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below

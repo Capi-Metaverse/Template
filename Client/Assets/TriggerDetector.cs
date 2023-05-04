@@ -5,27 +5,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static System.Windows.Forms.LinkLabel;
 
-public enum TutorialStatus
-{
-    Movement,
-    Jumping,
-    Interaction,
-    Voice,
-    Settings,
-    Presentation,
-    Animations,
-    Finished
-}
 
 public class TriggerDetector : MonoBehaviour
 {
 
     [SerializeField] private Canvas canvasDialogue;
     private Dialogue dialogueScript;
-
-    private TutorialStatus tutorialStatus = TutorialStatus.Movement;
-
-    public TutorialStatus TutorialStatus { get => tutorialStatus; set => tutorialStatus = value; }
+    private GameManagerTutorial gameManager;
 
     //Set flags dictionary
     private Dictionary<string, bool> flags = new Dictionary<string, bool>();
@@ -39,6 +25,7 @@ public class TriggerDetector : MonoBehaviour
 
     public void Start()
     {
+        gameManager = GameObject.Find("Manager").GetComponent<GameManagerTutorial>();
         dialogueScript = canvasDialogue.GetComponentInChildren<Dialogue>();
 
         //Set dictionary initial values
@@ -56,9 +43,9 @@ public class TriggerDetector : MonoBehaviour
     }
     public void Update()
     {
-        if (dialogueScript.DialogueStatus == DialogueStatus.InGame)
+        if (gameManager.DialogueStatus == DialogueStatus.InGame && gameManager.GameStatus == GameStatus.InGame)
         {
-            switch (tutorialStatus)
+            switch (gameManager.TutorialStatus)
             {
                 case TutorialStatus.Movement:
                     {
@@ -74,7 +61,6 @@ public class TriggerDetector : MonoBehaviour
                         if (Input.GetKey("d")) { flags["D"] = true; objective4.color = Color.green; }
 
                         if (flags["W"] && flags["A"] && flags["S"] && flags["D"])
-
                         {
                             objective1.text = "";
                             objective1.color = Color.black;
@@ -181,8 +167,8 @@ public class TriggerDetector : MonoBehaviour
 
     public void RestartDialogue(TutorialStatus tutorialStatusValue, string[] lines)
     {
-        tutorialStatus = tutorialStatusValue;
-        dialogueScript.DialogueStatus = DialogueStatus.InDialogue;
+        gameManager.TutorialStatus = tutorialStatusValue;
+        gameManager.DialogueStatus = DialogueStatus.InDialogue;
 
         dialogueScript.lines = lines;
         dialogueScript.textComponent.text = string.Empty;

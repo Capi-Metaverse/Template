@@ -4,25 +4,21 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public enum DialogueStatus
-{
-    InDialogue,
-    InGame
-}
 
 public class Dialogue : MonoBehaviour
 {
-    private DialogueStatus dialogueStatus = DialogueStatus.InDialogue;
-    public DialogueStatus DialogueStatus { get => dialogueStatus; set => dialogueStatus = value; }
 
+    private GameManagerTutorial gameManager;
     public TextMeshProUGUI textComponent;
     public SC_FPSController fpsController;
     public string[] lines;
     public float textSpeed;
     private int index;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("Manager").GetComponent<GameManagerTutorial>();
         textComponent.text = string.Empty;
         StartDialogue();
     }
@@ -78,7 +74,7 @@ public class Dialogue : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             gameObject.SetActive(false);
-            dialogueStatus = DialogueStatus.InGame;
+            gameManager.DialogueStatus = DialogueStatus.InGame;
             fpsController.micro.SetActive(true);
             fpsController.scope.SetActive(true);
             fpsController.enabled = true;
