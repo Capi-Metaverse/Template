@@ -1,8 +1,7 @@
 
 using System;
 using UnityEngine;
-
-
+using UnityEngine.SceneManagement;
 
 public class CharacterInputHandler : MonoBehaviour
 {
@@ -40,6 +39,9 @@ public class CharacterInputHandler : MonoBehaviour
     ChatGPTActive chatGPTActive;
 
     public GameObject emoteWheel;
+
+    //Drawing Plane
+    private DrawLinesOnPlane drawingPlaneScript;
 
 
     VoiceManager voiceChat = new VoiceManager();//Manager for the voiceChat, not in scene object
@@ -197,6 +199,13 @@ public class CharacterInputHandler : MonoBehaviour
                                     playerCamera.enabled = true;
                                     eventTextK.SetActive(true);
                                     ActiveALL();
+
+                                    if (SceneManager.GetActiveScene().name == "LobbyOficial")
+                                    {
+                                        Debug.Log("Deactivate Drawline");
+                                        drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
+                                        drawingPlaneScript.enabled = false;
+                                    }
                                 }
 
                                 else
@@ -206,6 +215,13 @@ public class CharacterInputHandler : MonoBehaviour
                                     eventText.SetActive(false);
                                     DeactivateALL();
                                     gameManager.SetUserStatus(UserStatus.InGame);
+
+                                    if (SceneManager.GetActiveScene().name == "LobbyOficial")
+                                    {
+                                        Debug.Log("Activate Drawline");
+                                        if (drawingPlaneScript == null) drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
+                                        drawingPlaneScript.enabled = true;
+                                    }
                             }
 
                                 onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite

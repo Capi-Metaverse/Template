@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DrawLinesOnPlane : MonoBehaviour
 {
-    public Material materialLinea;
+    public Material materialLine;
     public LayerMask planeLayer;
     public Camera camera;
     public Slider sliderGross;
@@ -18,7 +18,7 @@ public class DrawLinesOnPlane : MonoBehaviour
 
     void Start()
     {
-        materialLinea = materialsList[0];
+        materialLine = materialsList[0];
         CreateNewLineRenderer();
     }
 
@@ -78,7 +78,7 @@ public class DrawLinesOnPlane : MonoBehaviour
         GameObject newLineObject = new GameObject("LineRenderer");
         newLineObject.transform.SetParent(transform);
         currentLineRenderer = newLineObject.AddComponent<LineRenderer>();
-        currentLineRenderer.material = materialLinea;
+        currentLineRenderer.material = materialLine;
         currentLineRenderer.widthMultiplier = lineWidth;
         currentLineRenderer.positionCount = 0;
         currentLineRenderer.useWorldSpace = true;
@@ -101,7 +101,7 @@ public class DrawLinesOnPlane : MonoBehaviour
 
     public void ChangeYellow()
     {
-        materialLinea= materialsList[1];
+        materialLine= materialsList[1];
     }
 
 
