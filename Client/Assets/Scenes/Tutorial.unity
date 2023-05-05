@@ -5211,7 +5211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fpsController: {fileID: 5874118889009996889}
-  canvas: {fileID: 0}
+  canvas: {fileID: 851344087}
 --- !u!4 &564503116 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5587160888839851944, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
@@ -10389,7 +10389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 5874118889009996889}
-  dialogueScript: {fileID: 0}
+  dialogueScript: {fileID: 851344092}
 --- !u!1 &1066139872
 GameObject:
   m_ObjectHideFlags: 0

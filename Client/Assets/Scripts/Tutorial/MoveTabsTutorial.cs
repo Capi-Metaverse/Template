@@ -96,7 +96,7 @@ public class MoveTabsTutorial : MonoBehaviour
         string[] lines = new string[1] { "This is the settings menu. You can change some options like Volume or Sensivity." };
         dialogueScript.lines = lines;
         dialogueScript.textComponent.text = string.Empty;
-        dialogueScript.gameObject.SetActive(true);
+        dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
         settingsStatus = SettingsStatus.Settings;
         dialogueScript.StartDialogue();
         //Mover tab
@@ -115,7 +115,7 @@ public class MoveTabsTutorial : MonoBehaviour
                     string[] lines = new string[1] { "This is the Key menu. You can change the input keys from here." };
                     dialogueScript.lines = lines;
                     dialogueScript.textComponent.text = string.Empty;
-                    dialogueScript.gameObject.SetActive(true);
+                    dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
 
                     dialogueScript.StartDialogue();
                     break;
@@ -128,7 +128,7 @@ public class MoveTabsTutorial : MonoBehaviour
                     string[] lines = new string[1] { "This is the Friends menu. You can see the friends that you add here." };
                     dialogueScript.lines = lines;
                     dialogueScript.textComponent.text = string.Empty;
-                    dialogueScript.gameObject.SetActive(true);
+                    dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
 
                     dialogueScript.StartDialogue();
                     break;
@@ -140,7 +140,7 @@ public class MoveTabsTutorial : MonoBehaviour
                     string[] lines = new string[1] { "This is the Player menu. You can see the list of players here." };
                     dialogueScript.lines = lines;
                     dialogueScript.textComponent.text = string.Empty;
-                    dialogueScript.gameObject.SetActive(true);
+                    dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
 
                     dialogueScript.StartDialogue();
                     break;

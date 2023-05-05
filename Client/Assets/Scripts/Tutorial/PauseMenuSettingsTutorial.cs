@@ -71,7 +71,7 @@ public class PauseMenuSettingsTutorial : MonoBehaviour
         string[] lines = new string[2] { "This is the pause menu. You can disconnect from the application here.", "You can enter the settings menu from here too! Click on the gear icon in the top of the panel." };
         dialogueScript.lines = lines;
         dialogueScript.textComponent.text = string.Empty;
-        dialogueScript.gameObject.SetActive(true);
+        dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
 
         dialogueScript.StartDialogue();
 
