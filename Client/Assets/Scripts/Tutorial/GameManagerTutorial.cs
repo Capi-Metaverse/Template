@@ -41,15 +41,4 @@ public class GameManagerTutorial : MonoBehaviour
     private GameStatus gameStatus = GameStatus.InGame;
     public GameStatus GameStatus { get => gameStatus; set => gameStatus = value; }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

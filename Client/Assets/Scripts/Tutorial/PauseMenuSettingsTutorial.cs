@@ -89,8 +89,7 @@ public class PauseMenuSettingsTutorial : MonoBehaviour
         gameManager.GameStatus = GameStatus.InGame;
         Pause.SetActive(false);
         controller.gameObject.SetActive(true);
-        controller.micro.SetActive(true);
-        controller.scope.SetActive(true);
+        controller.playerUI.ShowUI();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 

@@ -21,6 +21,8 @@ public class TriggerDetector : MonoBehaviour
     public TMP_Text objective3;
     public TMP_Text objective4;
 
+    public SC_FPSController fPSController;
+
     private int interaction = 0;
 
     public TMP_Text tutorialNumber;
@@ -98,26 +100,7 @@ public class TriggerDetector : MonoBehaviour
                         }
                         break;
                     }
-                case TutorialStatus.Interaction:
-                    {
-                        if (Input.GetKeyDown("e"))
-                        {
-                            ++interaction;
-                            Debug.Log(interaction);
-                            objective1.text = "Press e with an interactable object."+ interaction+"/2";
-                            if (interaction == 2) {
-                                flags["E"] = true;
-                                objective1.color = Color.green;
-                                RestartDialogue(TutorialStatus.Voice, new string[2] { "Hello again again again", "Press M to mute and unmute the voice chat" });
-                                objective1.text = "";
-                                objective1.color = Color.black;
-                                objective1.text = "Press m to activate the chat.";
-                            }
-                            
-
-                        };
-                        break;
-                    }
+              
                 case TutorialStatus.Voice:
                     {
                         if (Input.GetKey("m"))
@@ -173,14 +156,35 @@ public class TriggerDetector : MonoBehaviour
         }
     }
 
+
+    public void endInteraction()
+    {
+        if(gameManager.TutorialStatus == TutorialStatus.Interaction)
+        {
+            ++interaction;
+            Debug.Log(interaction);
+            objective1.text = "Press e with an interactable object." + interaction + "/2";
+            if (interaction == 2)
+            {
+                flags["E"] = true;
+                objective1.color = Color.green;
+                RestartDialogue(TutorialStatus.Voice, new string[2] { "Hello again again again", "Press M to mute and unmute the voice chat" });
+                objective1.text = "";
+                objective1.color = Color.black;
+                objective1.text = "Press m to activate the chat.";
+            }
+        }
+
+    }
+
     public void RestartDialogue(TutorialStatus tutorialStatusValue, string[] lines)
     {
         gameManager.TutorialStatus = tutorialStatusValue;
         gameManager.DialogueStatus = DialogueStatus.InDialogue;
-
+        fPSController.playerUI.EventTextOff();
         dialogueScript.lines = lines;
         dialogueScript.textComponent.text = string.Empty;
-        dialogueScript.gameObject.SetActive(true);
+        dialogueScript.EnableDialogue();
 
         dialogueScript.StartDialogue();
     }

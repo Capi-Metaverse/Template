@@ -308,6 +308,7 @@ GameObject:
   - component: {fileID: 945855473836507099}
   - component: {fileID: 1793479082914508795}
   - component: {fileID: 2648901319380380238}
+  - component: {fileID: 376108788847319317}
   m_Layer: 5
   m_Name: PlayerUIPrefab
   m_TagString: Untagged
@@ -415,6 +416,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressKey: {fileID: 8464196530687960134}
   pressKeyK: {fileID: 7154364103344299715}
+--- !u!114 &376108788847319317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2809155357823638500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23bacd312ab64cb4db1452ebc7e9ddd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mic: {fileID: 117166805576720267}
+  crosshair: {fileID: 2150685785000368530}
+  eventText: {fileID: 2927807100598743568}
+  presentationText: {fileID: 3281747531893059600}
 --- !u!1 &2927807100598743568
 GameObject:
   m_ObjectHideFlags: 0

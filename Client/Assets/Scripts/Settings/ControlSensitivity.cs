@@ -14,7 +14,7 @@ public class ControlSensitivity : MonoBehaviour
     {
         slider.value = PlayerPrefs.GetFloat("Sensitivity", 1f);
         sensi = slider.value;
-        Debug.Log(sensi);
+        
     }
 
     public void ChangeSlider(float value)

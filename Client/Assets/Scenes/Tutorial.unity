@@ -411,7 +411,6 @@ GameObject:
   - component: {fileID: 48820399}
   - component: {fileID: 48820401}
   - component: {fileID: 48820400}
-  - component: {fileID: 48820402}
   m_Layer: 5
   m_Name: DialogueBox
   m_TagString: Untagged
@@ -478,26 +477,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 48820398}
   m_CullTransparentMesh: 1
---- !u!114 &48820402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48820398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96d8d24c99c62f042ad2a50bf7ac903c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textComponent: {fileID: 866192361}
-  fpsController: {fileID: 5874118889009996889}
-  moveTabs: {fileID: 1799658160}
-  lines:
-  - Hi, I'm your virtual assistant, Adam.
-  - I'm here to help you with the basics of this application.
-  - You can move to any direction with the WASD Keys, Try it!
-  textSpeed: 0.2
 --- !u!1 &76749358
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,22 +870,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &125496786 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2927807100598743568, guid: 6656e180177ec6746ab1e8248c512cfd, type: 3}
-  m_PrefabInstance: {fileID: 998984376}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &125496788 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8464196530687960134, guid: 6656e180177ec6746ab1e8248c512cfd, type: 3}
-  m_PrefabInstance: {fileID: 998984376}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125496786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &159214254
 Mesh:
   m_ObjectHideFlags: 0
@@ -4333,11 +4296,6 @@ MonoBehaviour:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6669665880055044789, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
   m_PrefabInstance: {fileID: 564503113}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &485261370 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 117166805576720267, guid: 6656e180177ec6746ab1e8248c512cfd, type: 3}
-  m_PrefabInstance: {fileID: 998984376}
   m_PrefabAsset: {fileID: 0}
 --- !u!43 &498991737
 Mesh:
@@ -8204,6 +8162,7 @@ GameObject:
   - component: {fileID: 851344090}
   - component: {fileID: 851344089}
   - component: {fileID: 851344088}
+  - component: {fileID: 851344092}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -8294,6 +8253,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &851344092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851344087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d8d24c99c62f042ad2a50bf7ac903c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 866192361}
+  fpsController: {fileID: 5874118889009996889}
+  moveTabs: {fileID: 1799658160}
+  lines:
+  - Hi, I'm your virtual assistant, Adam.
+  - I'm here to help you with the basics of this application.
+  - You can move to any direction with the WASD Keys, Try it!
+  textSpeed: 0.2
+  textDialogue: {fileID: 48820398}
 --- !u!1 &866192359
 GameObject:
   m_ObjectHideFlags: 0
@@ -8429,22 +8409,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866192359}
   m_CullTransparentMesh: 1
---- !u!1 &904045343 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3281747531893059600, guid: 6656e180177ec6746ab1e8248c512cfd, type: 3}
-  m_PrefabInstance: {fileID: 998984376}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &904045345 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7154364103344299715, guid: 6656e180177ec6746ab1e8248c512cfd, type: 3}
-  m_PrefabInstance: {fileID: 998984376}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 904045343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &905979491
 GameObject:
   m_ObjectHideFlags: 0
@@ -10243,30 +10207,22 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!1 &1018573539 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2809155357823638500, guid: 6656e180177ec6746ab1e8248c512cfd, type: 3}
-  m_PrefabInstance: {fileID: 998984376}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1018573540 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1654446971527835929, guid: 6656e180177ec6746ab1e8248c512cfd, type: 3}
   m_PrefabInstance: {fileID: 998984376}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1018573545
+--- !u!114 &1018573549 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 376108788847319317, guid: 6656e180177ec6746ab1e8248c512cfd, type: 3}
+  m_PrefabInstance: {fileID: 998984376}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018573539}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3b68971e83ee32429ae640277283275, type: 3}
+  m_Script: {fileID: 11500000, guid: 23bacd312ab64cb4db1452ebc7e9ddd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pressKey: {fileID: 125496788}
-  pressKeyK: {fileID: 904045345}
 --- !u!1 &1019194020 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5587160888456876868, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
@@ -10433,7 +10389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 5874118889009996889}
-  dialogueScript: {fileID: 48820402}
+  dialogueScript: {fileID: 0}
 --- !u!1 &1066139872
 GameObject:
   m_ObjectHideFlags: 0
@@ -26073,7 +26029,7 @@ MonoBehaviour:
   TabPanelFriends: {fileID: 469436030}
   TabTabPlayers: {fileID: 1697925260}
   Lenguages: {fileID: 0}
-  dialogueScript: {fileID: 48820402}
+  dialogueScript: {fileID: 0}
   settingsStatus: 0
   PlayerKeys: []
 --- !u!43 &1804209313
@@ -27452,11 +27408,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!1 &1910626907 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2150685785000368530, guid: 6656e180177ec6746ab1e8248c512cfd, type: 3}
-  m_PrefabInstance: {fileID: 998984376}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1923614045
 GameObject:
   m_ObjectHideFlags: 0
@@ -69114,7 +69065,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277d5914ed2c4174fbe9d3621b59632b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNameGame: {fileID: 0}
   walkingSpeed: 7.5
   runningSpeed: 11.5
   jumpSpeed: 8
@@ -69123,18 +69073,14 @@ MonoBehaviour:
   lookSpeed: 2
   lookXLimit: 45
   sensitivity: 0
-  imagenPrueba: {fileID: 0}
+  triggerDetector: {fileID: 5874118889009996890}
   rayDistance: 3
-  active: 0
   targetTime: 0.5
   canMove: 1
   pauseMenu: {fileID: 1030233501}
   presentationCamera: {fileID: 0}
   onPresentationCamera: 0
-  scope: {fileID: 1910626907}
-  micro: {fileID: 485261370}
-  eventText: {fileID: 125496786}
-  eventTextK: {fileID: 904045343}
+  playerUI: {fileID: 1018573549}
 --- !u!114 &5874118889009996890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69152,6 +69098,7 @@ MonoBehaviour:
   objective2: {fileID: 1454040622}
   objective3: {fileID: 1224049649}
   objective4: {fileID: 312076097}
+  fPSController: {fileID: 5874118889009996889}
   tutorialNumber: {fileID: 929373500}
 --- !u!1 &5887144530825114076
 GameObject:

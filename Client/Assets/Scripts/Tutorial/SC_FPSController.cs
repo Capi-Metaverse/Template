@@ -7,7 +7,6 @@ using TMPro;
 public class SC_FPSController : MonoBehaviour
 {
     /*-------------VARIABLES---------------*/
-    public TMP_Text playerNameGame;
     public float walkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;
     public float jumpSpeed = 8.0f;
@@ -15,8 +14,11 @@ public class SC_FPSController : MonoBehaviour
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
+
+    //Add sensitivity
     public float sensitivity;
-    public Sprite imagenPrueba;
+
+    public TriggerDetector triggerDetector;
   
     private bool isRunning;
 
@@ -26,12 +28,13 @@ public class SC_FPSController : MonoBehaviour
 
     //Raycast distance
     public float rayDistance = 3;
-    public bool active = false;
 
+   
     public float targetTime = 0.5f;
     GameObject raycastObject = null;
     [HideInInspector]
     public bool canMove = true;
+
     InputManager inputManager;
 
     public GameObject pauseMenu;
@@ -44,10 +47,9 @@ public class SC_FPSController : MonoBehaviour
     public bool onPresentationCamera = false;
 
     //PlayerUIPrefab
-    public GameObject scope;
-    public GameObject micro;//Actually this is the microphone in game
-    public GameObject eventText;
-    public GameObject eventTextK;
+
+    [SerializeField] public PlayerUI playerUI;
+
     private GameManagerTutorial gameManager;
 
 
@@ -65,10 +67,10 @@ public class SC_FPSController : MonoBehaviour
 
     void Update()
     {
-       
 
-        if (HittingObject)
-            eventText.SetActive(true);
+
+        if (HittingObject && gameManager.DialogueStatus != DialogueStatus.InDialogue)
+            playerUI.EventTextOn();
 
         sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
         targetTime -= Time.deltaTime;
@@ -82,7 +84,7 @@ public class SC_FPSController : MonoBehaviour
                 {
                     raycastObject = hit.transform.gameObject;
                     //raycastObject.gameObject.GetComponent<Outline>().enabled = true;
-                    eventText.SetActive(true);
+                    playerUI.EventTextOn();
                     HittingObject = true;
                 }
                 //RaycastObject
@@ -91,7 +93,7 @@ public class SC_FPSController : MonoBehaviour
 
                     raycastObject = hit.transform.gameObject;
 
-                    eventText.SetActive(true);
+                    playerUI.EventTextOn();
                     HittingObject = true;
 
                 }
@@ -104,6 +106,7 @@ public class SC_FPSController : MonoBehaviour
                     //Retrieve Parent Object and call event
                     GameObject eventObject = hit.transform.gameObject;
                     eventObject.GetComponent<IMetaEvent>().activate(true);
+                    if (gameManager.TutorialStatus == TutorialStatus.Interaction) triggerDetector.endInteraction();
                 }
             }
 
@@ -114,7 +117,7 @@ public class SC_FPSController : MonoBehaviour
                 {
                     //raycastObject.GetComponent<Outline>().enabled = false;
                     raycastObject = null;
-                    eventText.SetActive(false);
+                    playerUI.EventTextOff();
                     HittingObject = false;
                 }
             }
@@ -148,8 +151,7 @@ public class SC_FPSController : MonoBehaviour
             gameManager.GameStatus = GameStatus.InPause;
             
             pauseMenu.SetActive(true);
-            micro.SetActive(false);
-            scope.SetActive(false);
+            playerUI.HideUI();
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
@@ -196,7 +198,7 @@ public class SC_FPSController : MonoBehaviour
             presentationCamera = null;
 
             //We deactivate UI
-            eventTextK.SetActive(false);
+            playerUI.PresentationTextOff();
         }
 
         else
@@ -205,7 +207,7 @@ public class SC_FPSController : MonoBehaviour
             presentationCamera = camera;
 
             //We activate UI
-            eventTextK.SetActive(true);
+            playerUI.PresentationTextOn();
         }
     }
 

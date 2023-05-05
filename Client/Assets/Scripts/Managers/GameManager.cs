@@ -4,18 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Fusion;
 using Fusion.Sockets;
-using Mono.Cecil.Cil;
+
 using Newtonsoft.Json.Linq;
-using TMPro;
+
 using Unity.VisualScripting;
-using UnityEditor.PackageManager;
-using UnityEditor.PackageManager.Requests;
+
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using static Unity.Collections.Unicode;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
+
 
 
 //Status of the connection WIP (Some status are not necessary)

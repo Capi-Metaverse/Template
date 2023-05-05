@@ -16,6 +16,8 @@ public class Dialogue : MonoBehaviour
     public float textSpeed;
     private int index;
 
+    [SerializeField] private GameObject textDialogue;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,7 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //If user clicks, and it's not ended then this code completes the line.
         if (Input.GetMouseButtonDown(0))
         {
             if (textComponent.text == lines[index])
@@ -45,8 +48,7 @@ public class Dialogue : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        fpsController.micro.SetActive(false);
-        fpsController.scope.SetActive(false);
+        fpsController.playerUI.HideUI();
         fpsController.enabled = false;
         index = 0;
         StartCoroutine(TypeLine());
@@ -61,6 +63,8 @@ public class Dialogue : MonoBehaviour
 
         }
     }
+
+   
 
     void NextLine()
     {
@@ -77,15 +81,14 @@ public class Dialogue : MonoBehaviour
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
-                gameObject.SetActive(false);
+                DisableDialogue();
                 gameManager.DialogueStatus = DialogueStatus.InGame;
-                fpsController.micro.SetActive(true);
-                fpsController.scope.SetActive(true);
+                fpsController.playerUI.ShowUI();
                 fpsController.enabled = true;
             }
             else
             {
-                gameObject.SetActive(false);
+                DisableDialogue();
                 if(moveTabs.settingsStatus >= SettingsStatus.Settings)
                 moveTabs.NextTutorial();
 
@@ -95,5 +98,15 @@ public class Dialogue : MonoBehaviour
               
           
         }
+    }
+
+    public void EnableDialogue()
+    {
+        textDialogue.SetActive(true);
+    }
+
+    public void DisableDialogue()
+    {
+        textDialogue.SetActive(false);
     }
 }

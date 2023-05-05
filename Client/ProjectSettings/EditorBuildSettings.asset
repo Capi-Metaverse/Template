@@ -5,33 +5,36 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/1.Start.unity
     guid: abbdffdcc4569e5489bf4c08727b5820
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Lobby.unity
     guid: 2fd6410cecde61944b2669a77a270fe3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Mapa1.unity
     guid: f464382776cf42545908cfd39d6aac3c
   - enabled: 0
     path: Assets/Scenes/Mapa0.unity
     guid: d5a3218ea9a0bf34c950bfc8a0b2aa36
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Mapa2.unity
     guid: bc4a49f583879a143859b41e561151b9
   - enabled: 0
     path: Assets/Scenes/Mapa3.unity
     guid: 672cbf57b9f20134d8853223689ac23f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/HUBValencia.unity
     guid: 6db01cda3fd48274b97633f476714969
   - enabled: 0
     path: Assets/Scenes/Oficinas.unity
     guid: ed37fef22d92cb540a35f5143a98a5ae
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LobbyOficial.unity
     guid: d3d88da86035f944d8cd942aa807ab9a
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: a6e14805cfa7d8140873ad505d6d787f
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 41407aaaad68c76459d0dbd97e3ab2a1, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 569df3d431c1217479027bf2db99b9a2, type: 2}
