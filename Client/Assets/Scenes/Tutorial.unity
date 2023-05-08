@@ -26029,7 +26029,7 @@ MonoBehaviour:
   TabPanelFriends: {fileID: 469436030}
   TabTabPlayers: {fileID: 1697925260}
   Lenguages: {fileID: 0}
-  dialogueScript: {fileID: 0}
+  dialogueScript: {fileID: 851344092}
   settingsStatus: 0
   PlayerKeys: []
 --- !u!43 &1804209313
