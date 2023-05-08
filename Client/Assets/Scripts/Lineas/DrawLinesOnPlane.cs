@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-
+using System.Windows.Forms;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +14,8 @@ public class DrawLinesOnPlane : MonoBehaviour
     private List<Vector3> linePoints = new List<Vector3>();
     private LineRenderer currentLineRenderer;
     public List<Material> materialsList;
-
+   
+    [SerializeField] private GameObject panelMaterials;
 
     void Start()
     {
@@ -104,6 +105,17 @@ public class DrawLinesOnPlane : MonoBehaviour
         materialLine= materialsList[1];
     }
 
+    public void ActivatePanelMaterials() 
+    {
+        if (panelMaterials.activeSelf)
+        {
+            panelMaterials.SetActive(false);
+        }
+        else 
+        {
+            panelMaterials.SetActive(true);
+        }
+    }
 
 
 
