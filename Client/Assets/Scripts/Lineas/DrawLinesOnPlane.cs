@@ -132,15 +132,15 @@ public class DrawLinesOnPlane : NetworkBehaviour
     }
     public void dibujoetc(Vector3[] Lines)
     {
-        SendLineRenderer.positionCount = Lines.Length;
-        GameObject newLineObjectSend = new GameObject("LineRenderer");
+        Debug.Log(Lines.Length);
+        //SendLineRenderer.positionCount = Lines.Length;
+        GameObject newLineObjectSend = new GameObject("LineRendererSend");
         newLineObjectSend.transform.SetParent(transform);
         SendLineRenderer = newLineObjectSend.AddComponent<LineRenderer>();
         SendLineRenderer.material = materialLine;
         SendLineRenderer.widthMultiplier = lineWidth;
-        SendLineRenderer.positionCount = 0;
         SendLineRenderer.useWorldSpace = true;
-        linePoints.Clear();
+     
     }
 
 
