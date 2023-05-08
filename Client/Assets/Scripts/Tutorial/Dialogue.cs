@@ -30,7 +30,7 @@ public class Dialogue : MonoBehaviour
     void Update()
     {
         //If user clicks, and it's not ended then this code completes the line.
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && gameManager.DialogueStatus== DialogueStatus.InDialogue)
         {
             if (textComponent.text == lines[index])
             {
@@ -46,6 +46,7 @@ public class Dialogue : MonoBehaviour
 
     public void StartDialogue()
     {
+        gameManager.DialogueStatus = DialogueStatus.InDialogue;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         fpsController.playerUI.HideUI();
@@ -85,6 +86,7 @@ public class Dialogue : MonoBehaviour
                 gameManager.DialogueStatus = DialogueStatus.InGame;
                 fpsController.playerUI.ShowUI();
                 fpsController.enabled = true;
+                Debug.Log("Dialogue");
             }
             else
             {

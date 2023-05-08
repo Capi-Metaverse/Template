@@ -271,6 +271,20 @@ public class TriggerDetector : MonoBehaviour
         objective1.text = "Press B to play an animation.";
     }
 
+    public void EndAnimationTutorial()
+    {
+        flags["B"] = true;
+        fPSController.EventWheelController();
+        RestartDialogue(TutorialStatus.Finished, new string[2] { "Congratulations! You've finished the tutorial. Now you're free to continue practicing in the tutorial or to change to other maps.", "Press C when you're ready to change" });
+        StartCoroutine(CancelAnimation());
+    }
+
+    IEnumerator CancelAnimation()
+    {
+        yield return new WaitForSeconds(2);
+        fPSController.animator.SetInteger("AnimationWheel", (int)AnimationList.None);
+    }
+
     public void RestartDialogue(TutorialStatus tutorialStatusValue, string[] lines)
     {
         gameManager.TutorialStatus = tutorialStatusValue;
