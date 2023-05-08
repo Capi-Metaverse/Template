@@ -15,6 +15,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
     private float gross = 1;
     private List<Vector3> linePoints = new List<Vector3>();
     private LineRenderer currentLineRenderer;
+    private LineRenderer SendLineRenderer;
     public List<Material> materialsList;
     public GameManager gameManager;
     [SerializeField] private GameObject panelMaterials;
@@ -128,6 +129,18 @@ public class DrawLinesOnPlane : NetworkBehaviour
         {
             panelMaterials.SetActive(true);
         }
+    }
+    public void dibujoetc(Vector3[] Lines)
+    {
+        SendLineRenderer.positionCount = Lines.Length;
+        GameObject newLineObjectSend = new GameObject("LineRenderer");
+        newLineObjectSend.transform.SetParent(transform);
+        SendLineRenderer = newLineObjectSend.AddComponent<LineRenderer>();
+        SendLineRenderer.material = materialLine;
+        SendLineRenderer.widthMultiplier = lineWidth;
+        SendLineRenderer.positionCount = 0;
+        SendLineRenderer.useWorldSpace = true;
+        linePoints.Clear();
     }
 
 

@@ -666,8 +666,10 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     {
 
 
-        Debug.Log(Lines);
+        Debug.Log(Lines.Length);
 
+        DrawLinesOnPlane drawLinesOnPlane = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
+        drawLinesOnPlane.dibujoetc(Lines);
     }
 }
 
