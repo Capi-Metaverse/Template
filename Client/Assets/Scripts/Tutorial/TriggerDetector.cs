@@ -92,7 +92,7 @@ public class TriggerDetector : MonoBehaviour
                         {
                             if (flags["Space"] && this.gameObject.GetComponent<CharacterController>().isGrounded)
                             {
-                                RestartDialogue(TutorialStatus.Interaction, new string[2] { "Hello again again", "Go near a lamp and press e to interact with it" });
+                                RestartDialogue(TutorialStatus.Interaction, new string[2] { "Well Done! Now, let's do something more interactive.", "Go near a lamp and press e to interact with it" });
                                 objective1.text = "";
                                 objective1.color = Color.black;
                                 objective1.text = "Press e with an interactable object. 0/2";
@@ -107,7 +107,7 @@ public class TriggerDetector : MonoBehaviour
                         {
                             flags["M"] = true;
                             objective1.color = Color.green;
-                            RestartDialogue(TutorialStatus.PreSettings, new string[2] { "Hello again again again again", "Press ESC to show the Pause and Settings Menus" });
+                            RestartDialogue(TutorialStatus.PreSettings, new string[2] { "After turning the lights on/off, it's time to see how to modify the settings", "Press ESC to show the Pause and Settings Menus" });
                             objective1.text = "";
                             objective1.color = Color.black;
                             objective1.text = "Press Escape to open the pause menu";
@@ -128,7 +128,7 @@ public class TriggerDetector : MonoBehaviour
                         if (Input.GetKey("k"))
                         {
                             flags["K"] = true;
-                            RestartDialogue(TutorialStatus.Animations, new string[2] { "Hello again again again again again", "Press B to show the Animation Roulette and click one" });
+                            RestartDialogue(TutorialStatus.Animations, new string[2] { "Now, let's do a special move. ", "Approach a mirror, press B to show the Animation Roulette and select a move" });
                         };
                         break;
                     }
