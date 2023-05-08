@@ -76,14 +76,15 @@ public class DrawLinesOnPlane : NetworkBehaviour
         }
         currentLineRenderer.SetPositions(nonNullPoints);
 
-        Vector3[] positions = new Vector3[currentLineRenderer.positionCount];
-
-        for (int y = 0; y < currentLineRenderer.positionCount; y++)
+        if (Input.GetMouseButtonUp(0))
         {
-            positions[i] = currentLineRenderer.GetPosition(y);
+            Vector3[] positions = new Vector3[currentLineRenderer.positionCount];
+
+
+            currentLineRenderer.GetPositions(positions);
+            GameManager.RPC_LinesSend(gameManager.GetRunner(), positions);
         }
-        currentLineRenderer.GetPositions(positions);
-        GameManager.RPC_LinesSend(gameManager.GetRunner(), positions);
+      
     }
 
     private void CreateNewLineRenderer()
