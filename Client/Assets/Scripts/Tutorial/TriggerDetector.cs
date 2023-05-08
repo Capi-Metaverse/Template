@@ -10,6 +10,7 @@ public class TriggerDetector : MonoBehaviour
 {
 
     [SerializeField] private Canvas canvasDialogue;
+    [SerializeField] private PlayerUI playerUI;
     private Dialogue dialogueScript;
     private GameManagerTutorial gameManager;
 
@@ -27,7 +28,7 @@ public class TriggerDetector : MonoBehaviour
 
     public TMP_Text tutorialNumber;
 
-    private int arrowLeftCounter, arrowRightCounter, kPressedCounter = 0;
+    private int arrowLeftCounter, arrowRightCounter, kPressedCounter, mPressedCounter = 0;
 
     public void Start()
     {
@@ -107,15 +108,9 @@ public class TriggerDetector : MonoBehaviour
               
                 case TutorialStatus.Voice:
                     {
-                        if (Input.GetKey("m"))
+                        if (Input.GetKeyDown("m"))
                         {
-                            flags["M"] = true;
-                            objective1.color = Color.green;
-                            RestartDialogue(TutorialStatus.PreSettings, new string[2] { "After turning the lights on/off, it's time to see how to modify the settings", "Press ESC to show the Pause and Settings Menus" });
-                            objective1.text = "";
-                            tutorialNumber.text = "5";
-                            objective1.color = Color.black;
-                            objective1.text = "Press Escape to open the pause menu";
+                            OnVoice();
                         };
                         break;
                     }
@@ -131,8 +126,6 @@ public class TriggerDetector : MonoBehaviour
                     }
                 case TutorialStatus.Presentation:
                     {
-                    
-
                         if (Input.GetKey("k"))
                         {
                             flags["K"] = true;
@@ -180,7 +173,7 @@ public class TriggerDetector : MonoBehaviour
                 objective1.text = "";
                 objective1.color = Color.black;
                 tutorialNumber.text = "4";
-                objective1.text = "Press m to activate the chat.";
+                objective1.text = "Press m to mute/unmute the chat 0/2";
             }
         }
 
@@ -203,7 +196,7 @@ public class TriggerDetector : MonoBehaviour
         if(arrowLeftCounter < 2)
         {
             ++arrowLeftCounter;
-            objective2.text = "Click the left arrow." + arrowLeftCounter + "/2";
+            objective2.text = "Click the left arrow " + arrowLeftCounter + "/2";
 
             if(arrowLeftCounter == 2)
             {
@@ -225,7 +218,7 @@ public class TriggerDetector : MonoBehaviour
         if (arrowRightCounter < 2)
         {
             ++arrowRightCounter;
-            objective1.text = "Click the right arrow." + arrowRightCounter + "/2";
+            objective1.text = "Click the right arrow " + arrowRightCounter + "/2";
 
             if (arrowRightCounter == 2)
             {
@@ -245,7 +238,7 @@ public class TriggerDetector : MonoBehaviour
         if (kPressedCounter < 2)
         {
             ++kPressedCounter;
-            objective3.text = "Click the K key in a presentation area." + kPressedCounter + "/2";
+            objective3.text = "Click the K key in a presentation area " + kPressedCounter + "/2";
 
             if (kPressedCounter == 2)
             {
@@ -257,6 +250,33 @@ public class TriggerDetector : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OnVoice()
+    {
+        if (mPressedCounter < 2)
+        {
+            ++mPressedCounter;
+            objective1.text = "Press m to mute/unmute the chat " + mPressedCounter + "/2";
+            playerUI.ChangeMicSprite();
+
+            if (mPressedCounter == 2)
+            {
+                objective1.color = Color.green;
+                EndVoiceTutorial();
+            }
+        }
+    }
+
+    public void EndVoiceTutorial()
+    {
+        flags["M"] = true;
+        objective1.color = Color.green;
+        RestartDialogue(TutorialStatus.PreSettings, new string[2] { "After turning the lights on/off, it's time to see how to modify the settings", "Press ESC to show the Pause and Settings Menus" });
+        objective1.text = "";
+        tutorialNumber.text = "5";
+        objective1.color = Color.black;
+        objective1.text = "Press Escape to open the pause menu";
     }
 
     public void SetAnimationTutorial()

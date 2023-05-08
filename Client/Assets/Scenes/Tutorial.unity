@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7843357}
   - component: {fileID: 7843358}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5071,7 +5071,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 127
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -29155,6 +29155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7843358}
+  gameManager: {fileID: 1923614046}
+  triggerDetector: {fileID: 5874118889009996890}
 --- !u!1 &2050783224
 GameObject:
   m_ObjectHideFlags: 0
@@ -63872,7 +63874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5994323021103597555}
   - component: {fileID: 5104353657297670466}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EyeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63888,7 +63890,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4473679905676058270}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63998,7 +64000,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1564575932714225887}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64290,7 +64292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6660300309692759369}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandThumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64322,7 +64324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4518457555153681493}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandRing4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64474,7 +64476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 607275136753542704}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64490,7 +64492,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7530076563214888044}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandPinky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64537,7 +64539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 407400658545316423}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64646,7 +64648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4855282682590264686}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightToe_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64859,7 +64861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2778383816735570166}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65090,7 +65092,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5831018718737696032}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandThumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65217,7 +65219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2402637602768255993}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65298,7 +65300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7270972983523849696}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftToe_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65314,7 +65316,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2566489618724181603}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandThumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65498,7 +65500,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 303300035940037331}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65546,7 +65548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6299943070315517764}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandMiddle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65658,7 +65660,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7644321273569949625}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandRing3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65908,7 +65910,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8781346887671006006}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandThumb4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65988,7 +65990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7171683656146558408}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66203,7 +66205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7401679748545432396}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66252,7 +66254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2541338120471036436}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66286,7 +66288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2765738966192298754}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandRing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66302,7 +66304,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8395179014360139294}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandMiddle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66382,7 +66384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1271413528345572714}
   - component: {fileID: 6538871359058933538}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wolf3D_Hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66414,7 +66416,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4126920349154241931}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandIndex2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66446,7 +66448,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8347679496066567885}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandThumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66846,7 +66848,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3967209988114745023}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandPinky4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66910,7 +66912,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7935470521640513771}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandPinky4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66926,7 +66928,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 351969550623674905}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandRing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66942,7 +66944,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1442771916368454074}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandMiddle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66974,7 +66976,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2969328702270194786}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67038,7 +67040,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1730767064992006971}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67054,7 +67056,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2210754836854076821}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67199,7 +67201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1344341589647679009}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandThumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67247,7 +67249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2333444021007294092}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67383,7 +67385,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3808210133026966925}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67450,7 +67452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 751558705035549940}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67466,7 +67468,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6077015743383576961}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandRing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67665,7 +67667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3603011302706468652}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandMiddle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67697,7 +67699,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7861702795839093016}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandIndex3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68018,7 +68020,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6563189486772294272}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68083,7 +68085,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1915641492791595750}
   - component: {fileID: 1090173543780719507}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wolf3D_Outfit_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68147,7 +68149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3011570395681673251}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68163,7 +68165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7218068357649274835}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandIndex4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68195,7 +68197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5734787634018346136}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandPinky2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68227,7 +68229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5133303061114016392}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandIndex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68565,7 +68567,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2821511193122662829}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandRing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68597,7 +68599,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 270685139227548665}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandIndex2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68629,7 +68631,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 666538648506969145}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HeadTop_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68645,7 +68647,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1460053121958091054}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68693,7 +68695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1759717568706936189}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandPinky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68742,7 +68744,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8229024942662453907}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68816,6 +68818,7 @@ MonoBehaviour:
   playerUI: {fileID: 1018573549}
   emoteWheel: {fileID: 2046480095}
   isEventWheelOpen: 0
+  animator: {fileID: 7843358}
 --- !u!114 &5874118889009996890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68829,6 +68832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasDialogue: {fileID: 851344090}
+  playerUI: {fileID: 1018573549}
   objective1: {fileID: 733683723}
   objective2: {fileID: 1454040622}
   objective3: {fileID: 1224049649}
@@ -68844,7 +68848,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6302540779639182980}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandIndex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68892,7 +68896,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7899456124731758777}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandRing3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68908,7 +68912,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6599928310652855192}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandPinky3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69358,7 +69362,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 966093302416223425}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandMiddle4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69374,7 +69378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3323396919336195163}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandRing4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69625,7 +69629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4152696158856956411}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandThumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69657,7 +69661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6083749112144754274}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69824,7 +69828,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1061549325912061052}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandMiddle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70113,7 +70117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 768651375761078664}
   - component: {fileID: 1551386539012056184}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wolf3D_Teeth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70144,7 +70148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2518412268681909936}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandMiddle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70224,7 +70228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8967611628273814958}
   - component: {fileID: 4057852812959236054}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wolf3D_Outfit_Footwear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70333,7 +70337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6174843424675555297}
   - component: {fileID: 6132955897730837909}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EyeRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70349,7 +70353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4513052445201017561}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70365,7 +70369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3588087494942131732}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandMiddle4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70399,7 +70403,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1757515877542396299}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandIndex3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70561,7 +70565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1131611959147296188}
   - component: {fileID: 6873126565741736137}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wolf3D_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70624,7 +70628,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3841273463294144310}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70641,7 +70645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 940839072395762601}
   - component: {fileID: 6106494422157111758}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wolf3D_Glasses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70705,7 +70709,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3398969608972996186}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70738,7 +70742,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8669025804224633824}
   - component: {fileID: 4980862039353088308}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wolf3D_Outfit_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70770,7 +70774,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4981700403698431753}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandThumb4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70802,7 +70806,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8808480813587130262}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftHandIndex4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70947,7 +70951,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8919683268310273613}
   - component: {fileID: 3886717220002462791}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wolf3D_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70963,7 +70967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5223707330231484005}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandPinky3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71026,7 +71030,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2824587782892867287}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightHandPinky2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
