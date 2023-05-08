@@ -137,6 +137,8 @@ public class DrawLinesOnPlane : NetworkBehaviour
         GameObject newLineObjectSend = new GameObject("LineRendererSend");
         newLineObjectSend.transform.SetParent(transform);
         SendLineRenderer = newLineObjectSend.AddComponent<LineRenderer>();
+        SendLineRenderer.positionCount = Lines.Length;
+        SendLineRenderer.SetPositions(Lines);
         SendLineRenderer.material = materialLine;
         SendLineRenderer.widthMultiplier = lineWidth;
         SendLineRenderer.useWorldSpace = true;

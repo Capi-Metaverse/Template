@@ -84,7 +84,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
     public GameObject Settings;
 
-   
+
 
     //Static function to get the singleton
     public static GameManager FindInstance()
@@ -108,11 +108,11 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     public bool CameraBool = false;
 
     //Initialization Correct
-    private void Awake() 
+    private void Awake()
     {
         //When this component awake, it get the others game managers
         GameManager[] managers = FindObjectsOfType<GameManager>();
-      
+
         //Check if there is more managers
         if (managers != null && managers.Length > 1)
         {
@@ -125,7 +125,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         //If the scene loader is null, initializates it and change to the start scene.
         if (_loader == null)
         {
-           
+
 
             //Don't destroy the Game Manager
             DontDestroyOnLoad(gameObject);
@@ -135,38 +135,38 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
             //Change to the login scene ONLY IF THE LOGIN IS NOT THE FIRST SCENE
             //SceneManager.LoadSceneAsync( _startScene);
-       
+
         }
     }
-    
+
     //This function sets the LobbyManager and enter the Lobby
     //Correct
     public async void SetLobbyManager(LobbyManager lobbyManager)
     {
-        if(inputManager == null) inputManager = this.gameObject.AddComponent<InputManager>();
+        if (inputManager == null) inputManager = this.gameObject.AddComponent<InputManager>();
 
 
         this._lobbyManager = lobbyManager;
         await EnterLobby();
-        
+
     }
     //AWAKE -> Intro -> Lobby -> Session
 
     //Add the NetworkRunner to this object Correct
     private void Connect()
     {
-        
+
         if (_runner == null)
         {
-           
+
             //Initializes the runner
             SetConnectionStatus(ConnectionStatus.Connecting);
             GameObject go = new GameObject("Session");
-          
+
 
             _runner = go.AddComponent<NetworkRunner>();
             _runner.AddCallbacks(this);
-            
+
         }
     }
 
@@ -192,7 +192,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         //We connect to the Lobby
         SetConnectionStatus(ConnectionStatus.EnteringLobby);
         var result = await _runner.JoinSessionLobby(SessionLobby.Custom, LOBBY_NAME);
-        
+
         //If the connection fails...
         if (!result.Ok)
         {
@@ -203,7 +203,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
             SceneManager.LoadScene("1.Start");
 
             return;
-     
+
 
         }
 
@@ -215,7 +215,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     //Create a session/room Correct
     public async void CreateSession(SessionProps props)
     {
-        await StartSession( GameMode.Shared, props);
+        await StartSession(GameMode.Shared, props);
     }
 
     //Join a session/room Correct, Maybe improve props in the future
@@ -224,13 +224,13 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         SessionProps props = new SessionProps(info.Properties);
         props.PlayerLimit = info.MaxPlayers;
         props.RoomName = info.Name;
-       await StartSession( GameMode.Shared, props);
+        await StartSession(GameMode.Shared, props);
     }
 
     //Function to create the session / room
     public async Task StartSession(GameMode mode, SessionProps props, bool disableClientSessionCreation = true)
     {
-       Connect();
+        Connect();
 
         SetConnectionStatus(ConnectionStatus.Starting);
 
@@ -244,7 +244,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
             SessionName = props.RoomName.ToUpper(),
             PlayerCount = 10,
             SessionProperties = props.Properties,
-           
+
         });
 
         playerCount = 10;
@@ -258,7 +258,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         {
             SetConnectionStatus(ConnectionStatus.Failed, result.ShutdownReason.ToString());
 
-             await Disconnect();
+            await Disconnect();
 
             SceneManager.LoadScene("1.Start");
 
@@ -269,7 +269,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         {
             Debug.Log("[Photon-GameManager] Entering Lobby");
             //Indicate LobbyManager to change the panel
-            _lobbyManager.SetPlayerPanel(props.RoomName,_runner);
+            _lobbyManager.SetPlayerPanel(props.RoomName, _runner);
             SetUserStatus(UserStatus.InLobby);
         }
 
@@ -300,7 +300,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     {
         if (UserStatus == status)
             return;
-       UserStatus = status;
+        UserStatus = status;
     }
 
     public UserStatus GetUserStatus()
@@ -320,7 +320,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
     public UserRole GetUserRole()
     {
-            return this.UserRole;
+        return this.UserRole;
 
     }
 
@@ -344,8 +344,8 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     //Correct
     public async void LeaveSession()
     {
-       await Disconnect();
-       await EnterLobby(); 
+        await Disconnect();
+        await EnterLobby();
     }
     //Function that executes when a user clicks on Join in the Lobby
     public async void StartGame(string sessionName, int avatarNumber)
@@ -379,7 +379,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     {
         await Disconnect();
         roomName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
-        currentMap = "LobbyOficial";   
+        currentMap = "LobbyOficial";
         playerCount = 4;
         Connect();
 
@@ -396,7 +396,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
                 playerCount = item.Properties["PlayerLimit"];
                 break;
             }
-        
+
         }
 
 
@@ -442,7 +442,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
     public void SetCurrentPlayer(GameObject currentPlayer)
     {
-       this.currentPlayer = currentPlayer;
+        this.currentPlayer = currentPlayer;
     }
 
     //AvatarNumber Get Set
@@ -454,7 +454,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
     public void SetAvatarNumber(int avatarNumber)
     {
-       this.avatarNumber = avatarNumber;
+        this.avatarNumber = avatarNumber;
     }
 
     public string GetUserID()
@@ -493,7 +493,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     //Callback when the user joins to a Server/Host
     public void OnConnectedToServer(NetworkRunner runner)
     {
-        
+
     }
 
 
@@ -536,18 +536,18 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-       
-        if(UserStatus == UserStatus.InLobby)
+
+        if (UserStatus == UserStatus.InLobby)
         {
             Debug.Log("A user has joined to the room");
             //We indicate to the LobbyManager that he has a new user
-  
+
         }
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
-            Debug.Log("A user has disconnected from the room");
+        Debug.Log("A user has disconnected from the room");
     }
 
     public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ArraySegment<byte> data)
@@ -565,7 +565,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         throw new NotImplementedException();
     }
 
-    
+
 
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
     {
@@ -616,7 +616,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     {
         Presentation presentation = GameObject.Find("Presentation").GetComponent<Presentation>();
         presentation.OnReturn();
-    
+
     }
     [Rpc]
     public static void RPC_AdvancePress(NetworkRunner runner)
@@ -640,7 +640,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     {
         TriggerEntranceDoor door = GameObject.Find("GlassEntrance").GetComponentInChildren<TriggerEntranceDoor>();
         door.membersInside--;
-        if(door.membersInside == 0)
+        if (door.membersInside == 0)
         {
             door.CloseDoor();
         }
@@ -652,17 +652,18 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-        foreach(GameObject player in players)
+        foreach (GameObject player in players)
         {
-            if(player.GetComponent<NetworkPlayer>().ActorID == actorID)
+            if (player.GetComponent<NetworkPlayer>().ActorID == actorID)
             {
                 player.GetComponentInChildren<AudioSource>().maxDistance = 500;
             }
         }
 
     }
-    [Rpc]
-    public static void RPC_LinesSend(NetworkRunner runner, Vector3[] Lines)
+
+    [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = false)]
+     public static void RPC_LinesSend(NetworkRunner runner, Vector3[] Lines)
     {
 
 
