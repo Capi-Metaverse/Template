@@ -661,6 +661,14 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         }
 
     }
+    [Rpc]
+    public static void RPC_LinesSend(NetworkRunner runner, Vector3[] Lines)
+    {
+
+
+        Debug.Log(Lines);
+
+    }
 }
 
 

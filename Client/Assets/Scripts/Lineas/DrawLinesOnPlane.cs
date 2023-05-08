@@ -1,9 +1,11 @@
+using Fusion;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DrawLinesOnPlane : MonoBehaviour
+public class DrawLinesOnPlane : NetworkBehaviour
 {
     public Material materialLine;
     public LayerMask planeLayer;
@@ -14,13 +16,14 @@ public class DrawLinesOnPlane : MonoBehaviour
     private List<Vector3> linePoints = new List<Vector3>();
     private LineRenderer currentLineRenderer;
     public List<Material> materialsList;
-   
+    public GameManager gameManager;
     [SerializeField] private GameObject panelMaterials;
 
     void Start()
     {
         materialLine = materialsList[0];
         CreateNewLineRenderer();
+        gameManager = GameManager.FindInstance();
     }
 
     void Update()
@@ -72,6 +75,15 @@ public class DrawLinesOnPlane : MonoBehaviour
             }
         }
         currentLineRenderer.SetPositions(nonNullPoints);
+
+        Vector3[] positions = new Vector3[currentLineRenderer.positionCount];
+
+        for (int y = 0; y < currentLineRenderer.positionCount; y++)
+        {
+            positions[i] = currentLineRenderer.GetPosition(y);
+        }
+        currentLineRenderer.GetPositions(positions);
+        GameManager.RPC_LinesSend(gameManager.GetRunner(), positions);
     }
 
     private void CreateNewLineRenderer()
@@ -116,7 +128,6 @@ public class DrawLinesOnPlane : MonoBehaviour
             panelMaterials.SetActive(true);
         }
     }
-
 
 
 }
