@@ -169,9 +169,6 @@ public class MoveTabsTutorial : MonoBehaviour
                     triggerDetector.SetPresentationTutorial();
                    
 
-                   
-
-
                     break;
                 }
         }

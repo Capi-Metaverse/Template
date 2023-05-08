@@ -123,15 +123,45 @@ public class SC_FPSController : MonoBehaviour
             }
         }
 
+        //K key down(PresentationMode)
+        if (presentationCamera != null)
+        {
+            Debug.Log(presentationCamera!=null);
+            if (Input.GetKeyDown("k") && presentationCamera != null)
+            {
+                if (gameManager.TutorialStatus == TutorialStatus.Presentation) triggerDetector.OnPresentation();
+
+                if (onPresentationCamera)
+                {
+                    presentationCamera.enabled = false;
+                    playerCamera.enabled = true;
+                    playerUI.PresentationTextOn();
+                    playerUI.ShowUI();
+                }
+
+                else
+                {
+                    presentationCamera.enabled = true;
+                    playerCamera.enabled = false;
+                    playerUI.PresentationTextOff();
+                    playerUI.HideUI();
+                }
+
+                onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
+            }
+        }
+
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
+
         // Press Left Shift to run
         isRunning = Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.S);
         float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+
         //Normalize diagonal speed
         moveDirection = moveDirection.normalized * Mathf.Clamp(moveDirection.magnitude, 0, 50);//Parameters are:(Value,MinX,MaxX)
 

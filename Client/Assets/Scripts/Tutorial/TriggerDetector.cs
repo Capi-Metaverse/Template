@@ -27,8 +27,7 @@ public class TriggerDetector : MonoBehaviour
 
     public TMP_Text tutorialNumber;
 
-    private int arrowLeftCounter, arrowRightCounter = 0;
-    private bool onPresentation = false;
+    private int arrowLeftCounter, arrowRightCounter, kPressedCounter = 0;
 
     public void Start()
     {
@@ -177,7 +176,7 @@ public class TriggerDetector : MonoBehaviour
             {
                 flags["E"] = true;
                 objective1.color = Color.green;
-                RestartDialogue(TutorialStatus.Voice, new string[2] { "Hello again again again", "Press M to mute and unmute the voice chat" });
+                RestartDialogue(TutorialStatus.Voice, new string[2] { "Now, let's see how to talk with someone.", "Press M to mute and unmute your voice" });
                 objective1.text = "";
                 objective1.color = Color.black;
                 tutorialNumber.text = "4";
@@ -196,7 +195,7 @@ public class TriggerDetector : MonoBehaviour
         objective3.color = Color.black;
         objective1.text = "Click the right arrow 0/2";
         objective2.text = "Click the left arrow 0/2";
-        objective3.text = "Click the K key in a presentation area";
+        objective3.text = "Click the K key in a presentation area 0/2";
     }
 
     public void OnLeftArrow()
@@ -210,7 +209,7 @@ public class TriggerDetector : MonoBehaviour
             {
                 objective2.color = Color.green;
 
-                if((arrowRightCounter == 2) && onPresentation)
+                if((arrowRightCounter == 2) && (kPressedCounter == 2))
                 {
                     SetAnimationTutorial();
                 }
@@ -232,7 +231,7 @@ public class TriggerDetector : MonoBehaviour
             {
                 objective1.color = Color.green;
 
-                if ((arrowLeftCounter == 2) && onPresentation)
+                if ((arrowLeftCounter == 2) && (kPressedCounter == 2))
                 {
                     SetAnimationTutorial();
                 }
@@ -243,18 +242,33 @@ public class TriggerDetector : MonoBehaviour
 
     public void OnPresentation()
     {
-        onPresentation = true;
-
-        if ((arrowLeftCounter == 2) && (arrowRightCounter == 2) && onPresentation)
+        if (kPressedCounter < 2)
         {
-            //Funci�n animaciones
-            objective3.color = Color.green;
+            ++kPressedCounter;
+            objective3.text = "Click the K key in a presentation area." + kPressedCounter + "/2";
+
+            if (kPressedCounter == 2)
+            {
+                objective3.color = Color.green;
+
+                if ((arrowLeftCounter == 2) && (arrowRightCounter == 2))
+                {
+                    SetAnimationTutorial();
+                }
+            }
         }
     }
 
     public void SetAnimationTutorial()
     {
-        RestartDialogue(TutorialStatus.Animations, new string[2] { "Hello again again again again again", "Press B to show the Animation Roulette and click one" });
+        flags["K"] = true;
+        RestartDialogue(TutorialStatus.Animations, new string[2] { "Now, let's do a special move. ", "Approach a mirror, press B to show the Animation Roulette and select a move" });
+        objective1.text = "";
+        objective2.text = "";
+        objective3.text = "";
+        objective1.color = Color.black;
+        tutorialNumber.text = "7";
+        objective1.text = "Press B to play an animation.";
     }
 
     public void RestartDialogue(TutorialStatus tutorialStatusValue, string[] lines)
