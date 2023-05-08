@@ -27,6 +27,9 @@ public class TriggerDetector : MonoBehaviour
 
     public TMP_Text tutorialNumber;
 
+    private int arrowLeftCounter, arrowRightCounter = 0;
+    private bool onPresentation = false;
+
     public void Start()
     {
         gameManager = GameObject.Find("Manager").GetComponent<GameManagerTutorial>();
@@ -84,9 +87,10 @@ public class TriggerDetector : MonoBehaviour
                         {
                             flags["Space"] = true;
                             objective1.color = Color.green;
+                          
 
-                 
-                           
+
+
                         }
                         else
                         {
@@ -95,6 +99,7 @@ public class TriggerDetector : MonoBehaviour
                                 RestartDialogue(TutorialStatus.Interaction, new string[2] { "Well Done! Now, let's do something more interactive.", "Go near a lamp and press e to interact with it" });
                                 objective1.text = "";
                                 objective1.color = Color.black;
+                                tutorialNumber.text = "3";
                                 objective1.text = "Press e with an interactable object. 0/2";
                             }
                         }
@@ -109,6 +114,7 @@ public class TriggerDetector : MonoBehaviour
                             objective1.color = Color.green;
                             RestartDialogue(TutorialStatus.PreSettings, new string[2] { "After turning the lights on/off, it's time to see how to modify the settings", "Press ESC to show the Pause and Settings Menus" });
                             objective1.text = "";
+                            tutorialNumber.text = "5";
                             objective1.color = Color.black;
                             objective1.text = "Press Escape to open the pause menu";
                         };
@@ -119,12 +125,15 @@ public class TriggerDetector : MonoBehaviour
                         if (Input.GetKey("escape"))
                         {
                             flags["ESC"] = true;
+                             
                             //RestartDialogue(TutorialStatus.Presentation, new string[2] { "Hello again again again again again", "Go upstairs and interact with the podium to view a presentation" });
                         };
                         break;
                     }
                 case TutorialStatus.Presentation:
                     {
+                    
+
                         if (Input.GetKey("k"))
                         {
                             flags["K"] = true;
@@ -171,10 +180,81 @@ public class TriggerDetector : MonoBehaviour
                 RestartDialogue(TutorialStatus.Voice, new string[2] { "Hello again again again", "Press M to mute and unmute the voice chat" });
                 objective1.text = "";
                 objective1.color = Color.black;
+                tutorialNumber.text = "4";
                 objective1.text = "Press m to activate the chat.";
             }
         }
 
+    }
+
+    public void SetPresentationTutorial()
+    {
+        objective1.text = "";
+        tutorialNumber.text = "6";
+        objective1.color = Color.black;
+        objective2.color = Color.black;
+        objective3.color = Color.black;
+        objective1.text = "Click the right arrow 0/2";
+        objective2.text = "Click the left arrow 0/2";
+        objective3.text = "Click the K key in a presentation area";
+    }
+
+    public void OnLeftArrow()
+    {
+        if(arrowLeftCounter < 2)
+        {
+            ++arrowLeftCounter;
+            objective2.text = "Click the left arrow." + arrowLeftCounter + "/2";
+
+            if(arrowLeftCounter == 2)
+            {
+                objective2.color = Color.green;
+
+                if((arrowRightCounter == 2) && onPresentation)
+                {
+                    SetAnimationTutorial();
+                }
+            }
+
+       
+        }
+
+    }
+
+    public void OnRightArrow()
+    {
+        if (arrowRightCounter < 2)
+        {
+            ++arrowRightCounter;
+            objective1.text = "Click the right arrow." + arrowRightCounter + "/2";
+
+            if (arrowRightCounter == 2)
+            {
+                objective1.color = Color.green;
+
+                if ((arrowLeftCounter == 2) && onPresentation)
+                {
+                    SetAnimationTutorial();
+                }
+            }
+        }
+
+    }
+
+    public void OnPresentation()
+    {
+        onPresentation = true;
+
+        if ((arrowLeftCounter == 2) && (arrowRightCounter == 2) && onPresentation)
+        {
+            //Funci�n animaciones
+            objective3.color = Color.green;
+        }
+    }
+
+    public void SetAnimationTutorial()
+    {
+        RestartDialogue(TutorialStatus.Animations, new string[2] { "Hello again again again again again", "Press B to show the Animation Roulette and click one" });
     }
 
     public void RestartDialogue(TutorialStatus tutorialStatusValue, string[] lines)

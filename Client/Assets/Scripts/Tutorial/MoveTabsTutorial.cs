@@ -24,6 +24,11 @@ public class MoveTabsTutorial : MonoBehaviour
 
     [SerializeField] private Dialogue dialogueScript;
 
+    [SerializeField] private TriggerDetector triggerDetector;
+
+
+    [SerializeField] private GameManagerTutorial gameManager;
+
 
     private GameObject Settings;
     private GameObject Pause;
@@ -148,8 +153,25 @@ public class MoveTabsTutorial : MonoBehaviour
 
             case SettingsStatus.Finished:
                 {
-                    Pause.SetActive(true);
+                   
                     Settings.SetActive(false);
+
+
+                    string[] lines = new string[2] { "That's all about the settings part.", "Now, go upstairs and interact with the podium to view a presentation" };
+                    dialogueScript.lines = lines;
+                    dialogueScript.textComponent.text = string.Empty;
+                    dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
+
+                    dialogueScript.StartDialogue();
+
+                    gameManager.TutorialStatus = TutorialStatus.Presentation;
+
+                    triggerDetector.SetPresentationTutorial();
+                   
+
+                   
+
+
                     break;
                 }
         }
