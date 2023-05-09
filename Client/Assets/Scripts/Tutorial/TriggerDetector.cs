@@ -118,7 +118,6 @@ public class TriggerDetector : MonoBehaviour
 
                 case TutorialStatus.Animations:
                     {
-                        Debug.Log("Animations");
                         if (Input.GetKeyDown("b"))
                         {
                             EventWheelController();
@@ -151,7 +150,6 @@ public class TriggerDetector : MonoBehaviour
         if(gameManager.TutorialStatus == TutorialStatus.Interaction)
         {
             ++interaction;
-            Debug.Log(interaction);
             objective1.text = "Press e with an interactable object." + interaction + "/2";
             if (interaction == 2)
             {

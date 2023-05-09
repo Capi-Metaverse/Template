@@ -131,7 +131,6 @@ public class SC_FPSController : MonoBehaviour
         //K key down(PresentationMode)
         if (presentationCamera != null)
         {
-            Debug.Log(presentationCamera!=null);
             if (Input.GetKeyDown("k") && presentationCamera != null)
             {
                 if (gameManager.TutorialStatus == TutorialStatus.Presentation) triggerDetector.OnPresentation();

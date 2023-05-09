@@ -77,7 +77,6 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-
             if (gameManager.TutorialStatus != TutorialStatus.Settings)
             {
                 Cursor.visible = false;
@@ -86,19 +85,13 @@ public class Dialogue : MonoBehaviour
                 gameManager.DialogueStatus = DialogueStatus.InGame;
                 fpsController.playerUI.ShowUI();
                 fpsController.enabled = true;
-                Debug.Log("Dialogue");
             }
             else
             {
                 DisableDialogue();
                 if(moveTabs.settingsStatus >= SettingsStatus.Settings)
                 moveTabs.NextTutorial();
-
-                
             }
-
-              
-          
         }
     }
 

@@ -22,6 +22,6 @@ public class ControlSensitivity : MonoBehaviour
         sliderValue = value;
         PlayerPrefs.SetFloat("Sensitivity", sliderValue);
         sensi = slider.value;
-        Debug.Log(sensi);
+        //Debug.Log(sensi);
     }
 }
