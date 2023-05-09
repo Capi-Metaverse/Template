@@ -18,6 +18,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
     private LineRenderer SendLineRenderer;
     public List<Material> materialsList;
     public GameManager gameManager;
+    public int NumMaterial = 0;
     [SerializeField] private GameObject panelMaterials;
 
     void Start()
@@ -83,7 +84,8 @@ public class DrawLinesOnPlane : NetworkBehaviour
 
 
             currentLineRenderer.GetPositions(positions);
-            GameManager.RPC_LinesSend(gameManager.GetRunner(), positions);
+            GameManager.RPC_LinesSend(gameManager.GetRunner(), positions, NumMaterial);
+
         }
       
     }
@@ -117,6 +119,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
     public void ChangeYellow()
     {
         materialLine= materialsList[1];
+        NumMaterial = 1;
     }
 
     public void ActivatePanelMaterials() 
@@ -130,7 +133,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
             panelMaterials.SetActive(true);
         }
     }
-    public void dibujoetc(Vector3[] Lines)
+    public void dibujoetc(Vector3[] Lines, int NumMaterial)
     {
         Debug.Log(Lines.Length);
         //SendLineRenderer.positionCount = Lines.Length;
@@ -139,7 +142,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
         SendLineRenderer = newLineObjectSend.AddComponent<LineRenderer>();
         SendLineRenderer.positionCount = Lines.Length;
         SendLineRenderer.SetPositions(Lines);
-        SendLineRenderer.material = materialsList[0];
+        SendLineRenderer.material = materialsList[NumMaterial];
         SendLineRenderer.widthMultiplier = lineWidth * gross;
         SendLineRenderer.useWorldSpace = true;
      
