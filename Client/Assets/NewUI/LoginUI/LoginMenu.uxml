@@ -1,0 +1,26 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/NewUI/LoginUI/LoginStyle.uss?fileID=7433441132597879392&amp;guid=5ec189eca9a45dd4ea9a7c26dfdc2129&amp;type=3#LoginStyle" />
+    <ui:VisualElement name="contenedor" class="contenedor" style="align-items: center; justify-content: center;">
+        <ui:VisualElement name="titulo" class="titulo" style="flex-direction: row; justify-content: center; align-items: center;">
+            <ui:VisualElement name="capgemini-logo" class="capgemini-logo" />
+            <ui:Label text="metaverse" display-tooltip-when-elided="true" name="texto-metaverse" class="texto-metaverse" style="color: rgb(103, 205, 229);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="inputs" class="inputs">
+            <ui:Label text="Introduzca sus credenciales" display-tooltip-when-elided="true" name="texto-credenciales" class="texto-credenciales" />
+            <ui:TextField picking-mode="Ignore" text="Email" name="email-input" usage-hints="None" multiline="false" max-length="30" is-delayed="false" />
+            <ui:TextField picking-mode="Ignore" name="password-input" password="true" mask-character="*" is-delayed="false" max-length="30" />
+            <ui:VisualElement name="forgot-password-container" class="forgot-password-container">
+                <ui:Label text="Forgot your password? Click" display-tooltip-when-elided="true" name="first-sentence" class="forgot-sentences" />
+                <ui:Button text="HERE" display-tooltip-when-elided="true" name="here-button" class="here-button" />
+                <ui:Label text="to recover" display-tooltip-when-elided="true" name="second-sentence" class="forgot-sentences" />
+            </ui:VisualElement>
+            <ui:Button text="Log In" display-tooltip-when-elided="true" name="login-button" class="login-button" />
+            <ui:VisualElement name="register-container" class="register-container">
+                <ui:Label text="Register" display-tooltip-when-elided="true" name="first-sentence" class="register-sentence" />
+                <ui:Button text="HERE" display-tooltip-when-elided="true" name="here-button-register" class="here-register" />
+                <ui:Label text="if you don&apos;t have an account" display-tooltip-when-elided="true" name="second-sentence" class="register-sentence" />
+            </ui:VisualElement>
+            <ui:Label display-tooltip-when-elided="true" name="message" class="error-message" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

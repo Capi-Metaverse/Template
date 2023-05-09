@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="User" style="flex-direction: row; align-items: center; justify-content: space-between; width: 400px; height: 65px;">
+        <ui:Label text="User" display-tooltip-when-elided="true" name="UserLabel" style="color: rgb(0, 43, 78); font-size: 25px; -unity-text-align: middle-left; -unity-font-style: bold;" />
+        <ui:Button text="Kick" display-tooltip-when-elided="true" name="KickButton" class="kick-button" />
+    </ui:VisualElement>
+</ui:UXML>

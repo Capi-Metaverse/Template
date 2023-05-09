@@ -1,0 +1,91 @@
+VisualElement {
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(65, 100, 154);
+    background-image: resource('Sprites/UI/UIBackground');
+}
+
+.title-text {
+    width: 50%;
+    height: auto;
+    -unity-text-align: middle-center;
+    font-size: 30px;
+    margin-top: 20px;
+    color: rgb(221, 221, 221);
+    -unity-font: url('project://database/Assets/NewUI/Fonts/Bahnschrift%20Regular.ttf?fileID=12800000&guid=435c52161bc0b78448a8723c0455a208&type=3#Bahnschrift Regular');
+    -unity-font-definition: none;
+}
+
+.add-button {
+    width: 7%;
+    height: 100%;
+    font-size: 25px;
+    background-color: rgb(221, 221, 221);
+    color: rgb(31, 28, 46);
+    -unity-font-style: bold;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.rooms-container {
+    width: 35%;
+    height: 35%;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgb(221, 221, 221);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    flex-wrap: nowrap;
+}
+
+.add-button:hover {
+    background-color: rgb(31, 28, 46);
+    color: rgb(221, 221, 221);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
+}
+
+.create-room-continer {
+    width: 35%;
+    height: 5%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.unity-text-field__input {
+    background-color: rgb(221, 221, 221);
+    color: rgb(31, 28, 46);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    padding-left: 20px;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    font-size: 16px;
+    -unity-font: url('project://database/Assets/NewUI/Fonts/Bahnschrift%20Regular.ttf?fileID=12800000&guid=435c52161bc0b78448a8723c0455a208&type=3#Bahnschrift Regular');
+    -unity-font-definition: none;
+}
+
+.unity-base-field {
+    width: 93%;
+    height: 100%;
+}

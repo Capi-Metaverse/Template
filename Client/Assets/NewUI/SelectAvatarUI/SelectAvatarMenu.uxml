@@ -1,0 +1,20 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="playerTemplate" src="project://database/Assets/Resources/UI/playerTemplate.uxml?fileID=9197481963319205126&amp;guid=03de1cc32bdb6f34a9cda3777720689a&amp;type=3#playerTemplate" />
+    <Style src="project://database/Assets/NewUI/SelectAvatarUI/SelectAvatarStyle.uss?fileID=7433441132597879392&amp;guid=0a5e4b8a71d29f442a4832eb1cb62617&amp;type=3#SelectAvatarStyle" />
+    <ui:VisualElement name="container" class="container">
+        <ui:VisualElement name="name-container" class="name-container">
+            <ui:Label text="Room:" display-tooltip-when-elided="true" name="room-label" class="room-label" />
+            <ui:Label text="WUC" display-tooltip-when-elided="true" name="name-label" class="room-label" />
+        </ui:VisualElement>
+        <ui:VisualElement name="players-container" class="players-container">
+            <ui:Instance template="playerTemplate" name="playerTemplate" class="player-template" />
+            <ui:Instance template="playerTemplate" name="playerTemplate" />
+            <ui:Instance template="playerTemplate" name="playerTemplate" />
+            <ui:Instance template="playerTemplate" name="playerTemplate" />
+        </ui:VisualElement>
+        <ui:VisualElement name="buttons-container" class="buttons-container">
+            <ui:Button text="JOIN" display-tooltip-when-elided="true" name="join-button" class="join-button" />
+            <ui:Button text="Leave Room" display-tooltip-when-elided="true" name="leave-button" class="leave-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
