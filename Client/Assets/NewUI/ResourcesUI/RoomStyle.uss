@@ -1,0 +1,26 @@
+.join-button {
+    background-color: rgba(221, 221, 221, 0);
+    font-size: 16px;
+    -unity-font-style: bold;
+    width: 15%;
+    color: rgb(221, 221, 221);
+    margin-right: 15px;
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    height: 22px;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
+}
+
+.join-button:hover {
+    background-color: rgb(221, 221, 221);
+    color: rgb(31, 28, 46);
+}

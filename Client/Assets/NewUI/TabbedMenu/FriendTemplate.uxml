@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="Friend" style="flex-direction: row; align-items: center; justify-content: space-between; margin-top: 20px; padding-left: 20px; padding-right: 20px; width: 350px; height: 45px; background-color: rgb(169, 223, 250); border-top-left-radius: 14px; border-bottom-left-radius: 14px; border-top-right-radius: 14px; border-bottom-right-radius: 14px;">
+        <ui:Label text="Friend" display-tooltip-when-elided="true" name="FriendLabel" style="color: rgb(0, 43, 78); font-size: 25px; -unity-font-style: bold;" />
+        <ui:Button display-tooltip-when-elided="true" name="DeleteButton" style="background-color: rgba(0, 0, 0, 0); border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); background-image: resource(&apos;Sprites/UI/Delete&apos;); width: 25px; height: 25px;" />
+    </ui:VisualElement>
+</ui:UXML>
