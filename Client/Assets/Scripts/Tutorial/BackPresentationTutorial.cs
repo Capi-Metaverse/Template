@@ -7,10 +7,18 @@ public class BackPresentationTutorial : MonoBehaviour, IMetaEvent
     [SerializeField] Presentation presentation;
 
     [SerializeField] TriggerDetector triggerDetector;
+
+    [SerializeField] GameManagerTutorial gameManager;
+
     public void activate(bool host)
     {
-        presentation.OnReturn();
 
-        triggerDetector.OnLeftArrow();
+
+        if (gameManager.TutorialStatus == TutorialStatus.Presentation)
+        {
+            presentation.OnReturn();
+
+            triggerDetector.OnLeftArrow();
+        }
     }
 }

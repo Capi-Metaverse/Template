@@ -900,6 +900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   presentation: {fileID: 651365731}
   triggerDetector: {fileID: 5874118889009996890}
+  gameManager: {fileID: 1923614046}
 --- !u!1 &302872217
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,6 +1958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   presentation: {fileID: 651365731}
   triggerDetector: {fileID: 5874118889009996890}
+  gameManager: {fileID: 1923614046}
 --- !u!1 &733683721
 GameObject:
   m_ObjectHideFlags: 0
