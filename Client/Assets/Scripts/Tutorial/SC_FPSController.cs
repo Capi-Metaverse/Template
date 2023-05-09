@@ -49,10 +49,6 @@ public class SC_FPSController : MonoBehaviour
     //PlayerUIPrefab
     [SerializeField] public PlayerUI playerUI;
 
-    //EventWheel
-    public GameObject emoteWheel;
-    public bool isEventWheelOpen = false;
-
     public Animator animator;
     private GameManagerTutorial gameManager;
 
@@ -125,12 +121,6 @@ public class SC_FPSController : MonoBehaviour
                     HittingObject = false;
                 }
             }
-        }
-
-        if (Input.GetKeyDown("b"))
-        {
-            EventWheelController();
-
         }
 
         //K key down(PresentationMode)
@@ -248,26 +238,6 @@ public class SC_FPSController : MonoBehaviour
 
             //We activate UI
             playerUI.PresentationTextOn();
-        }
-    }
-
-    public void EventWheelController()
-    {
-        if (isEventWheelOpen)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            playerUI.ShowUI();
-            emoteWheel.SetActive(false);
-            isEventWheelOpen = false;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            playerUI.HideUI();
-            emoteWheel.SetActive(true);
-            isEventWheelOpen = true;
         }
     }
 

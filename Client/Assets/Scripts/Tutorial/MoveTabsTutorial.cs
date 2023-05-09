@@ -157,13 +157,14 @@ public class MoveTabsTutorial : MonoBehaviour
                     Settings.SetActive(false);
 
 
-                    string[] lines = new string[2] { "That's all about the settings part.", "Now, go upstairs and interact with the podium to view a presentation" };
+                    string[] lines = new string[2] { "That's all about the settings part.", "Now, go downstairs and interact with the podium to view a presentation" };
                     dialogueScript.lines = lines;
                     dialogueScript.textComponent.text = string.Empty;
                     dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
 
                     dialogueScript.StartDialogue();
 
+                    gameManager.GameStatus = GameStatus.InGame;
                     gameManager.TutorialStatus = TutorialStatus.Presentation;
 
                     triggerDetector.SetPresentationTutorial();

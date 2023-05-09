@@ -30,6 +30,11 @@ public class TriggerDetector : MonoBehaviour
 
     private int arrowLeftCounter, arrowRightCounter, kPressedCounter, mPressedCounter = 0;
 
+    //EventWheel
+    public GameObject emoteWheel;
+    public bool isEventWheelOpen = false;
+    public Animator animator;
+
     public void Start()
     {
         gameManager = GameObject.Find("Manager").GetComponent<GameManagerTutorial>();
@@ -76,7 +81,7 @@ public class TriggerDetector : MonoBehaviour
                             objective2.text = "";
                             objective3.text = "";
                             objective4.text = "";
-                            RestartDialogue(TutorialStatus.Jumping, new string[2] { "Congratulations! In the metaverse you can jump too.", "Press Space to Jump" });
+                            RestartDialogue(TutorialStatus.Jumping, new string[2] { "Congratulations! In the metaverse you can jump too.", "Go upstairs and press Space to Jump" });
                            
                         }
                         break;
@@ -87,10 +92,6 @@ public class TriggerDetector : MonoBehaviour
                         {
                             flags["Space"] = true;
                             objective1.color = Color.green;
-                          
-
-
-
                         }
                         else
                         {
@@ -114,36 +115,23 @@ public class TriggerDetector : MonoBehaviour
                         };
                         break;
                     }
-                case TutorialStatus.PreSettings:
-                    {
-                        if (Input.GetKey("escape"))
-                        {
-                            flags["ESC"] = true;
-                             
-                            //RestartDialogue(TutorialStatus.Presentation, new string[2] { "Hello again again again again again", "Go upstairs and interact with the podium to view a presentation" });
-                        };
-                        break;
-                    }
-                case TutorialStatus.Presentation:
-                    {
-                        if (Input.GetKey("k"))
-                        {
-                            flags["K"] = true;
-                            RestartDialogue(TutorialStatus.Animations, new string[2] { "Now, let's do a special move. ", "Approach a mirror, press B to show the Animation Roulette and select a move" });
-                        };
-                        break;
-                    }
+
                 case TutorialStatus.Animations:
                     {
-                        if (Input.GetKey("b"))
+                        Debug.Log("Animations");
+                        if (Input.GetKeyDown("b"))
                         {
-                            flags["B"] = true;
-                            RestartDialogue(TutorialStatus.Finished, new string[2] { "Congratulations! You've finished the tutorial. Now you're free to continue practicing in the tutorial or to change to other maps.", "Press C when you're ready to change" });
+                            EventWheelController();
                         };
                         break;
                     }
                 case TutorialStatus.Finished:
                     {
+                        if (Input.GetKeyDown("b"))
+                        {
+                            EventWheelController();
+                        };
+
                         if (Input.GetKey("c"))
                         {
                             flags["C"] = true;
@@ -272,11 +260,32 @@ public class TriggerDetector : MonoBehaviour
     {
         flags["M"] = true;
         objective1.color = Color.green;
-        RestartDialogue(TutorialStatus.PreSettings, new string[2] { "After turning the lights on/off, it's time to see how to modify the settings", "Press ESC to show the Pause and Settings Menus" });
+        RestartDialogue(TutorialStatus.PreSettings, new string[2] { "After turning the voice on/off, it's time to see how to modify the settings", "Press ESC to show the Pause and Settings Menus" });
         objective1.text = "";
         tutorialNumber.text = "5";
         objective1.color = Color.black;
         objective1.text = "Press Escape to open the pause menu";
+    }
+    public void EventWheelController()
+    {
+        if (isEventWheelOpen)
+        {
+            fPSController.enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            playerUI.ShowUI();
+            emoteWheel.SetActive(false);
+            isEventWheelOpen = false;
+        }
+        else
+        {
+            fPSController.enabled = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            playerUI.HideUI();
+            emoteWheel.SetActive(true);
+            isEventWheelOpen = true;
+        }
     }
 
     public void SetAnimationTutorial()
@@ -294,7 +303,7 @@ public class TriggerDetector : MonoBehaviour
     public void EndAnimationTutorial()
     {
         flags["B"] = true;
-        fPSController.EventWheelController();
+        EventWheelController();
         RestartDialogue(TutorialStatus.Finished, new string[2] { "Congratulations! You've finished the tutorial. Now you're free to continue practicing in the tutorial or to change to other maps.", "Press C when you're ready to change" });
         StartCoroutine(CancelAnimation());
     }
