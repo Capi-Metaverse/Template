@@ -663,7 +663,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     }
 
     [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = false)]
-     public static void RPC_LinesSend(NetworkRunner runner, Vector3[] Lines, int NumMaterial, int gross)
+     public static void RPC_LinesSend(NetworkRunner runner, Vector3[] Lines, int NumMaterial, float gross)
     {
 
 

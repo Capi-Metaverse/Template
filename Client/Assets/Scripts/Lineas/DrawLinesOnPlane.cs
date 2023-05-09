@@ -84,7 +84,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
 
 
             currentLineRenderer.GetPositions(positions);
-            GameManager.RPC_LinesSend(gameManager.GetRunner(), positions, NumMaterial, groos);
+            GameManager.RPC_LinesSend(gameManager.GetRunner(), positions, NumMaterial, gross);
 
         }
       
@@ -133,7 +133,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
             panelMaterials.SetActive(true);
         }
     }
-    public void dibujoetc(Vector3[] Lines, int NumMaterial, int gross)
+    public void dibujoetc(Vector3[] Lines, int NumMaterial, float gross)
     {
         Debug.Log(Lines.Length);
         //SendLineRenderer.positionCount = Lines.Length;
