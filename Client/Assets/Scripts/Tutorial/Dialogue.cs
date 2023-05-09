@@ -12,6 +12,7 @@ public class Dialogue : MonoBehaviour
     public TextMeshProUGUI textComponent;
     public SC_FPSController fpsController;
     public MoveTabsTutorial moveTabs;
+    public Animator animator;
     public string[] lines;
     public float textSpeed;
     private int index;
@@ -21,7 +22,7 @@ public class Dialogue : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("Manager").GetComponent<GameManagerTutorial>();
+        gameManager = GameObject.Find("ManagerTutorial").GetComponent<GameManagerTutorial>();
         textComponent.text = string.Empty;
         StartDialogue();
     }
@@ -46,6 +47,7 @@ public class Dialogue : MonoBehaviour
 
     public void StartDialogue()
     {
+        animator.SetFloat("Speed", 0);
         gameManager.DialogueStatus = DialogueStatus.InDialogue;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -85,6 +87,7 @@ public class Dialogue : MonoBehaviour
                 gameManager.DialogueStatus = DialogueStatus.InGame;
                 fpsController.playerUI.ShowUI();
                 fpsController.enabled = true;
+                animator.SetFloat("Speed", 1);
             }
             else
             {

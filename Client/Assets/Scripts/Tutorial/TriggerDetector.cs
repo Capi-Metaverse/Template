@@ -37,7 +37,7 @@ public class TriggerDetector : MonoBehaviour
 
     public void Start()
     {
-        gameManager = GameObject.Find("Manager").GetComponent<GameManagerTutorial>();
+        gameManager = GameObject.Find("ManagerTutorial").GetComponent<GameManagerTutorial>();
         dialogueScript = canvasDialogue.GetComponentInChildren<Dialogue>();
 
         //Set dictionary initial values

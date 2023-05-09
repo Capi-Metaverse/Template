@@ -61,7 +61,7 @@ public class SC_FPSController : MonoBehaviour
     /*-----------------------METHODS------------------------------*/
     void Start()
     {
-        gameManager = GameObject.Find("Manager").GetComponent<GameManagerTutorial>();
+        gameManager = GameObject.Find("ManagerTutorial").GetComponent<GameManagerTutorial>();
         characterController = GetComponent<CharacterController>();
 
         // Lock cursor

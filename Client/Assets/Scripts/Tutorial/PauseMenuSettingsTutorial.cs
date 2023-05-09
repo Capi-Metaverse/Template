@@ -24,7 +24,7 @@ public class PauseMenuSettingsTutorial : MonoBehaviour
     private void Start()
     {
         //We find the GameObjects
-        gameManager = GameObject.Find("Manager").GetComponent<GameManagerTutorial>();
+        gameManager = GameObject.Find("ManagerTutorial").GetComponent<GameManagerTutorial>();
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
         Pause = this.gameObject;
     }
