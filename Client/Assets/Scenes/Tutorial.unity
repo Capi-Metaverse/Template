@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 25117461}
   - component: {fileID: 25117463}
   - component: {fileID: 25117462}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -804,7 +804,7 @@ GameObject:
   - component: {fileID: 169817350}
   - component: {fileID: 169817349}
   - component: {fileID: 169817354}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -905,7 +905,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   presentation: {fileID: 651365731}
   triggerDetector: {fileID: 5874118889009996890}
-  gameManager: {fileID: 1923614046}
 --- !u!1 &302872217
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,7 +1175,7 @@ GameObject:
   - component: {fileID: 408545431}
   - component: {fileID: 408545430}
   - component: {fileID: 408545429}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: ArrowLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1919,7 +1918,7 @@ GameObject:
   - component: {fileID: 665547066}
   - component: {fileID: 665547065}
   - component: {fileID: 665547070}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Advance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2020,7 +2019,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   presentation: {fileID: 651365731}
   triggerDetector: {fileID: 5874118889009996890}
-  gameManager: {fileID: 1923614046}
 --- !u!1 &733683721
 GameObject:
   m_ObjectHideFlags: 0
@@ -2274,6 +2272,7 @@ MonoBehaviour:
   textComponent: {fileID: 866192361}
   fpsController: {fileID: 5874118889009996889}
   moveTabs: {fileID: 1799658160}
+  animator: {fileID: 7843358}
   lines:
   - Hi, I'm your virtual assistant, Adam.
   - I'm here to help you with the basics of this application.
@@ -2426,7 +2425,7 @@ GameObject:
   - component: {fileID: 896090982}
   - component: {fileID: 896090984}
   - component: {fileID: 896090983}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3651,7 +3650,7 @@ GameObject:
   - component: {fileID: 1626538787}
   - component: {fileID: 1626538786}
   - component: {fileID: 1626538785}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: ArrowRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7006,7 +7005,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5874118889009996887}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -8.73, y: -2.66, z: 11.66}
+  m_LocalPosition: {x: -8.73, y: -2.8, z: 11.66}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7993,13 +7992,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.2
+  m_Height: 1.8
+  m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.58, z: 0}
+  m_Center: {x: 0.1, y: 1, z: 0}
 --- !u!114 &5874118889009996889
 MonoBehaviour:
   m_ObjectHideFlags: 0

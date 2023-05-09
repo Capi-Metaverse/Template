@@ -126,6 +126,7 @@ public class TriggerDetector : MonoBehaviour
                     }
                 case TutorialStatus.Finished:
                     {
+
                         if (Input.GetKeyDown("b"))
                         {
                             EventWheelController();
@@ -167,6 +168,8 @@ public class TriggerDetector : MonoBehaviour
 
     public void SetPresentationTutorial()
     {
+        GameObject.Find("Back").layer = LayerMask.NameToLayer("Interactive");
+        GameObject.Find("Advance").layer = LayerMask.NameToLayer("Interactive");
         objective1.text = "";
         tutorialNumber.text = "6";
         objective1.color = Color.black;
@@ -302,8 +305,14 @@ public class TriggerDetector : MonoBehaviour
     {
         flags["B"] = true;
         EventWheelController();
+
+        objective1.text = "";
+        objective1.color = Color.black;
+        tutorialNumber.text = "8";
         RestartDialogue(TutorialStatus.Finished, new string[2] { "Congratulations! You've finished the tutorial. Now you're free to continue practicing in the tutorial or to change to other maps.", "Press C when you're ready to change" });
         StartCoroutine(CancelAnimation());
+
+
     }
 
     IEnumerator CancelAnimation()
