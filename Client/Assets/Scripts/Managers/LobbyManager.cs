@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using PlayFab;
+using PlayFab.ClientModels;
+using PlayFab.MultiplayerModels;
 
 public class LobbyManager : MonoBehaviour
 {

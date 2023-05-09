@@ -39,7 +39,6 @@ namespace Photon.Realtime
     using SupportClass = ExitGames.Client.Photon.SupportClass;
     #endif
 
-
     /// <summary>
     /// Provides methods to work with Photon's regions (Photon Cloud) and can be use to find the one with best ping.
     /// </summary>
@@ -91,13 +90,12 @@ namespace Photon.Realtime
                 {
                     return null;
                 }
-
                 if (this.bestRegionCache != null)
                 {
                     return this.bestRegionCache;
                 }
 
-                this.EnabledRegions.Sort((a, b) => a.Ping.CompareTo(b.Ping));
+                this.EnabledRegions.Sort((a, b) => a.Ping.CompareTo(b.Ping) );
 
                 this.bestRegionCache = this.EnabledRegions[0];
                 return this.bestRegionCache;
@@ -115,12 +113,11 @@ namespace Photon.Realtime
         {
             get
             {
-                if (this.BestRegion != null)
-                {
-                    return this.BestRegion.Code + ";" + this.BestRegion.Ping + ";" + this.availableRegionCodes;
-                }
+				if (this.BestRegion != null) {
+					return this.BestRegion.Code + ";" + this.BestRegion.Ping + ";" + this.availableRegionCodes;
+				}
 
-                return this.availableRegionCodes;
+				return this.availableRegionCodes;
             }
         }
 
@@ -133,7 +130,6 @@ namespace Photon.Realtime
             {
                 sb.AppendFormat(region.GetResults() + "\n");
             }
-
             sb.AppendFormat("Previous summary: {0}", this.previousSummaryProvided);
 
             return sb.ToString();
@@ -145,7 +141,6 @@ namespace Photon.Realtime
             {
                 return;
             }
-
             if (opGetRegions.ReturnCode != ErrorCode.Ok)
             {
                 return;
@@ -218,14 +213,8 @@ namespace Photon.Realtime
 
             this.Aborted = false;
             this.IsPinging = true;
-            this.previousSummaryProvided = previousSummary;
-
-            #if SUPPORTED_UNITY
-            MonoBehaviourEmpty.Instance.onCompleteCall = onCompleteCallback;
-            this.onCompleteCall = MonoBehaviourEmpty.Instance.CompleteOnMainThread;
-            #else
             this.onCompleteCall = onCompleteCallback;
-            #endif
+            this.previousSummaryProvided = previousSummary;
 
             if (string.IsNullOrEmpty(previousSummary))
             {
@@ -275,7 +264,6 @@ namespace Photon.Realtime
 
             lock (this.pingerList)
             {
-                this.pingerList.Clear();
                 this.pingerList.Add(singlePinger);
             }
 
@@ -300,9 +288,6 @@ namespace Photon.Realtime
                 }
             }
 
-            #if SUPPORTED_UNITY
-            MonoBehaviourEmpty.SelfDestroy();
-            #endif
         }
 
         private void OnPreferredRegionPinged(Region preferredRegion)
@@ -315,6 +300,9 @@ namespace Photon.Realtime
             {
                 this.IsPinging = false;
                 this.onCompleteCall(this);
+                #if PING_VIA_COROUTINE
+                MonoBehaviourEmpty.SelfDestroy();
+                #endif
             }
         }
 
@@ -368,6 +356,9 @@ namespace Photon.Realtime
             {
                 this.onCompleteCall(this);
             }
+            #if PING_VIA_COROUTINE
+            MonoBehaviourEmpty.SelfDestroy();
+            #endif
         }
     }
 
@@ -523,6 +514,7 @@ namespace Photon.Realtime
                     break;
                 }
 
+                bool overtime = false;
                 sw.Reset();
                 sw.Start();
 
@@ -541,7 +533,7 @@ namespace Photon.Realtime
                 {
                     if (sw.ElapsedMilliseconds >= MaxMilliseconsPerPing)
                     {
-                        // if ping.Done() did not become true in MaxMilliseconsPerPing, ping.Successful is false and we apply MaxMilliseconsPerPing as rtt below
+                        overtime = true;
                         break;
                     }
                     #if !NETFX_CORE
@@ -605,6 +597,7 @@ namespace Photon.Realtime
                     yield return null;
                 }
 
+                bool overtime = false;
                 sw.Reset();
                 sw.Start();
 
@@ -623,7 +616,7 @@ namespace Photon.Realtime
                 {
                     if (sw.ElapsedMilliseconds >= MaxMilliseconsPerPing)
                     {
-                        // if ping.Done() did not become true in MaxMilliseconsPerPing, ping.Successful is false and we apply MaxMilliseconsPerPing as rtt below
+                        overtime = true;
                         break;
                     }
 
@@ -734,14 +727,11 @@ namespace Photon.Realtime
         }
     }
 
-    #if SUPPORTED_UNITY
+    #if PING_VIA_COROUTINE
     internal class MonoBehaviourEmpty : MonoBehaviour
     {
         private static bool instanceSet; // to avoid instance null check which may be incorrect
         private static MonoBehaviourEmpty instance;
-
-        internal Action<RegionHandler> onCompleteCall;
-        private RegionHandler obj;
 
         public static MonoBehaviourEmpty Instance
         {
@@ -767,22 +757,6 @@ namespace Photon.Realtime
                 instanceSet = false;
                 Destroy(instance.gameObject);
             }
-        }
-
-        void Update()
-        {
-            if (this.obj != null)
-            {
-                this.onCompleteCall(obj);
-                this.obj = null;
-                this.onCompleteCall = null;
-                MonoBehaviourEmpty.SelfDestroy();
-            }
-        }
-
-        public void CompleteOnMainThread(RegionHandler obj)
-        {
-            this.obj = obj;
         }
     }
     #endif
