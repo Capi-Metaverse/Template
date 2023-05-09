@@ -663,14 +663,14 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     }
 
     [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = false)]
-     public static void RPC_LinesSend(NetworkRunner runner, Vector3[] Lines, int NumMaterial)
+     public static void RPC_LinesSend(NetworkRunner runner, Vector3[] Lines, int NumMaterial, int gross)
     {
 
 
         Debug.Log(Lines.Length);
 
         DrawLinesOnPlane drawLinesOnPlane = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
-        drawLinesOnPlane.dibujoetc(Lines,NumMaterial);
+        drawLinesOnPlane.dibujoetc(Lines,NumMaterial,gross);
     }
 }
 
