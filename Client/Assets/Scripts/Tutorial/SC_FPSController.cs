@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using static Unity.Collections.Unicode;
 
 
 [RequireComponent(typeof(CharacterController))]
@@ -14,6 +15,10 @@ public class SC_FPSController : MonoBehaviour
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
+    private int jumpCount { get; set; } = 0;
+    private int _lastVisibleJump = 0;
+    public bool IsGrounded { get; set; }
+    public Vector3 Velocity { get; set; }
 
     //Add sensitivity
     public float sensitivity;
@@ -151,7 +156,30 @@ public class SC_FPSController : MonoBehaviour
             }
         }
 
+        //Settings
+        if (Input.GetKeyDown(KeyCode.Escape) && (gameManager.TutorialStatus == TutorialStatus.PreSettings || gameManager.TutorialStatus == TutorialStatus.Finished))
+        {
+
+            //Open pause menu and disable this
+            gameManager.GameStatus = GameStatus.InPause;
+
+            pauseMenu.SetActive(true);
+            playerUI.HideUI();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            if (gameManager.TutorialStatus == TutorialStatus.PreSettings)
+            {
+                gameManager.TutorialStatus = TutorialStatus.Settings;
+                pauseMenu.GetComponent<PauseMenuSettingsTutorial>().StartTutorial();
+            }
+
+            this.enabled = false;
+
+        }
+
         // We are grounded, so recalculate move direction based on axes
+        var previousPos = transform.position;
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
@@ -174,26 +202,7 @@ public class SC_FPSController : MonoBehaviour
             moveDirection.y = movementDirectionY;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && (gameManager.TutorialStatus == TutorialStatus.PreSettings || gameManager.TutorialStatus == TutorialStatus.Finished) )
-        {
 
-            //Open pause menu and disable this
-            gameManager.GameStatus = GameStatus.InPause;
-            
-            pauseMenu.SetActive(true);
-            playerUI.HideUI();
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-
-            if (gameManager.TutorialStatus == TutorialStatus.PreSettings)
-            {
-                gameManager.TutorialStatus = TutorialStatus.Settings;
-                pauseMenu.GetComponent<PauseMenuSettingsTutorial>().StartTutorial();
-            }
-
-            this.enabled = false;
-
-        }
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
         // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
         // as an acceleration (ms^-2)
@@ -205,8 +214,6 @@ public class SC_FPSController : MonoBehaviour
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
 
-        
-
         // Player and Camera rotation
         if (canMove)
         {
@@ -214,6 +221,40 @@ public class SC_FPSController : MonoBehaviour
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed / sensitivity, 0);
+        }
+
+        Velocity = (transform.position - previousPos);
+        IsGrounded = characterController.isGrounded;
+        if (IsGrounded) jumpCount++;
+
+        //Animations
+        if (animator == null) { animator = this.gameObject.GetComponentInChildren<Animator>(); }
+
+        if (IsGrounded)
+        {
+
+            if (Velocity.magnitude > 0 && IsGrounded)
+            {
+
+                animator.SetBool("Walking", true);
+
+            }
+            else
+            {
+                animator.SetBool("Walking", false);
+            }
+            animator.SetBool("Running", isRunning);
+        }
+
+        else
+        {
+            if (jumpCount > _lastVisibleJump)
+            {
+                animator.SetTrigger("Jumping");
+                // Play jump sound/particle effect
+                _lastVisibleJump = jumpCount;
+            }
+
         }
 
     }
