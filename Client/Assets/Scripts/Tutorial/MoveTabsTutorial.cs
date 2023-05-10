@@ -1,6 +1,7 @@
 
 using System.Windows.Forms;
 using UnityEngine;
+using UnityEngine.UI;
 using static System.Windows.Forms.LinkLabel;
 
 public enum SettingsStatus
@@ -25,6 +26,8 @@ public class MoveTabsTutorial : MonoBehaviour
     [SerializeField] private Dialogue dialogueScript;
 
     [SerializeField] private TriggerDetector triggerDetector;
+
+    public GraphicRaycaster graphic;
 
 
     [SerializeField] private GameManagerTutorial gameManager;
@@ -98,6 +101,8 @@ public class MoveTabsTutorial : MonoBehaviour
     {
         //Dialogo settings
 
+        graphic.enabled = false;
+
         string[] lines = new string[1] { "This is the settings menu. You can change some options like Volume or Sensivity." };
         dialogueScript.lines = lines;
         dialogueScript.textComponent.text = string.Empty;
@@ -166,6 +171,7 @@ public class MoveTabsTutorial : MonoBehaviour
 
                     gameManager.GameStatus = GameStatus.InGame;
                     gameManager.TutorialStatus = TutorialStatus.Presentation;
+                    graphic.enabled = true;
 
                     triggerDetector.SetPresentationTutorial();
                    

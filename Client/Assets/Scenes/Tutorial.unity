@@ -3975,6 +3975,7 @@ MonoBehaviour:
   Lenguages: {fileID: 0}
   dialogueScript: {fileID: 851344092}
   triggerDetector: {fileID: 5874118889009996890}
+  graphic: {fileID: 2114061403}
   gameManager: {fileID: 1923614046}
   settingsStatus: 0
   PlayerKeys: []
@@ -4734,6 +4735,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2065591732}
   m_CullTransparentMesh: 1
+--- !u!114 &2114061403 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5587160887694417672, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
+  m_PrefabInstance: {fileID: 564503113}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &270685139227548665
 Transform:
   m_ObjectHideFlags: 0
