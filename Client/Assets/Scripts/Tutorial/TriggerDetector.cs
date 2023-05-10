@@ -139,6 +139,8 @@ public class TriggerDetector : MonoBehaviour
                         if (Input.GetKey("c"))
                         {
                             flags["C"] = true;
+                            Cursor.lockState = CursorLockMode.None;
+                            Cursor.visible = true;
                             SceneManager.LoadScene("1.Start");
                             //Close 
                         };
