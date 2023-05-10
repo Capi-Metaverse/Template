@@ -298,6 +298,7 @@ public class TriggerDetector : MonoBehaviour
     public void SetAnimationTutorial()
     {
         flags["K"] = true;
+        playerUI.PresentationTextOff();
         RestartDialogue(TutorialStatus.Animations, new string[2] { "Now, let's do a special move. ", "Approach a mirror, press B to show the Animation Roulette and select a move" });
         objective1.text = "";
         objective2.text = "";
@@ -353,7 +354,6 @@ public class TriggerDetector : MonoBehaviour
     public void RestartDialogue(TutorialStatus tutorialStatusValue, string[] lines)
     {
         gameManager.TutorialStatus = tutorialStatusValue;
-        gameManager.DialogueStatus = DialogueStatus.InDialogue;
         fPSController.playerUI.EventTextOff();
         dialogueScript.lines = lines;
         dialogueScript.textComponent.text = string.Empty;

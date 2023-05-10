@@ -55,13 +55,13 @@ public class SC_FPSController : MonoBehaviour
     [SerializeField] public PlayerUI playerUI;
 
     public Animator animator;
-    private GameManagerTutorial gameManager;
+    public GameManagerTutorial gameManager;
 
 
     /*-----------------------METHODS------------------------------*/
     void Start()
     {
-        gameManager = GameObject.Find("ManagerTutorial").GetComponent<GameManagerTutorial>();
+        //gameManager = GameObject.Find("ManagerTutorial").GetComponent<GameManagerTutorial>();
         characterController = GetComponent<CharacterController>();
 
         // Lock cursor
@@ -72,7 +72,8 @@ public class SC_FPSController : MonoBehaviour
 
     void Update()
     {
-
+        if (presentationCamera != null && (gameManager.TutorialStatus == TutorialStatus.Presentation || gameManager.TutorialStatus == TutorialStatus.Finished) && gameManager.DialogueStatus!=DialogueStatus.InDialogue)
+            playerUI.PresentationTextOn();
 
         if (HittingObject && gameManager.DialogueStatus != DialogueStatus.InDialogue)
             playerUI.EventTextOn();
@@ -131,7 +132,7 @@ public class SC_FPSController : MonoBehaviour
         //K key down(PresentationMode)
         if (presentationCamera != null)
         {
-            if (Input.GetKeyDown("k") && presentationCamera != null)
+            if (Input.GetKeyDown("k") && presentationCamera != null && (gameManager.TutorialStatus == TutorialStatus.Presentation || gameManager.TutorialStatus == TutorialStatus.Finished))
             {
                 if (gameManager.TutorialStatus == TutorialStatus.Presentation) triggerDetector.OnPresentation();
 
@@ -139,7 +140,8 @@ public class SC_FPSController : MonoBehaviour
                 {
                     presentationCamera.enabled = false;
                     playerCamera.enabled = true;
-                    playerUI.PresentationTextOn();
+                    if (gameManager.DialogueStatus!=DialogueStatus.InDialogue)
+                        playerUI.PresentationTextOn();
                     playerUI.ShowUI();
                 }
 
@@ -275,10 +277,10 @@ public class SC_FPSController : MonoBehaviour
         {
             //We obtain the camera
             presentationCamera = camera;
-
+            //Debug.Log(gameManager.TutorialStatus);
             //We activate UI
-            if(gameManager.TutorialStatus >= TutorialStatus.Presentation)
-            playerUI.PresentationTextOn();
+            if (gameManager.TutorialStatus == TutorialStatus.Presentation || gameManager.TutorialStatus == TutorialStatus.Finished)
+                playerUI.PresentationTextOn();
         }
     }
 

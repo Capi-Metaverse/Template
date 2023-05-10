@@ -30,15 +30,23 @@ public enum GameStatus
 public class GameManagerTutorial : MonoBehaviour
 {
     //TutorialStatus
-    [SerializeField]  private TutorialStatus tutorialStatus = TutorialStatus.Movement;
+    [SerializeField]  private TutorialStatus tutorialStatus;
     public TutorialStatus TutorialStatus { get => tutorialStatus; set => tutorialStatus = value; }
 
     //DialogueStatus
-    private DialogueStatus dialogueStatus = DialogueStatus.InDialogue;
+    private DialogueStatus dialogueStatus;
     public DialogueStatus DialogueStatus { get => dialogueStatus; set => dialogueStatus = value; }
 
     //GameStatus
-    private GameStatus gameStatus = GameStatus.InGame;
+    private GameStatus gameStatus;
     public GameStatus GameStatus { get => gameStatus; set => gameStatus = value; }
+
+
+    public void Start()
+    {
+        tutorialStatus = TutorialStatus.Movement;
+        dialogueStatus = DialogueStatus.InDialogue;
+        gameStatus = GameStatus.InGame;
+    }
 
 }

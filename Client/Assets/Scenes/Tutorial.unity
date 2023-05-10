@@ -8028,6 +8028,7 @@ MonoBehaviour:
   onPresentationCamera: 0
   playerUI: {fileID: 1018573549}
   animator: {fileID: 7843358}
+  gameManager: {fileID: 1923614046}
 --- !u!114 &5874118889009996890
 MonoBehaviour:
   m_ObjectHideFlags: 0
