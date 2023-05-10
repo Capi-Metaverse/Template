@@ -158,7 +158,7 @@ public class SC_FPSController : MonoBehaviour
         }
 
         //Settings
-        if (Input.GetKeyDown(KeyCode.Escape) && (gameManager.TutorialStatus == TutorialStatus.PreSettings || gameManager.TutorialStatus == TutorialStatus.Finished))
+        if (Input.GetKeyDown(KeyCode.Escape) && (gameManager.TutorialStatus == TutorialStatus.PreSettings))
         {
 
             //Open pause menu and disable this
