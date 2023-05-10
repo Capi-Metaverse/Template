@@ -1,10 +1,14 @@
+
+using PlayFab;
+using PlayFab.ClientModels;
 using System.Collections;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEngine;
-using static System.Windows.Forms.LinkLabel;
 
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using Cursor = UnityEngine.Cursor;
 
 public class TriggerDetector : MonoBehaviour
 {
@@ -135,7 +139,7 @@ public class TriggerDetector : MonoBehaviour
                         if (Input.GetKey("c"))
                         {
                             flags["C"] = true;
-                            Debug.Log("Exiting");
+                            SceneManager.LoadScene("1.Start");
                             //Close 
                         };
                         break;
@@ -313,6 +317,29 @@ public class TriggerDetector : MonoBehaviour
         StartCoroutine(CancelAnimation());
 
 
+        //Add to playfab
+
+        var request = new UpdateUserDataRequest
+        {
+            Data = new Dictionary<string, string>
+            {
+                {"NewUser", "false"}
+            }
+        };
+        PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
+
+
+    }
+
+
+    public void OnError(PlayFabError obj)
+    {
+        Debug.Log("[PlayFab-ManageData] Error");
+    }
+
+    public void OnDataSend(UpdateUserDataResult obj)
+    {
+        Debug.Log("[PlayFab-ManageData] Data Sent");
     }
 
     IEnumerator CancelAnimation()

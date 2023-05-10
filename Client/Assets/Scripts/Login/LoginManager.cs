@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 public class LoginManager : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class LoginManager : MonoBehaviour
     public GameObject ResetPanel;
 
     private GameManager gameManager;
+
+    private bool newUser = true;
 
 
     //Roles
@@ -213,8 +216,19 @@ public class LoginManager : MonoBehaviour
 
         PlayFabClientAPI.ExecuteCloudScript(GetID, OnIDSuccess, OnError);
 
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnNewUser, OnError);
+
         //Assign the role of the user
         AssignRole();
+    }
+
+
+    public void OnNewUser(GetUserDataResult result)
+    {
+        if (result.Data != null && result.Data.ContainsKey("NewUser"))
+        {
+            newUser = Convert.ToBoolean(result.Data["NewUser"].Value);
+        }
     }
 
 
@@ -272,6 +286,7 @@ public class LoginManager : MonoBehaviour
     private void OnAddMemberSuccess(ExecuteCloudScriptResult result)
     {
         Debug.Log("[PlayFab-LoginManager] Member added to the group successfully." + result.ToJson());
+
     }
 
 
@@ -340,7 +355,16 @@ public class LoginManager : MonoBehaviour
         Debug.Log("[PlayFab-LoginManager] UserRole: " + gameManager.GetUserRole());
 
         //Change to the next scene
-        SceneManager.LoadSceneAsync("Lobby");
+        if (newUser)
+        {
+            SceneManager.LoadSceneAsync("Tutorial");
+            
+        }
+     
+        else
+        {
+            SceneManager.LoadSceneAsync("Lobby");
+        }
     }
 
 
