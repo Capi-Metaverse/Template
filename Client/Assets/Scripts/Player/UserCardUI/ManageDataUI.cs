@@ -66,8 +66,6 @@ using UnityEngine;
 
         }
 
-
-
         public void OnError(PlayFabError obj)
         {
             Debug.Log("[PlayFab-ManageData] Error");

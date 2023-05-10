@@ -6,6 +6,7 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
 {
     public Dictionary<string, string> inputdata;
     public ManageDataUI manageDataUI;
+    public GameObject UICard;
 
     public UserUIInfo currentString;
     // Start is called before the first frame update
@@ -47,12 +48,9 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
         manageDataUI = new ManageDataUI();
         manageDataUI.LoadData();
         StartCoroutine(LoadInitialData());
+
+        UICard.SetActive(true);
     }
-
-    
-
-
-    
 
     // Update is called once per frame
     void Update()

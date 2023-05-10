@@ -235,11 +235,4 @@ public class FriendManager : MonoBehaviour
         panelMessageCheckName.SetActive(false);
         validationMessage.text = " ";
     }
-
-    /*Called when the button is pressed from the UI
-    public void Invite()
-    {
-        Debug.Log("Sending message invitation...");
-        SendMessageInvitation("6452852E8B630026", gameManager.GetRoomName());//Cloudscript
-    }*/
 }
