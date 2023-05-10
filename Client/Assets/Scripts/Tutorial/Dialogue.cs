@@ -13,6 +13,7 @@ public class Dialogue : MonoBehaviour
     public SC_FPSController fpsController;
     public MoveTabsTutorial moveTabs;
     public Animator animator;
+    public TMP_Text reShowText;
     public string[] lines;
     public float textSpeed;
     private int index;
@@ -53,6 +54,7 @@ public class Dialogue : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         fpsController.playerUI.HideUI();
         fpsController.enabled = false;
+        reShowText.enabled = false;
         index = 0;
         StartCoroutine(TypeLine());
     }
@@ -87,12 +89,14 @@ public class Dialogue : MonoBehaviour
                 gameManager.DialogueStatus = DialogueStatus.InGame;
                 fpsController.playerUI.ShowUI();
                 fpsController.enabled = true;
+                Debug.Log("aaaa");
+                reShowText.enabled = true;
                 animator.SetFloat("Speed", 1);
             }
             else
             {
                 DisableDialogue();
-                if(moveTabs.settingsStatus >= SettingsStatus.Settings)
+                if (moveTabs.settingsStatus >= SettingsStatus.Settings)
                 moveTabs.NextTutorial();
             }
         }

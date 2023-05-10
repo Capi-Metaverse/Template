@@ -1,6 +1,7 @@
 
 using PlayFab;
 using PlayFab.ClientModels;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -8,6 +9,7 @@ using TMPro;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static System.Windows.Forms.LinkLabel;
 using Cursor = UnityEngine.Cursor;
 
 public class TriggerDetector : MonoBehaviour
@@ -25,6 +27,8 @@ public class TriggerDetector : MonoBehaviour
     public TMP_Text objective2;
     public TMP_Text objective3;
     public TMP_Text objective4;
+
+    public TMP_Text outText;
 
     public SC_FPSController fPSController;
 
@@ -61,6 +65,10 @@ public class TriggerDetector : MonoBehaviour
     {
         if (gameManager.DialogueStatus == DialogueStatus.InGame && gameManager.GameStatus == GameStatus.InGame)
         {
+            if (Input.GetKeyDown("j"))
+            {
+                ReShowDialogue();
+            }
             switch (gameManager.TutorialStatus)
             {
                 case TutorialStatus.Movement:
@@ -320,6 +328,7 @@ public class TriggerDetector : MonoBehaviour
         tutorialNumber.text = "8";
         RestartDialogue(TutorialStatus.Finished, new string[2] { "Congratulations! You've finished the tutorial. Now you're free to continue practicing in the tutorial or to change to other maps.", "Press C when you're ready to change" });
         StartCoroutine(CancelAnimation());
+        outText.enabled = true;
 
 
         //Add to playfab
@@ -364,4 +373,12 @@ public class TriggerDetector : MonoBehaviour
         dialogueScript.StartDialogue();
     }
 
+    public void ReShowDialogue()
+    {
+        fPSController.playerUI.EventTextOff();
+        dialogueScript.textComponent.text = string.Empty;
+        dialogueScript.EnableDialogue();
+
+        dialogueScript.StartDialogue();
+    }
 }
