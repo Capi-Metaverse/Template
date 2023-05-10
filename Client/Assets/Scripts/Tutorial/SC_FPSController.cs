@@ -78,7 +78,6 @@ public class SC_FPSController : MonoBehaviour
         if (HittingObject && gameManager.DialogueStatus != DialogueStatus.InDialogue)
             playerUI.EventTextOn();
 
-        sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
         targetTime -= Time.deltaTime;
         //Raycast
         if (gameManager.TutorialStatus >= TutorialStatus.Interaction)
