@@ -92,10 +92,12 @@ public class TriggerDetector : MonoBehaviour
                     }
                 case TutorialStatus.Jumping:
                     {
-                        if (!this.gameObject.GetComponent<CharacterController>().isGrounded)
+                        if (Input.GetKeyDown(KeyCode.Space))
                         {
-                            flags["Space"] = true;
+                            
+                                flags["Space"] = true;
                             objective1.color = Color.green;
+                        
                         }
                         else
                         {
