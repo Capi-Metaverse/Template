@@ -174,21 +174,7 @@ public class MoveTabsTutorial : MonoBehaviour
                 }
         }
     }
-        
-       
-        /*
-        //Dialogo Keys
-
-        //mover tab
-       
-
-        //...
-
-        ChangeToPanelPlayer();
-
-        
-        */
-        //Volver al controller
-    
+      
+  
 
 }
