@@ -7,12 +7,15 @@ VisualElement {
     justify-content: center;
     align-items: center;
     background-color: rgb(118, 118, 118);
-    background-image: resource('Sprites/UI/UIBackground');
+    background-image: resource('Sprites/UI/Background_2');
 }
 
 .titulo {
     width: 100%;
     height: 15%;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
 }
 
 .capgemini-logo {
@@ -28,6 +31,9 @@ VisualElement {
     margin-bottom: 25px;
     -unity-font: url('project://database/Assets/NewUI/Fonts/Bahnschrift%20Regular.ttf?fileID=12800000&guid=435c52161bc0b78448a8723c0455a208&type=3#Bahnschrift Regular');
     -unity-font-definition: none;
+    align-items: center;
+    justify-content: center;
+    -unity-text-align: middle-center;
 }
 
 .inputs {

@@ -6,7 +6,7 @@ VisualElement {
     height: 100%;
     align-items: center;
     justify-content: center;
-    background-image: resource('Sprites/UI/UIBackground');
+    background-image: resource('Sprites/UI/Background_2');
     background-color: rgba(240, 244, 247, 0);
 }
 
@@ -22,6 +22,7 @@ VisualElement {
     border-top-color: rgba(0, 0, 0, 0);
     border-bottom-color: rgba(0, 0, 0, 0);
     background-color: rgb(240, 244, 247);
+    flex-shrink: 0;
 }
 
 .header {
@@ -225,7 +226,7 @@ VisualElement {
 }
 
 .kick-button {
-    background-color: rgba(93, 187, 213, 255);
+    background-color: rgb(93, 187, 213);
     border-left-color: rgba(0, 0, 0, 0);
     border-right-color: rgba(0, 0, 0, 0);
     border-top-color: rgba(0, 0, 0, 0);
@@ -237,14 +238,14 @@ VisualElement {
 }
 
 .kick-button:hover {
-    background-color: rgba(0, 92, 118, 255);
+    background-color: rgb(0, 92, 118);
 }
 
 .unity-popup-field__input {
-    background-color: rgba(253, 253, 253, 255);
+    background-color: rgb(253, 253, 253);
 }
 
 .tab:hover {
-    background-color: rgba(57, 193, 229, 255);
-    color: rgba(240, 244, 247, 255);
+    background-color: rgb(57, 193, 229);
+    color: rgb(240, 244, 247);
 }
