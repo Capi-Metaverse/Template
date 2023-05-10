@@ -277,6 +277,7 @@ public class SC_FPSController : MonoBehaviour
             presentationCamera = camera;
 
             //We activate UI
+            if(gameManager.TutorialStatus >= TutorialStatus.Presentation)
             playerUI.PresentationTextOn();
         }
     }
