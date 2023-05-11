@@ -8,10 +8,14 @@ public class FriendRequest : MonoBehaviour {
 
     private string id;
 
+    [SerializeField] private FriendList friendList;
+
     public string Id { get => id; set => id = value; }
 
     public void AcceptRequest()
     {
+        friendList = GameObject.Find("TabFriends").GetComponent<FriendList>();
+
         ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
         {
             FunctionName = "AcceptFriendRequest",
@@ -23,6 +27,8 @@ public class FriendRequest : MonoBehaviour {
         };
 
         PlayFabClientAPI.ExecuteCloudScript(request, OnAddFriendSuccess, OnAddFriendFailure);
+
+        friendList.InstanceFriendItem();
     }
 
     public void DenyRequest()

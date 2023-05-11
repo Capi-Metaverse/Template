@@ -5,7 +5,8 @@ using TMPro;
 
 using UnityEngine;
 
-public class FriendList : MonoBehaviour {
+public class FriendList : MonoBehaviour
+{
 
     [SerializeField] private GameObject FriendItemRequestPrefabSettings;
     [SerializeField] private GameObject FriendRequestListSettings;
@@ -46,58 +47,43 @@ public class FriendList : MonoBehaviour {
     public void InstanceFriendItem()
     {
         CleanFriendsPanel();
-        switch (DisplayMode)
+
+        //Iterate players to get Nickname && ActorNumber
+        for (int i = 0; i < friends.Count; i++)
         {
-            case true:  
-                {
-                    //Iterate players to get Nickname && ActorNumber
-                    for (int i = 0; i < friends.Count; i++)
-                    {
-                        if (friends[i].Tags == "confirmed")
-                        {
+            if (friends[i].Tags == "confirmed")
+            {
 
-                            //We create the userItem object
-                            GameObject userItem = (GameObject)Instantiate(FriendItemPrefabSettings);
+                //We create the userItem object
+                GameObject userItem = (GameObject)Instantiate(FriendItemPrefabSettings);
 
-                            userItem.transform.SetParent(FriendListSettings.transform);
-                            userItem.transform.localScale = Vector3.one;
+                userItem.transform.SetParent(FriendListSettings.transform);
+                userItem.transform.localScale = Vector3.one;
 
-                            //We configure the Nickname
-                            TMP_Text PlayerNameText = userItem.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
-                            FriendItem = userItem.GetComponent<FriendItem>();
+                //We configure the Nickname
+                TMP_Text PlayerNameText = userItem.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
+                FriendItem = userItem.GetComponent<FriendItem>();
 
-                            PlayerNameText.text = friends[i].Username;
-                            FriendItem.Username = friends[i].Username;
-                            FriendItem.Id = friends[i].Id;
-                        }
-                    }
-                    break;
-                };
-            case false:
-                {
+                PlayerNameText.text = friends[i].Username;
+                FriendItem.Username = friends[i].Username;
+                FriendItem.Id = friends[i].Id;
+            }
 
-                    for (int i = 0; i < friends.Count; i++)
-                    {
-                        if (friends[i].Tags == "requester")
-                        {
-                            //We create the userItem object
-                            GameObject userItem = (GameObject)Instantiate(FriendItemRequestPrefabSettings);
+            else if (friends[i].Tags == "requester")
+            {
+                //We create the userItem object
+                GameObject userItem = (GameObject)Instantiate(FriendItemRequestPrefabSettings);
 
-                            userItem.transform.SetParent(FriendRequestListSettings.transform);
-                            userItem.transform.localScale = Vector3.one;
+                userItem.transform.SetParent(FriendRequestListSettings.transform);
+                userItem.transform.localScale = Vector3.one;
 
-                            //We configure the Nickname
-                            TMP_Text PlayerNameText = userItem.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
-                            playerRequest = userItem.GetComponent<FriendRequest>();
+                //We configure the Nickname
+                TMP_Text PlayerNameText = userItem.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
+                playerRequest = userItem.GetComponent<FriendRequest>();
 
-                            PlayerNameText.text = friends[i].Username;
-                            playerRequest.Id = friends[i].Id;
-                        }
-
-                    }
-                    break;
-                };
+                PlayerNameText.text = friends[i].Username;
+                playerRequest.Id = friends[i].Id;
+            }
         }
-
     }
 }
