@@ -314,7 +314,7 @@ public class GameManagerTutorial : MonoBehaviour
 
                     //string[] lines = new string[1] { "This is the Key menu. You can change the input keys from here." };
 
-                    dialogueScript.StartDialogue();
+                   // dialogueScript.StartDialogue();
                     break;
                 }
 
@@ -324,7 +324,7 @@ public class GameManagerTutorial : MonoBehaviour
 
                     //string[] lines = new string[1] { "This is the Friends menu. You can see the friends that you add here." };
 
-                    dialogueScript.StartDialogue();
+                    //dialogueScript.StartDialogue();
                     break;
                 }
 
@@ -333,7 +333,7 @@ public class GameManagerTutorial : MonoBehaviour
                     moveTabs.ChangeToPanelPlayer();
                     //string[] lines = new string[1] { "This is the Player menu. You can see the list of players here." };
 
-                    dialogueScript.StartDialogue();
+                    //dialogueScript.StartDialogue();
                     break;
                 }
 
@@ -346,13 +346,13 @@ public class GameManagerTutorial : MonoBehaviour
                     //string[] lines = new string[2] { "That's all about the settings part.", "Now, go downstairs and interact with the podium to view a presentation" };
 
 
-                    dialogueScript.StartDialogue();
+                   // dialogueScript.StartDialogue();
 
-                    gameManager.GameStatus = GameStatus.InGame;
-                    gameManager.TutorialStatus = TutorialStatus.Presentation;
-                    graphic.enabled = true;
+                   // gameManager.GameStatus = GameStatus.InGame;
+                   // gameManager.TutorialStatus = TutorialStatus.Presentation;
+                   // graphic.enabled = true;
 
-                    triggerDetector.SetPresentationTutorial();
+                    //triggerDetector.SetPresentationTutorial();
 
 
                     break;
