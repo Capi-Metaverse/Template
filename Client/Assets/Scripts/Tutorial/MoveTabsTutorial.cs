@@ -97,6 +97,7 @@ public class MoveTabsTutorial : MonoBehaviour
         Settings.SetActive(false);
     }
 
+    /*
     public void StartTutorial()
     {
         //Dialogo settings
@@ -111,75 +112,76 @@ public class MoveTabsTutorial : MonoBehaviour
         dialogueScript.StartDialogue();
         //Mover tab
     }
+    */
 
-    public void NextTutorial()
-    {
-        settingsStatus++;
+    //public void NextTutorial()
+    //{
+    //    settingsStatus++;
 
-        switch (settingsStatus)
-        {
-            case SettingsStatus.Keys:
-                {
-                    ChangeToPanelKeys();
+    //    switch (settingsStatus)
+    //    {
+    //        case SettingsStatus.Keys:
+    //            {
+    //                ChangeToPanelKeys();
 
-                    string[] lines = new string[1] { "This is the Key menu. You can change the input keys from here." };
-                    dialogueScript.lines = lines;
-                    dialogueScript.textComponent.text = string.Empty;
-                    dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
+    //                string[] lines = new string[1] { "This is the Key menu. You can change the input keys from here." };
+    //                dialogueScript.lines = lines;
+    //                dialogueScript.textComponent.text = string.Empty;
+    //                dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
 
-                    dialogueScript.StartDialogue();
-                    break;
-                }
+    //                dialogueScript.StartDialogue();
+    //                break;
+    //            }
 
-            case SettingsStatus.Friends:
-                {
-                    ChangeToPanelFriends();
+    //        case SettingsStatus.Friends:
+    //            {
+    //                ChangeToPanelFriends();
 
-                    string[] lines = new string[1] { "This is the Friends menu. You can see the friends that you add here." };
-                    dialogueScript.lines = lines;
-                    dialogueScript.textComponent.text = string.Empty;
-                    dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
+    //                string[] lines = new string[1] { "This is the Friends menu. You can see the friends that you add here." };
+    //                dialogueScript.lines = lines;
+    //                dialogueScript.textComponent.text = string.Empty;
+    //                dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
 
-                    dialogueScript.StartDialogue();
-                    break;
-                }
+    //                dialogueScript.StartDialogue();
+    //                break;
+    //            }
 
-            case SettingsStatus.Players:
-                {
-                    ChangeToPanelPlayer();
-                    string[] lines = new string[1] { "This is the Player menu. You can see the list of players here." };
-                    dialogueScript.lines = lines;
-                    dialogueScript.textComponent.text = string.Empty;
-                    dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
+    //        case SettingsStatus.Players:
+    //            {
+    //                ChangeToPanelPlayer();
+    //                string[] lines = new string[1] { "This is the Player menu. You can see the list of players here." };
+    //                dialogueScript.lines = lines;
+    //                dialogueScript.textComponent.text = string.Empty;
+    //                dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
 
-                    dialogueScript.StartDialogue();
-                    break;
-                }
+    //                dialogueScript.StartDialogue();
+    //                break;
+    //            }
 
-            case SettingsStatus.Finished:
-                {
+    //        case SettingsStatus.Finished:
+    //            {
                    
-                    Settings.SetActive(false);
+    //                Settings.SetActive(false);
 
 
-                    string[] lines = new string[2] { "That's all about the settings part.", "Now, go downstairs and interact with the podium to view a presentation" };
-                    dialogueScript.lines = lines;
-                    dialogueScript.textComponent.text = string.Empty;
-                    dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
+    //                string[] lines = new string[2] { "That's all about the settings part.", "Now, go downstairs and interact with the podium to view a presentation" };
+    //                dialogueScript.lines = lines;
+    //                dialogueScript.textComponent.text = string.Empty;
+    //                dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
 
-                    dialogueScript.StartDialogue();
+    //                dialogueScript.StartDialogue();
 
-                    gameManager.GameStatus = GameStatus.InGame;
-                    gameManager.TutorialStatus = TutorialStatus.Presentation;
-                    graphic.enabled = true;
+    //                gameManager.GameStatus = GameStatus.InGame;
+    //                gameManager.TutorialStatus = TutorialStatus.Presentation;
+    //                graphic.enabled = true;
 
-                    triggerDetector.SetPresentationTutorial();
+    //                triggerDetector.SetPresentationTutorial();
                    
 
-                    break;
-                }
-        }
-    }
+    //                break;
+    //            }
+    //    }
+    //}
       
   
 

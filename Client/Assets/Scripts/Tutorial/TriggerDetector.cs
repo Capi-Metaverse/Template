@@ -67,120 +67,74 @@ public class TriggerDetector : MonoBehaviour
         {
             if (Input.GetKeyDown("j"))
             {
-                ReShowDialogue();
+                //ReShowDialogue();
             }
             switch (gameManager.TutorialStatus)
             {
                 case TutorialStatus.Movement:
                     {
-                        if (Input.GetKey("w")) { flags["W"] = true; objective1.color = Color.green; }
-                        if (Input.GetKey("a"))
-                        {
-                            flags["A"] = true; objective3.color = Color.green;
-                        }
-                        if (Input.GetKey("s"))
-                        {
-                            flags["S"] = true; objective2.color = Color.green;
-                        }
-                        if (Input.GetKey("d")) { flags["D"] = true; objective4.color = Color.green; }
-
-                        if (flags["W"] && flags["A"] && flags["S"] && flags["D"])
-                        {
-                            objective1.text = "";
-                            objective1.color = Color.black;
-                            objective1.text = "Press space to jump.";
-                            tutorialNumber.text = "2";
-                            objective2.text = "";
-                            objective3.text = "";
-                            objective4.text = "";
-                            RestartDialogue(TutorialStatus.Jumping, new string[2] { "Congratulations! In the metaverse you can jump too.", "Go upstairs and press Space to Jump" });
-                           
-                        }
+                        if (Input.GetKeyDown("w")) gameManager.CompleteObjective(0);
+                        if (Input.GetKeyDown("s")) gameManager.CompleteObjective(1);
+                        if (Input.GetKeyDown("a")) gameManager.CompleteObjective(2);
+                        if (Input.GetKeyDown("d")) gameManager.CompleteObjective(3);
                         break;
                     }
+                    
                 case TutorialStatus.Jumping:
                     {
-                        if (Input.GetKeyDown(KeyCode.Space))
-                        {
-                            
-                                flags["Space"] = true;
-                            objective1.color = Color.green;
-                        
-                        }
+                        if (Input.GetKeyDown(KeyCode.Space)) flags["Space"] = true;
+
                         else
                         {
-                            if (flags["Space"] && this.gameObject.GetComponent<CharacterController>().isGrounded)
-                            {
-                                RestartDialogue(TutorialStatus.Interaction, new string[2] { "Well Done! Now, let's do something more interactive.", "Go near a lamp and press e to interact with it" });
-                                objective1.text = "";
-                                objective1.color = Color.black;
-                                tutorialNumber.text = "3";
-                                objective1.text = "Press e with an interactable object. 0/2";
-                            }
+                            if (flags["Space"] && this.gameObject.GetComponent<CharacterController>().isGrounded) gameManager.CompleteObjective(0);
                         }
+
                         break;
                     }
-              
+                   
                 case TutorialStatus.Voice:
                     {
-                        if (Input.GetKeyDown("m"))
-                        {
-                            OnVoice();
-                        };
+                        if (Input.GetKeyDown("m")) gameManager.CompleteObjective(0);
                         break;
+
                     }
 
-                case TutorialStatus.Animations:
+                case TutorialStatus.PreSettings:
                     {
-                        if (Input.GetKeyDown("b"))
-                        {
-                            EventWheelController();
-                        };
+                        if (Input.GetKeyDown(KeyCode.Escape)) gameManager.CompleteObjective(0);
                         break;
                     }
-                case TutorialStatus.Finished:
-                    {
+                    /*
+                     case TutorialStatus.Animations:
+                         {
+                             if (Input.GetKeyDown("b"))
+                             {
+                                 EventWheelController();
+                             };
+                             break;
+                         }
+                     case TutorialStatus.Finished:
+                         {
 
-                        if (Input.GetKeyDown("b"))
-                        {
-                            EventWheelController();
-                        };
+                             if (Input.GetKeyDown("b"))
+                             {
+                                 EventWheelController();
+                             };
 
-                        if (Input.GetKey("c"))
-                        {
-                            flags["C"] = true;
-                            Cursor.lockState = CursorLockMode.None;
-                            Cursor.visible = true;
-                            SceneManager.LoadScene("1.Start");
-                            //Close 
-                        };
-                        break;
-                    }
+                             if (Input.GetKey("c"))
+                             {
+                                 flags["C"] = true;
+                                 Cursor.lockState = CursorLockMode.None;
+                                 Cursor.visible = true;
+                                 SceneManager.LoadScene("1.Start");
+                                 //Close 
+                             };
+                             break;
+                         }*/
             }
 
         }
-    }
-
-
-    public void endInteraction()
-    {
-        if(gameManager.TutorialStatus == TutorialStatus.Interaction)
-        {
-            ++interaction;
-            objective1.text = "Press e with an interactable object." + interaction + "/2";
-            if (interaction == 2)
-            {
-                flags["E"] = true;
-                objective1.color = Color.green;
-                RestartDialogue(TutorialStatus.Voice, new string[2] { "Now, let's see how to talk with someone.", "Press M to mute and unmute your voice" });
-                objective1.text = "";
-                objective1.color = Color.black;
-                tutorialNumber.text = "4";
-                objective1.text = "Press m to mute/unmute the chat 0/2";
-            }
         }
-
-    }
 
     public void SetPresentationTutorial()
     {
@@ -257,27 +211,12 @@ public class TriggerDetector : MonoBehaviour
         }
     }
 
-    public void OnVoice()
-    {
-        if (mPressedCounter < 2)
-        {
-            ++mPressedCounter;
-            objective1.text = "Press m to mute/unmute the chat " + mPressedCounter + "/2";
-            playerUI.ChangeMicSprite();
-
-            if (mPressedCounter == 2)
-            {
-                objective1.color = Color.green;
-                EndVoiceTutorial();
-            }
-        }
-    }
 
     public void EndVoiceTutorial()
     {
         flags["M"] = true;
         objective1.color = Color.green;
-        RestartDialogue(TutorialStatus.PreSettings, new string[2] { "After turning the voice on/off, it's time to see how to modify the settings", "Press ESC to show the Pause and Settings Menus" });
+        //RestartDialogue(TutorialStatus.PreSettings, new string[2] { "After turning the voice on/off, it's time to see how to modify the settings", "Press ESC to show the Pause and Settings Menus" });
         objective1.text = "";
         tutorialNumber.text = "5";
         objective1.color = Color.black;
@@ -309,7 +248,7 @@ public class TriggerDetector : MonoBehaviour
     {
         flags["K"] = true;
         playerUI.PresentationTextOff();
-        RestartDialogue(TutorialStatus.Animations, new string[2] { "Now, let's do a special move. ", "Approach a mirror, press B to show the Animation Roulette and select a move" });
+        //RestartDialogue(TutorialStatus.Animations, new string[2] { "Now, let's do a special move. ", "Approach a mirror, press B to show the Animation Roulette and select a move" });
         objective1.text = "";
         objective2.text = "";
         objective3.text = "";
@@ -326,7 +265,7 @@ public class TriggerDetector : MonoBehaviour
         objective1.text = "";
         objective1.color = Color.black;
         tutorialNumber.text = "8";
-        RestartDialogue(TutorialStatus.Finished, new string[2] { "Congratulations! You've finished the tutorial. Now you're free to continue practicing in the tutorial or to change to other maps.", "Press C when you're ready to change" });
+        //RestartDialogue(TutorialStatus.Finished, new string[2] { "Congratulations! You've finished the tutorial. Now you're free to continue practicing in the tutorial or to change to other maps.", "Press C when you're ready to change" });
         StartCoroutine(CancelAnimation());
         outText.enabled = true;
 
@@ -361,7 +300,7 @@ public class TriggerDetector : MonoBehaviour
         yield return new WaitForSeconds(2);
         fPSController.animator.SetInteger("AnimationWheel", (int)AnimationList.None);
     }
-
+    /*
     public void RestartDialogue(TutorialStatus tutorialStatusValue, string[] lines)
     {
         gameManager.TutorialStatus = tutorialStatusValue;
@@ -381,4 +320,5 @@ public class TriggerDetector : MonoBehaviour
 
         dialogueScript.StartDialogue();
     }
+    */
 }

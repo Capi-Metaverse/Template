@@ -1768,25 +1768,6 @@ PrefabInstance:
     - {fileID: 3568877231533172023, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
     - {fileID: 1442107820706898414, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
---- !u!1 &564503114 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5587160888839851947, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
-  m_PrefabInstance: {fileID: 564503113}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &564503115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 564503114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 302aa3d8711e90448a23ec327a4f8aed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fpsController: {fileID: 5874118889009996889}
-  canvas: {fileID: 851344087}
 --- !u!4 &564503116 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5587160888839851944, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
@@ -2505,11 +2486,12 @@ MonoBehaviour:
   animator: {fileID: 7843358}
   reShowText: {fileID: 820631548}
   lines:
-  - Hi, I'm your virtual assistant, Adam.
+  - ' I''m your virtual assistant, Adam.am.'
   - I'm here to help you with the basics of this application.
   - You can move to any direction with the WASD Keys, Try it!
   textSpeed: 0.2
   textDialogue: {fileID: 48820398}
+  gameManager: {fileID: 1923614046}
 --- !u!1 &866192359
 GameObject:
   m_ObjectHideFlags: 0
@@ -3258,8 +3240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9e7186d81a9c544bde20334fcb525b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 5874118889009996889}
-  dialogueScript: {fileID: 851344092}
+  controller: {fileID: 0}
+  dialogueScript: {fileID: 0}
 --- !u!1 &1224049647
 GameObject:
   m_ObjectHideFlags: 0
@@ -4564,7 +4546,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153aa83fc1352d34e9918029192b2284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialStatus: 0
+  dialogueScript: {fileID: 851344092}
+  fpsController: {fileID: 5874118889009996889}
+  moveTabs: {fileID: 1799658160}
+  animator: {fileID: 7843358}
+  reShowText: {fileID: 820631548}
+  playerUI: {fileID: 1018573549}
+  objectives:
+  - {fileID: 733683723}
+  - {fileID: 1454040622}
+  - {fileID: 1224049649}
+  - {fileID: 312076097}
+  tutorialNumber: {fileID: 929373500}
+  pauseMenuSettings: {fileID: 1039993762}
 --- !u!4 &1923614047
 Transform:
   m_ObjectHideFlags: 0

@@ -112,7 +112,8 @@ public class SC_FPSController : MonoBehaviour
         }
 
         //Settings
-        if (Input.GetKeyDown(KeyCode.Escape) && (gameManager.TutorialStatus == TutorialStatus.PreSettings))
+        
+        if (Input.GetKeyDown(KeyCode.Escape) && (gameManager.TutorialStatus == TutorialStatus.Finished))
         {
 
             //Open pause menu and disable this
@@ -126,12 +127,13 @@ public class SC_FPSController : MonoBehaviour
             if (gameManager.TutorialStatus == TutorialStatus.PreSettings)
             {
                 gameManager.TutorialStatus = TutorialStatus.Settings;
-                pauseMenu.GetComponent<PauseMenuSettingsTutorial>().StartTutorial();
+                //pauseMenu.GetComponent<PauseMenuSettingsTutorial>().StartTutorial();
             }
 
             this.enabled = false;
 
         }
+      
 
         // We are grounded, so recalculate move direction based on axes
         var previousPos = transform.position;
@@ -262,12 +264,25 @@ public class SC_FPSController : MonoBehaviour
                 eventObject.GetComponent<IMetaEvent>().activate(true);
 
                 //Tutorial next step (Maybe change this?)
-                if (gameManager.TutorialStatus == TutorialStatus.Interaction) triggerDetector.endInteraction();
+                if (gameManager.TutorialStatus == TutorialStatus.Interaction) gameManager.CompleteObjective(0);
             }
         }
 
         //If the raycast don't detect an interactive item it removes the text
         else playerUI.EventTextOff();
+    }
+
+    public void Deactivate()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        playerUI.HideUI();
+        gameManager.GameStatus = GameStatus.InPause;
+        this.enabled = false;
+
+       
+
     }
 
 

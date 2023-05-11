@@ -11,14 +11,12 @@ using static System.Windows.Forms.LinkLabel;
 public class PauseMenuSettingsTutorial : MonoBehaviour
 {
     private GameObject Settings;
-    private GameObject Pause;
+ 
 
     public SC_FPSController controller;
     private GameManagerTutorial gameManager;
 
     [SerializeField] private Dialogue dialogueScript;
-
-    private bool isTutorial = false;
 
 
     private void Start()
@@ -26,14 +24,14 @@ public class PauseMenuSettingsTutorial : MonoBehaviour
         //We find the GameObjects
         gameManager = GameObject.Find("ManagerTutorial").GetComponent<GameManagerTutorial>();
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
-        Pause = this.gameObject;
+ 
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && (gameManager.TutorialStatus != TutorialStatus.Settings) && (gameManager.TutorialStatus != TutorialStatus.PreSettings))
         {
-            DeactivatePauseMenu();
+            Hide();
         }
     }
 
@@ -44,54 +42,38 @@ public class PauseMenuSettingsTutorial : MonoBehaviour
 
     }
 
+    public void Show()
+    {
+        this.gameObject.SetActive(true);
+    }
+
     //Method to open the settings menu
     public void OnClickSettings()
     {
-        if (isTutorial == false)
-        {
-            //Change visibility of menus
-      
-            Pause.SetActive(false);
-            Settings.SetActive(true);
-        }
-
-        else
-        {
-            Pause.SetActive(false);
-            Settings.SetActive(true);
-            Settings.GetComponentInChildren<MoveTabsTutorial>().StartTutorial();
-            isTutorial = false;
-        }
+        Settings.SetActive(true);
+        if (gameManager.TutorialStatus == TutorialStatus.Settings) gameManager.CompleteObjective(0);
+        Hide();
 
     }
 
-    public void StartTutorial()
+
+    public void Hide()
     {
-        //Diálogo
-        string[] lines = new string[2] { "This is the pause menu. You can disconnect from the application here.", "You can enter the settings menu from here too! Click on the gear icon in the top of the panel." };
-        dialogueScript.lines = lines;
-        dialogueScript.textComponent.text = string.Empty;
-        dialogueScript.transform.GetChild(0).gameObject.SetActive(true);
-
-        dialogueScript.StartDialogue();
-
-
-
-        isTutorial = true;
-
+        this.gameObject.SetActive(false);
     }
-
+    /*
     public void DeactivatePauseMenu()
     {
         controller.enabled = true;
 
         //Open pause menu and disable this
         gameManager.GameStatus = GameStatus.InGame;
-        Pause.SetActive(false);
+        this.gameObject.SetActive(false);
         controller.gameObject.SetActive(true);
         controller.playerUI.ShowUI();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
     }
+    */
 }

@@ -8,31 +8,35 @@ using UnityEngine;
 public class Dialogue : MonoBehaviour
 {
 
-    private GameManagerTutorial gameManager;
-    public TextMeshProUGUI textComponent;
-    public SC_FPSController fpsController;
-    public MoveTabsTutorial moveTabs;
-    public Animator animator;
-    public TMP_Text reShowText;
-    public string[] lines;
-    public float textSpeed;
-    private int index;
+    //Variables
+    //Change public to serializable
+   
+    [SerializeField] private TextMeshProUGUI textComponent;
+    [SerializeField] private SC_FPSController fpsController;
+    [SerializeField] private MoveTabsTutorial moveTabs;
+    [SerializeField] private Animator animator;
+    [SerializeField] private TMP_Text reShowText;
+    [SerializeField] private string[] lines;
+    [SerializeField] private float textSpeed;
+   
 
     [SerializeField] private GameObject textDialogue;
+
+    [SerializeField] private GameManagerTutorial gameManager;
+    private int index;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("ManagerTutorial").GetComponent<GameManagerTutorial>();
-        textComponent.text = string.Empty;
-        StartDialogue();
+        
+        //StartDialogue();
     }
 
     // Update is called once per frame
     void Update()
     {
         //If user clicks, and it's not ended then this code completes the line.
-        if (Input.GetMouseButtonDown(0) && gameManager.DialogueStatus== DialogueStatus.InDialogue)
+        if (Input.GetMouseButtonDown(0) && gameManager.DialogueStatus == DialogueStatus.InDialogue)
         {
             if (textComponent.text == lines[index])
             {
@@ -46,15 +50,12 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    public void StartDialogue()
+    public void StartDialogue(string[] lines)
     {
-        animator.SetFloat("Speed", 0);
-        gameManager.DialogueStatus = DialogueStatus.InDialogue;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        fpsController.playerUI.HideUI();
-        fpsController.enabled = false;
-        reShowText.enabled = false;
+        //Mantener
+        EnableDialogue();
+        textComponent.text = string.Empty;
+        this.lines = lines;
         index = 0;
         StartCoroutine(TypeLine());
     }
@@ -81,6 +82,9 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
+            DisableDialogue();
+            /*
+            //Cambiar
             if (gameManager.TutorialStatus != TutorialStatus.Settings)
             {
                 Cursor.visible = false;
@@ -89,7 +93,6 @@ public class Dialogue : MonoBehaviour
                 gameManager.DialogueStatus = DialogueStatus.InGame;
                 fpsController.playerUI.ShowUI();
                 fpsController.enabled = true;
-                Debug.Log("aaaa");
                 reShowText.enabled = true;
                 animator.SetFloat("Speed", 1);
             }
@@ -99,6 +102,11 @@ public class Dialogue : MonoBehaviour
                 if (moveTabs.settingsStatus >= SettingsStatus.Settings)
                 moveTabs.NextTutorial();
             }
+
+            */
+
+
+            
         }
     }
 
@@ -110,5 +118,7 @@ public class Dialogue : MonoBehaviour
     public void DisableDialogue()
     {
         textDialogue.SetActive(false);
+        gameManager.OnInGameStatus();
     }
+
 }
