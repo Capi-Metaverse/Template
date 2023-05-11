@@ -16,15 +16,17 @@ using UnityEngine;
         public string teams;
         public string about;
         public string hobbies;
+    public string CV;
 
 
 
-        public UserUIInfo(string name, string teams, string about, string hobbies)
+        public UserUIInfo(string name, string teams, string about, string hobbies,string CV)
         {
             this.name = name;
             this.teams = teams;
             this.about = about;
             this.hobbies = hobbies;
+            this.CV=CV;
         }
     }
     public class ManageDataUI

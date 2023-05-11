@@ -74,6 +74,8 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
     //User username
     private string username = "Anon";
+
+    private string email = "Anon@gmail.com";
     //User ID
     private string userID;
 
@@ -475,6 +477,15 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     public void SetUsername(string username)
     {
         this.username = username;
+    }
+
+    public string GetEmail()
+    {
+        return this.email;
+    }
+    public void SetEmail(string email)
+    {
+        this.email = email;
     }
 
     public string GetRoomName()

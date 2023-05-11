@@ -267,8 +267,10 @@ public class LoginManager : MonoBehaviour
         PlayerDataUsername playerDataUsername = JsonUtility.FromJson<PlayerDataUsername>(jsonString);
 
         string username = playerDataUsername.getPlayerUsername;
+      
 
         gameManager.SetUsername(username);
+        gameManager.SetEmail(emailInput.text);
 
         Debug.Log("[PlayFab-LoginManager] Username: " + username); // output: "prueba1"
     }
