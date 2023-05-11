@@ -13,7 +13,6 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
     public EditVisionData editVisionData;
     public UserUIInfo currentString;
     GameManager gameManager;
-    GameObject scope;
     CharacterInputHandler characterInputHandler;
     // Start is called before the first frame update
    
@@ -39,6 +38,9 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
             visionData.OboutText.text = manageDataUI.data.about;
             visionData.HobbiesText.text = manageDataUI.data.hobbies;
             visionData.CVText.text = manageDataUI.data.CV;
+
+            editVisionData.UserNameTitle.text = gameManager.GetUsername();
+            editVisionData.TemasText.text= gameManager.GetEmail();
 
         }
         currentString = manageDataUI.data;
