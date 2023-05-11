@@ -80,34 +80,8 @@ public class Dialogue : MonoBehaviour
             textComponent.text = string.Empty;
             StartCoroutine (TypeLine());
         }
-        else
-        {
-            DisableDialogue();
-            /*
-            //Cambiar
-            if (gameManager.TutorialStatus != TutorialStatus.Settings)
-            {
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-                DisableDialogue();
-                gameManager.DialogueStatus = DialogueStatus.InGame;
-                fpsController.playerUI.ShowUI();
-                fpsController.enabled = true;
-                reShowText.enabled = true;
-                animator.SetFloat("Speed", 1);
-            }
-            else
-            {
-                DisableDialogue();
-                if (moveTabs.settingsStatus >= SettingsStatus.Settings)
-                moveTabs.NextTutorial();
-            }
+        else DisableDialogue();
 
-            */
-
-
-            
-        }
     }
 
     public void EnableDialogue()

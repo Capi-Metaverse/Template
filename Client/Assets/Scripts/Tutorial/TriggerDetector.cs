@@ -104,7 +104,7 @@ public class TriggerDetector : MonoBehaviour
                         if (Input.GetKeyDown(KeyCode.Escape)) gameManager.CompleteObjective(0);
                         break;
                     }
-                    /*
+
                      case TutorialStatus.Animations:
                          {
                              if (Input.GetKeyDown("b"))
@@ -130,98 +130,32 @@ public class TriggerDetector : MonoBehaviour
                                  //Close 
                              };
                              break;
-                         }*/
+                         }
             }
 
         }
         }
 
-    public void SetPresentationTutorial()
-    {
-        GameObject.Find("Back").layer = LayerMask.NameToLayer("Interactive");
-        GameObject.Find("Advance").layer = LayerMask.NameToLayer("Interactive");
-        objective1.text = "";
-        tutorialNumber.text = "6";
-        objective1.color = Color.black;
-        objective2.color = Color.black;
-        objective3.color = Color.black;
-        objective1.text = "Click the right arrow 0/2";
-        objective2.text = "Click the left arrow 0/2";
-        objective3.text = "Click the K key in a presentation area 0/2";
-    }
+
 
     public void OnLeftArrow()
     {
-        if(arrowLeftCounter < 2)
-        {
-            ++arrowLeftCounter;
-            objective2.text = "Click the left arrow " + arrowLeftCounter + "/2";
-
-            if(arrowLeftCounter == 2)
-            {
-                objective2.color = Color.green;
-
-                if((arrowRightCounter == 2) && (kPressedCounter == 2))
-                {
-                    SetAnimationTutorial();
-                }
-            }
-
-       
-        }
+       gameManager.CompleteObjective(0);
 
     }
 
     public void OnRightArrow()
     {
-        if (arrowRightCounter < 2)
-        {
-            ++arrowRightCounter;
-            objective1.text = "Click the right arrow " + arrowRightCounter + "/2";
-
-            if (arrowRightCounter == 2)
-            {
-                objective1.color = Color.green;
-
-                if ((arrowLeftCounter == 2) && (kPressedCounter == 2))
-                {
-                    SetAnimationTutorial();
-                }
-            }
-        }
+        gameManager.CompleteObjective(1);
 
     }
 
     public void OnPresentation()
     {
-        if (kPressedCounter < 2)
-        {
-            ++kPressedCounter;
-            objective3.text = "Click the K key in a presentation area " + kPressedCounter + "/2";
-
-            if (kPressedCounter == 2)
-            {
-                objective3.color = Color.green;
-
-                if ((arrowLeftCounter == 2) && (arrowRightCounter == 2))
-                {
-                    SetAnimationTutorial();
-                }
-            }
-        }
+        gameManager.CompleteObjective(2);
     }
 
 
-    public void EndVoiceTutorial()
-    {
-        flags["M"] = true;
-        objective1.color = Color.green;
-        //RestartDialogue(TutorialStatus.PreSettings, new string[2] { "After turning the voice on/off, it's time to see how to modify the settings", "Press ESC to show the Pause and Settings Menus" });
-        objective1.text = "";
-        tutorialNumber.text = "5";
-        objective1.color = Color.black;
-        objective1.text = "Press Escape to open the pause menu";
-    }
     public void EventWheelController()
     {
         if (isEventWheelOpen)
@@ -301,16 +235,7 @@ public class TriggerDetector : MonoBehaviour
         fPSController.animator.SetInteger("AnimationWheel", (int)AnimationList.None);
     }
     /*
-    public void RestartDialogue(TutorialStatus tutorialStatusValue, string[] lines)
-    {
-        gameManager.TutorialStatus = tutorialStatusValue;
-        fPSController.playerUI.EventTextOff();
-        dialogueScript.lines = lines;
-        dialogueScript.textComponent.text = string.Empty;
-        dialogueScript.EnableDialogue();
-
-        dialogueScript.StartDialogue();
-    }
+  
 
     public void ReShowDialogue()
     {
