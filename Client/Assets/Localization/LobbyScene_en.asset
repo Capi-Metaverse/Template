@@ -19,15 +19,15 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 16884498432
-    m_Localized: CREATE A ROOM OR JOIN ONE WITH YOUR FRIENDS
+    m_Localized: Create a room
     m_Metadata:
       m_Items: []
   - m_Id: 493990772736
-    m_Localized: Introduce the room name
+    m_Localized: New room's name
     m_Metadata:
       m_Items: []
   - m_Id: 1049115295744
-    m_Localized: Create
+    m_Localized: +
     m_Metadata:
       m_Items: []
   - m_Id: 1379639033856
@@ -43,7 +43,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3457111359488
-    m_Localized: Join Game
+    m_Localized: Join
     m_Metadata:
       m_Items: []
   - m_Id: 5675071897600
@@ -52,6 +52,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 20287731349651456
     m_Localized: Add
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28254561415397376
+    m_Localized: Join a room
     m_Metadata:
       m_Items: []
   references:

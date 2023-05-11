@@ -39,7 +39,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3392821067776
-    m_Localized: "Don\xB4t remember your password?"
+    m_Localized: Forgot your password? Click               to recover
     m_Metadata:
       m_Items: []
   - m_Id: 4101427757056
@@ -72,6 +72,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 10873362257870848
     m_Localized: Back to login
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28571682116665344
+    m_Localized: Register               if you don't have an account
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28574914041806848
+    m_Localized: HERE
     m_Metadata:
       m_Items: []
   references:

@@ -16,7 +16,7 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: b2ae5e7f1e21b8245963b6a3d21f50a9
   m_Entries:
   - m_Id: 16884498432
-    m_Key: TitleText
+    m_Key: CreateARoomText
     m_Metadata:
       m_Items: []
   - m_Id: 493990772736
@@ -49,6 +49,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 20287731349651456
     m_Key: AddFriendText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28254561415397376
+    m_Key: JoinARoomText
     m_Metadata:
       m_Items: []
   m_Metadata:

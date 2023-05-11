@@ -36,7 +36,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3392821067776
-    m_Key: NoAccountText
+    m_Key: ForgotPasswordText
     m_Metadata:
       m_Items: []
   - m_Id: 4101427757056
@@ -69,6 +69,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 10873362257870848
     m_Key: BackToLoginText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28571682116665344
+    m_Key: GoRegisterText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28574914041806848
+    m_Key: GoRegisterButton
     m_Metadata:
       m_Items: []
   m_Metadata:
