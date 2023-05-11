@@ -60,12 +60,11 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
     void Start()
     {
         gameManager = GameManager.FindInstance();
-        
+
     }
     // Update is called once per frame
     void Update()
     {
-        
     }
     public void EditUserData()
     {

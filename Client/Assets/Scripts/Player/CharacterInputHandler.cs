@@ -28,6 +28,7 @@ public class CharacterInputHandler : MonoBehaviour
     public bool escPul;//Reference if ESC key is pushed or not(ESC opens the Menu and you�ll be on Pause State)
     public GameObject Pause;//Pause is an object in scene map, you can see it as the manager of the pause state
     public GameObject Settings;//The same as Pause but for settings, the state will be Pause too cause the setting are accesible from Pause
+    public GameObject UICard;
     
     //PlayerUIPrefab
     GameObject scope;
@@ -84,6 +85,8 @@ public class CharacterInputHandler : MonoBehaviour
 
         //ChatGPT
         chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
+        UICard = GameObject.Find("Menus").transform.GetChild(4).gameObject;
+        Debug.Log(UICard);
 
 
         Debug.Log(Pause);
@@ -405,9 +408,10 @@ public class CharacterInputHandler : MonoBehaviour
         Pause.SetActive(false);
         emoteWheel.SetActive(false);
         Cursor.visible = false;
+        UICard.SetActive(false);
         //States and Reactivate all
-      
-   
+
+
         ActiveALL();
         Debug.Log(gameManager.GetUserStatus());
 

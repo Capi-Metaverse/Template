@@ -15,10 +15,12 @@ public class VisionData : MonoBehaviour
 
     public GameObject OnlyVisionData;
     public GameObject EditVisionDat;
+
     public void changeEditData()
     {
         EditVisionDat.SetActive(true);
         OnlyVisionData.SetActive(false);
     }
+
 }
 

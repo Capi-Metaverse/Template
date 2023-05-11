@@ -15,6 +15,7 @@ public class EditVisionData : MonoBehaviour
 
     public GameObject OnlyVisionData;
     public GameObject EditVisionDat;
+
     public void changeViewDataAndSave()
     {
         uiusers.EditUserData();
