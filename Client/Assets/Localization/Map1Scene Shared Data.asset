@@ -51,10 +51,6 @@ MonoBehaviour:
     m_Key: SettingsReturnButtonText
     m_Metadata:
       m_Items: []
-  - m_Id: 3287321739264
-    m_Key: SettingsFullScreenText
-    m_Metadata:
-      m_Items: []
   - m_Id: 3751920599040
     m_Key: SettingsSettingsText
     m_Metadata:
@@ -77,6 +73,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 20313178208796672
     m_Key: EnterText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28254626548744192
+    m_Key: SettingsScreen
     m_Metadata:
       m_Items: []
   m_Metadata:

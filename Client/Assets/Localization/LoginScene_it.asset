@@ -74,6 +74,14 @@ MonoBehaviour:
     m_Localized: "\rTorna al login"
     m_Metadata:
       m_Items: []
+  - m_Id: 28574914041806848
+    m_Localized: Creare un account
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28599901150707712
+    m_Localized: Reimpostare la password
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -74,6 +74,14 @@ MonoBehaviour:
     m_Localized: Volver a Inicio
     m_Metadata:
       m_Items: []
+  - m_Id: 28574914041806848
+    m_Localized: Crear cuenta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28599901150707712
+    m_Localized: "Restablecer contrase\xF1a"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

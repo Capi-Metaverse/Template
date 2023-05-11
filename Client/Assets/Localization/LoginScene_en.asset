@@ -74,12 +74,12 @@ MonoBehaviour:
     m_Localized: Back to login
     m_Metadata:
       m_Items: []
-  - m_Id: 28571682116665344
-    m_Localized: Register               if you don't have an account
+  - m_Id: 28599901150707712
+    m_Localized: Reset password
     m_Metadata:
       m_Items: []
   - m_Id: 28574914041806848
-    m_Localized: HERE
+    m_Localized: Sign up
     m_Metadata:
       m_Items: []
   references:

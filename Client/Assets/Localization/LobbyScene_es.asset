@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 16884498432
-    m_Localized: CREA UNA SALA O ENTRA A UNA CON TUS AMIGOS
+    m_Localized: Crea una sala
     m_Metadata:
       m_Items: []
   - m_Id: 493990772736
@@ -52,6 +52,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 20287731349651456
     m_Localized: "A\xF1adir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28254561415397376
+    m_Localized: Unirse a una sala
     m_Metadata:
       m_Items: []
   references:

@@ -71,12 +71,12 @@ MonoBehaviour:
     m_Key: BackToLoginText
     m_Metadata:
       m_Items: []
-  - m_Id: 28571682116665344
-    m_Key: GoRegisterText
-    m_Metadata:
-      m_Items: []
   - m_Id: 28574914041806848
     m_Key: GoRegisterButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28599901150707712
+    m_Key: GoResetPasswordButton
     m_Metadata:
       m_Items: []
   m_Metadata:

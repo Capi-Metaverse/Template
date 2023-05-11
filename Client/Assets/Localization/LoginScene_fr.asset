@@ -74,6 +74,14 @@ MonoBehaviour:
     m_Localized: Retour connexion
     m_Metadata:
       m_Items: []
+  - m_Id: 28574914041806848
+    m_Localized: "Cr\xE9er un compte"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28599901150707712
+    m_Localized: "R\xE9initialiser le mot de passe"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
