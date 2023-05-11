@@ -3,20 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static System.Windows.Forms.LinkLabel;
 
-public enum TutorialStatus
-{
-    Movement,
-    Jumping,
-    Interaction,
-    Voice,
-    PreSettings,
-    Settings,
-    Presentation,
-    Animations,
-    Finished
-}
+
 
 public enum DialogueStatus
 {
@@ -28,6 +18,28 @@ public enum GameStatus
 {
     InPause,
     InGame,
+}
+
+public enum SettingsStatus
+{
+    None,
+    Settings,
+    Keys,
+    Friends,
+    Players,
+    Finished
+}
+public enum TutorialStatus
+{
+    Movement,
+    Jumping,
+    Interaction,
+    Voice,
+    PreSettings,
+    Settings,
+    Presentation,
+    Animations,
+    Finished
 }
 
 public class GameManagerTutorial : MonoBehaviour
@@ -43,6 +55,10 @@ public class GameManagerTutorial : MonoBehaviour
     //GameStatus
     private GameStatus gameStatus;
     public GameStatus GameStatus { get => gameStatus; set => gameStatus = value; }
+
+    //SettingStatus
+    private SettingsStatus settingsStatus = SettingsStatus.None;
+    public SettingsStatus SettingsStatus { get => settingsStatus; set => settingsStatus = value; }
 
 
     [SerializeField] private Dialogue dialogueScript;
@@ -173,10 +189,6 @@ public class GameManagerTutorial : MonoBehaviour
                 break;
         }
 
-
-
-
-
         //We call the DialogueScript
         dialogueScript.StartDialogue(lines);
     }
@@ -292,7 +304,60 @@ public class GameManagerTutorial : MonoBehaviour
 
     private void OnSettingsTutorial()
     {
+        settingsStatus++;
 
+        switch (settingsStatus)
+        {
+            case SettingsStatus.Keys:
+                {
+                    moveTabs.ChangeToPanelKeys();
+
+                    //string[] lines = new string[1] { "This is the Key menu. You can change the input keys from here." };
+
+                    dialogueScript.StartDialogue();
+                    break;
+                }
+
+            case SettingsStatus.Friends:
+                {
+                    moveTabs.ChangeToPanelFriends();
+
+                    //string[] lines = new string[1] { "This is the Friends menu. You can see the friends that you add here." };
+
+                    dialogueScript.StartDialogue();
+                    break;
+                }
+
+            case SettingsStatus.Players:
+                {
+                    moveTabs.ChangeToPanelPlayer();
+                    //string[] lines = new string[1] { "This is the Player menu. You can see the list of players here." };
+
+                    dialogueScript.StartDialogue();
+                    break;
+                }
+
+            case SettingsStatus.Finished:
+                {
+
+                    moveTabs.HideSettings();
+
+
+                    //string[] lines = new string[2] { "That's all about the settings part.", "Now, go downstairs and interact with the podium to view a presentation" };
+
+
+                    dialogueScript.StartDialogue();
+
+                    gameManager.GameStatus = GameStatus.InGame;
+                    gameManager.TutorialStatus = TutorialStatus.Presentation;
+                    graphic.enabled = true;
+
+                    triggerDetector.SetPresentationTutorial();
+
+
+                    break;
+                }
+        }
     }
 
 

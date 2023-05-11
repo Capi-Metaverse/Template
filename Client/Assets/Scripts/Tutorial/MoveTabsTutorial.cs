@@ -4,15 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static System.Windows.Forms.LinkLabel;
 
-public enum SettingsStatus
-{
-    None,
-   Settings,
-   Keys,
-   Friends,
-   Players,
-    Finished
-}
+
 
 public class MoveTabsTutorial : MonoBehaviour
 {
@@ -80,9 +72,6 @@ public class MoveTabsTutorial : MonoBehaviour
     }
     public void ChangeToPanelFriends()
     {
-
-
-
         TabPanel.SetActive(false);
 
         TabPanelKeys.SetActive(false);
@@ -95,6 +84,17 @@ public class MoveTabsTutorial : MonoBehaviour
     {
         Pause.SetActive(true);
         Settings.SetActive(false);
+    }
+
+    //Settings Control
+    public void HideSettings()
+    {
+        Settings.SetActive(false);
+    }
+
+    public void ShowSettings()
+    {
+        Settings.SetActive(true);
     }
 
     /*
