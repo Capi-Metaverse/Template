@@ -8,13 +8,15 @@ using static Unity.Collections.Unicode;
 public class SC_FPSController : MonoBehaviour
 {
     /*-------------VARIABLES---------------*/
-    public float walkingSpeed = 7.5f;
-    public float runningSpeed = 11.5f;
-    public float jumpSpeed = 8.0f;
-    public float gravity = 20.0f;
-    public Camera playerCamera;
-    public float lookSpeed = 2.0f;
-    public float lookXLimit = 45.0f;
+   [SerializeField] private float walkingSpeed = 7.5f;
+   [SerializeField] private float runningSpeed = 11.5f;
+   [SerializeField] private float jumpSpeed = 8.0f;
+   [SerializeField] private float gravity = 20.0f;
+   [SerializeField] private Camera playerCamera;
+   [SerializeField] private float lookSpeed = 2.0f;
+   [SerializeField] private float lookXLimit = 45.0f;
+
+
     private int jumpCount { get; set; } = 0;
     private int _lastVisibleJump = 0;
     public bool IsGrounded { get; set; }
@@ -44,9 +46,6 @@ public class SC_FPSController : MonoBehaviour
 
     public GameObject pauseMenu;
 
-    //Detect if Certain Object is being hit
-    bool HittingObject = false;
-
     //Presentation
     public Camera presentationCamera = null;
     public bool onPresentationCamera = false;
@@ -61,7 +60,7 @@ public class SC_FPSController : MonoBehaviour
     /*-----------------------METHODS------------------------------*/
     void Start()
     {
-        //gameManager = GameObject.Find("ManagerTutorial").GetComponent<GameManagerTutorial>();
+        //We get the character controller from the gameobject 
         characterController = GetComponent<CharacterController>();
 
         // Lock cursor
@@ -72,61 +71,17 @@ public class SC_FPSController : MonoBehaviour
 
     void Update()
     {
+        //A bit big??
         if (presentationCamera != null && (gameManager.TutorialStatus == TutorialStatus.Presentation || gameManager.TutorialStatus == TutorialStatus.Finished) && gameManager.DialogueStatus!=DialogueStatus.InDialogue)
             playerUI.PresentationTextOn();
 
-        if (HittingObject && gameManager.DialogueStatus != DialogueStatus.InDialogue)
+        if (raycastObject != null && gameManager.DialogueStatus != DialogueStatus.InDialogue)
             playerUI.EventTextOn();
 
         targetTime -= Time.deltaTime;
         //Raycast
-        if (gameManager.TutorialStatus >= TutorialStatus.Interaction)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rayDistance, LayerMask.GetMask("Interactive")))
-            {
-                if (raycastObject == null)
-                {
-                    raycastObject = hit.transform.gameObject;
-                    //raycastObject.gameObject.GetComponent<Outline>().enabled = true;
-                    playerUI.EventTextOn();
-                    HittingObject = true;
-                }
-                //RaycastObject
-                else if (raycastObject != hit.transform.gameObject)
-                {
-
-                    raycastObject = hit.transform.gameObject;
-
-                    playerUI.EventTextOn();
-                    HittingObject = true;
-
-                }
-                //If the user interacts, activate the event
-                if (Input.GetKey(KeyCode.E) && targetTime <= 0)
-                {
-                    //Cooldown timer
-                    targetTime = 0.5f;
-
-                    //Retrieve Parent Object and call event
-                    GameObject eventObject = hit.transform.gameObject;
-                    eventObject.GetComponent<IMetaEvent>().activate(true);
-                    if (gameManager.TutorialStatus == TutorialStatus.Interaction) triggerDetector.endInteraction();
-                }
-            }
-
-            else
-            {
-
-                if (raycastObject != null)
-                {
-                    //raycastObject.GetComponent<Outline>().enabled = false;
-                    raycastObject = null;
-                    playerUI.EventTextOff();
-                    HittingObject = false;
-                }
-            }
-        }
+        if (gameManager.TutorialStatus >= TutorialStatus.Interaction) PlayerRaycast();
+        
 
         //K key down(PresentationMode)
         if (presentationCamera != null)
@@ -281,6 +236,38 @@ public class SC_FPSController : MonoBehaviour
             if (gameManager.TutorialStatus == TutorialStatus.Presentation || gameManager.TutorialStatus == TutorialStatus.Finished)
                 playerUI.PresentationTextOn();
         }
+    }
+
+    //Function that do the raycast between the player and interactive items
+    public void PlayerRaycast()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, rayDistance, LayerMask.GetMask("Interactive")))
+        {
+            //This executes if the raycast object from the former iteraction is null or the new one is different.
+            if (raycastObject == null || raycastObject != hit.transform.gameObject)
+            {
+                raycastObject = hit.transform.gameObject;
+                playerUI.EventTextOn();
+            }
+
+            //If the user interacts, activate the event
+            if (Input.GetKey(KeyCode.E) && targetTime <= 0)
+            {
+                //Cooldown timer
+                targetTime = 0.5f;
+
+                //Retrieve Parent Object and call event
+                GameObject eventObject = hit.transform.gameObject;
+                eventObject.GetComponent<IMetaEvent>().activate(true);
+
+                //Tutorial next step (Maybe change this?)
+                if (gameManager.TutorialStatus == TutorialStatus.Interaction) triggerDetector.endInteraction();
+            }
+        }
+
+        //If the raycast don't detect an interactive item it removes the text
+        else playerUI.EventTextOff();
     }
 
 
