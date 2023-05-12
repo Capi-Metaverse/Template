@@ -8,6 +8,7 @@ using Photon.Realtime;
 public class BackPresentation : NetworkBehaviour, IMetaEvent
 {
    public Presentation presentation;
+    GameObject eventObject { get; set; }
 
     public void activate(bool host)
     {

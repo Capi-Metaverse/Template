@@ -8,6 +8,7 @@ public class ChatGPTActive : MonoBehaviour, IMetaEvent
     public GameObject CanvasChatGPT;
     //PlayerSpawn playerSpawn;
     CharacterInputHandler CharacterInputHandler;
+    GameObject eventObject;
 
     public void activate(bool host)
     {

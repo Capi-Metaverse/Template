@@ -7,6 +7,8 @@ public class LightEventTutorial : MonoBehaviour, IMetaEvent
 {
 
     private bool active = false;
+    GameObject eventObject;
+
     public void activate(bool host)
     {
         active = !active;

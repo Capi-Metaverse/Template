@@ -8,6 +8,7 @@ using Fusion;
 public class AdvancePresentation : NetworkBehaviour, IMetaEvent
 {
    public Presentation presentation;
+    GameObject eventObject;
 
     public void activate(bool host)
     {

@@ -9,7 +9,7 @@ public class UploadPPTX : MonoBehaviour, IMetaEvent
     public FileExplorer fileExplorer;
     bool activado=false;
     public TMP_Text loadingPressCanvas;
-
+    GameObject eventObject;
 
     [System.Obsolete]
     public void activate(bool host)

@@ -9,8 +9,8 @@ public class DoorEvent : MonoBehaviour, IMetaEvent
 
     public string map;
 
-    
-   [SerializeField] private bool isPublic = true;
+    GameObject eventObject;
+    [SerializeField] private bool isPublic = true;
 
   
    [SerializeField] private string password {  get; set; }

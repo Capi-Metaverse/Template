@@ -15,8 +15,10 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
     public Animator animator;
     //UI NAME IN GAME
     public TextMeshProUGUI playerNicknameTM;
+    public string playfabIdentity;
     [Networked(OnChanged = nameof(OnNickNameChanged))]
     public NetworkString<_16> nickname { get; set; }
+    public NetworkString<_16> playfabId { get; set; }
     // Start is called before the first frame update
     [Networked] public int ActorID { get; set; }
 
@@ -55,9 +57,6 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
             {
                 child.gameObject.layer = LayerMask.NameToLayer("LocalPlayer");
             }
-
-            //RPC to Send the name to host/server to have it networked
-            //RPC_SetNickName(auxiliar);
         }
 
         else Debug.Log("Spawned remote player");
@@ -82,16 +81,8 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
         Debug.Log($"Nick name changed for player to {nickname} for player {gameObject.name}");
 
         playerNicknameTM.text = nickname.ToString();
-    }
+        this.playfabIdentity= playfabId.ToString();
 
-    [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
-    public void RPC_SetNickName(string nickname, RpcInfo info = default)
-    {
-        Debug.Log($"[RPC]: setNickname {nickname} ");
-
-        //change of our networked nickname so [Networked(OnChanged = nameof(OnNickNameChanged))] will be activated
-        //and static OnNickNameChanged(changed) will be called
-        this.nickname = nickname;
     }
 
     //Setter for GameManager

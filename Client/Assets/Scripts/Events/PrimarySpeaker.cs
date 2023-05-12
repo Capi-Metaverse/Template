@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PrimarySpeaker : MonoBehaviour, IMetaEvent
 {
+    GameObject eventObject;
+
     public void activate(bool host)
     {
         GameManager gameManager = GameManager.FindInstance();
