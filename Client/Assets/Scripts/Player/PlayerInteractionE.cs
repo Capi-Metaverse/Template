@@ -41,7 +41,7 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
             Keys = new List<string> { key },
             IfChangedFromDataVersion = 0 // Optional: Only retrieve data if it has changed since a specific version
         };
-
+        /*
         var result = await PlayFabClientAPI.GetUserDataAsync(request);
 
         if (result.Data.TryGetValue(key, out string value))
@@ -53,5 +53,6 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
         {
             Debug.Log($"Could not retrieve value for key {key} from player {otherPlayerId}");
         }
+        */
     }
 }
