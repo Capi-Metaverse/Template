@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PrimarySpeaker : MonoBehaviour, IMetaEvent
 {
-    GameObject eventObject;
+    GameObject _eventObject;
+    GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
 
     public void activate(bool host)
     {

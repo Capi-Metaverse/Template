@@ -10,6 +10,9 @@ public class ChatGPTActive : MonoBehaviour, IMetaEvent
     CharacterInputHandler CharacterInputHandler;
     GameObject eventObject;
 
+    GameObject _eventObject;
+    GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
+
     public void activate(bool host)
     {
         if (CharacterInputHandler == null) { CharacterInputHandler = GameManager.FindInstance().GetCurrentPlayer().gameObject.GetComponent<CharacterInputHandler>(); }

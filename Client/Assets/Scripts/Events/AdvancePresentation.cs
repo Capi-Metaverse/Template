@@ -8,7 +8,9 @@ using Fusion;
 public class AdvancePresentation : NetworkBehaviour, IMetaEvent
 {
    public Presentation presentation;
-    GameObject eventObject;
+
+    GameObject _eventObject;
+    GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
 
     public void activate(bool host)
     {

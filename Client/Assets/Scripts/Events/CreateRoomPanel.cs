@@ -5,7 +5,8 @@ using UnityEngine;
 public class CreateRoomPanel : MonoBehaviour, IMetaEvent
 {
     [SerializeField] private CreateRoom createScript;
-    GameObject eventObject;
+    GameObject _eventObject;
+    GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
     private GameManager gameManager;
 
     public void activate(bool host)

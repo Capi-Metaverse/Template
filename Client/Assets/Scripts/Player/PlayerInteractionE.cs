@@ -7,11 +7,14 @@ using PlayFab.ClientModels;
 public class PlayerInteractionE : MonoBehaviour , IMetaEvent
 {
     GameManager gameManager;
-    GameObject eventObject;
+
+
+    GameObject _eventObject;
+    GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
 
     public void activate(bool host)
     {
-        string playfabid =eventObject.GetComponent<NetworkPlayer>().playfabIdentity;
+        string playfabid =_eventObject.GetComponent<NetworkPlayer>().playfabIdentity;
         //get UIcard
         GetPublicDataFromOtherPlayer(playfabid, "userUICard");
     }
@@ -19,7 +22,7 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
     // Start is called before the first frame update
     void Start()
     {
-        gameManager.FindInstance();
+        gameManager = GameManager.FindInstance();
 
         
     }

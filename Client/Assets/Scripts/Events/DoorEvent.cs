@@ -9,7 +9,8 @@ public class DoorEvent : MonoBehaviour, IMetaEvent
 
     public string map;
 
-    GameObject eventObject;
+    GameObject _eventObject;
+    GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
     [SerializeField] private bool isPublic = true;
 
   

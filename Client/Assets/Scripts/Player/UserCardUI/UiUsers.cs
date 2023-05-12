@@ -14,8 +14,11 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
     public UserUIInfo currentString;
     GameManager gameManager;
     CharacterInputHandler characterInputHandler;
+
+    GameObject _eventObject;
+    GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
     // Start is called before the first frame update
-   
+
     public IEnumerator LoadInitialData()
     {
         // Do some work here...
