@@ -69,6 +69,27 @@ public class TriggerDetector : MonoBehaviour
             {
                 //ReShowDialogue();
             }
+            if (Input.GetKey("c"))
+            {
+                flags["C"] = true;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+
+                var request = new UpdateUserDataRequest
+                {
+                    Data = new Dictionary<string, string>
+            {
+                {"NewUser", "false"}
+            }
+                };
+                PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
+
+
+               
+
+
+                //Close 
+            };
             switch (gameManager.TutorialStatus)
             {
                 case TutorialStatus.Movement:
@@ -227,6 +248,11 @@ public class TriggerDetector : MonoBehaviour
     public void OnDataSend(UpdateUserDataResult obj)
     {
         Debug.Log("[PlayFab-ManageData] Data Sent");
+
+        if(gameManager.TutorialStatus != TutorialStatus.Finished)
+        {
+            SceneManager.LoadScene("1.Start");
+        }
     }
 
     IEnumerator CancelAnimation()
