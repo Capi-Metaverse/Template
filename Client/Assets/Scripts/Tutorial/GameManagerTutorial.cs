@@ -290,6 +290,7 @@ public class GameManagerTutorial : MonoBehaviour
 
                 //Objectives
                 ++objectiveCounter[0];
+                playerUI.ChangeMicSprite();
                 objectives[num].text = "Press m to mute/unmute the chat. " + objectiveCounter[0] + "/2";
 
                 if (objectiveCounter[0] == 2)
