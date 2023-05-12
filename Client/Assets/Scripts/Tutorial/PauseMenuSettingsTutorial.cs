@@ -1,19 +1,12 @@
-using System.Collections;
-using System;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using TMPro;
-using static System.Windows.Forms.LinkLabel;
+
 
 
 public class PauseMenuSettingsTutorial : MonoBehaviour
 {
     private GameObject Settings;
- 
-
-    public SC_FPSController controller;
     private GameManagerTutorial gameManager;
 
     [SerializeField] private Dialogue dialogueScript;
@@ -61,19 +54,5 @@ public class PauseMenuSettingsTutorial : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
-    /*
-    public void DeactivatePauseMenu()
-    {
-        controller.enabled = true;
-
-        //Open pause menu and disable this
-        gameManager.GameStatus = GameStatus.InGame;
-        this.gameObject.SetActive(false);
-        controller.gameObject.SetActive(true);
-        controller.playerUI.ShowUI();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-    }
-    */
+    
 }

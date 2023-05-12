@@ -1,6 +1,5 @@
-using ExitGames.Client.Photon.StructWrapping;
+
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -25,12 +24,6 @@ public class Dialogue : MonoBehaviour
     [SerializeField] private GameManagerTutorial gameManager;
     private int index;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        //StartDialogue();
-    }
 
     // Update is called once per frame
     void Update()
