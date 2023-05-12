@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Options Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Options
+  m_TableCollectionNameGuidString: bef0adae260c8ab49b60c9a2e435cde7
+  m_Entries:
+  - m_Id: 121269059584
+    m_Key: SettingsText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 603085537280
+    m_Key: KeysText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 956921217024
+    m_Key: FriendsText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1287696613376
+    m_Key: PlayersText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1567976783872
+    m_Key: SensitivityText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1945506086912
+    m_Key: VolumeText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2119007666176
+    m_Key: ResolutionText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2278290554880
+    m_Key: ScreenText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2586148274176
+    m_Key: YourFriendsText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2774728376320
+    m_Key: AddFriendText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3017465331712
+    m_Key: YourRequestsText
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7209965314229403650
+  references:
+    version: 2
+    RefIds:
+    - rid: 7209965314229403650
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1683879213309

@@ -33,6 +33,10 @@ MonoBehaviour:
     m_Address: Assets/Localization/Map1Scene Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: bef0adae260c8ab49b60c9a2e435cde7
+    m_Address: bef0adae260c8ab49b60c9a2e435cde7
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 72fbad147e0fb7e45b4132796fb81ef7, type: 2}
   m_SchemaSet:
