@@ -3392,7 +3392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9e7186d81a9c544bde20334fcb525b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
   dialogueScript: {fileID: 0}
 --- !u!1 &1224049647
 GameObject:
@@ -4531,6 +4530,7 @@ MonoBehaviour:
   animator: {fileID: 7843358}
   reShowText: {fileID: 820631548}
   playerUI: {fileID: 1018573549}
+  emoteWheel: {fileID: 2046480095}
   objectives:
   - {fileID: 733683723}
   - {fileID: 1454040622}
@@ -4943,7 +4943,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7843358}
   gameManager: {fileID: 1923614046}
-  triggerDetector: {fileID: 5874118889009996890}
 --- !u!1 &2065591732
 GameObject:
   m_ObjectHideFlags: 0

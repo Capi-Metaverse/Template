@@ -67,29 +67,28 @@ public class TriggerDetector : MonoBehaviour
         {
             if (Input.GetKeyDown("j"))
             {
-                //ReShowDialogue();
+                gameManager.StartDialogue(true);
             }
+
             if (Input.GetKey("c"))
             {
                 flags["C"] = true;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
 
+                //Add to playfab
                 var request = new UpdateUserDataRequest
                 {
                     Data = new Dictionary<string, string>
-            {
-                {"NewUser", "false"}
-            }
+                    {
+                        {"NewUser", "false"}
+                    }
                 };
                 PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
 
-
-               
-
-
                 //Close 
             };
+
             switch (gameManager.TutorialStatus)
             {
                 case TutorialStatus.Movement:
@@ -126,36 +125,35 @@ public class TriggerDetector : MonoBehaviour
                         break;
                     }
 
-                     case TutorialStatus.Animations:
-                         {
-                             if (Input.GetKeyDown("b"))
-                             {
-                                 EventWheelController();
-                             };
-                             break;
-                         }
-                     case TutorialStatus.Finished:
-                         {
+                case TutorialStatus.Animations:
+                    {
+                        if (Input.GetKeyDown("b"))
+                        {
+                            gameManager.CompleteObjective(0);
+                        };
+                        break;
+                    }
+                case TutorialStatus.Finished:
+                    {
 
-                             if (Input.GetKeyDown("b"))
-                             {
-                                 EventWheelController();
-                             };
+                        if (Input.GetKeyDown("b"))
+                        {
+                            gameManager.EventWheelController();
+                        };
 
-                             if (Input.GetKey("c"))
-                             {
-                                 flags["C"] = true;
-                                 Cursor.lockState = CursorLockMode.None;
-                                 Cursor.visible = true;
-                                 SceneManager.LoadScene("1.Start");
-                                 //Close 
-                             };
-                             break;
-                         }
+                        if (Input.GetKey("c"))
+                        {
+                            flags["C"] = true;
+                            Cursor.lockState = CursorLockMode.None;
+                            Cursor.visible = true;
+                            SceneManager.LoadScene("1.Start");
+                            //Close 
+                        };
+                        break;
+                    }
             }
-
         }
-        }
+    }
 
 
 
@@ -176,70 +174,7 @@ public class TriggerDetector : MonoBehaviour
         gameManager.CompleteObjective(2);
     }
 
-
-    public void EventWheelController()
-    {
-        if (isEventWheelOpen)
-        {
-            fPSController.enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            playerUI.ShowUI();
-            emoteWheel.SetActive(false);
-            isEventWheelOpen = false;
-        }
-        else
-        {
-            fPSController.enabled = false;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            playerUI.HideUI();
-            emoteWheel.SetActive(true);
-            isEventWheelOpen = true;
-        }
-    }
-
-    public void SetAnimationTutorial()
-    {
-        flags["K"] = true;
-        playerUI.PresentationTextOff();
-        //RestartDialogue(TutorialStatus.Animations, new string[2] { "Now, let's do a special move. ", "Approach a mirror, press B to show the Animation Roulette and select a move" });
-        objective1.text = "";
-        objective2.text = "";
-        objective3.text = "";
-        objective1.color = Color.black;
-        tutorialNumber.text = "7";
-        objective1.text = "Press B to play an animation.";
-    }
-
-    public void EndAnimationTutorial()
-    {
-        flags["B"] = true;
-        EventWheelController();
-
-        objective1.text = "";
-        objective1.color = Color.black;
-        tutorialNumber.text = "8";
-        //RestartDialogue(TutorialStatus.Finished, new string[2] { "Congratulations! You've finished the tutorial. Now you're free to continue practicing in the tutorial or to change to other maps.", "Press C when you're ready to change" });
-        StartCoroutine(CancelAnimation());
-        outText.enabled = true;
-
-
-        //Add to playfab
-
-        var request = new UpdateUserDataRequest
-        {
-            Data = new Dictionary<string, string>
-            {
-                {"NewUser", "false"}
-            }
-        };
-        PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
-
-
-    }
-
-
+    //PlayFab Functions
     public void OnError(PlayFabError obj)
     {
         Debug.Log("[PlayFab-ManageData] Error");
@@ -254,22 +189,4 @@ public class TriggerDetector : MonoBehaviour
             SceneManager.LoadScene("1.Start");
         }
     }
-
-    IEnumerator CancelAnimation()
-    {
-        yield return new WaitForSeconds(2);
-        fPSController.animator.SetInteger("AnimationWheel", (int)AnimationList.None);
-    }
-    /*
-  
-
-    public void ReShowDialogue()
-    {
-        fPSController.playerUI.EventTextOff();
-        dialogueScript.textComponent.text = string.Empty;
-        dialogueScript.EnableDialogue();
-
-        dialogueScript.StartDialogue();
-    }
-    */
 }

@@ -1,3 +1,5 @@
+using PlayFab.ClientModels;
+using PlayFab;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -65,6 +67,9 @@ public class GameManagerTutorial : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private TMP_Text reShowText;
     [SerializeField] private PlayerUI playerUI;
+    [SerializeField] private GameObject emoteWheel;
+
+    private bool isEventWheelOpen = false;
 
 
     //Tutorial UI
@@ -73,6 +78,7 @@ public class GameManagerTutorial : MonoBehaviour
     [SerializeField] private TMP_Text tutorialNumber;
 
     private int[] objectiveCounter = new int[3];
+    private string[] lines;
 
     [SerializeField] private PauseMenuSettingsTutorial pauseMenuSettings;
 
@@ -138,71 +144,78 @@ public class GameManagerTutorial : MonoBehaviour
         }
     }
 
-    public void StartDialogue()
+    public void StartDialogue(bool reShow=false)
     {
         OnDialogueStatus();
-        string[] lines = { "Empty" };
-        EmptyObjectives();
-
-        switch (tutorialStatus)
+        
+        if (!reShow)
         {
-            case TutorialStatus.Movement:
-                lines = new string[3] { " I'm your virtual assistant, Adam.", "I'm here to help you with the basics of this application.", "You can move to any direction with the WASD Keys, Try it!" };
+            //lines = new string[1] { "Empty" };
+            EmptyObjectives();
 
-                //Objectives
-                objectives[0].text = "Press W to move forward.";
-                objectives[1].text= "Press S to move backwards";
-                objectives[2].text = "Press A to move to the left.";
-                objectives[3].text = "Press D to move to the right.";
-                break;
+            switch (tutorialStatus)
+            {
+                case TutorialStatus.Movement:
+                    lines = new string[3] { " I'm your virtual assistant, Adam.", "I'm here to help you with the basics of this application.", "You can move to any direction with the WASD Keys, Try it!" };
 
-            case TutorialStatus.Jumping:
-               
-                lines = new string[2] { "Congratulations! In the metaverse you can jump too.", "Go upstairs and press Space to Jump" };
+                    //Objectives
+                    objectives[0].text = "Press W to move forward.";
+                    objectives[1].text = "Press S to move backwards";
+                    objectives[2].text = "Press A to move to the left.";
+                    objectives[3].text = "Press D to move to the right.";
+                    break;
 
-                //Objectives
-                objectives[0].text = "Press space to jump.";
-                tutorialNumber.text = "2";
-                break;
+                case TutorialStatus.Jumping:
 
-            case TutorialStatus.Interaction:
-                
-                lines = new string[2] { "Well Done! Now, let's do something more interactive.", "Go near a lamp and press e to interact with it" };
+                    lines = new string[2] { "Congratulations! In the metaverse you can jump too.", "Go upstairs and press Space to Jump" };
 
-                //Objectives
-                objectives[0].text = "Press e with an interactable object. 0/2";
-                tutorialNumber.text = "3";
-                break;
+                    //Objectives
+                    objectives[0].text = "Press space to jump.";
+                    tutorialNumber.text = "2";
+                    break;
 
-            case TutorialStatus.Voice:
-                
-                lines = new string[2] { "Now, let's see how to talk with someone.", "Press M to mute and unmute your voice" };
+                case TutorialStatus.Interaction:
 
-                //Objectives
-                objectives[0].text = "Press m to mute/unmute the chat 0/2";
-                tutorialNumber.text = "4";
-                break;
+                    lines = new string[2] { "Well Done! Now, let's do something more interactive.", "Go near a lamp and press e to interact with it" };
 
-            case TutorialStatus.PreSettings:
-                lines = new string[2] { "After turning the voice on/off, it's time to see how to modify the settings", "Press ESC to show the Pause and Settings Menus" };
-                objectives[0].text = "Press ESC to open the pause menu";
-                tutorialNumber.text = "5";
-                break;
+                    //Objectives
+                    objectives[0].text = "Press e with an interactable object. 0/2";
+                    tutorialNumber.text = "3";
+                    break;
 
-            case TutorialStatus.Settings:
-                lines = OnSettingsTutorial();
+                case TutorialStatus.Voice:
 
-                
-                break;
-            case TutorialStatus.Animations:
+                    lines = new string[2] { "Now, let's see how to talk with someone.", "Press M to mute and unmute your voice" };
 
-                lines = new string[2] { "Now, let's do a special move. ", "Approach a mirror, press B to show the Animation Roulette and select a move" };
-                tutorialNumber.text = "7";
-                objectives[0].text = "Press B to open the emote wheel";
-                objectives[1].text = "Do an emote";
-                break;
+                    //Objectives
+                    objectives[0].text = "Press m to mute/unmute the chat 0/2";
+                    tutorialNumber.text = "4";
+                    break;
 
+                case TutorialStatus.PreSettings:
+                    lines = new string[2] { "After turning the voice on/off, it's time to see how to modify the settings", "Press ESC to show the Pause and Settings Menus" };
+                    objectives[0].text = "Press ESC to open the pause menu";
+                    tutorialNumber.text = "5";
+                    break;
 
+                case TutorialStatus.Settings:
+                    lines = OnSettingsTutorial();
+                    break;
+
+                case TutorialStatus.Animations:
+
+                    lines = new string[2] { "Now, let's do a special move. ", "Approach a mirror, press B to show the Animation Roulette and select a move" };
+                    tutorialNumber.text = "7";
+                    objectives[0].text = "Press B to open the emote wheel";
+                    objectives[1].text = "Do an emote";
+                    break;
+
+                case TutorialStatus.Finished:
+                    lines = new string[2] { "Congratulations! You've finished the tutorial. Now you're free to continue practicing in the tutorial or to change to other maps.", "Press C when you're ready to change" };
+                    tutorialNumber.text = "8";
+                    objectives[0].text = "Press C to exit the tutorial";
+                    break;
+            }
         }
 
         //We call the DialogueScript
@@ -310,28 +323,24 @@ public class GameManagerTutorial : MonoBehaviour
 
             case TutorialStatus.Presentation:
                 
-
-                
                     if (objectiveCounter[num] < 2) {
 
-                    ++objectiveCounter[num];
-                    if (objectiveCounter[num] == 2) { objectives[num].color = Color.green; }
-                    switch (num)
-                    {
-                        case 0:
-                            objectives[num].text = "Click the right arrow " + objectiveCounter[num] + "/2";
-                            break;
-                        case 1:
-                            objectives[num].text = "Click the left arrow " + objectiveCounter[num] + "/2";
-                            break;
-                        case 2:
-                            objectives[num].text = "Click the K key in a presentation area " + objectiveCounter[num] + "/2";
-                            break;
+                        ++objectiveCounter[num];
+                        if (objectiveCounter[num] == 2) { objectives[num].color = Color.green; }
+                        switch (num)
+                        {
+                            case 0:
+                                objectives[num].text = "Click the right arrow " + objectiveCounter[num] + "/2";
+                                break;
+                            case 1:
+                                objectives[num].text = "Click the left arrow " + objectiveCounter[num] + "/2";
+                                break;
+                            case 2:
+                                objectives[num].text = "Click the K key in a presentation area " + objectiveCounter[num] + "/2";
+                                break;
 
+                        }
                     }
-
-                    
-                }
 
                 bool allGreen = true;
                 for (int i = 0; i < objectives.Length - 1; i++)
@@ -350,6 +359,30 @@ public class GameManagerTutorial : MonoBehaviour
                 }
                 break;
 
+            case TutorialStatus.Animations:
+                Debug.Log("CompleteObjective Animation");
+                objectives[num].color = Color.green;
+
+                //To show or hide the eventWheel
+                EventWheelController();
+
+                flag = true;
+
+                //We check the flags
+                foreach (TMP_Text objective in objectives)
+                {
+                    if (objective.color != Color.green) flag = false;
+                }
+
+                if (objectives[0].color == Color.green && objectives[1].color == Color.green)
+                {
+                    //Stops the current animation from looping
+                    StartCoroutine(CancelAnimation());
+
+                    TutorialStatus = TutorialStatus.Finished;
+                    StartDialogue();
+                }
+                break;
 
             default:
                 objectives[num].color = Color.green;
@@ -361,8 +394,6 @@ public class GameManagerTutorial : MonoBehaviour
 
     private string[] OnSettingsTutorial()
     {
-       
-
         switch (settingsStatus++)
         {
 
@@ -370,8 +401,6 @@ public class GameManagerTutorial : MonoBehaviour
                 {
                     objectives[0].text = "Press the gear button to open the settings menu";
                     return new string[2] { "This is the pause menu. You can disconnect from the application here.", "You can enter the settings menu from here too! Click on the gear icon in the top of the panel." };
-                    
-                    
                 }
 
             case SettingsStatus.Settings: return  new string[1] { "This is the settings menu. You can change some options like Volume or Sensivity." };
@@ -379,15 +408,12 @@ public class GameManagerTutorial : MonoBehaviour
             case SettingsStatus.Keys:
                 {
                     moveTabs.ChangeToPanelKeys();
-
                     return new string[1] { "This is the Key menu. You can change the input keys from here." };
-
                 }
 
             case SettingsStatus.Friends:
                 {
                     moveTabs.ChangeToPanelFriends();
-
                     return new string[1] { "This is the Friends menu. You can see the friends that you add here." };
                 }
 
@@ -399,11 +425,11 @@ public class GameManagerTutorial : MonoBehaviour
 
             case SettingsStatus.Finished:
                 {
-
                     moveTabs.HideSettings();
 
                     //Deactive menu
                     tutorialStatus = TutorialStatus.Presentation;
+                    gameStatus = GameStatus.InGame;
 
                     objectives[0].text = "Click the right arrow 0/2";
                     objectives[1].text = "Click the left arrow 0/2";
@@ -420,8 +446,33 @@ public class GameManagerTutorial : MonoBehaviour
         }
     }
 
+    //Changes the EventWheel State
+    public void EventWheelController()
+    {
+        if (isEventWheelOpen)
+        {
+            fpsController.enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            playerUI.ShowUI();
+            emoteWheel.SetActive(false);
+            isEventWheelOpen = false;
+        }
+        else
+        {
+            fpsController.enabled = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            playerUI.HideUI();
+            emoteWheel.SetActive(true);
+            isEventWheelOpen = true;
+        }
+    }
 
-
-
-
+    //Stops the animation from being played in loop
+    IEnumerator CancelAnimation()
+    {
+        yield return new WaitForSeconds(2);
+        animator.SetInteger("AnimationWheel", (int)AnimationList.None);
+    }
 }

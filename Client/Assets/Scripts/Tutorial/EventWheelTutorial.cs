@@ -7,7 +7,6 @@ public class EventWheelTutorial : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private GameManagerTutorial gameManager;
-    [SerializeField] private TriggerDetector triggerDetector;
 
     AnimationList animationToPlay = AnimationList.None;
 
@@ -60,7 +59,7 @@ public class EventWheelTutorial : MonoBehaviour
 
             if (gameManager.TutorialStatus == TutorialStatus.Animations)
             {
-                triggerDetector.EndAnimationTutorial();
+                gameManager.CompleteObjective(1);
             }
         }
         else
