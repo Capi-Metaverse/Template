@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
-using PlayFab.ClientAPI;
 using System;
+using Newtonsoft.Json;
 
 public class PlayerInteractionE : MonoBehaviour , IMetaEvent
 {
     GameManager gameManager;
-
+    public UserUIInfo data;
 
     GameObject _eventObject;
     GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
@@ -25,7 +25,6 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
     void Start()
     {
         gameManager = GameManager.FindInstance();
-
         
     }
 
@@ -35,7 +34,7 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
         
     }
 
-    public void GetPublicDataFromOtherPlayer(string otherPlayerId, string key, Action<string> callback)
+    public void GetPublicDataFromOtherPlayer(string otherPlayerId, string key)
     {
         var request = new GetUserDataRequest
         {
@@ -44,22 +43,21 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
             IfChangedFromDataVersion = 0 // Optional: Only retrieve data if it has changed since a specific version
         };
 
-        PlayFabClientAPI.GetUserData(request, result =>
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnCharactersDataReceived, OnError);
+    }
+
+    void OnCharactersDataReceived(GetUserDataResult result)
+    {
+        Debug.Log("[PlayFab-ManageData] Received characters data!");
+        if (result.Data != null && result.Data.ContainsKey("userUIInfo"))
         {
-            if (result.Data.TryGetValue(key, out string value))
-            {
-                // Do something with the retrieved value
-                callback?.Invoke(value);
-                Debug.Log($"Retrieved value {value} for key {key} from player {otherPlayerId}");
-            }
-            else
-            {
-                callback?.Invoke(null);
-                Debug.Log($"Could not retrieve value for key {key} from player {otherPlayerId}");
-            }
-        }, error =>
-        {
-            Debug.LogError($"Error retrieving public data for player {otherPlayerId}: {error.ErrorMessage}");
-        });
+            data = JsonConvert.DeserializeObject<UserUIInfo>(result.Data["userUIInfo"].Value);
+        }
+
+    }
+
+    public void OnError(PlayFabError obj)
+    {
+        Debug.Log("[PlayFab-ManageData] Error");
     }
 }
