@@ -5,67 +5,35 @@ using UnityEngine;
 
 public class EventWheelTutorial : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
     [SerializeField] private GameManagerTutorial gameManager;
-
-    AnimationList animationToPlay = AnimationList.None;
 
     public void setAnimation1()
     {
-        animationToPlay = AnimationList.Clapping;
-        Debug.Log(animationToPlay);
+        gameManager.AnimationToPlay = AnimationList.Clapping;
     }
 
     public void setAnimation2()
     {
-        animationToPlay = AnimationList.Waving;
-        Debug.Log(animationToPlay);
+        gameManager.AnimationToPlay = AnimationList.Waving;
     }
 
     public void setAnimation3()
     {
-        animationToPlay = AnimationList.Capoeira;
-        Debug.Log(animationToPlay);
+        gameManager.AnimationToPlay = AnimationList.Capoeira;
     }
 
     public void setAnimation4()
-    {
-        animationToPlay = AnimationList.Salute;
-        Debug.Log(animationToPlay);
+    { 
+        gameManager.AnimationToPlay = AnimationList.Salute;
     }
 
     public void setAnimation5()
     {
-        animationToPlay = AnimationList.Defeated;
-        Debug.Log(animationToPlay);
+        gameManager.AnimationToPlay = AnimationList.Defeated;
     }
 
     public void setAnimation6()
     {
-        animationToPlay = AnimationList.TwistedDance;
-        Debug.Log(animationToPlay);
-    }
-
-
-    void Update()
-    {
-        if (animationToPlay != AnimationList.None)
-        {
-            if (animator == null) { animator = this.gameObject.transform.parent.GetComponentInChildren<Animator>(); };
-            animator.SetInteger("AnimationWheel", (int)animationToPlay);
-
-            //Set the value to zero to end animation
-            animationToPlay = AnimationList.None;
-
-            if (gameManager.TutorialStatus == TutorialStatus.Animations)
-            {
-                gameManager.CompleteObjective(1);
-            }
-        }
-        else
-        {
-            if (animator == null) { animator = this.gameObject.transform.parent.GetComponentInChildren<Animator>(); };
-            animator.SetInteger("AnimationWheel", (int)animationToPlay);
-        }
+        gameManager.AnimationToPlay = AnimationList.TwistedDance;
     }
 }

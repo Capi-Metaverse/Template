@@ -60,6 +60,11 @@ public class GameManagerTutorial : MonoBehaviour
     private SettingsStatus settingsStatus = SettingsStatus.None;
     public SettingsStatus SettingsStatus { get => settingsStatus; set => settingsStatus = value; }
 
+    //AnimationToPlay
+    private AnimationList animationToPlay = AnimationList.None;
+    public AnimationList AnimationToPlay { get => animationToPlay; set => animationToPlay = value; }
+
+    private AnimationList previousAnimation;
 
     [SerializeField] private Dialogue dialogueScript;
     [SerializeField] private SC_FPSController fpsController;
@@ -94,6 +99,11 @@ public class GameManagerTutorial : MonoBehaviour
         //Init first Dialogue
         StartDialogue();
         
+    }
+
+    private void Update()
+    {
+        AnimationController();
     }
 
 
@@ -361,7 +371,6 @@ public class GameManagerTutorial : MonoBehaviour
                 break;
 
             case TutorialStatus.Animations:
-                Debug.Log("CompleteObjective Animation");
                 objectives[num].color = Color.green;
 
                 //To show or hide the eventWheel
@@ -475,5 +484,40 @@ public class GameManagerTutorial : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         animator.SetInteger("AnimationWheel", (int)AnimationList.None);
+    }
+
+    public void AnimationController()
+    {
+        if (animationToPlay != AnimationList.None)
+        {
+            if (animator == null) { animator = this.gameObject.transform.parent.GetComponentInChildren<Animator>(); }
+            if (previousAnimation != animationToPlay)
+            {
+                if(previousAnimation != AnimationList.None) StartCoroutine(RunNewAnimation());
+                else animator.SetInteger("AnimationWheel", (int)animationToPlay);
+            }
+            previousAnimation = animationToPlay;
+
+            //Set the value to zero to end animation
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
+            {
+                Debug.Log("None animation");
+                animationToPlay = AnimationList.None;
+                previousAnimation = animationToPlay;
+                animator.SetInteger("AnimationWheel", (int)animationToPlay);
+            }
+                
+            if (TutorialStatus == TutorialStatus.Animations) { CompleteObjective(1); }
+        }
+    }
+
+    IEnumerator RunNewAnimation()
+    {
+        Debug.Log("Apply animation");
+        animator.SetInteger("AnimationWheel", (int)AnimationList.None);
+        yield return new WaitForSeconds(0.1F);
+        animator.SetInteger("AnimationWheel", (int)animationToPlay);
+        Debug.Log(animationToPlay);
+        
     }
 }
