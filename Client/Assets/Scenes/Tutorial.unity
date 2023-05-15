@@ -702,6 +702,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: lampara4.0
       objectReference: {fileID: 0}
+    - target: {fileID: 7122044598676827261, guid: 2c6f8a891a08aa644a05e0464f3238d3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122044598676827261, guid: 2c6f8a891a08aa644a05e0464f3238d3, type: 3}
+      propertyPath: m_TagString
+      value: Interact
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 9199261849990390558, guid: 2c6f8a891a08aa644a05e0464f3238d3, type: 3}
 --- !u!4 &75024380 stripped
@@ -709,6 +717,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -2594623445087206621, guid: 2c6f8a891a08aa644a05e0464f3238d3, type: 3}
   m_PrefabInstance: {fileID: 75024379}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &75024381 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7122044598676827261, guid: 2c6f8a891a08aa644a05e0464f3238d3, type: 3}
+  m_PrefabInstance: {fileID: 75024379}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &75024382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75024381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b354e612f22a104db44d0b20baa2af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &75024385
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75024381}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 14.960699, y: 14.960604, z: 52.82091}
+  m_Center: {x: -19.685051, y: 0, z: -26.410456}
 --- !u!1 &76749358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,7 +1140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 304990600}
   - component: {fileID: 304990601}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
