@@ -246,6 +246,7 @@ MonoBehaviour:
   - {fileID: -3915082565821610680, guid: d610150337f0d054b9c1ad13aab73346, type: 3}
   animator: {fileID: 8161174919126568394, guid: 57f6953ce52c19147b49af395f0446ec, type: 3}
   playerNicknameTM: {fileID: 495725005451376805}
+  playfabIdentity: 
   _nickname:
     _length: 0
     _data:
@@ -519,6 +520,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3557584282980754365, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3896946117323890000, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -549,7 +554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6129467522659788601, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6284644884585929756, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_Layer

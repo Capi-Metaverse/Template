@@ -75,7 +75,7 @@ public class CharacterInputHandler : MonoBehaviour
         characterMovementHandler = this.gameObject.GetComponent<CharacterMovementHandler>();
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
         Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
-        emoteWheel = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(6).gameObject;
+        emoteWheel = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(6).GetChild(0).gameObject;
         Debug.Log(emoteWheel);
         //PlayerUIPrefab
         micro = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(0).gameObject;//Micro
@@ -388,8 +388,6 @@ public class CharacterInputHandler : MonoBehaviour
 
     public void setEmoteWheel()
     {
-
-
         //Pause canvas
 
         emoteWheel.SetActive(true);
