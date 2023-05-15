@@ -150,6 +150,7 @@ public class CharacterInputHandler : MonoBehaviour
 
                     //Retrieve Parent Object and call event
                     GameObject eventObject = hit.transform.gameObject;
+                    Debug.Log(eventObject);
                     eventObject.GetComponent<IMetaEvent>().eventObject = eventObject;
                     eventObject.GetComponent<IMetaEvent>().activate(true);
                 }
