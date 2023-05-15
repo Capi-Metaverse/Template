@@ -17,6 +17,7 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
     public void activate(bool host)
     {
         string playfabid =_eventObject.GetComponent<NetworkPlayer>().playfabIdentity;
+        Debug.Log("PlayfabID del pulsado: " + playfabid);
         //get UIcard
         GetPublicDataFromOtherPlayer(playfabid, "userUICard");
     }
@@ -49,9 +50,10 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
     void OnCharactersDataReceived(GetUserDataResult result)
     {
         Debug.Log("[PlayFab-ManageData] Received characters data!");
-        if (result.Data != null && result.Data.ContainsKey("userUIInfo"))
+        if (result.Data != null && result.Data.ContainsKey("userUICard"))
         {
-            data = JsonConvert.DeserializeObject<UserUIInfo>(result.Data["userUIInfo"].Value);
+            data = JsonConvert.DeserializeObject<UserUIInfo>(result.Data["userUICard"].Value);
+            Debug.Log(data);
         }
 
     }

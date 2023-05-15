@@ -61,9 +61,10 @@ using UnityEngine;
         void OnCharactersDataReceived(GetUserDataResult result)
         {
             Debug.Log("[PlayFab-ManageData] Received characters data!");
-            if (result.Data != null && result.Data.ContainsKey("userUIInfo"))
+            if (result.Data != null && result.Data.ContainsKey("userUICard"))
             {
-                data = JsonConvert.DeserializeObject<UserUIInfo>(result.Data["userUIInfo"].Value);
+            Debug.Log(result.Data["userUICard"].Value);
+                data = JsonConvert.DeserializeObject<UserUIInfo>(result.Data["userUICard"].Value);
             }
 
         }

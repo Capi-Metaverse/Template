@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0ceadf2b0641646b2b64b9d403ab6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UICard: {fileID: 0}
+  UICard: {fileID: 7208463161891461583, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
   visionData: {fileID: 0}
   editVisionData: {fileID: 0}
 --- !u!1 &8062771405473327188
