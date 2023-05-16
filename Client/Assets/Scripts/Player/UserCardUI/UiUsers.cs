@@ -33,19 +33,17 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
             manageDataUI.data = new UserUIInfo(gameManager.GetUsername(), gameManager.GetEmail(), "Por defecto", "Por defecto", "Por defecto");
             manageDataUI.SaveData(manageDataUI.data);
         }
-        else
-        {
+      
+        editVisionData.UserNameTitle.text = gameManager.GetUsername();
+        editVisionData.TemasText.text= gameManager.GetEmail();
 
-            visionData.UserNameTitle.text = gameManager.GetUsername();
-            visionData.TemasText.text = gameManager.GetEmail(); ;
-            visionData.OboutText.text = manageDataUI.data.about;
-            visionData.HobbiesText.text = manageDataUI.data.hobbies;
-            visionData.CVText.text = manageDataUI.data.CV;
+  
 
-            editVisionData.UserNameTitle.text = gameManager.GetUsername();
-            editVisionData.TemasText.text= gameManager.GetEmail();
-
-        }
+        visionData.UserNameTitle.text = gameManager.GetUsername();
+        visionData.TemasText.text = gameManager.GetEmail(); ;
+        visionData.OboutText.text = manageDataUI.data.about;
+        visionData.HobbiesText.text = manageDataUI.data.hobbies;
+        visionData.CVText.text = manageDataUI.data.CV;
         currentString = manageDataUI.data;
         // Function is finished
     }
