@@ -7,13 +7,16 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 
-public class Prueba : MonoBehaviour
+public class ImagenData : MonoBehaviour
 {
     // Replace with your own title ID
     // Replace with your own title ID
 
     private string ruta;
-
+    void Start()
+    {
+        FetchImageData();
+    }
     public void ClickImageAvatar()
     {
         string path = UnityEditor.EditorUtility.OpenFilePanel("Seleccionar archivo", "", "png,jpg");
@@ -62,7 +65,7 @@ public class Prueba : MonoBehaviour
 
 
     //Devuelve 
-    private void FetchImageData()
+    public void FetchImageData()
     {
         GetUserDataRequest request = new GetUserDataRequest();
 

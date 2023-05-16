@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VisionData : MonoBehaviour
 {
@@ -11,7 +12,6 @@ public class VisionData : MonoBehaviour
     public TMP_Text OboutText;
     public TMP_Text HobbiesText;
     public TMP_Text CVText;
-
 
     public GameObject OnlyVisionData;
     public GameObject EditVisionDat;

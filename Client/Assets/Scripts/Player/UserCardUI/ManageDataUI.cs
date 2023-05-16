@@ -16,7 +16,7 @@ using UnityEngine;
         public string teams;
         public string about;
         public string hobbies;
-    public string CV;
+        public string CV;
 
 
 

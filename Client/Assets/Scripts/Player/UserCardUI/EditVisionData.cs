@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EditVisionData : MonoBehaviour
 {
+    public ImagenData imagedata;
 
     public TMP_Text UserNameTitle;
     public TMP_Text TemasText;
@@ -19,8 +20,10 @@ public class EditVisionData : MonoBehaviour
     public void changeViewDataAndSave()
     {
         uiusers.EditUserData();
+        imagedata.FetchImageData();
         StartCoroutine(uiusers.LoadInitialData());
         EditVisionDat.SetActive(false);
         OnlyVisionData.SetActive(true);
+        
     }
 }

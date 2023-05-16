@@ -57,8 +57,8 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
             if (gameManager.GetUserRole() == UserRole.Admin)
             {
              
-                playerList = GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(3).GetComponent<PlayerList>();
-                Debug.Log(GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(3));
+                playerList = GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetComponent<PlayerList>();
+                Debug.Log(GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(0).GetChild(3));
                 playerList.ListPlayers();
             }
 
