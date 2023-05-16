@@ -27,7 +27,7 @@ public class LoginManager : MonoBehaviour
 
     private GameManager gameManager;
 
-    private bool newUser = false;
+    private bool newUser = true;
 
 
     //Roles
@@ -216,19 +216,10 @@ public class LoginManager : MonoBehaviour
 
         PlayFabClientAPI.ExecuteCloudScript(GetID, OnIDSuccess, OnError);
 
-        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnNewUser, OnError);
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), AssignRole, OnError);
 
-        //Assign the role of the user
-        AssignRole();
-    }
-
-
-    public void OnNewUser(GetUserDataResult result)
-    {
-        if (result.Data != null && result.Data.ContainsKey("NewUser"))
-        {
-            newUser = Convert.ToBoolean(result.Data["NewUser"].Value);
-        }
+        
+       
     }
 
 
@@ -328,8 +319,13 @@ public class LoginManager : MonoBehaviour
     /// <summary>
     /// PlayFab. Assigns the role to the UserRole variable defined in GameManager
     /// </summary>
-    public async void AssignRole()
+    public async void AssignRole(GetUserDataResult result)
     {
+
+        if (result.Data != null && result.Data.ContainsKey("NewUser"))
+        {
+            newUser = Convert.ToBoolean(result.Data["NewUser"].Value);
+        }
 
         // Wait until roles dictionary contains "members" key
         while (!roles.ContainsKey("members"))
