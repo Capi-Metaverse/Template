@@ -34,8 +34,9 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
         
         //Add animator
         if (this.avatar == 0) this.avatar = Random.Range(1, 6);
+        Debug.Log(this.avatar);
         gameManager = GameManager.FindInstance();
-        gameManager.SetAvatarNumber(avatar);
+        
         GameObject model = Instantiate(playerPrefabs[this.avatar], gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
         model.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         model.transform.SetAsFirstSibling();
@@ -45,6 +46,7 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
 
         if (Object.HasInputAuthority)
         {
+            gameManager.SetAvatarNumber(avatar);
             Local = this;
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
             this.inputHandler.enabled = true;
