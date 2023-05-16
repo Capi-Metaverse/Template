@@ -10,18 +10,22 @@ public class Prueba : MonoBehaviour
 {
     // Replace with your own title ID
     // Replace with your own title ID
-   
 
-    private void Start()
+    private string ruta;
+
+    public void ClickImageAvatar()
     {
-        string imagePath = "C:\\Users\\Pedrgarc\\Documents\\Jose.png"; // Path to your image file
+        string path = UnityEditor.EditorUtility.OpenFilePanel("Seleccionar archivo", "", "png,jpg");
+        if (!string.IsNullOrEmpty(path))
+        {
+            ruta = path;
+        }
+
+        string imagePath = ruta; // Path to your image file
         byte[] imageData = LoadImageAsByteArray(imagePath);
         UploadImageToUser(imageData);
     }
-    public void ImageOb()
-    {
-        FetchImageData();
-    }
+
 
     //Envia
     private byte[] LoadImageAsByteArray(string imagePath)
@@ -46,6 +50,8 @@ public class Prueba : MonoBehaviour
     private void OnUpdateUserDataSuccess(UpdateUserDataResult result)
     {
         Debug.Log("Image uploaded to user successfully!");
+
+        FetchImageData();
     }
 
     private void OnUpdateUserDataFailure(PlayFabError error)
@@ -73,7 +79,7 @@ public class Prueba : MonoBehaviour
             Debug.Log("Image retrieved successfully!");
 
             // Example: Save the image to a file
-            string savePath = "C:\\Users\\Pedrgarc\\Desktop\\RetrievedImage.png";
+            string savePath = "C:\\Users\\slopezpu\\Desktop\\RetrievedImage.png";
             File.WriteAllBytes(savePath, imageData);
             Debug.Log("Image saved to " + savePath);
         }

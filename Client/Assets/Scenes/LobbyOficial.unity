@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1840,6 +1840,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.703
       objectReference: {fileID: 0}
+    - target: {fileID: 6422494882741983485, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClickImageAvatar
+      objectReference: {fileID: 0}
     - target: {fileID: 6793117959586957767, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
       propertyPath: m_text
       value: 
@@ -2286,9 +2290,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4203677670405521772, guid: ef8df16f7d4a47648be713df9d6142d8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203677670405521772, guid: ef8df16f7d4a47648be713df9d6142d8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203677670405521772, guid: ef8df16f7d4a47648be713df9d6142d8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7521400143652658567, guid: ef8df16f7d4a47648be713df9d6142d8, type: 3}
       propertyPath: m_Name
       value: CanvasChatGPT
+      objectReference: {fileID: 0}
+    - target: {fileID: 7521400143652658567, guid: ef8df16f7d4a47648be713df9d6142d8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7521400143652658571, guid: ef8df16f7d4a47648be713df9d6142d8, type: 3}
       propertyPath: m_Pivot.x
