@@ -695,6 +695,7 @@ GameObject:
   - component: {fileID: 367055715}
   - component: {fileID: 367055718}
   - component: {fileID: 367055716}
+  - component: {fileID: 367055719}
   m_Layer: 5
   m_Name: PanelResetPass
   m_TagString: Untagged
@@ -754,6 +755,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367055714}
   m_CullTransparentMesh: 0
+--- !u!114 &367055719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367055714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb3af742b81c3eb4c9bda93e1c6d0308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navigationObjects:
+  - {fileID: 1654513121}
+  - {fileID: 884191503}
 --- !u!1 &516408564
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,6 +1175,7 @@ GameObject:
   - component: {fileID: 602019937}
   - component: {fileID: 602019940}
   - component: {fileID: 602019938}
+  - component: {fileID: 602019941}
   m_Layer: 5
   m_Name: PanelRegister
   m_TagString: Untagged
@@ -1220,6 +1237,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 602019936}
   m_CullTransparentMesh: 1
+--- !u!114 &602019941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602019936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb3af742b81c3eb4c9bda93e1c6d0308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navigationObjects:
+  - {fileID: 1379404879}
+  - {fileID: 1991867527}
+  - {fileID: 1737751447}
+  - {fileID: 984693135}
 --- !u!1 &688476424
 GameObject:
   m_ObjectHideFlags: 0
@@ -3587,6 +3621,7 @@ GameObject:
   - component: {fileID: 1210460669}
   - component: {fileID: 1210460671}
   - component: {fileID: 1210460672}
+  - component: {fileID: 1210460673}
   m_Layer: 5
   m_Name: PanelLogin
   m_TagString: Untagged
@@ -3647,6 +3682,22 @@ MonoBehaviour:
   LoginPanel: {fileID: 1210460668}
   RegisterPanel: {fileID: 602019936}
   ResetPanel: {fileID: 367055714}
+--- !u!114 &1210460673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210460668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb3af742b81c3eb4c9bda93e1c6d0308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navigationObjects:
+  - {fileID: 2082988904}
+  - {fileID: 688476424}
+  - {fileID: 1725698865}
 --- !u!1 &1270540775
 GameObject:
   m_ObjectHideFlags: 0
@@ -7529,10 +7580,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 2
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 688476428}
+    m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
