@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: -5693455340294351376}
   - component: {fileID: 4611559743175162702}
   - component: {fileID: 5389401787901867171}
-  - component: {fileID: 9213383750266425675}
+  - component: {fileID: 8705840550502790033}
   m_Layer: 6
   m_Name: Character
   m_TagString: Untagged
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
---- !u!114 &9213383750266425675
+--- !u!114 &8705840550502790033
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -405,12 +405,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5861252648722139143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de0ceadf2b0641646b2b64b9d403ab6e, type: 3}
+  m_Script: {fileID: 11500000, guid: d19b862be9a2534489f51c0ff40b5641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UICard: {fileID: 7208463161891461583, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
-  visionData: {fileID: 0}
-  editVisionData: {fileID: 0}
 --- !u!1 &8062771405473327188
 GameObject:
   m_ObjectHideFlags: 0
