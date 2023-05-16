@@ -27,7 +27,7 @@ public class LoginManager : MonoBehaviour
 
     private GameManager gameManager;
 
-    private bool newUser = true;
+    private bool newUser = false;
 
 
     //Roles
