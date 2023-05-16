@@ -4,6 +4,7 @@ using PlayFab.ClientModels;
 using System;
 using System.IO;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class Prueba : MonoBehaviour
@@ -78,10 +79,11 @@ public class Prueba : MonoBehaviour
             // Use the image data as desired (e.g., display in Unity, save to file, etc.)
             Debug.Log("Image retrieved successfully!");
 
-            // Example: Save the image to a file
-            string savePath = "C:\\Users\\slopezpu\\Desktop\\RetrievedImage.png";
-            File.WriteAllBytes(savePath, imageData);
-            Debug.Log("Image saved to " + savePath);
+            Image imagen = GetComponent<Image>();
+            Texture2D texture = new Texture2D(2, 2);
+            texture.LoadImage(imageData);
+            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            imagen.sprite = sprite;
         }
         else
         {
