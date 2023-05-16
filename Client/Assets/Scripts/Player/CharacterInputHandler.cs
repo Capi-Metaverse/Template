@@ -181,8 +181,13 @@ public class CharacterInputHandler : MonoBehaviour
             {
                 case UserStatus.InGame:
                     {
-                        //ESC key down(PauseMenu)
-                        if ((Input.GetKeyDown(KeyCode.Escape) && !escPul))
+                        if ((Input.GetKeyDown(KeyCode.C) && !escPul))
+                        {
+                            setPause();
+                            UICard.SetActive(true);
+                        }
+                    //ESC key down(PauseMenu)
+                    if ((Input.GetKeyDown(KeyCode.Escape) && !escPul))
                         {
                             setPause();
                         }
