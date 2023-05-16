@@ -3,11 +3,14 @@ using UnityEngine;
 using PlayFab.ClientModels;
 using static Fusion.NetworkCharacterController;
 using PlayFab;
+using Newtonsoft.Json;
 
 public class PlayerInteractionE : MonoBehaviour , IMetaEvent
 {
     GameManager gameManager;
     public UserUIInfo data;
+    public GameObject card;
+    public VisionData visionData;
 
     GameObject _eventObject;
     GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
@@ -39,10 +42,23 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
        
     }
 
+    private void LoadDataIntoCard(GetUserDataResult result)
+    {
+        data = JsonConvert.DeserializeObject<UserUIInfo>(result.Data["userUICard"].Value);
+        visionData = card.GetComponent<VisionData>();
+
+        visionData.UserNameTitle.text = data.name;
+        visionData.TemasText.text = data.teams;
+        visionData.OboutText.text = data.about;
+        visionData.HobbiesText.text = data.hobbies;
+        visionData.CVText.text = data.CV;
+    }
+
     private void OnUpdateUserDataSuccess(GetUserDataResult result)
     {
         Debug.Log("Rsult to user successfully!");
         Debug.Log(result.Data["userUICard"].Value);
+        LoadDataIntoCard(result);
     }
 
     private void OnUpdateUserDataFailure(PlayFabError error)
