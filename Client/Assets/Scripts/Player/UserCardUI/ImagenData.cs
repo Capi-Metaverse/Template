@@ -45,7 +45,7 @@ public class ImagenData : MonoBehaviour
             Data = new Dictionary<string, string>
             {
                 { "CustomImage", Convert.ToBase64String(imageData) }
-            }
+            },
             Permission = UserDataPermission.Public
         };
 
