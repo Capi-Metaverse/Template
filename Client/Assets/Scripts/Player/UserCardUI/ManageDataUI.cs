@@ -41,8 +41,10 @@ using UnityEngine;
                 Data = new Dictionary<string, string>
             {
                 {"userUICard", JsonConvert.SerializeObject(data)}
-            }
+            },
+                Permission = UserDataPermission.Public
             };
+
             PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
         }
 

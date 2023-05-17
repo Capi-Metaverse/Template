@@ -46,6 +46,7 @@ public class ImagenData : MonoBehaviour
             {
                 { "CustomImage", Convert.ToBase64String(imageData) }
             }
+            Permission = UserDataPermission.Public
         };
 
         PlayFabClientAPI.UpdateUserData(request, OnUpdateUserDataSuccess, OnUpdateUserDataFailure);
