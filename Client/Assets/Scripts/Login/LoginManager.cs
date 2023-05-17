@@ -293,8 +293,21 @@ public class LoginManager : MonoBehaviour
     {
         var ListaLogros = new List<Achievement>
         {
-            new Achievement("Interactuado por primera vez", false),
-            new Achievement("pruebaa2",false)
+            new Achievement("Educated", false), //Finish the Tutorial.
+            new Achievement("Dolled up", false), //Edit your profile for the first time.
+            new Achievement("Independent", false), //Change your location for the first time.
+            new Achievement("Traveler", false), //Change your location for the fifth time.
+            new Achievement("Phileas Fogg", false), //Change your location for the 10 time.
+            new Achievement("Brush Cleaner", false), //Draw for the first time.
+            new Achievement("Artist", false), //Draw for the 5 time.
+            new Achievement("Cultist", false), //Pray in Jose Photo
+            new Achievement("Camera Assistant", false), //Do a recording
+            new Achievement("Next Almodovar", false), //Do 10 recordings.
+            new Achievement("Curious",false), //Interact with items 5 times.
+            new Achievement("Restless", false), //Interact with items 15 times.
+            new Achievement("Unhinged", false), //Interact with items 50 times.
+
+
         };
 
         return ListaLogros;
