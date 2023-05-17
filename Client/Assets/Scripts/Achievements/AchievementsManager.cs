@@ -10,23 +10,24 @@ using UnityEngine;
 
 
 
-public class Achievements
-{
-    public bool interactAchievement;
+public class Achievement{
+    public string Name;
+    public bool activate;
 
-    public Achievements(bool interactAchievement)
+    public Achievement(string Name, bool activate)
     {
-        this.interactAchievement = interactAchievement;
+        this.Name = Name;
+        this.activate = activate;
     }
 }
 
 
-public class AchievementsManager
+public class AchievementsManager : MonoBehaviour 
 {
-    public Achievements currentAchievements;
-
+    public AchivementList achivementList;
+    public List<Achievement> currentAchievements;
     // Save User Data
-    public void SaveData(Achievements achievements)
+    public void SaveData(List<Achievement> achievements)
     {
         var request = new UpdateUserDataRequest
         {
@@ -53,10 +54,12 @@ public class AchievementsManager
 
     void OnCharactersDataReceived(GetUserDataResult result)
     {
-        Debug.Log("[PlayFab-ManageData] Received characters data!");
+        Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         if (result.Data != null && result.Data.ContainsKey("Achievements"))
         {
-            currentAchievements = JsonConvert.DeserializeObject<Achievements>(result.Data["Achievements"].Value);
+            currentAchievements = JsonConvert.DeserializeObject<List<Achievement>>(result.Data["Achievements"].Value);
+            Debug.Log(currentAchievements[0].Name);
+            achivementList.InstanceAchivementItem();
         }
 
     }
