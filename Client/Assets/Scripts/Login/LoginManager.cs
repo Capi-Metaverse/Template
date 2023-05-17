@@ -29,6 +29,7 @@ public class LoginManager : MonoBehaviour
 
     private bool newUser = true;
 
+    public AchievementsManager achievementsManager;
 
     //Roles
     Dictionary<string, bool> roles = new Dictionary<string, bool>();
@@ -280,9 +281,24 @@ public class LoginManager : MonoBehaviour
     {
         Debug.Log("[PlayFab-LoginManager] Member added to the group successfully." + result.ToJson());
 
+        achievementsManager.currentAchievements = AchivementRegister();
+
+
+        achievementsManager.SaveData(achievementsManager.currentAchievements);
+        
+
     }
 
+    private List<Achievement> AchivementRegister()
+    {
+        var ListaLogros = new List<Achievement>
+        {
+            new Achievement("Interactuado por primera vez", false),
+            new Achievement("pruebaa2",false)
+        };
 
+        return ListaLogros;
+    }
     /// <summary>
     /// PlayFab. It's called when the function that adds a member fails.
     /// </summary>

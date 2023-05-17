@@ -7,8 +7,7 @@ using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
-
-
+using UnityEngine.SceneManagement;
 
 public class Achievement{
     public string Name;
@@ -59,7 +58,10 @@ public class AchievementsManager : MonoBehaviour
         {
             currentAchievements = JsonConvert.DeserializeObject<List<Achievement>>(result.Data["Achievements"].Value);
             Debug.Log(currentAchievements[0].Name);
-            achivementList.InstanceAchivementItem();
+            if (!(SceneManager.GetSceneByName("Login") == SceneManager.GetActiveScene()))
+            {
+                achivementList.InstanceAchivementItem();
+            }
         }
 
     }

@@ -8,11 +8,14 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
 {
    
     public ManageDataUI manageDataUI;
+    //
     public AchievementsManager achievementsManager;
+    //
     public GameObject UICard;
     public VisionData visionData;
     public EditVisionData editVisionData;
     public UserUIInfo currentString;
+    public AchivementList achivementList;
    
     
     GameManager gameManager;
@@ -49,7 +52,9 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
         visionData.HobbiesText.text = manageDataUI.data.hobbies;
         visionData.CVText.text = manageDataUI.data.CV;
         currentString = manageDataUI.data;
-      
+
+
+        achivementList.InstanceAchivementItem();
         // Function is finished
     }
     // Start is called before the first frame update
@@ -57,9 +62,8 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
     {
         ///////////////////////
         ///
-      
-        achievementsManager.currentAchievements = new List<Achievement> { new Achievement("Interactuado por primera vez", true )};
 
+        achievementsManager.currentAchievements[0].activate = true;
         achievementsManager.SaveData(achievementsManager.currentAchievements);
 
         /////////////////////////////////
@@ -74,18 +78,18 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
         UICard.SetActive(true);
         characterInputHandler.DeactivateALL();
 
+        
 
     }
     void Start()
     {
         gameManager = GameManager.FindInstance();
         achievementsManager.LoadData();
+       
 
     }
     // Update is called once per frame
-    void Update()
-    {
-    }
+   
     public void EditUserData()
     {
         manageDataUI.data = new UserUIInfo(gameManager.GetUsername(), gameManager.GetEmail(), editVisionData.OboutTextInput.text, editVisionData.HobbiesTextInput.text, editVisionData.CVTextInput.text);

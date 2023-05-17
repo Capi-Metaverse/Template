@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -747,6 +747,7 @@ MonoBehaviour:
   LoginPanel: {fileID: 1210460668}
   RegisterPanel: {fileID: 602019936}
   ResetPanel: {fileID: 367055714}
+  achievementsManager: {fileID: 0}
 --- !u!222 &367055718
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1176,6 +1177,7 @@ GameObject:
   - component: {fileID: 602019940}
   - component: {fileID: 602019938}
   - component: {fileID: 602019941}
+  - component: {fileID: 602019942}
   m_Layer: 5
   m_Name: PanelRegister
   m_TagString: Untagged
@@ -1229,6 +1231,7 @@ MonoBehaviour:
   LoginPanel: {fileID: 1210460668}
   RegisterPanel: {fileID: 602019936}
   ResetPanel: {fileID: 367055714}
+  achievementsManager: {fileID: 602019942}
 --- !u!222 &602019940
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1254,6 +1257,19 @@ MonoBehaviour:
   - {fileID: 1991867527}
   - {fileID: 1737751447}
   - {fileID: 984693135}
+--- !u!114 &602019942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602019936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b129b765876dd7647baf76b802e50dae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achivementList: {fileID: 0}
 --- !u!1 &688476424
 GameObject:
   m_ObjectHideFlags: 0
@@ -3682,6 +3698,7 @@ MonoBehaviour:
   LoginPanel: {fileID: 1210460668}
   RegisterPanel: {fileID: 602019936}
   ResetPanel: {fileID: 367055714}
+  achievementsManager: {fileID: 0}
 --- !u!114 &1210460673
 MonoBehaviour:
   m_ObjectHideFlags: 0
