@@ -403,9 +403,6 @@ public class LoginManager : MonoBehaviour
         roles.Add(role, isRole);
     }
 
-
-
-
     /*Error Callback*/
 
     
