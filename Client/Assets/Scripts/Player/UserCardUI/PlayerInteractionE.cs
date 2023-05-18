@@ -12,6 +12,7 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
     public GameObject card;
     public VisionData visionData;
 
+    CharacterInputHandler characterInputHandler;
     GameObject _eventObject;
     GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
 
@@ -44,6 +45,10 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
 
     private void LoadDataIntoCard(GetUserDataResult result)
     {
+        card.SetActive(true);
+        characterInputHandler = GameManager.FindInstance().GetCurrentPlayer().gameObject.GetComponent<CharacterInputHandler>();
+        characterInputHandler.DeactivateALL();
+
         data = JsonConvert.DeserializeObject<UserUIInfo>(result.Data["userUICard"].Value);
         visionData = card.GetComponent<VisionData>();
 
