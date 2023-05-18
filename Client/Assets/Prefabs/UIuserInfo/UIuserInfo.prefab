@@ -38,8 +38,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.21525002, y: 0.13100001}
   m_AnchorMax: {x: 0.784646, y: 0.71900004}
-  m_AnchoredPosition: {x: -531.7731, y: -194.39069}
-  m_SizeDelta: {x: -349.1063, y: 81.9964}
+  m_AnchoredPosition: {x: -541.42065, y: -194.39066}
+  m_SizeDelta: {x: -552.661, y: 81.9964}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3215488832555116740
 CanvasRenderer:
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 207265611925847300}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1686,7 +1686,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2542205317374213837}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -4635,10 +4635,10 @@ RectTransform:
   m_Father: {fileID: 5633329738875671168}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0011410492}
-  m_SizeDelta: {x: 0, y: 1283.831}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -261.79, y: 995.0369}
+  m_SizeDelta: {x: 523.79, y: 1353.555}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5788323548977875934
 MonoBehaviour:
@@ -4657,9 +4657,9 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
+  m_ChildAlignment: 1
+  m_Spacing: 1
+  m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
@@ -4721,7 +4721,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8398699409978737194}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -4787,8 +4787,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6465587319961401830}
   m_HandleRect: {fileID: 5002671859972855639}
   m_Direction: 2
-  m_Value: 0.99999803
-  m_Size: 0.5585131
+  m_Value: 0
+  m_Size: 0.5296399
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
