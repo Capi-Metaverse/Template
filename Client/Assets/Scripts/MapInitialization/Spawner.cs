@@ -51,18 +51,9 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     IEnumerator WaitPlayer()
     {
         yield return new WaitForSeconds(2);
-        if (gameManager.GetUserStatus() == UserStatus.InPause)
-        {
-
-            if (gameManager.GetUserRole() == UserRole.Admin)
-            {
-             
-                playerList = GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetComponent<PlayerList>();
-                Debug.Log(GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(0).GetChild(3));
-                playerList.ListPlayers();
-            }
-
-        }
+        playerList = GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetComponent<PlayerList>();
+        Debug.Log(GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2));
+        playerList.ListPlayers();
     }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
