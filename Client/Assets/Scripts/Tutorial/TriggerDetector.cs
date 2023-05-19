@@ -32,11 +32,7 @@ public class TriggerDetector : MonoBehaviour
 
     public SC_FPSController fPSController;
 
-    private int interaction = 0;
-
     public TMP_Text tutorialNumber;
-
-    private int arrowLeftCounter, arrowRightCounter, kPressedCounter, mPressedCounter = 0;
 
     //EventWheel
     public GameObject emoteWheel;
@@ -49,16 +45,7 @@ public class TriggerDetector : MonoBehaviour
         dialogueScript = canvasDialogue.GetComponentInChildren<Dialogue>();
 
         //Set dictionary initial values
-        flags.Add("W", false);
-        flags.Add("A", false);
-        flags.Add("S", false);
-        flags.Add("D", false);
         flags.Add("Space", false);
-        flags.Add("E", false);
-        flags.Add("M", false);
-        flags.Add("ESC", false);
-        flags.Add("K", false); //Change key
-        flags.Add("B", false);
         flags.Add("C", false);
     }
     public void Update()

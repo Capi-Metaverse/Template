@@ -7,8 +7,6 @@ public class TriggerEntranceDoor : MonoBehaviour
 
     public int membersInside = 0;
 
-    float startTime = 0.0f;
-
     GameManager gameManager;
 
     private void Start()
@@ -22,20 +20,16 @@ public class TriggerEntranceDoor : MonoBehaviour
         if(other.gameObject.GetComponent<NetworkPlayer>().ActorID == gameManager.GetRunner().LocalPlayer.PlayerId) 
         {
             GameManager.RPC_OpenDoor(gameManager.GetRunner());
- 
         }
         
     }
 
-    
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.GetComponent<NetworkPlayer>().ActorID == gameManager.GetRunner().LocalPlayer.PlayerId)
         {
             GameManager.RPC_CloseDoor(gameManager.GetRunner());
-            
-            
         }
 
     }
