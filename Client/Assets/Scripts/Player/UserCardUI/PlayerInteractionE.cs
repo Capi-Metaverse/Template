@@ -10,6 +10,7 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
     GameManager gameManager;
     public UserUIInfo data;
     public GameObject card;
+    public GameObject apagar;
     public VisionData visionData;
 
     CharacterInputHandler characterInputHandler;
@@ -46,6 +47,7 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
     private void LoadDataIntoCard(GetUserDataResult result)
     {
         card.SetActive(true);
+        apagar.SetActive(false);
         characterInputHandler = GameManager.FindInstance().GetCurrentPlayer().gameObject.GetComponent<CharacterInputHandler>();
         characterInputHandler.DeactivateALL();
 

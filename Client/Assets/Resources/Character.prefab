@@ -309,7 +309,6 @@ MonoBehaviour:
   eventText: {fileID: 0}
   eventTextK: {fileID: 0}
   changeRoomPanel: {fileID: 0}
-  card: {fileID: 0}
   emoteWheel: {fileID: 0}
   presentationCamera: {fileID: 0}
   onPresentationCamera: 0
@@ -411,6 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 3948895528900692149}
+  apagar: {fileID: 8290683710401700819}
   visionData: {fileID: 0}
 --- !u!1 &8062771405473327188
 GameObject:
@@ -973,9 +973,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0ceadf2b0641646b2b64b9d403ab6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  achievementsManager: {fileID: 0}
   UICard: {fileID: 3948895528900692149}
   visionData: {fileID: 0}
   editVisionData: {fileID: 0}
+  achivementList: {fileID: 0}
+--- !u!1 &8290683710401700819 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2434965714513883817, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
+  m_PrefabInstance: {fileID: 5964121063482102138}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6221349324366832098
 PrefabInstance:
   m_ObjectHideFlags: 0
