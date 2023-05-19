@@ -747,7 +747,6 @@ MonoBehaviour:
   LoginPanel: {fileID: 1210460668}
   RegisterPanel: {fileID: 602019936}
   ResetPanel: {fileID: 367055714}
-  achievementsManager: {fileID: 0}
 --- !u!222 &367055718
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1224,14 +1223,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7600851698b304c809291f21b8f3dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageText: {fileID: 1207553909}
+  messageText: {fileID: 758073474}
   usernameInput: {fileID: 1379404881}
   emailInput: {fileID: 1991867528}
   passwordInput: {fileID: 1737751448}
   LoginPanel: {fileID: 1210460668}
   RegisterPanel: {fileID: 602019936}
   ResetPanel: {fileID: 367055714}
-  achievementsManager: {fileID: 602019942}
 --- !u!222 &602019940
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3698,7 +3696,6 @@ MonoBehaviour:
   LoginPanel: {fileID: 1210460668}
   RegisterPanel: {fileID: 602019936}
   ResetPanel: {fileID: 367055714}
-  achievementsManager: {fileID: 0}
 --- !u!114 &1210460673
 MonoBehaviour:
   m_ObjectHideFlags: 0
