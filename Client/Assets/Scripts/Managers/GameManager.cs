@@ -99,11 +99,11 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
 
     //Connection Status
-    private ConnectionStatus ConnectionStatus { get; set; }
+    [SerializeField] private ConnectionStatus ConnectionStatus { get; set; }
 
-    private UserStatus UserStatus { get; set; }
+    [SerializeField] private UserStatus UserStatus { get; set; }
 
-    private UserRole UserRole { get; set; }
+    [SerializeField] private UserRole UserRole { get; set; }
 
     private int avatarNumber = 0;
 

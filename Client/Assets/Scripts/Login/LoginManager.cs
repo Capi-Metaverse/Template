@@ -149,8 +149,38 @@ public class LoginManager : MonoBehaviour
         };
 
         PlayFabClientAPI.ExecuteCloudScript(AddMem, OnAddMemberSuccess, OnAddMemberFailure);
-    }  
-      
+    }
+
+    /// <summary>
+    /// PlayFab. It's called when the function that adds a member works.
+    /// </summary>
+    /// <param name="result"></param>
+    private void OnAddMemberSuccess(ExecuteCloudScriptResult result)
+    {
+        Debug.Log("[PlayFab-LoginManager] Member added to the group successfully." + result.ToJson());
+
+        //We register the achivements in Playfab
+        List<Achievement> achievementList = AchivementRegister();
+
+        var request = new UpdateUserDataRequest
+        {
+            Data = new Dictionary<string, string>
+            {
+                {"Achievements", JsonConvert.SerializeObject(achievementList)}
+            }
+        };
+        PlayFabClientAPI.UpdateUserData(request, OnEndRegister, OnError);
+
+    }
+
+    private void OnEndRegister(UpdateUserDataResult obj)
+    {
+        //We change the UI
+        messageText.text = "Registered!";
+        LoginPanel.SetActive(true);
+        RegisterPanel.SetActive(false);
+    }
+
 
 
 
@@ -212,210 +242,10 @@ public class LoginManager : MonoBehaviour
         messageText.text = "logged in!";
 
         //Determine the role of the user
-        DetermineRole();   
-
-    }
-
-
-
-
-
-
-    /*ID and Username Functions*/
-
-
-    /// <summary>
-    /// PlayFab. It's called when the MasterID is obtained succesfully.
-    /// </summary>
-    /// <param name="result"></param>
-    private void OnIDSuccess(ExecuteCloudScriptResult result)
-    {
-        string jsonString = result.FunctionResult.ToString();
-
-        PlayerDataId playerDataId = JsonUtility.FromJson<PlayerDataId>(jsonString);
-
-        string IDMaster = playerDataId.getPlayerId;
-
-        Debug.Log("[PlayFab-LoginManager] MasterID: " + IDMaster);
-        gameManager.SetUserID(IDMaster);
-
-        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), AssignRole, OnError);
-    }
-
-    /// <summary>
-    /// PlayFab. It's called when the username has been returned succesfully. Sets the username value in the GameManager.
-    /// </summary>
-    /// <param name="result"></param>
-    void OnUsernameSuccess(ExecuteCloudScriptResult result)
-    {
-
-        string jsonString = result.FunctionResult.ToString();
-
-        PlayerDataUsername playerDataUsername = JsonUtility.FromJson<PlayerDataUsername>(jsonString);
-
-        string username = playerDataUsername.getPlayerUsername;
-      
-
-        gameManager.SetUsername(username);
-        gameManager.SetEmail(emailInput.text);
-
-        //Obtain ID
-        var GetID = new ExecuteCloudScriptRequest()
-        {
-            FunctionName = "getPlayerAccountInfoId"
-        };
-
-        PlayFabClientAPI.ExecuteCloudScript(GetID, OnIDSuccess, OnError);
-
-        Debug.Log("[PlayFab-LoginManager] Username: " + username); // output: "prueba1"
-    }
-
-
-
-
-    /*Add Member Functions*/
-
-
-    /// <summary>
-    /// PlayFab. It's called when the function that adds a member works.
-    /// </summary>
-    /// <param name="result"></param>
-    private void OnAddMemberSuccess(ExecuteCloudScriptResult result)
-    {
-        Debug.Log("[PlayFab-LoginManager] Member added to the group successfully." + result.ToJson());
-
-        //We register the achivements in Playfab
-        List<Achievement> achievementList = AchivementRegister();
-
-        var request = new UpdateUserDataRequest
-        {
-            Data = new Dictionary<string, string>
-            {
-                {"Achievements", JsonConvert.SerializeObject(achievementList)}
-            }
-        };
-        PlayFabClientAPI.UpdateUserData(request, OnEndRegister, OnError);
-
-    }
-
-    private List<Achievement> AchivementRegister()
-    {
-        List<Achievement> ListaLogros = new List<Achievement>
-        {
-            new Achievement("Educated", false), //Finish the Tutorial.
-            new Achievement("Dolled up", false), //Edit your profile for the first time.
-            new Achievement("Independent", false), //Change your location for the first time.
-            new Achievement("Traveler", false), //Change your location for the fifth time.
-            new Achievement("Phileas Fogg", false), //Change your location for the 10 time.
-            new Achievement("Brush Cleaner", false), //Draw for the first time.
-            new Achievement("Artist", false), //Draw for the 5 time.
-            new Achievement("Cultist", false), //Pray in Jose Photo
-            new Achievement("Camera Assistant", false), //Do a recording
-            new Achievement("Next Almodovar", false), //Do 10 recordings.
-            new Achievement("Curious",false), //Interact with items 5 times.
-            new Achievement("Restless", false), //Interact with items 15 times.
-            new Achievement("Unhinged", false), //Interact with items 50 times.
-
-
-        };
-
-        return ListaLogros;
-    }
-
-    private void OnEndRegister(UpdateUserDataResult obj)
-    {
-        //We change the UI
-        messageText.text = "Registered!";
-        LoginPanel.SetActive(true);
-        RegisterPanel.SetActive(false);
-    }
-
-
-    /// <summary>
-    /// PlayFab. It's called when the function that adds a member fails.
-    /// </summary>
-    /// <param name="error"></param>
-    private void OnAddMemberFailure(PlayFabError error)
-    {
-        Debug.LogError("[PlayFab-LoginManager] Error adding member to group: " + error.ErrorMessage);
-    }
-
-
-
-
-    /*Role Confirmation*/
-
-
-    /// <summary>
-    /// PlayFab. Executes ConfirmRole function several times to determine the role of the user.
-    /// </summary>
-    void DetermineRole()
-    {
         //Confirm if admin
-        ConfirmRole("admins" );
+        ConfirmRole("admins");
 
-        //Confirm if moderator
-        ConfirmRole("moderators");
-
-        //Confirm if client
-        ConfirmRole("clients");
-
-        //Confirm if employee
-        ConfirmRole("members");
     }
-
-    /// <summary>
-    /// PlayFab. Assigns the role to the UserRole variable defined in GameManager
-    /// </summary>
-    public void AssignRole(GetUserDataResult result)
-    {
-
-        if (result.Data != null && result.Data.ContainsKey("NewUser"))
-        {
-            newUser = Convert.ToBoolean(result.Data["NewUser"].Value);
-        }
-
-        /*
-        // Wait until roles dictionary contains "members" key
-        while (!roles.ContainsKey("members"))
-        {
-            // Wait for 100 milliseconds before checking again
-            await Task.Delay(100);
-        }
-        */
-
-        UserRolePlayFab = roles.FirstOrDefault(x => x.Value == true).Key;
-        switch (UserRolePlayFab)
-        {
-            case "admins":
-                gameManager.SetUserRole(UserRole.Admin);
-                break;
-            case "members":
-                gameManager.SetUserRole(UserRole.Employee);
-                break;
-            case "clients":
-                gameManager.SetUserRole(UserRole.Client);
-                break;
-            case "moderators":
-                gameManager.SetUserRole(UserRole.Moderator);
-                break;
-        }
-        Debug.Log("[PlayFab-LoginManager] UserRole: " + gameManager.GetUserRole());
-
-        //Change to the next scene
-        if (newUser)
-        {
-            SceneManager.LoadSceneAsync("Tutorial");
-            
-        }
-     
-        else
-        {
-            SceneManager.LoadSceneAsync("Lobby");
-        }
-    }
-
-
 
     /// <summary>
     /// PlayFab. Confirms if the user has the role introduced
@@ -436,6 +266,7 @@ public class LoginManager : MonoBehaviour
 
         PlayFabClientAPI.ExecuteCloudScript(ConfirmRole, OnRoleSuccess, OnError);
     }
+
 
     /// <summary>
     /// PlayFab. It's called when the confirmation of role of the user has been returned succesfully.
@@ -474,6 +305,151 @@ public class LoginManager : MonoBehaviour
                 }
         }
     }
+    /*ID and Username Functions*/
+
+    /// <summary>
+    /// PlayFab. It's called when the username has been returned succesfully. Sets the username value in the GameManager.
+    /// </summary>
+    /// <param name="result"></param>
+    void OnUsernameSuccess(ExecuteCloudScriptResult result)
+    {
+
+        string jsonString = result.FunctionResult.ToString();
+
+        PlayerDataUsername playerDataUsername = JsonUtility.FromJson<PlayerDataUsername>(jsonString);
+
+        string username = playerDataUsername.getPlayerUsername;
+
+
+        gameManager.SetUsername(username);
+        gameManager.SetEmail(emailInput.text);
+
+        //Obtain ID
+        var GetID = new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "getPlayerAccountInfoId"
+        };
+
+        PlayFabClientAPI.ExecuteCloudScript(GetID, OnIDSuccess, OnError);
+
+        Debug.Log("[PlayFab-LoginManager] Username: " + username); // output: "prueba1"
+    }
+
+
+
+    /// <summary>
+    /// PlayFab. It's called when the MasterID is obtained succesfully.
+    /// </summary>
+    /// <param name="result"></param>
+    private void OnIDSuccess(ExecuteCloudScriptResult result)
+    {
+        string jsonString = result.FunctionResult.ToString();
+
+        PlayerDataId playerDataId = JsonUtility.FromJson<PlayerDataId>(jsonString);
+
+        string IDMaster = playerDataId.getPlayerId;
+
+        Debug.Log("[PlayFab-LoginManager] MasterID: " + IDMaster);
+        gameManager.SetUserID(IDMaster);
+
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), AssignRole, OnError);
+    }
+
+   
+
+
+
+
+    /*Add Member Functions*/
+
+
+  
+
+    private List<Achievement> AchivementRegister()
+    {
+        List<Achievement> ListaLogros = new List<Achievement>
+        {
+            new Achievement("Educated", false), //Finish the Tutorial.
+            new Achievement("Dolled up", false), //Edit your profile for the first time.
+            new Achievement("Independent", false), //Change your location for the first time.
+            new Achievement("Traveler", false), //Change your location for the fifth time.
+            new Achievement("Phileas Fogg", false), //Change your location for the 10 time.
+            new Achievement("Brush Cleaner", false), //Draw for the first time.
+            new Achievement("Artist", false), //Draw for the 5 time.
+            new Achievement("Cultist", false), //Pray in Jose Photo
+            new Achievement("Camera Assistant", false), //Do a recording
+            new Achievement("Next Almodovar", false), //Do 10 recordings.
+            new Achievement("Curious",false), //Interact with items 5 times.
+            new Achievement("Restless", false), //Interact with items 15 times.
+            new Achievement("Unhinged", false), //Interact with items 50 times.
+
+
+        };
+
+        return ListaLogros;
+    }
+
+   
+
+
+    /// <summary>
+    /// PlayFab. It's called when the function that adds a member fails.
+    /// </summary>
+    /// <param name="error"></param>
+    private void OnAddMemberFailure(PlayFabError error)
+    {
+        Debug.LogError("[PlayFab-LoginManager] Error adding member to group: " + error.ErrorMessage);
+    }
+
+
+
+
+   
+
+    /// <summary>
+    /// PlayFab. Assigns the role to the UserRole variable defined in GameManager
+    /// </summary>
+    public void AssignRole(GetUserDataResult result)
+    {
+
+        if (result.Data != null && result.Data.ContainsKey("NewUser"))
+        {
+            newUser = Convert.ToBoolean(result.Data["NewUser"].Value);
+        }
+
+
+        UserRolePlayFab = roles.FirstOrDefault(x => x.Value == true).Key;
+        switch (UserRolePlayFab)
+        {
+            case "admins":
+                gameManager.SetUserRole(UserRole.Admin);
+                break;
+            case "members":
+                gameManager.SetUserRole(UserRole.Employee);
+                break;
+            case "clients":
+                gameManager.SetUserRole(UserRole.Client);
+                break;
+            case "moderators":
+                gameManager.SetUserRole(UserRole.Moderator);
+                break;
+        }
+        Debug.Log("[PlayFab-LoginManager] UserRole: " + gameManager.GetUserRole());
+
+        //Change to the next scene
+        if (newUser)
+        {
+            SceneManager.LoadSceneAsync("Tutorial");
+            
+        }
+     
+        else
+        {
+            SceneManager.LoadSceneAsync("Lobby");
+        }
+    }
+
+
 
     /*Error Callback*/
 
