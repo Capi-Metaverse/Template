@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
+
 public class LoginManager : MonoBehaviour
 {
     [Header("UI")]
@@ -25,11 +26,11 @@ public class LoginManager : MonoBehaviour
     public GameObject RegisterPanel;
     public GameObject ResetPanel;
 
+    //GameManager
     private GameManager gameManager;
 
+    //Boolean that checks if the user is new or not
     private bool newUser = true;
-
-    public AchievementsManager achievementsManager;
 
     //Roles
     Dictionary<string, bool> roles = new Dictionary<string, bool>();
@@ -46,10 +47,16 @@ public class LoginManager : MonoBehaviour
         public string getPlayerId;
     }
 
+    private string actualRole = "none";
+
 
     private void Start()
     {
+        //It gets the GameManager at the start
         gameManager = GameManager.FindInstance();
+
+        //If there's an error in the connection it will return
+        //This statement indicates to the user that an error has occurred.
         if (gameManager.GetConnectionStatus() == ConnectionStatus.Failed)
         {
             messageText.text = "An error has occurred. Try Again";
@@ -59,21 +66,26 @@ public class LoginManager : MonoBehaviour
 
 
 
-    /*Panel Modification Functions*/
+
+ //-------------------- Panel Modification Functions --------------------
 
 
+    //Function that changes the UI to the Sign-Up UI
     public void ChangeRegister()
     {
         RegisterPanel.SetActive(true);
         ResetPanel.SetActive(false);
         LoginPanel.SetActive(false);
     }
+    //Function that changes the UI to the Login UI
     public void ChangeLogin()
     {
         RegisterPanel.SetActive(false);
         ResetPanel.SetActive(false);
         LoginPanel.SetActive(true);
     }
+
+    //Function that changes the UI to the Reset Password UI
     public void ChangeReset()
     {
         RegisterPanel.SetActive(false);
@@ -93,7 +105,7 @@ public class LoginManager : MonoBehaviour
     /// </summary>
     public void RegisterButton()
     {
-        if (!ValidarUserName(usernameInput.text))
+        if (!ValidateUserName(usernameInput.text))
         {
             return;
         }
@@ -103,6 +115,8 @@ public class LoginManager : MonoBehaviour
             messageText.text = "Password too Short!";
             return;
         }
+
+        //Playfab Request
         var request = new RegisterPlayFabUserRequest
         {
             Username = usernameInput.text,
@@ -120,9 +134,8 @@ public class LoginManager : MonoBehaviour
     /// <param name="result"></param>
     void OnRegisterSucess(RegisterPlayFabUserResult result)
     {
-        messageText.text = "Registered and logged in!";
-        LoginPanel.SetActive(true);
-        RegisterPanel.SetActive(false);
+        //When the user is in the database, we assign their group
+       
 
         //Add Member
         var AddMem = new ExecuteCloudScriptRequest()
@@ -199,28 +212,8 @@ public class LoginManager : MonoBehaviour
         messageText.text = "logged in!";
 
         //Determine the role of the user
-        DetermineRole();
+        DetermineRole();   
 
-        //Obtain Name
-        var GetNa = new ExecuteCloudScriptRequest()
-        {
-            FunctionName = "getPlayerAccountInfoUsername"
-        };
-
-        PlayFabClientAPI.ExecuteCloudScript(GetNa, OnUsernameSuccess, OnError);
-
-        //Obtain ID
-        var GetID = new ExecuteCloudScriptRequest()
-        {
-            FunctionName = "getPlayerAccountInfoId"
-        };
-
-        PlayFabClientAPI.ExecuteCloudScript(GetID, OnIDSuccess, OnError);
-
-        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), AssignRole, OnError);
-
-        
-       
     }
 
 
@@ -245,6 +238,8 @@ public class LoginManager : MonoBehaviour
 
         Debug.Log("[PlayFab-LoginManager] MasterID: " + IDMaster);
         gameManager.SetUserID(IDMaster);
+
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), AssignRole, OnError);
     }
 
     /// <summary>
@@ -264,6 +259,14 @@ public class LoginManager : MonoBehaviour
         gameManager.SetUsername(username);
         gameManager.SetEmail(emailInput.text);
 
+        //Obtain ID
+        var GetID = new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "getPlayerAccountInfoId"
+        };
+
+        PlayFabClientAPI.ExecuteCloudScript(GetID, OnIDSuccess, OnError);
+
         Debug.Log("[PlayFab-LoginManager] Username: " + username); // output: "prueba1"
     }
 
@@ -281,17 +284,23 @@ public class LoginManager : MonoBehaviour
     {
         Debug.Log("[PlayFab-LoginManager] Member added to the group successfully." + result.ToJson());
 
-        achievementsManager.currentAchievements = AchivementRegister();
+        //We register the achivements in Playfab
+        List<Achievement> achievementList = AchivementRegister();
 
-
-        achievementsManager.SaveData(achievementsManager.currentAchievements);
-        
+        var request = new UpdateUserDataRequest
+        {
+            Data = new Dictionary<string, string>
+            {
+                {"Achievements", JsonConvert.SerializeObject(achievementList)}
+            }
+        };
+        PlayFabClientAPI.UpdateUserData(request, OnEndRegister, OnError);
 
     }
 
     private List<Achievement> AchivementRegister()
     {
-        var ListaLogros = new List<Achievement>
+        List<Achievement> ListaLogros = new List<Achievement>
         {
             new Achievement("Educated", false), //Finish the Tutorial.
             new Achievement("Dolled up", false), //Edit your profile for the first time.
@@ -312,6 +321,16 @@ public class LoginManager : MonoBehaviour
 
         return ListaLogros;
     }
+
+    private void OnEndRegister(UpdateUserDataResult obj)
+    {
+        //We change the UI
+        messageText.text = "Registered!";
+        LoginPanel.SetActive(true);
+        RegisterPanel.SetActive(false);
+    }
+
+
     /// <summary>
     /// PlayFab. It's called when the function that adds a member fails.
     /// </summary>
@@ -333,7 +352,7 @@ public class LoginManager : MonoBehaviour
     void DetermineRole()
     {
         //Confirm if admin
-        ConfirmRole("admins");
+        ConfirmRole("admins" );
 
         //Confirm if moderator
         ConfirmRole("moderators");
@@ -348,7 +367,7 @@ public class LoginManager : MonoBehaviour
     /// <summary>
     /// PlayFab. Assigns the role to the UserRole variable defined in GameManager
     /// </summary>
-    public async void AssignRole(GetUserDataResult result)
+    public void AssignRole(GetUserDataResult result)
     {
 
         if (result.Data != null && result.Data.ContainsKey("NewUser"))
@@ -356,12 +375,14 @@ public class LoginManager : MonoBehaviour
             newUser = Convert.ToBoolean(result.Data["NewUser"].Value);
         }
 
+        /*
         // Wait until roles dictionary contains "members" key
         while (!roles.ContainsKey("members"))
         {
             // Wait for 100 milliseconds before checking again
             await Task.Delay(100);
         }
+        */
 
         UserRolePlayFab = roles.FirstOrDefault(x => x.Value == true).Key;
         switch (UserRolePlayFab)
@@ -402,6 +423,7 @@ public class LoginManager : MonoBehaviour
     /// <param name="role"></param>
     public void ConfirmRole(string role)
     {
+        actualRole = role;
         var ConfirmRole = new ExecuteCloudScriptRequest()
         {
             FunctionName = "checkRole",
@@ -430,6 +452,27 @@ public class LoginManager : MonoBehaviour
         var isRole = functionresult.Contains("true");
 
         roles.Add(role, isRole);
+
+        switch (actualRole)
+        {
+            case "admins": ConfirmRole("moderators"); break;
+            case "moderators": ConfirmRole("clients"); break;
+            case "clients": ConfirmRole("members"); break;
+            case "members":
+                {
+                    //Obtain Name
+                    var GetNa = new ExecuteCloudScriptRequest()
+                    {
+                        FunctionName = "getPlayerAccountInfoUsername"
+                    };
+
+                    PlayFabClientAPI.ExecuteCloudScript(GetNa, OnUsernameSuccess, OnError);
+
+
+                    break;
+
+                }
+        }
     }
 
     /*Error Callback*/
@@ -447,7 +490,7 @@ public class LoginManager : MonoBehaviour
 
     /*Username Validation Message*/
 
-    public bool ValidarUserName(string str)
+    public bool ValidateUserName(string str)
     {
         // Check if string is null or empty
         if (string.IsNullOrEmpty(str))
