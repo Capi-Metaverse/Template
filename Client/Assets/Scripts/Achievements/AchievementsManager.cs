@@ -58,10 +58,7 @@ public class AchievementsManager : MonoBehaviour
         {
             currentAchievements = JsonConvert.DeserializeObject<List<Achievement>>(result.Data["Achievements"].Value);
             Debug.Log(currentAchievements[0].Name);
-            if (!(SceneManager.GetSceneByName("Login") == SceneManager.GetActiveScene()))
-            {
-                achivementList.InstanceAchivementItem();
-            }
+           
         }
 
     }
