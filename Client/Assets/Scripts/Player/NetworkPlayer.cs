@@ -47,13 +47,12 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
         if (Object.HasInputAuthority)
         {
             gameManager.SetAvatarNumber(avatar);
+            playfabIdentity = gameManager.GetUserID();
             Local = this;
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
             this.inputHandler.enabled = true;
             //Looks in scene for the GameManager and store it
             SetGameManager(GameObject.Find("/Manager").GetComponent<GameManager>());
-            string auxiliar = gameManager.GetUsername();//loginManager sets nickname on GameManager and we can retrieve it
-            Debug.Log("Spawned local player : " + auxiliar);
             gameObject.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("LocalPlayer");
             foreach (Transform child in gameObject.transform.GetChild(0))
             {
@@ -81,9 +80,9 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
     private void OnNickNameChanged()
     {
         Debug.Log($"Nick name changed for player to {nickname} for player {gameObject.name}");
-
+        
         playerNicknameTM.text = nickname.ToString();
-        this.playfabIdentity= playfabId.ToString();
+        
 
     }
 

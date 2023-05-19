@@ -22,7 +22,7 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
         string playfabid =_eventObject.GetComponent<NetworkPlayer>().playfabIdentity;
         Debug.Log("PlayfabID del pulsado: " + playfabid);
         //get UIcard
-        GetPublicDataFromOtherPlayer("B8F668536256F472", "userUICard");
+        GetPublicDataFromOtherPlayer(playfabid, "userUICard");
     }
 
     // Start is called before the first frame update
