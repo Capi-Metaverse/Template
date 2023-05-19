@@ -63,17 +63,17 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
         ///////////////////////
         ///
 
-        achievementsManager.currentAchievements[0].activate = true;
-        achievementsManager.SaveData(achievementsManager.currentAchievements);
+        
 
         /////////////////////////////////
         ///
         characterInputHandler = GameManager.FindInstance().GetCurrentPlayer().gameObject.GetComponent<CharacterInputHandler>();
         manageDataUI = new ManageDataUI();
         manageDataUI.LoadData();
+        achievementsManager.LoadData();
         StartCoroutine(LoadInitialData());
 
-        
+     
 
         UICard.SetActive(true);
         characterInputHandler.DeactivateALL();
@@ -84,9 +84,6 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
     void Start()
     {
         gameManager = GameManager.FindInstance();
-        achievementsManager.LoadData();
-       
-
     }
     // Update is called once per frame
    
