@@ -47,7 +47,7 @@ public class LoginManager : MonoBehaviour
         public string getPlayerId;
     }
 
-    private string actualRole = "none";
+    private int requestsCounter = 0;
 
 
     private void Start()
@@ -223,6 +223,7 @@ public class LoginManager : MonoBehaviour
     /// </summary>
     public void LoginButton()
     {
+        messageText.text = "logging in...";
         var request = new LoginWithEmailAddressRequest
         {
 
@@ -242,8 +243,25 @@ public class LoginManager : MonoBehaviour
         messageText.text = "logged in!";
 
         //Determine the role of the user
-        //Confirm if admin
         ConfirmRole("admins");
+        ConfirmRole("moderators");
+        ConfirmRole("clients");
+        ConfirmRole("members");
+
+        var GetNa = new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "getPlayerAccountInfoUsername"
+        };
+
+        PlayFabClientAPI.ExecuteCloudScript(GetNa, OnUsernameSuccess, OnError);
+
+        //Obtain ID
+        var GetID = new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "getPlayerAccountInfoId"
+        };
+
+        PlayFabClientAPI.ExecuteCloudScript(GetID, OnIDSuccess, OnError);
 
     }
 
@@ -253,7 +271,6 @@ public class LoginManager : MonoBehaviour
     /// <param name="role"></param>
     public void ConfirmRole(string role)
     {
-        actualRole = role;
         var ConfirmRole = new ExecuteCloudScriptRequest()
         {
             FunctionName = "checkRole",
@@ -284,26 +301,20 @@ public class LoginManager : MonoBehaviour
 
         roles.Add(role, isRole);
 
-        switch (actualRole)
+        if (roles.Count == 4) 
         {
-            case "admins": ConfirmRole("moderators"); break;
-            case "moderators": ConfirmRole("clients"); break;
-            case "clients": ConfirmRole("members"); break;
-            case "members":
-                {
-                    //Obtain Name
-                    var GetNa = new ExecuteCloudScriptRequest()
-                    {
-                        FunctionName = "getPlayerAccountInfoUsername"
-                    };
-
-                    PlayFabClientAPI.ExecuteCloudScript(GetNa, OnUsernameSuccess, OnError);
-
-
-                    break;
-
-                }
+            requestsCounter++;
+            checkRequestCounter();
         }
+    }
+
+    private void checkRequestCounter()
+    {
+        if(requestsCounter == 3)
+        {
+            PlayFabClientAPI.GetUserData(new GetUserDataRequest(), AssignRole, OnError);
+        }
+
     }
     /*ID and Username Functions*/
 
@@ -324,13 +335,8 @@ public class LoginManager : MonoBehaviour
         gameManager.SetUsername(username);
         gameManager.SetEmail(emailInput.text);
 
-        //Obtain ID
-        var GetID = new ExecuteCloudScriptRequest()
-        {
-            FunctionName = "getPlayerAccountInfoId"
-        };
-
-        PlayFabClientAPI.ExecuteCloudScript(GetID, OnIDSuccess, OnError);
+        requestsCounter++;
+        checkRequestCounter();
 
         Debug.Log("[PlayFab-LoginManager] Username: " + username); // output: "prueba1"
     }
@@ -351,8 +357,8 @@ public class LoginManager : MonoBehaviour
 
         Debug.Log("[PlayFab-LoginManager] MasterID: " + IDMaster);
         gameManager.SetUserID(IDMaster);
-
-        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), AssignRole, OnError);
+        requestsCounter++;
+        checkRequestCounter();
     }
 
    
@@ -411,7 +417,7 @@ public class LoginManager : MonoBehaviour
     /// </summary>
     public void AssignRole(GetUserDataResult result)
     {
-
+        messageText.text = "logged in!";
         if (result.Data != null && result.Data.ContainsKey("NewUser"))
         {
             newUser = Convert.ToBoolean(result.Data["NewUser"].Value);
@@ -439,13 +445,13 @@ public class LoginManager : MonoBehaviour
         //Change to the next scene
         if (newUser)
         {
-            SceneManager.LoadSceneAsync("Tutorial");
+            SceneManager.LoadScene("Tutorial");
             
         }
      
         else
         {
-            SceneManager.LoadSceneAsync("Lobby");
+            SceneManager.LoadScene("Lobby");
         }
     }
 
