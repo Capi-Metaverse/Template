@@ -34,7 +34,7 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     float rotationX = 0;
 
     public Animator animator = null;
- 
+    public GameManager gameManager = null;
 
     [Networked]
   [HideInInspector]
@@ -166,6 +166,10 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     {
 
         if(animator == null) { animator = this.gameObject.GetComponentInChildren<Animator>(); }
+        if (gameManager == null) { gameManager = GameObject.Find("Manager").GetComponentInChildren<GameManager>(); }
+
+        if (gameManager.GetUserStatus() == UserStatus.InGame) { animator.SetFloat("Speed", 1); }
+        else { animator.SetFloat("Speed", 0); }
        
         if (IsGrounded)
         {
