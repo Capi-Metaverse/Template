@@ -3205,9 +3205,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 67874654457803308}
-  - component: {fileID: 3089374201123794346}
   - component: {fileID: 4447026040780193267}
   - component: {fileID: 7095604937447300521}
+  - component: {fileID: 8455532466235325246}
   m_Layer: 0
   m_Name: ImagenPJ
   m_TagString: Untagged
@@ -3235,18 +3235,6 @@ RectTransform:
   m_AnchoredPosition: {x: -543, y: 174}
   m_SizeDelta: {x: 4.5589, y: 5.541}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3089374201123794346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6861456170954926788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e9766223a9014447b4f690b162c3436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &4447026040780193267
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3285,6 +3273,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8455532466235325246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6861456170954926788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9766223a9014447b4f690b162c3436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7031423380524512207
 GameObject:
   m_ObjectHideFlags: 0
@@ -3756,7 +3756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e764ce496176d42a6c0a406245d9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imagedata: {fileID: 3089374201123794346}
+  imagedata: {fileID: 0}
   UserNameTitle: {fileID: 2817869555988508744}
   TemasText: {fileID: 6793117959586957767}
   OboutTextInput: {fileID: 8158187277617765664}
@@ -4788,7 +4788,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5002671859972855639}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.5296399
+  m_Size: 0.52973956
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

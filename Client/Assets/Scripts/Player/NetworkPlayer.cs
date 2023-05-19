@@ -58,7 +58,9 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
             foreach (Transform child in gameObject.transform.GetChild(0))
             {
                 child.gameObject.layer = LayerMask.NameToLayer("LocalPlayer");
+            
             }
+            inputHandler.FindUIOtherUser();
         }
 
         else Debug.Log("Spawned remote player");

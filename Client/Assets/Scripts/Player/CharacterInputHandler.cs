@@ -29,7 +29,9 @@ public class CharacterInputHandler : MonoBehaviour
     public GameObject Pause;//Pause is an object in scene map, you can see it as the manager of the pause state
     public GameObject Settings;//The same as Pause but for settings, the state will be Pause too cause the setting are accesible from Pause
     public GameObject UICard;
-    
+    public GameObject UICardOtherUser;
+
+
     //PlayerUIPrefab
     GameObject scope;
     GameObject micro;//Actually this is the microphone in game
@@ -86,18 +88,19 @@ public class CharacterInputHandler : MonoBehaviour
         //ChatGPT
         chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
         UICard = GameObject.Find("Menus").transform.GetChild(4).gameObject;
-        Debug.Log(UICard);
-
-
-        Debug.Log(Pause);
-
+        
         //seteamos el estado para que este InGame, esto hay que cambiarlo
         gameManager.SetUserStatus(UserStatus.InGame);
     }
 
+    public void FindUIOtherUser()
+    {
+        UICardOtherUser = gameManager.GetCurrentPlayer().transform.GetChild(6).gameObject;
+    }
     // Update is called once per frame
     void Update()
     {
+        
         sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
 
         if (Input.GetKeyDown("m") && gameManager.GetUserStatus() == UserStatus.InGame)
@@ -181,11 +184,6 @@ public class CharacterInputHandler : MonoBehaviour
             {
                 case UserStatus.InGame:
                     {
-                        if ((Input.GetKeyDown(KeyCode.C) && !escPul))
-                        {
-                            setPause();
-                            UICard.SetActive(true);
-                        }
                     //ESC key down(PauseMenu)
                     if ((Input.GetKeyDown(KeyCode.Escape) && !escPul))
                         {
@@ -412,6 +410,7 @@ public class CharacterInputHandler : MonoBehaviour
         Settings.SetActive(false);
         Pause.SetActive(false);
         emoteWheel.SetActive(false);
+        UICardOtherUser.SetActive(false);
         Cursor.visible = false;
         UICard.SetActive(false);
         //States and Reactivate all

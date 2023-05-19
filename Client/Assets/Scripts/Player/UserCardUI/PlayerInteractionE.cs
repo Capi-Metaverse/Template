@@ -4,6 +4,7 @@ using PlayFab.ClientModels;
 using static Fusion.NetworkCharacterController;
 using PlayFab;
 using Newtonsoft.Json;
+using UnityEngine.UI;
 
 public class PlayerInteractionE : MonoBehaviour , IMetaEvent
 {
@@ -12,7 +13,7 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
     public GameObject card;
     public GameObject apagar;
     public VisionData visionData;
-
+    public Image imagen;
     CharacterInputHandler characterInputHandler;
     GameObject _eventObject;
     GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
@@ -22,7 +23,8 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
         string playfabid =_eventObject.GetComponent<NetworkPlayer>().playfabIdentity;
         Debug.Log("PlayfabID del pulsado: " + playfabid);
         //get UIcard
-        GetPublicDataFromOtherPlayer(playfabid, "userUICard");
+        GetPublicDataFromOtherPlayer(playfabid,new List<string> {"userUICard", "CustomImage"});
+
     }
 
     // Start is called before the first frame update
@@ -32,17 +34,19 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
         
     }
 
-    public void GetPublicDataFromOtherPlayer(string otherPlayerId, string key)
+    public void GetPublicDataFromOtherPlayer(string otherPlayerId, List<string> list)
     {
         var request = new GetUserDataRequest
         {
             PlayFabId = otherPlayerId,
-            Keys = new List<string> { key }
+            Keys = list 
         };
 
         PlayFabClientAPI.GetUserData(request, OnUpdateUserDataSuccess, OnUpdateUserDataFailure);
        
     }
+
+
 
     private void LoadDataIntoCard(GetUserDataResult result)
     {
@@ -59,14 +63,32 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
         visionData.OboutText.text = data.about;
         visionData.HobbiesText.text = data.hobbies;
         visionData.CVText.text = data.CV;
+        Debug.Log("safsdhdfjdvcasckpoWDK`PASGJÑNIZÑPCAPFHSDÑKBMZÑL");
+        Debug.Log(result.Data.ToString());
+        Debug.Log(result.Data["CustomImage"].Value.ToString());
+
+
+        //esto se puede reciclar usando el script ImagenData la funcion OnGetUserDataSuccess
+        if (result.Data != null && result.Data.ContainsKey("CustomImage"))
+        {
+            string imageString = result.Data["CustomImage"].Value;
+            byte[] imageData = System.Convert.FromBase64String(imageString);
+
+            // Use the image data as desired (e.g., display in Unity, save to file, etc.)
+            Debug.Log("Image retrieved successfully!");
+
+            Texture2D texture = new Texture2D(2, 2);
+            texture.LoadImage(imageData);
+            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            imagen.sprite = sprite;
+        }
     }
 
     private void OnUpdateUserDataSuccess(GetUserDataResult result)
     {
-        Debug.Log("Rsult to user successfully!");
-        Debug.Log(result.Data["userUICard"].Value);
         LoadDataIntoCard(result);
     }
+
 
     private void OnUpdateUserDataFailure(PlayFabError error)
     {

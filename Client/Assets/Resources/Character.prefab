@@ -248,7 +248,7 @@ MonoBehaviour:
   - {fileID: -3915082565821610680, guid: d610150337f0d054b9c1ad13aab73346, type: 3}
   animator: {fileID: 8161174919126568394, guid: 57f6953ce52c19147b49af395f0446ec, type: 3}
   playerNicknameTM: {fileID: 495725005451376805}
-  playfabIdentity: 
+  _playfabIdentity: 
   _nickname:
     _length: 0
     _data:
@@ -412,6 +412,7 @@ MonoBehaviour:
   card: {fileID: 3948895528900692149}
   apagar: {fileID: 8290683710401700819}
   visionData: {fileID: 0}
+  imagen: {fileID: 3511813315859533011}
 --- !u!1 &8062771405473327188
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,7 +939,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8455532466235325246, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8455532466235325246, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
 --- !u!224 &1958343482095789686 stripped
 RectTransform:
