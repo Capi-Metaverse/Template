@@ -15,7 +15,8 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
     public Animator animator;
     //UI NAME IN GAME
     public TextMeshProUGUI playerNicknameTM;
-    public string playfabIdentity;
+    [Networked]
+    public string playfabIdentity { get; set; }
     [Networked(OnChanged = nameof(OnNickNameChanged))]
     public NetworkString<_16> nickname { get; set; }
     public NetworkString<_16> playfabId { get; set; }
