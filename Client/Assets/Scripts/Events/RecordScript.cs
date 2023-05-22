@@ -24,37 +24,17 @@ public class RecordScript : MonoBehaviour, IMetaEvent
             VideoCaptureCtrl.instance.StartCapture();
           
         }
-        else if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.STARTED)
+        else if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.STARTED || VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.PAUSED)
         {
            
                 //Stop the video
                 VideoCaptureCtrl.instance.StopCapture();
           
           
-                //Pause
-                //VideoCaptureCtrl.instance.ToggleCapture();
+               
             
         }
-        /*
-        else if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.PAUSED)
-        {
-            if (GUI.Button(new Rect(10, Screen.height - 60, 150, 50), "Stop Capture"))
-            {
-                VideoCaptureCtrl.instance.StopCapture();
-            }
-            if (GUI.Button(new Rect(180, Screen.height - 60, 150, 50), "Continue Capture"))
-            {
-                VideoCaptureCtrl.instance.ToggleCapture();
-            }
-        }
-        */
-        else if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.STOPPED)
-        {
-            if (GUI.Button(new Rect(10, Screen.height - 60, 150, 50), "Processing"))
-            {
-                // Waiting processing end.
-            }
-        }
+     
 
     }
 
