@@ -18,6 +18,11 @@ public class AchivementList : MonoBehaviour
     {
         list = achievementsManager.currentAchievements;
 
+        foreach (Transform child in AchivementsUIList.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
         //Iterate players to get Nickname && ActorNumber
         for (int i = 0; i < list.Count; i++)
         {
