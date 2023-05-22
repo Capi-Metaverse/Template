@@ -1,31 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PlayFab.ClientModels;
-using static Fusion.NetworkCharacterController;
 using PlayFab;
 using Newtonsoft.Json;
 using UnityEngine.UI;
 
-public class PlayerInteractionE : MonoBehaviour , IMetaEvent
+public class PlayerInteractionE : MonoBehaviour 
 {
     GameManager gameManager;
     public UserUIInfo data;
     public GameObject card;
-    public GameObject apagar;
     public VisionData visionData;
     public Image imagen;
     CharacterInputHandler characterInputHandler;
-    GameObject _eventObject;
-    GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
-
-    public void activate(bool host)
-    {
-        string playfabid =_eventObject.GetComponent<NetworkPlayer>().playfabIdentity;
-        Debug.Log("PlayfabID del pulsado: " + playfabid);
-        //get UIcard
-        GetPublicDataFromOtherPlayer(playfabid,new List<string> {"userUICard", "CustomImage"});
-
-    }
+    //
+   
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +40,7 @@ public class PlayerInteractionE : MonoBehaviour , IMetaEvent
     private void LoadDataIntoCard(GetUserDataResult result)
     {
         card.SetActive(true);
-        apagar.SetActive(false);
+      
         characterInputHandler = GameManager.FindInstance().GetCurrentPlayer().gameObject.GetComponent<CharacterInputHandler>();
         characterInputHandler.DeactivateALL();
 
