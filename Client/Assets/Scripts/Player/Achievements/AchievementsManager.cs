@@ -53,7 +53,6 @@ public class AchievementsManager : MonoBehaviour
 
     void OnCharactersDataReceived(GetUserDataResult result)
     {
-        Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         if (result.Data != null && result.Data.ContainsKey("Achievements"))
         {
             currentAchievements = JsonConvert.DeserializeObject<List<Achievement>>(result.Data["Achievements"].Value);

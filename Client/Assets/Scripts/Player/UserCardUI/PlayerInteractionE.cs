@@ -12,9 +12,9 @@ public class PlayerInteractionE : MonoBehaviour
     public GameObject card;
     public VisionData visionData;
     public Image imagen;
+    public AchievementsManager achievementsManager;
+    public AchivementList achivementList;
     CharacterInputHandler characterInputHandler;
-    //
-   
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +35,6 @@ public class PlayerInteractionE : MonoBehaviour
        
     }
 
-
-
     private void LoadDataIntoCard(GetUserDataResult result)
     {
         card.SetActive(true);
@@ -52,9 +50,17 @@ public class PlayerInteractionE : MonoBehaviour
         visionData.OboutText.text = data.about;
         visionData.HobbiesText.text = data.hobbies;
         visionData.CVText.text = data.CV;
-       
 
+        //Logros
 
+        if (result.Data != null && result.Data.ContainsKey("Achievements"))
+        {
+            achievementsManager.currentAchievements = JsonConvert.DeserializeObject<List<Achievement>>(result.Data["Achievements"].Value);
+            Debug.Log("Achievements retrieved successfully!");
+            achivementList.InstanceAchivementItem();
+        }
+
+        //Imagen
         //esto se puede reciclar usando el script ImagenData la funcion OnGetUserDataSuccess
         if (result.Data != null && result.Data.ContainsKey("CustomImage"))
         {

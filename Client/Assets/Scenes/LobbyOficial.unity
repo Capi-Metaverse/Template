@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3655,6 +3655,14 @@ PrefabInstance:
       propertyPath: visionData
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9166918225025845130, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
+      propertyPath: achivementList
+      value: 
+      objectReference: {fileID: 9166918225025845132}
+    - target: {fileID: 9166918225025845130, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
+      propertyPath: achievementsManager
+      value: 
+      objectReference: {fileID: 9166918225025845133}
     - target: {fileID: 9166918226495525129, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
       propertyPath: m_Name
       value: Menus
@@ -3741,5 +3749,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9166918225025845132 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4521935984786782730, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
+  m_PrefabInstance: {fileID: 9166918225025845128}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f85a720477981646b796887127ffb00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9166918225025845133 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2305176615534673470, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
+  m_PrefabInstance: {fileID: 9166918225025845128}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b129b765876dd7647baf76b802e50dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

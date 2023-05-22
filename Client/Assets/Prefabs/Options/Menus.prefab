@@ -53,6 +53,8 @@ MonoBehaviour:
   card: {fileID: 2495531870298462780}
   visionData: {fileID: 833146143550189851}
   imagen: {fileID: 5123012197220266190}
+  achievementsManager: {fileID: 0}
+  achivementList: {fileID: 0}
 --- !u!1001 &568308342904409067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62,7 +64,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 64724813525762616, guid: cf02cf4f7333b514eb7f6cd52fec4dd4, type: 3}
       propertyPath: m_Size
-      value: 0.52974313
+      value: 0.5297431
       objectReference: {fileID: 0}
     - target: {fileID: 64724813525762616, guid: cf02cf4f7333b514eb7f6cd52fec4dd4, type: 3}
       propertyPath: m_Value
@@ -222,6 +224,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2495531870298462780}
   m_CullTransparentMesh: 1
+--- !u!114 &2305176615534673470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2495531870298462780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b129b765876dd7647baf76b802e50dae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achivementList: {fileID: 4521935984786782730}
+--- !u!114 &4521935984786782730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2495531870298462780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f85a720477981646b796887127ffb00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AchivementsUIItem: {fileID: 7680741457055669170, guid: 32811fb50cf67e44b8f0fe566af4cfdd, type: 3}
+  AchivementsUIList: {fileID: 6073027117692187601}
+  achievementsManager: {fileID: 2305176615534673470}
 --- !u!224 &4515089252703329518 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4128631723525510917, guid: cf02cf4f7333b514eb7f6cd52fec4dd4, type: 3}
@@ -238,6 +268,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6073027117692187601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6027136342321674298, guid: cf02cf4f7333b514eb7f6cd52fec4dd4, type: 3}
+  m_PrefabInstance: {fileID: 568308342904409067}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9166918224498879559
 PrefabInstance:
   m_ObjectHideFlags: 0

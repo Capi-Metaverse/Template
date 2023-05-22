@@ -12,7 +12,6 @@ public class AchivementList : MonoBehaviour
 
 
     public AchievementsManager achievementsManager;
-
  
    
     public void InstanceAchivementItem()
@@ -34,10 +33,7 @@ public class AchivementList : MonoBehaviour
                 //We configure the Nickname
                 TMP_Text PlayerNameText = userItem.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
 
-
                 PlayerNameText.text = list[i].Name;
-
-
             }
         }
         }

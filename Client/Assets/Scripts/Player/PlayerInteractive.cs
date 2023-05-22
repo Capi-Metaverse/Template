@@ -14,7 +14,7 @@ public class PlayerInteractive : MonoBehaviour, IMetaEvent
         string playfabid = _eventObject.GetComponent<NetworkPlayer>().playfabIdentity;
         Debug.Log("PlayfabID del pulsado: " + playfabid);
         //get UIcard
-        menuUiOther.GetPublicDataFromOtherPlayer(playfabid, new List<string> { "userUICard", "CustomImage" });
+        menuUiOther.GetPublicDataFromOtherPlayer(playfabid, new List<string> { "userUICard", "CustomImage", "Achievements" });
 
     }
 }

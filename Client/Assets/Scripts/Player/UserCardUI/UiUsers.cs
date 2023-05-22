@@ -44,8 +44,6 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
         editVisionData.UserNameTitle.text = gameManager.GetUsername();
         editVisionData.TemasText.text= gameManager.GetEmail();
 
-  
-
         visionData.UserNameTitle.text = gameManager.GetUsername();
         visionData.TemasText.text = gameManager.GetEmail(); ;
         visionData.OboutText.text = manageDataUI.data.about;
@@ -60,26 +58,14 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
     // Start is called before the first frame update
     public void activate(bool host)
     {
-        ///////////////////////
-        ///
-
-        
-
-        /////////////////////////////////
-        ///
         characterInputHandler = GameManager.FindInstance().GetCurrentPlayer().gameObject.GetComponent<CharacterInputHandler>();
         manageDataUI = new ManageDataUI();
         manageDataUI.LoadData();
         achievementsManager.LoadData();
         StartCoroutine(LoadInitialData());
 
-     
-
         UICard.SetActive(true);
         characterInputHandler.DeactivateALL();
-
-        
-
     }
     void Start()
     {
