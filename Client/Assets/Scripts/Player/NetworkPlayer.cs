@@ -60,7 +60,7 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
                 child.gameObject.layer = LayerMask.NameToLayer("LocalPlayer");
             
             }
-            inputHandler.FindUIOtherUser();
+        
         }
 
         else Debug.Log("Spawned remote player");

@@ -88,15 +88,12 @@ public class CharacterInputHandler : MonoBehaviour
         //ChatGPT
         chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
         UICard = GameObject.Find("Menus").transform.GetChild(4).gameObject;
-        
+        UICardOtherUser = GameObject.Find("Menus").transform.GetChild(5).gameObject;
+
         //seteamos el estado para que este InGame, esto hay que cambiarlo
         gameManager.SetUserStatus(UserStatus.InGame);
     }
 
-    public void FindUIOtherUser()
-    {
-        UICardOtherUser = gameManager.GetCurrentPlayer().transform.GetChild(6).gameObject;
-    }
     // Update is called once per frame
     void Update()
     {

@@ -31,7 +31,7 @@ public class PlayerInteractionE : MonoBehaviour
             Keys = list 
         };
 
-        PlayFabClientAPI.GetUserData(request, OnUpdateUserDataSuccess, OnUpdateUserDataFailure);
+        PlayFabClientAPI.GetUserData(request, LoadDataIntoCard, OnUpdateUserDataFailure);
        
     }
 
@@ -52,9 +52,7 @@ public class PlayerInteractionE : MonoBehaviour
         visionData.OboutText.text = data.about;
         visionData.HobbiesText.text = data.hobbies;
         visionData.CVText.text = data.CV;
-        Debug.Log("safsdhdfjdvcasckpoWDK`PASGJÑNIZÑPCAPFHSDÑKBMZÑL");
-        Debug.Log(result.Data.ToString());
-        Debug.Log(result.Data["CustomImage"].Value.ToString());
+       
 
 
         //esto se puede reciclar usando el script ImagenData la funcion OnGetUserDataSuccess
@@ -72,12 +70,6 @@ public class PlayerInteractionE : MonoBehaviour
             imagen.sprite = sprite;
         }
     }
-
-    private void OnUpdateUserDataSuccess(GetUserDataResult result)
-    {
-        LoadDataIntoCard(result);
-    }
-
 
     private void OnUpdateUserDataFailure(PlayFabError error)
     {

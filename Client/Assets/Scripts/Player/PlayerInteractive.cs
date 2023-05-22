@@ -10,6 +10,7 @@ public class PlayerInteractive : MonoBehaviour, IMetaEvent
     //
     public void activate(bool host)
     {
+        menuUiOther = GameObject.Find("Menus").GetComponent<PlayerInteractionE>();
         string playfabid = _eventObject.GetComponent<NetworkPlayer>().playfabIdentity;
         Debug.Log("PlayfabID del pulsado: " + playfabid);
         //get UIcard
