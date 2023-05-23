@@ -7,6 +7,8 @@ public class RecordScript : MonoBehaviour, IMetaEvent
 {
 
     GameObject _eventObject;
+
+     [SerializeField] private GameObject camera;
     GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
 
     private bool isPlayVideo = false;
@@ -18,6 +20,7 @@ public class RecordScript : MonoBehaviour, IMetaEvent
 
     public void activate(bool host)
     {
+        camera.SetActive(true);
         if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.NOT_START)
         {
             //Start to capture the video
@@ -29,10 +32,11 @@ public class RecordScript : MonoBehaviour, IMetaEvent
            
                 //Stop the video
                 VideoCaptureCtrl.instance.StopCapture();
-          
-          
-               
-            
+            camera.SetActive(false);
+
+
+
+
         }
      
 
