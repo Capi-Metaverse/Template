@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Collections.Generic;
 using RockVR.Common;
+using UnityEngine.Windows.WebCam;
 
 namespace RockVR.Video
 {
@@ -65,6 +66,10 @@ namespace RockVR.Video
         /// </summary>
         private bool isOfflineRender;
         /// <summary>
+        /// User audio clip.
+        /// </summary>
+        private AudioClip microphoneClip;
+        /// <summary>
         /// Initialize the attributes of the capture session and start capture.
         /// </summary>
         public override void StartCapture()
@@ -76,6 +81,9 @@ namespace RockVR.Video
                                  " capture not finish yet!");
                 return;
             }
+            //Capture User audio
+            microphoneClip = Microphone.Start(Microphone.devices[0],true,20,AudioSettings.outputSampleRate);
+            
             // Filter out disabled capture component.
             List<VideoCapture> validCaptures = new List<VideoCapture>();
             if (videoCaptures != null && videoCaptures.Length > 0)
@@ -162,6 +170,7 @@ namespace RockVR.Video
                                  "not start yet!");
                 return;
             }
+
             foreach (VideoCapture videoCapture in videoCaptures)
             {
                 if (!videoCapture.gameObject.activeSelf)
@@ -182,6 +191,9 @@ namespace RockVR.Video
                 videoCapture.StopCapture();
                 PathConfig.lastVideoFile = videoCapture.filePath;
             }
+            //End Recording User Audio
+            Microphone.End(Microphone.devices[0]);
+            SavWav.Save(PathConfig.lastVideoFile.Substring(0, PathConfig.lastVideoFile.LastIndexOf("/") + 1)+"userAudio", microphoneClip);
             if (IsCaptureAudio())
             {
                 audioCapture.StopCapture();
