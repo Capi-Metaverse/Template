@@ -15362,6 +15362,17 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1612710283 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2632993261950319765, guid: df3fe77ae6b319d45b11b1a868e751ea, type: 3}
+  m_PrefabInstance: {fileID: 2632993261000957782}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d01430cb7446d4787e1549b55f0a70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1624987003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20156,6 +20167,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2632993261950319765, guid: df3fe77ae6b319d45b11b1a868e751ea, type: 3}
+      propertyPath: customPath
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2632993261952605408, guid: df3fe77ae6b319d45b11b1a868e751ea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.843
@@ -20164,6 +20179,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 3.143
       objectReference: {fileID: 0}
+    - target: {fileID: 5827899633299862223, guid: df3fe77ae6b319d45b11b1a868e751ea, type: 3}
+      propertyPath: videoCapture
+      value: 
+      objectReference: {fileID: 1612710283}
     m_RemovedComponents:
     - {fileID: 2142208496040678489, guid: df3fe77ae6b319d45b11b1a868e751ea, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: df3fe77ae6b319d45b11b1a868e751ea, type: 3}

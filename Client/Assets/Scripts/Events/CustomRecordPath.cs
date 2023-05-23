@@ -1,3 +1,4 @@
+using RockVR.Video;
 using SFB;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ public class CustomRecordPath : MonoBehaviour, IMetaEvent
 
     GameObject _eventObject;
     public GameObject eventObject { get => _eventObject; set => _eventObject = value; }
+
+    [SerializeField] private VideoCapture videoCapture;
 
     string _path;
     public void activate(bool host)
@@ -26,7 +29,8 @@ public class CustomRecordPath : MonoBehaviour, IMetaEvent
         var extensions = new[] { new ExtensionFilter() };
 
 
-        WriteResult(StandaloneFileBrowser.OpenFilePanel("Select Folder", "", extensions, false));
+        WriteResult(StandaloneFileBrowser.OpenFolderPanel("Custom directory", "",false));
+  
 
         Cursor.lockState = CursorLockMode.Locked;//Unity and standalone
     }
@@ -37,14 +41,14 @@ public class CustomRecordPath : MonoBehaviour, IMetaEvent
         {
             return;
         }
-        _path = "";
-        foreach (var p in paths)
-        {
-            _path += p + "\n";
-            Debug.Log("WriteResultPath: " + _path);
-        }
+        Debug.Log("CustomPath: " + paths[0]);
+        _path = paths[0];
 
-   
+        videoCapture.customPathFolder = _path;
+
+
+
+
     }
 
 
