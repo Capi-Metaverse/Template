@@ -44,6 +44,7 @@ public class CustomRecordPath : MonoBehaviour, IMetaEvent
         Debug.Log("CustomPath: " + paths[0]);
         _path = paths[0];
 
+        videoCapture.customPath = true;
         videoCapture.customPathFolder = _path;
 
 

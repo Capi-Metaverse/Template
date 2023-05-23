@@ -20119,6 +20119,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 4.547
       objectReference: {fileID: 0}
+    - target: {fileID: 2632993260358018344, guid: df3fe77ae6b319d45b11b1a868e751ea, type: 3}
+      propertyPath: captureTime
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 2632993260811389124, guid: df3fe77ae6b319d45b11b1a868e751ea, type: 3}
       propertyPath: m_Name
       value: Recorder
@@ -20169,6 +20173,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2632993261950319765, guid: df3fe77ae6b319d45b11b1a868e751ea, type: 3}
       propertyPath: customPath
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2632993261950319765, guid: df3fe77ae6b319d45b11b1a868e751ea, type: 3}
+      propertyPath: offlineRender
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2632993261950319765, guid: df3fe77ae6b319d45b11b1a868e751ea, type: 3}
+      propertyPath: _targetFramerate
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2632993261952605408, guid: df3fe77ae6b319d45b11b1a868e751ea, type: 3}
