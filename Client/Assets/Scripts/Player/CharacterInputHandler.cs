@@ -1,5 +1,7 @@
 
 using System;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,6 +32,7 @@ public class CharacterInputHandler : MonoBehaviour
     public GameObject Settings;//The same as Pause but for settings, the state will be Pause too cause the setting are accesible from Pause
     public GameObject UICard;
     public GameObject UICardOtherUser;
+    private GameObject miniMap;
 
 
     //PlayerUIPrefab
@@ -59,6 +62,7 @@ public class CharacterInputHandler : MonoBehaviour
 
 
     public string nickname;
+    private bool MPul;
 
     private void Awake()
     {
@@ -89,6 +93,9 @@ public class CharacterInputHandler : MonoBehaviour
         chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
         UICard = GameObject.Find("Menus").transform.GetChild(4).gameObject;
         UICardOtherUser = GameObject.Find("Menus").transform.GetChild(5).gameObject;
+
+        //Minimap
+        miniMap = GameObject.Find("Canvasminimap");
 
         //seteamos el estado para que este InGame, esto hay que cambiarlo
         gameManager.SetUserStatus(UserStatus.InGame);
@@ -176,13 +183,27 @@ public class CharacterInputHandler : MonoBehaviour
                 escPul = false; // Detecta si no esta pulsado
 
             }
+            if (!Input.GetKeyDown(KeyCode.C))
+            {
 
-            switch (gameManager.GetUserStatus())
+                MPul = false; // Detecta si no esta pulsado
+
+            }
+
+        switch (gameManager.GetUserStatus())
             {
                 case UserStatus.InGame:
                     {
-                    //ESC key down(PauseMenu)
-                    if ((Input.GetKeyDown(KeyCode.Escape) && !escPul))
+
+                        //M key down(PauseMenu)
+                        if ((Input.GetKeyDown(KeyCode.C) && !MPul))
+                        {
+                            miniMap.transform.GetChild(0).gameObject.SetActive(true);
+                            MPul = true;
+                        }
+
+                        //ESC key down(PauseMenu)
+                        if ((Input.GetKeyDown(KeyCode.Escape) && !escPul))
                         {
                             setPause();
                         }
@@ -243,16 +264,13 @@ public class CharacterInputHandler : MonoBehaviour
                             if(changeRoomPanel != null)
                               changeRoomPanel.SetActive(false);
                         }
-                    /*
-                    if (Input.GetKeyDown(KeyCode.B) && !escPul)
-                    {
-                        setJuego();
+                    
+                        if (Input.GetKeyDown(KeyCode.C) && !MPul)
+                        {
+                           miniMap.transform.GetChild(0).gameObject.SetActive(false);
 
-                        if (emoteWheel.activeSelf)
-                            emoteWheel.SetActive(false);
-
-                    }
-                    */
+                        }
+                    
 
                         break;
                     }
