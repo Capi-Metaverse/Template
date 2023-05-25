@@ -12,10 +12,12 @@ public class FriendRequest : MonoBehaviour {
 
     public string Id { get => id; set => id = value; }
 
+    /// <summary>
+    /// PlayFab - Accept Friend Request
+    /// </summary>
     public void AcceptRequest()
     {
-        friendList = GameObject.Find("TabFriends").GetComponent<FriendList>();
-
+        friendList = gameObject.GetComponentInParent<FriendList>();
         ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
         {
             FunctionName = "AcceptFriendRequest",
@@ -27,10 +29,11 @@ public class FriendRequest : MonoBehaviour {
         };
 
         PlayFabClientAPI.ExecuteCloudScript(request, OnAddFriendSuccess, OnAddFriendFailure);
-
-        friendList.InstanceFriendItem();
+        
     }
-
+    /// <summary>
+    /// PlayFab - Deny Friend Request
+    /// </summary>
     public void DenyRequest()
     {
         ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
@@ -45,15 +48,21 @@ public class FriendRequest : MonoBehaviour {
 
         PlayFabClientAPI.ExecuteCloudScript(request, OnAddFriendSuccess, OnAddFriendFailure);
     }
-    // Callback for successful CloudScript function call
+
+    /// <summary>
+    /// Callback for successful CloudScript function call
+    /// </summary>
+
     private void OnAddFriendSuccess(ExecuteCloudScriptResult result)
 {
-        Debug.Log("User added or denied successfully");
+        friendList.InstanceFriendItem();
         Destroy(this.gameObject);
 }
 
-// Callback for failed CloudScript function call
-private void OnAddFriendFailure(PlayFabError error)
+    /// <summary>
+    /// Callback for Failed CloudScript function call
+    /// </summary>
+    private void OnAddFriendFailure(PlayFabError error)
 {
     Debug.LogError("Failed to retrieve Friends List: " + error.ErrorMessage);
     Destroy(this.gameObject);

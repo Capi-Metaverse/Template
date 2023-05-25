@@ -52,7 +52,12 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         playerAvatarNumber = 0;
 
     }
-
+    /// <summary>
+    /// Get the information from the GameManager and the network runner, to give properties to the object.
+    /// </summary>
+    /// <param name="gameManager"></param>
+    /// <param name="runner"></param>
+    /// <param name="obj"></param>
     public void setInfo( GameManager gameManager, NetworkRunner runner, NetworkObject obj)
     {
 
@@ -65,7 +70,9 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         this.leftArrowButton.SetActive(true);
         this.rightArrowButton.SetActive(true);
     }
-
+    /// <summary>
+    /// Spawns the object inside the player listener and adds its name and sprite.
+    /// </summary>
     public override void Spawned()
     {
         base.Spawned();
@@ -80,8 +87,10 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         playerAvatar.sprite = avatars[playerAvatarNumber];
 
     }
+    /// <summary>
+    /// Image Button Left To move the Sprite
+    /// </summary>
 
-    //Image Button Left
     public void OnClickLeftArrow()
     {
         //Change Sprite and Avatar to Left
@@ -99,7 +108,10 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         Rpc_SetImage(playerAvatarNumber);
 
     }
-    //Image Button Right
+    /// <summary>
+    /// Image Button Right To move the Sprite
+    /// </summary>
+
     public void OnClickRightArrow()
     {
         //Change Sprite and Avatar to Right
@@ -116,8 +128,10 @@ public class PlayerItem : NetworkBehaviour, ISpawned
         _lobbyManager.SetAvatarNumber(playerAvatarNumber);
         Rpc_SetImage(playerAvatarNumber);
     }
-
-    //Function that executes when a user change their image
+    /// <summary>
+    /// Function that executes when a user change their image
+    /// </summary>
+    /// <param name="playerNumber"></param>
     [Rpc(RpcSources.All, RpcTargets.All)]
     void Rpc_SetImage(int playerNumber)
     {
