@@ -11,13 +11,14 @@ public class AdvancePresentationTutorial : MonoBehaviour, IMetaEvent
     GameObject _eventObject;
     GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
 
+    /// <summary>
+    /// Activates the OnRightArrow function.
+    /// </summary>
+    /// <param name="host"></param>
     public void activate(bool host)
     {
-
-      
             presentation.OnAdvance();
 
             triggerDetector.OnRightArrow();
-       
     }
 }
