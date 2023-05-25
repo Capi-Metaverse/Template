@@ -15,7 +15,7 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
     public VisionData visionData;
     public EditVisionData editVisionData;
     public UserUIInfo currentString;
-    public AchivementList achivementList;
+    public AchievementList achivementList;
    
     
     GameManager gameManager;
@@ -52,7 +52,7 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
         currentString = manageDataUI.data;
 
 
-        achivementList.InstanceAchivementItem();
+        achivementList.InstanceAchievementItem();
         // Function is finished
     }
     // Start is called before the first frame update

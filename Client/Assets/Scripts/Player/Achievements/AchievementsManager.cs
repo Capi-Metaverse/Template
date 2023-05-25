@@ -23,7 +23,7 @@ public class Achievement{
 
 public class AchievementsManager : MonoBehaviour 
 {
-    public AchivementList achivementList;
+    public AchievementList achivementList;
     public List<Achievement> currentAchievements;
     // Save User Data
     public void SaveData(List<Achievement> achievements)

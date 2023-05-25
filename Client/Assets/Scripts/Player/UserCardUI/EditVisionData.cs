@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+/// <summary>
+/// Interface to CV Edit
+/// </summary>
 public class EditVisionData : MonoBehaviour
 {
     public ImagenData imagedata;

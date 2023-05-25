@@ -13,7 +13,7 @@ public class PlayerInteractionE : MonoBehaviour
     public VisionData visionData;
     public Image imagen;
     public AchievementsManager achievementsManager;
-    public AchivementList achivementList;
+    public AchievementList achivementList;
     CharacterInputHandler characterInputHandler;
 
     // Start is called before the first frame update
@@ -57,7 +57,7 @@ public class PlayerInteractionE : MonoBehaviour
         {
             achievementsManager.currentAchievements = JsonConvert.DeserializeObject<List<Achievement>>(result.Data["Achievements"].Value);
             Debug.Log("Achievements retrieved successfully!");
-            achivementList.InstanceAchivementItem();
+            achivementList.InstanceAchievementItem();
         }
 
         //Imagen

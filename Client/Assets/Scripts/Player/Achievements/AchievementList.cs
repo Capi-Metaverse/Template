@@ -4,7 +4,7 @@ using System.Reflection;
 using TMPro;
 using UnityEngine;
 
-public class AchivementList : MonoBehaviour
+public class AchievementList : MonoBehaviour
 {
     [SerializeField] private GameObject AchivementsUIItem;
     [SerializeField] private GameObject AchivementsUIList;
@@ -12,9 +12,11 @@ public class AchivementList : MonoBehaviour
 
 
     public AchievementsManager achievementsManager;
- 
-   
-    public void InstanceAchivementItem()
+
+    /// <summary>
+    /// Instance each Achievement in the list, with true value of PLayFab
+    /// </summary>
+    public void InstanceAchievementItem()
     {
         list = achievementsManager.currentAchievements;
 
