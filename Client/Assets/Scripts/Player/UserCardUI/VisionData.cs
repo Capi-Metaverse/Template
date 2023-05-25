@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// Interface to CV 
+/// </summary>
 public class VisionData : MonoBehaviour
 {
     // Start is called before the first frame update
