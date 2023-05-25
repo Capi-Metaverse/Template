@@ -160,7 +160,7 @@ public class LoginManager : MonoBehaviour
         Debug.Log("[PlayFab-LoginManager] Member added to the group successfully." + result.ToJson());
 
         //We register the achivements in Playfab
-        List<Achievement> achievementList = AchivementRegister();
+        List<Achievement> achievementList = AchievementRegister();
 
         var request = new UpdateUserDataRequest
         {
@@ -370,8 +370,11 @@ public class LoginManager : MonoBehaviour
 
 
   
-
-    private List<Achievement> AchivementRegister()
+    /// <summary>
+    /// Achievements List
+    /// </summary>
+    /// <returns></returns>
+    private List<Achievement> AchievementRegister()
     {
         List<Achievement> ListaLogros = new List<Achievement>
         {
@@ -525,6 +528,10 @@ public class LoginManager : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Change the style of the error message
+    /// </summary>
+    /// <param name="message"></param>
     public void NameErrorMessage(string message)
     {
         messageText.fontSize = 4;

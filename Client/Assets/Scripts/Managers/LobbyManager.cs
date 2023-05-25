@@ -42,8 +42,9 @@ public class LobbyManager : MonoBehaviour
 
     private int avatarNumber = 0;
 
-
-    //When the Lobby awakes, it tries to find the game manager
+    /// <summary>
+    /// When the Lobby awakes, it tries to find the game manager
+    /// </summary>
     private void Awake()
     {
         gameManager = GameManager.FindInstance();
@@ -51,7 +52,10 @@ public class LobbyManager : MonoBehaviour
         gameManager.SetLobbyManager(this);  
     }
 
-    //Function when the user clicks on a session/room to join.
+    /// <summary>
+    /// Function when the user clicks on a session/room to join.
+    /// </summary>
+    /// <param name="sessionInfo"></param>
     public void OnClickJoinSession(SessionInfo sessionInfo)
     {
         Debug.Log("[Photon-LobbyManager] Joining session");
@@ -59,7 +63,9 @@ public class LobbyManager : MonoBehaviour
         
     }
 
-    //Function when the user creates a room/session.
+    /// <summary>
+    /// Function when the user creates a room/session.
+    /// </summary>
     public void OnClickCreateSession()
     {
         Debug.Log("[Photon-LobbyManager] Creating session");
@@ -74,7 +80,10 @@ public class LobbyManager : MonoBehaviour
         gameManager.CreateSession(props);
     }
 
-    //Function to add the new sessions to the list of sessions
+    /// <summary>
+    /// Function to add the new sessions to the list of sessions
+    /// </summary>
+    /// <param name="sessionList"></param>
     public void SetSessionList(List<SessionInfo> sessionList)
     {
         //We clean the list
@@ -92,10 +101,14 @@ public class LobbyManager : MonoBehaviour
      
     }
 
-    
 
 
-    //It sets the panel of players when you enter a session
+
+    /// <summary>
+    /// It sets the panel of players when you enter a session
+    /// </summary>
+    /// <param name="sessionName"></param>
+    /// <param name="runner"></param>
     public void SetPlayerPanel(string sessionName, NetworkRunner runner)
     {
         this.sessionNamePanel.text = sessionName;
@@ -112,7 +125,9 @@ public class LobbyManager : MonoBehaviour
 
     }
 
-    //It sets the LobbyPanel when the user leaves a session.
+    /// <summary>
+    /// It sets the LobbyPanel when the user leaves a session.
+    /// </summary>
     public void SetLobbyPanel()
     {
         //We deactivate the panel of the room and Activate the panel of the Lobby interface.
@@ -123,7 +138,9 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    //Function when a user leaves the session
+    /// <summary>
+    /// Function when a user leaves the session
+    /// </summary>
     public void OnClickLeaveSession()
     {
         SetLobbyPanel();
@@ -131,6 +148,9 @@ public class LobbyManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Function when the user clicks on a room to join
+    /// </summary>
     public void OnClickJoinRoom()
     {
         JoinButton.interactable = false;
@@ -139,7 +159,9 @@ public class LobbyManager : MonoBehaviour
         gameManager.StartGame(sessionNamePanel.text,avatarNumber);
     }
 
-    //Function that cleans the session list
+    /// <summary>
+    /// Function that cleans the session list
+    /// </summary>
     public void CleanSessions()
     {
 
@@ -152,18 +174,30 @@ public class LobbyManager : MonoBehaviour
        
     }
 
+    /// <summary>
+    /// Set true or false the create room button and the group of rooms
+    /// </summary>
+    /// <param name="active"></param>
     public void setLobbyButtons(bool active)
     {
         createButton.gameObject.SetActive(active);
         contentObject.gameObject.SetActive(active);
     }
 
- public void SetAvatarNumber(int number)
+    /// <summary>
+    /// Sets the avatar that the player choose 
+    /// </summary>
+    /// <param name="number"></param>
+    public void SetAvatarNumber(int number)
     {
         avatarNumber = number;
     }
 
-    //PlayerItemSpawn
+    /// <summary>
+    /// Spawn the PlayerItem in the Lobby Scene
+    /// </summary>
+    /// <param name="runner"></param>
+    /// <param name="player"></param>
     public void SpawnPlayerItem(NetworkRunner runner, PlayerItem player)
     {
         runner.Spawn(
@@ -176,7 +210,11 @@ public class LobbyManager : MonoBehaviour
         );
     }
 
-    //Function that initializes the object on the first user
+    /// <summary>
+    /// Function that initializes the object on the first user
+    /// </summary>
+    /// <param name="runner"></param>
+    /// <param name="obj"></param>
     public static void BeforeSpawn(NetworkRunner runner, NetworkObject obj)
     {
         //We get the GameManager for username
