@@ -191,14 +191,20 @@ namespace RockVR.Video
                 videoCapture.StopCapture();
                 PathConfig.lastVideoFile = videoCapture.filePath;
             }
-            //End Recording User Audio
-            Microphone.End(Microphone.devices[0]);
-            SavWav.Save(PathConfig.lastVideoFile.Substring(0, PathConfig.lastVideoFile.LastIndexOf("/") + 1)+"userAudio", microphoneClip);
+
             if (IsCaptureAudio())
             {
                 audioCapture.StopCapture();
             }
+
             status = StatusType.STOPPED;
+
+
+            //End Recording User Audio
+            Microphone.End(Microphone.devices[0]);
+            SavWav.Save(PathConfig.lastVideoFile.Substring(0, PathConfig.lastVideoFile.LastIndexOf("/") + 1) + "userAudio", microphoneClip);
+
+            //System.Diagnostics.Process.Start(PathConfig.ffmpegPath, " -i " + PathConfig.lastVideoFile + " -s 3840x2160  " + PathConfig.lastVideoFile.Replace(".mp4", "_ReEncode.mp4"));
         }
         /// <summary>
         /// Pause video capture process.
