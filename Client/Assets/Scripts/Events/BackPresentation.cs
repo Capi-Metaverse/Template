@@ -4,7 +4,9 @@ using UnityEngine;
 using Fusion;
 using ExitGames.Client.Photon;
 using Photon.Realtime;
-
+/// <summary>
+/// Event to activate the slice back in the presentation
+/// </summary>
 public class BackPresentation : NetworkBehaviour, IMetaEvent
 {
    public Presentation presentation;

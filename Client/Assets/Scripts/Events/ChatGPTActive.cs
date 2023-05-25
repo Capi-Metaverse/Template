@@ -12,7 +12,9 @@ public class ChatGPTActive : MonoBehaviour, IMetaEvent
 
     GameObject _eventObject;
     GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
-
+    /// <summary>
+    /// Event to activate Adam's UI and his camera
+    /// </summary>
     public void activate(bool host)
     {
         if (CharacterInputHandler == null) { CharacterInputHandler = GameManager.FindInstance().GetCurrentPlayer().gameObject.GetComponent<CharacterInputHandler>(); }
@@ -29,9 +31,5 @@ public class ChatGPTActive : MonoBehaviour, IMetaEvent
             GameObject.Find("adam").transform.GetChild(2).gameObject.SetActive(false);
         }
     }
-    /*public void PressReturn()
-    {
-       CanvasChatGPT.SetActive(false); 
-       playerSpawn.ActiveALL();
-    }*/
+   
 }

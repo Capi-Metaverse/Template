@@ -27,7 +27,9 @@ public class DrawLinesOnPlane : NetworkBehaviour
         CreateNewLineRenderer();
         gameManager = GameManager.FindInstance();
     }
-
+    /// <summary>
+    /// Allows each point to join together to form a list of points to form a line and, when the mouse is raised, calls the CreateNewLineRenderer() function to create a new line.
+    /// </summary>
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -89,7 +91,9 @@ public class DrawLinesOnPlane : NetworkBehaviour
         }
       
     }
-
+    /// <summary>
+    /// Create the lines with the chosen thickness and materials.
+    /// </summary>
     private void CreateNewLineRenderer()
     {
         GameObject newLineObject = new GameObject("LineRenderer");
@@ -101,7 +105,9 @@ public class DrawLinesOnPlane : NetworkBehaviour
         currentLineRenderer.useWorldSpace = true;
         linePoints.Clear();
     }
-
+    /// <summary>
+    /// cleans all children and calls for the creation of a new line.
+    /// </summary>
     public void Clear()
     {
         foreach (Transform child in transform)
@@ -110,12 +116,16 @@ public class DrawLinesOnPlane : NetworkBehaviour
         }
         CreateNewLineRenderer();
     }
-
+    /// <summary>
+    /// Change the gross of the line.
+    /// </summary>
     public void ChangeGross()
     {
         gross = sliderGross.value;
     }
-
+    /// <summary>
+    /// Change the material of the line.
+    /// </summary>
     public void ChangeYellow()
     {
         materialLine= materialsList[1];
@@ -133,6 +143,12 @@ public class DrawLinesOnPlane : NetworkBehaviour
             panelMaterials.SetActive(true);
         }
     }
+    /// <summary>
+    /// Using the gameManager creates the lines for the other players, with the characteristics that the user draws.
+    /// </summary>
+    /// <param name="Lines"></param>
+    /// <param name="NumMaterial"></param>
+    /// <param name="gross"></param>
     public void dibujoetc(Vector3[] Lines, int NumMaterial, float gross)
     {
         Debug.Log(Lines.Length);
