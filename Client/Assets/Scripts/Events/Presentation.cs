@@ -12,6 +12,12 @@ public class Presentation : MonoBehaviour
     public new SpriteRenderer renderer;
     public TMP_Text  loadingPressCanvas;
     
+    /// <summary>
+    /// Determines if the list is empty.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list">True, if the list is empty.</param>
+    /// <returns></returns>
     public static bool IsEmpty<T>(List<T> list)
     {
         if (list == null) 
@@ -21,14 +27,19 @@ public class Presentation : MonoBehaviour
         return !list.Any();
     }
 
-    //splice advance event
+    /// <summary>
+    /// Renders the next sprite.
+    /// </summary>
     public void OnAdvance()
     { 
         if (current < (sprites.Count - 1))
         current++;
         renderer.sprite = sprites[current];
     }
-    //splice return event
+    
+    /// <summary>
+    /// Renders the previous sprite.
+    /// </summary>
     public void OnReturn(){
 
         if(current > 0)
@@ -38,20 +49,21 @@ public class Presentation : MonoBehaviour
         }
     }
     
-    //event to check if the list has content and display the first splice
+    /// <summary>
+    /// Checks if the list has content and displays the first sprite.
+    /// </summary>
     public void OnDirect(){
         bool isEmpty = IsEmpty(sprites);
  
         if (isEmpty) 
         {
-            Debug.Log("[Presentation] List is Empty");
-            renderer.sprite = sprites[0]; 
-            //Show nothing is in  
+            Debug.Log("List is Empty");
+            renderer.sprite = sprites[0];   
             loadingPressCanvas.SetText("There´s nothing in file");
         }
         else 
         {
-            Debug.Log("[Presentation] List contains elements");
+            Debug.Log("List contains elements");
             loadingPressCanvas.enabled = false;
             renderer.sprite = sprites[0];
         }
