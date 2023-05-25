@@ -32,8 +32,16 @@ public class NetworkRunnerHandler : MonoBehaviour
         Debug.Log("Server NetworkRunner Started");
     }
 
+    /// <summary>
+    /// Function that initializes the network runner
+    /// </summary>
+    /// <param name="runner"></param>
+    /// <param name="gameMode"></param>
+    /// <param name="address"></param>
+    /// <param name="scene"></param>
+    /// <param name="initialized"></param>
+    /// <returns></returns>
 
-    //Function that initializes the network runner
     protected virtual Task InitializeNetworkRunner(NetworkRunner runner, GameMode gameMode, NetAddress address, SceneRef scene, Action<NetworkRunner> initialized)
     {
         var sceneManager = runner.GetComponents(typeof(MonoBehaviour)).OfType<INetworkSceneManager>().FirstOrDefault();

@@ -9,6 +9,9 @@ using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Class and Constructor to Achievement
+/// </summary>
 public class Achievement{
     public string Name;
     public bool activate;
@@ -25,7 +28,11 @@ public class AchievementsManager : MonoBehaviour
 {
     public AchievementList achivementList;
     public List<Achievement> currentAchievements;
-    // Save User Data
+    
+    /// <summary>
+    /// PlayFab - Save the Data in Json, with the Key Achivements
+    /// </summary>
+    /// <param name="achievements"></param>
     public void SaveData(List<Achievement> achievements)
     {
         var request = new UpdateUserDataRequest
@@ -44,13 +51,21 @@ public class AchievementsManager : MonoBehaviour
     }
 
 
-    //Load User Data
+    /// <summary>
+    /// Load the data from Own User
+    /// </summary>
     public void LoadData()
     {
         PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnCharactersDataReceived, OnError);
     }
 
-
+    /// <summary>
+    /// Receives the data and filters it to retrieve only those containing the Key Achievements.
+    /// </summary>
+    /// <returns>
+    /// List How content the Key Achievements
+    /// </returns>
+    /// <param name="result"></param>
     void OnCharactersDataReceived(GetUserDataResult result)
     {
         if (result.Data != null && result.Data.ContainsKey("Achievements"))

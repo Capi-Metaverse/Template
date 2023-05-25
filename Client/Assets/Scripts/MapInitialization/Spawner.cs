@@ -25,11 +25,13 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     {
         gameManager = GameManager.FindInstance();
     }
-    void Start()
-    {
 
-    }
-
+    /// <summary>
+    /// When a player enters, spawns with the selected prefab and gives it the network properties.
+    /// Initialice WaitPlayer
+    /// </summary>
+    /// <param name="runner"></param>
+    /// <param name="player"></param>
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if (player == runner.LocalPlayer)
@@ -43,6 +45,11 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 
         StartCoroutine(WaitPlayer());
     }
+    /// <summary>
+    /// Detects that the user has left, to remove them from the list of players.
+    /// </summary>
+    /// <param name="runner"></param>
+    /// <param name="player"></param>
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
         StartCoroutine(WaitPlayer());
@@ -68,7 +75,11 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
         }
     }
 
-
+    /// <summary>
+    /// Initialises the individual properties of each user
+    /// </summary>
+    /// <param name="runner"></param>
+    /// <param name="obj"></param>
     public void OnBeforeSpawn(NetworkRunner runner, NetworkObject obj)
     {
         obj.GetComponent<NetworkPlayer>().avatar = gameManager.GetAvatarNumber();
