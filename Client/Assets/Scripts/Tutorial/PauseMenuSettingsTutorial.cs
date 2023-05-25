@@ -1,7 +1,5 @@
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 
 
 public class PauseMenuSettingsTutorial : MonoBehaviour
@@ -11,7 +9,9 @@ public class PauseMenuSettingsTutorial : MonoBehaviour
 
     [SerializeField] private Dialogue dialogueScript;
 
-
+    /// <summary>
+    /// Gets Components.
+    /// </summary>
     private void Start()
     {
         //We find the GameObjects
@@ -20,6 +20,9 @@ public class PauseMenuSettingsTutorial : MonoBehaviour
  
     }
 
+    /// <summary>
+    /// If condition is true, it hides the gameobject.
+    /// </summary>
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && (gameManager.TutorialStatus != TutorialStatus.Settings) && (gameManager.TutorialStatus != TutorialStatus.PreSettings))
@@ -28,28 +31,35 @@ public class PauseMenuSettingsTutorial : MonoBehaviour
         }
     }
 
-    //Method to disconnect the User
+    /// <summary>
+    /// Disconnects the User.
+    /// </summary>
     public void OnClickDisconnect()
     {
         SceneManager.LoadSceneAsync("1.Start");
-
     }
 
+    /// <summary>
+    /// Activates the gamObject.
+    /// </summary>
     public void Show()
     {
         this.gameObject.SetActive(true);
     }
 
-    //Method to open the settings menu
+    /// <summary>
+    /// Opens the settings menu.
+    /// </summary>
     public void OnClickSettings()
     {
         Settings.SetActive(true);
         if (gameManager.TutorialStatus == TutorialStatus.Settings) gameManager.CompleteObjective(0);
         Hide();
-
     }
 
-
+    /// <summary>
+    /// Deactivates the gameObject.
+    /// </summary>
     public void Hide()
     {
         this.gameObject.SetActive(false);

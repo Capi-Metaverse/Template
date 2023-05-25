@@ -1,20 +1,14 @@
 
 using PlayFab;
 using PlayFab.ClientModels;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using TMPro;
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static System.Windows.Forms.LinkLabel;
 using Cursor = UnityEngine.Cursor;
 
 public class TriggerDetector : MonoBehaviour
 {
-
     [SerializeField] private Canvas canvasDialogue;
     [SerializeField] private PlayerUI playerUI;
     private Dialogue dialogueScript;
@@ -39,6 +33,9 @@ public class TriggerDetector : MonoBehaviour
     public bool isEventWheelOpen = false;
     public Animator animator;
 
+    /// <summary>
+    /// Gets components and defines flags.
+    /// </summary>
     public void Start()
     {
         gameManager = GameObject.Find("ManagerTutorial").GetComponent<GameManagerTutorial>();
@@ -48,6 +45,10 @@ public class TriggerDetector : MonoBehaviour
         flags.Add("Space", false);
         flags.Add("C", false);
     }
+
+    /// <summary>
+    /// Detects if keys are being pressed in certain states.
+    /// </summary>
     public void Update()
     {
         if (gameManager.DialogueStatus == DialogueStatus.InGame && gameManager.GameStatus == GameStatus.InGame)
@@ -72,8 +73,6 @@ public class TriggerDetector : MonoBehaviour
                     }
                 };
                 PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
-
-                //Close 
             };
 
             switch (gameManager.TutorialStatus)
@@ -143,33 +142,48 @@ public class TriggerDetector : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Completes Presentation Objective 0. Is activated when the presentation left arrow is pressed.
+    /// </summary>
     public void OnLeftArrow()
     {
        gameManager.CompleteObjective(0);
 
     }
 
+    /// <summary>
+    /// Completes Presentation Objective 1. Is activated when the presentation right arrow is pressed.
+    /// </summary>
     public void OnRightArrow()
     {
         gameManager.CompleteObjective(1);
 
     }
 
+    /// <summary>
+    /// Completes the Presentation Objective 2. Is activated when there is a change between cameras.
+    /// </summary>
     public void OnPresentation()
     {
         gameManager.CompleteObjective(2);
     }
 
-    //PlayFab Functions
+    /// <summary>
+    /// PlayFab. Shows the error produced when sending data to server.
+    /// </summary>
+    /// <param name="obj"></param>
     public void OnError(PlayFabError obj)
     {
-        Debug.Log("[PlayFab-ManageData] Error");
+        Debug.Log("[PlayFab] Error");
     }
 
+    /// <summary>
+    /// PlayFab. Changes the scene. Is activated when the data was sent succesfully.
+    /// </summary>
+    /// <param name="obj"></param>
     public void OnDataSend(UpdateUserDataResult obj)
     {
-        Debug.Log("[PlayFab-ManageData] Data Sent");
+        Debug.Log("[PlayFab] Data Sent");
 
         if(gameManager.TutorialStatus != TutorialStatus.Finished)
         {

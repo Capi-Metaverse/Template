@@ -1,25 +1,28 @@
-using PlayFab.ClientModels;
-using PlayFab;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using static System.Windows.Forms.LinkLabel;
+using TMPro;
+
+/// <summary>
+/// States if the dialogue is being shown
+/// </summary>
 public enum DialogueStatus
 {
     InDialogue,
     InGame
 }
 
+/// <summary>
+/// States if the game is paused.
+/// </summary>
 public enum GameStatus
 {
     InPause,
     InGame,
 }
 
+/// <summary>
+/// States in which settings tab is the user during the settings tutorial part.
+/// </summary>
 public enum SettingsStatus
 {
     None,
@@ -29,6 +32,10 @@ public enum SettingsStatus
     Players,
     Finished
 }
+
+/// <summary>
+/// States in which part of the tutorial is the user.
+/// </summary>
 public enum TutorialStatus
 {
     Movement,
@@ -89,6 +96,9 @@ public class GameManagerTutorial : MonoBehaviour
 
     [SerializeField] private GameObject back, advance;
 
+    /// <summary>
+    /// Sets the value of some Status and start the dialogue.
+    /// </summary>
     public void Start()
     {
         tutorialStatus = TutorialStatus.Movement;
@@ -101,12 +111,17 @@ public class GameManagerTutorial : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Executes the AnimationController per frame.
+    /// </summary>
     private void Update()
     {
         AnimationController();
     }
 
-
+    /// <summary>
+    /// Prepares the game to show the dialogue
+    /// </summary>
     private void OnDialogueStatus()
     {
         //SetDialogueStatus
@@ -123,16 +138,17 @@ public class GameManagerTutorial : MonoBehaviour
         playerUI.HideUI();
         fpsController.enabled = false;
         reShowText.enabled = false;
-
     }
 
+    /// <summary>
+    /// Re-starts the game
+    /// </summary>
     public void OnInGameStatus()
     {
         if (TutorialStatus != TutorialStatus.Settings)
         {
             //SetDialogueStatus
             DialogueStatus = DialogueStatus.InGame;
-
 
             //Make cursor invisible
             Cursor.visible = false;
@@ -154,6 +170,10 @@ public class GameManagerTutorial : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shows the dialogue of the part in which the user is currently.
+    /// </summary>
+    /// <param name="reShow">True if the user wants to see the dialogue again.</param>
     public void StartDialogue(bool reShow=false)
     {
         OnDialogueStatus();
@@ -232,7 +252,9 @@ public class GameManagerTutorial : MonoBehaviour
         dialogueScript.StartDialogue(lines);
     }
 
-
+    /// <summary>
+    /// Sets Objectives to Default State.
+    /// </summary>
     private void EmptyObjectives()
     {
         //Objectives UI
@@ -250,6 +272,10 @@ public class GameManagerTutorial : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Sets Objectives to Completed State.
+    /// </summary>
+    /// <param name="num"></param>
     public void CompleteObjective(int num)
     {
        
@@ -349,7 +375,6 @@ public class GameManagerTutorial : MonoBehaviour
                             case 2:
                                 objectives[num].text = "Click the K key in a presentation area " + objectiveCounter[num] + "/2";
                                 break;
-
                         }
                     }
 
@@ -398,15 +423,16 @@ public class GameManagerTutorial : MonoBehaviour
                 objectives[num].color = Color.green;
                 break;
         }
-
     }
 
-
+    /// <summary>
+    /// Controls the Settings Tutorial.
+    /// </summary>
+    /// <returns></returns>
     private string[] OnSettingsTutorial()
     {
         switch (settingsStatus++)
         {
-
             case SettingsStatus.None:
                 {
                     objectives[0].text = "Press the gear button to open the settings menu";
@@ -451,12 +477,14 @@ public class GameManagerTutorial : MonoBehaviour
 
                     return new string[2] { "That's all about the settings part.", "Now, go downstairs and interact with the podium to view a presentation" };
                 }
-
             default: return new string[1] { "Error" }; ;
         }
     }
 
     //Changes the EventWheel State
+    /// <summary>
+    /// Changes the EventWheel State.
+    /// </summary>
     public void EventWheelController()
     {
         if (isEventWheelOpen)
@@ -479,13 +507,20 @@ public class GameManagerTutorial : MonoBehaviour
         }
     }
 
-    //Stops the animation from being played in loop
+
+    /// <summary>
+    /// Stops the animation from being played in loop
+    /// </summary>
+    /// <returns></returns>
     IEnumerator CancelAnimation()
     {
         yield return new WaitForSeconds(2);
         animator.SetInteger("AnimationWheel", (int)AnimationList.None);
     }
 
+    /// <summary>
+    /// Controls which animation is being played.
+    /// </summary>
     public void AnimationController()
     {
         if (animationToPlay != AnimationList.None)
@@ -511,6 +546,10 @@ public class GameManagerTutorial : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts running a new animation.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator RunNewAnimation()
     {
         Debug.Log("Apply animation");

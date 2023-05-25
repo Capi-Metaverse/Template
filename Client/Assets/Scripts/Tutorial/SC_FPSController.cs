@@ -1,7 +1,4 @@
 using UnityEngine;
-using TMPro;
-using static Unity.Collections.Unicode;
-
 
 [RequireComponent(typeof(CharacterController))]
 
@@ -12,9 +9,9 @@ public class SC_FPSController : MonoBehaviour
    [SerializeField] private float runningSpeed = 11.5f;
    [SerializeField] private float jumpSpeed = 8.0f;
    [SerializeField] private float gravity = 20.0f;
-   [SerializeField] private Camera playerCamera;
    [SerializeField] private float lookSpeed = 2.0f;
    [SerializeField] private float lookXLimit = 45.0f;
+   [SerializeField] private Camera playerCamera;
 
 
     private int jumpCount { get; set; } = 0;
@@ -41,8 +38,6 @@ public class SC_FPSController : MonoBehaviour
     GameObject raycastObject = null;
     [HideInInspector]
     public bool canMove = true;
-
-    InputManager inputManager;
 
     public GameObject pauseMenu;
 
@@ -216,6 +211,10 @@ public class SC_FPSController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Changes between cameras.
+    /// </summary>
+    /// <param name="camera"></param>
     public void setPresentationCamera(Camera camera)
     {
 
@@ -240,7 +239,10 @@ public class SC_FPSController : MonoBehaviour
         }
     }
 
-    //Function that do the raycast between the player and interactive items
+
+    /// <summary>
+    /// Does the raycast between the player and interactive items.
+    /// </summary>
     public void PlayerRaycast()
     {
         RaycastHit hit;
@@ -272,6 +274,9 @@ public class SC_FPSController : MonoBehaviour
         else playerUI.EventTextOff();
     }
 
+    /// <summary>
+    /// Changes the GameStatus to Pause.
+    /// </summary>
     public void Deactivate()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -280,9 +285,6 @@ public class SC_FPSController : MonoBehaviour
         playerUI.HideUI();
         gameManager.GameStatus = GameStatus.InPause;
         this.enabled = false;
-
-       
-
     }
 
 

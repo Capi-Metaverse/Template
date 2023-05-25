@@ -25,7 +25,9 @@ public class Dialogue : MonoBehaviour
     private int index;
 
 
-    // Update is called once per frame
+    /// <summary>
+    /// Detects interaction with the Dialogue Window.
+    /// </summary>
     void Update()
     {
         //If user clicks, and it's not ended then this code completes the line.
@@ -43,6 +45,10 @@ public class Dialogue : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the Dialogue Initial Configuration and starts it.
+    /// </summary>
+    /// <param name="lines"></param>
     public void StartDialogue(string[] lines)
     {
         //Mantener
@@ -53,18 +59,21 @@ public class Dialogue : MonoBehaviour
         StartCoroutine(TypeLine());
     }
 
+    /// <summary>
+    /// Writes a line of text in the Dialogue window.
+    /// </summary>
     IEnumerator TypeLine()
     {
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
-
         }
     }
 
-   
-
+    /// <summary>
+    /// Changes to the next line.
+    /// </summary>
     void NextLine()
     {
         if (index < lines.Length - 1)
@@ -77,11 +86,17 @@ public class Dialogue : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Activates the dialogue text gameObject.
+    /// </summary>
     public void EnableDialogue()
     {
         textDialogue.SetActive(true);
     }
 
+    /// <summary>
+    /// Deactivate the dialogue text gameObject.
+    /// </summary>
     public void DisableDialogue()
     {
         textDialogue.SetActive(false);
