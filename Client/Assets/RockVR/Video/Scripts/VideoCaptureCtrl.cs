@@ -202,9 +202,14 @@ namespace RockVR.Video
 
             //End Recording User Audio
             Microphone.End(Microphone.devices[0]);
-            SavWav.Save(PathConfig.lastVideoFile.Substring(0, PathConfig.lastVideoFile.LastIndexOf("/") + 1) + "userAudio", microphoneClip);
 
-            //System.Diagnostics.Process.Start(PathConfig.ffmpegPath, " -i " + PathConfig.lastVideoFile + " -s 3840x2160  " + PathConfig.lastVideoFile.Replace(".mp4", "_ReEncode.mp4"));
+            var audioFilePath = PathConfig.lastVideoFile.Substring(0, PathConfig.lastVideoFile.LastIndexOf(@"\") + 1) + "userAudio.wav";
+            Debug.Log("Saved in: " + audioFilePath);
+        
+            SavWav.Save(audioFilePath, microphoneClip);
+
+            Debug.Log(" -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -filter_complex amerge=inputs=1 -ac 2 " + PathConfig.lastVideoFile);
+            System.Diagnostics.Process.Start(PathConfig.ffmpegPath, " -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -filter_complex amerge=inputs=1 -ac 2 " + PathConfig.lastVideoFile);
         }
         /// <summary>
         /// Pause video capture process.

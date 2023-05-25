@@ -64,7 +64,8 @@ namespace RockVR.Video
             libAPI = AudioCaptureLib_Get(
                 AudioSettings.outputSampleRate,
                 filePath,
-                PathConfig.ffmpegPath);
+                PathConfig.
+                Path);
             if (libAPI == System.IntPtr.Zero)
             {
                 Debug.LogWarning("[AudioCapture::StartCapture] Get native " +
