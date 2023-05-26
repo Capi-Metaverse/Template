@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using RockVR.Common;
 using UnityEngine.Windows.WebCam;
 using Unity.Entities.UniversalDelegates;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 namespace RockVR.Video
 {
@@ -182,6 +184,7 @@ namespace RockVR.Video
                 {
                     if (IsCaptureAudio())
                     {
+                        Debug.Log("Capturando audio");
                         audioCapture.eventDelegate.OnComplete -= OnAudioCaptureComplete;
                         audioCapture.StopCapture();
                     }
@@ -205,12 +208,24 @@ namespace RockVR.Video
             Microphone.End(Microphone.devices[0]);
 
             var audioFilePath = PathConfig.lastVideoFile.Substring(0, PathConfig.lastVideoFile.LastIndexOf(@"\") + 1) + "userAudio.wav";
+            var audioFilePath2 = PathConfig.lastVideoFile.Substring(0, PathConfig.lastVideoFile.LastIndexOf(@"\") + 1) + "appAudio.wav";
             Debug.Log("Saved in: " + audioFilePath);
         
             SavWav.Save(audioFilePath, microphoneClip);
 
             Debug.Log(" -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -filter_complex amix=inputs=1 " + PathConfig.lastVideoFile);
-            System.Diagnostics.Process.Start(PathConfig.ffmpegPath, " -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + "-c:v copy - c:a aac - map 0:v: 0 - map 1:a: 0 " + PathConfig.lastVideoFile + "final");
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.UseShellExecute = false;
+            startInfo.FileName = PathConfig.ffmpegPath;
+            startInfo.Arguments = " -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -i " + audioFilePath2 + "-filter_complex \"[1:a][2:a]amix=inputs=2:duration=longest[outa]\" -map 0:v:0 -map \"[outa]\" -c:v copy -c:a aac -shortest" + PathConfig.lastVideoFile + "final";
+
+
+            Process processTemp = new Process();
+            processTemp.StartInfo = startInfo;
+
+            processTemp.Start();
+
+            //System.Diagnostics.Process.Start(PathConfig.ffmpegPath, " -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + "-c:v copy - c:a aac - map 0:v: 0 - map 1:a: 0 " + PathConfig.lastVideoFile + "final");
         }
         /// <summary>
         /// Pause video capture process.
@@ -335,7 +350,8 @@ namespace RockVR.Video
         /// <returns>Whether recording audio</returns>
         private bool IsCaptureAudio()
         {
-            return isCaptureAudio && !isOfflineRender;
+            //return isCaptureAudio && !isOfflineRender;
+            return isCaptureAudio;
         }
         /// <summary>
         /// Initial instance and init variable.
