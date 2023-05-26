@@ -85,7 +85,7 @@ namespace RockVR.Video
                 return;
             }
             //Capture User audio
-            microphoneClip = Microphone.Start(Microphone.devices[0],true,20,AudioSettings.outputSampleRate);
+            microphoneClip = Microphone.Start(Microphone.devices[0],false,200,AudioSettings.outputSampleRate);
             
             // Filter out disabled capture component.
             List<VideoCapture> validCaptures = new List<VideoCapture>();
@@ -215,9 +215,10 @@ namespace RockVR.Video
 
             Debug.Log(" -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -filter_complex amix=inputs=1 " + PathConfig.lastVideoFile);
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.UseShellExecute = false;
+            //startInfo.UseShellExecute = false;
+            startInfo.CreateNoWindow = true;
             startInfo.FileName = PathConfig.ffmpegPath;
-            startInfo.Arguments = " -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -i " + audioFilePath2 + "-filter_complex \"[1:a][2:a]amix=inputs=2:duration=longest[outa]\" -map 0:v:0 -map \"[outa]\" -c:v copy -c:a aac -shortest" + PathConfig.lastVideoFile + "final";
+            startInfo.Arguments = " -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -i " + audioFilePath2 + "-filter_complex \"[1:a][2:a]amix=inputs=2:duration=longest[outa]\" -map 0:v:0 -map \"[outa]\" -c:v copy -c:a aac -shortest" + PathConfig.lastVideoFile.Substring(0, PathConfig.lastVideoFile.LastIndexOf(@"\") + 1) + "finalVideo.mp4";
 
 
             Process processTemp = new Process();
@@ -272,10 +273,10 @@ namespace RockVR.Video
             // Start merging thread when we have videos captured.
             if (IsCaptureAudio())
             {
-                videoMergeThread = new Thread(VideoMergeThreadFunction);
-                videoMergeThread.Priority = System.Threading.ThreadPriority.Lowest;
-                videoMergeThread.IsBackground = true;
-                videoMergeThread.Start();
+                //videoMergeThread = new Thread(VideoMergeThreadFunction);
+                //videoMergeThread.Priority = System.Threading.ThreadPriority.Lowest;
+                //videoMergeThread.IsBackground = true;
+                //videoMergeThread.Start();
             }
         }
         /// <summary>
