@@ -4,6 +4,7 @@ using System.Threading;
 using System.Collections.Generic;
 using RockVR.Common;
 using UnityEngine.Windows.WebCam;
+using Unity.Entities.UniversalDelegates;
 
 namespace RockVR.Video
 {
@@ -208,8 +209,8 @@ namespace RockVR.Video
         
             SavWav.Save(audioFilePath, microphoneClip);
 
-            Debug.Log(" -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -filter_complex amerge=inputs=1 -ac 2 " + PathConfig.lastVideoFile);
-            System.Diagnostics.Process.Start(PathConfig.ffmpegPath, " -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -filter_complex amerge=inputs=1 -ac 2 " + PathConfig.lastVideoFile);
+            Debug.Log(" -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -filter_complex amix=inputs=1 " + PathConfig.lastVideoFile);
+            System.Diagnostics.Process.Start(PathConfig.ffmpegPath, " -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + "-c:v copy - c:a aac - map 0:v: 0 - map 1:a: 0 " + PathConfig.lastVideoFile + "final");
         }
         /// <summary>
         /// Pause video capture process.
