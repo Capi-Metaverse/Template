@@ -10,8 +10,10 @@ public class PresentationZone : MonoBehaviour
 
     CharacterInputHandler playerInputs;
 
-
-    //Detect if it in collider
+    /// <summary>
+    /// Detect if it in collider, activate the Ui Press K and mute the music
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
 
         if (other.gameObject.Equals(GameManager.FindInstance().GetCurrentPlayer().gameObject))
@@ -25,7 +27,10 @@ public class PresentationZone : MonoBehaviour
             musicController.ChangeAudioState();
         }
     }
-    //Detect if Exits collider
+    /// <summary>
+    /// Detect if Exits collider, desactivate the UI Press K and active the music
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other) {
 
         if (other.gameObject.Equals(GameManager.FindInstance().GetCurrentPlayer().gameObject))

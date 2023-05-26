@@ -28,12 +28,7 @@ public class DoorEvent : MonoBehaviour, IMetaEvent
         if (isPublic || gameManager.GetUserRole() == UserRole.Admin )
         {
 
-            
-
             //Activate the loading UI
-
-            //GameObject Loading = GameObject.Find("PlayerUIPrefab").transform.GetChild(4).gameObject;
-            //Loading.SetActive(true);
 
             gameManager.ChangeMap(map);
         }
