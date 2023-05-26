@@ -212,11 +212,7 @@ public class LoginManager : MonoBehaviour
        
     }
 
-
-
-
     /*Login Functions*/
-
 
     /// <summary>
     /// PlayFab. Sends a request to PlayFab with the login values (Email, Password).
