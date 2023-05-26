@@ -3,7 +3,9 @@ using PlayFab;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// This script is used to give properties to the prefac of friends.
+/// </summary>
 public class FriendItem : MonoBehaviour
 {
     private string username;
@@ -11,7 +13,9 @@ public class FriendItem : MonoBehaviour
 
     public string Username { get => username; set => username = value; }
     public string Id { get => id; set => id = value; }
-
+    /// <summary>
+    /// PlayFab - to remove from the list of confirmed friends
+    /// </summary>
     public void Removefriends()
     {
         ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
@@ -24,14 +28,19 @@ public class FriendItem : MonoBehaviour
         PlayFabClientAPI.ExecuteCloudScript(request, OnRemoveFriendsSuccess, OnRemoveFriendsFailure);
     }
 
-    // Callback for successful CloudScript function call
+    /// <summary>
+    /// Friend Remove Success
+    /// </summary>
+    /// <param name="result"></param>
     private void OnRemoveFriendsSuccess(ExecuteCloudScriptResult result)
     {
         Debug.Log(result);
         Destroy(this.gameObject);
     }
-
-    // Callback for failed CloudScript function call
+    /// <summary>
+    /// Friend Remove Fail
+    /// </summary>
+    /// <param name="error"></param>
     private void OnRemoveFriendsFailure(PlayFabError error)
     {
         Debug.LogError("Failed to retrieve Friends List: " + error.ErrorMessage);
