@@ -39,8 +39,9 @@ public class FriendManager : MonoBehaviour
         gameManager = GameManager.FindInstance();
         friendList = gameObject.GetComponent<FriendList>();
     }
-
-    //Method that gets the ID of a player from PlayFab
+    /// <summary>
+    /// PlayFab - Method that gets the ID of a player from PlayFab
+    /// </summary>
     public void RequestIDPlayer()
     {
         if (ValidarUserNameFriend(inputFriendUsername.text))
@@ -64,8 +65,9 @@ public class FriendManager : MonoBehaviour
     {
         Debug.LogError("GetAccountInfo failed: " + error.ErrorMessage);
     }
-
-    //Method assigned to the Add Friend Button
+    /// <summary>
+    /// Method assigned to the Add Friend Button
+    /// </summary>
     public void AddFriend()
     {
         if (ValidarUserNameFriend(inputFriendUsername.text))
@@ -76,8 +78,9 @@ public class FriendManager : MonoBehaviour
 
         //Else Error Message
     }
-
-    //Method that sends the Friend Request on PlayFab
+    /// <summary>
+    /// PlayFab - Method that sends the Friend Request on PlayFab
+    /// </summary>
     public void SendFriendRequest()
     {
         Debug.Log("Send info");
@@ -113,8 +116,9 @@ public class FriendManager : MonoBehaviour
         Debug.LogError("Failed to add friend: " + error.ErrorMessage);
         // Handle failure, if necessary
     }
-
-    //Method that returns the list of friends from Playfab
+    /// <summary>
+    /// PlayFab - Method that returns the list of friends from Playfab
+    /// </summary>
     public void GetFriendsConfirmedList()
     {
         ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
@@ -126,8 +130,10 @@ public class FriendManager : MonoBehaviour
         PlayFabClientAPI.ExecuteCloudScript(request, OnGetFriendsConfirmedListSuccess, OnGetFriendsListFailure);
     }
 
-
-    // Callback for successful GetFriendsList 
+    /// <summary>
+    /// Callback for successful GetFriendsList ,which gets the result of the callback and appends it to a list
+    /// </summary>
+    /// <param name="result"></param>
     private void OnGetFriendsConfirmedListSuccess(ExecuteCloudScriptResult result)
     {
         friends.Clear();
@@ -170,7 +176,11 @@ public class FriendManager : MonoBehaviour
     }
 
 
-    //Check if the friend name input is accurate
+    /// <summary>
+    /// When you add a friend, the error messages and the right ones
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
     public bool ValidarUserNameFriend(string str)
     {
         validationMessage.color = Color.red;

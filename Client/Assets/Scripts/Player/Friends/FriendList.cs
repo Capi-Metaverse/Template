@@ -25,7 +25,9 @@ public class FriendList : MonoBehaviour
 
     // Start is called before the first frame update
     //Function to get the List of players and Kick them
-
+    /// <summary>
+    /// Destroy the children and clean up the lists
+    /// </summary>
     void Start()
     {
         gameManager = GameManager.FindInstance();
@@ -44,11 +46,14 @@ public class FriendList : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
+    /// <summary>
+    /// Iterate players to get Nickname && ActorNumber, each time this function is called, the lists are cleaned and the children are destroyed.
+    /// </summary>
     public void InstanceFriendItem()
     {
         CleanFriendsPanel();
 
-        //Iterate players to get Nickname && ActorNumber
+        
         for (int i = 0; i < friends.Count; i++)
         {
             if (friends[i].Tags == "confirmed")

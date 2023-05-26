@@ -17,6 +17,9 @@ public class ImagenData : MonoBehaviour
     {
         FetchImageData();
     }
+    /// <summary>
+    /// Open a FileChooser and save the path to convert in image using UploadImagenToUser
+    /// </summary>
     public void ClickImageAvatar()
     {
         string path = UnityEditor.EditorUtility.OpenFilePanel("Seleccionar archivo", "", "png,jpg");
@@ -31,13 +34,20 @@ public class ImagenData : MonoBehaviour
     }
 
 
-    //Envia
+    /// <summary>
+    /// Transform the Path to Bytes
+    /// </summary>
+    /// <param name="imagePath"></param>
+    /// <returns></returns>
     private byte[] LoadImageAsByteArray(string imagePath)
     {
         byte[] imageData = File.ReadAllBytes(imagePath);
         return imageData;
     }
-
+    /// <summary>
+    /// PlayFab - Upload the image in playfab in base 64 with Key CustomKey
+    /// </summary>
+    /// <param name="imageData"></param>
     private void UploadImageToUser(byte[] imageData)
     {
         UpdateUserDataRequest request = new UpdateUserDataRequest
@@ -65,14 +75,19 @@ public class ImagenData : MonoBehaviour
     }
 
 
-    //Devuelve 
+    /// <summary>
+    /// PlayFab - Call GetUserData from Playfab
+    /// </summary>
     public void FetchImageData()
     {
         GetUserDataRequest request = new GetUserDataRequest();
 
         PlayFabClientAPI.GetUserData(request, OnGetUserDataSuccess, OnGetUserDataFailure);
     }
-
+    /// <summary>
+    /// Data result from FetchImageData, is reconvert to a Image and save like a Sprite
+    /// </summary>
+    /// <param name="result"></param>
     private void OnGetUserDataSuccess(GetUserDataResult result)
     {
         if (result.Data != null && result.Data.ContainsKey("CustomImage"))
