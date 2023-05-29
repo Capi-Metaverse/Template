@@ -5,9 +5,9 @@ using System.IO;
 using System.IO.Compression;
 
 
-/*
-Stands for the video when presenting
-*/
+/// <summary>
+/// Stands for the video when presenting
+/// </summary>
 public class Compressor
 {
     public byte[] Compress(byte[] data)

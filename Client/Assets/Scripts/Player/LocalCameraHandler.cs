@@ -32,6 +32,9 @@ public class LocalCameraHandler : MonoBehaviour
     }
 
     // Update is called once per frame
+    /// <summary>
+    /// Controll of our camera
+    /// </summary>
     void LateUpdate()
     {
         if(cameraAnchorPoint == null) return;

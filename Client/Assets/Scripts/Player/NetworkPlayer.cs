@@ -26,7 +26,9 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
     public CharacterInputHandler inputHandler;
 
 
-
+    /// <summary>
+    /// Instance the prefab to the user, add Animator componet,add properties to the avatar
+    /// </summary>
     public override void Spawned()
     {
       
@@ -65,13 +67,19 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
 
         else Debug.Log("Spawned remote player");
     }
-
+    /// <summary>
+    /// When user left, despawn the Avatar
+    /// </summary>
+    /// <param name="player"></param>
     public void PlayerLeft(PlayerRef player)
     {
         if (player == Object.InputAuthority) Runner.Despawn(Object);
     }
 
-    //Detects and activates [Networked(OnChanged = nameof(OnNickNameChanged))].
+    /// <summary>
+    /// Detects and activates [Networked(OnChanged = nameof(OnNickNameChanged))].
+    /// </summary>
+    /// <param name="changed"></param>
     static void OnNickNameChanged(Changed<NetworkPlayer> changed)
     {
         Debug.Log($"{Time.time} OnHPChanged value {changed.Behaviour.nickname}");
@@ -79,7 +87,9 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
         changed.Behaviour.OnNickNameChanged();
     }
 
-    //Here we put the name to our local player, we don´t need to do more because our nerworked nickname is also setted so since is networked nickname will be load in every client 
+    /// <summary>
+    /// Here we put the name to our local player, we don´t need to do more because our nerworked nickname is also setted so since is networked nickname will be load in every client 
+    /// </summary>
     private void OnNickNameChanged()
     {
         Debug.Log($"Nick name changed for player to {nickname} for player {gameObject.name}");
@@ -89,7 +99,10 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
 
     }
 
-    //Setter for GameManager
+    /// <summary>
+    /// Setter for GameManager
+    /// </summary>
+    /// <param name="gameManager"></param>
     public void SetGameManager(GameManager gameManager)
     {
         this.gameManager = gameManager;
