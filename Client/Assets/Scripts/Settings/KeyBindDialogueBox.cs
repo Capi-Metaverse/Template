@@ -20,6 +20,9 @@ public class KeyBindDialogueBox : MonoBehaviour
 
 
     // Start is called before the first frame update
+    /// <summary>
+    /// Instance the buttons adds the value of the playfab letter and prepares them so that the letter can be changed.
+    /// </summary>
     void Start()
     {
         inputManager = GameObject.FindObjectOfType<InputManager>();
@@ -56,6 +59,9 @@ public class KeyBindDialogueBox : MonoBehaviour
     }
 
     // Update is called once per frame
+    /// <summary>
+    /// Changes the value of the button and saves that value in PlayFab
+    /// </summary>
     void Update()
     {
         if (buttonToRebind != null)

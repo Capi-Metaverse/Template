@@ -26,16 +26,23 @@ public class UserListItem : MonoBehaviour
 
         
     }
+    /// <summary>
+    /// Kick Other players from de APP
+    /// </summary>
     public void KickPlayer() { 
         GameManager.RPC_onKick(gameManager.GetRunner(),NumActor);  
     }
-
+    /// <summary>
+    /// Change the Audio Level
+    /// </summary>
     public void ChangeAudioPlayer()
     {
         Debug.Log(slider.value);
         GameObjectPlayer.GetComponentInChildren<AudioSource>().volume = slider.value; 
     }
-
+    /// <summary>
+    /// Mute the audio from other users
+    /// </summary>
     public void MutePlayer()
     {
         Debug.Log(muteToggle.isOn);

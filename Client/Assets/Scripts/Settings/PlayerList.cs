@@ -11,7 +11,9 @@ public class PlayerList : MonoBehaviour
 {
     public GameObject PlayerItemPrefabSettings;
     public GameObject PlayerListSettings;
-
+    /// <summary>
+    /// List Player with his names in PlayFab and Get his ID
+    /// </summary>
     public void ListPlayers()
     {
         //Destroys the former list
