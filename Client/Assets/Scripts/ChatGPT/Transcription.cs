@@ -62,6 +62,7 @@ namespace XXX
 
             // Log text result.
             Debug.Log($"[Whisper_API.Transcription.Samples] Result:\n{text}");
+
         }
     }
 }*/
