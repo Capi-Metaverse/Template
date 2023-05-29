@@ -23,7 +23,9 @@ public class PauseMenuSettings : MonoBehaviour
         roomName.text = gameManager.GetRoomName();
     }
 
-    //Method to disconnect the User
+    /// <summary>
+    /// Method to disconnect the User and return to Login
+    /// </summary>
     public async void OnClickDisconnect()
     {
         await gameManager.Disconnect();

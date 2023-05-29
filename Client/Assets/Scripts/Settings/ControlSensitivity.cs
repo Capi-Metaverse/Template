@@ -16,7 +16,10 @@ public class ControlSensitivity : MonoBehaviour
         sensi = slider.value;
         
     }
-
+    /// <summary>
+    /// Change the sensitivity
+    /// </summary>
+    /// <param name="value"></param>
     public void ChangeSlider(float value)
     {
         sliderValue = value;
