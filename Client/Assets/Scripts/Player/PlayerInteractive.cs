@@ -7,7 +7,10 @@ public class PlayerInteractive : MonoBehaviour, IMetaEvent
     public PlayerInteractionE menuUiOther;
     GameObject _eventObject;
     GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
-    //
+    /// <summary>
+    /// Script containing each avatar that allows them to be interactive, and to get the data from playfab
+    /// </summary>
+    /// <param name="host"></param>
     public void activate(bool host)
     {
         menuUiOther = GameObject.Find("Menus").GetComponent<PlayerInteractionE>();

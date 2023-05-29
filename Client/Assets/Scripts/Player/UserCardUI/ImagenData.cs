@@ -85,7 +85,7 @@ public class ImagenData : MonoBehaviour
         PlayFabClientAPI.GetUserData(request, OnGetUserDataSuccess, OnGetUserDataFailure);
     }
     /// <summary>
-    /// Data result from FetchImageData, is reconvert to a Image and save like a Sprite
+    /// Data result from FetchImageData, is reconvert to a Image and save like a Sprite, Gets the image component of the object
     /// </summary>
     /// <param name="result"></param>
     private void OnGetUserDataSuccess(GetUserDataResult result)

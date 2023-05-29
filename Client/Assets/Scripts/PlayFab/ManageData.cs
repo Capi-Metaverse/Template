@@ -8,7 +8,9 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
 
-
+/// <summary>
+/// Class and construvtor to InteractKey
+/// </summary>
 public class InteractKey
 {
     public int interactkey;
@@ -20,7 +22,9 @@ public class InteractKey
 }
 
 
-
+/// <summary>
+/// Class and construvtor to PresentationKey
+/// </summary>
 public class PresentationKey
 {
     public int presentation;
@@ -31,6 +35,9 @@ public class PresentationKey
     }
 }
 
+/// <summary>
+/// Class and construvtor to WheelKey
+/// </summary>
 public class WheelKey
 {
     public int wheel;
@@ -41,7 +48,9 @@ public class WheelKey
     }
 }
 
-
+/// <summary>
+/// Class and construvtor to Keys
+/// </summary>
 public class Keys
 {
     public int interact;
@@ -55,7 +64,9 @@ public class Keys
         this.wheel = wheel;
     }
 }
-
+/// <summary>
+/// Save Data with the Key Keys
+/// </summary>
 public class ManageData 
 {
     public Keys currentkeys;
@@ -84,18 +95,18 @@ public class ManageData
     {
         PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnCharactersDataReceived, OnError);
     }
-
+    /// <summary>
+    /// Set the value to currentKeys
+    /// </summary>
+    /// <param name="result"></param>
     void OnCharactersDataReceived(GetUserDataResult result)
     {
         Debug.Log("[PlayFab-ManageData] Received characters data!");
         if (result.Data != null && result.Data.ContainsKey("Keys"))
         {
             currentkeys = JsonConvert.DeserializeObject<Keys>(result.Data["Keys"].Value);
-        }
-       
+        }      
     }
-
- 
 
     public void OnError(PlayFabError obj)
     {
