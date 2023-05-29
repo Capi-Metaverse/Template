@@ -24,7 +24,10 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
     GameObject _eventObject;
     GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
     // Start is called before the first frame update
-
+    /// <summary>
+    /// if there is no data in playfab, it sets default data, if it does not get it, it will request it.
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator LoadInitialData()
     {
         // Do some work here...
@@ -56,6 +59,10 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
         // Function is finished
     }
     // Start is called before the first frame update
+    /// <summary>
+    /// Detects activation, e.g. when the chair is clicked, initialises the components and calls functions to get the information from playfab, also calls LoadInitialData.
+    /// </summary>
+    /// <param name="host"></param>
     public void activate(bool host)
     {
         characterInputHandler = GameManager.FindInstance().GetCurrentPlayer().gameObject.GetComponent<CharacterInputHandler>();
@@ -72,7 +79,9 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
         gameManager = GameManager.FindInstance();
     }
     // Update is called once per frame
-   
+    /// <summary>
+    /// change the playfab values to the values you set in the inputs
+    /// </summary>
     public void EditUserData()
     {
         manageDataUI.data = new UserUIInfo(gameManager.GetUsername(), gameManager.GetEmail(), editVisionData.OboutTextInput.text, editVisionData.HobbiesTextInput.text, editVisionData.CVTextInput.text);

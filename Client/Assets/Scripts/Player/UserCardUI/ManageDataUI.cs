@@ -9,7 +9,9 @@ using PlayFab.ClientModels;
 using UnityEngine;
 
 
-
+/// <summary>
+/// Class and constructor UserUIInfo
+/// </summary>
     public class UserUIInfo
     {
         public string name;
@@ -33,7 +35,10 @@ using UnityEngine;
     {
     public UserUIInfo data;
 
-        // Save User Data
+        /// <summary>
+        /// Save User Data with key userUICard
+        /// </summary>
+        /// <param name="data"></param>
         public void SaveData(UserUIInfo data)
         {
             var request = new UpdateUserDataRequest
@@ -54,12 +59,17 @@ using UnityEngine;
         }
 
 
-        //Load User Data
+        /// <summary>
+        /// Load User Data
+        /// </summary>
         public void LoadData()
         {
             PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnCharactersDataReceived, OnError);
-        }
-
+         }
+        /// <summary>
+        /// If the user receives the data, he stores it in a variable
+        /// </summary>
+        /// <param name="result"></param>
         void OnCharactersDataReceived(GetUserDataResult result)
         {
             Debug.Log("[PlayFab-ManageData] Received characters data!");

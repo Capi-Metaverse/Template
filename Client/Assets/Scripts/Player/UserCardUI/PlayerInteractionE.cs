@@ -22,7 +22,11 @@ public class PlayerInteractionE : MonoBehaviour
         //gameManager = GameManager.FindInstance();
         
     }
-
+    /// <summary>
+    /// PlayFab - Obtains the public data of other users.
+    /// </summary>
+    /// <param name="otherPlayerId"></param>
+    /// <param name="list"></param>
     public void GetPublicDataFromOtherPlayer(string otherPlayerId, List<string> list)
     {
         var request = new GetUserDataRequest
@@ -34,7 +38,10 @@ public class PlayerInteractionE : MonoBehaviour
         PlayFabClientAPI.GetUserData(request, LoadDataIntoCard, OnUpdateUserDataFailure);
        
     }
-
+    /// <summary>
+    /// With the data obtained, it saves them, so that you can see them on the cv-card.
+    /// </summary>
+    /// <param name="result"></param>
     private void LoadDataIntoCard(GetUserDataResult result)
     {
         card.SetActive(true);
@@ -51,8 +58,7 @@ public class PlayerInteractionE : MonoBehaviour
         visionData.HobbiesText.text = data.hobbies;
         visionData.CVText.text = data.CV;
 
-        //Logros
-
+        //Achievements
         if (result.Data != null && result.Data.ContainsKey("Achievements"))
         {
             achievementsManager.currentAchievements = JsonConvert.DeserializeObject<List<Achievement>>(result.Data["Achievements"].Value);
@@ -60,8 +66,7 @@ public class PlayerInteractionE : MonoBehaviour
             achivementList.InstanceAchievementItem();
         }
 
-        //Imagen
-        //esto se puede reciclar usando el script ImagenData la funcion OnGetUserDataSuccess
+        //Image
         if (result.Data != null && result.Data.ContainsKey("CustomImage"))
         {
             string imageString = result.Data["CustomImage"].Value;
