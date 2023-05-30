@@ -11,7 +11,10 @@ public class InputManager : MonoBehaviour
     private PlayerUiPrefab playerUiPrefab;
 
     public Keys currentKeys;
-
+    /// <summary>
+    /// Detect if playfab has default values and if not, create default values, and update them in playfab.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator LoadInitialKeys()
     {
         // Do some work here...
@@ -66,15 +69,15 @@ public class InputManager : MonoBehaviour
     {
         manageData = new ManageData();
         manageData.LoadData();
-        StartCoroutine(LoadInitialKeys());
-       
+        StartCoroutine(LoadInitialKeys());    
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+    /// <summary>
+    /// Detects which key has been polished
+    /// </summary>
+    /// <param name="buttonName"></param>
+    /// <returns></returns>
     public bool GetButtonDown(string buttonName)
     {
         if (buttonKeys.ContainsKey(buttonName) == false)
@@ -84,12 +87,19 @@ public class InputManager : MonoBehaviour
         }
         return Input.GetKeyDown(buttonKeys[buttonName]);
     }
-
+    /// <summary>
+    /// Get Names of Keys
+    /// </summary>
+    /// <returns></returns>
     public string[] GetButtonNames()
     {
         return buttonKeys.Keys.ToArray();
     }
-
+    /// <summary>
+    /// Get Name from the button
+    /// </summary>
+    /// <param name="buttonName"></param>
+    /// <returns></returns>
     public string GetKeyNameForButton(string buttonName)
     {
         if (buttonKeys.ContainsKey(buttonName) == false)
@@ -99,6 +109,11 @@ public class InputManager : MonoBehaviour
         }
         return buttonKeys[buttonName].ToString();
     }
+    /// <summary>
+    /// Change the Key
+    /// </summary>
+    /// <param name="buttonName"></param>
+    /// <param name="keyCode"></param>
     public void SetButtonForKey(string buttonName, KeyCode keyCode)
     {
         buttonKeys[buttonName] = keyCode;

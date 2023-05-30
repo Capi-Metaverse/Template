@@ -56,20 +56,6 @@ public class MusicManager : MonoBehaviour
     void Update()
     {
         _audioSource.volume = volume;
-
-        //if (SceneManager.GetActiveScene().buildIndex > 1 && SongText == null)
-        //{
-        //    MusicController = GameObject.Find("Menus").transform.GetChild(1).GetChild(0).GetChild(0).GetChild(1).GetChild(9).gameObject;
-        //    SongText = MusicController.transform.GetChild(2).GetComponent<TMP_Text>();
-        //    SongText.text = CurrentSong;
-
-        //    LeftArrow = MusicController.transform.GetChild(0).GetComponent<Button>();
-        //    RightArrow = MusicController.transform.GetChild(1).GetComponent<Button>();
-
-        //    LeftArrow.onClick.AddListener(() => ChangeSong(Random.Range(0, songs.Length)));
-        //    RightArrow.onClick.AddListener(() => ChangeSong(Random.Range(0, songs.Length)));
-        //}
-
         if (_audioSource.isPlaying)
             _trackTimer += 1 * Time.deltaTime;
 

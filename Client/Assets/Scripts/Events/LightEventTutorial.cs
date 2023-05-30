@@ -15,7 +15,6 @@ public class LightEventTutorial : MonoBehaviour, IMetaEvent
         active = !active;
         this.gameObject.GetComponentInChildren<Light>().enabled = active;
 
-
     }
 
     

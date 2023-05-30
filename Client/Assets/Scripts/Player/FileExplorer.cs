@@ -41,14 +41,15 @@ public class FileExplorer : NetworkBehaviour
         presentation=GameObject.Find("Presentation").GetComponent<Presentation>();//Getting the press from scene
         gameManager = GameManager.FindInstance();
     }
-
+    /// <summary>
+    /// Open panel to choose the file and limiting the extensions to choose
+    /// </summary>
     [Obsolete]
     public void OpenFile()
     {
         loadingPressCanvas.SetText("Loading");
         Screen.lockCursor = false;//Unity and standalone
 
-        //Open panel to choose the file and limiting the extensions to choose
         var extensions = new [] {new ExtensionFilter("Powerpoint Files", "pptx", "ppt"),new ExtensionFilter("Excel Files", "xlsx", "xlsm","xlsb"),new ExtensionFilter("Image Files", "png", "jpg", "jpeg" ),new ExtensionFilter("Video Files", "mp4","ogv","vp8","webm" ),new ExtensionFilter("All Files", "*" ),};
         
         #if UNITY_WEBGL && !UNITY_EDITOR
@@ -85,7 +86,10 @@ public class FileExplorer : NetworkBehaviour
 
         StartCoroutine(UpdateFile());
     }
-
+    /// <summary>
+    /// Transform the path to byte and call Api, eith the extenion and this bytes
+    /// </summary>
+    /// <returns></returns>
     [System.Obsolete]
     IEnumerator UpdateFile()
     {
@@ -156,6 +160,10 @@ public class FileExplorer : NetworkBehaviour
 
         SetImage(bytes);
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="bytes"></param>
     public void SetImage(byte[] bytes){
         //Clear videoScreen
         presentation.sprites.Clear();
@@ -212,7 +220,13 @@ public class FileExplorer : NetworkBehaviour
         videoPlayer.url = PostPath;
 
     }
-
+    /// <summary>
+    /// Upload the file to the api, and obtend the results in JSON
+    /// </summary>
+    /// <param name="bytes"></param>
+    /// <param name="fileExtension"></param>
+    /// <param name="PostPath"></param>
+    /// <returns></returns>
     //Upload the presentation file to the convert api
     IEnumerator PresentationUpload(byte[] bytes,string fileExtension, string PostPath){
 
@@ -283,7 +297,10 @@ public class FileExplorer : NetworkBehaviour
         StartCoroutine(GetRequestFunc());
     }
 
-    //Function to make a Get request
+    /// <summary>
+    /// function to make a get request, Get dta from Json with kay Files
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator GetRequestFunc()
     {
         foreach (var archiv in json["Files"]) 

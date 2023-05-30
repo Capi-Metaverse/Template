@@ -25,12 +25,19 @@ public class PlayerUiPrefab : MonoBehaviour
         ChangeLetterK(inputManager.buttonKeys["ChangeCamera"].ToString());
 
     }
-
+    /// <summary>
+    /// Text Press E change
+    /// </summary>
+    /// <param name="change"></param>
     public void ChangeLetter(string change)
     {
         eventText = $"Press {change} to interact";
         pressKey.text = eventText;
     }
+    /// <summary>
+    /// Text Press K change
+    /// </summary>
+    /// <param name="change"></param>
     public void ChangeLetterK(string change)
     {
         eventTextK = $"Press {change} to enable presentation mode";
