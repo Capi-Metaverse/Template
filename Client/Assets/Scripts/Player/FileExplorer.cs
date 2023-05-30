@@ -287,14 +287,18 @@ public class FileExplorer : NetworkBehaviour
 
 
         //Si es nula
+        /*
         if (presentation.current >= 1) presentation.current=0;
         if(presentation.sprites != null) presentation.sprites.Clear();
         StartCoroutine(GetRequestFunc());
+        */
     }
 
     public void StartCoroutine()
     {
         presentation.sprites.Clear();
+        if (presentation.current >= 1) presentation.current = 0;
+        if (presentation.sprites != null) presentation.sprites.Clear();
         StartCoroutine(GetRequestFunc());
     }
 
