@@ -294,6 +294,7 @@ public class FileExplorer : NetworkBehaviour
 
     public void StartCoroutine()
     {
+        presentation.sprites.Clear();
         StartCoroutine(GetRequestFunc());
     }
 
