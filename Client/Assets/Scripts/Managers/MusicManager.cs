@@ -39,6 +39,9 @@ public class MusicManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
+    /// <summary>
+    /// Start the music
+    /// </summary>
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -53,6 +56,9 @@ public class MusicManager : MonoBehaviour
     }
 
     // Update is called once per frame
+    /// <summary>
+    /// Control the state of the musics, when a song finish start other
+    /// </summary>
     void Update()
     {
         _audioSource.volume = volume;
@@ -65,7 +71,10 @@ public class MusicManager : MonoBehaviour
         }
         ResetShuffle();
     }
-
+    /// <summary>
+    /// Change to other song
+    /// </summary>
+    /// <param name="songPicked"></param>
     public void ChangeSong(int songPicked)
     {
         if (!_beenPlayed[songPicked])
@@ -85,7 +94,9 @@ public class MusicManager : MonoBehaviour
             _audioSource.Stop();
         }
     }
-
+    /// <summary>
+    /// Reset the list, when all the song of the list have been played
+    /// </summary>
     private void ResetShuffle()
     {
         if (_songsPlayed == songs.Length)
@@ -100,7 +111,9 @@ public class MusicManager : MonoBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// Stop and Activate music, when you are in the app
+    /// </summary>
     public void ChangeAudioState()
     {
         if (_audioSource.isPlaying == true)
@@ -114,7 +127,9 @@ public class MusicManager : MonoBehaviour
             StopAudio = false;
         }
     }
-
+    /// <summary>
+    /// Activate music
+    /// </summary>
     public void ActivateAudio()
     {
         _audioSource.Play();

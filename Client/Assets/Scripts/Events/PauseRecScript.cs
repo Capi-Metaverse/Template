@@ -15,7 +15,10 @@ public class PauseRecScript : MonoBehaviour, IMetaEvent
         Application.runInBackground = true;
         isPlayVideo = false;
     }
-
+    /// <summary>
+    /// To Pause the recording
+    /// </summary>
+    /// <param name="host"></param>
     public void activate(bool host)
     {
         //Set Pause

@@ -50,7 +50,9 @@ public class EventWheel : NetworkTransform
         animationToPlay = AnimationList.TwistedDance;
     }
 
-
+    /// <summary>
+    /// Controls which animation is being played.
+    /// </summary>
     public override void Render()
     {
         if (animationToPlay != AnimationList.None)
@@ -74,7 +76,10 @@ public class EventWheel : NetworkTransform
             }
         }
     }
-
+    /// <summary>
+    /// Starts running a new animation.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator RunNewAnimation()
     {
         Debug.Log("Apply animation");

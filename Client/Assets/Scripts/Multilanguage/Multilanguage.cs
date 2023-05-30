@@ -17,7 +17,10 @@ public class Multilanguage : MonoBehaviour
         int number = PlayerPrefs.GetInt("Lang");
         Language(number);
     }
-
+    /// <summary>
+    /// Take the language from Unity Editor and set the language
+    /// </summary>
+    /// <param name="lang"></param>
     public void Language(int lang)
     {
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[lang];

@@ -28,7 +28,10 @@ public class VoiceManager
         MicroOn = Resources.Load<Sprite>("Sprites/UI/micro_on");
         recorder = GameObject.Find("Network runner").GetComponent<Photon.Voice.Unity.Recorder>();
     }
-
+    /// <summary>
+    /// Mute and Unmute and change the sprite
+    /// </summary>
+    /// <param name="estado"></param>
     public void MuteAudio(UserStatus estado)
     {
         

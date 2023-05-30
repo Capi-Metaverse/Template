@@ -9,8 +9,7 @@ using UnityEngine.UI;
 public class CreateRoom : MonoBehaviour
 {
 
-   [SerializeField] private TMP_InputField inputNameCreate;
-
+    [SerializeField] private TMP_InputField inputNameCreate;
 
     [SerializeField] private TMP_InputField inputNameJoin;
 
@@ -47,7 +46,9 @@ public class CreateRoom : MonoBehaviour
          map.text = mapNames[actualMap];
     }
 
-
+    /// <summary>
+    /// Check that the inputs are not empty and create a new room with the value of the inputs.
+    /// </summary>
     public void CreateNewRoom()
     {
 
@@ -60,7 +61,9 @@ public class CreateRoom : MonoBehaviour
         //Else mensaje de error
 
     }
-
+    /// <summary>
+    /// Join in a room whit the name of the input
+    /// </summary>
     public void JoinNewRoom()
     {
         if (!inputNameJoin.text.Equals(""))
@@ -68,8 +71,6 @@ public class CreateRoom : MonoBehaviour
             Debug.Log("Uniendose a una nueva sala");
             gameManager.JoinCustomGame(inputNameJoin.text);
         }
-
-        //Else mensaje de error
     }
 
 
@@ -105,7 +106,9 @@ public class CreateRoom : MonoBehaviour
         createPanel.SetActive(true);
     }
 
-
+    /// <summary>
+    /// change the number of users can enter in the room
+    /// </summary>
     public void OnClickLeftPlayer()
     {
         int userCount = Int32.Parse(inputPlayers.text);
@@ -114,8 +117,6 @@ public class CreateRoom : MonoBehaviour
         {
             inputPlayers.text = (userCount - 1).ToString();
         }
-
-        
     }
 
     public void OnClickRightPlayer()
@@ -126,33 +127,24 @@ public class CreateRoom : MonoBehaviour
         {
             inputPlayers.text = (userCount + 1).ToString();
         }
-
-
     }
-
+    /// <summary>
+    /// Change map
+    /// </summary>
     public void OnClickLeftMap()
     {
-        
-
         if (actualMap > 0)
         {
 
             map.text = mapNames[--actualMap];
         }
-
-
     }
 
     public void OnClickRightMap()
     {
-
-
         if (actualMap < mapNames.Length - 1 )
         {
            map.text = mapNames[++actualMap];
         }
-
-
     }
-
 }

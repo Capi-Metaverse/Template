@@ -17,7 +17,10 @@ public class RecordScript : MonoBehaviour, IMetaEvent
         Application.runInBackground = true;
         isPlayVideo = false;
     }
-
+    /// <summary>
+    /// Start an finish the recording
+    /// </summary>
+    /// <param name="host"></param>
     public void activate(bool host)
     {
         camera.SetActive(true);
@@ -25,22 +28,12 @@ public class RecordScript : MonoBehaviour, IMetaEvent
         {
             //Start to capture the video
             VideoCaptureCtrl.instance.StartCapture();
-          
         }
         else if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.STARTED || VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.PAUSED)
-        {
-           
+        { 
                 //Stop the video
-                VideoCaptureCtrl.instance.StopCapture();
+            VideoCaptureCtrl.instance.StopCapture();
             camera.SetActive(false);
-
-
-
-
         }
-     
-
-    }
-
-  
+    } 
 }

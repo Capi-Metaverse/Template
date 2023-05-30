@@ -15,12 +15,11 @@ public class CustomRecordPath : MonoBehaviour, IMetaEvent
     string _path;
     public void activate(bool host)
     {
-        OpenFile();
-
-        
+        OpenFile();    
     }
-
-
+    /// <summary>
+    /// Open panel to select the directory 
+    /// </summary>
     public void OpenFile()
     {
         Cursor.lockState = CursorLockMode.None;//Unity and standalone
@@ -34,7 +33,10 @@ public class CustomRecordPath : MonoBehaviour, IMetaEvent
 
         Cursor.lockState = CursorLockMode.Locked;//Unity and standalone
     }
-
+    /// <summary>
+    /// To change the path to save the recording
+    /// </summary>
+    /// <param name="paths"></param>
     public void WriteResult(string[] paths)
     {
         if (paths.Length == 0)
@@ -46,11 +48,5 @@ public class CustomRecordPath : MonoBehaviour, IMetaEvent
 
         videoCapture.customPath = true;
         videoCapture.customPathFolder = _path;
-
-
-
-
     }
-
-
 }
