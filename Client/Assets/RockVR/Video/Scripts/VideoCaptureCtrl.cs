@@ -213,20 +213,21 @@ namespace RockVR.Video
         
             SavWav.Save(audioFilePath, microphoneClip);
 
-            Debug.Log(" -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -filter_complex amix=inputs=1 " + PathConfig.lastVideoFile);
+            Debug.Log(" -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -i " + audioFilePath2 + " -filter_complex \"[1:a][2:a]amix=inputs=2:duration=longest[outa]\" -map 0:v:0 -map \"[outa]\" -c:v copy -c:a aac -shortest " + PathConfig.lastVideoFile.Substring(0, PathConfig.lastVideoFile.LastIndexOf(@"\") + 1) + "finalVideo.mp4");
+            /*
             ProcessStartInfo startInfo = new ProcessStartInfo();
             //startInfo.UseShellExecute = false;
-            startInfo.CreateNoWindow = true;
+            //startInfo.CreateNoWindow = true;
             startInfo.FileName = PathConfig.ffmpegPath;
-            startInfo.Arguments = " -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -i " + audioFilePath2 + "-filter_complex \"[1:a][2:a]amix=inputs=2:duration=longest[outa]\" -map 0:v:0 -map \"[outa]\" -c:v copy -c:a aac -shortest" + PathConfig.lastVideoFile.Substring(0, PathConfig.lastVideoFile.LastIndexOf(@"\") + 1) + "finalVideo.mp4";
+            startInfo.Arguments = " -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -i " + audioFilePath2 + " -filter_complex \"[1:a][2:a]amix=inputs=2:duration=longest[outa]\" -map 0:v:0 -map \"[outa]\" -c:v copy -c:a aac -shortest " + PathConfig.lastVideoFile.Substring(0, PathConfig.lastVideoFile.LastIndexOf(@"\") + 1) + "finalVideo.mp4";
 
 
             Process processTemp = new Process();
             processTemp.StartInfo = startInfo;
 
             processTemp.Start();
-
-            //System.Diagnostics.Process.Start(PathConfig.ffmpegPath, " -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + "-c:v copy - c:a aac - map 0:v: 0 - map 1:a: 0 " + PathConfig.lastVideoFile + "final");
+            */
+            Process.Start(PathConfig.ffmpegPath, " -i " + PathConfig.lastVideoFile + " -i " + audioFilePath + " -i " + audioFilePath2 + " -filter_complex \"[1:a][2:a]amix=inputs=2:duration=longest[outa]\" -map 0:v:0 -map \"[outa]\" -c:v copy -c:a aac -shortest " + PathConfig.lastVideoFile.Substring(0, PathConfig.lastVideoFile.LastIndexOf(@"\") + 1) + "finalVideo.mp4");
         }
         /// <summary>
         /// Pause video capture process.
