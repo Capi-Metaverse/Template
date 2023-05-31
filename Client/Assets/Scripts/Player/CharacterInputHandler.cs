@@ -295,7 +295,10 @@ public class CharacterInputHandler : MonoBehaviour
             if (localCameraHandler != null) localCameraHandler.SetViewInputVector(viewInputVector);
         }
     
-
+    /// <summary>
+    /// To all the people can see the movement
+    /// </summary>
+    /// <returns></returns>
     public NetworkInputData GetNetworkInput()
     {
         NetworkInputData networkInputData = new NetworkInputData();
@@ -315,7 +318,10 @@ public class CharacterInputHandler : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// Change the state of camera when you are in a zone of presentation
+    /// </summary>
+    /// <param name="camera"></param>
     public void setPresentationCamera(Camera camera)
     {
 
@@ -339,7 +345,9 @@ public class CharacterInputHandler : MonoBehaviour
         }
     }
 
-    //DeactivateALL
+    /// <summary>
+    /// DeactivateALL
+    /// </summary>
     public void DeactivateALL()
     {
         escPul = true;
@@ -365,7 +373,9 @@ public class CharacterInputHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
     }
 
-    //ActiveALL
+    /// <summary>
+    /// ActiveALL
+    /// </summary>
     public void ActiveALL()
     {
 

@@ -22,7 +22,9 @@ public class CharacterMovementHandler : NetworkBehaviour
         localCamera = GetComponentInChildren<Camera>();
     }
 
-
+    /// <summary>
+    /// Catch info to movement
+    /// </summary>
     public override void FixedUpdateNetwork()
     {
         if (GetInput(out NetworkInputData networkInputData))

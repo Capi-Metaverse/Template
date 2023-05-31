@@ -11,6 +11,7 @@ using Unity.VisualScripting;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static Unity.Collections.Unicode;
 
 
 
@@ -141,8 +142,10 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         }
     }
 
-    //This function sets the LobbyManager and enter the Lobby
-    //Correct
+    /// <summary>
+    /// This function sets the LobbyManager and enter the Lobby
+    /// </summary>
+    /// <param name="lobbyManager"></param>
     public async void SetLobbyManager(LobbyManager lobbyManager)
     {
         if (inputManager == null) inputManager = this.gameObject.AddComponent<InputManager>();
@@ -154,7 +157,9 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     }
     //AWAKE -> Intro -> Lobby -> Session
 
-    //Add the NetworkRunner to this object Correct
+    /// <summary>
+    /// Add the NetworkRunner to this object 
+    /// </summary>
     private void Connect()
     {
 
@@ -172,7 +177,10 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         }
     }
 
-    //Disconnects the runner Correct
+    /// <summary>
+    /// Disconnects the runner 
+    /// </summary>
+    /// <returns></returns>
     public async Task Disconnect()
     {
         if (_runner != null)
@@ -185,7 +193,10 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         }
     }
 
-    //Function to enter the Lobby
+    /// <summary>
+    /// Function to enter the Lobby, load Lobby if fail, load 1.Start
+    /// </summary>
+    /// <returns></returns>
     public async Task EnterLobby()
     {
         //We connect to photonFusion
@@ -205,22 +216,25 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
             SceneManager.LoadScene("1.Start");
 
             return;
-
-
         }
-
         _lobbyManager.setLobbyButtons(true);
         SetUserStatus(UserStatus.PreLobby);
     }
 
 
-    //Create a session/room Correct
+    /// <summary>
+    /// Create a session/room Correct
+    /// </summary>
+    /// <param name="props"></param>
     public async void CreateSession(SessionProps props)
     {
         await StartSession(GameMode.Shared, props);
     }
 
-    //Join a session/room Correct, Maybe improve props in the future
+    /// <summary>
+    /// Join a session/room Correct, Maybe improve props in the future
+    /// </summary>
+    /// <param name="info"></param>
     public async void JoinSession(SessionInfo info)
     {
         SessionProps props = new SessionProps(info.Properties);
@@ -229,7 +243,13 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         await StartSession(GameMode.Shared, props);
     }
 
-    //Function to create the session / room
+    /// <summary>
+    /// Function to create the session / room , Set properties to Room, if fail load 1.Start
+    /// </summary>
+    /// <param name="mode"></param>
+    /// <param name="props"></param>
+    /// <param name="disableClientSessionCreation"></param>
+    /// <returns></returns>
     public async Task StartSession(GameMode mode, SessionProps props, bool disableClientSessionCreation = true)
     {
         Connect();
@@ -277,10 +297,11 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
     }
 
-
-
-    //Debug function to set the user connection
-    //Correct
+    /// <summary>
+    /// Set the user connection
+    /// </summary>
+    /// <param name="status"></param>
+    /// <param name="reason"></param>
     private void SetConnectionStatus(ConnectionStatus status, string reason = "")
     {
         if (ConnectionStatus == status)
@@ -296,8 +317,11 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
     }
 
-    //Debug function to set the user status
-    //Correct
+    /// <summary>
+    /// Set the user status
+    /// </summary>
+    /// <param name="status"></param>
+    /// <param name="reason"></param>
     public void SetUserStatus(UserStatus status, string reason = "")
     {
         if (UserStatus == status)
@@ -311,8 +335,11 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
     }
 
-    //Debug function to set the user role
-    //Correct
+    /// <summary>
+    /// Set the user role
+    /// </summary>
+    /// <param name="role"></param>
+    /// <param name="reason"></param>
     public void SetUserRole(UserRole role, string reason = "")
     {
         if (UserRole == role)
@@ -331,8 +358,11 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         return this;
     }
 
-    //Function that updates the list of sessions
-    //Correct
+    /// <summary>
+    /// Function that updates the list of sessions
+    /// </summary>
+    /// <param name="runner"></param>
+    /// <param name="sessionList"></param>
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {
         //Because it seems this doesn't work like PUN2, i think is better update the whole panel
@@ -342,14 +372,19 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     }
 
 
-    //Function to Leave Room
-    //Correct
+    /// <summary>
+    /// Function to Leave Room
+    /// </summary>
     public async void LeaveSession()
     {
         await Disconnect();
         await EnterLobby();
     }
-    //Function that executes when a user clicks on Join in the Lobby
+    /// <summary>
+    /// Function that executes when a user clicks on Join in the Lobby
+    /// </summary>
+    /// <param name="sessionName"></param>
+    /// <param name="avatarNumber"></param>
     public async void StartGame(string sessionName, int avatarNumber)
     {
         //We disconnect the actual runner
@@ -362,10 +397,13 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         //THIS WILL BE THE LOBBY WHEN IT'S ENDED
         SceneManager.LoadSceneAsync("LobbyOficial");
         Debug.Log("Creating session");
-
-
     }
-
+    /// <summary>
+    /// Set up the custom room within the scenes, so you can join the scenes.
+    /// </summary>
+    /// <param name="sessionName"></param>
+    /// <param name="playerNumber"></param>
+    /// <param name="map"></param>
     public async void StartCustomGame(string sessionName, int playerNumber, string map)
     {
         await Disconnect();
@@ -376,7 +414,10 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         //We change to the respective map
         SceneManager.LoadSceneAsync(map);
     }
-
+    /// <summary>
+    /// Joins the custom game, previously created
+    /// </summary>
+    /// <param name="sessionName"></param>
     public async void JoinCustomGame(string sessionName)
     {
         await Disconnect();
@@ -416,7 +457,15 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
      * It's not needed to start the new Runner because the Runner Handler of the scene is responsible for initialising it.
      * 
      */
-    //Correct
+    /// <summary>
+    ///  Function that changes the map to another
+    /// For example Map1 --> Map2 // Lobby --> HUBValencia
+    /// It disconnects the current Network Runner and change the scene to the new map.
+    /// It's not needed to start the new Runner because the Runner Handler of the scene is responsible for initialising it.
+    /// </summary>
+    /// <param name="map"></param>
+
+
     public async void ChangeMap(string map)
     {
         await Disconnect();
@@ -426,8 +475,11 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
 
 
-    //Runner Get Set
-    //Correct
+    /// <summary>
+    /// Runner Get Set
+    /// </summary>
+    /// <returns></returns>
+   
     public NetworkRunner GetRunner() { return _runner; }
 
     public void SetRunner(NetworkRunner runner)
@@ -588,7 +640,11 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         throw new NotImplementedException();
     }
 
-
+    /// <summary>
+    /// Kick oter users by the ID
+    /// </summary>
+    /// <param name="runner"></param>
+    /// <param name="numActor"></param>
     [Rpc]
     public static async void RPC_onKick(NetworkRunner runner, int numActor)
     {
@@ -610,6 +666,11 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         }
 
     }
+    /// <summary>
+    /// All the people Download the Images of PDF
+    /// </summary>
+    /// <param name="runner"></param>
+    /// <param name="routes"></param>
     [Rpc]
     public static async void RPC_DownloadImages(NetworkRunner runner, string routes)
     {
@@ -621,7 +682,10 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         fileExplorer.StartCoroutine();
 
     }
-
+    /// <summary>
+    /// All the people can see Back in the presentation
+    /// </summary>
+    /// <param name="runner"></param>
     [Rpc]
     public static void RPC_BackPress(NetworkRunner runner)
     {
@@ -629,6 +693,10 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         presentation.OnReturn();
 
     }
+    /// <summary>
+    /// All the people can see Advance in the presentation
+    /// </summary>
+    /// <param name="runner"></param>
     [Rpc]
     public static void RPC_AdvancePress(NetworkRunner runner)
     {
@@ -636,7 +704,10 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         presentation.OnAdvance();
 
     }
-
+    /// <summary>
+    /// All the people can see Open the door
+    /// </summary>
+    /// <param name="runner"></param>
     [Rpc]
     public static void RPC_OpenDoor(NetworkRunner runner)
     {
@@ -645,7 +716,10 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         door.membersInside++;
 
     }
-
+    /// <summary>
+    /// All the people can see close the door
+    /// </summary>
+    /// <param name="runner"></param>
     [Rpc]
     public static void RPC_CloseDoor(NetworkRunner runner)
     {
@@ -657,7 +731,11 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         }
 
     }
-
+    /// <summary>
+    /// Increases the distance at which a certain user can be listened to
+    /// </summary>
+    /// <param name="runner"></param>
+    /// <param name="actorID"></param>
     [Rpc]
     public static void RPC_PrimarySpeaker(NetworkRunner runner, int actorID)
     {
@@ -672,7 +750,13 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         }
 
     }
-
+    /// <summary>
+    /// All the people can see, the lines was paint by others
+    /// </summary>
+    /// <param name="runner"></param>
+    /// <param name="Lines"></param>
+    /// <param name="NumMaterial"></param>
+    /// <param name="gross"></param>
     [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = false)]
      public static void RPC_LinesSend(NetworkRunner runner, Vector3[] Lines, int NumMaterial, float gross)
     {
