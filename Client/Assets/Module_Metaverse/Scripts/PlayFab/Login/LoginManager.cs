@@ -2,24 +2,21 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+
 
 
 public class LoginManager : MonoBehaviour
 {
     [Header("UI")]
     //UI Text
-    public TMP_Text messageText;
+    public TMP_Text MessageText;
 
     //UI Inputs
-    public TMP_InputField usernameInput;
-    public TMP_InputField emailInput;
-    public TMP_InputField passwordInput;
+    public TMP_InputField UsernameInput;
+    public TMP_InputField EmailInput;
+    public TMP_InputField PasswordInput;
 
     //UI Panels
     public GameObject LoginPanel;
@@ -27,7 +24,7 @@ public class LoginManager : MonoBehaviour
     public GameObject ResetPanel;
 
     //GameManager
-    private GameManager gameManager;
+    private GameManager GameManager;
 
     //Boolean that checks if the user is new or not
     private bool newUser = true;
@@ -53,13 +50,13 @@ public class LoginManager : MonoBehaviour
     private void Start()
     {
         //It gets the GameManager at the start
-        gameManager = GameManager.FindInstance();
+        GameManager = GameManager.FindInstance();
 
         //If there's an error in the connection it will return
         //This statement indicates to the user that an error has occurred.
-        if (gameManager.GetConnectionStatus() == ConnectionStatus.Failed)
+        if (GameManager.GetConnectionStatus() == ConnectionStatus.Failed)
         {
-            messageText.text = "An error has occurred. Try Again";
+            MessageText.text = "An error has occurred. Try Again";
         }
     }
 
@@ -106,19 +103,19 @@ public class LoginManager : MonoBehaviour
     public void RegisterButton()
     {
         //llamada a la interfaz
-        if (!ValidateUserName(usernameInput.text))
+        if (!ValidateUserName(UsernameInput.text))
         {
             return;
         }
-        if (passwordInput.text.Length < 6)
+        if (PasswordInput.text.Length < 6)
         {
-            messageText.color = Color.red;
-            messageText.text = "Password too Short!";
+            MessageText.color = Color.red;
+            MessageText.text = "Password too Short!";
             return;
         }
         if (TryGetComponent(out LoginPlayFab loginPlayFab))
         {
-            loginPlayFab.Register( usernameInput.text,emailInput.text,passwordInput.text);
+            loginPlayFab.Register( UsernameInput.text,EmailInput.text,PasswordInput.text);
         }//else(LoginSinPlayFab)
     }
 
@@ -132,7 +129,7 @@ public class LoginManager : MonoBehaviour
     {
         if (TryGetComponent(out LoginPlayFab loginPlayFab))
         {
-            loginPlayFab.Reset(emailInput.text);
+            loginPlayFab.OnReset(EmailInput.text);
         }//else(Log
     }
 
@@ -144,11 +141,11 @@ public class LoginManager : MonoBehaviour
     /// </summary>
     public void LoginButton()
     {
-        messageText.text = "logging in...";
+        MessageText.text = "logging in...";
 
         if (TryGetComponent(out LoginPlayFab loginPlayFab))
         {
-            loginPlayFab.Login(emailInput.text, passwordInput.text);
+            loginPlayFab.Login(EmailInput.text, PasswordInput.text);
             
         }//else(Log
     }
@@ -215,8 +212,13 @@ public class LoginManager : MonoBehaviour
     /// <param name="message"></param>
     public void NameErrorMessage(string message)
     {
-        messageText.fontSize = 4;
-        messageText.color = Color.red;
-        messageText.text = message;
+        MessageText.fontSize = 4;
+        MessageText.color = Color.red;
+        MessageText.text = message;
+    }
+
+    public void SetInfoMessage(string message)
+    {
+        MessageText.text = message;
     }
 }

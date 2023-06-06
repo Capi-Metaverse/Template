@@ -1,10 +1,8 @@
 using PlayFab.ClientModels;
 using PlayFab;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
-using UnityEditor.PackageManager.Requests;
 using static LoginManager;
 using System;
 using System.Linq;
@@ -16,6 +14,20 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     private int requestsCounter = 0;
     string UserRolePlayFab;
     private bool newUser = true;
+
+    public LoginManager LoginManager;
+
+    private void Start()
+    {
+        LoginManager = GetComponent<LoginManager>();
+    }
+
+    /// <summary>
+    /// Method to login the user.
+    /// </summary>
+    /// <param name="emailInput"></param>
+    /// <param name="passwordInput"></param>
+
     public void Login(string emailInput, string passwordInput)
     {
         var request = new LoginWithEmailAddressRequest
@@ -26,14 +38,13 @@ public class LoginPlayFab : MonoBehaviour, ILogin
         };
         PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnError);
     }
+
     /// <summary>
     /// PlayFab. It's called when the Login works correctly.
     /// </summary>
     /// <param name="result"></param>
     void OnLoginSuccess(LoginResult result)
     {
-
-        
 
         //Determine the role of the user
         ConfirmRole("admins");
@@ -231,7 +242,8 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     /// <summary>
     /// PlayFab. Sends a request to PlayFab to reset the password.
     /// </summary>
-    public void Reset(string emailInput)
+    /// <param name="emailInput"></param>
+    public void OnReset(string emailInput)
     {
         var request = new SendAccountRecoveryEmailRequest
         {
@@ -240,16 +252,16 @@ public class LoginPlayFab : MonoBehaviour, ILogin
         };
         PlayFabClientAPI.SendAccountRecoveryEmail(request, OnPasswordReset, OnError);
     }
+
     /// <summary>
     /// PlayFab. It's called when the password reset mail is sent correctly.
     /// </summary>
     /// <param name="result"></param>
     void OnPasswordReset(SendAccountRecoveryEmailResult result)
     {
-        /* messageText.text = "Password reset mail sent!";
-         LoginPanel.SetActive(true);
-         ResetPanel.SetActive(false);*/
-
+        string message = "Password reset mail sent!";
+        LoginManager.SetInfoMessage(message);
+       
     }
 
     /// <summary>
@@ -260,6 +272,8 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     {
         Debug.LogError("[PlayFab-LoginManager] Error adding member to group: " + error.ErrorMessage);
     }
+
+
     /// <summary>
     /// PlayFab. Assigns the role to the UserRole variable defined in GameManager
     /// </summary>
