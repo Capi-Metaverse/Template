@@ -406,11 +406,6 @@ public class LoginManager : MonoBehaviour
         Debug.LogError("[PlayFab-LoginManager] Error adding member to group: " + error.ErrorMessage);
     }
 
-
-
-
-   
-
     /// <summary>
     /// PlayFab. Assigns the role to the UserRole variable defined in GameManager
     /// </summary>

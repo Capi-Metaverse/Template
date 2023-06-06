@@ -26,7 +26,6 @@ public class Achievement{
 
 public class AchievementsManager : MonoBehaviour 
 {
-    public AchievementList achivementList;
     public List<Achievement> currentAchievements;
     
     /// <summary>
