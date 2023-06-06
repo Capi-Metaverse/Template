@@ -10,7 +10,7 @@ using System;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
-public class LoginPlayFab : ILogin
+public class LoginPlayFab : MonoBehaviour, ILogin
 {
     Dictionary<string, bool> roles = new Dictionary<string, bool>();
     private int requestsCounter = 0;
@@ -18,7 +18,6 @@ public class LoginPlayFab : ILogin
     private bool newUser = true;
     public void Login(string emailInput, string passwordInput)
     {
-        
         var request = new LoginWithEmailAddressRequest
         {
 
