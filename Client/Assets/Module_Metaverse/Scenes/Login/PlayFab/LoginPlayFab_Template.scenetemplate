@@ -10,16 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13966, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Login_Template
+  m_Name: LoginPlayFab_Template
   m_EditorClassIdentifier: 
-  templateScene: {fileID: 102900000, guid: bb5d0f7e937b9134c90a56c4ce6bbb7a, type: 3}
-  templateName: Login Template
+  templateScene: {fileID: 102900000, guid: b06aa0deb83b1cb469a48695c0c56a94, type: 3}
+  templateName: LoginPlayFab Template
   description: Template for Login
   preview: {fileID: 2800000, guid: 309866a888041c24583382a8345fb6a4, type: 3}
   dependencies:
   - dependency: {fileID: 2800000, guid: a7ec9e7ad8b847b7ae4510af83c5d868, type: 3}
-    instantiationMode: 0
-  - dependency: {fileID: 2800000, guid: dd940d333aeeaa048842e87b9b259188, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: f46b811d73ba8ac4aa57c515261c2a1d, type: 3}
     instantiationMode: 0
