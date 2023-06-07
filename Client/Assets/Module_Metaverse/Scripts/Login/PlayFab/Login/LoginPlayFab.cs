@@ -15,12 +15,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     string UserRolePlayFab;
     private bool newUser = true;
 
-    public LoginManager LoginManager;
-
-    private void Start()
-    {
-        LoginManager = GetComponent<LoginManager>();
-    }
+    public PanelManager PanelManager;
 
     /// <summary>
     /// Method to login the user.
@@ -30,6 +25,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
 
     public void Login(string emailInput, string passwordInput)
     {
+        PanelManager.SetInfoMessage("Logging in...");
         var request = new LoginWithEmailAddressRequest
         {
 
@@ -260,7 +256,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     void OnPasswordReset(SendAccountRecoveryEmailResult result)
     {
         string message = "Password reset mail sent!";
-        LoginManager.SetInfoMessage(message);
+        PanelManager.SetInfoMessage(message);
        
     }
 
@@ -279,7 +275,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     /// </summary>
     public void AssignRole(GetUserDataResult result)
     {
-       
+        PanelManager.SetInfoMessage("Confirming role");
         if (result.Data != null && result.Data.ContainsKey("NewUser"))
         {
             newUser = Convert.ToBoolean(result.Data["NewUser"].Value);

@@ -131,6 +131,9 @@ public class SC_FPSController : MonoBehaviour
       
 
         // We are grounded, so recalculate move direction based on axes
+        
+
+        //Refact from here
         var previousPos = transform.position;
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
@@ -178,6 +181,8 @@ public class SC_FPSController : MonoBehaviour
         Velocity = (transform.position - previousPos);
         IsGrounded = characterController.isGrounded;
         if (IsGrounded) jumpCount++;
+
+        //To here
 
         //Animations
         if (animator == null) { animator = this.gameObject.GetComponentInChildren<Animator>(); }

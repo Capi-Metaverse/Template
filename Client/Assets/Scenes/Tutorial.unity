@@ -5909,7 +5909,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb745fc208b7d5d4095a96fcaa275224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 7843358}
   gameManager: {fileID: 1923614046}
 --- !u!1 &2065591732
 GameObject:
@@ -9389,6 +9388,7 @@ GameObject:
   - component: {fileID: 5874118889009996888}
   - component: {fileID: 5874118889009996889}
   - component: {fileID: 5874118889009996890}
+  - component: {fileID: 5874118889009996891}
   m_Layer: 0
   m_Name: TonyModel
   m_TagString: Player
@@ -9430,9 +9430,9 @@ MonoBehaviour:
   runningSpeed: 11.5
   jumpSpeed: 8
   gravity: 20
-  playerCamera: {fileID: 559153185}
   lookSpeed: 2
   lookXLimit: 45
+  playerCamera: {fileID: 559153185}
   sensitivity: 2
   triggerDetector: {fileID: 5874118889009996890}
   rayDistance: 3
@@ -9468,6 +9468,21 @@ MonoBehaviour:
   emoteWheel: {fileID: 2046480095}
   isEventWheelOpen: 0
   animator: {fileID: 7843358}
+--- !u!114 &5874118889009996891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5874118889009996887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bb61d5e0f7b4be4eb7576115e1a9dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WalkingSpeed: 7.5
+  RunningSpeed: 11.5
+  canMove: 1
 --- !u!1 &5887144530825114076
 GameObject:
   m_ObjectHideFlags: 0
