@@ -6,7 +6,7 @@ using TMPro;
 public class UploadPPTX : MonoBehaviour, IMetaEvent
 {
     public GameObject ChooseFile;
-    public FileExplorer fileExplorer;
+    public FileSelector fileSelector;
     bool activado=false;
     public TMP_Text loadingPressCanvas;
     GameObject _eventObject;
@@ -18,6 +18,6 @@ public class UploadPPTX : MonoBehaviour, IMetaEvent
         ChooseFile.SetActive(!activado);
         loadingPressCanvas.enabled = true;
         loadingPressCanvas.SetText("Loading");
-        fileExplorer.OpenFile();   
+        fileSelector.OpenFile();   
     }  
 }

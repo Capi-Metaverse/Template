@@ -23,7 +23,7 @@ public class FileSelector: MonoBehaviour
     //File Upload
     private ImageUpload ImageUpload;
     private VideoUpload VideoUpload;
-    private PresentationUpload PresentationUpload;
+    public PresentationUpload PresentationUpload;
 
 #if UNITY_WEBGL && !UNITY_EDITOR
         //

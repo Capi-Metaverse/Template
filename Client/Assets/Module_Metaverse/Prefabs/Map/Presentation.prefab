@@ -1480,7 +1480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChooseFile: {fileID: 6414680037694834152}
-  fileExplorer: {fileID: 3499882956546835857}
+  fileExplorer: {fileID: 0}
   loadingPressCanvas: {fileID: 3139590104210711232}
 --- !u!64 &7513824060817393358
 MeshCollider:
@@ -1702,46 +1702,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2f4cc0f1ea3be848981115778e4d6e0, type: 3}
---- !u!114 &3499882956546835857 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1945561161894460959, guid: c2f4cc0f1ea3be848981115778e4d6e0, type: 3}
-  m_PrefabInstance: {fileID: 3139590104849906574}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6414680037694834152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1380b93f9329fa0479d2d1150290522e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6414680037694834152 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8257232350266523238, guid: c2f4cc0f1ea3be848981115778e4d6e0, type: 3}
   m_PrefabInstance: {fileID: 3139590104849906574}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3139590104849906571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6414680037694834152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjectInterest: 1
-  DefaultInterestGroups: []
-  DestroyWhenStateAuthorityLeaves: 0
-  AllowStateAuthorityOverride: 1
-  AoiPositionSource: {fileID: 0}
-  Flags: 2561
-  NetworkGuid:
-    RawGuidValue: 3d263d332f984f2d9cd8ca4b22025d6a
-  NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 3499882956546835857}
-  SimulationBehaviours: []
 --- !u!224 &6448984403422034208 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8281404712132657838, guid: c2f4cc0f1ea3be848981115778e4d6e0, type: 3}

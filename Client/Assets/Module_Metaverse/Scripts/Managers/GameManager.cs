@@ -677,9 +677,9 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         JObject JsonRoutes = JObject.Parse(routes);
         Debug.Log(JsonRoutes.ToString());
 
-        FileExplorer fileExplorer = GameObject.Find("ChooseFile").GetComponent<FileExplorer>();
-        fileExplorer.json = JsonRoutes;
-        fileExplorer.StartCoroutine();
+        FileSelector fileSelector = GameObject.Find("ChooseFile").GetComponent<FileSelector>();
+        fileSelector.PresentationUpload._json = JsonRoutes;
+        fileSelector.PresentationUpload.ClearPresentation();
 
     }
     /// <summary>

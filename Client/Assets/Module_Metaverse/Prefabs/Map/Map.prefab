@@ -58092,6 +58092,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1013375426794576138}
     m_Modifications:
+    - target: {fileID: 2830587435388943722, guid: 179b0bd24bab0e547900ba67d2891087, type: 3}
+      propertyPath: Size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4755949845276613376, guid: 179b0bd24bab0e547900ba67d2891087, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -58140,7 +58144,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Presentation
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3139590104849906571, guid: 179b0bd24bab0e547900ba67d2891087, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 179b0bd24bab0e547900ba67d2891087, type: 3}
 --- !u!4 &5481088258851880693 stripped
 Transform:

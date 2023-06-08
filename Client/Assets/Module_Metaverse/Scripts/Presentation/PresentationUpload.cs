@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 public class PresentationUpload : MonoBehaviour, IFileUpload
 {
     private float _size;
-    private JObject _json;
+    public JObject _json;
     private GameManager _gameManager;
     private Presentation _presentation;
 
