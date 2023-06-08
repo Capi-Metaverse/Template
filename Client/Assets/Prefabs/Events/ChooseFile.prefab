@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5729302982257982552}
   - component: {fileID: 8021269115405755264}
   - component: {fileID: 3369865205766407877}
-  - component: {fileID: 1945561161894460959}
+  - component: {fileID: 926145953287784164}
   m_Layer: 0
   m_Name: ChooseFile
   m_TagString: Untagged
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1945561161894460959
+--- !u!114 &926145953287784164
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,9 +110,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8257232350266523238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1380b93f9329fa0479d2d1150290522e, type: 3}
+  m_Script: {fileID: 11500000, guid: c863f47e1027feb48a1cf433a9d0cff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  presentation: {fileID: 0}
-  loadingPressCanvas: {fileID: 0}
-  size: 0
+  Size: 0
+  LoadingPressCanvas: {fileID: 0}
