@@ -406,67 +406,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6441409569224158297, guid: e989bb6ad63c4724f9cfdd90c1d179de, type: 3}
   m_PrefabInstance: {fileID: 6441409570161968549}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1870919788550457716
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2360106094562125143, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
-      propertyPath: PanelManager
-      value: 
-      objectReference: {fileID: 616146561}
-    - target: {fileID: 2739670652528852030, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
-      propertyPath: m_Name
-      value: LoginManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 5431413394850054989, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5431413394850054989, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 873.48883
-      objectReference: {fileID: 0}
-    - target: {fileID: 5431413394850054989, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 492.52994
-      objectReference: {fileID: 0}
-    - target: {fileID: 5431413394850054989, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -12.392016
-      objectReference: {fileID: 0}
-    - target: {fileID: 5431413394850054989, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5431413394850054989, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5431413394850054989, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5431413394850054989, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5431413394850054989, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5431413394850054989, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5431413394850054989, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
 --- !u!1001 &3061649903303530073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -700,6 +639,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6441409570520602317, guid: e989bb6ad63c4724f9cfdd90c1d179de, type: 3}
+      propertyPath: PanelManager
+      value: 
+      objectReference: {fileID: 616146561}
     - target: {fileID: 6441409570602058066, guid: e989bb6ad63c4724f9cfdd90c1d179de, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
