@@ -1,0 +1,150 @@
+@startuml Login Modulado
+title
+  <font size="40">Login</font>
+end title
+interface ILogin {
+    + Register()
+    + Login()
+    + OnReset()
+}
+
+class LoginPlayFab {
+    - roles: Dictionary<string, bool>
+    - requestsCounter: int
+    - UserRolePlayFab: string
+    - newUser: bool
+    + PanelManager: PanelManager
+    --
+    .. Login ..
+    + Login(string, string)
+    - OnLoginSucces(LoginResult)
+    - OnUsernameSuccess(ExecuteCloudScriptResult)
+    - OnIDSuccess(ExecuteCloudScriptResult)
+    .. Role ..
+    + ConfirmRole(string)
+    - OnRoleSucces(ExecuteCloudScriptResult)
+    - checkRequestCounter()
+    + AssignRole(GetUserDataResult)
+    .. Register ..
+    + Register(string, string, string)
+    - OnRegisterSuccess(RegisterPlayFabUserResult)
+    - OnAddMemberSuccess(ExecuteCloudScriptResult)
+    - OnAddMemeberFailure(PlayFabError)
+    - OnEndRegister(UpdateUserDataResult)
+    - AchievementRegister(): List<Achievement>
+    .. Reset Password ..
+    + OnReset(string)
+    - OnPasswordReset(SendAccountRecoveryEmailResult)
+    .. Error ..
+    - OnError(PlayFabError)
+}
+
+class LoginScript {
+    .. Inputs ..
+    + EmailInput: TMP_InputField
+    + PasswordInput: TMP_InputField
+    .. Login Manager ..
+    - LoginManager: GameObject
+    --
+    - Start()
+    + LoginButton()
+}
+
+class PanelManager {
+    + MessageText: TMP_Text
+    .. UI Panels ..
+    + LoginPanel: GameObject
+    + RegisterPanel: GameObject
+    + ResetPanel: GameObject
+    --
+    + ChangeRegister()
+    + ChangeLogin()
+    + ChangeReset()
+    + SetInfoMessage(string)
+    + SetErrorMessage(string)
+}
+
+class RegisterScript {
+    .. Inputs ..
+    + EmailInput: TMP_InputField
+    + UsernameInput: TMP_InputField
+    + PasswordInput: TMP_InputField
+    .. UI Manager ..
+    - PanelManager: PanelManager
+    .. Login Manager ..
+    - LoginManager: GameObject
+    --
+    - Start()
+    + RegisterButton()
+    + ValidateUserName(string): bool
+}
+
+class ResetPasswordScript {
+    .. Info UI Text ..
+    + MessageText: TMP_Text
+    .. Inputs ..
+    + EmailInput: TMP_InputField
+    .. UI Manager ..
+    + PanelManager: PanelManager
+    .. Login Manager ..
+    - LoginManager: GameObjectç
+    --
+    - Start()
+    + ResetPassword()
+}
+
+class TabNavigation {
+    + navigationObjects: GameObject[]
+    - currentIndex: int
+    --
+    - Start()
+    - Update()
+}
+
+ILogin <|.. LoginPlayFab
+LoginPlayFab --> PanelManager: Set info messages
+LoginScript --> LoginPlayFab: Calls login function
+RegisterScript --> PanelManager: Set error messages
+RegisterScript --> LoginPlayFab: Calls register function
+ResetPasswordScript --> LoginPlayFab: Calls reset\npassword function
+
+note bottom of LoginScript
+    <b><color:royalBlue>LoginScript</color>
+    Controls the 
+    login panel.
+end note
+
+note bottom of LoginPlayFab
+    <b><color:royalBlue>LoginPlayFab</color>
+    Has the methods to login,
+    register and reset password
+    in PlayFab.
+end note
+
+note bottom of PanelManager
+    <b><color:royalBlue>PanelManager</color>
+    This script has the methods
+    to change the panels between
+    Login, Register and Reset.
+end note
+
+note bottom of RegisterScript
+    <b><color:royalBlue>RegisterScript</color>
+    Controls the
+    register panel.
+end note
+
+note bottom of ResetPasswordScript
+    <b><color:royalBlue>ResetPasswordScript</color>
+    Controls the reset
+    password panel.
+end note
+
+note bottom of TabNavigation
+    <b><color:royalBlue>TabNavigation</color>
+    Allows tab navigation between
+    the elements of the UI.
+end note
+
+
+@enduml
