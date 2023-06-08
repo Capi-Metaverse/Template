@@ -53,7 +53,7 @@ MonoBehaviour:
   card: {fileID: 6679319385659895764}
   visionData: {fileID: 0}
   imagen: {fileID: 4109751158374106406}
-  achievementsManager: {fileID: 7056574913130662870}
+  achievementsManager: {fileID: 0}
   achivementList: {fileID: 4670646529582206946}
 --- !u!1001 &83091307727410362
 PrefabInstance:
@@ -176,6 +176,10 @@ PrefabInstance:
       propertyPath: imagedata
       value: 
       objectReference: {fileID: 8394470974520517265}
+    - target: {fileID: 804727767, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
+      propertyPath: achievementsManager
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1676563330352215286, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
       propertyPath: m_Size
       value: 0.52974313
@@ -304,13 +308,31 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 358.5182
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 804727768, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
 --- !u!224 &5246285225257971363 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5325998622574376716, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
   m_PrefabInstance: {fileID: 83091307796519343}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7290949663768035424 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7208463161891461583, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
+  m_PrefabInstance: {fileID: 83091307796519343}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5529834154525940428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7290949663768035424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3ef2c5eed849f4387260aa9b6fafc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8394470974520517265 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8455532466235325246, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
@@ -916,19 +938,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6679319385659895764}
   m_CullTransparentMesh: 1
---- !u!114 &7056574913130662870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6679319385659895764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b129b765876dd7647baf76b802e50dae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  achivementList: {fileID: 4670646529582206946}
 --- !u!114 &4670646529582206946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,4 +952,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AchivementsUIItem: {fileID: 7680741457055669170, guid: 32811fb50cf67e44b8f0fe566af4cfdd, type: 3}
   AchivementsUIList: {fileID: 3051159509959853625}
-  achievementsManager: {fileID: 7056574913130662870}
+  achievementsManager: {fileID: 0}
+--- !u!114 &1964494426702727682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6679319385659895764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3ef2c5eed849f4387260aa9b6fafc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
