@@ -1,12 +1,10 @@
-using PlayFab;
-using PlayFab.ClientModels;
 using UnityEngine;
 using TMPro;
 using System;
-using System.Linq;
 
-
-
+/// <summary>
+/// Class. Check if the connection is stablished
+/// </summary>
 public class LoginManager : MonoBehaviour
 {
     [Header("UI")]

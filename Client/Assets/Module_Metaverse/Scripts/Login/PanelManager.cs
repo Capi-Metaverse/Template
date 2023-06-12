@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Class. Change the UI of the login from current to selected, example:
+/// (LoginPanel-->RegisterPanel, RegisterPanel-->ResetPasswordPanel)
+/// </summary>
 public class PanelManager : MonoBehaviour
 {
-
     //Info UI Text
     public TMP_Text MessageText;
 
@@ -14,20 +17,21 @@ public class PanelManager : MonoBehaviour
     public GameObject RegisterPanel;
     public GameObject ResetPanel;
 
-
-
-
     //-------------------- Panel Modification Functions --------------------
 
-
-    //Function that changes the UI to the Sign-Up UI
+    /// <summary>
+    /// This function change the current UI to the Sign-Up UI
+    /// </summary>
     public void ChangeRegister()
     {
         RegisterPanel.SetActive(true);
         ResetPanel.SetActive(false);
         LoginPanel.SetActive(false);
     }
-    //Function that changes the UI to the Login UI
+
+    /// <summary>
+    /// This function change the current UI to the Login UI
+    /// </summary>
     public void ChangeLogin()
     {
         RegisterPanel.SetActive(false);
@@ -35,7 +39,9 @@ public class PanelManager : MonoBehaviour
         LoginPanel.SetActive(true);
     }
 
-    //Function that changes the UI to the Reset Password UI
+    /// <summary>
+    /// This Function change the current UI to the Reset Password UI
+    /// </summary>
     public void ChangeReset()
     {
         RegisterPanel.SetActive(false);
@@ -43,18 +49,21 @@ public class PanelManager : MonoBehaviour
         LoginPanel.SetActive(false);
     }
 
+    /// <summary>
+    /// Display a message to inform about something needed
+    /// </summary>
     public void SetInfoMessage(string message)
     {
         MessageText.color = Color.white;
         MessageText.text = message;
     }
 
+    /// <summary>
+    /// Display a message to inform about an error
+    /// </summary>
     public void SetErrorMessage(string message)
     {
         MessageText.color = Color.red;
         MessageText.text = message;
     }
-
-
-
 }
