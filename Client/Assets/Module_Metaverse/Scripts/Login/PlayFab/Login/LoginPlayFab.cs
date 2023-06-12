@@ -15,7 +15,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     string UserRolePlayFab;
     private bool newUser = true;
 
-    public PanelManager PanelManager;
+    public PanelLoginManager PanelLoginManager;
 
     /// <summary>
     /// Method to login the user.
@@ -25,7 +25,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
 
     public void Login(string emailInput, string passwordInput)
     {
-        PanelManager.SetInfoMessage("Logging in...");
+        PanelLoginManager.SetInfoMessage("Logging in...");
         var request = new LoginWithEmailAddressRequest
         {
 
@@ -119,7 +119,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
         string username = playerDataUsername.getPlayerUsername;
 
 
-       // gameManager.SetUsername(username);
+       //gameManager.SetUsername(username);
        // gameManager.SetEmail(emailInput.text);
 
         requestsCounter++;
@@ -206,7 +206,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
 
         PlayFabClientAPI.ExecuteCloudScript(AddMem, OnAddMemberSuccess, OnAddMemberFailure);
 
-        PanelManager.ChangeLogin();
+        PanelLoginManager.ChangeLogin();
     }
     /// <summary>
     /// PlayFab. It's called when the function that adds a member works.
@@ -258,8 +258,8 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     void OnPasswordReset(SendAccountRecoveryEmailResult result)
     {
         string message = "Password reset mail sent!";
-        PanelManager.SetInfoMessage(message);
-        PanelManager.ChangeLogin();
+        PanelLoginManager.SetInfoMessage(message);
+        PanelLoginManager.ChangeLogin();
     }
 
     /// <summary>
@@ -277,7 +277,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     /// </summary>
     public void AssignRole(GetUserDataResult result)
     {
-        PanelManager.SetInfoMessage("Confirming role");
+        PanelLoginManager.SetInfoMessage("Confirming role");
         if (result.Data != null && result.Data.ContainsKey("NewUser"))
         {
             newUser = Convert.ToBoolean(result.Data["NewUser"].Value);

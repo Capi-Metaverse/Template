@@ -7,7 +7,7 @@ using UnityEngine;
 /// Class. Change the UI of the login from current to selected, example:
 /// (LoginPanel-->RegisterPanel, RegisterPanel-->ResetPasswordPanel)
 /// </summary>
-public class PanelManager : MonoBehaviour
+public class PanelLoginManager : MonoBehaviour
 {
     //Info UI Text
     public TMP_Text MessageText;

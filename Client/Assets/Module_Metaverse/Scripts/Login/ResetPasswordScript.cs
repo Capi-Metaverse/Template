@@ -9,7 +9,7 @@ public class ResetPasswordScript : MonoBehaviour
     public TMP_InputField EmailInput;
 
     //UI Manager
-    public PanelManager PanelManager;
+    public PanelLoginManager PanelLoginManager;
 
     //Login Manager
     private GameObject LoginManager;

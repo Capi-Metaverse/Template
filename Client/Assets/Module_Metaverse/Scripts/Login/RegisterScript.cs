@@ -6,13 +6,14 @@ using UnityEngine;
 
 public class RegisterScript : MonoBehaviour
 {
+
     //Inputs
     public TMP_InputField EmailInput;
     public TMP_InputField UsernameInput;
     public TMP_InputField PasswordInput;
 
     //UI Manager
-    private PanelManager PanelManager;
+    private PanelLoginManager PanelLoginManager;
 
     //Login Manager
     private GameObject LoginManager;
@@ -20,8 +21,12 @@ public class RegisterScript : MonoBehaviour
     private void Start()
     {
         LoginManager = GameObject.Find("LoginManager");
-        PanelManager = GameObject.Find("PanelManager").GetComponent<PanelManager>();
+        PanelLoginManager = GameObject.Find("PanelManager").GetComponent<PanelLoginManager>();
     }
+
+
+
+    /*Register Functions*/
 
     /// <summary>
     /// PlayFab. Confirms that the password reaches the length required and 
@@ -36,7 +41,7 @@ public class RegisterScript : MonoBehaviour
         }
         if (PasswordInput.text.Length < 6)
         {
-            PanelManager.SetErrorMessage("Password too short");
+            PanelLoginManager.SetErrorMessage("Password too short");
             return;
         }
 
@@ -46,39 +51,38 @@ public class RegisterScript : MonoBehaviour
         }//else(LoginSinPlayFab)
     }
 
-    /// <summary>
-    /// This function check a string (username) to match some determined needs.
-    /// </summary>
+    /*Username Validation Message*/
+
     public bool ValidateUserName(string str)
     {
         // Check if string is null or empty
         if (string.IsNullOrEmpty(str))
         {
-            PanelManager.SetErrorMessage("El nombre de usuario no puede estar vacío");
+            PanelLoginManager.SetErrorMessage("El nombre de usuario no puede estar vacío");
             return false;
         }
         // Check if string starts with a space
         if (str.StartsWith(" "))
         {
-            PanelManager.SetErrorMessage("El nombre de usuario no puede empezar por un espacio en blanco");
+            PanelLoginManager.SetErrorMessage("El nombre de usuario no puede empezar por un espacio en blanco");
             return false;
         }
         // Check if string is only spaces
         if (str.Trim().Length == 0)
         {
-            PanelManager.SetErrorMessage("El nombre de usuario no debe estar contenido solo por espacios");
+            PanelLoginManager.SetErrorMessage("El nombre de usuario no debe estar contenido solo por espacios");
             return false;
         }
         // Check minimum length
         if (str.Length < 3)
         {
-            PanelManager.SetErrorMessage("El nombre de usuario debe contener más de 3 caracteres");
+            PanelLoginManager.SetErrorMessage("El nombre de usuario debe contener más de 3 caracteres");
             return false;
         }
         // Check maximum length
         if (str.Length > 20)
         {
-            PanelManager.SetErrorMessage("El nombre de usuario debe contener menos de 20 caracteres");
+            PanelLoginManager.SetErrorMessage("El nombre de usuario debe contener menos de 20 caracteres");
             return false;
         }
         // Check forbidden characters
@@ -87,7 +91,7 @@ public class RegisterScript : MonoBehaviour
         {
             if (str.Contains(c))
             {
-                PanelManager.SetErrorMessage("El nombre de usuario contiene un carácter no permitido");
+                PanelLoginManager.SetErrorMessage("El nombre de usuario contiene un carácter no permitido");
                 return false;
             }
         }
@@ -95,10 +99,11 @@ public class RegisterScript : MonoBehaviour
         string[] reserved = { "admin", "root", "system" };
         if (reserved.Contains(str.ToLower()))
         {
-            PanelManager.SetErrorMessage("El nombre de usuario no debe contener palabras restringidas");
+            PanelLoginManager.SetErrorMessage("El nombre de usuario no debe contener palabras restringidas");
             return false;
         }
         // String is valid
         return true;
     }
+
 }
