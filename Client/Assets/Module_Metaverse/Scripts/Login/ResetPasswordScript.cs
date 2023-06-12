@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class ResetPasswordScript : MonoBehaviour
 {
-
-    //Info UI Text
-    public TMP_Text MessageText;
-
     //Inputs
     public TMP_InputField EmailInput;
 

@@ -13,22 +13,9 @@ public class LoginManager : MonoBehaviour
     //UI Text
     public TMP_Text MessageText;
 
-    //UI Inputs
-    public TMP_InputField UsernameInput;
-    public TMP_InputField EmailInput;
-    public TMP_InputField PasswordInput;
-
- 
-
     //GameManager
     private GameManager GameManager;
 
-    //Boolean that checks if the user is new or not
-    private bool newUser = true;
-
-    //Roles
-   
-    string UserRolePlayFab;
 
     //Player data Classes
     [Serializable]
@@ -40,9 +27,6 @@ public class LoginManager : MonoBehaviour
     {
         public string getPlayerId;
     }
-
-    private int requestsCounter = 0;
-
 
     private void Start()
     {

@@ -205,6 +205,8 @@ public class LoginPlayFab : MonoBehaviour, ILogin
         };
 
         PlayFabClientAPI.ExecuteCloudScript(AddMem, OnAddMemberSuccess, OnAddMemberFailure);
+
+        PanelManager.ChangeLogin();
     }
     /// <summary>
     /// PlayFab. It's called when the function that adds a member works.
@@ -257,7 +259,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     {
         string message = "Password reset mail sent!";
         PanelManager.SetInfoMessage(message);
-       
+        PanelManager.ChangeLogin();
     }
 
     /// <summary>
