@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Fusion;
 
-public class PresentationZone : MonoBehaviour
+public class PresentationZonePhoton : MonoBehaviour
 {
     //Camera of the presentation
     public Camera cameraObject;
@@ -18,14 +15,12 @@ public class PresentationZone : MonoBehaviour
 
         if (other.gameObject.Equals(GameManager.FindInstance().GetCurrentPlayer().gameObject))
         {
-
-
             playerInputs = GameManager.FindInstance().GetCurrentPlayer().GetComponent<CharacterInputHandler>();
             playerInputs.setPresentationCamera(cameraObject);
 
             MusicManager musicController = GameObject.Find("Manager").GetComponent<MusicManager>();
             musicController.ChangeAudioState();
-        }
+        }  
     }
     /// <summary>
     /// Detect if Exits collider, desactivate the UI Press K and active the music
@@ -35,7 +30,6 @@ public class PresentationZone : MonoBehaviour
 
         if (other.gameObject.Equals(GameManager.FindInstance().GetCurrentPlayer().gameObject))
         {
-
             playerInputs = GameManager.FindInstance().GetCurrentPlayer().GetComponent<CharacterInputHandler>();
             playerInputs.setPresentationCamera(null);
 

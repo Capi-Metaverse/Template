@@ -9,11 +9,11 @@ public class VideoUpload : IFileUpload
     private Presentation _presentation;
     private TMP_Text _loadingPressCanvas;
 
-    public VideoUpload(string _path, Presentation _presentation, TMP_Text _loadingPressCanvas)
+    public VideoUpload(string Path, Presentation Presentation, TMP_Text LoadingPressCanvas)
     {
-        this._path = _path;
-        this._presentation = _presentation;
-        this._loadingPressCanvas = _loadingPressCanvas;
+        _path = Path;
+        _presentation = Presentation;
+        _loadingPressCanvas = LoadingPressCanvas;
     }
 
 

@@ -13,11 +13,11 @@ public class PresentationUpload : MonoBehaviour, IFileUpload
     private GameManager _gameManager;
     private Presentation _presentation;
 
-    public PresentationUpload(float _size, Presentation _presentation, GameManager _gameManager)
+    public PresentationUpload(float Size, Presentation Presentation, GameManager GameManager)
     {
-        this._size = _size;
-        this._presentation = _presentation;
-        this._gameManager = _gameManager;
+        _size = Size;
+        _presentation = Presentation;
+        _gameManager = GameManager;
     }
     public void FileUpload(byte[] bytes, string fileExtension)
     {

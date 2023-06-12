@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-public class PresentationZoneTutorial : MonoBehaviour
+public class PresentationZone : MonoBehaviour
 {
     //Camera of the presentation
     public Camera cameraObject;

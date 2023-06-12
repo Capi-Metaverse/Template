@@ -11,18 +11,20 @@ public class FileSelector: MonoBehaviour
 {
     /*---------------------VARIABLES-------------------------*/
     
-    public float Size;
+    [SerializeField]
+    private float Size;
     private string _path;//File path
     private GameManager GameManager;
 
     //UI
     private Presentation Presentation;
-    public TMP_Text LoadingPressCanvas;
+    private TMP_Text LoadingPressCanvas;
 
 
     //File Upload
     private ImageUpload ImageUpload;
     private VideoUpload VideoUpload;
+    [HideInInspector] 
     public PresentationUpload PresentationUpload;
 
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -36,6 +38,7 @@ public class FileSelector: MonoBehaviour
     void Start()
     {
         Presentation = GameObject.Find("Presentation").GetComponent<Presentation>();//Getting the press from scene
+        LoadingPressCanvas = GameObject.Find("LoadingPressCanvas").transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
         GameManager = GameManager.FindInstance();
     }
 

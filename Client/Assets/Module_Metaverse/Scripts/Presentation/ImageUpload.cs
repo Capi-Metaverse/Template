@@ -9,9 +9,9 @@ public class ImageUpload : IFileUpload
 
     public ImageUpload(float Size, Presentation Presentation, TMP_Text LoadingPressCanvas)
     {
-        this._size = Size;
-        this._presentation = Presentation;
-        this._loadingPressCanvas = LoadingPressCanvas;
+        _size = Size;
+        _presentation = Presentation;
+        _loadingPressCanvas = LoadingPressCanvas;
     }
 
     public void FileUpload(byte[] bytes, string fileExtension=null)
