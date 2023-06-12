@@ -38,10 +38,4 @@ public class LoginManager : MonoBehaviour
             MessageText.text = "An error has occurred. Try Again";
         }
     }
-
-
-
-
-
- 
 }
