@@ -1,12 +1,10 @@
-using PlayFab;
-using PlayFab.ClientModels;
 using UnityEngine;
 using TMPro;
 using System;
-using System.Linq;
 
-
-
+/// <summary>
+/// Class. Check if the connection is stablished
+/// </summary>
 public class LoginManager : MonoBehaviour
 {
     [Header("UI")]
@@ -18,17 +16,8 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField EmailInput;
     public TMP_InputField PasswordInput;
 
- 
-
     //GameManager
     private GameManager GameManager;
-
-    //Boolean that checks if the user is new or not
-    private bool newUser = true;
-
-    //Roles
-   
-    string UserRolePlayFab;
 
     //Player data Classes
     [Serializable]
@@ -40,9 +29,6 @@ public class LoginManager : MonoBehaviour
     {
         public string getPlayerId;
     }
-
-    private int requestsCounter = 0;
-
 
     private void Start()
     {
@@ -56,10 +42,4 @@ public class LoginManager : MonoBehaviour
             MessageText.text = "An error has occurred. Try Again";
         }
     }
-
-
-
-
-
- 
 }

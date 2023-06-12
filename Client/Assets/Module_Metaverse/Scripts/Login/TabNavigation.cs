@@ -11,13 +11,17 @@ public class TabNavigation : MonoBehaviour
 
     private int currentIndex = 0;
 
-    //Select the first item of the array
+    /// <summary>
+    /// Select the first item of the array
+    /// </summary>
     private void Start()
     {
         EventSystem.current.SetSelectedGameObject(navigationObjects[currentIndex]);
     }
 
-    //Go to the next item of the array when tab is pressed
+    /// <summary>
+    /// Go to the next item of the array when tab is pressed
+    /// </summary>
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))

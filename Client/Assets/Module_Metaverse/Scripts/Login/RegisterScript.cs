@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class RegisterScript : MonoBehaviour
 {
-
     //Inputs
     public TMP_InputField EmailInput;
     public TMP_InputField UsernameInput;
@@ -23,10 +22,6 @@ public class RegisterScript : MonoBehaviour
         LoginManager = GameObject.Find("LoginManager");
         PanelManager = GameObject.Find("PanelManager").GetComponent<PanelManager>();
     }
-
-
-
-    /*Register Functions*/
 
     /// <summary>
     /// PlayFab. Confirms that the password reaches the length required and 
@@ -51,8 +46,9 @@ public class RegisterScript : MonoBehaviour
         }//else(LoginSinPlayFab)
     }
 
-    /*Username Validation Message*/
-
+    /// <summary>
+    /// This function check a string (username) to match some determined needs.
+    /// </summary>
     public bool ValidateUserName(string str)
     {
         // Check if string is null or empty
@@ -105,5 +101,4 @@ public class RegisterScript : MonoBehaviour
         // String is valid
         return true;
     }
-
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ResetPasswordScript : MonoBehaviour
 {
-
     //Info UI Text
     public TMP_Text MessageText;
 
@@ -23,11 +22,6 @@ public class ResetPasswordScript : MonoBehaviour
         LoginManager = GameObject.Find("LoginManager");
     }
 
-    /*Reset Password Functions*/
-
-
-
-
     /// <summary>
     /// PlayFab. Sends a request to PlayFab to reset the password.
     /// </summary>
@@ -38,5 +32,4 @@ public class ResetPasswordScript : MonoBehaviour
             loginPlayFab.OnReset(EmailInput.text);
         }//else(Log
     }
-
 }
