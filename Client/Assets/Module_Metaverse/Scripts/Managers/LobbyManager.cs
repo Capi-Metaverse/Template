@@ -58,10 +58,8 @@ public class LobbyManager : MonoBehaviour
         props.AllowLateJoin = true;
         props.PlayerLimit = 10;
 
-
         gameManager.CreateSession(props);
     }
-
     /// <summary>
     /// Function when the user clicks on a session/room to join.
     /// </summary>
@@ -72,9 +70,6 @@ public class LobbyManager : MonoBehaviour
         gameManager.JoinSession(sessionInfo);
 
     }
-
- 
-
     /// <summary>
     /// Function when the user clicks on a room to join
     /// </summary>
@@ -100,9 +95,7 @@ public class LobbyManager : MonoBehaviour
             RoomItem newRoom = Instantiate(LobbyPanelScript.roomItemPrefab, LobbyPanelScript.contentObject);
             newRoom.SetSessionInfo(session);
             sessionItemsList.Add(newRoom);
-
         }
-
     }
 
     /// <summary>
@@ -110,9 +103,10 @@ public class LobbyManager : MonoBehaviour
     /// </summary>
     /// <param name="sessionName"></param>
     /// <param name="runner"></param>
-    public void SetPlayerPanel(NetworkRunner runner)
+    public void SetPlayerPanel(string sessionName,NetworkRunner runner)
     {
-        
+        RoomPanelScript.sessionNamePanel.text = sessionName;
+        LobbyPanelScript.sessionName.text = sessionName;
         PanelLobbyManager.ChangeRoomPanel();
 
         SpawnPlayerItem(runner, RoomPanelScript.playerItemPrefab);

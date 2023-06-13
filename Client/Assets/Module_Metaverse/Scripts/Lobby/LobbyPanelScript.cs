@@ -10,11 +10,10 @@ public class LobbyPanelScript : MonoBehaviour
 {
  
     
-    [SerializeField] private TMP_Text sessionName;
+    public TMP_Text sessionName;
     //Lobby panel
     public  RoomItem roomItemPrefab;
     public Transform contentObject;
-
     public Button createButton;
 
     private GameObject LobbyManager;

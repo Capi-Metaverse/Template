@@ -7,11 +7,8 @@ using UnityEngine.UI;
 
 public class RoomPanelScript : MonoBehaviour
 {
-    [SerializeField] private TMP_Text sessionNamePanel;
-
+    public TMP_Text sessionNamePanel;
     public PlayerItem playerItemPrefab;
-
-    //LobbyButtons
     [SerializeField] private Button JoinButton;
 
     private GameObject LobbyManager;

@@ -291,7 +291,7 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         {
             Debug.Log("[Photon-GameManager] Entering Lobby");
             //Indicate LobbyManager to change the panel
-            _lobbyManager.SetPlayerPanel(_runner);
+            _lobbyManager.SetPlayerPanel(props.RoomName, _runner);
             SetUserStatus(UserStatus.InLobby);
         }
 
