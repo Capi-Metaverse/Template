@@ -57,7 +57,6 @@ public class LobbyManager : MonoBehaviour
         props.RoomName = sessionName;
         props.AllowLateJoin = true;
         props.PlayerLimit = 10;
-
         gameManager.CreateSession(props);
     }
     /// <summary>
@@ -108,9 +107,7 @@ public class LobbyManager : MonoBehaviour
         RoomPanelScript.sessionNamePanel.text = sessionName;
         LobbyPanelScript.sessionName.text = sessionName;
         PanelLobbyManager.ChangeRoomPanel();
-
         SpawnPlayerItem(runner, RoomPanelScript.playerItemPrefab);
-
     }
 
     /// <summary>
@@ -119,9 +116,7 @@ public class LobbyManager : MonoBehaviour
     public void SetLobbyPanel()
     {
         //We deactivate the panel of the room and Activate the panel of the Lobby interface.
-        
             PanelLobbyManager.ChangeLobbyPanel();
-        
     }
 
     /// <summary>
@@ -133,21 +128,17 @@ public class LobbyManager : MonoBehaviour
         gameManager.LeaveSession();
     }
 
-   
-
     /// <summary>
     /// Function that cleans the session list
     /// </summary>
     public void CleanSessions()
     {
-
         foreach (RoomItem item in sessionItemsList)
         {
             if (item != null)
                 Destroy(item.gameObject);
         }
         sessionItemsList.Clear();
-
     }
 
     /// <summary>
@@ -202,5 +193,4 @@ public class LobbyManager : MonoBehaviour
         //Set item
         item.setInfo(gameManager, runner, obj);
     }
-
 }
