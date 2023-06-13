@@ -13,7 +13,7 @@ class LoginPlayFab {
     - requestsCounter: int
     - UserRolePlayFab: string
     - newUser: bool
-    + PanelManager: PanelManager
+    + PanelLoginManager: PanelLoginManager
     --
     .. Login ..
     + Login(string, string)
@@ -50,7 +50,7 @@ class LoginScript {
     + LoginButton()
 }
 
-class PanelManager {
+class PanelLoginManager {
     + MessageText: TMP_Text
     .. UI Panels ..
     + LoginPanel: GameObject
@@ -70,7 +70,7 @@ class RegisterScript {
     + UsernameInput: TMP_InputField
     + PasswordInput: TMP_InputField
     .. UI Manager ..
-    - PanelManager: PanelManager
+    - PanelLoginManager: PanelLoginManager
     .. Login Manager ..
     - LoginManager: GameObject
     --
@@ -80,12 +80,10 @@ class RegisterScript {
 }
 
 class ResetPasswordScript {
-    .. Info UI Text ..
-    + MessageText: TMP_Text
     .. Inputs ..
     + EmailInput: TMP_InputField
     .. UI Manager ..
-    + PanelManager: PanelManager
+    + PanelLoginManager: PanelLoginManager
     .. Login Manager ..
     - LoginManager: GameObjectç
     --
@@ -101,10 +99,19 @@ class TabNavigation {
     - Update()
 }
 
+class LoginManager {
+    + MessageText: TMP_Text
+    - GameManager: GameManager
+    + PlayerDataUsername: class
+    + PlayerDataId: class
+    --
+    - Start()
+}
+
 ILogin <|.. LoginPlayFab
-LoginPlayFab --> PanelManager: Set info messages
+LoginPlayFab --> PanelLoginManager: Set info messages
 LoginScript --> LoginPlayFab: Calls login function
-RegisterScript --> PanelManager: Set error messages
+RegisterScript --> PanelLoginManager: Set error messages
 RegisterScript --> LoginPlayFab: Calls register function
 ResetPasswordScript --> LoginPlayFab: Calls reset\npassword function
 
@@ -121,8 +128,8 @@ note bottom of LoginPlayFab
     in PlayFab.
 end note
 
-note bottom of PanelManager
-    <b><color:royalBlue>PanelManager</color>
+note bottom of PanelLoginManager
+    <b><color:royalBlue>PanelLoginManager</color>
     This script has the methods
     to change the panels between
     Login, Register and Reset.
@@ -144,6 +151,12 @@ note bottom of TabNavigation
     <b><color:royalBlue>TabNavigation</color>
     Allows tab navigation between
     the elements of the UI.
+end note
+
+note bottom of LoginManager
+    <b><color:royalBlue>LoginManager</color>
+    Check if the connection
+    is stablished.
 end note
 
 
