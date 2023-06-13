@@ -11,14 +11,14 @@ public class RoomItem : MonoBehaviour
 {
     /*---------------------VARIABLES-----------------*/
     [SerializeField] private TMP_Text roomName;
-    [SerializeField] private LobbyManager _lobbyManager;
+    [SerializeField] private LobbyPanelScript _lobbyPanelScript;
 
     public SessionInfo sessionInfo { get; private set; }
 
     /*---------------------METHODS------------------*/
     private void Start()
     {
-        _lobbyManager = FindObjectOfType<LobbyManager>();//We get the LobbyManager from scene
+        _lobbyPanelScript = FindObjectOfType<LobbyPanelScript>();//We get the LobbyManager from scene
     }
     //public void SetRoomName(string _roomName)
     ////Set name of the room
@@ -32,7 +32,7 @@ public class RoomItem : MonoBehaviour
     public void OnClickItem()
     //Enter into LobbyRoom
     {
-        _lobbyManager.OnClickJoinSession(sessionInfo);
+        _lobbyPanelScript.OnClickJoinSession(sessionInfo);
     }
 
     /// <summary>

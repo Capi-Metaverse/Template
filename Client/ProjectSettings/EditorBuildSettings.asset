@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/1.Start.unity
     guid: abbdffdcc4569e5489bf4c08727b5820
   - enabled: 1
+    path: Assets/Module_Metaverse/Scenes/Lobby/Lobby_Module.unity
+    guid: 5085b6660f7f8394494bec817fc5a17f
+  - enabled: 0
     path: Assets/Scenes/Lobby.unity
     guid: 2fd6410cecde61944b2669a77a270fe3
   - enabled: 1

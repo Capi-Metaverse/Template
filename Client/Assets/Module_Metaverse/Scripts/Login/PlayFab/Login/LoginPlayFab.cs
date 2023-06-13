@@ -311,7 +311,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
 
         else
         {
-            SceneManager.LoadScene("Lobby");
+            SceneManager.LoadScene("Lobby_Module");
         }
     }
 

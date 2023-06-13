@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -699,8 +699,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 366290958}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 119749435}
+        m_TargetAssemblyTypeName: RoomPanelScript, Assembly-CSharp
         m_MethodName: OnClickJoinRoom
         m_Mode: 1
         m_Arguments:
@@ -760,6 +760,7 @@ GameObject:
   - component: {fileID: 119749432}
   - component: {fileID: 119749434}
   - component: {fileID: 119749433}
+  - component: {fileID: 119749435}
   m_Layer: 5
   m_Name: RoomPanel
   m_TagString: Untagged
@@ -833,6 +834,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119749431}
   m_CullTransparentMesh: 1
+--- !u!114 &119749435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119749431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 212123602ba7f154faf3b7abce0692c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sessionNamePanel: {fileID: 628324908}
+  playerItemPrefab: {fileID: 6571602323266590305, guid: 4a4143cc9112a434082be24511d92ced, type: 3}
+  JoinButton: {fileID: 109756426}
 --- !u!1 &174331201
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,6 +1183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 366290957}
   - component: {fileID: 366290958}
+  - component: {fileID: 366290959}
   m_Layer: 0
   m_Name: LobbyManager
   m_TagString: Untagged
@@ -1201,16 +1218,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e908ff0d94c6c48ac786f854e10978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sessionName: {fileID: 1055654332}
-  sessionNamePanel: {fileID: 628324908}
-  roomItemPrefab: {fileID: 3553842892826626922, guid: 55d0b644a90a14240882d68456f289a8, type: 3}
-  contentObject: {fileID: 1644937402}
-  lobbyPanel: {fileID: 385119111}
-  playerItemPrefab: {fileID: 6571602323266590305, guid: 4a4143cc9112a434082be24511d92ced, type: 3}
-  roomPanel: {fileID: 119749431}
-  playerItemParent: {fileID: 119749432}
-  createButton: {fileID: 1946407129}
-  JoinButton: {fileID: 109756426}
+  PanelLobbyManager: {fileID: 366290959}
+  RoomPanelScript: {fileID: 119749435}
+  LobbyPanelScript: {fileID: 385119115}
+--- !u!114 &366290959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366290955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8a268cb8ea55cf43b2b1e4750341329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LobbyPanel: {fileID: 385119111}
+  RoomPanel: {fileID: 119749431}
 --- !u!1 &385119111
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,6 +1246,7 @@ GameObject:
   - component: {fileID: 385119112}
   - component: {fileID: 385119114}
   - component: {fileID: 385119113}
+  - component: {fileID: 385119115}
   m_Layer: 5
   m_Name: LobbyPanel
   m_TagString: Untagged
@@ -1290,6 +1315,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385119111}
   m_CullTransparentMesh: 1
+--- !u!114 &385119115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385119111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc7b34ebe0b90714cbb77d784767b651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sessionName: {fileID: 1055654332}
+  roomItemPrefab: {fileID: 3553842892826626922, guid: 55d0b644a90a14240882d68456f289a8, type: 3}
+  contentObject: {fileID: 1644937402}
+  createButton: {fileID: 1946407129}
 --- !u!1 &425982950
 GameObject:
   m_ObjectHideFlags: 0
@@ -3316,8 +3357,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 366290958}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 119749435}
+        m_TargetAssemblyTypeName: RoomPanelScript, Assembly-CSharp
         m_MethodName: OnClickLeaveSession
         m_Mode: 1
         m_Arguments:
@@ -3848,8 +3889,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 366290958}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+      - m_Target: {fileID: 385119115}
+        m_TargetAssemblyTypeName: LobbyPanelScript, Assembly-CSharp
         m_MethodName: OnClickCreateSession
         m_Mode: 1
         m_Arguments:

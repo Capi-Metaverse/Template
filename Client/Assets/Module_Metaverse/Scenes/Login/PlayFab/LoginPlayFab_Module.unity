@@ -762,9 +762,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5d3bcbd78961a4baa6b04cd49299ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MessageText: {fileID: 0}
   EmailInput: {fileID: 1654513123}
-  PanelManager: {fileID: 1601487231}
+  PanelLoginManager: {fileID: 0}
 --- !u!1 &516408564
 GameObject:
   m_ObjectHideFlags: 0
@@ -3092,7 +3091,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2360106094562125143, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
-      propertyPath: PanelManager
+      propertyPath: PanelLoginManager
       value: 
       objectReference: {fileID: 1601487231}
     - target: {fileID: 2739670652528852030, guid: 20264d8939ad069488c7f13142d2046c, type: 3}
@@ -4304,7 +4303,7 @@ PrefabInstance:
       objectReference: {fileID: 602019936}
     - target: {fileID: 3061649902845931737, guid: 1fa0b44e7683e5c4cb46e281debe5050, type: 3}
       propertyPath: m_Name
-      value: PanelManager
+      value: PanelLoginManager
       objectReference: {fileID: 0}
     - target: {fileID: 3061649902845931739, guid: 1fa0b44e7683e5c4cb46e281debe5050, type: 3}
       propertyPath: m_RootOrder

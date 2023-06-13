@@ -13,8 +13,8 @@ using PlayFab.MultiplayerModels;
 public class LobbyManager : MonoBehaviour
 {
     //Name of the session/room
-    [SerializeField] private TMP_Text sessionName;
-    [SerializeField] private TMP_Text sessionNamePanel;
+  
+
 
     //Game Manager of the game
     private GameManager gameManager;
@@ -23,24 +23,16 @@ public class LobbyManager : MonoBehaviour
     //List of rooms
     private List<RoomItem> sessionItemsList = new List<RoomItem>();
 
-    //Lobby panel
-    [SerializeField] private RoomItem roomItemPrefab;
-    [SerializeField] private Transform contentObject;
-    [SerializeField] private GameObject lobbyPanel;
-   
 
-    //Players panel
-    [SerializeField] private PlayerItem playerItemPrefab;
-    [SerializeField] private GameObject roomPanel;
+    public PanelLobbyManager PanelLobbyManager;
 
-    [SerializeField] private Transform playerItemParent;
+    public RoomPanelScript RoomPanelScript;
 
-    //LobbyButtons
-    [SerializeField] private Button createButton;
-    [SerializeField] private Button JoinButton;
+    public LobbyPanelScript LobbyPanelScript;
     //Avatar number
 
     private int avatarNumber = 0;
+    
 
     /// <summary>
     /// When the Lobby awakes, it tries to find the game manager
@@ -48,36 +40,48 @@ public class LobbyManager : MonoBehaviour
     private void Awake()
     {
         gameManager = GameManager.FindInstance();
-       
-        gameManager.SetLobbyManager(this);  
+
+        gameManager.SetLobbyManager(this);
+    }
+
+
+    /// <summary>
+    /// Function when the user creates a room/session.
+    /// </summary>
+    public void OnCreateSession(string sessionName)
+    {
+        Debug.Log("[Photon-LobbyManager] Creating session");
+        //Properties of the room WIP
+        SessionProps props = new SessionProps();
+        props.StartMap = "Mapa1";
+        props.RoomName = sessionName;
+        props.AllowLateJoin = true;
+        props.PlayerLimit = 10;
+
+
+        gameManager.CreateSession(props);
     }
 
     /// <summary>
     /// Function when the user clicks on a session/room to join.
     /// </summary>
     /// <param name="sessionInfo"></param>
-    public void OnClickJoinSession(SessionInfo sessionInfo)
+    public void OnJoinSession(SessionInfo sessionInfo)
     {
         Debug.Log("[Photon-LobbyManager] Joining session");
         gameManager.JoinSession(sessionInfo);
-        
+
     }
 
+ 
+
     /// <summary>
-    /// Function when the user creates a room/session.
+    /// Function when the user clicks on a room to join
     /// </summary>
-    public void OnClickCreateSession()
+    public void OnJoinRoom(string sessionNamePanel)
     {
-        Debug.Log("[Photon-LobbyManager] Creating session");
-        //Properties of the room WIP
-        SessionProps props = new SessionProps();
-        props.StartMap = "Mapa1";
-        props.RoomName = sessionName.text;
-        props.AllowLateJoin = true;
-        props.PlayerLimit = 10;
-        
-        
-        gameManager.CreateSession(props);
+        //JoinButton.gameObject.SetActive(false);
+        gameManager.StartGame(sessionNamePanel, avatarNumber);
     }
 
     /// <summary>
@@ -91,37 +95,27 @@ public class LobbyManager : MonoBehaviour
         CleanSessions();
         //We instantiate the items in the interface.
 
-        foreach(SessionInfo session in sessionList)
+        foreach (SessionInfo session in sessionList)
         {
-            RoomItem newRoom = Instantiate(roomItemPrefab, contentObject);
+            RoomItem newRoom = Instantiate(LobbyPanelScript.roomItemPrefab, LobbyPanelScript.contentObject);
             newRoom.SetSessionInfo(session);
             sessionItemsList.Add(newRoom);
 
         }
-     
+
     }
-
-
-
 
     /// <summary>
     /// It sets the panel of players when you enter a session
     /// </summary>
     /// <param name="sessionName"></param>
     /// <param name="runner"></param>
-    public void SetPlayerPanel(string sessionName, NetworkRunner runner)
+    public void SetPlayerPanel(NetworkRunner runner)
     {
-        this.sessionNamePanel.text = sessionName;
-        this.sessionName.text = sessionName;
-        //We deactivate the panel of the room and Activate the panel of the Lobby interface.
-        if (roomPanel != null & lobbyPanel != null)
-        {
-            roomPanel.SetActive(true);
-            lobbyPanel.SetActive(false);
-            setLobbyButtons(false);
-        }
+        
+        PanelLobbyManager.ChangeRoomPanel();
 
-        SpawnPlayerItem(runner,playerItemPrefab);
+        SpawnPlayerItem(runner, RoomPanelScript.playerItemPrefab);
 
     }
 
@@ -131,33 +125,21 @@ public class LobbyManager : MonoBehaviour
     public void SetLobbyPanel()
     {
         //We deactivate the panel of the room and Activate the panel of the Lobby interface.
-        if (roomPanel != null & lobbyPanel != null)
-        {
-            roomPanel.SetActive(false);
-            lobbyPanel.SetActive(true);
-        }
+        
+            PanelLobbyManager.ChangeLobbyPanel();
+        
     }
 
     /// <summary>
     /// Function when a user leaves the session
     /// </summary>
-    public void OnClickLeaveSession()
+    public void OnLeaveSession()
     {
         SetLobbyPanel();
         gameManager.LeaveSession();
-
     }
 
-    /// <summary>
-    /// Function when the user clicks on a room to join
-    /// </summary>
-    public void OnClickJoinRoom()
-    {
-        JoinButton.interactable = false;
-        //JoinButton.gameObject.SetActive(false);
-        Debug.Log("[Photon-LobbyManager]" + sessionName.text);
-        gameManager.StartGame(sessionNamePanel.text,avatarNumber);
-    }
+   
 
     /// <summary>
     /// Function that cleans the session list
@@ -171,7 +153,7 @@ public class LobbyManager : MonoBehaviour
                 Destroy(item.gameObject);
         }
         sessionItemsList.Clear();
-       
+
     }
 
     /// <summary>
@@ -180,8 +162,8 @@ public class LobbyManager : MonoBehaviour
     /// <param name="active"></param>
     public void setLobbyButtons(bool active)
     {
-        createButton.gameObject.SetActive(active);
-        contentObject.gameObject.SetActive(active);
+        LobbyPanelScript.createButton.gameObject.SetActive(active);
+        LobbyPanelScript.contentObject.gameObject.SetActive(active);
     }
 
     /// <summary>
@@ -224,7 +206,7 @@ public class LobbyManager : MonoBehaviour
         PlayerItem item = obj.GetComponent<PlayerItem>();
 
         //Set item
-        item.setInfo(gameManager,runner,obj);
+        item.setInfo(gameManager, runner, obj);
     }
 
 }
