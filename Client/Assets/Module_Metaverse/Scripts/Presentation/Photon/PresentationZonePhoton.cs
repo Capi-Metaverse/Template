@@ -13,7 +13,7 @@ public class PresentationZonePhoton : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
 
-        if (other.gameObject.Equals(GameManager.FindInstance().GetCurrentPlayer().gameObject))
+        if (other.gameObject.Equals(GameManager.FindInstance().GetCurrentPlayer().gameObject)) //TODO: Modify getcurrentplayer so that it is compatible with single player
         {
             playerInputs = GameManager.FindInstance().GetCurrentPlayer().GetComponent<CharacterInputHandler>();
             playerInputs.setPresentationCamera(cameraObject);

@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
@@ -37,6 +36,7 @@ namespace OpenAI
         {
             StartCoroutine(SendReply());
         }
+
         /// <summary>
         /// Connect to the Api chatGPT, Send a form and gets the answer from this form and displays it in the text
         /// </summary>

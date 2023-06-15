@@ -31,5 +31,6 @@ public class LoginScript : MonoBehaviour
             loginPlayFab.Login(EmailInput.text, PasswordInput.text);
 
         }
+        //TODO: Add ELSE which will do the login without playfab
     }
 }

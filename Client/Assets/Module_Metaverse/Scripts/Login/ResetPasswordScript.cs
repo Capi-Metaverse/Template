@@ -27,6 +27,7 @@ public class ResetPasswordScript : MonoBehaviour
         if (LoginManager.TryGetComponent(out LoginPlayFab loginPlayFab))
         {
             loginPlayFab.OnReset(EmailInput.text);
-        }//else(Log
+        }
+        //TODO: Add ELSE which will do the reset without playfab
     }
 }

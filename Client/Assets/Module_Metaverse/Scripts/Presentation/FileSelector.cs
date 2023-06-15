@@ -60,7 +60,10 @@ public class FileSelector: MonoBehaviour
         #endif
         Screen.lockCursor = true;//Unity and standalone
     }
-
+    /// <summary>
+    /// Writes the path of the file selected
+    /// </summary>
+    /// <param name="paths"></param>
     [System.Obsolete]
     public void WriteResult(string[] paths)
     {

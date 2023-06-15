@@ -48,7 +48,8 @@ public class RegisterScript : MonoBehaviour
         if (LoginManager.TryGetComponent(out LoginPlayFab loginPlayFab))
         {
             loginPlayFab.Register(UsernameInput.text, EmailInput.text, PasswordInput.text);
-        }//else(LoginSinPlayFab)
+        }
+        //TODO: Add ELSE which will do the register without playfab
     }
 
     /*Username Validation Message*/

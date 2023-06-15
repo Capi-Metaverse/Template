@@ -8,10 +8,10 @@ public class ChatGPTActive : MonoBehaviour, IMetaEvent
     public GameObject CanvasChatGPT;
     //PlayerSpawn playerSpawn;
     CharacterInputHandler CharacterInputHandler;
-    GameObject eventObject;
 
     GameObject _eventObject;
     GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
+
     /// <summary>
     /// Event to activate Adam's UI and his camera
     /// </summary>
