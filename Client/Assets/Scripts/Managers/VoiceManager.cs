@@ -9,6 +9,7 @@ public class AudioVideoStates
 {
     public bool subAudio = true;
     public bool pubAudio = false;
+    public bool muteAllAudio = false;
 }
 
 public class VoiceManager
@@ -18,7 +19,7 @@ public class VoiceManager
     public Sprite MicroOff;
     public Sprite MicroOn;
 
-    private AudioVideoStates AudioVideoState = new AudioVideoStates();
+    public AudioVideoStates AudioVideoState = new AudioVideoStates();
 
     public Photon.Voice.Unity.Recorder recorder;
 
@@ -34,24 +35,52 @@ public class VoiceManager
     /// <param name="estado"></param>
     public void MuteAudio(UserStatus estado)
     {
-        
-        if (AudioVideoState.pubAudio == true)
+        if (AudioVideoState.muteAllAudio == false)
         {
-            recorder.TransmitEnabled = false;
-            AudioVideoState.pubAudio = false;
-            Debug.Log("[PhotonVoice-VoiceManager] Micro Off");
+            if (AudioVideoState.pubAudio == true)
+            {
+                recorder.TransmitEnabled = false;
+                AudioVideoState.pubAudio = false;
+                Debug.Log("[PhotonVoice-VoiceManager] Micro Off");
 
-            if (estado==UserStatus.InGame)
-                GameObject.Find("Micro").GetComponent<Image>().sprite = MicroOff;
+                if (estado == UserStatus.InGame)
+                    GameObject.Find("Micro").GetComponent<Image>().sprite = MicroOff;
+            }
+            else
+            {
+                recorder.TransmitEnabled = true;
+                AudioVideoState.pubAudio = true;
+                Debug.Log("[PhotonVoice-VoiceManager] Micro On");
+
+                if (estado == UserStatus.InGame)
+                    GameObject.Find("Micro").GetComponent<Image>().sprite = MicroOn;
+            }
+        }
+
+    }
+
+    public void MuteAllPlayersAudio(UserStatus estado, bool mute)
+    {
+        AudioVideoState.muteAllAudio = mute;
+
+        if (AudioVideoState.muteAllAudio == false)
+        {
+
+            if (AudioVideoState.pubAudio == true)
+            {
+                recorder.TransmitEnabled = true;
+                Debug.Log("[PhotonVoice-VoiceManager] Micro On");
+
+                if (estado == UserStatus.InGame)
+                    GameObject.Find("Micro").GetComponent<Image>().sprite = MicroOn;
+            }
         }
         else
         {
-            recorder.TransmitEnabled = true;
-            AudioVideoState.pubAudio = true;
-            Debug.Log("[PhotonVoice-VoiceManager] Micro On");
-
+            recorder.TransmitEnabled = false;
+            Debug.Log("[PhotonVoice-VoiceManager] Micro Off");
             if (estado == UserStatus.InGame)
-                GameObject.Find("Micro").GetComponent<Image>().sprite = MicroOn;
+                GameObject.Find("Micro").GetComponent<Image>().sprite = MicroOff;
         }
     }
 }

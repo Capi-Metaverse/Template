@@ -50,7 +50,7 @@ public class CharacterInputHandler : MonoBehaviour
     private DrawLinesOnPlane drawingPlaneScript;
 
 
-    VoiceManager voiceChat = new VoiceManager();//Manager for the voiceChat, not in scene object
+    public VoiceManager voiceChat = new VoiceManager();//Manager for the voiceChat, not in scene object
     CharacterMovementHandler characterMovementHandler;
 
     GameManager gameManager;

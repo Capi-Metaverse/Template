@@ -666,6 +666,22 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         }
 
     }
+
+    [Rpc]
+    public static void RPC_MuteAllPlayers(NetworkRunner runner, bool mute, int numActor)
+    {
+        int PlayerID = GameManager.FindInstance().GetCurrentPlayer().GetComponent<NetworkPlayer>().ActorID;
+
+        //If is not the player who started the muteAll
+        if (numActor != PlayerID)
+        {
+            VoiceManager voiceChat = GameManager.FindInstance().GetCurrentPlayer().GetComponent<CharacterInputHandler>().voiceChat;
+            UserStatus userStatus = GameManager.FindInstance().UserStatus;
+
+            voiceChat.MuteAllPlayersAudio(userStatus, mute);
+        }
+    }
+
     /// <summary>
     /// All the people Download the Images of PDF
     /// </summary>

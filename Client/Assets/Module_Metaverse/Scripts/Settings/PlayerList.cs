@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Fusion;
 using Fusion.Sockets;
 using System.Linq;
@@ -11,6 +12,23 @@ public class PlayerList : MonoBehaviour
 {
     public GameObject PlayerItemPrefabSettings;
     public GameObject PlayerListSettings;
+    private GameObject gameObjectPlayer;
+    private GameManager gameManager;
+    [SerializeField] private Toggle muteButton;
+    private bool mute = false;
+
+    public GameObject GameObjectPlayer { get => gameObjectPlayer; set => gameObjectPlayer = value; }
+
+    public void Start()
+    {
+        gameManager = GameManager.FindInstance();
+
+        if (gameManager.GetUserRole() == UserRole.Admin)
+        {
+            muteButton.gameObject.SetActive(true);
+        }
+    }
+
     /// <summary>
     /// List Player with his names in PlayFab and Get his ID
     /// </summary>
@@ -45,10 +63,14 @@ public class PlayerList : MonoBehaviour
 
             userItem.GetComponent<UserListItem>().NumActor = networkPlayer.ActorID;
             userItem.GetComponent<UserListItem>().GameObjectPlayer = player;
-
-
-
         }
 
+    }
+
+    public void MuteAll()
+    {
+        int PlayerID = GameManager.FindInstance().GetCurrentPlayer().GetComponent<NetworkPlayer>().ActorID;
+        mute = !mute;
+        GameManager.RPC_MuteAllPlayers(gameManager.GetRunner(), mute, PlayerID);
     }
 }
