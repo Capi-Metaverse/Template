@@ -821,7 +821,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4755949845276613376}
   m_Layer: 0
-  m_Name: Presentation
+  m_Name: PresentationSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1393,6 +1393,7 @@ GameObject:
   - component: {fileID: 4176929008779284155}
   - component: {fileID: 6013783654414716484}
   - component: {fileID: 1149271268034919154}
+  - component: {fileID: 5391974196700399168}
   - component: {fileID: 7513824060817393358}
   m_Layer: 6
   m_Name: Upload
@@ -1480,8 +1481,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChooseFile: {fileID: 6414680037694834152}
-  fileSelector: {fileID: 0}
+  fileSelector: {fileID: 2830587435388943722}
   loadingPressCanvas: {fileID: 3139590104210711232}
+--- !u!114 &5391974196700399168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8301898414127144445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd912aecdbba1cd4186c22e3b8864a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _size: 1
+  _gameManager: {fileID: 0}
+  _presentation: {fileID: 0}
 --- !u!64 &7513824060817393358
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1702,6 +1718,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2f4cc0f1ea3be848981115778e4d6e0, type: 3}
+--- !u!114 &2830587435388943722 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 926145953287784164, guid: c2f4cc0f1ea3be848981115778e4d6e0, type: 3}
+  m_PrefabInstance: {fileID: 3139590104849906574}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6414680037694834152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c863f47e1027feb48a1cf433a9d0cff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6414680037694834152 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8257232350266523238, guid: c2f4cc0f1ea3be848981115778e4d6e0, type: 3}
@@ -1719,10 +1746,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6803722904551840720}
     m_Modifications:
+    - target: {fileID: 897506783, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2143715370, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
       propertyPath: loadingPressCanvas
       value: 
       objectReference: {fileID: 3139590104210711232}
+    - target: {fileID: 2413975198355197750, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413975198355197750, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413975198355197750, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.75
+      objectReference: {fileID: 0}
     - target: {fileID: 4766252298970315507, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1798,6 +1841,10 @@ PrefabInstance:
     - target: {fileID: 7420122817405076816, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
       propertyPath: m_Name
       value: Presentation
+      objectReference: {fileID: 0}
+    - target: {fileID: 8182559675032434862, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f92a9c9d7ccfe3e42bbd067120192e44, type: 3}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f49f43b6f9312d4d8a62db4fdcd1395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: Mapa1
+  map: Map_Photon_Module
   isPublic: 1
   passwordScript: {fileID: 0}
   lastPassword: 
@@ -1093,7 +1093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0ceadf2b0641646b2b64b9d403ab6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  achievementsManager: {fileID: 804727768}
+  achievementsManager: {fileID: 0}
   UICard: {fileID: 804727760}
   visionData: {fileID: 804727761}
   editVisionData: {fileID: 309700834}
@@ -1677,17 +1677,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f85a720477981646b796887127ffb00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &804727768 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9166918225025845151, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
-  m_PrefabInstance: {fileID: 9166918225025845128}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 804727760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b129b765876dd7647baf76b802e50dae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!64 &823474566
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2054,7 +2043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f49f43b6f9312d4d8a62db4fdcd1395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: Mapa1
+  map: Map_Photon_Module
   isPublic: 1
   passwordScript: {fileID: 0}
   lastPassword: 
@@ -2656,7 +2645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f12927f7422f7704e81883d5b397b0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  createScript: {fileID: 1841278561}
+  createScript: {fileID: 0}
 --- !u!1 &1592156057
 GameObject:
   m_ObjectHideFlags: 0
@@ -3042,7 +3031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f12927f7422f7704e81883d5b397b0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  createScript: {fileID: 1841278561}
+  createScript: {fileID: 0}
 --- !u!64 &1779009223
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3057,17 +3046,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1716842359454501035, guid: b4eeec6b6f3267a43907bf570da5250b, type: 3}
---- !u!114 &1841278561 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7215875436469631543, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
-  m_PrefabInstance: {fileID: 9166918225025845128}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb11eaea2a42b504797625265e0d6fb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!64 &1868187693
 MeshCollider:
   m_ObjectHideFlags: 0

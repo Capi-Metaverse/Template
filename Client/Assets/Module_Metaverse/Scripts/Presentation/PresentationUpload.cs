@@ -2,17 +2,23 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
 
 public class PresentationUpload : MonoBehaviour, IFileUpload
 {
-    private float _size;
+    public float _size;
     public JObject _json;
-    private GameManager _gameManager;
-    private Presentation _presentation;
+    public GameManager _gameManager;
+    public Presentation _presentation;
 
+    public void Start()
+    {
+        _presentation = GameObject.Find("Presentation").GetComponent<Presentation>();//Getting the press from scene
+        _gameManager = GameManager.FindInstance();
+    }
     public PresentationUpload(float Size, Presentation Presentation, GameManager GameManager)
     {
         _size = Size;
@@ -91,6 +97,7 @@ public class PresentationUpload : MonoBehaviour, IFileUpload
 
     public void ClearPresentation()
     {
+        _presentation.transform.GetChild(2).gameObject.SetActive(false);
         _presentation.sprites.Clear();
         if (_presentation.current >= 1) _presentation.current = 0;
         if (_presentation.sprites != null) _presentation.sprites.Clear();

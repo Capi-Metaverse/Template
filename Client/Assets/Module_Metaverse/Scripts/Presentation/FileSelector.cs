@@ -138,7 +138,8 @@ public class FileSelector: MonoBehaviour
             case "pptx":
             case "ppt":
                 Debug.Log("Presentation");
-                PresentationUpload = new PresentationUpload(Size, Presentation, GameManager);
+                //PresentationUpload = new PresentationUpload(Size, Presentation, GameManager);
+                PresentationUpload = GameObject.Find("Upload").GetComponent<PresentationUpload>();
                 PresentationUpload.FileUpload(bytes, fileExtension);
                 break;
             default:
