@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5063447898686058720}
   m_Layer: 6
   m_Name: Folder
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 3615939374949459716}
   m_Layer: 6
   m_Name: Record
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bc4326fe67e9b4e90b05cffefe5edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 3615939376541695673}
+  VideoRecorder: {fileID: 3615939376541695673}
 --- !u!1 &3615939375537310443
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,7 +777,7 @@ GameObject:
   - component: {fileID: 6799404381208741437}
   m_Layer: 6
   m_Name: Pause
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
