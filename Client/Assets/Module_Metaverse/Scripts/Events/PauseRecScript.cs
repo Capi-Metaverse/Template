@@ -1,11 +1,8 @@
 using RockVR.Video;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseRecScript : MonoBehaviour, IMetaEvent
 {
-    private bool isPlayVideo = false;
 
     GameObject _eventObject;
     public GameObject eventObject { get => _eventObject; set => _eventObject = value; }
@@ -13,7 +10,6 @@ public class PauseRecScript : MonoBehaviour, IMetaEvent
     private void Awake()
     {
         Application.runInBackground = true;
-        isPlayVideo = false;
     }
     /// <summary>
     /// To Pause the recording

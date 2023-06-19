@@ -1,6 +1,4 @@
 using RockVR.Video;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RecordScript : MonoBehaviour, IMetaEvent
@@ -8,14 +6,12 @@ public class RecordScript : MonoBehaviour, IMetaEvent
 
     GameObject _eventObject;
 
-     [SerializeField] private GameObject camera;
+     [SerializeField] private GameObject VideoRecorder;
     GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
 
-    private bool isPlayVideo = false;
     private void Awake()
     {
         Application.runInBackground = true;
-        isPlayVideo = false;
     }
     /// <summary>
     /// Start an finish the recording
@@ -23,7 +19,7 @@ public class RecordScript : MonoBehaviour, IMetaEvent
     /// <param name="host"></param>
     public void activate(bool host)
     {
-        camera.SetActive(true);
+        VideoRecorder.SetActive(true);
         if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.NOT_START)
         {
             //Start to capture the video
@@ -33,7 +29,7 @@ public class RecordScript : MonoBehaviour, IMetaEvent
         { 
                 //Stop the video
             VideoCaptureCtrl.instance.StopCapture();
-            camera.SetActive(false);
+            VideoRecorder.SetActive(false);
         }
     } 
 }
