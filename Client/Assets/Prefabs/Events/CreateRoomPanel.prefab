@@ -31,7 +31,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7093693875877601671}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -166,12 +166,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7093693875877601671}
-  m_RootOrder: 7
+  m_Father: {fileID: 2239441897673309356}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180.135}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -59, y: -8}
+  m_AnchoredPosition: {x: -79.49994, y: -0.000061035156}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8911869198737441924
@@ -256,9 +256,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1951360412032011170}
-        m_TargetAssemblyTypeName: CreateRoom, Assembly-CSharp
-        m_MethodName: OnClickLeftPlayer
+      - m_Target: {fileID: 6162619551323931854}
+        m_TargetAssemblyTypeName: UserNumberArrows, Assembly-CSharp
+        m_MethodName: OnLeftClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1155,6 +1155,44 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2769131743221436121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8621437802814510290}
+  m_Layer: 5
+  m_Name: MapArrows
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8621437802814510290
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2769131743221436121}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5928369309688019025}
+  - {fileID: 5981701536492475305}
+  m_Father: {fileID: 7093693875877601671}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 6.5, y: -119}
+  m_SizeDelta: {x: 245, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2866460398180262993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,8 +1782,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1951360412032011170}
-        m_TargetAssemblyTypeName: CreateRoom, Assembly-CSharp
+      - m_Target: {fileID: 529370804312771902}
+        m_TargetAssemblyTypeName: CreateRoomPanelUI, Assembly-CSharp
         m_MethodName: OpenCreateUI
         m_Mode: 1
         m_Arguments:
@@ -1930,8 +1968,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1951360412032011170}
-        m_TargetAssemblyTypeName: CreateRoom, Assembly-CSharp
+      - m_Target: {fileID: 529370804312771902}
+        m_TargetAssemblyTypeName: CreateRoomPanelUI, Assembly-CSharp
         m_MethodName: CloseUI
         m_Mode: 1
         m_Arguments:
@@ -2026,12 +2064,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7093693875877601671}
-  m_RootOrder: 6
+  m_Father: {fileID: 2239441897673309356}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: -8}
+  m_AnchoredPosition: {x: 79.5, y: -0.000061035156}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &289302671975364467
@@ -2116,9 +2154,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1951360412032011170}
-        m_TargetAssemblyTypeName: CreateRoom, Assembly-CSharp
-        m_MethodName: OnClickRightPlayer
+      - m_Target: {fileID: 6162619551323931854}
+        m_TargetAssemblyTypeName: UserNumberArrows, Assembly-CSharp
+        m_MethodName: OnRightClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2450,6 +2488,8 @@ GameObject:
   - component: {fileID: 7093693875877601671}
   - component: {fileID: 1814733647048586186}
   - component: {fileID: 8519968653819462976}
+  - component: {fileID: 1780056757812284534}
+  - component: {fileID: 6162619551323931854}
   m_Layer: 5
   m_Name: CreatePanel
   m_TagString: Untagged
@@ -2475,12 +2515,10 @@ RectTransform:
   - {fileID: 6459859870250228623}
   - {fileID: 8915504208250042369}
   - {fileID: 4271361778296465241}
-  - {fileID: 1268528213885944289}
-  - {fileID: 2157662863991988838}
+  - {fileID: 2239441897673309356}
   - {fileID: 4204839012337021395}
   - {fileID: 2185220443606474023}
-  - {fileID: 5928369309688019025}
-  - {fileID: 5981701536492475305}
+  - {fileID: 8621437802814510290}
   m_Father: {fileID: 4489360846297917337}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2527,6 +2565,32 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1780056757812284534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6519040060172962221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5dd2bf4104024742bdaab753e72c476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 5505191096967057004}
+--- !u!114 &6162619551323931854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6519040060172962221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f238ad568a24dbd46bbfaa158f070b51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputPlayers: {fileID: 6369641597512125366}
 --- !u!1 &6523621294681930663
 GameObject:
   m_ObjectHideFlags: 0
@@ -2540,7 +2604,7 @@ GameObject:
   - component: {fileID: 2948339155753542955}
   - component: {fileID: 5018274593250772390}
   m_Layer: 5
-  m_Name: RightArrow (1)
+  m_Name: RightArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2558,12 +2622,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7093693875877601671}
-  m_RootOrder: 10
+  m_Father: {fileID: 8621437802814510290}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 114, y: -119}
+  m_AnchoredPosition: {x: 107.5, y: 0}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3397475501570308663
@@ -2648,9 +2712,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1951360412032011170}
-        m_TargetAssemblyTypeName: CreateRoom, Assembly-CSharp
-        m_MethodName: OnClickRightMap
+      - m_Target: {fileID: 1780056757812284534}
+        m_TargetAssemblyTypeName: MapArrows, Assembly-CSharp
+        m_MethodName: OnRightClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2781,8 +2845,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1951360412032011170}
-        m_TargetAssemblyTypeName: CreateRoom, Assembly-CSharp
+      - m_Target: {fileID: 529370804312771902}
+        m_TargetAssemblyTypeName: CreateRoomPanelUI, Assembly-CSharp
         m_MethodName: CloseUI
         m_Mode: 1
         m_Arguments:
@@ -2915,8 +2979,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1951360412032011170}
-        m_TargetAssemblyTypeName: CreateRoom, Assembly-CSharp
+      - m_Target: {fileID: 529370804312771902}
+        m_TargetAssemblyTypeName: CreateRoomPanelUI, Assembly-CSharp
         m_MethodName: OpenJoinUI
         m_Mode: 1
         m_Arguments:
@@ -3517,7 +3581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4489360846297917337}
   m_Layer: 0
-  m_Name: CreateMenu 1
+  m_Name: CreateMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3554,7 +3618,7 @@ GameObject:
   - component: {fileID: 5854524013675373703}
   - component: {fileID: 3290020303601396098}
   m_Layer: 5
-  m_Name: LeftArrow (1)
+  m_Name: LeftArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3572,12 +3636,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7093693875877601671}
-  m_RootOrder: 11
+  m_Father: {fileID: 8621437802814510290}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180.135}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -101, y: -119}
+  m_AnchoredPosition: {x: -107.49994, y: 0}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3412835817601354182
@@ -3662,9 +3726,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1951360412032011170}
-        m_TargetAssemblyTypeName: CreateRoom, Assembly-CSharp
-        m_MethodName: OnClickLeftMap
+      - m_Target: {fileID: 1780056757812284534}
+        m_TargetAssemblyTypeName: MapArrows, Assembly-CSharp
+        m_MethodName: OnLeftClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3951,8 +4015,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1951360412032011170}
-        m_TargetAssemblyTypeName: CreateRoom, Assembly-CSharp
+      - m_Target: {fileID: 529370804312771902}
+        m_TargetAssemblyTypeName: CreateRoomPanelUI, Assembly-CSharp
         m_MethodName: CloseUI
         m_Mode: 1
         m_Arguments:
@@ -3973,6 +4037,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1925271012699909997}
   - component: {fileID: 1951360412032011170}
+  - component: {fileID: 529370804312771902}
   m_Layer: 0
   m_Name: CreateRoomPanel
   m_TagString: Untagged
@@ -4012,10 +4077,18 @@ MonoBehaviour:
   inputNameJoin: {fileID: 2877967086312530723}
   inputPlayers: {fileID: 6369641597512125366}
   map: {fileID: 5505191096967057004}
-  leftPlayers: {fileID: 122411300431333755}
-  rightPlayers: {fileID: 6470079941538373896}
-  leftMap: {fileID: 3290020303601396098}
-  rightMap: {fileID: 5018274593250772390}
+--- !u!114 &529370804312771902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7909642407990650812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c62a34095a539c4b945fb80466f5a84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   choosePanel: {fileID: 2484071155905345829}
   joinPanel: {fileID: 2624362082418837355}
   createPanel: {fileID: 6519040060172962221}
@@ -4382,7 +4455,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7093693875877601671}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4874,3 +4947,41 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!1 &9150208173036046039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2239441897673309356}
+  m_Layer: 5
+  m_Name: UserNumberArrows
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2239441897673309356
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9150208173036046039}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1268528213885944289}
+  - {fileID: 2157662863991988838}
+  m_Father: {fileID: 7093693875877601671}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 20.5, y: -8}
+  m_SizeDelta: {x: 189, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}

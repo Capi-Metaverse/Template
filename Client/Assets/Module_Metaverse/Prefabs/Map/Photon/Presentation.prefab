@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1204885878}
   - component: {fileID: 1204885879}
-  - component: {fileID: 1236925175260817897}
+  - component: {fileID: 1204885880}
   m_Layer: 0
   m_Name: PresentationZone
   m_TagString: PresentationZone
@@ -47,7 +47,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 16, y: 5, z: 15}
   m_Center: {x: 0, y: 3.5, z: 0}
---- !u!114 &1236925175260817897
+--- !u!114 &1204885880
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1204885877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a84ba74d07f435e439ada011ce46d38f, type: 3}
+  m_Script: {fileID: 11500000, guid: 99bc8ce108eebf143bad314402b0086d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraObject: {fileID: 1301906689}

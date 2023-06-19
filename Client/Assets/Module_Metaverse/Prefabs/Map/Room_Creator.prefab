@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f12927f7422f7704e81883d5b397b0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  createScript: {fileID: 5032795663041608252}
+  createScript: {fileID: 6454846804685208736}
 --- !u!1 &879898815831543357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,10 +1074,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CreateRoomPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 7909642407990650812, guid: 783113c5a1ba68d49a0967658652a478, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 783113c5a1ba68d49a0967658652a478, type: 3}
 --- !u!4 &4934648593467350771 stripped
@@ -1085,14 +1081,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1925271012699909997, guid: 783113c5a1ba68d49a0967658652a478, type: 3}
   m_PrefabInstance: {fileID: 6830987606144397726}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5032795663041608252 stripped
+--- !u!114 &6454846804685208736 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1951360412032011170, guid: 783113c5a1ba68d49a0967658652a478, type: 3}
+  m_CorrespondingSourceObject: {fileID: 529370804312771902, guid: 783113c5a1ba68d49a0967658652a478, type: 3}
   m_PrefabInstance: {fileID: 6830987606144397726}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb11eaea2a42b504797625265e0d6fb9, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c62a34095a539c4b945fb80466f5a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
