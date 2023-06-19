@@ -783,6 +783,13 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         DrawLinesOnPlane drawLinesOnPlane = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
         drawLinesOnPlane.dibujoetc(Lines,NumMaterial,gross);
     }
+
+    [Rpc]
+    public static void RPC_LinesClear(NetworkRunner runner)
+    {
+        DrawLinesOnPlane drawLinesOnPlane = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
+        drawLinesOnPlane.FunctionClear();
+    }
 }
 
 

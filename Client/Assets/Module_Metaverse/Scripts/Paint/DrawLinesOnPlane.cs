@@ -4,10 +4,15 @@ using System.Windows.Forms;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.UI;
+using static Fusion.NetworkCharacterController;
+
+
 
 public class DrawLinesOnPlane : NetworkBehaviour
 {
     public Material materialLine;
+    public Material materialColorPicker;
+    private int materialIndex = 0;
     public LayerMask planeLayer;
     public Camera camera;
     public Slider sliderGross;
@@ -19,13 +24,20 @@ public class DrawLinesOnPlane : NetworkBehaviour
     public List<Material> materialsList;
     public GameManager gameManager;
     public int NumMaterial = 0;
+    public int orderInLayer = 0;
+    public GameObject grossImage;
     [SerializeField] private GameObject panelMaterials;
+
+
 
     void Start()
     {
-        materialLine = materialsList[0];
-        CreateNewLineRenderer();
         gameManager = GameManager.FindInstance();
+        materialColorPicker.color = Color.black;
+        Material firstMaterial = new Material(materialColorPicker);
+        materialsList.Add(new Material(firstMaterial));
+        grossImage.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f) * sliderGross.value;
+        CreateNewLineRenderer();
     }
     /// <summary>
     /// Allows each point to join together to form a list of points to form a line and, when the mouse is raised, calls the CreateNewLineRenderer() function to create a new line.
@@ -37,6 +49,8 @@ public class DrawLinesOnPlane : NetworkBehaviour
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
+
+
             if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Paint"))
             {
                 // Perform action on object with "yourTag"
@@ -44,9 +58,13 @@ public class DrawLinesOnPlane : NetworkBehaviour
             }
         }
 
+
+
         if (Input.GetMouseButton(0))
         {
             RaycastHit hit;
+
+
 
             if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit, float.PositiveInfinity, planeLayer) && hit.transform.tag == "Paint")
             {
@@ -59,14 +77,21 @@ public class DrawLinesOnPlane : NetworkBehaviour
             Debug.Log(childCount);
             if (childCount > 1)
             {
-                Transform lastChild = transform.GetChild(childCount - 2);
+                Transform lastChild = transform.GetChild(childCount - 1);
                 Destroy(lastChild.gameObject);
             }
-
         }
 
-        currentLineRenderer.positionCount = linePoints.Count;
-        currentLineRenderer.widthMultiplier = lineWidth * gross;
+
+
+        if (currentLineRenderer != null)
+        {
+            currentLineRenderer.positionCount = linePoints.Count;
+            currentLineRenderer.widthMultiplier = lineWidth * gross;
+        }
+
+
+
 
         Vector3[] nonNullPoints = new Vector3[linePoints.Count];
         int i = 0;
@@ -78,18 +103,29 @@ public class DrawLinesOnPlane : NetworkBehaviour
                 i++;
             }
         }
-        currentLineRenderer.SetPositions(nonNullPoints);
 
-        if (Input.GetMouseButtonUp(0))
+
+
+        if (currentLineRenderer != null)
+        {
+            currentLineRenderer.SetPositions(nonNullPoints);
+        }
+
+
+
+        if (Input.GetMouseButtonUp(0) && currentLineRenderer != null)
         {
             Vector3[] positions = new Vector3[currentLineRenderer.positionCount];
 
 
+
             currentLineRenderer.GetPositions(positions);
             GameManager.RPC_LinesSend(gameManager.GetRunner(), positions, NumMaterial, gross);
-
+            currentLineRenderer = null;
         }
-      
+
+
+
     }
     /// <summary>
     /// Create the lines with the chosen thickness and materials.
@@ -99,21 +135,35 @@ public class DrawLinesOnPlane : NetworkBehaviour
         GameObject newLineObject = new GameObject("LineRenderer");
         newLineObject.transform.SetParent(transform);
         currentLineRenderer = newLineObject.AddComponent<LineRenderer>();
-        currentLineRenderer.material = materialLine;
+        currentLineRenderer.material = materialsList[materialIndex];
         currentLineRenderer.widthMultiplier = lineWidth;
         currentLineRenderer.positionCount = 0;
         currentLineRenderer.useWorldSpace = true;
+        currentLineRenderer.sortingOrder = orderInLayer;
         linePoints.Clear();
+        orderInLayer += 1;
     }
     /// <summary>
     /// cleans all children and calls for the creation of a new line.
     /// </summary>
-    public void Clear()
+    public void OnClickClear()
+    {
+        GameManager.RPC_LinesClear(gameManager.GetRunner());
+    }
+
+
+
+    public void FunctionClear()
     {
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
         }
+        orderInLayer = 0;
+        materialsList.Clear();
+        Material newMaterial = new Material(materialColorPicker);
+        materialsList.Add(new Material(newMaterial));
+        materialIndex = 0;
         CreateNewLineRenderer();
     }
     /// <summary>
@@ -122,27 +172,21 @@ public class DrawLinesOnPlane : NetworkBehaviour
     public void ChangeGross()
     {
         gross = sliderGross.value;
-    }
-    /// <summary>
-    /// Change the material of the line.
-    /// </summary>
-    public void ChangeYellow()
-    {
-        materialLine= materialsList[1];
-        NumMaterial = 1;
+        grossImage.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f) * sliderGross.value;
     }
 
-    public void ActivatePanelMaterials() 
+
+
+    public void CreateNewMaterial(Color _color)
     {
-        if (panelMaterials.activeSelf)
-        {
-            panelMaterials.SetActive(false);
-        }
-        else 
-        {
-            panelMaterials.SetActive(true);
-        }
+        Material mat = new Material(materialColorPicker);
+        mat.color = _color;
+        materialsList.Add(mat);
+        materialIndex += 1;
     }
+
+
+
     /// <summary>
     /// Using the gameManager creates the lines for the other players, with the characteristics that the user draws.
     /// </summary>
@@ -161,8 +205,9 @@ public class DrawLinesOnPlane : NetworkBehaviour
         SendLineRenderer.material = materialsList[NumMaterial];
         SendLineRenderer.widthMultiplier = lineWidth * gross;
         SendLineRenderer.useWorldSpace = true;
-     
     }
+
+
 
 
 }
