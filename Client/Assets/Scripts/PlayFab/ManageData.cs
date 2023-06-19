@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -49,6 +45,32 @@ public class WheelKey
 }
 
 /// <summary>
+/// Class and construvtor to openMiniMapKey
+/// </summary>
+public class OpenMiniMapKey
+{
+    public int openMiniMapKey;
+
+    public OpenMiniMapKey(int openMiniMapKey)
+    {
+        this.openMiniMapKey = openMiniMapKey;
+    }
+}
+
+/// <summary>
+/// Class and construvtor to muteVoiceKey
+/// </summary>
+public class MuteVoiceKey
+{
+    public int muteVoiceKey;
+
+    public MuteVoiceKey(int muteVoiceKey)
+    {
+        this.muteVoiceKey = muteVoiceKey;
+    }
+}
+
+/// <summary>
 /// Class and construvtor to Keys
 /// </summary>
 public class Keys
@@ -56,23 +78,27 @@ public class Keys
     public int interact;
     public int presentationMode;
     public int wheel;
+    public int openMiniMap;
+    public int muteVoice;
 
-    public Keys(int interact, int presentationMode, int wheel)
+    public Keys(int interact, int presentationMode, int wheel, int openMiniMap, int muteVoice)
     {
         this.interact = interact;
         this.presentationMode = presentationMode;
         this.wheel = wheel;
+        this.openMiniMap = openMiniMap;
+        this.muteVoice = muteVoice;
     }
 }
 /// <summary>
 /// Save Data with the Key Keys
 /// </summary>
-public class ManageData 
+public class ManageData
 {
     public Keys currentkeys;
 
-    // Save User Data
-    public void SaveData(Keys keys)
+    // Save User current keys data to playfab
+    public void SaveCurrentKeysDataPlayfab(Keys keys)
     {
         var request = new UpdateUserDataRequest
         {
@@ -81,35 +107,48 @@ public class ManageData
                 {"Keys", JsonConvert.SerializeObject(keys)}
             }
         };
+
         PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
     }
 
     public void OnDataSend(UpdateUserDataResult obj)
     {
-        Debug.Log("[PlayFab-ManageData] Data Sent");
+        Debug.Log("[PlayFab-ManageData] Current keys data Sent succesfully");
     }
 
-
-    //Load User Data
-    public void LoadData()
-    {
-        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnCharactersDataReceived, OnError);
-    }
     /// <summary>
-    /// Set the value to currentKeys
+    /// Get current keys data from playfab
+    /// </summary>
+    /// <param name="result"></param>
+    public void GetCurrentKeysDataPlayfab()
+    {
+        var request = new GetUserDataRequest
+        {
+            Keys = new List<string> { "Keys" }
+        };
+
+        PlayFabClientAPI.GetUserData(request, OnCharactersDataReceived, OnError);
+    }
+
+    /// <summary>
+    /// Fills the field currentKeys with the retrieved keys from playfab
     /// </summary>
     /// <param name="result"></param>
     void OnCharactersDataReceived(GetUserDataResult result)
     {
-        Debug.Log("[PlayFab-ManageData] Received characters data!");
+        Debug.Log("[PlayFab-ManageData] Received current keys on playfab data!");
         if (result.Data != null && result.Data.ContainsKey("Keys"))
         {
             currentkeys = JsonConvert.DeserializeObject<Keys>(result.Data["Keys"].Value);
-        }      
+        }
     }
 
+    /// <summary>
+    /// Inform that an error ocurred getting the current keys data from playfab
+    /// </summary>
+    /// <param name="result"></param>
     public void OnError(PlayFabError obj)
     {
-        Debug.Log("[PlayFab-ManageData] Error");
+        Debug.Log("[PlayFab-ManageData] Error retrieving current keys data");
     }
 }

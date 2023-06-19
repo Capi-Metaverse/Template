@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,8 +28,6 @@ public class KeyBindDialogueBox : MonoBehaviour
         playerUiPrefab = GameObject.FindObjectOfType<PlayerUiPrefab>();
         //Create one "Key List Item"
         manageData = new ManageData();
-
-
 
         string[] buttonNames = inputManager.GetButtonNames();
         buttonToLabel = new Dictionary<string, TMP_Text>();
@@ -70,35 +67,36 @@ public class KeyBindDialogueBox : MonoBehaviour
             {
                 //which key was pressed down
                 //Loop through all possible keys
-                foreach (KeyCode kc in Enum.GetValues(typeof(KeyCode)))
+                foreach (KeyCode keyCode in Enum.GetValues(typeof(KeyCode)))
                 {
-                    if (Input.GetKeyDown(kc))
+                    if (Input.GetKeyDown(keyCode))
                     {
-                        inputManager.SetButtonForKey(buttonToRebind, kc);
-                        buttonToLabel[buttonToRebind].text = kc.ToString();
+                        inputManager.SetButtonForKey(buttonToRebind, keyCode);
+                        buttonToLabel[buttonToRebind].text = keyCode.ToString();
 
                         switch (buttonToRebind)
                         {
                             case "Interact":
                                 {
-                                    playerUiPrefab.ChangeLetter(kc.ToString());
-                                    inputManager.currentKeys.interact = ((int)kc);
+                                    playerUiPrefab.ChangeLetter(keyCode.ToString());
+                                    inputManager.currentKeys.interact = ((int)keyCode);
                                 }
                                 break;
                             case "ChangeCamera":
                                 {
-                                    playerUiPrefab.ChangeLetterK(kc.ToString());
-                                    inputManager.currentKeys.presentationMode = ((int)kc);
+                                    playerUiPrefab.ChangeLetterK(keyCode.ToString());
+                                    inputManager.currentKeys.presentationMode = ((int)keyCode);
                                 }
                                 break;
                             case "Wheel":
                                 {
-                                    playerUiPrefab.ChangeLetter(kc.ToString());
-                                    inputManager.currentKeys.wheel = ((int)kc);
+                                    playerUiPrefab.ChangeLetter(keyCode.ToString());
+                                    inputManager.currentKeys.wheel = ((int)keyCode);
                                 }
                                 break;
                         }
-                        manageData.SaveData(inputManager.currentKeys);
+
+                        manageData.SaveCurrentKeysDataPlayfab(inputManager.currentKeys);
                         buttonToRebind = null;
                         break;
                     }

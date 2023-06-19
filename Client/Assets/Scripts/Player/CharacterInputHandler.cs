@@ -62,7 +62,7 @@ public class CharacterInputHandler : MonoBehaviour
 
 
     public string nickname;
-    private bool MPul;
+    private bool OpenMiniMapPul;
 
     private void Awake()
     {
@@ -107,7 +107,7 @@ public class CharacterInputHandler : MonoBehaviour
         
         sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
 
-        if (Input.GetKeyDown("m") && gameManager.GetUserStatus() == UserStatus.InGame)
+        if (inputManager.GetButtonDown("MuteVoice") && gameManager.GetUserStatus() == UserStatus.InGame)
             voiceChat.MuteAudio(gameManager.GetUserStatus());
         nickname = this.gameObject.GetComponent<NetworkPlayer>().nickname.ToString();
 
@@ -116,9 +116,7 @@ public class CharacterInputHandler : MonoBehaviour
             
             localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
             playerCamera = localCameraHandler.gameObject.GetComponent<Camera>();
-
         }
-
      
         if (HittingObject && gameManager.GetUserStatus() != UserStatus.InPause && onPresentationCamera==false)
             eventText.SetActive(true);
@@ -140,12 +138,10 @@ public class CharacterInputHandler : MonoBehaviour
                 //RaycastObject
                 else if (raycastObject != hit.transform.gameObject)
                 {
-
                     raycastObject = hit.transform.gameObject;
 
                     eventText.SetActive(true);
                     HittingObject = true;
-
                 }
 
                 //If the user interacts, activate the event
@@ -183,11 +179,9 @@ public class CharacterInputHandler : MonoBehaviour
                 escPul = false; // Detecta si no esta pulsado
 
             }
-            if (!Input.GetKeyDown(KeyCode.C))
+            if (!inputManager.GetButtonDown("OpenMiniMap"))
             {
-
-                MPul = false; // Detecta si no esta pulsado
-
+                OpenMiniMapPul = false; // Detecta si no esta pulsado
             }
 
         switch (gameManager.GetUserStatus())
@@ -195,15 +189,14 @@ public class CharacterInputHandler : MonoBehaviour
                 case UserStatus.InGame:
                     {
 
-                        //M key down(PauseMenu)
-                        if ((Input.GetKeyDown(KeyCode.C) && !MPul))
-                        {
-                            miniMap.transform.GetChild(0).gameObject.SetActive(true);
-                            MPul = true;
-                        }
+                    if ((inputManager.GetButtonDown("OpenMiniMap") && !OpenMiniMapPul))
+                    {
+                        miniMap.transform.GetChild(0).gameObject.SetActive(true);
+                        OpenMiniMapPul = true;
+                    }
 
-                        //ESC key down(PauseMenu)
-                        if ((Input.GetKeyDown(KeyCode.Escape) && !escPul))
+                    //ESC key down(PauseMenu)
+                    if ((Input.GetKeyDown(KeyCode.Escape) && !escPul))
                         {
                             setPause();
                         }
@@ -255,27 +248,25 @@ public class CharacterInputHandler : MonoBehaviour
                         }
                         break;
                     }
-                case UserStatus.InPause:
+            case UserStatus.InPause:
+                {
+                    if (Input.GetKeyDown(KeyCode.Escape) && !escPul)
                     {
-                        if (Input.GetKeyDown(KeyCode.Escape) && !escPul)
-                        {
-                            setJuego();
+                        setJuego();
 
-                            if(changeRoomPanel != null)
-                              changeRoomPanel.SetActive(false);
-                        }
-                    
-                        if (Input.GetKeyDown(KeyCode.C) && !MPul)
-                        {
-                           miniMap.transform.GetChild(0).gameObject.SetActive(false);
-
-                        }
-                    
-
-                        break;
+                        if (changeRoomPanel != null)
+                            changeRoomPanel.SetActive(false);
                     }
 
-                default:
+                    if ((inputManager.GetButtonDown("OpenMiniMap")) && !OpenMiniMapPul)
+                    {
+                        miniMap.transform.GetChild(0).gameObject.SetActive(false);
+
+                    }
+                    break;
+                }
+
+            default:
                     Debug.Log(gameManager.GetUserStatus());
                     break;
             }
