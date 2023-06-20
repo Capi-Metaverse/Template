@@ -1,11 +1,12 @@
 using Newtonsoft.Json.Linq;
-using System;
+using Siccity.GLTFUtility;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class PresentationUpload : MonoBehaviour, IFileUpload
 {
@@ -16,37 +17,28 @@ public class PresentationUpload : MonoBehaviour, IFileUpload
 
     public void Start()
     {
-        _presentation = GameObject.Find("Presentation").GetComponent<Presentation>();//Getting the press from scene
+        _presentation = GameObject.Find("Presentation").GetComponent<Presentation>();
         _gameManager = GameManager.FindInstance();
     }
-    public PresentationUpload(float Size, Presentation Presentation, GameManager GameManager)
-    {
-        _size = Size;
-        _presentation = Presentation;
-        _gameManager = GameManager;
-    }
+
     public void FileUpload(byte[] bytes, string fileExtension)
     {
+        string base64Data = System.Convert.ToBase64String(bytes);
 
-        //Convert data un Base64
-        string s = Convert.ToBase64String(bytes);
-
-        //JSON needed to make a post
         var file = new JObject
         {
             ["Name"] = $"file.{fileExtension}",
-            ["Data"] = s
+            ["Data"] = base64Data
         };
-
 
         var parameters = new JArray
         {
-        new JObject
+            new JObject
             {
                 ["Name"] = "file",
                 ["FileValue"] = file
             },
-        new JObject
+            new JObject
             {
                 ["Name"] = "StoreFile",
                 ["Value"] = true
@@ -61,38 +53,30 @@ public class PresentationUpload : MonoBehaviour, IFileUpload
         string jsonString = jsonObject.ToString();
         Debug.Log(jsonString);
 
-        StartCoroutine(
-            PresentationToImage(
-                $"https://v2.convertapi.com/convert/{fileExtension}/to/png?Secret=vCDWYMLnubBCLVDo",
-                jsonString));
+        StartCoroutine(PresentationToImage($"https://v2.convertapi.com/convert/{fileExtension}/to/png?Secret=vCDWYMLnubBCLVDo", jsonString));
     }
 
-    IEnumerator PresentationToImage(string PostPath,string jsonString)
+    IEnumerator PresentationToImage(string postPath, string jsonString)
     {
-        //POST to ConvertApi
-        UnityWebRequest request = new UnityWebRequest(PostPath, "POST");
+        UnityWebRequest request = new UnityWebRequest(postPath, "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonString);
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.SendWebRequest();
 
-
         _json = JObject.Parse(request.downloadHandler.text);
         Debug.Log("Json: " + _json);
 
-        //TODO: Delete line when status created
-        bool PhotonStatus = true;
-        if (PhotonStatus == true)
+        bool photonStatus = true;
+        if (photonStatus)
         {
-            //We send the content to the other users
             GameManager.RPC_DownloadImages(_gameManager.GetRunner(), request.downloadHandler.text);
         }
         else
         {
             ClearPresentation();
         }
-
     }
 
     public void ClearPresentation()
@@ -104,42 +88,36 @@ public class PresentationUpload : MonoBehaviour, IFileUpload
         StartCoroutine(ImageRequest());
     }
 
-    /// <summary>
-    /// function to make a get request, Get dta from Json with kay Files
-    /// </summary>
-    /// <returns></returns>
     public IEnumerator ImageRequest()
     {
-        foreach (var archiv in _json["Files"])
+        List<UnityWebRequest> webRequests = new List<UnityWebRequest>();
+
+        foreach (var archive in _json["Files"])
         {
-            Debug.Log(archiv["Url"].ToString());
-            //Get Request
-            UnityWebRequest GetRequest = UnityWebRequestTexture.GetTexture(archiv["Url"].ToString());
-            yield return GetRequest.SendWebRequest();
-
-
-            switch (GetRequest.result)
-            {
-                //Error cases
-                case UnityWebRequest.Result.ConnectionError:
-                case UnityWebRequest.Result.DataProcessingError:
-                    Debug.LogError("Error: " + GetRequest.error);
-                    break;
-                case UnityWebRequest.Result.ProtocolError:
-                    Debug.LogError("HTTP Error: " + GetRequest.error);
-                    break;
-
-                //Success case
-                case UnityWebRequest.Result.Success:
-                    //We create a texture2D with the response data
-                    Texture2D textu = ((DownloadHandlerTexture)GetRequest.downloadHandler).texture;
-                    var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2((float)_size, (float)(_size - 0.07)));
-                    _presentation.sprites.Add(nuevoSprite);
-                    break;
-            }      
+            string url = archive["Url"].ToString();
+            UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
+            webRequests.Add(request);
+            request.SendWebRequest();
         }
 
-        //function in presentation to check if the list is full
+        foreach (UnityWebRequest request in webRequests)
+        {
+            while (!request.isDone)
+            {
+                yield return null;
+            }
+
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Error: " + request.error);
+                continue;
+            }
+
+            Texture2D texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
+            var newSprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(_size, _size - 0.07f));
+            _presentation.sprites.Add(newSprite);
+        }
+
         _presentation.OnDirect();
     }
 }

@@ -71,12 +71,8 @@ public class FileSelector: MonoBehaviour
         {
             return;
         }
-        _path = "";
-        foreach (var p in paths)
-        {
-            _path += p + "\n";
-            Debug.Log("WriteResultPath: " + _path);
-        }
+        _path = string.Join("\n", paths);
+
 
         StartCoroutine(UpdateFile());
     }
