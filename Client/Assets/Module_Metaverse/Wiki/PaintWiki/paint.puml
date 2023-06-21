@@ -1,0 +1,77 @@
+@startuml Paint
+
+title
+    <font size="40">Paint</font>
+end title
+
+class ColorPicker {
+    .. SerializeField ..
+    - _texture: RectTransform
+    - _drawLinesOnPlane: DrawLinesOnPlane
+    - _refSprite: Texture2D
+    ..
+    - mouseIn: bool
+    - _color: Color
+    --
+    + OnClickPickerColor()
+    - SetColor()
+    + MouseIn()
+    + MouseOut()
+    + OnPointerUp()
+}
+
+class DrawLinesOnPlane {
+    .. Material ..
+    + materialColorPicker: Material
+    - materialIndex: int
+    + materialList: List<Material>
+    .. Gross ..
+    + sliderGross: Slider
+    - lineWidth: float
+    - gross: float
+    + grossImage: GameObject
+    ..
+    + planeLayer: LayerMask
+    + orderInLayer: int
+    + camera: Camera
+    - linePoints: List<Vector3>
+    - currentLineRenderer: LineRenderer
+    - SendLineRenderer: LineRenderer
+    + gameManager: GameManager
+    --
+    - Start()
+    - Update()
+    - CreateNewLineRenderer()
+    + OnClickClear()
+    + FunctionClear()
+    + ChangeGross()
+    + CreateNewMaterial(Color)
+    + dibujoetc(Vector3[], int, float, int)
+}
+
+class GameManager {
+    + RPC_LinesSend(NetworkRunner, Vector3[], int, float, int)
+    + RPC_LinesClear(NetworkRunner)
+}
+
+ColorPicker::OnPointerUp ..> DrawLinesOnPlane::CreateNewMaterial: Create new material\nwith the color selected
+DrawLinesOnPlane::OnClickClear -[#Green,dashed,thickness=1]-> GameManager::RPC_LinesClear: Called when\nbutton clear\nis pressed
+DrawLinesOnPlane::Update -[#Red,dashed,thickness=1]-> GameManager::RPC_LinesSend: Called when\nline ended
+GameManager::RPC_LinesClear -[#Orange,dashed,thickness=1]-> DrawLinesOnPlane::FunctionClear: Clear the lines\nfor all players
+GameManager::RPC_LinesSend -[#Blue,dashed,thickness=1]-> DrawLinesOnPlane::dibujoetc: Draw the line\nfor all players
+
+note left of ColorPicker
+    <b><color:royalBlue>ColorPicker</color>
+    This script manages
+    the selection of the color
+    in the color picker panel
+end note
+
+note left of DrawLinesOnPlane
+    <b><color:royalBlue>DrawLinesOnPlane</color>
+    This script manages
+    drawing of the lines
+    in the board
+end note
+
+@enduml

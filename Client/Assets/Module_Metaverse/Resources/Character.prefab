@@ -335,6 +335,7 @@ MonoBehaviour:
   - {fileID: -3915082565821610680, guid: a9561826c922a76459b99f2f589cad7e, type: 3}
   - {fileID: -3915082565821610680, guid: c6004deba5390ed4784fdec07fb6b29e, type: 3}
   - {fileID: -3915082565821610680, guid: d610150337f0d054b9c1ad13aab73346, type: 3}
+  - {fileID: -3915082565821610680, guid: dcb111c6c372d2d4ba7b94376f44f5dc, type: 3}
   animator: {fileID: 8161174919126568394, guid: 57f6953ce52c19147b49af395f0446ec, type: 3}
   playerNicknameTM: {fileID: 495725005451376805}
   _playfabIdentity: 
@@ -396,7 +397,6 @@ MonoBehaviour:
   Settings: {fileID: 5587160888839851947, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
   UICard: {fileID: 0}
   UICardOtherUser: {fileID: 0}
-  miniMap: {fileID: 0}
   eventText: {fileID: 0}
   eventTextK: {fileID: 0}
   changeRoomPanel: {fileID: 0}
