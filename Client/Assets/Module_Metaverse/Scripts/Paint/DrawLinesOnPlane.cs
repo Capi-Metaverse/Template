@@ -10,23 +10,23 @@ using static Fusion.NetworkCharacterController;
 
 public class DrawLinesOnPlane : NetworkBehaviour
 {
-    public Material materialLine;
+    //Material
     public Material materialColorPicker;
     private int materialIndex = 0;
-    public LayerMask planeLayer;
-    public Camera camera;
+    public List<Material> materialsList;
+    //Gross
     public Slider sliderGross;
     private float lineWidth = 0.05f;
     private float gross = 1;
+    public GameObject grossImage;
+    //Other
+    public LayerMask planeLayer;
+    public int orderInLayer = 0;
+    public Camera camera;
     private List<Vector3> linePoints = new List<Vector3>();
     private LineRenderer currentLineRenderer;
     private LineRenderer SendLineRenderer;
-    public List<Material> materialsList;
     public GameManager gameManager;
-    public int NumMaterial = 0;
-    public int orderInLayer = 0;
-    public GameObject grossImage;
-    [SerializeField] private GameObject panelMaterials;
 
 
 
@@ -120,11 +120,9 @@ public class DrawLinesOnPlane : NetworkBehaviour
 
 
             currentLineRenderer.GetPositions(positions);
-            GameManager.RPC_LinesSend(gameManager.GetRunner(), positions, NumMaterial, gross);
+            GameManager.RPC_LinesSend(gameManager.GetRunner(), positions, materialIndex, gross, orderInLayer);
             currentLineRenderer = null;
         }
-
-
 
     }
     /// <summary>
@@ -193,7 +191,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
     /// <param name="Lines"></param>
     /// <param name="NumMaterial"></param>
     /// <param name="gross"></param>
-    public void dibujoetc(Vector3[] Lines, int NumMaterial, float gross)
+    public void dibujoetc(Vector3[] Lines, int materialIndex, float gross, int orderInLayer)
     {
         Debug.Log(Lines.Length);
         //SendLineRenderer.positionCount = Lines.Length;
@@ -202,12 +200,10 @@ public class DrawLinesOnPlane : NetworkBehaviour
         SendLineRenderer = newLineObjectSend.AddComponent<LineRenderer>();
         SendLineRenderer.positionCount = Lines.Length;
         SendLineRenderer.SetPositions(Lines);
-        SendLineRenderer.material = materialsList[NumMaterial];
+        SendLineRenderer.material = materialsList[materialIndex];
         SendLineRenderer.widthMultiplier = lineWidth * gross;
         SendLineRenderer.useWorldSpace = true;
+        SendLineRenderer.sortingOrder = orderInLayer;
     }
-
-
-
 
 }
