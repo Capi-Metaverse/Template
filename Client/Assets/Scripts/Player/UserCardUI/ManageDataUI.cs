@@ -65,17 +65,24 @@ using UnityEngine;
         public void LoadData()
         {
             PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnCharactersDataReceived, OnError);
-         }
+        }
         /// <summary>
         /// If the user receives the data, he stores it in a variable
         /// </summary>
         /// <param name="result"></param>
         void OnCharactersDataReceived(GetUserDataResult result)
+        {  
+        Debug.Log("[PlayFab-ManageData] Received characters data!");
+
+        if (result.Data != null && result.Data.ContainsKey("userUICard"))
         {
-            Debug.Log("[PlayFab-ManageData] Received characters data!");
+            Debug.Log(result.Data["userUICard"].Value);
+            data = JsonConvert.DeserializeObject<UserUIInfo>(result.Data["userUICard"].Value);
         }
 
-        public void OnError(PlayFabError obj)
+    }
+
+    public void OnError(PlayFabError obj)
         {
             Debug.Log("[PlayFab-ManageData] Error");
         }

@@ -8,9 +8,7 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
 {
    
     public ManageDataUI manageDataUI;
-    //
     public AchievementsManager achievementsManager;
-    //
     public GameObject UICard;
     public VisionData visionData;
     public EditVisionData editVisionData;

@@ -620,7 +620,7 @@ PrefabInstance:
     - target: {fileID: 804727767, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
       propertyPath: achievementsManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 804727764}
     - target: {fileID: 1676563330352215286, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
       propertyPath: m_Size
       value: 0.52974313
@@ -761,6 +761,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e9766223a9014447b4f690b162c3436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1963275331951981960 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7208463161891461583, guid: f947d59ff761da34c8f9d5d9fa4d1924, type: 3}
+  m_PrefabInstance: {fileID: 9166918224498879559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &804727764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963275331951981960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3ef2c5eed849f4387260aa9b6fafc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &3953826263919795019 stripped
