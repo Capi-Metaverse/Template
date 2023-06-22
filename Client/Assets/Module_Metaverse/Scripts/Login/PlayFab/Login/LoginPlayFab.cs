@@ -17,12 +17,17 @@ public class LoginPlayFab : MonoBehaviour, ILogin
 
     public PanelLoginManager PanelLoginManager;
 
+    private GameManager gameManager;
     /// <summary>
     /// Method to login the user.
     /// </summary>
     /// <param name="emailInput"></param>
     /// <param name="passwordInput"></param>
 
+    public void Start()
+    {
+        gameManager = GameManager.FindInstance();
+    }
     public void Login(string emailInput, string passwordInput)
     {
         PanelLoginManager.SetInfoMessage("Logging in...");
@@ -119,8 +124,8 @@ public class LoginPlayFab : MonoBehaviour, ILogin
         string username = playerDataUsername.getPlayerUsername;
 
 
-       //gameManager.SetUsername(username);
-       // gameManager.SetEmail(emailInput.text);
+       gameManager.SetUsername(username);
+       //gameManager.SetEmail(emailInput);
 
         requestsCounter++;
         checkRequestCounter();
@@ -143,7 +148,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
         string IDMaster = playerDataId.getPlayerId;
 
         Debug.Log("[PlayFab-LoginManager] MasterID: " + IDMaster);
-        //gameManager.SetUserID(IDMaster);
+        gameManager.SetUserID(IDMaster);
         requestsCounter++;
         checkRequestCounter();
     }
