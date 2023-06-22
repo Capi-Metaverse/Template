@@ -385,7 +385,7 @@ MonoBehaviour:
   card: {fileID: 2495531870298462780}
   visionData: {fileID: 0}
   imagen: {fileID: 5123012197220266190}
-  achievementsManager: {fileID: 0}
+  achievementsManager: {fileID: 8522163095776886145}
   achivementList: {fileID: 4521935984786782730}
 --- !u!1001 &568308342904409067
 PrefabInstance:
@@ -580,7 +580,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AchivementsUIItem: {fileID: 7680741457055669170, guid: 32811fb50cf67e44b8f0fe566af4cfdd, type: 3}
   AchivementsUIList: {fileID: 6073027117692187601}
-  achievementsManager: {fileID: 0}
+  achievementsManager: {fileID: 8522163095776886145}
+--- !u!114 &8522163095776886145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2495531870298462780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3ef2c5eed849f4387260aa9b6fafc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4515089252703329518 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4128631723525510917, guid: cf02cf4f7333b514eb7f6cd52fec4dd4, type: 3}

@@ -4045,6 +4045,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4521935984786782730, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
+      propertyPath: achievementsManager
+      value: 
+      objectReference: {fileID: 9166918225025845130}
     - target: {fileID: 9166918224799515813, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
       propertyPath: uiusers
       value: 
@@ -4052,11 +4056,11 @@ PrefabInstance:
     - target: {fileID: 9166918225025845130, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
       propertyPath: visionData
       value: 
-      objectReference: {fileID: 804727761}
+      objectReference: {fileID: 0}
     - target: {fileID: 9166918225025845130, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
       propertyPath: achievementsManager
       value: 
-      objectReference: {fileID: 804727764}
+      objectReference: {fileID: 9166918225025845130}
     - target: {fileID: 9166918226495525129, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
       propertyPath: m_Name
       value: Menus
@@ -4107,3 +4111,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
+--- !u!1 &9166918225025845129 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2495531870298462780, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
+  m_PrefabInstance: {fileID: 9166918225025845128}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9166918225025845130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9166918225025845129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3ef2c5eed849f4387260aa9b6fafc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
