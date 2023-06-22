@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -17,6 +18,7 @@ public class ColorPicker : MonoBehaviour
 
     private bool mouseIn = false;
     private Color _color;
+    public Image _colorButton;
 
 
     public void OnClickPickerColor()
@@ -43,6 +45,7 @@ public class ColorPicker : MonoBehaviour
 
             _color = _refSprite.GetPixel(localPosX, localPosY);
             _materialColorPicker.color = _color;
+            _colorButton.color = _color;
         }
     }
 
