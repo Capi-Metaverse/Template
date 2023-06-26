@@ -1666,8 +1666,8 @@ RectTransform:
   m_Father: {fileID: 3964655306307713964}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.47025687}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3645,14 +3645,14 @@ GameObject:
   - component: {fileID: 309700834}
   - component: {fileID: 804727761}
   - component: {fileID: 804727767}
-  - component: {fileID: 804727768}
+  - component: {fileID: 804727764}
   m_Layer: 5
   m_Name: UIuserInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5325998622574376716
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3756,7 +3756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e764ce496176d42a6c0a406245d9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imagedata: {fileID: 0}
+  imagedata: {fileID: 8455532466235325246}
   UserNameTitle: {fileID: 2817869555988508744}
   TemasText: {fileID: 6793117959586957767}
   OboutTextInput: {fileID: 8158187277617765664}
@@ -3798,8 +3798,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AchivementsUIItem: {fileID: 7680741457055669170, guid: 32811fb50cf67e44b8f0fe566af4cfdd, type: 3}
   AchivementsUIList: {fileID: 8047321658674379654}
-  achievementsManager: {fileID: 804727768}
---- !u!114 &804727768
+  achievementsManager: {fileID: 804727764}
+--- !u!114 &804727764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3808,10 +3808,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7208463161891461583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b129b765876dd7647baf76b802e50dae, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f3ef2c5eed849f4387260aa9b6fafc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  achivementList: {fileID: 804727767}
 --- !u!1 &7228245122682587891
 GameObject:
   m_ObjectHideFlags: 0
@@ -4285,9 +4284,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -17, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1475280483560743201
 CanvasRenderer:
@@ -4637,7 +4636,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -261.79, y: 995.0369}
+  m_AnchoredPosition: {x: -261.79, y: 358.5182}
   m_SizeDelta: {x: 523.79, y: 1353.555}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5788323548977875934
@@ -4787,8 +4786,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6465587319961401830}
   m_HandleRect: {fileID: 5002671859972855639}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.52973956
+  m_Value: 1
+  m_Size: 0.52974313
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
