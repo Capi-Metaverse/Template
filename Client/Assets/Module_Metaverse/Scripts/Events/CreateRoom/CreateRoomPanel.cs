@@ -17,7 +17,7 @@ public class CreateRoomPanel : MonoBehaviour
 
     [SerializeField] private TMP_Text map;
 
-    private string[] mapNames = { "Mapa1", "Mapa2", "Oficinas","Map_Photon_Module" };
+    private string[] mapNames = { "Mapa1", "Mapa2", "Oficinas"};
 
 
     GameManager gameManager;
