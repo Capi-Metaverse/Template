@@ -294,6 +294,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
 
 
         UserRolePlayFab = roles.FirstOrDefault(x => x.Value == true).Key;
+
         userManager.UserRole = (UserRole)Enum.Parse(typeof(UserRole), UserRolePlayFab);
       /*  switch (UserRolePlayFab)
         {
