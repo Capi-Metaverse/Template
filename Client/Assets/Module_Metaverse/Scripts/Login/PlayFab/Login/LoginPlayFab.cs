@@ -7,6 +7,7 @@ using static LoginManager;
 using System;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using Fusion;
 
 public class LoginPlayFab : MonoBehaviour, ILogin
 {
@@ -18,6 +19,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     public PanelLoginManager PanelLoginManager;
 
     private GameManager gameManager;
+    private UserManager userManager;
     /// <summary>
     /// Method to login the user.
     /// </summary>
@@ -27,6 +29,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     public void Start()
     {
         gameManager = GameManager.FindInstance();
+        userManager = UserManager.FindInstance();
     }
     public void Login(string emailInput, string passwordInput)
     {
@@ -37,6 +40,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
             Email = emailInput,
             Password = passwordInput
         };
+        userManager.Email = emailInput;
         PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnError);
     }
 
@@ -124,9 +128,8 @@ public class LoginPlayFab : MonoBehaviour, ILogin
         string username = playerDataUsername.getPlayerUsername;
 
 
-       gameManager.SetUsername(username);
-       //gameManager.SetEmail(emailInput);
-
+       //gameManager.SetUsername(username);
+        userManager.Username = username;
         requestsCounter++;
         checkRequestCounter();
 
@@ -148,7 +151,8 @@ public class LoginPlayFab : MonoBehaviour, ILogin
         string IDMaster = playerDataId.getPlayerId;
 
         Debug.Log("[PlayFab-LoginManager] MasterID: " + IDMaster);
-        gameManager.SetUserID(IDMaster);
+        //gameManager.SetUserID(IDMaster);
+        userManager.UserID = IDMaster;
         requestsCounter++;
         checkRequestCounter();
     }
@@ -290,6 +294,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
 
 
         UserRolePlayFab = roles.FirstOrDefault(x => x.Value == true).Key;
+        userManager.UserRole = (UserRole)Enum.Parse(typeof(UserRole), UserRolePlayFab);
       /*  switch (UserRolePlayFab)
         {
             case "admins":
@@ -305,7 +310,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
                 gameManager.SetUserRole(UserRole.Moderator);
                 break;
         }*/
-       // Debug.Log("[PlayFab-LoginManager] UserRole: " + gameManager.GetUserRole());
+       Debug.Log("[PlayFab-LoginManager] UserRole: " + gameManager.GetUserRole());
 
         //Change to the next scene
         if (newUser)

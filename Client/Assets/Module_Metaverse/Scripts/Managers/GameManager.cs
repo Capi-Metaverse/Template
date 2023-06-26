@@ -37,14 +37,6 @@ public enum UserStatus
     InPause
 }
 
-public enum UserRole
-{
-    Admin,
-    Moderator,
-    Client,
-    Employee
-}
-
 public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 {
 

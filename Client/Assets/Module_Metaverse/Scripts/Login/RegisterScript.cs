@@ -21,7 +21,7 @@ public class RegisterScript : MonoBehaviour
     private void Start()
     {
         LoginManager = GameObject.Find("LoginManager");
-        PanelLoginManager = GameObject.Find("PanelManager").GetComponent<PanelLoginManager>();
+        PanelLoginManager = GameObject.Find("PanelLoginManager").GetComponent<PanelLoginManager>();
     }
 
 
