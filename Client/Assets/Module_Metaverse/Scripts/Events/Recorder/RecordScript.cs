@@ -6,7 +6,8 @@ public class RecordScript : MonoBehaviour, IMetaEvent
 
     GameObject _eventObject;
 
-     [SerializeField] private GameObject VideoRecorder;
+    [SerializeField] private RecorderCameraController _recorderCameraController;
+    [SerializeField] private GameObject VideoRecorder;
     GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
 
     private void Awake()
@@ -22,6 +23,7 @@ public class RecordScript : MonoBehaviour, IMetaEvent
         VideoRecorder.SetActive(true);
         if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.NOT_START)
         {
+            _recorderCameraController.ActivateCamera();
             //Start to capture the video
             VideoCaptureCtrl.instance.StartCapture();
         }
@@ -30,6 +32,7 @@ public class RecordScript : MonoBehaviour, IMetaEvent
                 //Stop the video
             VideoCaptureCtrl.instance.StopCapture();
             VideoRecorder.SetActive(false);
+            _recorderCameraController.DeactivateCamera();
         }
     } 
 }
