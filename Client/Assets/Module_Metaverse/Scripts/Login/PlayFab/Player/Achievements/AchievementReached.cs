@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class AchievementReached : MonoBehaviour
 {
-    public static void ShowAchievement(string achName, Transform achZone)
+  /*  public static void ShowAchievement(string achName, Transform achZone)
     {
         string path = "Assets/Module_Metaverse/Prefabs/Achievement/Achievement.prefab";
         GameObject achPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
@@ -17,5 +17,5 @@ public class AchievementReached : MonoBehaviour
         text = achName;
 
         Instantiate(achPrefab, achZone);
-    }
+    }*/
 }

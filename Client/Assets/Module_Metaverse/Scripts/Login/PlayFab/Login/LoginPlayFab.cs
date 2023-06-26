@@ -48,10 +48,10 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     {
 
         //Determine the role of the user
-        ConfirmRole("admins");
-        ConfirmRole("moderators");
-        ConfirmRole("clients");
-        ConfirmRole("members");
+        ConfirmRole("Admin");
+        ConfirmRole("Moderator");
+        ConfirmRole("Client");
+        ConfirmRole("Employee");
 
         var GetNa = new ExecuteCloudScriptRequest()
         {
