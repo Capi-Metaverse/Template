@@ -17,14 +17,15 @@ public class CreateRoomPanel : MonoBehaviour
 
     [SerializeField] private TMP_Text map;
 
-    private string[] mapNames = { "Mapa1", "Mapa2", "Oficinas" };
+    private string[] mapNames = { "Mapa1", "Mapa2", "Oficinas","Map_Photon_Module" };
 
 
     GameManager gameManager;
 
     private void Start()
     {
-         map.text = mapNames[0];
+        gameManager = GameManager.FindInstance();
+        map.text = mapNames[0];
     }
 
     /// <summary>

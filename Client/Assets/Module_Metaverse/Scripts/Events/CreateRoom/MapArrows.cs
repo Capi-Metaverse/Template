@@ -5,7 +5,7 @@ public class MapArrows : MonoBehaviour, ICreateRoomArrows
 {
     [SerializeField] private TMP_Text map;
 
-    private string[] mapNames = { "Mapa1", "Mapa2", "Oficinas" };
+    private string[] mapNames = { "Mapa1", "Mapa2", "Oficinas", "Map_Photon_Module" };
 
     private int actualMap = 0;
 
