@@ -167,14 +167,14 @@ public class RPCManager : SimulationBehaviour
     /// <param name="NumMaterial"></param>
     /// <param name="gross"></param>
     [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = false)]
-    public static void RPC_LinesSend(NetworkRunner runner, Vector3[] Lines, int materialIndex, float gross, int orderInLayer)
+    public static void RPC_LinesSend(NetworkRunner runner, Vector3[] Lines,float gross, int orderInLayer, Color color)
     {
 
 
         Debug.Log(Lines.Length);
 
         DrawLinesOnPlane drawLinesOnPlane = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
-        drawLinesOnPlane.dibujoetc(Lines, materialIndex, gross, orderInLayer);
+        drawLinesOnPlane.dibujoetc(Lines, gross, orderInLayer, color);
     }
 
     [Rpc]

@@ -122,7 +122,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
 
 
             currentLineRenderer.GetPositions(positions);
-            RPCManager.RPC_LinesSend(gameManager.GetRunner(), positions, materialIndex, gross, orderInLayer);
+            RPCManager.RPC_LinesSend(gameManager.GetRunner(), positions, gross, orderInLayer, materialsList[materialIndex].color);
             currentLineRenderer = null;
         }
 
@@ -193,16 +193,18 @@ public class DrawLinesOnPlane : NetworkBehaviour
     /// <param name="Lines"></param>
     /// <param name="NumMaterial"></param>
     /// <param name="gross"></param>
-    public void dibujoetc(Vector3[] Lines, int materialIndex, float gross, int orderInLayer)
+    public void dibujoetc(Vector3[] Lines, float gross, int orderInLayer,Color color)
     {
         Debug.Log(Lines.Length);
-        //SendLineRenderer.positionCount = Lines.Length;
+        SendLineRenderer.positionCount = Lines.Length;
         GameObject newLineObjectSend = new GameObject("LineRendererSend");
         newLineObjectSend.transform.SetParent(transform);
         SendLineRenderer = newLineObjectSend.AddComponent<LineRenderer>();
         SendLineRenderer.positionCount = Lines.Length;
         SendLineRenderer.SetPositions(Lines);
-        SendLineRenderer.material = materialsList[materialIndex];
+        Material mater = new Material(materialColorPicker);
+        mater.color = color;
+        materialsList.Add(mater); materialIndex += 1;
         SendLineRenderer.widthMultiplier = lineWidth * gross;
         SendLineRenderer.useWorldSpace = true;
         SendLineRenderer.sortingOrder = orderInLayer;
