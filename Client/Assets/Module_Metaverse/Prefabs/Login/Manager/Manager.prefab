@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4542204701511270775}
   - component: {fileID: 1416844657987540433}
   - component: {fileID: 8752408761582623535}
+  - component: {fileID: 1147169449751264389}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -50,13 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9726cca4fdd1c4ea5c5e56e938be4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loader: {fileID: 0}
-  _runner: {fileID: 0}
   inputManager: {fileID: 0}
-  playerCount: 0
-  currentMap: 
   Settings: {fileID: 5587160888839851947, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
-  CameraBool: 0
 --- !u!114 &2175234757224767764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +225,20 @@ MonoBehaviour:
   _currentPlayer: {fileID: 0}
   _connectionStatus: 0
   _userStatus: 0
+  avatarNumber: 0
   CameraBool: 0
   currentMap: 
   inputManager: {fileID: 0}
+--- !u!114 &1147169449751264389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6962550070303046523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2643f85d7f9da4c43ad8410d39b1548a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentScene: 

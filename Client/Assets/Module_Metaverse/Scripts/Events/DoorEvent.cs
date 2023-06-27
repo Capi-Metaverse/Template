@@ -28,7 +28,7 @@ public class DoorEvent : MonoBehaviour, IMetaEvent
         if (isPublic || userManager.UserRole == UserRole.Admin )
         {
             //Activate the loading UI
-            photonManager.ChangeMap(map);
+            photonManager.ChangeScene(map);
         }
         //If the room is not public, we will ask the password
         else
@@ -43,7 +43,7 @@ public class DoorEvent : MonoBehaviour, IMetaEvent
             else
             {
                 photonManager = PhotonManager.FindInstance();
-                photonManager.ChangeMap(map);
+                photonManager.ChangeScene(map);
             }
         }
     }

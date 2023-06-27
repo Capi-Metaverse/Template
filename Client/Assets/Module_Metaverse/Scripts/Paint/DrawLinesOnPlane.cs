@@ -28,7 +28,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
     private LineRenderer currentLineRenderer;
     private LineRenderer SendLineRenderer;
     public GameManager gameManager;
-    [SerializeField] private ColorPicker colorPicker;
+ 
 
     public PhotonManager photonManager;
 
@@ -38,6 +38,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
     void Start()
     {
         gameManager = GameManager.FindInstance();
+        photonManager = PhotonManager.FindInstance();
         materialColorPicker.color = Color.black;
         Material firstMaterial = new Material(materialColorPicker);
         materialsList.Add(new Material(firstMaterial));
@@ -212,7 +213,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
         SendLineRenderer.widthMultiplier = lineWidth * gross;
         SendLineRenderer.useWorldSpace = true;
         SendLineRenderer.sortingOrder = orderInLayer;
-        colorPicker._colorButton.color = color;
+      
 
     }
 

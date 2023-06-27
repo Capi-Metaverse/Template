@@ -33,7 +33,11 @@ public enum UserStatus
 }
 public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
 {
-    
+
+    //Managers
+
+    private MSceneManager mSceneManager;
+
     //Runner, JUST ONE PER USER/ROOM
     [SerializeField] private NetworkRunner _runner;
 
@@ -55,6 +59,8 @@ public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
 
     //Multiplayer server Lobby
     public const string LOBBY_NAME = "Main";
+
+  
 
     //Connection Status
     [SerializeField] private ConnectionStatus _connectionStatus;
@@ -80,6 +86,7 @@ public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
 
     //SceneManager
     public string currentMap;
+    //GameManager
     [SerializeField] private InputManager inputManager;
     //Initialization
     private void Awake()
@@ -95,6 +102,11 @@ public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
             return;
 
         }
+    }
+
+    private void Start()
+    {
+        mSceneManager = MSceneManager.FindInstance();
     }
 
     //List of rooms
@@ -173,7 +185,8 @@ public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
             await Disconnect();
             //Mostrar error screen
             //If it's not Playfab, change to another scene
-            SceneManager.LoadScene("LoginPlayFab_Module");
+
+            mSceneManager.LoadLogin();
 
             return;
         }
@@ -235,7 +248,6 @@ public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
         });
 
         PlayerCount = 10;
-        //CurrentMap = "LobbyOficial";
         RoomName = props.RoomName.ToUpper();
 
         //Maybe refactor this part Add Player in setPlayerPanel?
@@ -247,7 +259,7 @@ public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
 
             await Disconnect();
 
-            SceneManager.LoadScene("1.Start");
+            mSceneManager.LoadLogin();
 
             return;
         }
@@ -301,7 +313,7 @@ public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
         RoomName = RoomName.ToUpper();
         //We change to the new map
         //THIS WILL BE THE LOBBY WHEN IT'S ENDED
-        SceneManager.LoadSceneAsync("LobbyOficial");
+        mSceneManager.LoadMain();
         Debug.Log("Creating session");
     }
 
@@ -312,15 +324,15 @@ public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
     /// <param name="sessionName"></param>
     /// <param name="playerNumber"></param>
     /// <param name="map"></param>
-    public async void StartCustomGame(string sessionName, int playerNumber, string map)
+    public async void StartCustomGame(string sessionName, int playerNumber, string scene)
     {
         await Disconnect();
         RoomName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
         RoomName = RoomName.ToUpper();
-        currentMap = map;
+        currentMap = scene;
         PlayerCount = playerNumber;
         //We change to the respective map
-        SceneManager.LoadSceneAsync(map);
+        mSceneManager.LoadScene(scene);
     }
 
     //PhotonManager
@@ -377,10 +389,10 @@ public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
     /// <param name="map"></param>
 
     //PhotonManager
-    public async void ChangeMap(string map)
+    public async void ChangeScene(string scene)
     {
         await Disconnect();
-        SceneManager.LoadSceneAsync(map);
+        mSceneManager.LoadScene(scene);
 
     }
 

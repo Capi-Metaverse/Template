@@ -20,6 +20,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
 
     private GameManager gameManager;
     private UserManager userManager;
+    private MSceneManager mSceneManager;
     /// <summary>
     /// Method to login the user.
     /// </summary>
@@ -30,6 +31,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     {
         gameManager = GameManager.FindInstance();
         userManager = UserManager.FindInstance();
+        mSceneManager = MSceneManager.FindInstance();
     }
     public void Login(string emailInput, string passwordInput)
     {
@@ -302,13 +304,14 @@ public class LoginPlayFab : MonoBehaviour, ILogin
         //Change to the next scene
         if (newUser)
         {
-            SceneManager.LoadScene("Tutorial");
+            mSceneManager.LoadTutorial();
 
         }
 
         else
         {
-            SceneManager.LoadScene("Lobby_Module");
+       
+            mSceneManager.LoadScene("Lobby_Module");
         }
     }
 
