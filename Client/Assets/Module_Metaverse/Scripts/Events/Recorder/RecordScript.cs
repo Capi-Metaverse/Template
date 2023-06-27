@@ -21,7 +21,6 @@ public class RecordScript : MonoBehaviour, IMetaEvent
     /// <param name="host"></param>
     public void activate(bool host)
     {
-        //VideoRecorder.SetActive(true);
         _recorderCameraController.ActivateCamera();
         if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.NOT_START)
         {
@@ -32,13 +31,11 @@ public class RecordScript : MonoBehaviour, IMetaEvent
         { 
                 //Stop the video
             VideoCaptureCtrl.instance.StopCapture();
-            Debug.Log("Status Finished");
-            //VideoRecorder.SetActive(false);
             _recorderCameraController.DeactivateCamera();
         }
         //else if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.FINISH)
         //{
-            
+
         //}
     } 
 }
