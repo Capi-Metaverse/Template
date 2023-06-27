@@ -71,7 +71,7 @@ public class PresentationUpload : MonoBehaviour, IFileUpload
         bool photonStatus = true;
         if (photonStatus)
         {
-            GameManager.RPC_DownloadImages(_gameManager.GetRunner(), request.downloadHandler.text);
+            RPCManager.RPC_DownloadImages(_gameManager.GetRunner(), request.downloadHandler.text);
         }
         else
         {

@@ -28,6 +28,8 @@ public class DrawLinesOnPlane : NetworkBehaviour
     private LineRenderer SendLineRenderer;
     public GameManager gameManager;
 
+    
+
 
 
     void Start()
@@ -120,7 +122,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
 
 
             currentLineRenderer.GetPositions(positions);
-            GameManager.RPC_LinesSend(gameManager.GetRunner(), positions, materialIndex, gross, orderInLayer);
+            RPCManager.RPC_LinesSend(gameManager.GetRunner(), positions, materialIndex, gross, orderInLayer);
             currentLineRenderer = null;
         }
 
@@ -146,7 +148,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
     /// </summary>
     public void OnClickClear()
     {
-        GameManager.RPC_LinesClear(gameManager.GetRunner());
+        RPCManager.RPC_LinesClear(gameManager.GetRunner());
     }
 
 

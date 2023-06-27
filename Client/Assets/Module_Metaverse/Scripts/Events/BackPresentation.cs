@@ -15,6 +15,6 @@ public class BackPresentation : NetworkBehaviour, IMetaEvent
 
     public void activate(bool host)
     {
-        GameManager.RPC_BackPress(GameManager.FindInstance().GetRunner());
+        RPCManager.RPC_BackPress(GameManager.FindInstance().GetRunner());
     }
 }

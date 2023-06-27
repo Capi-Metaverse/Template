@@ -22,7 +22,7 @@ public class TriggerEntranceDoor : MonoBehaviour
     {
         if(other.gameObject.GetComponent<NetworkPlayer>().ActorID == gameManager.GetRunner().LocalPlayer.PlayerId) 
         {
-            GameManager.RPC_OpenDoor(gameManager.GetRunner());
+            RPCManager.RPC_OpenDoor(gameManager.GetRunner());
         }
         
     }
@@ -35,7 +35,7 @@ public class TriggerEntranceDoor : MonoBehaviour
     {
         if (other.gameObject.GetComponent<NetworkPlayer>().ActorID == gameManager.GetRunner().LocalPlayer.PlayerId)
         {
-            GameManager.RPC_CloseDoor(gameManager.GetRunner());
+           RPCManager.RPC_CloseDoor(gameManager.GetRunner());
         }
 
     }

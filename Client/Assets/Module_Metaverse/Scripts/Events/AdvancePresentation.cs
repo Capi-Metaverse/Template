@@ -16,6 +16,6 @@ public class AdvancePresentation : NetworkBehaviour, IMetaEvent
 
     public void activate(bool host)
     {
-        GameManager.RPC_AdvancePress(GameManager.FindInstance().GetRunner());
+       RPCManager.RPC_AdvancePress(GameManager.FindInstance().GetRunner());
     }
 }

@@ -31,7 +31,7 @@ public class UserListItem : MonoBehaviour
     /// Kick Other players from de APP
     /// </summary>
     public void KickPlayer() { 
-        GameManager.RPC_onKick(gameManager.GetRunner(),NumActor);  
+        RPCManager.RPC_onKick(gameManager.GetRunner(),NumActor);  
     }
     /// <summary>
     /// Change the Audio Level
