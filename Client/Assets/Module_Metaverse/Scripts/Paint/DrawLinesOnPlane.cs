@@ -196,15 +196,16 @@ public class DrawLinesOnPlane : NetworkBehaviour
     public void dibujoetc(Vector3[] Lines, float gross, int orderInLayer,Color color)
     {
         Debug.Log(Lines.Length);
-        SendLineRenderer.positionCount = Lines.Length;
         GameObject newLineObjectSend = new GameObject("LineRendererSend");
-        newLineObjectSend.transform.SetParent(transform);
         SendLineRenderer = newLineObjectSend.AddComponent<LineRenderer>();
+        SendLineRenderer.positionCount = Lines.Length;
+        newLineObjectSend.transform.SetParent(transform);
         SendLineRenderer.positionCount = Lines.Length;
         SendLineRenderer.SetPositions(Lines);
         Material mater = new Material(materialColorPicker);
         mater.color = color;
         materialsList.Add(mater); materialIndex += 1;
+        SendLineRenderer.material = mater;
         SendLineRenderer.widthMultiplier = lineWidth * gross;
         SendLineRenderer.useWorldSpace = true;
         SendLineRenderer.sortingOrder = orderInLayer;
