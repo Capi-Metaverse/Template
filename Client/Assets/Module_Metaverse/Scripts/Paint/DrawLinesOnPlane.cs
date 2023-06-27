@@ -30,6 +30,8 @@ public class DrawLinesOnPlane : NetworkBehaviour
     public GameManager gameManager;
     [SerializeField] private ColorPicker colorPicker;
 
+    public PhotonManager photonManager;
+
 
 
 
@@ -123,7 +125,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
 
 
             currentLineRenderer.GetPositions(positions);
-            RPCManager.RPC_LinesSend(gameManager.GetRunner(), positions, gross, orderInLayer, materialsList[materialIndex].color);
+            RPCManager.RPC_LinesSend(photonManager.Runner, positions, gross, orderInLayer, materialsList[materialIndex].color);
             currentLineRenderer = null;
         }
 
@@ -149,7 +151,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
     /// </summary>
     public void OnClickClear()
     {
-        RPCManager.RPC_LinesClear(gameManager.GetRunner());
+        RPCManager.RPC_LinesClear(photonManager.Runner);
     }
 
 

@@ -20,12 +20,15 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     public GameObject Settings;
     PlayerList playerList;
 
+    public PhotonManager photonManager;
+
     // Start is called before the first frame update
 
     private void Awake()
     {
-        gameManager = GameManager.FindInstance();
+        //gameManager = GameManager.FindInstance();
         userManager = UserManager.FindInstance();
+        photonManager = PhotonManager.FindInstance();
     }
 
     /// <summary>
@@ -41,7 +44,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
             GameObject handler = GameObject.Find("NetworkRunnerHandler");
             Debug.Log("Spawning Player");
             runner.Spawn(playerPrefab, handler.transform.position, Quaternion.identity, player,OnBeforeSpawn);
-            Debug.Log(gameManager.GetRunner().SessionInfo.ToString());
+            Debug.Log(photonManager.Runner.SessionInfo.ToString());
         }
         Debug.Log(gameManager.GetUserStatus());
 
@@ -84,10 +87,11 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     /// <param name="obj"></param>
     public void OnBeforeSpawn(NetworkRunner runner, NetworkObject obj)
     {
-        obj.GetComponent<NetworkPlayer>().avatar = gameManager.GetAvatarNumber();
-        obj.GetComponent<NetworkPlayer>().ActorID = gameManager.GetRunner().LocalPlayer;
+        
+        obj.GetComponent<NetworkPlayer>().avatar = photonManager.avatarNumber;
+        obj.GetComponent<NetworkPlayer>().ActorID = photonManager.Runner.LocalPlayer;
         obj.GetComponent<NetworkPlayer>().nickname = userManager.Username;
-        gameManager.SetCurrentPlayer(obj.gameObject);
+        photonManager.CurrentPlayer = obj.gameObject;
         obj.transform.GetChild(2).gameObject.SetActive(true);
     }
 

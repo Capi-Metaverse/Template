@@ -13,12 +13,14 @@ public class NetworkRunnerHandler : MonoBehaviour
     public NetworkRunner networkRunnerPrefab;
 
     NetworkRunner networkRunner;
-    GameManager gameManager;
+    //GameManager gameManager;
+    PhotonManager photonManager;
     public string map;
 
     private void Awake()
     {
-        gameManager = GameManager.FindInstance();
+        //gameManager = GameManager.FindInstance();
+        photonManager = PhotonManager.FindInstance();
     }
 
     private void Start()
@@ -53,13 +55,13 @@ public class NetworkRunnerHandler : MonoBehaviour
         }
 
         runner.ProvideInput = true;
-        GameManager.FindInstance().SetRunner(runner);
+        PhotonManager.FindInstance().Runner = runner;
 
          SessionProps props = new SessionProps();
-        props.StartMap = gameManager.currentMap;
-        props.RoomName = gameManager.GetRoomName();
+        props.StartMap = photonManager.currentMap;
+        props.RoomName = photonManager.RoomName;
         props.AllowLateJoin = true;
-        props.PlayerLimit = gameManager.playerCount;
+        props.PlayerLimit = photonManager.PlayerCount;
 
         return runner.StartGame(new StartGameArgs
         {
@@ -67,8 +69,8 @@ public class NetworkRunnerHandler : MonoBehaviour
             Address = address,
             Scene = scene,
             CustomLobbyName = "Lobby_Play",
-            SessionName = gameManager.GetRoomName() + "-" + map,
-            PlayerCount = gameManager.playerCount,
+            SessionName = photonManager.RoomName + "-" + map,
+            PlayerCount = photonManager.PlayerCount,
             Initialized = initialized,
             SceneManager = sceneManager,
             SessionProperties = props.Properties

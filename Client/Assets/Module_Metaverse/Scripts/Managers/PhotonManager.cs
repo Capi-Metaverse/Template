@@ -1,93 +1,91 @@
-using System;
-using System.Collections.Generic;
+using Fusion;
+using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
-using Fusion;
-using Fusion.Sockets;
-
-using Newtonsoft.Json.Linq;
-
-using Unity.VisualScripting;
-
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static Unity.Collections.Unicode;
+using Unity.VisualScripting;
+using Fusion.Sockets;
+using System;
 
 
-
-
-public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
+//Status of the connection WIP (Some status are not necessary)
+public enum ConnectionStatus
 {
+    Disconnected,
+    Connecting,
+    Connected,
+    EnteringLobby,
+    InLobby,
+    Starting,
+    Started,
+    Failed,
+}
 
-    /*
-     * The game manager is the main of the App, it controls all the user connections.
-     * 
-     * 
-     * 
-     */
-
-    //Managers
-
-    //Not needed
-    //This SceneManager is going to change between scenes and is going to put a loading screen between them.
-    [SerializeField] private NetworkSceneManagerBase _loader;
-
-    //PhotonManager
-    //Runner, JUST ONE PER USER/ROOM
-    //It's like PhotonNetwork.somefunction() in PUN2
-    [SerializeField] private NetworkRunner _runner;
+//Status of the location of the user WIP (It can increase)
+public enum UserStatus
+{
+    PreLobby,
+    InLobby,
+    InGame,
+    InPause
+}
+public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
+{
     
-    //Needed??
-    [SerializeField] private InputManager inputManager;
+    //Runner, JUST ONE PER USER/ROOM
+    [SerializeField] private NetworkRunner _runner;
+
+    public NetworkRunner Runner { get => _runner; set => _runner = value; }
 
     //PhotonManager
-    private GameObject currentPlayer;
 
-    //Not needed pos
+    [SerializeField] private GameObject _currentPlayer;
+    public GameObject CurrentPlayer { get => _currentPlayer; set => _currentPlayer = value; }
+
+    //Name of the PhotonRoom
+    private string _roomName;
+    public string RoomName { get => _roomName; set => _roomName = value; }
+
+    //Number of players
+    private int _playerCount;
+
+    public int PlayerCount { get => _playerCount; set => _playerCount = value; }
+
+    //Multiplayer server Lobby
+    public const string LOBBY_NAME = "Main";
+
+    //Connection Status
+    [SerializeField] private ConnectionStatus _connectionStatus;
+    public ConnectionStatus ConnectionStatus { get => _connectionStatus; set => _connectionStatus = value; }
+
+    //User Status
+    [SerializeField] private UserStatus _userStatus;
+    public UserStatus UserStatus { get => _userStatus; set => _userStatus = value; }
+
+    //Static function to get the singleton
+    public static PhotonManager FindInstance()
+    {
+        return FindObjectOfType<PhotonManager>();
+    }
+
     //The Lobby Manager from Lobby Scene
     private LobbyManager _lobbyManager;
 
-    //PhotonManager
-    private List<SessionInfo> sessionList;
 
-    //PhotonManager
-    private string roomName; //This is the RoomName
-    public int playerCount;
+    //GameManager
+    public int avatarNumber = 0;
+    public bool CameraBool = false;
 
     //SceneManager
     public string currentMap;
-
-    //??
-    public GameObject Settings;
-
-
-
-    //Static function to get the singleton
-    public static GameManager FindInstance()
-    {
-        return FindObjectOfType<GameManager>();
-    }
-
-    //PhotonManager
-    //Name of the Lobby of the game
-    private const string LOBBY_NAME = "Main";
-
-
-    //PhotonManager
-    //Connection Status
-    [SerializeField] private ConnectionStatus ConnectionStatus { get; set; }
-
-    [SerializeField] public UserStatus UserStatus { get; set; }
-
-    //GameManager
-    private int avatarNumber = 0;
-    public bool CameraBool = false;
-
-    //Initialization Correct
+    [SerializeField] private InputManager inputManager;
+    //Initialization
     private void Awake()
     {
         //When this component awake, it get the others game managers
-        GameManager[] managers = FindObjectsOfType<GameManager>();
+        PhotonManager[] managers = FindObjectsOfType<PhotonManager>();
 
         //Check if there is more managers
         if (managers != null && managers.Length > 1)
@@ -97,25 +95,47 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
             return;
 
         }
+    }
 
-        //If the scene loader is null, initializates it and change to the start scene.
-        if (_loader == null)
+    //List of rooms
+    private List<SessionInfo> sessionList;
+
+    /// <summary>
+    /// Add the NetworkRunner to this object 
+    /// </summary>
+    private void Connect()
+    {
+
+        if (Runner == null)
         {
 
+            //Initializes the runner
+            ConnectionStatus = ConnectionStatus.Connecting;
+            GameObject go = new GameObject("Session");
 
-            //Don't destroy the Game Manager
-            DontDestroyOnLoad(gameObject);
 
-            //To indicate we are not in the Lobby
-            SetUserStatus(UserStatus.PreLobby);
-
-            //Change to the login scene ONLY IF THE LOGIN IS NOT THE FIRST SCENE
-            //SceneManager.LoadSceneAsync( _startScene);
+            Runner = go.AddComponent<NetworkRunner>();
+            Runner.AddCallbacks(this);
 
         }
     }
 
-    /*
+    /// <summary>
+    /// Disconnects the runner 
+    /// </summary>
+    /// <returns></returns>
+    public async Task Disconnect()
+    {
+        if (Runner != null)
+        {
+            //Disconnects the runner
+            ConnectionStatus = ConnectionStatus.Disconnected;
+            await _runner.Shutdown();
+            Runner = null;
+
+        }
+    }
+
     //SceneManager
     /// <summary>
     /// This function sets the LobbyManager and enter the Lobby
@@ -130,48 +150,8 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
         await EnterLobby();
 
     }
-    //AWAKE -> Intro -> Lobby -> Session
-    */
-
-    //PhotonManager
-    /// <summary>
-    /// Add the NetworkRunner to this object 
-    /// </summary>
-    private void Connect()
-    {
-
-        if (_runner == null)
-        {
-
-            //Initializes the runner
-            SetConnectionStatus(ConnectionStatus.Connecting);
-            GameObject go = new GameObject("Session");
 
 
-            _runner = go.AddComponent<NetworkRunner>();
-            _runner.AddCallbacks(this);
-
-        }
-    }
-
-    //PhotonManager
-    /// <summary>
-    /// Disconnects the runner 
-    /// </summary>
-    /// <returns></returns>
-    public async Task Disconnect()
-    {
-        if (_runner != null)
-        {
-            //Disconnects the runner
-            SetConnectionStatus(ConnectionStatus.Disconnected);
-            await _runner.Shutdown();
-            _runner = null;
-
-        }
-    }
-
-    //PhotonManager
     /// <summary>
     /// Function to enter the Lobby, load Lobby if fail, load 1.Start
     /// </summary>
@@ -182,13 +162,13 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
         Connect();
 
         //We connect to the Lobby
-        SetConnectionStatus(ConnectionStatus.EnteringLobby);
-        var result = await _runner.JoinSessionLobby(SessionLobby.Custom, LOBBY_NAME);
+        ConnectionStatus = ConnectionStatus.EnteringLobby;
+        var result = await Runner.JoinSessionLobby(SessionLobby.Custom, LOBBY_NAME);
 
         //If the connection fails...
         if (!result.Ok)
         {
-            SetConnectionStatus(ConnectionStatus.Failed);
+            ConnectionStatus = ConnectionStatus.Failed;
 
             await Disconnect();
             //Mostrar error screen
@@ -197,11 +177,12 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
 
             return;
         }
+        //Change this line maybe
         _lobbyManager.setLobbyButtons(true);
-        SetUserStatus(UserStatus.PreLobby);
+        UserStatus = UserStatus.PreLobby;
     }
 
-    //PhotonManager
+
     /// <summary>
     /// Create a session/room Correct
     /// </summary>
@@ -210,6 +191,8 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
     {
         await StartSession(GameMode.Shared, props);
     }
+
+
     //PhotonManager
     /// <summary>
     /// Join a session/room Correct, Maybe improve props in the future
@@ -222,6 +205,8 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
         props.RoomName = info.Name;
         await StartSession(GameMode.Shared, props);
     }
+
+
     //PhotonManager
     /// <summary>
     /// Function to create the session / room , Set properties to Room, if fail load 1.Start
@@ -234,7 +219,7 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
     {
         Connect();
 
-        SetConnectionStatus(ConnectionStatus.Starting);
+        ConnectionStatus = ConnectionStatus.Starting;
 
         Debug.Log($"[Photon-GameManager] Starting game with session {props.RoomName}, player limit {props.PlayerLimit}");
         _runner.ProvideInput = mode != GameMode.Server;
@@ -249,16 +234,16 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
 
         });
 
-        playerCount = 10;
-        currentMap = "LobbyOficial";
-        roomName = props.RoomName.ToUpper();
+        PlayerCount = 10;
+        //CurrentMap = "LobbyOficial";
+        RoomName = props.RoomName.ToUpper();
 
         //Maybe refactor this part Add Player in setPlayerPanel?
 
 
         if (!result.Ok)
         {
-            SetConnectionStatus(ConnectionStatus.Failed, result.ShutdownReason.ToString());
+            ConnectionStatus = ConnectionStatus.Failed;
 
             await Disconnect();
 
@@ -272,48 +257,11 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
             Debug.Log("[Photon-GameManager] Entering Lobby");
             //Indicate LobbyManager to change the panel
             _lobbyManager.SetPlayerPanel(props.RoomName, _runner);
-            SetUserStatus(UserStatus.InLobby);
+            UserStatus = UserStatus.InLobby;
         }
 
     }
-    //PhotonManager
-    /// <summary>
-    /// Set the user connection
-    /// </summary>
-    /// <param name="status"></param>
-    /// <param name="reason"></param>
-    private void SetConnectionStatus(ConnectionStatus status, string reason = "")
-    {
-        if (ConnectionStatus == status)
-            return;
-        ConnectionStatus = status;
 
-        Debug.Log($"[Photon-GameManager] ConnectionStatus={status} {reason}");
-    }
-    //PhotonManager
-    public ConnectionStatus GetConnectionStatus()
-    {
-        return this.ConnectionStatus;
-
-    }
-    //PhotonManager
-    /// <summary>
-    /// Set the user status
-    /// </summary>
-    /// <param name="status"></param>
-    /// <param name="reason"></param>
-    public void SetUserStatus(UserStatus status, string reason = "")
-    {
-        if (UserStatus == status)
-            return;
-        UserStatus = status;
-    }
-    //PhotonManager
-    public UserStatus GetUserStatus()
-    {
-        return this.UserStatus;
-
-    }
     //PhotonManager
     /// <summary>
     /// Function that updates the list of sessions
@@ -349,8 +297,8 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
         await Disconnect();
         this.avatarNumber = avatarNumber;
 
-        roomName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
-        roomName = roomName.ToUpper();
+        RoomName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
+        RoomName = RoomName.ToUpper();
         //We change to the new map
         //THIS WILL BE THE LOBBY WHEN IT'S ENDED
         SceneManager.LoadSceneAsync("LobbyOficial");
@@ -367,10 +315,10 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
     public async void StartCustomGame(string sessionName, int playerNumber, string map)
     {
         await Disconnect();
-        roomName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
-        roomName = roomName.ToUpper();
+        RoomName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
+        RoomName = RoomName.ToUpper();
         currentMap = map;
-        playerCount = playerNumber;
+        PlayerCount = playerNumber;
         //We change to the respective map
         SceneManager.LoadSceneAsync(map);
     }
@@ -383,22 +331,23 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
     public async void JoinCustomGame(string sessionName)
     {
         await Disconnect();
-        roomName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
+        RoomName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
         currentMap = "LobbyOficial";
-        playerCount = 4;
+        PlayerCount = 4;
         Connect();
 
         //Nos unimos al lobby de custom
         var result = await _runner.JoinSessionLobby(SessionLobby.Custom, "Lobby_Play");
 
-        foreach (SessionInfo item in sessionList) {
+        foreach (SessionInfo item in sessionList)
+        {
 
             Debug.Log(item.Properties.ToString());
 
             if (item.Properties["RoomName"].Equals(sessionName))
             {
-                currentMap = item.Properties["StartMap"];
-                playerCount = item.Properties["PlayerLimit"];
+                //currentMap = item.Properties["StartMap"];
+                PlayerCount = item.Properties["PlayerLimit"];
                 break;
             }
 
@@ -409,7 +358,7 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
 
 
         //We change to the respective map
-        SceneManager.LoadSceneAsync(currentMap);
+        //SceneManager.LoadSceneAsync(currentMap);
     }
 
     /* Function that changes the map to another
@@ -434,58 +383,6 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
         SceneManager.LoadSceneAsync(map);
 
     }
-
-
-
-    /// <summary>
-    /// Runner Get Set
-    /// </summary>
-    /// <returns></returns>
-    //PhotonManager
-    public NetworkRunner GetRunner() { return _runner; }
-
-    public void SetRunner(NetworkRunner runner)
-    {
-        _runner = runner;
-    }
-    //PhotonManager
-    //CurrentPlayer Get Set 
-    //This is the GameObject IN-GAME
-    public GameObject GetCurrentPlayer()
-    {
-        return currentPlayer;
-    }
-
-    public void SetCurrentPlayer(GameObject currentPlayer)
-    {
-        this.currentPlayer = currentPlayer;
-    }
-
-    //AvatarNumber Get Set
-    //GameManager
-    public int GetAvatarNumber()
-    {
-        return this.avatarNumber;
-    }
-
-    public void SetAvatarNumber(int avatarNumber)
-    {
-        this.avatarNumber = avatarNumber;
-    }
-
-
-    public string GetRoomName()
-    {
-        return this.roomName;
-    }
-
-    public void SetRoomName(string roomName)
-    {
-        this.roomName = roomName;
-    }
-
-
-
 
     //Callback when the user joins to a Server/Host
     public void OnConnectedToServer(NetworkRunner runner)
@@ -573,7 +470,4 @@ public class GameManager :MonoBehaviour, INetworkRunnerCallbacks
     {
         throw new NotImplementedException();
     }
-
 }
-
-

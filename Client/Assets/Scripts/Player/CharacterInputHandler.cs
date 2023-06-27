@@ -55,6 +55,7 @@ public class CharacterInputHandler : MonoBehaviour
 
     GameManager gameManager;
     InputManager inputManager;
+    PhotonManager photonManager;
 
     //Presentation
     public Camera presentationCamera = null;
@@ -68,6 +69,7 @@ public class CharacterInputHandler : MonoBehaviour
     {
         gameManager = GameManager.FindInstance().GetComponent<GameManager>();
         inputManager = GameManager.FindInstance().GetComponent<InputManager>();
+        photonManager = PhotonManager.FindInstance();
     }
 
 
@@ -77,17 +79,17 @@ public class CharacterInputHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         voiceChat.recorder.TransmitEnabled = false;
-
+        GameObject currentPlayer = PhotonManager.FindInstance().CurrentPlayer;
         characterMovementHandler = this.gameObject.GetComponent<CharacterMovementHandler>();
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
         Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
-        emoteWheel = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(6).GetChild(0).gameObject;
+        emoteWheel = currentPlayer.transform.GetChild(6).GetChild(0).gameObject;
         Debug.Log(emoteWheel);
         //PlayerUIPrefab
-        micro = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(0).gameObject;//Micro
-        scope = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(1).gameObject;//Scope
-        eventText = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(2).gameObject;
-        eventTextK = GameManager.FindInstance().GetCurrentPlayer().transform.GetChild(3).GetChild(3).gameObject;
+        micro = currentPlayer.transform.GetChild(3).GetChild(0).gameObject;//Micro
+        scope = currentPlayer.transform.GetChild(3).GetChild(1).gameObject;//Scope
+        eventText = currentPlayer.transform.GetChild(3).GetChild(2).gameObject;
+        eventTextK = currentPlayer.transform.GetChild(3).GetChild(3).gameObject;
 
         //ChatGPT
         chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
@@ -98,7 +100,7 @@ public class CharacterInputHandler : MonoBehaviour
         miniMap = GameObject.Find("Canvasminimap");
 
         //seteamos el estado para que este InGame, esto hay que cambiarlo
-        gameManager.SetUserStatus(UserStatus.InGame);
+        photonManager.UserStatus = UserStatus.InGame;
     }
 
     // Update is called once per frame
@@ -107,8 +109,8 @@ public class CharacterInputHandler : MonoBehaviour
         
         sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
 
-        if (inputManager.GetButtonDown("MuteVoice") && gameManager.GetUserStatus() == UserStatus.InGame)
-            voiceChat.MuteAudio(gameManager.GetUserStatus());
+        if (inputManager.GetButtonDown("MuteVoice") && photonManager.UserStatus == UserStatus.InGame)
+            voiceChat.MuteAudio(photonManager.UserStatus);
         nickname = this.gameObject.GetComponent<NetworkPlayer>().nickname.ToString();
 
        
@@ -118,10 +120,10 @@ public class CharacterInputHandler : MonoBehaviour
             playerCamera = localCameraHandler.gameObject.GetComponent<Camera>();
         }
      
-        if (HittingObject && gameManager.GetUserStatus() != UserStatus.InPause && onPresentationCamera==false)
+        if (HittingObject && photonManager.UserStatus != UserStatus.InPause && onPresentationCamera==false)
             eventText.SetActive(true);
 
-        if (gameManager.GetUserStatus() != UserStatus.InPause)
+        if (photonManager.UserStatus != UserStatus.InPause)
         {
             targetTime -= Time.deltaTime;
             //Raycast
@@ -184,7 +186,7 @@ public class CharacterInputHandler : MonoBehaviour
                 OpenMiniMapPul = false; // Detecta si no esta pulsado
             }
 
-        switch (gameManager.GetUserStatus())
+        switch (photonManager.UserStatus)
             {
                 case UserStatus.InGame:
                     {
@@ -233,7 +235,7 @@ public class CharacterInputHandler : MonoBehaviour
                                     playerCamera.enabled = false;
                                     eventText.SetActive(false);
                                     DeactivateALL();
-                                    gameManager.SetUserStatus(UserStatus.InGame);
+                                photonManager.UserStatus = UserStatus.InGame;
 
                                     if (SceneManager.GetActiveScene().name == "LobbyOficial")
                                     {
@@ -267,7 +269,7 @@ public class CharacterInputHandler : MonoBehaviour
                 }
 
             default:
-                    Debug.Log(gameManager.GetUserStatus());
+                    Debug.Log(photonManager.UserStatus);
                     break;
             }
 
@@ -342,7 +344,7 @@ public class CharacterInputHandler : MonoBehaviour
     public void DeactivateALL()
     {
         escPul = true;
-        gameManager.SetUserStatus(UserStatus.InPause);
+        photonManager.UserStatus = UserStatus.InPause;
         
     //playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
 
@@ -378,7 +380,7 @@ public class CharacterInputHandler : MonoBehaviour
         //AQUI IRA EL FIND DEL PLAYERCAMERA PARA ACTIVAR
         characterMovementHandler.enabled = true;
         localCameraHandler.enabled = true;
-        gameManager.SetUserStatus(UserStatus.InGame);
+        photonManager.UserStatus = UserStatus.InGame;
 
 
         //Deactivate presentation text
@@ -433,7 +435,7 @@ public class CharacterInputHandler : MonoBehaviour
 
 
         ActiveALL();
-        Debug.Log(gameManager.GetUserStatus());
+        Debug.Log(photonManager.UserStatus);
 
     }
 

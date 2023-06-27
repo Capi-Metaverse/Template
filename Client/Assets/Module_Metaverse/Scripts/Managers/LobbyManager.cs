@@ -19,6 +19,8 @@ public class LobbyManager : MonoBehaviour
     //Game Manager of the game
     private GameManager gameManager;
 
+    private PhotonManager photonManager;
+
 
     //List of rooms
     private List<RoomItem> sessionItemsList = new List<RoomItem>();
@@ -40,8 +42,10 @@ public class LobbyManager : MonoBehaviour
     private void Awake()
     {
         gameManager = GameManager.FindInstance();
+        photonManager = PhotonManager.FindInstance();
 
-        gameManager.SetLobbyManager(this);
+        photonManager.SetLobbyManager(this);
+        //gameManager.SetLobbyManager(this);
     }
 
 
@@ -57,7 +61,7 @@ public class LobbyManager : MonoBehaviour
         props.RoomName = sessionName;
         props.AllowLateJoin = true;
         props.PlayerLimit = 10;
-        gameManager.CreateSession(props);
+        photonManager.CreateSession(props);
     }
     /// <summary>
     /// Function when the user clicks on a session/room to join.
@@ -66,7 +70,7 @@ public class LobbyManager : MonoBehaviour
     public void OnJoinSession(SessionInfo sessionInfo)
     {
         Debug.Log("[Photon-LobbyManager] Joining session");
-        gameManager.JoinSession(sessionInfo);
+        photonManager.JoinSession(sessionInfo);
 
     }
     /// <summary>
@@ -75,7 +79,7 @@ public class LobbyManager : MonoBehaviour
     public void OnJoinRoom(string sessionNamePanel)
     {
         //JoinButton.gameObject.SetActive(false);
-        gameManager.StartGame(sessionNamePanel, avatarNumber);
+        photonManager.StartGame(sessionNamePanel, avatarNumber);
     }
 
     /// <summary>
@@ -125,7 +129,7 @@ public class LobbyManager : MonoBehaviour
     public void OnLeaveSession()
     {
         SetLobbyPanel();
-        gameManager.LeaveSession();
+        photonManager.LeaveSession();
     }
 
     /// <summary>

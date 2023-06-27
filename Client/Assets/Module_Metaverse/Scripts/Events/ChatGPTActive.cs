@@ -17,7 +17,7 @@ public class ChatGPTActive : MonoBehaviour, IMetaEvent
     /// </summary>
     public void activate(bool host)
     {
-        if (CharacterInputHandler == null) { CharacterInputHandler = GameManager.FindInstance().GetCurrentPlayer().gameObject.GetComponent<CharacterInputHandler>(); }
+        if (CharacterInputHandler == null) { CharacterInputHandler = PhotonManager.FindInstance().CurrentPlayer.gameObject.GetComponent<CharacterInputHandler>(); }
         if (host == true)
         {
             CanvasChatGPT.SetActive(true);

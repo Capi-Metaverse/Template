@@ -8,6 +8,7 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
 {
     private GameManager gameManager;
     private UserManager userManager;
+    private PhotonManager photonManager;
 
     public static NetworkPlayer Local { get; set; }
     [Networked]
@@ -41,6 +42,7 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
         Debug.Log(this.avatar);
         gameManager = GameManager.FindInstance();
         userManager = UserManager.FindInstance();
+        photonManager = PhotonManager.FindInstance();
         
         
         GameObject model = Instantiate(playerPrefabs[this.avatar], gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
@@ -52,7 +54,7 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
 
         if (Object.HasInputAuthority)
         {
-            gameManager.SetAvatarNumber(avatar);
+            photonManager.avatarNumber = avatar;
             playfabIdentity = userManager.UserID;
             Local = this;
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);

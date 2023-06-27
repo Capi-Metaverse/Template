@@ -4,6 +4,7 @@ public class PresentationZonePhoton : MonoBehaviour
 {
     //Camera of the presentation
     public Camera cameraObject;
+    private PhotonManager photonManager;
 
     CharacterInputHandler playerInputs;
 
@@ -13,9 +14,9 @@ public class PresentationZonePhoton : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
 
-        if (other.gameObject.Equals(GameManager.FindInstance().GetCurrentPlayer().gameObject)) //TODO: Modify getcurrentplayer so that it is compatible with single player
+        if (other.gameObject.Equals(PhotonManager.FindInstance().CurrentPlayer.gameObject)) //TODO: Modify getcurrentplayer so that it is compatible with single player
         {
-            playerInputs = GameManager.FindInstance().GetCurrentPlayer().GetComponent<CharacterInputHandler>();
+            playerInputs = PhotonManager.FindInstance().CurrentPlayer.GetComponent<CharacterInputHandler>();
             playerInputs.setPresentationCamera(cameraObject);
 
             MusicManager musicController = GameObject.Find("Manager").GetComponent<MusicManager>();
@@ -28,9 +29,9 @@ public class PresentationZonePhoton : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerExit(Collider other) {
 
-        if (other.gameObject.Equals(GameManager.FindInstance().GetCurrentPlayer().gameObject))
+        if (other.gameObject.Equals(PhotonManager.FindInstance().CurrentPlayer.gameObject))
         {
-            playerInputs = GameManager.FindInstance().GetCurrentPlayer().GetComponent<CharacterInputHandler>();
+            playerInputs = PhotonManager.FindInstance().CurrentPlayer.GetComponent<CharacterInputHandler>();
             playerInputs.setPresentationCamera(null);
 
             MusicManager musicController = GameObject.Find("Manager").GetComponent<MusicManager>();

@@ -9,9 +9,12 @@ public class TriggerEntranceDoor : MonoBehaviour
 
     GameManager gameManager;
 
+    PhotonManager photonManager;
+
     private void Start()
     {
         gameManager = GameManager.FindInstance();
+        photonManager = PhotonManager.FindInstance();
     }
 
     /// <summary>
@@ -20,9 +23,9 @@ public class TriggerEntranceDoor : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.GetComponent<NetworkPlayer>().ActorID == gameManager.GetRunner().LocalPlayer.PlayerId) 
+        if(other.gameObject.GetComponent<NetworkPlayer>().ActorID == photonManager.Runner.LocalPlayer.PlayerId) 
         {
-            RPCManager.RPC_OpenDoor(gameManager.GetRunner());
+            RPCManager.RPC_OpenDoor(photonManager.Runner);
         }
         
     }
@@ -33,9 +36,9 @@ public class TriggerEntranceDoor : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.GetComponent<NetworkPlayer>().ActorID == gameManager.GetRunner().LocalPlayer.PlayerId)
+        if (other.gameObject.GetComponent<NetworkPlayer>().ActorID == photonManager.Runner.LocalPlayer.PlayerId)
         {
-           RPCManager.RPC_CloseDoor(gameManager.GetRunner());
+           RPCManager.RPC_CloseDoor(photonManager.Runner);
         }
 
     }
