@@ -41,6 +41,7 @@ public class PasswordScript : MonoBehaviour
     public void OpenUI(DoorEvent doorEvent)
     {
         GameManager gameManager = GameManager.FindInstance();
+        UserManager userManager = UserManager.FindInstance();
         GameObject player = gameManager.GetCurrentPlayer();
 
         player.GetComponent<CharacterInputHandler>().DeactivateALL();
@@ -48,7 +49,7 @@ public class PasswordScript : MonoBehaviour
         this.gameObject.SetActive(true);
 
         //If this user is admin, activate changePasswordbutton
-        if(gameManager.GetUserRole() == UserRole.Admin) changeButton.gameObject.SetActive(true);
+        if(userManager.UserRole == UserRole.Admin) changeButton.gameObject.SetActive(true);
 
 
 

@@ -22,8 +22,8 @@ public class PlayerList : MonoBehaviour
     public void Start()
     {
         gameManager = GameManager.FindInstance();
-
-        if (gameManager.GetUserRole() == UserRole.Admin)
+        UserManager userManager = UserManager.FindInstance();
+        if (userManager.UserRole == UserRole.Admin)
         {
             muteButton.gameObject.SetActive(true);
         }

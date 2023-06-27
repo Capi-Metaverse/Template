@@ -16,6 +16,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     CharacterInputHandler characterInputHandler;
 
     GameManager gameManager;
+    private UserManager userManager;
     public GameObject Settings;
     PlayerList playerList;
 
@@ -24,6 +25,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     private void Awake()
     {
         gameManager = GameManager.FindInstance();
+        userManager = UserManager.FindInstance();
     }
 
     /// <summary>
@@ -84,7 +86,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     {
         obj.GetComponent<NetworkPlayer>().avatar = gameManager.GetAvatarNumber();
         obj.GetComponent<NetworkPlayer>().ActorID = gameManager.GetRunner().LocalPlayer;
-        obj.GetComponent<NetworkPlayer>().nickname = gameManager.GetUsername();
+        obj.GetComponent<NetworkPlayer>().nickname = userManager.Username;
         gameManager.SetCurrentPlayer(obj.gameObject);
         obj.transform.GetChild(2).gameObject.SetActive(true);
     }

@@ -311,7 +311,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
                 gameManager.SetUserRole(UserRole.Moderator);
                 break;
         }*/
-       Debug.Log("[PlayFab-LoginManager] UserRole: " + gameManager.GetUserRole());
+       Debug.Log("[PlayFab-LoginManager] UserRole: " + userManager.UserRole);
 
         //Change to the next scene
         if (newUser)

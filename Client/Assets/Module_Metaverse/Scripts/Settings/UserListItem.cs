@@ -18,8 +18,9 @@ public class UserListItem : MonoBehaviour
     public void Start()
     {
         gameManager = GameManager.FindInstance();
+        UserManager userManager = UserManager.FindInstance();
 
-        if (gameManager.GetUserRole() == UserRole.Admin)
+        if ( userManager.UserRole == UserRole.Admin)
         {
             kickButton.gameObject.SetActive(true);
         }

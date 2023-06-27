@@ -65,14 +65,6 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
     private List<SessionInfo> sessionList;
 
-    //User username
-    private string username = "Anon";
-
-    private string email = "Anon@gmail.com";
-    //User ID
-    private string userID;
-
-
     private string roomName; //This is the RoomName
     public int playerCount;
     public string currentMap;
@@ -95,8 +87,6 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
     [SerializeField] private ConnectionStatus ConnectionStatus { get; set; }
 
     [SerializeField] private UserStatus UserStatus { get; set; }
-
-    [SerializeField] private UserRole UserRole { get; set; }
 
     private int avatarNumber = 0;
 
@@ -327,23 +317,6 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
 
     }
 
-    /// <summary>
-    /// Set the user role
-    /// </summary>
-    /// <param name="role"></param>
-    /// <param name="reason"></param>
-    public void SetUserRole(UserRole role, string reason = "")
-    {
-        if (UserRole == role)
-            return;
-        UserRole = role;
-    }
-
-    public UserRole GetUserRole()
-    {
-        return this.UserRole;
-
-    }
 
     public GameManager GetGameManager()
     {
@@ -503,34 +476,6 @@ public class GameManager : SimulationBehaviour, INetworkRunnerCallbacks
         this.avatarNumber = avatarNumber;
     }
 
-    public string GetUserID()
-    {
-        return this.userID;
-    }
-
-    public void SetUserID(string userID)
-    {
-        this.userID = userID;
-    }
-
-    public string GetUsername()
-    {
-        return this.username;
-    }
-
-    public void SetUsername(string username)
-    {
-        this.username = username;
-    }
-
-    public string GetEmail()
-    {
-        return this.email;
-    }
-    public void SetEmail(string email)
-    {
-        this.email = email;
-    }
 
     public string GetRoomName()
     {

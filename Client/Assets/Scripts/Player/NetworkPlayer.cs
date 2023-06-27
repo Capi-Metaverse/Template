@@ -7,6 +7,7 @@ using TMPro;
 public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
 {
     private GameManager gameManager;
+    private UserManager userManager;
 
     public static NetworkPlayer Local { get; set; }
     [Networked]
@@ -39,6 +40,8 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
         if (this.avatar == 0) this.avatar = Random.Range(1, 6);
         Debug.Log(this.avatar);
         gameManager = GameManager.FindInstance();
+        userManager = UserManager.FindInstance();
+        
         
         GameObject model = Instantiate(playerPrefabs[this.avatar], gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
         model.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
@@ -50,7 +53,7 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
         if (Object.HasInputAuthority)
         {
             gameManager.SetAvatarNumber(avatar);
-            playfabIdentity = gameManager.GetUserID();
+            playfabIdentity = userManager.UserID;
             Local = this;
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
             this.inputHandler.enabled = true;

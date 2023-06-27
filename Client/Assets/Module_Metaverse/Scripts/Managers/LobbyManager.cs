@@ -191,6 +191,6 @@ public class LobbyManager : MonoBehaviour
         PlayerItem item = obj.GetComponent<PlayerItem>();
 
         //Set item
-        item.setInfo(gameManager, runner, obj);
+        item.setInfo(runner, obj);
     }
 }

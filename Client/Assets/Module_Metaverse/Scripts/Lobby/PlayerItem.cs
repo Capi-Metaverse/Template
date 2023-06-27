@@ -58,13 +58,17 @@ public class PlayerItem : NetworkBehaviour, ISpawned
     /// <param name="gameManager"></param>
     /// <param name="runner"></param>
     /// <param name="obj"></param>
-    public void setInfo( GameManager gameManager, NetworkRunner runner, NetworkObject obj)
+    public void setInfo(NetworkRunner runner, NetworkObject obj)
     {
 
        this._lobbyManager = GameObject.FindObjectOfType<LobbyManager>();
 
-        this.username = gameManager.GetUsername();
-        this.playerName.text = gameManager.GetUsername();
+        //Get the UserInfo to initialize username
+        UserManager userManager = UserManager.FindInstance();
+
+        this.username = userManager.Username;
+        this.playerName.text = userManager.Username;
+
         this.player = runner.LocalPlayer;
         this.networkObject = obj;
         this.leftArrowButton.SetActive(true);

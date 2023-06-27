@@ -23,8 +23,9 @@ public class DoorEvent : MonoBehaviour, IMetaEvent
     public void activate(bool host)
     {
         gameManager = GameManager.FindInstance();
+        UserManager userManager = UserManager.FindInstance();
         //If the room is public, we change the map
-        if (isPublic || gameManager.GetUserRole() == UserRole.Admin )
+        if (isPublic || userManager.UserRole == UserRole.Admin )
         {
             //Activate the loading UI
             gameManager.ChangeMap(map);

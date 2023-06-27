@@ -16,7 +16,7 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
     public AchievementList achivementList;
    
     
-    GameManager gameManager;
+    UserManager userManager;
     CharacterInputHandler characterInputHandler;
 
     GameObject _eventObject;
@@ -34,19 +34,21 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
         // Do some more work here...
         yield return new WaitForSeconds(1); // Wait for 1 seconds
 
+
+        userManager = UserManager.FindInstance();
      
         if (manageDataUI.data == null)
         {
-            manageDataUI.data = new UserUIInfo(gameManager.GetUsername(), gameManager.GetEmail(), "Por defecto", "Por defecto", "Por defecto");
+            manageDataUI.data = new UserUIInfo(userManager.Username, userManager.Email, "Por defecto", "Por defecto", "Por defecto");
            
             manageDataUI.SaveData(manageDataUI.data);
         }
       
-        editVisionData.UserNameTitle.text = gameManager.GetUsername();
-        editVisionData.TemasText.text= gameManager.GetEmail();
+        editVisionData.UserNameTitle.text = userManager.Username;
+        editVisionData.TemasText.text= userManager.Email;
 
-        visionData.UserNameTitle.text = gameManager.GetUsername();
-        visionData.TemasText.text = gameManager.GetEmail(); ;
+        visionData.UserNameTitle.text = userManager.Username;
+        visionData.TemasText.text = userManager.Email; ;
         visionData.OboutText.text = manageDataUI.data.about;
         visionData.HobbiesText.text = manageDataUI.data.hobbies;
         visionData.CVText.text = manageDataUI.data.CV;
@@ -72,17 +74,14 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
         UICard.SetActive(true);
         characterInputHandler.DeactivateALL();
     }
-    void Start()
-    {
-        gameManager = GameManager.FindInstance();
-    }
+   
     // Update is called once per frame
     /// <summary>
     /// change the playfab values to the values you set in the inputs
     /// </summary>
     public void EditUserData()
     {
-        manageDataUI.data = new UserUIInfo(gameManager.GetUsername(), gameManager.GetEmail(), editVisionData.OboutTextInput.text, editVisionData.HobbiesTextInput.text, editVisionData.CVTextInput.text);
+        manageDataUI.data = new UserUIInfo(userManager.Username, userManager.Email, editVisionData.OboutTextInput.text, editVisionData.HobbiesTextInput.text, editVisionData.CVTextInput.text);
         manageDataUI.SaveData(manageDataUI.data);
     }
 }
