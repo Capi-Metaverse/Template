@@ -46,7 +46,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
             runner.Spawn(playerPrefab, handler.transform.position, Quaternion.identity, player,OnBeforeSpawn);
             Debug.Log(photonManager.Runner.SessionInfo.ToString());
         }
-        Debug.Log(gameManager.GetUserStatus());
+        Debug.Log(photonManager.UserStatus);
 
         StartCoroutine(WaitPlayer());
     }

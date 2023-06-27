@@ -21,10 +21,12 @@ public class CreateRoomPanel : MonoBehaviour
 
 
     GameManager gameManager;
+    PhotonManager photonManager;
 
     private void Start()
     {
         gameManager = GameManager.FindInstance();
+        photonManager = PhotonManager.FindInstance();
         map.text = mapNames[0];
     }
 
@@ -37,7 +39,7 @@ public class CreateRoomPanel : MonoBehaviour
         if (!inputNameCreate.text.Equals("") && !inputPlayers.text.Equals(""))
         {
             Debug.Log("Creando a una nueva sala");
-            gameManager.StartCustomGame(inputNameCreate.text, Int32.Parse(inputPlayers.text), map.text);
+            photonManager.StartCustomGame(inputNameCreate.text, Int32.Parse(inputPlayers.text), map.text);
         }
         //Else mensaje de error
 
@@ -50,7 +52,7 @@ public class CreateRoomPanel : MonoBehaviour
         if (!inputNameJoin.text.Equals(""))
         {
             Debug.Log("Uniendose a una nueva sala");
-            gameManager.JoinCustomGame(inputNameJoin.text);
+            photonManager.JoinCustomGame(inputNameJoin.text);
         }
     }
 }

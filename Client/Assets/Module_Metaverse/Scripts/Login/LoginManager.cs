@@ -11,10 +11,6 @@ public class LoginManager : MonoBehaviour
     //UI Text
     public TMP_Text MessageText;
 
-    //GameManager
-    private GameManager GameManager;
-
-
     //Player data Classes
     [Serializable]
     public class PlayerDataUsername
@@ -29,11 +25,11 @@ public class LoginManager : MonoBehaviour
     private void Start()
     {
         //It gets the GameManager at the start
-        GameManager = GameManager.FindInstance();
+        PhotonManager photonManager = PhotonManager.FindInstance();
 
         //If there's an error in the connection it will return
         //This statement indicates to the user that an error has occurred.
-        if (GameManager.GetConnectionStatus() == ConnectionStatus.Failed)
+        if (photonManager.ConnectionStatus == ConnectionStatus.Failed)
         {
             MessageText.text = "An error has occurred. Try Again";
         }

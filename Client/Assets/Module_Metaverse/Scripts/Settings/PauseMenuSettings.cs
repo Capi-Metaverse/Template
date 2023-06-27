@@ -10,6 +10,7 @@ using TMPro;
 public class PauseMenuSettings : MonoBehaviour
 {
     private GameManager gameManager;
+    private PhotonManager photonManager;
     private GameObject Settings;
     private GameObject Pause;
     [SerializeField] private TMP_Text roomName;
@@ -18,9 +19,10 @@ public class PauseMenuSettings : MonoBehaviour
     {
         //We find the GameObjects
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
+        photonManager = PhotonManager.FindInstance();
         Pause = this.gameObject;
         gameManager = GameManager.FindInstance();
-        roomName.text = gameManager.GetRoomName();
+        roomName.text = PhotonManager.FindInstance().RoomName;
     }
 
     /// <summary>
@@ -28,7 +30,7 @@ public class PauseMenuSettings : MonoBehaviour
     /// </summary>
     public async void OnClickDisconnect()
     {
-        await gameManager.Disconnect();
+        await photonManager.Disconnect();
         SceneManager.LoadSceneAsync("1.Start");
 
 
@@ -46,7 +48,7 @@ public class PauseMenuSettings : MonoBehaviour
     //Method to return to the Lobby
     public async void OnClickReturnLobby()
     {
-        await gameManager.Disconnect();
+        await photonManager.Disconnect();
        
         SceneManager.LoadSceneAsync("Lobby");
        

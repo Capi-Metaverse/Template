@@ -11,10 +11,12 @@ public class BackPresentation : NetworkBehaviour, IMetaEvent
 {
    public Presentation presentation;
     GameObject _eventObject;
+    PhotonManager photonManager;
     GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
 
     public void activate(bool host)
     {
-        RPCManager.RPC_BackPress(GameManager.FindInstance().GetRunner());
+        photonManager = PhotonManager.FindInstance();
+        RPCManager.RPC_BackPress(photonManager.Runner);
     }
 }

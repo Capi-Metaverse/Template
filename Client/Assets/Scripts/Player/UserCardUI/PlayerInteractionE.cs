@@ -46,7 +46,7 @@ public class PlayerInteractionE : MonoBehaviour
     {
         card.SetActive(true);
       
-        characterInputHandler = GameManager.FindInstance().GetCurrentPlayer().gameObject.GetComponent<CharacterInputHandler>();
+        characterInputHandler = PhotonManager.FindInstance().CurrentPlayer.gameObject.GetComponent<CharacterInputHandler>();
         characterInputHandler.DeactivateALL();
 
         data = JsonConvert.DeserializeObject<UserUIInfo>(result.Data["userUICard"].Value);

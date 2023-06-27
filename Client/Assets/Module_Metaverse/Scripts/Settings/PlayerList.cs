@@ -69,8 +69,8 @@ public class PlayerList : MonoBehaviour
 
     public void MuteAll()
     {
-        int PlayerID = GameManager.FindInstance().GetCurrentPlayer().GetComponent<NetworkPlayer>().ActorID;
+        int PlayerID = PhotonManager.FindInstance().CurrentPlayer.GetComponent<NetworkPlayer>().ActorID;
         mute = !mute;
-        RPCManager.RPC_MuteAllPlayers(gameManager.GetRunner(), mute, PlayerID);
+        RPCManager.RPC_MuteAllPlayers(PhotonManager.FindInstance().Runner, mute, PlayerID);
     }
 }

@@ -46,11 +46,11 @@ public class RPCManager : SimulationBehaviour
 
         Debug.Log(numActor);
 
-        int PlayerID = GameManager.FindInstance().GetCurrentPlayer().GetComponent<NetworkPlayer>().ActorID;
+        int PlayerID = PhotonManager.FindInstance().CurrentPlayer.GetComponent<NetworkPlayer>().ActorID;
         Debug.Log(PlayerID);
         if (numActor == PlayerID)
         {
-            await GameManager.FindInstance().Disconnect();
+            await PhotonManager.FindInstance().Disconnect();
 
             SceneManager.LoadSceneAsync("Lobby");
             Cursor.visible = true;
@@ -63,13 +63,13 @@ public class RPCManager : SimulationBehaviour
     [Rpc]
     public static void RPC_MuteAllPlayers(NetworkRunner runner, bool mute, int numActor)
     {
-        int PlayerID = GameManager.FindInstance().GetCurrentPlayer().GetComponent<NetworkPlayer>().ActorID;
+        int PlayerID = PhotonManager.FindInstance().CurrentPlayer.GetComponent<NetworkPlayer>().ActorID;
 
         //If is not the player who started the muteAll
         if (numActor != PlayerID)
         {
-            VoiceManager voiceChat = GameManager.FindInstance().GetCurrentPlayer().GetComponent<CharacterInputHandler>().voiceChat;
-            UserStatus userStatus = GameManager.FindInstance().UserStatus;
+            VoiceManager voiceChat = PhotonManager.FindInstance().CurrentPlayer.GetComponent<CharacterInputHandler>().voiceChat;
+            UserStatus userStatus = PhotonManager.FindInstance().UserStatus;
 
             voiceChat.MuteAllPlayersAudio(userStatus, mute);
         }

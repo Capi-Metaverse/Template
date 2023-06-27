@@ -65,7 +65,7 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
     /// <param name="host"></param>
     public void activate(bool host)
     {
-        characterInputHandler = GameManager.FindInstance().GetCurrentPlayer().gameObject.GetComponent<CharacterInputHandler>();
+        characterInputHandler = PhotonManager.FindInstance().CurrentPlayer.gameObject.GetComponent<CharacterInputHandler>();
         manageDataUI = new ManageDataUI();
         manageDataUI.LoadData();
         achievementsManager.LoadData();

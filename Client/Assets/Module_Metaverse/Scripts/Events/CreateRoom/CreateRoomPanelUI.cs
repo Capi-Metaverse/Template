@@ -19,7 +19,7 @@ public class CreateRoomPanelUI : MonoBehaviour
         createPanel.SetActive(false);
         joinPanel.SetActive(false);
         gameManager = GameManager.FindInstance();
-        GameObject player = gameManager.GetCurrentPlayer();
+        GameObject player = PhotonManager.FindInstance().CurrentPlayer;
         player.GetComponent<CharacterInputHandler>().changeRoomPanel = this.gameObject;
         player.GetComponent<CharacterInputHandler>().DeactivateALL();
     }
@@ -27,7 +27,7 @@ public class CreateRoomPanelUI : MonoBehaviour
     public void CloseUI()
     {
         this.gameObject.SetActive(false);
-        GameObject player = gameManager.GetCurrentPlayer();
+        GameObject player = PhotonManager.FindInstance().CurrentPlayer;
         player.GetComponent<CharacterInputHandler>().ActiveALL();
     }
 

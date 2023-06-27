@@ -35,6 +35,7 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
 
     public Animator animator = null;
     public GameManager gameManager = null;
+    public PhotonManager photonManager = null;
 
     [Networked]
   [HideInInspector]
@@ -61,7 +62,7 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
   protected override void Awake() {
     base.Awake();
     CacheController();
-  
+    photonManager = PhotonManager.FindInstance();
   }
 
   public override void Spawned() {
@@ -168,7 +169,7 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
         if(animator == null) { animator = this.gameObject.GetComponentInChildren<Animator>(); }
         if (gameManager == null) { gameManager = GameObject.Find("Manager").GetComponentInChildren<GameManager>(); }
 
-        if (gameManager.GetUserStatus() == UserStatus.InGame) { animator.SetFloat("Speed", 1); }
+        if (photonManager.UserStatus == UserStatus.InGame) { animator.SetFloat("Speed", 1); }
         else { animator.SetFloat("Speed", 0); }
        
         if (IsGrounded)

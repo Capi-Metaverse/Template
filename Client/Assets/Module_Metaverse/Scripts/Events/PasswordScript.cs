@@ -42,7 +42,7 @@ public class PasswordScript : MonoBehaviour
     {
         GameManager gameManager = GameManager.FindInstance();
         UserManager userManager = UserManager.FindInstance();
-        GameObject player = gameManager.GetCurrentPlayer();
+        GameObject player = PhotonManager.FindInstance().CurrentPlayer;
 
         player.GetComponent<CharacterInputHandler>().DeactivateALL();
 
@@ -68,7 +68,7 @@ public class PasswordScript : MonoBehaviour
     //Method to close the menu
     public void Close()
     {
-        GameObject player = GameManager.FindInstance().GetCurrentPlayer();
+        GameObject player = PhotonManager.FindInstance().CurrentPlayer;
         this.gameObject.SetActive(false);
         player.GetComponent<CharacterInputHandler>().ActiveALL();
     }

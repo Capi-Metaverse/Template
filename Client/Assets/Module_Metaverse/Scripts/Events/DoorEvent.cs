@@ -18,17 +18,17 @@ public class DoorEvent : MonoBehaviour, IMetaEvent
     
    [SerializeField] private PasswordScript passwordScript;
     public string lastPassword = "";
-    GameManager gameManager;
+    PhotonManager photonManager;
 
     public void activate(bool host)
     {
-        gameManager = GameManager.FindInstance();
+        photonManager = PhotonManager.FindInstance();
         UserManager userManager = UserManager.FindInstance();
         //If the room is public, we change the map
         if (isPublic || userManager.UserRole == UserRole.Admin )
         {
             //Activate the loading UI
-            gameManager.ChangeMap(map);
+            photonManager.ChangeMap(map);
         }
         //If the room is not public, we will ask the password
         else
@@ -42,8 +42,8 @@ public class DoorEvent : MonoBehaviour, IMetaEvent
 
             else
             {
-                gameManager = GameManager.FindInstance();
-                gameManager.ChangeMap(map);
+                photonManager = PhotonManager.FindInstance();
+                photonManager.ChangeMap(map);
             }
         }
     }
