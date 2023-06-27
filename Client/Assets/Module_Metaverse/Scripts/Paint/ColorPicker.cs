@@ -46,10 +46,11 @@ public class ColorPicker : MonoBehaviour
             _color = _refSprite.GetPixel(localPosX, localPosY);
             _materialColorPicker.color = _color;
             _colorButton.color = _color;
+            _drawLinesOnPlane.CreateNewMaterial(_color);
         }
     }
 
-    
+
     public void MouseIn()
     {
         mouseIn = true;
@@ -62,12 +63,5 @@ public class ColorPicker : MonoBehaviour
     {
         mouseIn = false;
         Debug.Log("OUT");
-    }
-
-
-
-    public void OnPointerUp()
-    {
-        _drawLinesOnPlane.CreateNewMaterial(_color);
     }
 }

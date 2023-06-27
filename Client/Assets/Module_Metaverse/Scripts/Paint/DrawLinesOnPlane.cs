@@ -11,7 +11,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
 {
     //Material
     public Material materialColorPicker;
-    private int materialIndex = 0;
+    public int materialIndex = 0;
     private int RPCMaterialIndex = 0;
     public List<Material> materialsList;
     public List<Material> RPCMaterialsList;
@@ -42,6 +42,8 @@ public class DrawLinesOnPlane : NetworkBehaviour
         materialColorPicker.color = Color.black;
         Material firstMaterial = new Material(materialColorPicker);
         materialsList.Add(new Material(firstMaterial));
+        
+
         grossImage.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f) * sliderGross.value;
         CreateNewLineRenderer();
     }
@@ -136,6 +138,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
     /// </summary>
     private void CreateNewLineRenderer()
     {
+        
         GameObject newLineObject = new GameObject("LineRenderer");
         newLineObject.transform.SetParent(transform);
         currentLineRenderer = newLineObject.AddComponent<LineRenderer>();
@@ -183,10 +186,12 @@ public class DrawLinesOnPlane : NetworkBehaviour
 
     public void CreateNewMaterial(Color _color)
     {
-        Material mat = new Material(materialColorPicker);
-        mat.color = _color;
-        materialsList.Add(mat);
-        materialIndex += 1;
+      
+            Material mat = new Material(materialsList[materialIndex]);
+            mat.color = _color;
+            materialsList.Add(mat);
+            materialIndex += 1;
+        
     }
 
 
