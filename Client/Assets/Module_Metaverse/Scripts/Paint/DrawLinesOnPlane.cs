@@ -27,8 +27,8 @@ public class DrawLinesOnPlane : NetworkBehaviour
     private LineRenderer currentLineRenderer;
     private LineRenderer SendLineRenderer;
     public GameManager gameManager;
+    [SerializeField] private ColorPicker colorPicker;
 
-    
 
 
 
@@ -209,6 +209,8 @@ public class DrawLinesOnPlane : NetworkBehaviour
         SendLineRenderer.widthMultiplier = lineWidth * gross;
         SendLineRenderer.useWorldSpace = true;
         SendLineRenderer.sortingOrder = orderInLayer;
+        colorPicker._colorButton.color = color;
+
     }
 
 }
