@@ -128,7 +128,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
         string username = playerDataUsername.getPlayerUsername;
 
 
-       //gameManager.SetUsername(username);
+      
         userManager.Username = username;
         requestsCounter++;
         checkRequestCounter();
@@ -296,21 +296,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
         UserRolePlayFab = roles.FirstOrDefault(x => x.Value == true).Key;
 
         userManager.UserRole = (UserRole)Enum.Parse(typeof(UserRole), UserRolePlayFab);
-      /*  switch (UserRolePlayFab)
-        {
-            case "admins":
-                gameManager.SetUserRole(UserRole.Admin);
-                break;
-            case "members":
-                gameManager.SetUserRole(UserRole.Employee);
-                break;
-            case "clients":
-                gameManager.SetUserRole(UserRole.Client);
-                break;
-            case "moderators":
-                gameManager.SetUserRole(UserRole.Moderator);
-                break;
-        }*/
+    
        Debug.Log("[PlayFab-LoginManager] UserRole: " + userManager.UserRole);
 
         //Change to the next scene
