@@ -7,13 +7,14 @@ using UnityEngine.UI;
 using static Fusion.NetworkCharacterController;
 
 
-
 public class DrawLinesOnPlane : NetworkBehaviour
 {
     //Material
     public Material materialColorPicker;
     private int materialIndex = 0;
+    private int RPCMaterialIndex = 0;
     public List<Material> materialsList;
+    public List<Material> RPCMaterialsList;
     //Gross
     public Slider sliderGross;
     private float lineWidth = 0.05f;
@@ -193,7 +194,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
     /// <param name="Lines"></param>
     /// <param name="NumMaterial"></param>
     /// <param name="gross"></param>
-    public void dibujoetc(Vector3[] Lines, float gross, int orderInLayer,Color color)
+    public void dibujoetc(Vector3[] Lines, float gross, int orderInLayer, Color color)
     {
         Debug.Log(Lines.Length);
         GameObject newLineObjectSend = new GameObject("LineRendererSend");
@@ -204,7 +205,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
         SendLineRenderer.SetPositions(Lines);
         Material mater = new Material(materialColorPicker);
         mater.color = color;
-        materialsList.Add(mater); materialIndex += 1;
+        RPCMaterialsList.Add(mater);
         SendLineRenderer.material = mater;
         SendLineRenderer.widthMultiplier = lineWidth * gross;
         SendLineRenderer.useWorldSpace = true;
