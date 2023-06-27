@@ -1,11 +1,5 @@
 
-using Fusion;
 using UnityEngine;
-
-
-
-
-
 public class GameManager :MonoBehaviour
 {
 
@@ -16,29 +10,8 @@ public class GameManager :MonoBehaviour
      * 
      */
 
-    //Managers
-
-    //Not needed
-    //This SceneManager is going to change between scenes and is going to put a loading screen between them.
-    [SerializeField] private NetworkSceneManagerBase _loader;
-
-    //PhotonManager
-    //Runner, JUST ONE PER USER/ROOM
-    //It's like PhotonNetwork.somefunction() in PUN2
-    [SerializeField] private NetworkRunner _runner;
-    
     //Needed??
     [SerializeField] private InputManager inputManager;
-
-    //PhotonManager
-    private GameObject currentPlayer;
-
-    //PhotonManager
-    private string roomName; //This is the RoomName
-    public int playerCount;
-
-    //SceneManager
-    public string currentMap;
 
     //??
     public GameObject Settings;
