@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
-    [SerializeField] private bool _isPaused;
+    [SerializeField] private bool _isPaused = false;
 
     public bool IsPaused { get =>  _isPaused; set => _isPaused = value;}
 
@@ -28,27 +28,20 @@ public class PauseManager : MonoBehaviour
 
     public void Pause()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         IsPaused = true;
 
-        //_characterInputHandler.active = false;
 
         //UI Deactivate
-
-        //Activate Pause Menu
-        _pauseObject.SetActive(true);
 
     }
 
     public void Unpause()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         IsPaused = false;
-
-        //Deactivate Pause Menu
-        _pauseObject.SetActive(false);
-
-        //Activate UI
-
-        //_characterInputHandler.active = true;
 
     }
 }

@@ -32,7 +32,7 @@ public class CharacterInputHandler : MonoBehaviour
     //Camera
     public Camera playerCamera;
     LocalCameraHandler localCameraHandler;
-    
+
     //Input
     public bool escPul;//Reference if ESC key is pushed or not(ESC opens the Menu and youï¿½ll be on Pause State)
     //Pause
@@ -43,14 +43,6 @@ public class CharacterInputHandler : MonoBehaviour
     public GameObject UICardOtherUser;
     private GameObject miniMap;
 
-    //UI
-    /*
-    //PlayerUIPrefab
-    GameObject scope;
-    GameObject micro;//Actually this is the microphone in game
-    public GameObject eventText;
-    public GameObject eventTextK;
-    */
     public GameObject changeRoomPanel = null;
 
     //?
@@ -69,7 +61,6 @@ public class CharacterInputHandler : MonoBehaviour
     CharacterMovementHandler characterMovementHandler;
 
     //Managers
-    GameManager gameManager;
     InputManager inputManager;
     PhotonManager photonManager;
     PauseManager pauseManager;
@@ -79,20 +70,17 @@ public class CharacterInputHandler : MonoBehaviour
     public Camera presentationCamera = null;
     public bool onPresentationCamera = false;
 
-    //Nickname?
-    public string nickname;
-    //Input
-    private bool OpenMiniMapPul;
+
+    private bool EnableMovement = true;
 
     private void Awake()
     {
-        gameManager = GameManager.FindInstance().GetComponent<GameManager>();
         inputManager = GameManager.FindInstance().GetComponent<InputManager>();
         photonManager = PhotonManager.FindInstance();
 
         pauseManager = PauseManager.FindInstance();
         uiManager = UIManager.FindInstance();
- 
+
     }
 
 
@@ -101,16 +89,14 @@ public class CharacterInputHandler : MonoBehaviour
         //If this Script is just Input, it should only interact with managers
 
         voiceChat.GetGameObjects();
+        voiceChat.recorder.TransmitEnabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        voiceChat.recorder.TransmitEnabled = false;
-        GameObject currentPlayer = PhotonManager.FindInstance().CurrentPlayer;
+
         characterMovementHandler = this.gameObject.GetComponent<CharacterMovementHandler>();
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
-        Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
-        emoteWheel = currentPlayer.transform.GetChild(6).GetChild(0).gameObject;
-        Debug.Log(emoteWheel);
-      
+
+
 
         //ChatGPT
         chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
@@ -118,40 +104,365 @@ public class CharacterInputHandler : MonoBehaviour
         UICardOtherUser = GameObject.Find("Menus").transform.GetChild(5).gameObject;
 
         //Minimap
-        miniMap = GameObject.Find("Canvasminimap");
-
-        //seteamos el estado para que este InGame, esto hay que cambiarlo
-        photonManager.UserStatus = UserStatus.InGame;
+        miniMap = GameObject.Find("Canvasminimap").transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
         //This script should only get the inputs (W,A,S,D, Mouse && other keys)
-        
+
         //Just neeeded in camera
         sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
 
         //OK
-        if (inputManager.GetButtonDown("MuteVoice") && photonManager.UserStatus == UserStatus.InGame)
+        if (inputManager.GetButtonDown("MuteVoice") && !pauseManager.IsPaused)
             voiceChat.MuteAudio(photonManager.UserStatus);
 
-        //?¿
-        nickname = this.gameObject.GetComponent<NetworkPlayer>().nickname.ToString();
 
-       
-        if (localCameraHandler == null) {
-            
+        if (localCameraHandler == null)
+        {
+
             localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
             playerCamera = localCameraHandler.gameObject.GetComponent<Camera>();
         }
 
+        Raycast();
+      
+        //Emote Wheel Logic
+        CheckWheel();
+
+        //Pause Menu Logic
+        CheckPause();
+
+        //Presentation Camera Logic
+
+        CheckPresentationCamera();
+
+        //Minimap Logic
+        CheckMiniMap();
+
+        //Movement is active
+        if (EnableMovement)
+        {
+            if (!localCameraHandler.enabled) localCameraHandler.enabled = true;
+            if (!characterMovementHandler.enabled) characterMovementHandler.enabled = true;
+            //View input
+            viewInputVector.x = Input.GetAxis("Mouse X") / sensitivity;
+            viewInputVector.y = Input.GetAxis("Mouse Y") * -1 / sensitivity; //Invert the mouse look
+
+            //Move Input
+            moveInputVector.x = Input.GetAxis("Horizontal");
+            moveInputVector.y = Input.GetAxis("Vertical");
+
+            if (Input.GetButton("Jump"))
+                isJumpButtonPressed = true;
+
+            //?
+
+            if (localCameraHandler != null) localCameraHandler.SetViewInputVector(viewInputVector);
+
+        }
+        //Movement is not active
+        else
+        {
+            if (localCameraHandler.enabled) localCameraHandler.enabled = false;
+            if (characterMovementHandler.enabled) characterMovementHandler.enabled = false;
+        }
+
+
+
+
+    }
+
+    //OK
+    /// <summary>
+    /// To all the people can see the movement
+    /// </summary>
+    /// <returns></returns>
+    public NetworkInputData GetNetworkInput()
+    {
+        NetworkInputData networkInputData = new NetworkInputData();
+
+        //Aim data
+
+        networkInputData.aimForwardVector = localCameraHandler.transform.forward;
+
+        //Move data
+        networkInputData.movementInput = moveInputVector;
+
+        //Jump data
+        networkInputData.isJumpPressed = isJumpButtonPressed;
+
+        isJumpButtonPressed = false;
+
+
+        return networkInputData;
+
+    }
+
+    //NOT OK
+    /// <summary>
+    /// Change the state of camera when you are in a zone of presentation
+    /// </summary>
+    /// <param name="camera"></param>
+    public void setPresentationCamera(Camera camera)
+    {
+
+        //When leaving presentation mode?
+        if (camera == null)
+        {
+            //We deactivate the camera
+            presentationCamera = null;
+
+            //We deactivate UI
+            uiManager.HidePresentationText();
+        }
+
+        else
+        {
+            //We obtain the camera
+            presentationCamera = camera;
+
+            //We activate UI
+            uiManager.ShowPresentationText();
+        }
+    }
+
+
+    //Pause Login, not here
+    /// <summary>
+    /// DeactivateALL
+    /// </summary>
+    public void DeactivateALL()
+    {
+        escPul = true;
+        //photonManager.UserStatus = UserStatus.InPause;
+
+
+        //playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
+
+
+
+        //AQUI IRA EL FIND DEL CHARACTER CONTROL PARA DESACTIVAR
+        //AQUI IRA EL FIND DEL PLAYERCAMERA PARA DESACTIVARLA
+        characterMovementHandler.enabled = false;
+        //localCameraHandler.enabled=false;
+
+
+        uiManager.SetUIOff();
+    }
+
+    //Pause Logic, not here
+    /// <summary>
+    /// ActiveALL
+    /// </summary>
+    public void ActiveALL()
+    {
+
+       
+        characterMovementHandler.enabled = true;
+    
+
+        pauseManager.Unpause();
+
+        uiManager.SetUIOn();
+    }
+    public void CheckWheel()
+    {
+
+        //InGame
+        if (!pauseManager.IsPaused)
+        {
+            if (inputManager.GetButtonDown("Wheel"))
+            {
+
+                pauseManager.Pause();
+                uiManager.OpenEmoteWheel();
+                EnableMovement = false;
+
+            }
+
+        }
+        //Pause
+        else
+        {
+
+            if (inputManager.GetButtonDown("Wheel") && uiManager.EmoteWheel.activeSelf)
+            {
+                pauseManager.Unpause();
+                uiManager.CloseEmoteWheel();
+                EnableMovement = true;
+            }
+
+        }
+
+    }
+
+    public void CheckPause()
+    {
+        //InGame
+        if (!pauseManager.IsPaused)
+        {
+            //ESC key down(PauseMenu)
+            if ((Input.GetKeyDown(KeyCode.Escape)))
+            {
+                //setPause();
+                pauseManager.Pause();
+                uiManager.OpenPauseMenu();
+                EnableMovement = false;
+
+
+            }
+
+        }
+        //Pause
+        else
+        {
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+
+                pauseManager.Unpause();
+                uiManager.CloseNonPlayerUI();
+                EnableMovement = true;
+
+                if (changeRoomPanel != null)
+                    changeRoomPanel.SetActive(false);
+
+                //Make method
+                if (onPresentationCamera)
+                {
+                    presentationCamera.enabled = false;
+                    playerCamera.enabled = true;
+                    uiManager.ShowPresentationText();
+                    uiManager.SetUIOn();
+                    pauseManager.Unpause();
+
+                    EnableMovement = true;
+
+                    if (SceneManager.GetActiveScene().name == "LobbyOficial")
+                    {
+                        Debug.Log("Deactivate Drawline");
+                        drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
+                        drawingPlaneScript.enabled = false;
+                    }
+
+                    onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
+                }
+
+
+            }
+
+
+
+        }
+    }
+
+    public void CheckPresentationCamera()
+    {
+        //InGame
+        if (!pauseManager.IsPaused)
+        {
+            //K key down(PresentationMode)
+            if (presentationCamera != null)
+            {
+                if (inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null)
+                {
+
+                    if (onPresentationCamera)
+                    {
+                        presentationCamera.enabled = false;
+                        playerCamera.enabled = true;
+                        uiManager.ShowPresentationText();
+                        uiManager.SetUIOn();
+                        pauseManager.Unpause();
+
+                        EnableMovement = true;
+
+                        if (SceneManager.GetActiveScene().name == "LobbyOficial")
+                        {
+                            Debug.Log("Deactivate Drawline");
+                            drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
+                            drawingPlaneScript.enabled = false;
+                        }
+                    }
+
+                    else
+                    {
+                        presentationCamera.enabled = true;
+                        playerCamera.enabled = false;
+                        uiManager.SetUIOff();
+                        pauseManager.Pause();
+                        EnableMovement = false;
+                        //DeactivateALL();
+                        //photonManager.UserStatus = UserStatus.InGame;
+
+                        if (SceneManager.GetActiveScene().name == "LobbyOficial")
+                        {
+                            Debug.Log("Activate Drawline");
+                            if (drawingPlaneScript == null) drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
+                            drawingPlaneScript.enabled = true;
+                        }
+                    }
+
+                    onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
+                }
+            }
+        }
+
+        //Pause
+        else
+        {
+
+
+            if (inputManager.GetButtonDown("ChangeCamera") && onPresentationCamera)
+            {
+                presentationCamera.enabled = false;
+                playerCamera.enabled = true;
+                uiManager.ShowPresentationText();
+                uiManager.SetUIOn();
+                pauseManager.Unpause();
+
+                EnableMovement = true;
+
+                if (SceneManager.GetActiveScene().name == "LobbyOficial")
+                {
+                    Debug.Log("Deactivate Drawline");
+                    drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
+                    drawingPlaneScript.enabled = false;
+                }
+
+                onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
+            }
+
+        }
+
+    }
+
+    public void CheckMiniMap()
+    {
+        //InGame
+        if (!pauseManager.IsPaused)
+        {
+            //OK but minimap Logic in another script
+            if (inputManager.GetButtonDown("OpenMiniMap"))
+            {
+                if(miniMap.activeSelf) miniMap.SetActive(false);
+                else miniMap.SetActive(true);
+            }
+
+        }
+    }
+
+    public void Raycast()
+    {
         //UI script
-        if (HittingObject && photonManager.UserStatus != UserStatus.InPause && onPresentationCamera == false)
-            uiManager.HideEventText();
+        if (HittingObject && !pauseManager.IsPaused && onPresentationCamera == false)
+            uiManager.ShowEventText();
 
         //Raycast script
-        if (photonManager.UserStatus != UserStatus.InPause)
+        if (!pauseManager.IsPaused)
         {
             targetTime -= Time.deltaTime;
             //Raycast
@@ -202,268 +513,8 @@ public class CharacterInputHandler : MonoBehaviour
             }
         }
 
-            //Input OK but Pause Logic in another script
-            if (!Input.GetKeyDown(KeyCode.Escape))
-            {
 
-                escPul = false; // Detecta si no esta pulsado
 
-            }
-            //OK
-            if (!inputManager.GetButtonDown("OpenMiniMap"))
-            {
-                OpenMiniMapPul = false; // Detecta si no esta pulsado
-            }
-
-        switch (photonManager.UserStatus)
-            {
-                case UserStatus.InGame:
-                    {
-                    //OK but minimap Logic in another script
-                    if ((inputManager.GetButtonDown("OpenMiniMap") && !OpenMiniMapPul))
-                    {
-                        miniMap.transform.GetChild(0).gameObject.SetActive(true);
-                        OpenMiniMapPul = true;
-                    }
-
-                    //ESC key down(PauseMenu)
-                    if ((Input.GetKeyDown(KeyCode.Escape) && !escPul))
-                        {
-                            setPause();
-                        }
-                        //OK
-                        if (inputManager.GetButtonDown("Wheel") && !escPul)
-                        {
-                            setEmoteWheel();
-                        }
-
-                        //K key down(PresentationMode)
-                        if (presentationCamera != null)
-                        {
-                            if (inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null)
-                            {
-
-                                if (onPresentationCamera)
-                                {
-                                    presentationCamera.enabled = false;
-                                    playerCamera.enabled = true;
-                                    uiManager.ShowPresentationText();
-                                    ActiveALL();
-
-                                    if (SceneManager.GetActiveScene().name == "LobbyOficial")
-                                    {
-                                        Debug.Log("Deactivate Drawline");
-                                        drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
-                                        drawingPlaneScript.enabled = false;
-                                    }
-                                }
-
-                                else
-                                {
-                                    presentationCamera.enabled = true;
-                                    playerCamera.enabled = false;
-                                    uiManager.HideEventText();
-                                    DeactivateALL();
-                                photonManager.UserStatus = UserStatus.InGame;
-
-                                    if (SceneManager.GetActiveScene().name == "LobbyOficial")
-                                    {
-                                        Debug.Log("Activate Drawline");
-                                        if (drawingPlaneScript == null) drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
-                                        drawingPlaneScript.enabled = true;
-                                    }
-                            }
-
-                                onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
-                            }
-                        }
-                        break;
-                    }
-            case UserStatus.InPause:
-                {
-                    if (Input.GetKeyDown(KeyCode.Escape) && !escPul)
-                    {
-                        setJuego();
-
-                        if (changeRoomPanel != null)
-                            changeRoomPanel.SetActive(false);
-                    }
-
-                    if ((inputManager.GetButtonDown("OpenMiniMap")) && !OpenMiniMapPul)
-                    {
-                        miniMap.transform.GetChild(0).gameObject.SetActive(false);
-
-                    }
-                    break;
-                }
-
-            default:
-                    Debug.Log(photonManager.UserStatus);
-                    break;
-            }
-
-            //OK
-            //View input
-            viewInputVector.x = Input.GetAxis("Mouse X") / sensitivity;
-            viewInputVector.y = Input.GetAxis("Mouse Y") * -1 / sensitivity; //Invert the mouse look
-
-            //Move Input
-            moveInputVector.x = Input.GetAxis("Horizontal");
-            moveInputVector.y = Input.GetAxis("Vertical");
-
-            if (Input.GetButton("Jump"))
-                isJumpButtonPressed = true;
-
-            //?
-            if (localCameraHandler != null) localCameraHandler.SetViewInputVector(viewInputVector);
-        }
-    
-    //OK
-    /// <summary>
-    /// To all the people can see the movement
-    /// </summary>
-    /// <returns></returns>
-    public NetworkInputData GetNetworkInput()
-    {
-        NetworkInputData networkInputData = new NetworkInputData();
-
-        //Aim data
-        networkInputData.aimForwardVector = localCameraHandler.transform.forward;
-
-        //Move data
-        networkInputData.movementInput = moveInputVector;
-
-        //Jump data
-        networkInputData.isJumpPressed = isJumpButtonPressed;
-
-        isJumpButtonPressed = false;
-
-        return networkInputData;
 
     }
-
-    //NOT OK
-    /// <summary>
-    /// Change the state of camera when you are in a zone of presentation
-    /// </summary>
-    /// <param name="camera"></param>
-    public void setPresentationCamera(Camera camera)
-    {
-
-        //When leaving presentation mode?
-        if (camera == null)
-        {
-            //We deactivate the camera
-            presentationCamera = null;
-
-            //We deactivate UI
-            uiManager.HidePresentationText();
-        }
-
-        else
-        {
-            //We obtain the camera
-            presentationCamera = camera;
-
-            //We activate UI
-            uiManager.ShowPresentationText();
-        }
-    }
-
-    //Pause Login, not here
-    /// <summary>
-    /// DeactivateALL
-    /// </summary>
-    public void DeactivateALL()
-    {
-        escPul = true;
-        photonManager.UserStatus = UserStatus.InPause;
-        
-    //playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
-
-
-    
-        //AQUI IRA EL FIND DEL CHARACTER CONTROL PARA DESACTIVAR
-        //AQUI IRA EL FIND DEL PLAYERCAMERA PARA DESACTIVARLA
-        characterMovementHandler.enabled=false;
-        localCameraHandler.enabled=false;
-
-
-        uiManager.SetUIOff();
-    }
-
-    //Pause Logic, not here
-    /// <summary>
-    /// ActiveALL
-    /// </summary>
-    public void ActiveALL()
-    {
-
-        //playerToSpawn.GetComponent<SC_FPSController>().enabled = true;
-
-
-
-        // AQUI IRA EL FIND DEL CHARACTER CONTROL PARA ACTIVAR
-        //AQUI IRA EL FIND DEL PLAYERCAMERA PARA ACTIVAR
-        characterMovementHandler.enabled = true;
-        localCameraHandler.enabled = true;
-        photonManager.UserStatus = UserStatus.InGame;
-
-
-        //Deactivate presentation text
-        /*
-        if (presentationCamera!=null)
-            eventTextK.SetActive(true);
-        */
-
-        uiManager.SetUIOn();
-    }
-
-    //Is OK if only comunicate with Pause Manager
-    public void setPause()
-    {
-       
-
-        //Pause canvas
-        
-        Pause.SetActive(true);
-       
-        DeactivateALL();
-        //Escape activado
-
-    }
-
-    //I guess Input shouldn't activate UI
-    public void setEmoteWheel()
-    {
-        //Pause canvas
-
-        emoteWheel.SetActive(true);
-
-        DeactivateALL();
-        //Escape activado
-
-    }
-
-    //NOPE
-    public void setJuego()
-    {
-
-        //Activate Settings Window and stop
-        chatGPTActive.activate(false);
-        Settings.SetActive(false);
-        Pause.SetActive(false);
-        emoteWheel.SetActive(false);
-        UICardOtherUser.SetActive(false);
-        Cursor.visible = false;
-        UICard.SetActive(false);
-        //States and Reactivate all
-
-
-        ActiveALL();
-        Debug.Log(photonManager.UserStatus);
-
-    }
-
- 
 }

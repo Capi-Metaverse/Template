@@ -9,6 +9,25 @@ public class UIManager : MonoBehaviour
 
      public PlayerUI PlayerUI { get => _playerUI; set => _playerUI = value; }
 
+    [SerializeField] private GameObject _emoteWheel;
+
+    public GameObject EmoteWheel { get => _emoteWheel; set => _emoteWheel = value; }
+
+    [SerializeField] private GameObject _pause;
+
+    public GameObject Pause { get => _pause; set => _pause = value; }
+
+
+    private void Start()
+    {
+
+        
+    }
+
+    //Pause GameObject
+
+    [SerializeField] private GameObject _pauseObject;
+
     //Static function to get the singleton
     public static UIManager FindInstance()
     {
@@ -20,8 +39,7 @@ public class UIManager : MonoBehaviour
 
         Debug.Log("Activate UI");
         PlayerUI.ShowUI();
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+    
        
        
     }
@@ -31,8 +49,7 @@ public class UIManager : MonoBehaviour
         Debug.Log("Deactivate UI");
         PlayerUI.HideUI();
 
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+       
         
 
     }
@@ -60,6 +77,48 @@ public class UIManager : MonoBehaviour
         PlayerUI.PresentationTextOn();
 
     }
+
+    public void OpenPauseMenu()
+    {
+       if(Pause == null) Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
+        SetUIOff();
+        Pause.SetActive(true);
+    }
+
+    public void ClosePauseMenu() 
+    {
+        SetUIOn();
+        Pause.SetActive(false);
+    }
+
+    public void OpenEmoteWheel()
+    {
+        if(EmoteWheel == null) EmoteWheel = PhotonManager.FindInstance().CurrentPlayer.transform.GetChild(5).GetChild(0).gameObject;
+        Debug.Log(EmoteWheel);
+        SetUIOff();
+        EmoteWheel.SetActive(true);
+
+    }
+
+    public void CloseEmoteWheel()
+    {
+        SetUIOn();
+        EmoteWheel.SetActive(false);
+
+    }
+
+    public void CloseNonPlayerUI()
+    {
+        if (EmoteWheel == null) EmoteWheel = PhotonManager.FindInstance().CurrentPlayer.transform.GetChild(5).GetChild(0).gameObject;
+        if (Pause == null) Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
+
+        SetUIOn();
+        EmoteWheel.SetActive(false);
+        Pause.SetActive(false);
+
+    }
+
+
 
 
 }
