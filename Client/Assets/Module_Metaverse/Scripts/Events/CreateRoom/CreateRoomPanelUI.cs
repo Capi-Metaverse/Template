@@ -34,7 +34,7 @@ public class CreateRoomPanelUI : MonoBehaviour
     {
         this.gameObject.SetActive(false);
         GameObject player = PhotonManager.FindInstance().CurrentPlayer;
-        player.GetComponent<CharacterInputHandler>().ActiveALL();
+        //player.GetComponent<CharacterInputHandler>().ActiveALL();
     }
 
     public void OpenJoinUI()

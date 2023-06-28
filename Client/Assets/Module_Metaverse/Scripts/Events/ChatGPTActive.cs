@@ -33,7 +33,7 @@ public class ChatGPTActive : MonoBehaviour, IMetaEvent
         else
         {
             CanvasChatGPT.SetActive(false);
-            CharacterInputHandler.ActiveALL();
+            //CharacterInputHandler.ActiveALL();
             GameObject.Find("adam").transform.GetChild(2).gameObject.SetActive(false);
         }
     }

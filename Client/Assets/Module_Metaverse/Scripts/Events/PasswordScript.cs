@@ -77,7 +77,7 @@ public class PasswordScript : MonoBehaviour
     {
         GameObject player = PhotonManager.FindInstance().CurrentPlayer;
         this.gameObject.SetActive(false);
-        player.GetComponent<CharacterInputHandler>().ActiveALL();
+        //player.GetComponent<CharacterInputHandler>().ActiveALL();
     }
 
     public void ChangeLayout()

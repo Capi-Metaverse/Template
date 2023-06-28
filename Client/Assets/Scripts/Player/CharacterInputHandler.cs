@@ -19,13 +19,20 @@ public class CharacterInputHandler : MonoBehaviour
     public float lookSpeed = 2.0f;
 
 
-    //Raycast Manager
+    //Raycast
+
     //Raycast distance
+
     public float rayDistance = 3;
     //Raycast active
+
     public bool active = false;
+    //Raycast Timer
     public float targetTime = 0.5f;
+
+    //Raycast Object
     public GameObject raycastObject = null;
+
     //Detect if Certain Object is being hit
     bool HittingObject = false;
 
@@ -33,10 +40,6 @@ public class CharacterInputHandler : MonoBehaviour
     public Camera playerCamera;
     LocalCameraHandler localCameraHandler;
 
-    //Input
-    public bool escPul;//Reference if ESC key is pushed or not(ESC opens the Menu and you�ll be on Pause State)
-    //Pause
-    public GameObject Pause;//Pause is an object in scene map, you can see it as the manager of the pause state
     public GameObject Settings;//The same as Pause but for settings, the state will be Pause too cause the setting are accesible from Pause
     //UI
     public GameObject UICard;
@@ -44,12 +47,6 @@ public class CharacterInputHandler : MonoBehaviour
     private GameObject miniMap;
 
     public GameObject changeRoomPanel = null;
-
-    //?
-    ChatGPTActive chatGPTActive;
-
-    //EmoteWheel
-    public GameObject emoteWheel;
 
     //Drawing Plane ?
     private DrawLinesOnPlane drawingPlaneScript;
@@ -99,7 +96,7 @@ public class CharacterInputHandler : MonoBehaviour
 
 
         //ChatGPT
-        chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
+        //chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
         UICard = GameObject.Find("Menus").transform.GetChild(4).gameObject;
         UICardOtherUser = GameObject.Find("Menus").transform.GetChild(5).gameObject;
 
@@ -229,45 +226,6 @@ public class CharacterInputHandler : MonoBehaviour
         }
     }
 
-
-    //Pause Login, not here
-    /// <summary>
-    /// DeactivateALL
-    /// </summary>
-    public void DeactivateALL()
-    {
-        escPul = true;
-        //photonManager.UserStatus = UserStatus.InPause;
-
-
-        //playerToSpawn.GetComponent<SC_FPSController>().enabled = false;
-
-
-
-        //AQUI IRA EL FIND DEL CHARACTER CONTROL PARA DESACTIVAR
-        //AQUI IRA EL FIND DEL PLAYERCAMERA PARA DESACTIVARLA
-        characterMovementHandler.enabled = false;
-        //localCameraHandler.enabled=false;
-
-
-        uiManager.SetUIOff();
-    }
-
-    //Pause Logic, not here
-    /// <summary>
-    /// ActiveALL
-    /// </summary>
-    public void ActiveALL()
-    {
-
-       
-        characterMovementHandler.enabled = true;
-    
-
-        pauseManager.Unpause();
-
-        uiManager.SetUIOn();
-    }
     public void CheckWheel()
     {
 
