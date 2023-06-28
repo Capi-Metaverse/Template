@@ -21,7 +21,13 @@ public class ChatGPTActive : MonoBehaviour, IMetaEvent
         if (host == true)
         {
             CanvasChatGPT.SetActive(true);
-            CharacterInputHandler.DeactivateALL();
+
+            UIManager uiManager = UIManager.FindInstance();
+            PauseManager pauseManager = PauseManager.FindInstance();
+            pauseManager.Pause();
+            uiManager.SetUIOff();
+
+            //CharacterInputHandler.DeactivateALL();
             GameObject.Find("adam").transform.GetChild(2).gameObject.SetActive(true);
         }
         else

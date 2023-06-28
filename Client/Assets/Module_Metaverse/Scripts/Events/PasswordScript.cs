@@ -44,7 +44,14 @@ public class PasswordScript : MonoBehaviour
         UserManager userManager = UserManager.FindInstance();
         GameObject player = PhotonManager.FindInstance().CurrentPlayer;
 
-        player.GetComponent<CharacterInputHandler>().DeactivateALL();
+        UIManager uiManager = UIManager.FindInstance();
+        PauseManager pauseManager = PauseManager.FindInstance();
+
+        pauseManager.Pause();
+        uiManager.SetUIOff();
+
+
+        // player.GetComponent<CharacterInputHandler>().DeactivateALL();
 
         this.gameObject.SetActive(true);
 

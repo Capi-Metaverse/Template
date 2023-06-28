@@ -66,13 +66,21 @@ public class UiUsers : MonoBehaviour ,IMetaEvent
     public void activate(bool host)
     {
         characterInputHandler = PhotonManager.FindInstance().CurrentPlayer.gameObject.GetComponent<CharacterInputHandler>();
+        UIManager uiManager = UIManager.FindInstance();
+        PauseManager pauseManager = PauseManager.FindInstance();
+        characterInputHandler.EnableMovement = false;
+        pauseManager.Pause();
+        uiManager.SetUIOff();
+        
         manageDataUI = new ManageDataUI();
         manageDataUI.LoadData();
         achievementsManager.LoadData();
         StartCoroutine(LoadInitialData());
 
         UICard.SetActive(true);
-        characterInputHandler.DeactivateALL();
+
+       
+        //characterInputHandler.DeactivateALL();
     }
    
     // Update is called once per frame

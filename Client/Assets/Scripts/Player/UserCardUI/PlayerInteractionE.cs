@@ -45,9 +45,15 @@ public class PlayerInteractionE : MonoBehaviour
     private void LoadDataIntoCard(GetUserDataResult result)
     {
         card.SetActive(true);
+
+        UIManager uiManager = UIManager.FindInstance();
+        PauseManager pauseManager = PauseManager.FindInstance();
       
-        characterInputHandler = PhotonManager.FindInstance().CurrentPlayer.gameObject.GetComponent<CharacterInputHandler>();
-        characterInputHandler.DeactivateALL();
+       characterInputHandler = PhotonManager.FindInstance().CurrentPlayer.gameObject.GetComponent<CharacterInputHandler>();
+
+        characterInputHandler.EnableMovement = false;
+        pauseManager.Pause();
+        uiManager.SetUIOff();
 
         data = JsonConvert.DeserializeObject<UserUIInfo>(result.Data["userUICard"].Value);
         visionData = card.GetComponent<VisionData>();

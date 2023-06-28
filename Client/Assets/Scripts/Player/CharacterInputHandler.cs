@@ -71,7 +71,7 @@ public class CharacterInputHandler : MonoBehaviour
     public bool onPresentationCamera = false;
 
 
-    private bool EnableMovement = true;
+    public bool EnableMovement = true;
 
     private void Awake()
     {
