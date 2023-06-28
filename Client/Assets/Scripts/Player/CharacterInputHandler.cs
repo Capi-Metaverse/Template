@@ -70,6 +70,8 @@ public class CharacterInputHandler : MonoBehaviour
     GameManager gameManager;
     InputManager inputManager;
     PhotonManager photonManager;
+    PauseManager pauseManager;
+    UIManager uiManager;
 
     //Presentation
     public Camera presentationCamera = null;
@@ -85,6 +87,10 @@ public class CharacterInputHandler : MonoBehaviour
         gameManager = GameManager.FindInstance().GetComponent<GameManager>();
         inputManager = GameManager.FindInstance().GetComponent<InputManager>();
         photonManager = PhotonManager.FindInstance();
+
+        pauseManager = PauseManager.FindInstance();
+        uiManager = UIManager.FindInstance();
+ 
     }
 
 
