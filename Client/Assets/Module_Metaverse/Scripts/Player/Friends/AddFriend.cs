@@ -77,7 +77,7 @@ public class AddFriend : MonoBehaviour
     {
         Debug.Log(result.FunctionResult);
         validationMessage.text = "Friend request sended correctly";
-        validationMessage.color = Color.magenta;
+        validationMessage.color = Color.green;
         // Handle success, if necessary
     }
 
