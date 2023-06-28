@@ -9,7 +9,7 @@ public class FriendRequest : MonoBehaviour {
     private string id;
 
     [SerializeField] private FriendList friendList;
-    [SerializeField] private FriendManager friendManager;
+    [SerializeField] private GetFriends getFriend;
 
     public string Id { get => id; set => id = value; }
 
@@ -19,7 +19,7 @@ public class FriendRequest : MonoBehaviour {
     public void AcceptRequest()
     {
         friendList = gameObject.GetComponentInParent<FriendList>();
-        friendManager = gameObject.GetComponentInParent<FriendManager>();
+        getFriend = gameObject.GetComponentInParent<GetFriends>();
         ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
         {
             FunctionName = "AcceptFriendRequest",
@@ -57,17 +57,11 @@ public class FriendRequest : MonoBehaviour {
 
     private void OnDeniFriendSuccess(ExecuteCloudScriptResult result)
     {
-        Debug.Log("Se rechazo");
         Destroy(this.gameObject);
-
     }
     private void OnAddFriendSuccess(ExecuteCloudScriptResult result)
     {
-        Debug.Log("aaaaaaaaaaaaaaaaaaaaaaa");
-        friendManager.GetFriendsConfirmedList();
-
-
-
+        getFriend.GetFriendsConfirmedList();
     }
 
     /// <summary>

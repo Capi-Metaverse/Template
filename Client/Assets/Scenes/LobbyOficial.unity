@@ -3317,7 +3317,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   materialColorPicker: {fileID: 2100000, guid: b2866c90fb6106b45ae0568f42e87d46, type: 2}
+  materialIndex: 0
   materialsList: []
+  RPCMaterialsList: []
   sliderGross: {fileID: 1958735025}
   grossImage: {fileID: 1447538453}
   planeLayer:
@@ -3326,7 +3328,7 @@ MonoBehaviour:
   orderInLayer: 0
   camera: {fileID: 1592156059}
   gameManager: {fileID: 0}
-  colorPicker: {fileID: 2049244122}
+  photonManager: {fileID: 0}
 --- !u!64 &1716836369
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4038,6 +4040,18 @@ PrefabInstance:
     - target: {fileID: 4906311642251822703, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914824471281308996, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914824471281308996, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8764431177155767810, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000044699642
       objectReference: {fileID: 0}
     - target: {fileID: 9166918224799515813, guid: f57ce5f2df78b204e931295f5ddc228c, type: 3}
       propertyPath: uiusers
