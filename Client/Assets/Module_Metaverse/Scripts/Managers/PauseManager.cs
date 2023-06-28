@@ -30,7 +30,7 @@ public class PauseManager : MonoBehaviour
     {
         IsPaused = true;
 
-        _characterInputHandler.active = false;
+        //_characterInputHandler.active = false;
 
         //UI Deactivate
 
@@ -48,7 +48,7 @@ public class PauseManager : MonoBehaviour
 
         //Activate UI
 
-        _characterInputHandler.active = true;
+        //_characterInputHandler.active = true;
 
     }
 }

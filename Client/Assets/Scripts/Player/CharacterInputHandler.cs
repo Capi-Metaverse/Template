@@ -44,11 +44,13 @@ public class CharacterInputHandler : MonoBehaviour
     private GameObject miniMap;
 
     //UI
+    /*
     //PlayerUIPrefab
     GameObject scope;
     GameObject micro;//Actually this is the microphone in game
     public GameObject eventText;
     public GameObject eventTextK;
+    */
     public GameObject changeRoomPanel = null;
 
     //?
@@ -108,11 +110,7 @@ public class CharacterInputHandler : MonoBehaviour
         Pause = GameObject.Find("Menus").transform.GetChild(1).gameObject;
         emoteWheel = currentPlayer.transform.GetChild(6).GetChild(0).gameObject;
         Debug.Log(emoteWheel);
-        //PlayerUIPrefab
-        micro = currentPlayer.transform.GetChild(3).GetChild(0).gameObject;//Micro
-        scope = currentPlayer.transform.GetChild(3).GetChild(1).gameObject;//Scope
-        eventText = currentPlayer.transform.GetChild(3).GetChild(2).gameObject;
-        eventTextK = currentPlayer.transform.GetChild(3).GetChild(3).gameObject;
+      
 
         //ChatGPT
         chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
@@ -147,10 +145,10 @@ public class CharacterInputHandler : MonoBehaviour
             localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
             playerCamera = localCameraHandler.gameObject.GetComponent<Camera>();
         }
-        
+
         //UI script
-        if (HittingObject && photonManager.UserStatus != UserStatus.InPause && onPresentationCamera==false)
-            eventText.SetActive(true);
+        if (HittingObject && photonManager.UserStatus != UserStatus.InPause && onPresentationCamera == false)
+            uiManager.HideEventText();
 
         //Raycast script
         if (photonManager.UserStatus != UserStatus.InPause)
@@ -164,7 +162,7 @@ public class CharacterInputHandler : MonoBehaviour
                 {
                     raycastObject = hit.transform.gameObject;
 
-                    eventText.SetActive(true);
+                    uiManager.ShowEventText();
                     HittingObject = true;
                 }
                 //RaycastObject
@@ -172,7 +170,7 @@ public class CharacterInputHandler : MonoBehaviour
                 {
                     raycastObject = hit.transform.gameObject;
 
-                    eventText.SetActive(true);
+                    uiManager.ShowEventText();
                     HittingObject = true;
                 }
 
@@ -198,7 +196,7 @@ public class CharacterInputHandler : MonoBehaviour
                 {
                     //raycastObject.GetComponent<Outline>().enabled = false;
                     raycastObject = null;
-                    eventText.SetActive(false);
+                    uiManager.HideEventText();
                     HittingObject = false;
                 }
             }
@@ -249,7 +247,7 @@ public class CharacterInputHandler : MonoBehaviour
                                 {
                                     presentationCamera.enabled = false;
                                     playerCamera.enabled = true;
-                                    eventTextK.SetActive(true);
+                                    uiManager.ShowPresentationText();
                                     ActiveALL();
 
                                     if (SceneManager.GetActiveScene().name == "LobbyOficial")
@@ -264,7 +262,7 @@ public class CharacterInputHandler : MonoBehaviour
                                 {
                                     presentationCamera.enabled = true;
                                     playerCamera.enabled = false;
-                                    eventText.SetActive(false);
+                                    uiManager.HideEventText();
                                     DeactivateALL();
                                 photonManager.UserStatus = UserStatus.InGame;
 
@@ -359,7 +357,7 @@ public class CharacterInputHandler : MonoBehaviour
             presentationCamera = null;
 
             //We deactivate UI
-            eventTextK.SetActive(false);
+            uiManager.HidePresentationText();
         }
 
         else
@@ -368,7 +366,7 @@ public class CharacterInputHandler : MonoBehaviour
             presentationCamera = camera;
 
             //We activate UI
-            eventTextK.SetActive(true);
+            uiManager.ShowPresentationText();
         }
     }
 
@@ -391,14 +389,7 @@ public class CharacterInputHandler : MonoBehaviour
         localCameraHandler.enabled=false;
 
 
-        //Deactivate presentation text
-        eventTextK.SetActive(false);
-        eventText.SetActive(false);
-
-        micro.SetActive(false);
-        scope.SetActive(false);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
+        uiManager.SetUIOff();
     }
 
     //Pause Logic, not here
@@ -420,14 +411,12 @@ public class CharacterInputHandler : MonoBehaviour
 
 
         //Deactivate presentation text
+        /*
         if (presentationCamera!=null)
             eventTextK.SetActive(true);
+        */
 
-
-        Cursor.visible = false;
-        scope.SetActive(true);
-        micro.SetActive(true);
-        Cursor.lockState = CursorLockMode.Locked; // Desactiva el bloqueo cursor 
+        uiManager.SetUIOn();
     }
 
     //Is OK if only comunicate with Pause Manager

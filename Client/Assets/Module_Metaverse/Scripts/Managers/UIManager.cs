@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-   
-    GameObject CrossHair;
-    GameObject Mic;
-    GameObject EventText;
-    GameObject EventTextK;
+  
+     [SerializeField] private PlayerUI _playerUI;
+
+     public PlayerUI PlayerUI { get => _playerUI; set => _playerUI = value; }
 
     //Static function to get the singleton
     public static UIManager FindInstance()
@@ -16,28 +15,11 @@ public class UIManager : MonoBehaviour
         return FindObjectOfType<UIManager>();
     }
 
-    private void Start()
-    {
-        GameObject currentPlayer = PhotonManager.FindInstance().CurrentPlayer;
-
-        Mic = currentPlayer.transform.GetChild(3).GetChild(0).gameObject;
-        CrossHair = currentPlayer.transform.GetChild(3).GetChild(1).gameObject;
-        EventText = currentPlayer.transform.GetChild(3).GetChild(2).gameObject;
-        EventTextK = currentPlayer.transform.GetChild(3).GetChild(3).gameObject;
-
-
-    }
-
-
     public void SetUIOn()
     {
-        //Deactivate presentation text
-        EventTextK.SetActive(true);
-        EventText.SetActive(true);
 
-        Mic.SetActive(true);
-        CrossHair.SetActive(true);
-
+        Debug.Log("Activate UI");
+        PlayerUI.ShowUI();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
        
@@ -46,17 +28,38 @@ public class UIManager : MonoBehaviour
 
     public void SetUIOff()
     {
-
-        //Deactivate presentation text
-        EventTextK.SetActive(false);
-        EventText.SetActive(false);
-
-        Mic.SetActive(false);
-        CrossHair.SetActive(false);
+        Debug.Log("Deactivate UI");
+        PlayerUI.HideUI();
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         
 
     }
+
+    public void HideEventText()
+    {
+        PlayerUI.EventTextOff();
+        
+    }
+
+    public void ShowEventText()
+    {
+        PlayerUI.EventTextOn();
+      
+    }
+
+    public void HidePresentationText()
+    {
+        PlayerUI.PresentationTextOff();
+
+    }
+
+    public void ShowPresentationText()
+    {
+        PlayerUI.PresentationTextOn();
+
+    }
+
+
 }

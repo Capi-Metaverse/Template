@@ -39,6 +39,8 @@ public class PlayerUI : MonoBehaviour
 
         mic.GetComponent<Image>().sprite = microOff;
 
+        UIManager.FindInstance().PlayerUI = this;
+
     }
 
 
@@ -104,6 +106,7 @@ public class PlayerUI : MonoBehaviour
 
     public void HideUI()
     {
+        Debug.Log("All Off");
         MicOff();
         CrosshairOff();
         EventTextOff();
