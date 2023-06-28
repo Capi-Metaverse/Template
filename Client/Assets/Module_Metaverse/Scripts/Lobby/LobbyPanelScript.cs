@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class LobbyPanelScript : MonoBehaviour
@@ -15,12 +16,14 @@ public class LobbyPanelScript : MonoBehaviour
     public  RoomItem roomItemPrefab;
     public Transform contentObject;
     public Button createButton;
+    public TMP_InputField roomNameField;
 
     private GameObject LobbyManager;
 
     private void Start()
     {
         LobbyManager = GameObject.Find("LobbyManager");
+        EventSystem.current.SetSelectedGameObject(roomNameField.gameObject);
     }
     public void OnClickCreateSession()
     {
@@ -34,6 +37,17 @@ public class LobbyPanelScript : MonoBehaviour
         if (LobbyManager.TryGetComponent(out LobbyManager lobbyManager))
         {
             lobbyManager.OnJoinSession(sessionInfo);
+        }
+    }
+
+    public void OnCreateSessionEntered()
+    {
+        if (EventSystem.current.currentSelectedGameObject == roomNameField.gameObject && Input.GetKey(KeyCode.Return) && createButton.IsActive())
+        {
+            if (LobbyManager.TryGetComponent(out LobbyManager lobbyManager))
+            {
+                lobbyManager.OnCreateSession(sessionName.text);
+            }
         }
     }
 }

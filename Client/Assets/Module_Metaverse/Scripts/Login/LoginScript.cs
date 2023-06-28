@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Class. Handle just the PlayfabLogin Method
@@ -32,5 +34,18 @@ public class LoginScript : MonoBehaviour
 
         }
         //TODO: Add ELSE which will do the login without playfab
+    }
+
+    public void OnPasswordEntered()
+    {
+        if (EventSystem.current.currentSelectedGameObject == PasswordInput.gameObject && Input.GetKey(KeyCode.Return))
+        {
+            if (LoginManager.TryGetComponent(out LoginPlayFab loginPlayFab))
+            {
+
+                loginPlayFab.Login(EmailInput.text, PasswordInput.text);
+
+            }
+        }
     }
 }
