@@ -1,10 +1,8 @@
 using Fusion;
-using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using Fusion.Sockets;
 using System;
@@ -84,8 +82,6 @@ public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
     public int avatarNumber = 0;
     public bool CameraBool = false;
 
-    //SceneManager
-    public string currentMap;
     //GameManager
     [SerializeField] private InputManager inputManager;
     //Initialization
@@ -329,7 +325,6 @@ public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
         await Disconnect();
         RoomName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
         RoomName = RoomName.ToUpper();
-        currentMap = scene;
         PlayerCount = playerNumber;
         //We change to the respective map
         mSceneManager.LoadScene(scene);
@@ -344,7 +339,6 @@ public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
     {
         await Disconnect();
         RoomName = new string(sessionName.Where(c => char.IsLetter(c) || char.IsDigit(c)).ToArray());
-        currentMap = "LobbyOficial";
         PlayerCount = 4;
         Connect();
 

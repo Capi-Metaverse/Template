@@ -58,7 +58,7 @@ public class NetworkRunnerHandler : MonoBehaviour
         PhotonManager.FindInstance().Runner = runner;
 
          SessionProps props = new SessionProps();
-        props.StartMap = photonManager.currentMap;
+        props.StartMap = MSceneManager.FindInstance().CurrentScene;
         props.RoomName = photonManager.RoomName;
         props.AllowLateJoin = true;
         props.PlayerLimit = photonManager.PlayerCount;

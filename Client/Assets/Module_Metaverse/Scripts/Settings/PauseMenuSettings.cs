@@ -10,6 +10,7 @@ using TMPro;
 public class PauseMenuSettings : MonoBehaviour
 {
     private GameManager gameManager;
+    private MSceneManager mSceneManager;
     private PhotonManager photonManager;
     private GameObject Settings;
     private GameObject Pause;
@@ -20,6 +21,7 @@ public class PauseMenuSettings : MonoBehaviour
         //We find the GameObjects
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
         photonManager = PhotonManager.FindInstance();
+        mSceneManager = MSceneManager.FindInstance();
         Pause = this.gameObject;
         gameManager = GameManager.FindInstance();
         roomName.text = PhotonManager.FindInstance().RoomName;
@@ -31,7 +33,7 @@ public class PauseMenuSettings : MonoBehaviour
     public async void OnClickDisconnect()
     {
         await photonManager.Disconnect();
-        SceneManager.LoadSceneAsync("1.Start");
+        mSceneManager.LoadLogin();
 
 
     }
@@ -50,7 +52,7 @@ public class PauseMenuSettings : MonoBehaviour
     {
         await photonManager.Disconnect();
        
-        SceneManager.LoadSceneAsync("Lobby");
+        mSceneManager.LoadScene("Lobby_Module");
        
 
     }

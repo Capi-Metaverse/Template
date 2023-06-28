@@ -7,15 +7,19 @@ using UnityEngine.SceneManagement;
 
 public class CharacterInputHandler : MonoBehaviour
 {
+    //Movement
     Vector2 moveInputVector = Vector2.zero;
     Vector2 viewInputVector = Vector2.zero;
+
+    //Input
     bool isJumpButtonPressed = false;
 
+    //Camera
     public float sensitivity;
     public float lookSpeed = 2.0f;
 
-    //Raycast
 
+    //Raycast Manager
     //Raycast distance
     public float rayDistance = 3;
     //Raycast active
@@ -24,17 +28,22 @@ public class CharacterInputHandler : MonoBehaviour
     public GameObject raycastObject = null;
     //Detect if Certain Object is being hit
     bool HittingObject = false;
-    public Camera playerCamera;
 
+    //Camera
+    public Camera playerCamera;
     LocalCameraHandler localCameraHandler;
+    
+    //Input
     public bool escPul;//Reference if ESC key is pushed or not(ESC opens the Menu and youï¿½ll be on Pause State)
+    //Pause
     public GameObject Pause;//Pause is an object in scene map, you can see it as the manager of the pause state
     public GameObject Settings;//The same as Pause but for settings, the state will be Pause too cause the setting are accesible from Pause
+    //UI
     public GameObject UICard;
     public GameObject UICardOtherUser;
     private GameObject miniMap;
 
-
+    //UI
     //PlayerUIPrefab
     GameObject scope;
     GameObject micro;//Actually this is the microphone in game
@@ -42,17 +51,22 @@ public class CharacterInputHandler : MonoBehaviour
     public GameObject eventTextK;
     public GameObject changeRoomPanel = null;
 
+    //?
     ChatGPTActive chatGPTActive;
 
+    //EmoteWheel
     public GameObject emoteWheel;
 
-    //Drawing Plane
+    //Drawing Plane ?
     private DrawLinesOnPlane drawingPlaneScript;
 
-
+    //VoiceChat
     public VoiceManager voiceChat = new VoiceManager();//Manager for the voiceChat, not in scene object
+
+    //Movement
     CharacterMovementHandler characterMovementHandler;
 
+    //Managers
     GameManager gameManager;
     InputManager inputManager;
     PhotonManager photonManager;
@@ -61,8 +75,9 @@ public class CharacterInputHandler : MonoBehaviour
     public Camera presentationCamera = null;
     public bool onPresentationCamera = false;
 
-
+    //Nickname?
     public string nickname;
+    //Input
     private bool OpenMiniMapPul;
 
     private void Awake()
@@ -75,6 +90,8 @@ public class CharacterInputHandler : MonoBehaviour
 
     void Start()
     {
+        //If this Script is just Input, it should only interact with managers
+
         voiceChat.GetGameObjects();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -106,11 +123,16 @@ public class CharacterInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //This script should only get the inputs (W,A,S,D, Mouse && other keys)
         
+        //Just neeeded in camera
         sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
 
+        //OK
         if (inputManager.GetButtonDown("MuteVoice") && photonManager.UserStatus == UserStatus.InGame)
             voiceChat.MuteAudio(photonManager.UserStatus);
+
+        //?¿
         nickname = this.gameObject.GetComponent<NetworkPlayer>().nickname.ToString();
 
        
@@ -119,10 +141,12 @@ public class CharacterInputHandler : MonoBehaviour
             localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
             playerCamera = localCameraHandler.gameObject.GetComponent<Camera>();
         }
-     
+        
+        //UI script
         if (HittingObject && photonManager.UserStatus != UserStatus.InPause && onPresentationCamera==false)
             eventText.SetActive(true);
 
+        //Raycast script
         if (photonManager.UserStatus != UserStatus.InPause)
         {
             targetTime -= Time.deltaTime;
@@ -174,13 +198,14 @@ public class CharacterInputHandler : MonoBehaviour
             }
         }
 
-            //Pause
+            //Input OK but Pause Logic in another script
             if (!Input.GetKeyDown(KeyCode.Escape))
             {
 
                 escPul = false; // Detecta si no esta pulsado
 
             }
+            //OK
             if (!inputManager.GetButtonDown("OpenMiniMap"))
             {
                 OpenMiniMapPul = false; // Detecta si no esta pulsado
@@ -190,7 +215,7 @@ public class CharacterInputHandler : MonoBehaviour
             {
                 case UserStatus.InGame:
                     {
-
+                    //OK but minimap Logic in another script
                     if ((inputManager.GetButtonDown("OpenMiniMap") && !OpenMiniMapPul))
                     {
                         miniMap.transform.GetChild(0).gameObject.SetActive(true);
@@ -202,7 +227,7 @@ public class CharacterInputHandler : MonoBehaviour
                         {
                             setPause();
                         }
-
+                        //OK
                         if (inputManager.GetButtonDown("Wheel") && !escPul)
                         {
                             setEmoteWheel();
@@ -273,7 +298,7 @@ public class CharacterInputHandler : MonoBehaviour
                     break;
             }
 
-
+            //OK
             //View input
             viewInputVector.x = Input.GetAxis("Mouse X") / sensitivity;
             viewInputVector.y = Input.GetAxis("Mouse Y") * -1 / sensitivity; //Invert the mouse look
@@ -285,9 +310,11 @@ public class CharacterInputHandler : MonoBehaviour
             if (Input.GetButton("Jump"))
                 isJumpButtonPressed = true;
 
+            //?
             if (localCameraHandler != null) localCameraHandler.SetViewInputVector(viewInputVector);
         }
     
+    //OK
     /// <summary>
     /// To all the people can see the movement
     /// </summary>
@@ -311,6 +338,7 @@ public class CharacterInputHandler : MonoBehaviour
 
     }
 
+    //NOT OK
     /// <summary>
     /// Change the state of camera when you are in a zone of presentation
     /// </summary>
@@ -338,6 +366,7 @@ public class CharacterInputHandler : MonoBehaviour
         }
     }
 
+    //Pause Login, not here
     /// <summary>
     /// DeactivateALL
     /// </summary>
@@ -366,6 +395,7 @@ public class CharacterInputHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.None; // Desactiva el bloqueo cursor
     }
 
+    //Pause Logic, not here
     /// <summary>
     /// ActiveALL
     /// </summary>
@@ -394,6 +424,7 @@ public class CharacterInputHandler : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; // Desactiva el bloqueo cursor 
     }
 
+    //Is OK if only comunicate with Pause Manager
     public void setPause()
     {
        
@@ -407,7 +438,7 @@ public class CharacterInputHandler : MonoBehaviour
 
     }
 
-
+    //I guess Input shouldn't activate UI
     public void setEmoteWheel()
     {
         //Pause canvas
@@ -419,7 +450,7 @@ public class CharacterInputHandler : MonoBehaviour
 
     }
 
-
+    //NOPE
     public void setJuego()
     {
 
