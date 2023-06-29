@@ -83,24 +83,30 @@ public class CharacterInputHandler : MonoBehaviour
 
     void Start()
     {
-        //If this Script is just Input, it should only interact with managers
-
+        //VoiceChat
         voiceChat.GetGameObjects();
         voiceChat.recorder.TransmitEnabled = false;
+
+        //Activate Cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        //Movement Handler -> Communicates input
         characterMovementHandler = this.gameObject.GetComponent<CharacterMovementHandler>();
+
+        //Not needed
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
 
 
 
         //ChatGPT
         //chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
+
+        //Is not needed
         UICard = GameObject.Find("Menus").transform.GetChild(4).gameObject;
         UICardOtherUser = GameObject.Find("Menus").transform.GetChild(5).gameObject;
 
-        //Minimap
+        //Minimap Not needed
         miniMap = GameObject.Find("Canvasminimap").transform.GetChild(0).gameObject;
     }
 
@@ -124,8 +130,9 @@ public class CharacterInputHandler : MonoBehaviour
             playerCamera = localCameraHandler.gameObject.GetComponent<Camera>();
         }
 
+        // Raycast Logic
         Raycast();
-      
+
         //Emote Wheel Logic
         CheckWheel();
 
@@ -139,35 +146,8 @@ public class CharacterInputHandler : MonoBehaviour
         //Minimap Logic
         CheckMiniMap();
 
-        //Movement is active
-        if (EnableMovement)
-        {
-            if (!localCameraHandler.enabled) localCameraHandler.enabled = true;
-            if (!characterMovementHandler.enabled) characterMovementHandler.enabled = true;
-            //View input
-            viewInputVector.x = Input.GetAxis("Mouse X") / sensitivity;
-            viewInputVector.y = Input.GetAxis("Mouse Y") * -1 / sensitivity; //Invert the mouse look
-
-            //Move Input
-            moveInputVector.x = Input.GetAxis("Horizontal");
-            moveInputVector.y = Input.GetAxis("Vertical");
-
-            if (Input.GetButton("Jump"))
-                isJumpButtonPressed = true;
-
-            //?
-
-            if (localCameraHandler != null) localCameraHandler.SetViewInputVector(viewInputVector);
-
-        }
-        //Movement is not active
-        else
-        {
-            if (localCameraHandler.enabled) localCameraHandler.enabled = false;
-            if (characterMovementHandler.enabled) characterMovementHandler.enabled = false;
-        }
-
-
+        //MovementLogic
+        InputMovement();
 
 
     }
@@ -198,7 +178,6 @@ public class CharacterInputHandler : MonoBehaviour
 
     }
 
-    //NOT OK
     /// <summary>
     /// Change the state of camera when you are in a zone of presentation
     /// </summary>
@@ -291,22 +270,7 @@ public class CharacterInputHandler : MonoBehaviour
                 //Make method
                 if (onPresentationCamera)
                 {
-                    presentationCamera.enabled = false;
-                    playerCamera.enabled = true;
-                    uiManager.ShowPresentationText();
-                    uiManager.SetUIOn();
-                    pauseManager.Unpause();
-
-                    EnableMovement = true;
-
-                    if (SceneManager.GetActiveScene().name == "LobbyOficial")
-                    {
-                        Debug.Log("Deactivate Drawline");
-                        drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
-                        drawingPlaneScript.enabled = false;
-                    }
-
-                    onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
+                    ChangeCamera();
                 }
 
 
@@ -317,83 +281,59 @@ public class CharacterInputHandler : MonoBehaviour
         }
     }
 
-    public void CheckPresentationCamera()
+    private void ChangeCamera()
     {
-        //InGame
-        if (!pauseManager.IsPaused)
+        //Exit Presentation Camera
+        if (onPresentationCamera)
         {
-            //K key down(PresentationMode)
-            if (presentationCamera != null)
+            presentationCamera.enabled = false;
+            playerCamera.enabled = true;
+            uiManager.ShowPresentationText();
+            uiManager.SetUIOn();
+            pauseManager.Unpause();
+
+            EnableMovement = true;
+
+            if (SceneManager.GetActiveScene().name == "LobbyOficial")
             {
-                if (inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null)
-                {
-
-                    if (onPresentationCamera)
-                    {
-                        presentationCamera.enabled = false;
-                        playerCamera.enabled = true;
-                        uiManager.ShowPresentationText();
-                        uiManager.SetUIOn();
-                        pauseManager.Unpause();
-
-                        EnableMovement = true;
-
-                        if (SceneManager.GetActiveScene().name == "LobbyOficial")
-                        {
-                            Debug.Log("Deactivate Drawline");
-                            drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
-                            drawingPlaneScript.enabled = false;
-                        }
-                    }
-
-                    else
-                    {
-                        presentationCamera.enabled = true;
-                        playerCamera.enabled = false;
-                        uiManager.SetUIOff();
-                        pauseManager.Pause();
-                        EnableMovement = false;
-                        //DeactivateALL();
-                        //photonManager.UserStatus = UserStatus.InGame;
-
-                        if (SceneManager.GetActiveScene().name == "LobbyOficial")
-                        {
-                            Debug.Log("Activate Drawline");
-                            if (drawingPlaneScript == null) drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
-                            drawingPlaneScript.enabled = true;
-                        }
-                    }
-
-                    onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
-                }
+                Debug.Log("Deactivate Drawline");
+                drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
+                drawingPlaneScript.enabled = false;
             }
         }
 
-        //Pause
+        //Enter Presentation Camera
         else
         {
+            presentationCamera.enabled = true;
+            playerCamera.enabled = false;
+            uiManager.SetUIOff();
+            pauseManager.Pause();
+            EnableMovement = false;
 
 
-            if (inputManager.GetButtonDown("ChangeCamera") && onPresentationCamera)
+            if (SceneManager.GetActiveScene().name == "LobbyOficial")
             {
-                presentationCamera.enabled = false;
-                playerCamera.enabled = true;
-                uiManager.ShowPresentationText();
-                uiManager.SetUIOn();
-                pauseManager.Unpause();
-
-                EnableMovement = true;
-
-                if (SceneManager.GetActiveScene().name == "LobbyOficial")
-                {
-                    Debug.Log("Deactivate Drawline");
-                    drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
-                    drawingPlaneScript.enabled = false;
-                }
-
-                onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
+                Debug.Log("Activate Drawline");
+                if (drawingPlaneScript == null) drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
+                drawingPlaneScript.enabled = true;
             }
+        }
 
+        onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
+
+    }
+
+    public void CheckPresentationCamera()
+    {
+        //K key down(PresentationMode)
+        if (presentationCamera != null)
+        {
+            if (inputManager.GetButtonDown("ChangeCamera") && presentationCamera != null)
+            {
+
+                ChangeCamera();
+            }
         }
 
     }
@@ -406,10 +346,40 @@ public class CharacterInputHandler : MonoBehaviour
             //OK but minimap Logic in another script
             if (inputManager.GetButtonDown("OpenMiniMap"))
             {
-                if(miniMap.activeSelf) miniMap.SetActive(false);
+                if (miniMap.activeSelf) miniMap.SetActive(false);
                 else miniMap.SetActive(true);
             }
 
+        }
+    }
+
+    public void InputMovement()
+    {
+        //Movement is active
+        if (EnableMovement)
+        {
+            if (!localCameraHandler.enabled) localCameraHandler.enabled = true;
+            if (!characterMovementHandler.enabled) characterMovementHandler.enabled = true;
+            //View input
+            viewInputVector.x = Input.GetAxis("Mouse X") / sensitivity;
+            viewInputVector.y = Input.GetAxis("Mouse Y") * -1 / sensitivity; //Invert the mouse look
+
+            //Move Input
+            moveInputVector.x = Input.GetAxis("Horizontal");
+            moveInputVector.y = Input.GetAxis("Vertical");
+
+            if (Input.GetButton("Jump"))
+                isJumpButtonPressed = true;
+
+            //Add values to camera
+            if (localCameraHandler != null) localCameraHandler.SetViewInputVector(viewInputVector);
+
+        }
+        //Movement is not active
+        else
+        {
+            if (localCameraHandler.enabled) localCameraHandler.enabled = false;
+            if (characterMovementHandler.enabled) characterMovementHandler.enabled = false;
         }
     }
 
@@ -444,7 +414,6 @@ public class CharacterInputHandler : MonoBehaviour
                 }
 
                 //If the user interacts, activate the event
-                //if (inputManager.GetButtonDown("Interact") && targetTime <= 0)
                 if (inputManager.GetButtonDown("Interact") && targetTime <= 0)
                 {
                     //Cooldown timer
@@ -463,16 +432,11 @@ public class CharacterInputHandler : MonoBehaviour
 
                 if (raycastObject != null)
                 {
-                    //raycastObject.GetComponent<Outline>().enabled = false;
                     raycastObject = null;
                     uiManager.HideEventText();
                     HittingObject = false;
                 }
             }
         }
-
-
-
-
     }
 }
