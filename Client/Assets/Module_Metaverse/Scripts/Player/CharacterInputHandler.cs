@@ -114,10 +114,6 @@ public class CharacterInputHandler : MonoBehaviour
         //ChatGPT
         //chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
 
-        //Is not needed
-        //UICard = GameObject.Find("Menus").transform.GetChild(4).gameObject;
-        //UICardOtherUser = GameObject.Find("Menus").transform.GetChild(5).gameObject;
-
         //Minimap Not needed
         miniMap = GameObject.Find("Canvasminimap").transform.GetChild(0).gameObject;
     }
