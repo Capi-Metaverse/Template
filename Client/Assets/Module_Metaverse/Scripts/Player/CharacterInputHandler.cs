@@ -291,7 +291,7 @@ public class CharacterInputHandler : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "LobbyOficial")
             {
                 Debug.Log("Deactivate Drawline");
-                drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
+                drawingPlaneScript = GameObject.Find("Renderer").GetComponent<DrawLinesOnPlane>();
                 drawingPlaneScript.enabled = false;
             }
         }
@@ -309,7 +309,7 @@ public class CharacterInputHandler : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "LobbyOficial")
             {
                 Debug.Log("Activate Drawline");
-                if (drawingPlaneScript == null) drawingPlaneScript = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
+                if (drawingPlaneScript == null) drawingPlaneScript = GameObject.Find("Renderer").GetComponent<DrawLinesOnPlane>();
                 drawingPlaneScript.enabled = true;
             }
         }
