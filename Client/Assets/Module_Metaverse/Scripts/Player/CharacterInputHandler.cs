@@ -40,7 +40,6 @@ public class CharacterInputHandler : MonoBehaviour
     public Camera playerCamera;
     LocalCameraHandler localCameraHandler;
 
-    public GameObject Settings;//The same as Pause but for settings, the state will be Pause too cause the setting are accesible from Pause
     //UI
     public GameObject UICard;
     public GameObject UICardOtherUser;
@@ -93,11 +92,6 @@ public class CharacterInputHandler : MonoBehaviour
 
         //Movement Handler -> Communicates input
         characterMovementHandler = this.gameObject.GetComponent<CharacterMovementHandler>();
-
-        //Not needed
-        Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
-
-
 
         //ChatGPT
         //chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();

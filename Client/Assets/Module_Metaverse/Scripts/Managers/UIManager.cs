@@ -17,11 +17,15 @@ public class UIManager : MonoBehaviour
 
     public GameObject Pause { get => _pause; set => _pause = value; }
 
+    [SerializeField] private GameObject _settings;
+    public GameObject Settings { get => _settings; set => _settings = value; }
+
 
     private void Start()
     {
+        //Settings
+        Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
 
-        
     }
 
     //Pause GameObject
@@ -115,6 +119,7 @@ public class UIManager : MonoBehaviour
         SetUIOn();
         EmoteWheel.SetActive(false);
         Pause.SetActive(false);
+        Settings.SetActive(false);
 
     }
 
