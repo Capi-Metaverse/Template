@@ -41,7 +41,7 @@ public class VoiceManager
                 AudioVideoState.pubAudio = false;
                 Debug.Log("[PhotonVoice] Micro Off");
 
-                if (estado == UserStatus.InGame)
+                
                     GameObject.Find("Micro").GetComponent<Image>().sprite = MicroOff;
             }
             else
@@ -50,7 +50,7 @@ public class VoiceManager
                 AudioVideoState.pubAudio = true;
                 Debug.Log("[PhotonVoice] Micro On");
 
-                if (estado == UserStatus.InGame)
+
                     GameObject.Find("Micro").GetComponent<Image>().sprite = MicroOn;
             }
         }
