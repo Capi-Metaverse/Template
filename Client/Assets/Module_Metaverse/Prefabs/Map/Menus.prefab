@@ -98,7 +98,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &4429618584490960526
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,6 +402,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerUI: {fileID: 0}
+  _emoteWheel: {fileID: 0}
+  _pause: {fileID: 0}
+  _settings: {fileID: 0}
+  _pauseObject: {fileID: 0}
 --- !u!114 &984036151116265175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -916,6 +920,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6252930570896716687, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
+      propertyPath: sensi
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252930570896716687, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
+      propertyPath: sliderValue
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6316380765104090055, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1009,7 +1021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerItemPrefabSettings: {fileID: 5579281195357421886, guid: 2bf2d61890fe7494783d1555035f1d11, type: 3}
   PlayerListSettings: {fileID: 1128919341120842358}
-  muteButton: {fileID: 0}
+  muteButton: {fileID: 1523004664553703963}
 --- !u!1 &4906311642251822703 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4260924214363332052, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
