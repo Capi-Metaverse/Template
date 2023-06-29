@@ -9,12 +9,8 @@ public class PauseManager : MonoBehaviour
     public bool IsPaused { get =>  _isPaused; set => _isPaused = value;}
 
     //InputHandler
-
     [SerializeField] private CharacterInputHandler _characterInputHandler;
 
-    //Pause GameObject
-
-    [SerializeField] private GameObject _pauseObject;
 
     //UI Manager
 
@@ -25,7 +21,10 @@ public class PauseManager : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Static function to get the singleton
+    /// </summary>
+    /// <returns></returns>
     public void Pause()
     {
         Cursor.visible = true;
@@ -35,6 +34,9 @@ public class PauseManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Set the game state to play
+    /// </summary>
     public void Unpause()
     {
         Cursor.visible = false;

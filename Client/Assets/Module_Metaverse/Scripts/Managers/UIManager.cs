@@ -3,23 +3,28 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
+/// <summary>
+/// Manages the InGame UI
+/// </summary>
 public class UIManager : MonoBehaviour
 {
   
-     [SerializeField] private PlayerUI _playerUI;
+    [SerializeField] private PlayerUI _playerUI;
+    public PlayerUI PlayerUI { get => _playerUI; set => _playerUI = value; }
 
-     public PlayerUI PlayerUI { get => _playerUI; set => _playerUI = value; }
 
     [SerializeField] private GameObject _emoteWheel;
-
     public GameObject EmoteWheel { get => _emoteWheel; set => _emoteWheel = value; }
 
-    [SerializeField] private GameObject _pause;
 
+    [SerializeField] private GameObject _pause;
     public GameObject Pause { get => _pause; set => _pause = value; }
+
 
     [SerializeField] private GameObject _settings;
     public GameObject Settings { get => _settings; set => _settings = value; }
+
 
     //UI
     [Header("UI")]
@@ -37,40 +42,37 @@ public class UIManager : MonoBehaviour
 
     }
 
-    //Pause GameObject
-
-    [SerializeField] private GameObject _pauseObject;
-
-    //Static function to get the singleton
+    /// <summary>
+    /// Static function to get the singleton
+    /// </summary>
+    /// <returns></returns>
     public static UIManager FindInstance()
     {
         return FindObjectOfType<UIManager>();
     }
 
+    /// <summary>
+    /// Activate UI
+    /// </summary>
     public void SetUIOn()
     {
-
         Debug.Log("Activate UI");
         PlayerUI.ShowUI();
-    
-       
-       
     }
 
+
+    /// <summary>
+    /// Deactivate UI
+    /// </summary>
     public void SetUIOff()
     {
         Debug.Log("Deactivate UI");
         PlayerUI.HideUI();
-
-       
-        
-
     }
 
     public void HideEventText()
     {
         PlayerUI.EventTextOff();
-        
     }
 
     public void ShowEventText()
@@ -120,6 +122,9 @@ public class UIManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Closes all non Player UIs
+    /// </summary>
     public void CloseNonPlayerUI()
     {
         if (EmoteWheel == null) EmoteWheel = PhotonManager.FindInstance().CurrentPlayer.transform.GetChild(5).GetChild(0).gameObject;

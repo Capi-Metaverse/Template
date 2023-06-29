@@ -12,10 +12,8 @@ public class CharacterInputHandler : MonoBehaviour
     Vector2 viewInputVector = Vector2.zero;
 
 
-
     //Input
     bool isJumpButtonPressed = false;
-
 
 
     //Raycast
@@ -36,7 +34,6 @@ public class CharacterInputHandler : MonoBehaviour
     public bool HittingObject = false;
 
 
-
     //Camera
     [Header("Camera")]
     public float sensitivity;
@@ -44,7 +41,9 @@ public class CharacterInputHandler : MonoBehaviour
     public Camera playerCamera;
     LocalCameraHandler localCameraHandler;
     
+
     private GameObject miniMap;
+
 
     //Movement
     [Header("Movement")]
@@ -57,24 +56,14 @@ public class CharacterInputHandler : MonoBehaviour
     public Camera presentationCamera = null;
     public bool onPresentationCamera = false;
 
-
-
     public GameObject changeRoomPanel = null;
-
-
 
     //Drawing Plane ?
     private DrawLinesOnPlane drawingPlaneScript;
 
 
-
     //VoiceChat
     public VoiceManager voiceChat = new VoiceManager();//Manager for the voiceChat, not in scene object
-
-
-
-    
-
 
 
     //Managers
@@ -83,9 +72,6 @@ public class CharacterInputHandler : MonoBehaviour
     PauseManager pauseManager;
     UIManager uiManager;
 
-
-
-    
 
     private void Awake()
     {
@@ -162,7 +148,7 @@ public class CharacterInputHandler : MonoBehaviour
 
     //OK
     /// <summary>
-    /// To all the people can see the movement
+    /// Share Movement Data with other players
     /// </summary>
     /// <returns></returns>
     public NetworkInputData GetNetworkInput()
@@ -187,7 +173,7 @@ public class CharacterInputHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// Change the state of camera when you are in a zone of presentation
+    /// Change the state of camera when you are in the presentation zone
     /// </summary>
     /// <param name="camera"></param>
     public void setPresentationCamera(Camera camera)
@@ -213,6 +199,9 @@ public class CharacterInputHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes the EmoteWheel State
+    /// </summary>
     public void CheckWheel()
     {
 
@@ -227,7 +216,6 @@ public class CharacterInputHandler : MonoBehaviour
                 EnableMovement = false;
 
             }
-
         }
         //Pause
         else
@@ -239,11 +227,12 @@ public class CharacterInputHandler : MonoBehaviour
                 uiManager.CloseEmoteWheel();
                 EnableMovement = true;
             }
-
         }
-
     }
 
+    /// <summary>
+    /// Change the Pause State
+    /// </summary>
     public void CheckPause()
     {
         //InGame
@@ -259,7 +248,6 @@ public class CharacterInputHandler : MonoBehaviour
 
 
             }
-
         }
         //Pause
         else
@@ -280,15 +268,13 @@ public class CharacterInputHandler : MonoBehaviour
                 {
                     ChangeCamera();
                 }
-
-
             }
-
-
-
         }
     }
 
+    /// <summary>
+    /// Change the current Camera being used by the player
+    /// </summary>
     private void ChangeCamera()
     {
         //Exit Presentation Camera
@@ -332,6 +318,9 @@ public class CharacterInputHandler : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Confirms if presentationCamera exists
+    /// </summary>
     public void CheckPresentationCamera()
     {
         //K key down(PresentationMode)
@@ -346,6 +335,9 @@ public class CharacterInputHandler : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Changes the MiniMap State
+    /// </summary>
     public void CheckMiniMap()
     {
         //InGame
@@ -361,6 +353,9 @@ public class CharacterInputHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Manages the movement of the player
+    /// </summary>
     public void InputMovement()
     {
         //Movement is active
@@ -391,6 +386,9 @@ public class CharacterInputHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Manages the raycast interactions
+    /// </summary>
     public void Raycast()
     {
         //UI script
