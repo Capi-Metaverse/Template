@@ -11,50 +11,71 @@ public class CharacterInputHandler : MonoBehaviour
     Vector2 moveInputVector = Vector2.zero;
     Vector2 viewInputVector = Vector2.zero;
 
+
+
     //Input
     bool isJumpButtonPressed = false;
 
-    //Camera
-    public float sensitivity;
-    public float lookSpeed = 2.0f;
 
 
     //Raycast
-
+    [Header("Raycast")]
     //Raycast distance
-
     public float rayDistance = 3;
-    //Raycast active
-
-    public bool active = false;
-    //Raycast Timer
-    public float targetTime = 0.5f;
 
     //Raycast Object
     public GameObject raycastObject = null;
 
+    //Raycast active
+    private bool active = false;
+
+    //Raycast Timer
+    private float targetTime = 0.5f;
+
     //Detect if Certain Object is being hit
-    bool HittingObject = false;
+    public bool HittingObject = false;
+
+
 
     //Camera
+    [Header("Camera")]
+    public float sensitivity;
+    public float lookSpeed = 2.0f;
     public Camera playerCamera;
     LocalCameraHandler localCameraHandler;
-
-    //UI
-    public GameObject UICard;
-    public GameObject UICardOtherUser;
+    
     private GameObject miniMap;
 
+    //Movement
+    [Header("Movement")]
+    public bool EnableMovement = true;
+    public CharacterMovementHandler characterMovementHandler;
+    
+
+    //Presentation
+    [Header("Presentation")]
+    public Camera presentationCamera = null;
+    public bool onPresentationCamera = false;
+
+
+
     public GameObject changeRoomPanel = null;
+
+
 
     //Drawing Plane ?
     private DrawLinesOnPlane drawingPlaneScript;
 
+
+
     //VoiceChat
     public VoiceManager voiceChat = new VoiceManager();//Manager for the voiceChat, not in scene object
 
-    //Movement
-    CharacterMovementHandler characterMovementHandler;
+
+
+    
+
+
 
     //Managers
     InputManager inputManager;
@@ -62,12 +83,9 @@ public class CharacterInputHandler : MonoBehaviour
     PauseManager pauseManager;
     UIManager uiManager;
 
-    //Presentation
-    public Camera presentationCamera = null;
-    public bool onPresentationCamera = false;
 
 
-    public bool EnableMovement = true;
+    
 
     private void Awake()
     {
@@ -97,8 +115,8 @@ public class CharacterInputHandler : MonoBehaviour
         //chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
 
         //Is not needed
-        UICard = GameObject.Find("Menus").transform.GetChild(4).gameObject;
-        UICardOtherUser = GameObject.Find("Menus").transform.GetChild(5).gameObject;
+        //UICard = GameObject.Find("Menus").transform.GetChild(4).gameObject;
+        //UICardOtherUser = GameObject.Find("Menus").transform.GetChild(5).gameObject;
 
         //Minimap Not needed
         miniMap = GameObject.Find("Canvasminimap").transform.GetChild(0).gameObject;
