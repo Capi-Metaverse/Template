@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 public class GetFriends : MonoBehaviour
 {
@@ -17,41 +19,54 @@ public class GetFriends : MonoBehaviour
     /// <summary>
     /// PlayFab - Method that returns the list of friends from Playfab
     /// </summary>
-    public void GetFriendsConfirmedList()
+    public Task<List<Friend>> GetFriendsConfirmedListAsync()
     {
+        var tcs = new TaskCompletionSource<List<Friend>>();
+
         ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
         {
             FunctionName = "getFriendsListRequester",
             GeneratePlayStreamEvent = true
         };
 
-        PlayFabClientAPI.ExecuteCloudScript(request, OnGetFriendsConfirmedListSuccess, OnGetFriendsListFailure);
+        PlayFabClientAPI.ExecuteCloudScript(request, result =>
+        {
+            List<Friend> friends = OnGetFriendsConfirmedListSuccess(result);
+            tcs.SetResult(friends);
+        }, error =>
+        {
+            Debug.LogError("Failed to execute cloud script: " + error.ErrorMessage);
+            tcs.SetResult(new List<Friend>()); // Set an empty list in case of failure
+        });
+
+        return tcs.Task;
     }
 
     /// <summary>
     /// Callback for successful GetFriendsList ,which gets the result of the callback and appends it to a list
     /// </summary>
     /// <param name="result"></param>
-    private void OnGetFriendsConfirmedListSuccess(ExecuteCloudScriptResult result)
+    private List<Friend> OnGetFriendsConfirmedListSuccess(ExecuteCloudScriptResult result)
     {
+        List<Friend> friends = new List<Friend>();
         friendManager.Friends.Clear();
 
-        if (result.FunctionResult != null)
+        if (result != null && result.FunctionResult != null)
         {
+            string json = result.FunctionResult.ToString();
 
-            Debug.Log(result.FunctionResult.ToString());
-            // Access the Friends List from 'result.FunctionResult["Friends"]'
-            string objectString = result.FunctionResult.ToString();
-
+            // Deserialize the JSON response into a list of friend objects
+            List<Friend> friendObjects = JsonConvert.DeserializeObject<List<Friend>>(json);
+            friends.AddRange(friendObjects);
 
             //Patterns Regular Expressions
             string pattern = "\"Username\":\"(.*?)\"";
             string IdsPatter = "\"IDS\":\"(.*?)\"";
             string TagsPatter = "\"Tags\":\"(.*?)\"";
 
-            MatchCollection matches = Regex.Matches(objectString, pattern);
-            MatchCollection matche = Regex.Matches(objectString, IdsPatter);
-            MatchCollection matchTag = Regex.Matches(objectString, TagsPatter);
+            MatchCollection matches = Regex.Matches(json, pattern);
+            MatchCollection matche = Regex.Matches(json, IdsPatter);
+            MatchCollection matchTag = Regex.Matches(json, TagsPatter);
 
             for (int i = 0; i < matches.Count; i++)
             {
@@ -65,6 +80,8 @@ public class GetFriends : MonoBehaviour
 
             friendList.InstanceFriendItem();
         }
+
+        return friends;
 
     }
 
