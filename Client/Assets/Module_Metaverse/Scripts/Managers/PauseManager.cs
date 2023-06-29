@@ -33,8 +33,6 @@ public class PauseManager : MonoBehaviour
         IsPaused = true;
 
 
-        //UI Deactivate
-
     }
 
     public void Unpause()

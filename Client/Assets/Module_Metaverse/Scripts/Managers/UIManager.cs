@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -20,11 +21,19 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _settings;
     public GameObject Settings { get => _settings; set => _settings = value; }
 
+    //UI
+    [Header("UI")]
+    public GameObject UICard;
+    public GameObject UICardOtherUser;
+
 
     private void Start()
     {
         //Settings
         Settings = GameObject.Find("Menus").transform.GetChild(0).gameObject;
+
+        UICard = GameObject.Find("Menus").transform.GetChild(4).gameObject;
+        UICardOtherUser = GameObject.Find("Menus").transform.GetChild(5).gameObject;
 
     }
 
@@ -120,6 +129,8 @@ public class UIManager : MonoBehaviour
         EmoteWheel.SetActive(false);
         Pause.SetActive(false);
         Settings.SetActive(false);
+        UICard.SetActive(false);
+        UICardOtherUser.SetActive(false);
 
     }
 
