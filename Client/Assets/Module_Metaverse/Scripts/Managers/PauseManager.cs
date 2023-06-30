@@ -12,6 +12,8 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private CharacterInputHandler _characterInputHandler;
 
 
+
+
     //UI Manager
 
     //Static function to get the singleton
@@ -31,6 +33,8 @@ public class PauseManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         IsPaused = true;
 
+        this.gameObject.GetComponent<NetworkCharacterControllerPrototypeCustom>().IsPaused = true;
+
 
     }
 
@@ -42,6 +46,8 @@ public class PauseManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         IsPaused = false;
+
+        this.gameObject.GetComponent<NetworkCharacterControllerPrototypeCustom>().IsPaused = false;
 
     }
 }

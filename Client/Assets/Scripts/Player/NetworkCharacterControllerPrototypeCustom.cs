@@ -34,7 +34,6 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     float rotationX = 0;
 
     public Animator animator = null;
-    public GameManager gameManager = null;
     public PhotonManager photonManager = null;
 
     [Networked]
@@ -44,6 +43,9 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
   [Networked]
   [HideInInspector]
   public Vector3 Velocity { get; set; }
+
+    [Networked]
+    public bool IsPaused { get; set; } = false;
 
     //Managers
 
@@ -68,12 +70,16 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     CacheController();
     photonManager = PhotonManager.FindInstance();
     pauseManager = PauseManager.FindInstance();
+
+ 
     }
 
   public override void Spawned() {
     base.Spawned();
     CacheController();
-  }
+
+        if (animator == null) { animator = this.gameObject.GetComponentInChildren<Animator>(); }
+    }
 
   private void CacheController() {
     if (Controller == null) {
@@ -171,10 +177,7 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     public override void Render()
     {
 
-        if(animator == null) { animator = this.gameObject.GetComponentInChildren<Animator>(); }
-        if (gameManager == null) { gameManager = GameObject.Find("Manager").GetComponentInChildren<GameManager>(); }
-
-        if (!pauseManager.IsPaused) { animator.SetFloat("Speed", 1); }
+        if (!IsPaused) { animator.SetFloat("Speed", 1); }
         else { animator.SetFloat("Speed", 0); }
        
         if (IsGrounded)
