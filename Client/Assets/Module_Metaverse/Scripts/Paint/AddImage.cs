@@ -21,13 +21,15 @@ public class AddImage : MonoBehaviour
 
     public void OnClickOpenFile()
     {
-        Screen.lockCursor = false;//Unity and standalone
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         var extensions = new[] { new ExtensionFilter("Image Files", "png", "jpg", "jpeg") };
 
         WriteResult(StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false));
 
-        Screen.lockCursor = true;//Unity and standalone
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     /// <summary>
     /// Writes the path of the file selected
@@ -90,7 +92,7 @@ public class AddImage : MonoBehaviour
 
         var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2((float)_size, (float)(_size)));
         spriteRenderer.sprite = nuevoSprite;
-        Screen.lockCursor = false;
+        
     }
 }
 

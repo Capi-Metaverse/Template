@@ -9,7 +9,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
     //Material
     public Material materialColorPicker;
     public int materialIndex = 0;
-    private int RPCMaterialIndex = 0;
+   
     public List<Material> materialsList;
     public List<Material> RPCMaterialsList;
     //Gross

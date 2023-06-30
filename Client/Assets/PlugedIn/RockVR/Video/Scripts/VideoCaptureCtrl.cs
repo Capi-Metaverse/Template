@@ -67,7 +67,7 @@ namespace RockVR.Video
         /// <summary>
         /// Whether set up Time.maximumDeltaTime to avoiding nasty stuttering.
         /// </summary>
-        private bool isOfflineRender;
+        //private bool isOfflineRender;
         /// <summary>
         /// User audio clip.
         /// </summary>
@@ -137,10 +137,12 @@ namespace RockVR.Video
                 {
                     return;
                 }
+                /*
                 if (videoCapture.offlineRender)
                 {
-                    isOfflineRender = true;
+                    //isOfflineRender = true;
                 }
+                */
                 videoCapture.StartCapture();
                 videoCapture.eventDelegate.OnComplete += OnVideoCaptureComplete;
             }

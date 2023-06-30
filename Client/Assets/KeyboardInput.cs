@@ -9,8 +9,7 @@ public class KeyboardInput : MonoBehaviour
 {
     
 
-    [SerializeField] private float WalkingSpeed = 7.5f;
-    [SerializeField] private float RunningSpeed = 11.5f;
+    
 
     public bool canMove = true;
     public Vector3 MoveDirection { get; private set; }

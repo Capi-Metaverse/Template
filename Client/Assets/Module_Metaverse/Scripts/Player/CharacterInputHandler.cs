@@ -24,9 +24,6 @@ public class CharacterInputHandler : MonoBehaviour
     //Raycast Object
     public GameObject raycastObject = null;
 
-    //Raycast active
-    private bool active = false;
-
     //Raycast Timer
     private float targetTime = 0.5f;
 
