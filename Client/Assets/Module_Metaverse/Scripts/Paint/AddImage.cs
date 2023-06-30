@@ -83,7 +83,7 @@ public class AddImage : MonoBehaviour
             case "jpeg":
                 Debug.Log("Image");
                 FileUpload(bytes);
-                RPCManager.RPC_Images(photonmanager.Runner, _path);
+                RPCManager.RPC_Images(photonmanager.Runner, bytes);
                 break;
         }
     }
@@ -102,11 +102,8 @@ public class AddImage : MonoBehaviour
         spriteRenderer.sprite = nuevoSprite;
         
     }
-    public void FileUploadOthers(string _path)
+    public void FileUploadOthers(byte[] bytes)
     {
-        WWW www = new WWW("file://" + _path);
-       
-        byte[] bytes = www.bytes;
         //Create Texture
         Texture2D textu = new Texture2D(1, 1);
 
