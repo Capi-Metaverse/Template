@@ -18,8 +18,10 @@ public class EventWheel : NetworkTransform
     private Animator animator;
 
     [Networked]
-    private AnimationList previousAnimation { get; set; }   
-    private AnimationList animationToPlay { get; set; } = AnimationList.None;
+    public AnimationList previousAnimation { get; set; }
+
+    [Networked]
+    public AnimationList animationToPlay { get; set; } = AnimationList.None;
 
     private void Start()
     {
