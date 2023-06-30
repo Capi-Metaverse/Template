@@ -65,7 +65,7 @@ public class EventWheel : NetworkTransform
     {
         if (animationToPlay != AnimationList.None)
         {
-           
+            Debug.Log("First if");
 
             if (previousAnimation != animationToPlay)
             {
