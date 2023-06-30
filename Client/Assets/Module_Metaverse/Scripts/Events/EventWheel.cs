@@ -17,9 +17,15 @@ public class EventWheel : NetworkTransform
 {
     private Animator animator;
 
-    private AnimationList previousAnimation;
-    private AnimationList animationToPlay = AnimationList.None;
-    
+    [Networked]
+    private AnimationList previousAnimation { get; set; }   
+    private AnimationList animationToPlay { get; set; } = AnimationList.None;
+
+    private void Start()
+    {
+        if (animator == null) { animator = this.gameObject.transform.parent.GetComponentInChildren<Animator>(); }
+    }
+
     public void setAnimation1()
     {
         animationToPlay = AnimationList.Clapping;
@@ -57,7 +63,7 @@ public class EventWheel : NetworkTransform
     {
         if (animationToPlay != AnimationList.None)
         {
-            if (animator == null) { animator = this.gameObject.transform.parent.GetComponentInChildren<Animator>(); }
+           
 
             if (previousAnimation != animationToPlay)
             {
