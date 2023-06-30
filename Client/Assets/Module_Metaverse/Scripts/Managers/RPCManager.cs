@@ -186,10 +186,10 @@ public class RPCManager : SimulationBehaviour
     }
 
     [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = false)]
-    public static void RPC_Images(NetworkRunner runner, byte[] bytes)
+    public static void RPC_Images(NetworkRunner runner, string _path)
     {
         AddImage addImage = GameObject.Find("PresentationZone").GetComponent<AddImage>();
-        addImage.FileUploadOthers(bytes);
+        addImage.FileUploadOthers(_path);
 
     }
 }

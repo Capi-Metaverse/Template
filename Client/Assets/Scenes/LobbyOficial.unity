@@ -4230,6 +4230,10 @@ PrefabInstance:
       propertyPath: sliderGross
       value: 
       objectReference: {fileID: 1958735025}
+    - target: {fileID: 6759691928948769259, guid: afa691ab0010c744e8e54021b2efe8a3, type: 3}
+      propertyPath: PresentationCamera
+      value: 
+      objectReference: {fileID: 1592156059}
     - target: {fileID: 7881495605783572948, guid: afa691ab0010c744e8e54021b2efe8a3, type: 3}
       propertyPath: m_Sprite
       value: 
