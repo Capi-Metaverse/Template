@@ -45,6 +45,10 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
   [HideInInspector]
   public Vector3 Velocity { get; set; }
 
+    //Managers
+
+    private PauseManager pauseManager;
+
   /// <summary>
   /// Sets the default teleport interpolation velocity to be the CC's current velocity.
   /// For more details on how this field is used, see <see cref="NetworkTransform.TeleportToPosition"/>.
@@ -63,7 +67,8 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     base.Awake();
     CacheController();
     photonManager = PhotonManager.FindInstance();
-  }
+    pauseManager = PauseManager.FindInstance();
+    }
 
   public override void Spawned() {
     base.Spawned();
@@ -169,7 +174,7 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
         if(animator == null) { animator = this.gameObject.GetComponentInChildren<Animator>(); }
         if (gameManager == null) { gameManager = GameObject.Find("Manager").GetComponentInChildren<GameManager>(); }
 
-        if (photonManager.UserStatus == UserStatus.InGame) { animator.SetFloat("Speed", 1); }
+        if (!pauseManager.IsPaused) { animator.SetFloat("Speed", 1); }
         else { animator.SetFloat("Speed", 0); }
        
         if (IsGrounded)
