@@ -2,6 +2,7 @@ using Fusion;
 using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -184,4 +185,11 @@ public class RPCManager : SimulationBehaviour
         drawLinesOnPlane.FunctionClear();
     }
 
+    [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = false)]
+    public static void RPC_Images(NetworkRunner runner, byte[] bytes)
+    {
+        AddImage addImage = GameObject.Find("PresentationZone").GetComponent<AddImage>();
+        addImage.FileUploadOthers(bytes);
+
+    }
 }

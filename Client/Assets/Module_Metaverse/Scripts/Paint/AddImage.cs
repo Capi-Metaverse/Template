@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 
@@ -14,11 +15,17 @@ public class AddImage : MonoBehaviour
     private string _path;//File path
     private float _size = 0.5f;
     public SpriteRenderer spriteRenderer;
+    public RPCManager rcpmanager;
+    public PhotonManager photonmanager;
 
     /// <summary>
     /// Open panel to choose the file and limiting the extensions to choose
     /// </summary>
 
+    private void Start()
+    {
+        photonmanager = PhotonManager.FindInstance();
+    }
     public void OnClickOpenFile()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -76,6 +83,7 @@ public class AddImage : MonoBehaviour
             case "jpeg":
                 Debug.Log("Image");
                 FileUpload(bytes);
+                RPCManager.RPC_Images(photonmanager.Runner, bytes);
                 break;
         }
     }
@@ -93,6 +101,19 @@ public class AddImage : MonoBehaviour
         var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2((float)_size, (float)(_size)));
         spriteRenderer.sprite = nuevoSprite;
         
+    }
+    public void FileUploadOthers(byte[] bytes)
+    {
+        //Create Texture
+        Texture2D textu = new Texture2D(1, 1);
+
+        //transform data into texture
+        textu.LoadImage(bytes);
+
+        //transform texture into Sprite
+
+        var nuevoSprite = Sprite.Create(textu, new Rect(0.0f, 0.0f, textu.width, textu.height), new Vector2((float)_size, (float)(_size)));
+        spriteRenderer.sprite = nuevoSprite;
     }
 }
 
