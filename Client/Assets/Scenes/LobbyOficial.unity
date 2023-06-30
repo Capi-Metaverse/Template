@@ -1073,7 +1073,7 @@ GameObject:
   - component: {fileID: 335298701}
   - component: {fileID: 335298704}
   m_Layer: 0
-  m_Name: Presentation Zone
+  m_Name: PresentationZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1135,6 +1135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 6759691928519403788}
+  rcpmanager: {fileID: 0}
+  photonmanager: {fileID: 0}
 --- !u!64 &376933703
 MeshCollider:
   m_ObjectHideFlags: 0
