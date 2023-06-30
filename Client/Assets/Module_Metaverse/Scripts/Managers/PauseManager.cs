@@ -9,7 +9,7 @@ public class PauseManager : MonoBehaviour
     public bool IsPaused { get =>  _isPaused; set => _isPaused = value;}
 
     //InputHandler
-    [SerializeField] private CharacterInputHandler _characterInputHandler;
+    [SerializeField] private GameObject _player;
 
 
 
@@ -32,8 +32,8 @@ public class PauseManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         IsPaused = true;
-
-        this.gameObject.GetComponent<NetworkCharacterControllerPrototypeCustom>().IsPaused = true;
+        _player = PhotonManager.FindInstance().CurrentPlayer;
+        _player.GetComponent<NetworkCharacterControllerPrototypeCustom>().IsPaused = true;
 
 
     }
@@ -46,8 +46,8 @@ public class PauseManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         IsPaused = false;
-
-        this.gameObject.GetComponent<NetworkCharacterControllerPrototypeCustom>().IsPaused = false;
+        _player = PhotonManager.FindInstance().CurrentPlayer;
+        _player.GetComponent<NetworkCharacterControllerPrototypeCustom>().IsPaused = false;
 
     }
 }

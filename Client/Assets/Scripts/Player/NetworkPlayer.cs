@@ -61,6 +61,7 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
             this.inputHandler.enabled = true;
             //Looks in scene for the GameManager and store it
             SetGameManager(GameObject.Find("/Manager").GetComponent<GameManager>());
+            PhotonManager.FindInstance().CurrentPlayer = this.gameObject;
             gameObject.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("LocalPlayer");
             foreach (Transform child in gameObject.transform.GetChild(0))
             {
