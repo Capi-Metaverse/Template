@@ -173,14 +173,14 @@ public class RPCManager : SimulationBehaviour
 
         Debug.Log(Lines.Length);
 
-        DrawLinesOnPlane drawLinesOnPlane = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
+        DrawLinesOnPlane drawLinesOnPlane = GameObject.Find("Renderer").GetComponent<DrawLinesOnPlane>();
         drawLinesOnPlane.dibujoetc(Lines, gross, orderInLayer, color);
     }
 
     [Rpc]
     public static void RPC_LinesClear(NetworkRunner runner)
     {
-        DrawLinesOnPlane drawLinesOnPlane = GameObject.Find("Plane").GetComponent<DrawLinesOnPlane>();
+        DrawLinesOnPlane drawLinesOnPlane = GameObject.Find("Renderer").GetComponent<DrawLinesOnPlane>();
         drawLinesOnPlane.FunctionClear();
     }
 
