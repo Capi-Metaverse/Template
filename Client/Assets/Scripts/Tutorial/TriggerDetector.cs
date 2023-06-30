@@ -132,7 +132,7 @@ public class TriggerDetector : MonoBehaviour
                             flags["C"] = true;
                             Cursor.lockState = CursorLockMode.None;
                             Cursor.visible = true;
-                            SceneManager.LoadScene("1.Start");
+                            SceneManager.LoadScene("LoginPlayFab_Module");
                             //Close 
                         };
                         break;

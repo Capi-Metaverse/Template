@@ -81,7 +81,7 @@ public class RPCManager : SimulationBehaviour
     /// <param name="runner"></param>
     /// <param name="routes"></param>
     [Rpc]
-    public static async void RPC_DownloadImages(NetworkRunner runner, string routes)
+    public static void RPC_DownloadImages(NetworkRunner runner, string routes)
     {
         JObject JsonRoutes = JObject.Parse(routes);
         Debug.Log(JsonRoutes.ToString());

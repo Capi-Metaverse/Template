@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class ElevenLabs : MonoBehaviour
 {
     private string API_KEY = "e9f1c935dfe5617a03570b39fada8e69";
-    private string VOICE_ID = "TxGEqnHWrfWFTfGW9XjX";
+    //private string VOICE_ID = "TxGEqnHWrfWFTfGW9XjX";
 
     private AudioSource VOICE_SOURCE = null;
 
@@ -23,7 +23,7 @@ public class ElevenLabs : MonoBehaviour
     IEnumerator DownloadAudioFromServer()
     {
 
-        string Instruction = "Al habla Adam, vuestro guía en este mundo virtual conocido como Metaverso";
+        //string Instruction = "Al habla Adam, vuestro guía en este mundo virtual conocido como Metaverso";
 
         string jsonString = "{\"text\": \"Hola Peter\"}";
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonString);

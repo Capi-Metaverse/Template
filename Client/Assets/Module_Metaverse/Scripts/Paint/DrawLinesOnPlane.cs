@@ -1,10 +1,7 @@
 using Fusion;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.UI;
-using static Fusion.NetworkCharacterController;
 
 
 public class DrawLinesOnPlane : NetworkBehaviour
@@ -23,7 +20,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
     //Other
     public LayerMask planeLayer;
     public int orderInLayer = 0;
-    public Camera camera;
+    public Camera PresentationCamera;
     private List<Vector3> linePoints = new List<Vector3>();
     private LineRenderer currentLineRenderer;
     private LineRenderer SendLineRenderer;
@@ -54,7 +51,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = PresentationCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
 
@@ -74,7 +71,7 @@ public class DrawLinesOnPlane : NetworkBehaviour
 
 
 
-            if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit, float.PositiveInfinity, planeLayer) && hit.transform.tag == "Paint")
+            if (Physics.Raycast(PresentationCamera.ScreenPointToRay(Input.mousePosition), out hit, float.PositiveInfinity, planeLayer) && hit.transform.tag == "Paint")
             {
                 linePoints.Add(hit.point);
             }
