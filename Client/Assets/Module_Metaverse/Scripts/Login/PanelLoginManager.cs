@@ -12,6 +12,8 @@ public class PanelLoginManager : MonoBehaviour
     //Info UI Text
     public TMP_Text MessageText;
 
+
+    public TMP_Text MessageTextError;
     //UI Panels
     public GameObject LoginPanel;
     public GameObject RegisterPanel;
@@ -63,7 +65,7 @@ public class PanelLoginManager : MonoBehaviour
     /// </summary>
     public void SetErrorMessage(string message)
     {
-        MessageText.color = Color.red;
-        MessageText.text = message;
+        MessageTextError.color = Color.red;
+        MessageTextError.text = message;
     }
 }

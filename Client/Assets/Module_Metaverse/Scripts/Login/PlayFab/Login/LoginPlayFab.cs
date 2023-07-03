@@ -52,7 +52,7 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     /// <param name="result"></param>
     void OnLoginSuccess(LoginResult result)
     {
-
+        PanelLoginManager.SetInfoMessage("Correct Login");
         //Determine the role of the user
         ConfirmRole("Admin");
         ConfirmRole("Moderator");
@@ -321,6 +321,8 @@ public class LoginPlayFab : MonoBehaviour, ILogin
     /// <param name="error"></param>
     void OnError(PlayFabError error)
     {
+        PanelLoginManager.SetInfoMessage("Error");
+        PanelLoginManager.SetErrorMessage(error.GenerateErrorReport());
         //messageText.text = error.ErrorMessage;
         Debug.Log("[PlayFab-LoginManager] Error:" + error.GenerateErrorReport());
     }
