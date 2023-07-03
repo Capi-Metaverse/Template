@@ -177,7 +177,7 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     public override void Render()
     {
 
-        if (!IsPaused)
+        if (IsPaused)
         {
 
             //animator.SetFloat("Pause", 1); 
@@ -186,32 +186,34 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
 
         }
         //else { animator.SetFloat("Pause", 0); }
-       
-        if (IsGrounded)
-        {
-           
-            if (Velocity.magnitude > 0 && IsGrounded)
-            {
-                
-                animator.SetBool("Walking", true);
-
-            }
-            else
-            {
-                animator.SetBool("Walking", false);
-            }
-            animator.SetBool("Running", isRunning);
-        }
-
         else
         {
-            if (jumpCount > _lastVisibleJump)
+            if (IsGrounded)
             {
-                animator.SetTrigger("Jumping");
-                // Play jump sound/particle effect
-                _lastVisibleJump = jumpCount;
+
+                if (Velocity.magnitude > 0 && IsGrounded)
+                {
+
+                    animator.SetBool("Walking", true);
+
+                }
+                else
+                {
+                    animator.SetBool("Walking", false);
+                }
+                animator.SetBool("Running", isRunning);
             }
 
+            else
+            {
+                if (jumpCount > _lastVisibleJump)
+                {
+                    animator.SetTrigger("Jumping");
+                    // Play jump sound/particle effect
+                    _lastVisibleJump = jumpCount;
+                }
+
+            }
         }
 
       
