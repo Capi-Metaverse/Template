@@ -77,6 +77,7 @@ public class EventWheel : NetworkTransform
                 else
                 {
                     Debug.Log("Else");
+                    
                     animator.SetInteger("AnimationWheel", (int)animationToPlay); 
                 }
             }
