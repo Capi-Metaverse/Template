@@ -17,7 +17,7 @@ public class EventWheel : NetworkTransform
 {
     public Animator animator;
 
-    [Networked]
+    
     public AnimationList previousAnimation { get; set; } = AnimationList.None;
 
     [Networked]
@@ -68,45 +68,34 @@ public class EventWheel : NetworkTransform
         //Animation
         if (animationToPlay != AnimationList.None)
         {
-            Debug.Log(animationToPlay);
-            Debug.Log(previousAnimation);
 
             //Animation Changed
             if (previousAnimation != animationToPlay)
             {
-                Debug.Log("prueba");
+              
                 //Animation Stopped
                 if (previousAnimation != AnimationList.None)
                 {
-                    Debug.Log("Segundo if");
+                  
                     StartCoroutine(RunNewAnimation());
                 }
                 //First Time
                 else
                 {
-                    Debug.Log("Else");
-                    Debug.Log(animationToPlay.ToString());
-                    
                     animator.SetInteger("AnimationWheel", (int)animationToPlay); 
                 }
             }
-            if(PhotonManager.FindInstance().CurrentPlayer.GetComponent<NetworkPlayer>().ActorID == Runner.LocalPlayer)
             previousAnimation = animationToPlay;
 
             //Set the value to zero to end animation
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
             {
-                Debug.Log("None animation");
-                Debug.Log(PhotonManager.FindInstance().CurrentPlayer.GetComponent<NetworkPlayer>().ActorID);
-                Debug.Log(Runner.LocalPlayer);
 
-                if (PhotonManager.FindInstance().CurrentPlayer.GetComponent<NetworkPlayer>().ActorID == Runner.LocalPlayer)
-                {
-                    animationToPlay = AnimationList.None;
-                    previousAnimation = animationToPlay;
-                }
+            animationToPlay = AnimationList.None;
+            previousAnimation = animationToPlay;
+          
                     
-                animator.SetInteger("AnimationWheel", (int)animationToPlay);
+            animator.SetInteger("AnimationWheel", (int)animationToPlay);
             }
         }
     }
