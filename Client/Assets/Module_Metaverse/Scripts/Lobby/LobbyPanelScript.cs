@@ -17,7 +17,7 @@ public class LobbyPanelScript : MonoBehaviour
     public Transform contentObject;
     public Button createButton;
     public TMP_InputField roomNameField;
-
+    private float delayInSeconds = 0.5f;
     private GameObject LobbyManager;
 
     private void Start()
@@ -27,6 +27,8 @@ public class LobbyPanelScript : MonoBehaviour
     }
     public void OnClickCreateSession()
     {
+        createButton.interactable = false;
+        StartCoroutine(EnableInteractableAfterDelay(delayInSeconds));
         if (LobbyManager.TryGetComponent(out LobbyManager lobbyManager))
         {
             lobbyManager.OnCreateSession(sessionName.text);
@@ -49,5 +51,10 @@ public class LobbyPanelScript : MonoBehaviour
                 lobbyManager.OnCreateSession(sessionName.text);
             }
         }
+    }
+    IEnumerator EnableInteractableAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        createButton.interactable = true;
     }
 }
