@@ -1,13 +1,5 @@
 using UnityEngine;
-using PlayFab;
-using PlayFab.ClientModels;
-using Unity.VisualScripting;
-using TMPro;
-using System.Linq;
 using System.Collections.Generic;
-using System;
-using System.Text.RegularExpressions;
-
 
 //Class that represents a friend of the current user in the application
 public class Friend

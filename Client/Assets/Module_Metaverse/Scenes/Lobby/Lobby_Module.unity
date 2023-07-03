@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -846,6 +846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212123602ba7f154faf3b7abce0692c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  createButton: {fileID: 1946407129}
   sessionNamePanel: {fileID: 628324908}
   playerItemPrefab: {fileID: 6571602323266590305, guid: 4a4143cc9112a434082be24511d92ced, type: 3}
   JoinButton: {fileID: 109756426}
