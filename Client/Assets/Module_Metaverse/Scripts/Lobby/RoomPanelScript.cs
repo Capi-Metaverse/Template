@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class RoomPanelScript : MonoBehaviour
 {
+    public Button createButton;
     public TMP_Text sessionNamePanel;
     public PlayerItem playerItemPrefab;
     [SerializeField] private Button JoinButton;
@@ -28,6 +29,7 @@ public class RoomPanelScript : MonoBehaviour
     }
     public void OnClickLeaveSession()
     {
+        createButton.interactable = true;
         if (LobbyManager.TryGetComponent(out LobbyManager lobbyManager))
         {
             lobbyManager.OnLeaveSession();
