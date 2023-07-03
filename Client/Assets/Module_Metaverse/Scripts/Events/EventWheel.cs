@@ -17,7 +17,6 @@ public class EventWheel : NetworkTransform
 {
     public Animator animator;
 
-    [Networked]
     public AnimationList previousAnimation { get; set; } = AnimationList.None;
 
     [Networked]
@@ -65,6 +64,8 @@ public class EventWheel : NetworkTransform
     {
         if (animationToPlay != AnimationList.None)
         {
+            Debug.Log(animationToPlay);
+            Debug.Log(previousAnimation);
 
             if (previousAnimation != animationToPlay)
             {
@@ -77,6 +78,7 @@ public class EventWheel : NetworkTransform
                 else
                 {
                     Debug.Log("Else");
+                    Debug.Log(animationToPlay.ToString());
                     
                     animator.SetInteger("AnimationWheel", (int)animationToPlay); 
                 }
