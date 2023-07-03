@@ -1,6 +1,5 @@
 using PlayFab.ClientModels;
 using PlayFab;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -48,6 +47,7 @@ public class GetFriends : MonoBehaviour
     /// <param name="result"></param>
     private List<Friend> OnGetFriendsConfirmedListSuccess(ExecuteCloudScriptResult result)
     {
+        friendList = gameObject.GetComponent<FriendList>();
         List<Friend> friends = new List<Friend>();
         friendManager.Friends.Clear();
 
@@ -59,7 +59,7 @@ public class GetFriends : MonoBehaviour
             List<Friend> friendObjects = JsonConvert.DeserializeObject<List<Friend>>(json);
             friends.AddRange(friendObjects);
 
-            //Patterns Regular Expressions
+            /*Patterns Regular Expressions
             string pattern = "\"Username\":\"(.*?)\"";
             string IdsPatter = "\"IDS\":\"(.*?)\"";
             string TagsPatter = "\"Tags\":\"(.*?)\"";
@@ -78,7 +78,7 @@ public class GetFriends : MonoBehaviour
                 friendManager.Friends.Add(newFriend);
             }
 
-            friendList.InstanceFriendItem();
+            friendList.InstanceFriendItem();*/
         }
 
         return friends;

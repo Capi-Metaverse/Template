@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -14,6 +15,13 @@ public class CharacterInputHandler : MonoBehaviour
 
     //Input
     bool isJumpButtonPressed = false;
+
+    //MiniMap markers
+    List<int> playersInRoom;
+    GameObject arrowMarkerPlayer;
+    GetFriends getFriends;
+    private GameObject miniMap;
+    private GameObject miniMapCam;
 
 
     //Raycast
@@ -37,9 +45,6 @@ public class CharacterInputHandler : MonoBehaviour
     public float lookSpeed = 2.0f;
     public Camera playerCamera;
     LocalCameraHandler localCameraHandler;
-    
-
-    private GameObject miniMap;
 
 
     //Movement
@@ -68,7 +73,7 @@ public class CharacterInputHandler : MonoBehaviour
     PhotonManager photonManager;
     PauseManager pauseManager;
     UIManager uiManager;
-
+    private bool OpenMiniMapPul;
 
     private void Awake()
     {
@@ -78,6 +83,7 @@ public class CharacterInputHandler : MonoBehaviour
         pauseManager = PauseManager.FindInstance();
         uiManager = UIManager.FindInstance();
 
+        getFriends = GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(0).GetChild(3).gameObject.GetComponent<GetFriends>();
     }
 
 
@@ -97,8 +103,68 @@ public class CharacterInputHandler : MonoBehaviour
         //ChatGPT
         //chatGPTActive = GameObject.FindObjectOfType<ChatGPTActive>();
 
-        //Minimap Not needed
-        miniMap = GameObject.Find("Canvasminimap").transform.GetChild(0).gameObject;
+        //Minimap
+        miniMap = GameObject.Find("Canvasminimap");
+
+        //Camera MiniMap
+        miniMapCam = photonManager.CurrentPlayer.transform.GetChild(9).gameObject;
+        miniMapCam.SetActive(true);
+
+        //Activate localPlayer arrow on minimap
+        arrowMarkerPlayer = photonManager.CurrentPlayer.transform.GetChild(7).gameObject;
+        arrowMarkerPlayer.SetActive(true);
+
+        //Activate friend market on minimap
+        InitializeAsync();
+    }
+
+    public async void InitializeAsync()
+    {
+        List<Friend> listaAmigos = new List<Friend>();
+        try
+        {
+            listaAmigos = await getFriends.GetFriendsConfirmedListAsync();
+            Debug.Log("Lista Amigos: " + listaAmigos.Count);
+            ActivateFriendsMarker(listaAmigos);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to get friends list: " + e.Message);
+            // Handle the error case...
+        }
+    }
+
+    public void ActivateFriendsMarker(List<Friend> listaAmigos)
+    {
+        // Encuentra el objeto Character(Clone)
+        GameObject[] characters = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log("CharacterLenght: " + characters.Length);
+
+        // Recorre cada objeto Character(Clone)
+        foreach (GameObject character in characters)
+        {
+            string nickname = character.GetComponent<NetworkPlayer>().nickname.Value.ToString();
+
+            foreach (Friend friend in listaAmigos)
+            {
+
+                // Friend was found
+                if (nickname == friend.Username)
+                {
+                    Debug.Log(friend.Username + "Model(Clone) encontrado en " + character.name + " activating marker on minimap");
+
+                    //Activate FriendMarker for this friend
+                    character.transform.GetChild(8).transform.gameObject.SetActive(true);
+                }
+
+                else
+                {
+                    Debug.Log("Not a friend of yours");
+                }
+            }
+        }
+
+        Debug.Log(" All friendsMarkers activated on minimap!");
     }
 
     // Update is called once per frame
@@ -243,7 +309,6 @@ public class CharacterInputHandler : MonoBehaviour
                 uiManager.OpenPauseMenu();
                 EnableMovement = false;
 
-
             }
         }
         //Pause
@@ -312,7 +377,6 @@ public class CharacterInputHandler : MonoBehaviour
         }
 
         onPresentationCamera = !onPresentationCamera;//Boolean cond modification always set to the opposite
-
     }
 
     /// <summary>
@@ -329,7 +393,6 @@ public class CharacterInputHandler : MonoBehaviour
                 ChangeCamera();
             }
         }
-
     }
 
     /// <summary>
@@ -341,12 +404,20 @@ public class CharacterInputHandler : MonoBehaviour
         if (!pauseManager.IsPaused)
         {
             //OK but minimap Logic in another script
-            if (inputManager.GetButtonDown("OpenMiniMap"))
+            if ((inputManager.GetButtonDown("OpenMiniMap") && !OpenMiniMapPul))
             {
-                if (miniMap.activeSelf) miniMap.SetActive(false);
-                else miniMap.SetActive(true);
+                miniMap.transform.GetChild(0).gameObject.SetActive(true); //MinimapMask
+                miniMap.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true); //minimapRender
+                miniMap.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true); //minimapBorder
+                OpenMiniMapPul = true;
             }
+        }
 
+        else if ((inputManager.GetButtonDown("OpenMiniMap")) && !OpenMiniMapPul)
+        {
+            miniMap.transform.GetChild(0).gameObject.SetActive(false); //MinimapMask
+            miniMap.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false); //minimapRender
+            miniMap.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false); //minimapBorder
         }
     }
 

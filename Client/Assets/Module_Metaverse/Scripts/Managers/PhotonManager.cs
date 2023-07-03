@@ -442,6 +442,10 @@ public class PhotonManager : MonoBehaviour, INetworkRunnerCallbacks
             Debug.Log("A user has joined to the room");
             //We indicate to the LobbyManager that he has a new user
 
+            //Any time a player enters the room we activate the FriendMark on minimap if it´s a friend
+            //List<Friend> listFriend = GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(0).GetChild(3).gameObject.GetComponent<FriendManager>().GetFriendsConfirmedListAsync();
+            //GameManager.FindInstance().GetComponent<CharacterInputHandler>().ActivateFriendsMarker(listFriend);
+
         }
     }
 
