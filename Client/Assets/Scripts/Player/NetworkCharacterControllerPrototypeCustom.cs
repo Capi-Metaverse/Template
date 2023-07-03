@@ -177,7 +177,7 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
     public override void Render()
     {
 
-        if (!IsPaused)
+        if (IsPaused)
         {
 
             //animator.SetFloat("Pause", 1); 
