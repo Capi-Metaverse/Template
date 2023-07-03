@@ -15,10 +15,10 @@ public enum AnimationList
 }
 public class EventWheel : NetworkTransform
 {
-    private Animator animator;
+    public Animator animator;
 
     [Networked]
-    public AnimationList previousAnimation { get; set; }
+    public AnimationList previousAnimation { get; set; } = AnimationList.None;
 
     [Networked]
     public AnimationList animationToPlay { get; set; } = AnimationList.None;
@@ -65,12 +65,20 @@ public class EventWheel : NetworkTransform
     {
         if (animationToPlay != AnimationList.None)
         {
-            Debug.Log("First if");
 
             if (previousAnimation != animationToPlay)
             {
-                if (previousAnimation != AnimationList.None) StartCoroutine(RunNewAnimation());
-                else animator.SetInteger("AnimationWheel", (int)animationToPlay);
+                Debug.Log("prueba");
+                if (previousAnimation != AnimationList.None)
+                {
+                    Debug.Log("Segundo if");
+                    StartCoroutine(RunNewAnimation());
+                }
+                else
+                {
+                    Debug.Log("Else");
+                    animator.SetInteger("AnimationWheel", (int)animationToPlay); 
+                }
             }
             previousAnimation = animationToPlay;
 
