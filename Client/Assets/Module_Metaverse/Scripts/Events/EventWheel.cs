@@ -97,6 +97,9 @@ public class EventWheel : NetworkTransform
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
             {
                 Debug.Log("None animation");
+                Debug.Log(PhotonManager.FindInstance().CurrentPlayer.GetComponent<NetworkPlayer>().ActorID);
+                Debug.Log(Runner.LocalPlayer);
+
                 if (PhotonManager.FindInstance().CurrentPlayer.GetComponent<NetworkPlayer>().ActorID == Runner.LocalPlayer)
                 {
                     animationToPlay = AnimationList.None;
