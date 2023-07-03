@@ -364,10 +364,6 @@ public class CharacterInputHandler : MonoBehaviour
             viewInputVector.x = Input.GetAxis("Mouse X") / sensitivity;
             viewInputVector.y = Input.GetAxis("Mouse Y") * -1 / sensitivity; //Invert the mouse look
 
-            //Move Input
-            moveInputVector.x = Input.GetAxis("Horizontal");
-            moveInputVector.y = Input.GetAxis("Vertical");
-
             if (Input.GetButton("Jump"))
                 isJumpButtonPressed = true;
 

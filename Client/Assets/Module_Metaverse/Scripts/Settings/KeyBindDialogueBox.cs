@@ -94,6 +94,16 @@ public class KeyBindDialogueBox : MonoBehaviour
                                     inputManager.currentKeys.wheel = ((int)keyCode);
                                 }
                                 break;
+                            case "OpenMiniMap":
+                                {
+                                    inputManager.currentKeys.openMiniMap = ((int)keyCode);
+                                }
+                                break;
+                            case "MuteVoice":
+                                {
+                                    inputManager.currentKeys.muteVoice = ((int)keyCode);
+                                }
+                                break;
                         }
 
                         manageData.SaveCurrentKeysDataPlayfab(inputManager.currentKeys);
