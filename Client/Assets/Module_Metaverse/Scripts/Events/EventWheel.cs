@@ -23,6 +23,7 @@ public class EventWheel : NetworkTransform
     [Networked]
     public AnimationList animationToPlay { get; set; } = AnimationList.None;
 
+
     private bool IsPlaying = false;
 
   
@@ -34,31 +35,37 @@ public class EventWheel : NetworkTransform
 
     public void setAnimation1()
     {
+        ResetAnimation();
         animationToPlay = AnimationList.Clapping;
     }
 
     public void setAnimation2()
     {
+        ResetAnimation();
         animationToPlay = AnimationList.Waving;
     }
 
     public void setAnimation3()
     {
+        ResetAnimation();
         animationToPlay = AnimationList.Capoeira;
     }
 
     public void setAnimation4()
     {
+        ResetAnimation();
         animationToPlay = AnimationList.Salute;
     }
 
     public void setAnimation5()
     {
+        ResetAnimation();
         animationToPlay = AnimationList.Defeated;
     }
 
     public void setAnimation6()
     {
+        ResetAnimation();
         animationToPlay = AnimationList.TwistedDance;
     }
 
@@ -121,6 +128,16 @@ public class EventWheel : NetworkTransform
             }
         }
         */
+    }
+
+    private void ResetAnimation()
+    {
+        if (IsPlaying)
+        {
+            
+            IsPlaying = false;
+            animator.SetInteger("AnimationWheel", (int)AnimationList.None);
+        }
     }
     /// <summary>
     /// Starts running a new animation.
