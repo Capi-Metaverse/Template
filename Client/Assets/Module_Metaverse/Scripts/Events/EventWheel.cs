@@ -1,6 +1,4 @@
 using Fusion;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum AnimationList
@@ -28,63 +26,32 @@ public class EventWheel : NetworkTransform
         if (animator == null) { animator = this.gameObject.transform.parent.GetComponentInChildren<Animator>(); }
     }
 
-    public void setAnimation1()
+    public void SetAnimation(int animation)
     {
-        animationToPlay = AnimationList.Clapping;
-    }
-
-    public void setAnimation2()
-    {
-
-        animationToPlay = AnimationList.Waving;
-    }
-
-    public void setAnimation3()
-    {
-
-        animationToPlay = AnimationList.Capoeira;
-    }
-
-    public void setAnimation4()
-    {
-
-        animationToPlay = AnimationList.Salute;
-    }
-
-    public void setAnimation5()
-    {
-    
-        animationToPlay = AnimationList.Defeated;
-    }
-
-    public void setAnimation6()
-    {
-        animationToPlay = AnimationList.TwistedDance;
+        animationToPlay = (AnimationList)animation;
+   
     }
 
     public override void FixedUpdateNetwork()
     {
 
-        if (animationToPlay != AnimationList.None )
+        if (animationToPlay != AnimationList.None)
         {
-            if(!IsPlaying) IsPlaying = true;
-
+            if (!IsPlaying) IsPlaying = true;
 
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
             {
                 IsPlaying = false;
 
-             if (this.gameObject.transform.parent.GetComponent<NetworkPlayer>().ActorID == PhotonManager.FindInstance().Runner.LocalPlayer)
+                if (this.gameObject.transform.parent.GetComponent<NetworkPlayer>().ActorID == PhotonManager.FindInstance().Runner.LocalPlayer)
                 {
-
                     animationToPlay = AnimationList.None;
-
                 }
 
             }
 
         }
-    
+
     }
 
     /// <summary>
@@ -93,8 +60,6 @@ public class EventWheel : NetworkTransform
     public override void Render()
     {
         animator.SetInteger("AnimationWheel", (int)animationToPlay);
-
-
     }
-  
+
 }
