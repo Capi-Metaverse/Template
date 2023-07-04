@@ -92,27 +92,26 @@ public class EventWheel : NetworkTransform
 
         }
 
-
-        if (animationToPlay != AnimationList.None && !IsPlaying && !IsStopped)
+        if (animationToPlay != AnimationList.None)
         {
-            IsPlaying = true;
-            animator.SetInteger("AnimationWheel", (int)animationToPlay);
-
-        }
-
-        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0) && !IsStopped)
-        {
-          
-            animator.SetInteger("AnimationWheel", (int)AnimationList.None);
-            if (this.gameObject.transform.parent.GetComponent<NetworkPlayer>().ActorID == PhotonManager.FindInstance().Runner.LocalPlayer)
+            if (!IsPlaying && !IsStopped)
             {
-                animationToPlay = AnimationList.None;
+                IsPlaying = true;
+                animator.SetInteger("AnimationWheel", (int)animationToPlay);
+
             }
-            IsPlaying = false;
+
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0) && !IsStopped)
+            {
+
+                animator.SetInteger("AnimationWheel", (int)AnimationList.None);
+                if (this.gameObject.transform.parent.GetComponent<NetworkPlayer>().ActorID == PhotonManager.FindInstance().Runner.LocalPlayer)
+                {
+                    animationToPlay = AnimationList.None;
+                }
+                IsPlaying = false;
+            }
         }
-
-
-
     }
 
     /// <summary>
