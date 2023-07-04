@@ -26,12 +26,18 @@ public class EventWheel : NetworkTransform
         if (animator == null) { animator = this.gameObject.transform.parent.GetComponentInChildren<Animator>(); }
     }
 
+    /// <summary>
+    /// Set the animation variable for the EventWheel
+    /// </summary>
+    /// <param name="animation"></param>
     public void SetAnimation(int animation)
     {
         animationToPlay = (AnimationList)animation;
    
     }
-
+    /// <summary>
+    /// Runs before the Render
+    /// </summary>
     public override void FixedUpdateNetwork()
     {
 
