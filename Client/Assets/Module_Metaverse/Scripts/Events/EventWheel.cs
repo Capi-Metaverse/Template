@@ -28,7 +28,7 @@ public class EventWheel : NetworkTransform
     private bool IsPlaying = false;
 
     [Networked]
-    public NetworkBool IsStopped { get; set; }
+    public NetworkBool IsStopped { get; set; } = false;
 
 
     private void Start()
@@ -76,20 +76,17 @@ public class EventWheel : NetworkTransform
     {
 
 
-        if (IsStopped)
+        if (IsStopped && IsPlaying)
         {
-            AnimationList newAnimation = animationToPlay;
            
             animator.SetInteger("AnimationWheel", (int)AnimationList.None);
             if (this.gameObject.transform.parent.GetComponent<NetworkPlayer>().ActorID == PhotonManager.FindInstance().Runner.LocalPlayer)
             {
                 IsStopped = false;
+                animationToPlay = AnimationList.None;
 
             }
-            animationToPlay = newAnimation;
-
-            animator.SetInteger("AnimationWheel", (int)animationToPlay);
-            IsPlaying = true;
+            IsPlaying = false;
 
 
 
@@ -105,12 +102,13 @@ public class EventWheel : NetworkTransform
 
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0) && !IsStopped)
         {
-            IsPlaying = false;
+          
             animator.SetInteger("AnimationWheel", (int)AnimationList.None);
             if (this.gameObject.transform.parent.GetComponent<NetworkPlayer>().ActorID == PhotonManager.FindInstance().Runner.LocalPlayer)
             {
                 animationToPlay = AnimationList.None;
             }
+            IsPlaying = false;
         }
 
 
@@ -124,41 +122,7 @@ public class EventWheel : NetworkTransform
     {
       
 
-        /*
-        //Animation
-        if (animationToPlay != AnimationList.None)
-        {
-
-            //Animation Changed
-            if (previousAnimation != animationToPlay)
-            {
-              
-                //Animation Stopped
-                if (previousAnimation != AnimationList.None)
-                {
-                  
-                    StartCoroutine(RunNewAnimation());
-                }
-                //First Time
-                else
-                {
-                    animator.SetInteger("AnimationWheel", (int)animationToPlay); 
-                }
-            }
-            previousAnimation = animationToPlay;
-
-            //Set the value to zero to end animation
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
-            {
-
-            animationToPlay = AnimationList.None;
-            previousAnimation = animationToPlay;
-          
-                    
-            animator.SetInteger("AnimationWheel", (int)animationToPlay);
-            }
-        }
-        */
+       
     }
 
     private void ResetAnimation()
