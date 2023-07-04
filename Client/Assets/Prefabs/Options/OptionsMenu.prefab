@@ -3290,9 +3290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda9e9b9ff107164abe8f8c6eef22d0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputFriendUsername: {fileID: 2551948338601988629}
-  panelMessageCheckName: {fileID: 5716512702306607238}
-  validationMessage: {fileID: 8462411391889756237}
 --- !u!114 &1442107820706898414
 MonoBehaviour:
   m_ObjectHideFlags: 0

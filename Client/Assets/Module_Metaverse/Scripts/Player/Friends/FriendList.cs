@@ -52,7 +52,6 @@ public class FriendList : MonoBehaviour
     public void InstanceFriendItem()
     {
         CleanFriendsPanel();
-
         
         for (int i = 0; i < friends.Count; i++)
         {

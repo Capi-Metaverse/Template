@@ -19,7 +19,7 @@ public class CharacterInputHandler : MonoBehaviour
     //MiniMap markers
     List<int> playersInRoom;
     GameObject arrowMarkerPlayer;
-    GetFriends getFriends;
+    GetFriendMinimap getFriendMinimap;
     private GameObject miniMap;
     private GameObject miniMapCam;
 
@@ -83,7 +83,7 @@ public class CharacterInputHandler : MonoBehaviour
         pauseManager = PauseManager.FindInstance();
         uiManager = UIManager.FindInstance();
 
-        getFriends = GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(0).GetChild(3).gameObject.GetComponent<GetFriends>();
+        getFriendMinimap = new GetFriendMinimap();
     }
 
 
@@ -123,7 +123,7 @@ public class CharacterInputHandler : MonoBehaviour
         List<Friend> listaAmigos = new List<Friend>();
         try
         {
-            listaAmigos = await getFriends.GetFriendsConfirmedListAsync();
+            listaAmigos = await getFriendMinimap.GetFriendsConfirmedListAsync();
             Debug.Log("Lista Amigos: " + listaAmigos.Count);
             ActivateFriendsMarker(listaAmigos);
         }

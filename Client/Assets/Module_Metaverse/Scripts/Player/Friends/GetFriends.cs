@@ -15,12 +15,12 @@ public class GetFriends : MonoBehaviour
     {
        friendList = gameObject.GetComponent<FriendList>();
     }
+
     /// <summary>
     /// PlayFab - Method that returns the list of friends from Playfab
     /// </summary>
-    public Task<List<Friend>> GetFriendsConfirmedListAsync()
+    public void GetFriendsConfirmedList()
     {
-        var tcs = new TaskCompletionSource<List<Friend>>();
 
         ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
         {
@@ -28,26 +28,15 @@ public class GetFriends : MonoBehaviour
             GeneratePlayStreamEvent = true
         };
 
-        PlayFabClientAPI.ExecuteCloudScript(request, result =>
-        {
-            List<Friend> friends = OnGetFriendsConfirmedListSuccess(result);
-            tcs.SetResult(friends);
-        }, error =>
-        {
-            Debug.LogError("Failed to execute cloud script: " + error.ErrorMessage);
-            tcs.SetResult(new List<Friend>()); // Set an empty list in case of failure
-        });
-
-        return tcs.Task;
+        PlayFabClientAPI.ExecuteCloudScript(request, OnGetFriendsConfirmedListSuccess, OnGetFriendsListFailure);
     }
 
     /// <summary>
     /// Callback for successful GetFriendsList ,which gets the result of the callback and appends it to a list
     /// </summary>
     /// <param name="result"></param>
-    private List<Friend> OnGetFriendsConfirmedListSuccess(ExecuteCloudScriptResult result)
+    private void OnGetFriendsConfirmedListSuccess(ExecuteCloudScriptResult result)
     {
-        friendList = gameObject.GetComponent<FriendList>();
         List<Friend> friends = new List<Friend>();
         friendManager.Friends.Clear();
 
@@ -55,11 +44,7 @@ public class GetFriends : MonoBehaviour
         {
             string json = result.FunctionResult.ToString();
 
-            // Deserialize the JSON response into a list of friend objects
-            List<Friend> friendObjects = JsonConvert.DeserializeObject<List<Friend>>(json);
-            friends.AddRange(friendObjects);
-
-            /*Patterns Regular Expressions
+            //Patterns Regular Expressions
             string pattern = "\"Username\":\"(.*?)\"";
             string IdsPatter = "\"IDS\":\"(.*?)\"";
             string TagsPatter = "\"Tags\":\"(.*?)\"";
@@ -78,10 +63,8 @@ public class GetFriends : MonoBehaviour
                 friendManager.Friends.Add(newFriend);
             }
 
-            friendList.InstanceFriendItem();*/
+            friendList.InstanceFriendItem();
         }
-
-        return friends;
 
     }
 

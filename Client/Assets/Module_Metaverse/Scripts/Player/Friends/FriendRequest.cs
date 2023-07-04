@@ -61,7 +61,7 @@ public class FriendRequest : MonoBehaviour {
     }
     private void OnAddFriendSuccess(ExecuteCloudScriptResult result)
     {
-        getFriend.GetFriendsConfirmedListAsync();
+        getFriend.GetFriendsConfirmedList();
     }
 
     /// <summary>
