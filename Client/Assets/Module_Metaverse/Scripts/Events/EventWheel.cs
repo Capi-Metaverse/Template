@@ -17,16 +17,19 @@ public class EventWheel : NetworkTransform
 {
     public Animator animator;
 
-    
+    [SerializeField]
     public AnimationList previousAnimation { get; set; } = AnimationList.None;
 
     [Networked]
+    [SerializeField]
     public AnimationList animationToPlay { get; set; } = AnimationList.None;
 
-
+    [SerializeField]
     private bool IsPlaying = false;
 
-  
+    [Networked]
+    public NetworkBool IsStopped { get; set; }
+
 
     private void Start()
     {
@@ -69,29 +72,57 @@ public class EventWheel : NetworkTransform
         animationToPlay = AnimationList.TwistedDance;
     }
 
-    /// <summary>
-    /// Controls which animation is being played.
-    /// </summary>
-    public override void Render()
+    public override void FixedUpdateNetwork()
     {
-        if (animationToPlay != AnimationList.None && !IsPlaying)
+
+
+        if (IsStopped)
+        {
+            AnimationList newAnimation = animationToPlay;
+           
+            animator.SetInteger("AnimationWheel", (int)AnimationList.None);
+            if (this.gameObject.transform.parent.GetComponent<NetworkPlayer>().ActorID == PhotonManager.FindInstance().Runner.LocalPlayer)
+            {
+                IsStopped = false;
+
+            }
+            animationToPlay = newAnimation;
+
+            animator.SetInteger("AnimationWheel", (int)animationToPlay);
+            IsPlaying = true;
+
+
+
+        }
+
+
+        if (animationToPlay != AnimationList.None && !IsPlaying && !IsStopped)
         {
             IsPlaying = true;
             animator.SetInteger("AnimationWheel", (int)animationToPlay);
 
         }
 
-        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0) && !IsStopped)
         {
             IsPlaying = false;
             animator.SetInteger("AnimationWheel", (int)AnimationList.None);
-            if(this.gameObject.transform.parent.GetComponent<NetworkPlayer>().ActorID == PhotonManager.FindInstance().Runner.LocalPlayer)
+            if (this.gameObject.transform.parent.GetComponent<NetworkPlayer>().ActorID == PhotonManager.FindInstance().Runner.LocalPlayer)
             {
                 animationToPlay = AnimationList.None;
             }
         }
 
 
+
+    }
+
+    /// <summary>
+    /// Controls which animation is being played.
+    /// </summary>
+    public override void Render()
+    {
+      
 
         /*
         //Animation
@@ -134,9 +165,8 @@ public class EventWheel : NetworkTransform
     {
         if (IsPlaying)
         {
-            
-            IsPlaying = false;
-            animator.SetInteger("AnimationWheel", (int)AnimationList.None);
+            IsStopped = true;
+            Debug.Log("Stopping");
         }
     }
     /// <summary>
@@ -144,12 +174,10 @@ public class EventWheel : NetworkTransform
     /// </summary>
     /// <returns></returns>
     IEnumerator RunNewAnimation()
-    {
-        Debug.Log("Apply animation");
-        animator.SetInteger("AnimationWheel", (int)AnimationList.None);
+    { 
         yield return new WaitForSeconds(0.1F);
         animator.SetInteger("AnimationWheel", (int)animationToPlay);
-        Debug.Log(animationToPlay);
+  
 
     }
 }

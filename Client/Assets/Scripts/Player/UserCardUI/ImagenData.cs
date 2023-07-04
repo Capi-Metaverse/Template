@@ -22,6 +22,7 @@ public class ImagenData : MonoBehaviour
     /// </summary>
     public void ClickImageAvatar()
     {
+        /*
         string path = UnityEditor.EditorUtility.OpenFilePanel("Seleccionar archivo", "", "png,jpg");
         if (!string.IsNullOrEmpty(path))
         {
@@ -31,6 +32,7 @@ public class ImagenData : MonoBehaviour
         string imagePath = ruta; // Path to your image file
         byte[] imageData = LoadImageAsByteArray(imagePath);
         UploadImageToUser(imageData);
+        */
     }
 
 
