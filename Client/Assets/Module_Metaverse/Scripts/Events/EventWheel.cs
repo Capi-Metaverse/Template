@@ -23,6 +23,8 @@ public class EventWheel : NetworkTransform
     [Networked]
     public AnimationList animationToPlay { get; set; } = AnimationList.None;
 
+    private bool IsPlaying = false;
+
   
 
     private void Start()
@@ -65,6 +67,26 @@ public class EventWheel : NetworkTransform
     /// </summary>
     public override void Render()
     {
+        if (animationToPlay != AnimationList.None && !IsPlaying)
+        {
+            IsPlaying = true;
+            animator.SetInteger("AnimationWheel", (int)animationToPlay);
+
+        }
+
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
+        {
+            IsPlaying = false;
+            animator.SetInteger("AnimationWheel", (int)AnimationList.None);
+            if(this.gameObject.transform.parent.GetComponent<NetworkPlayer>().ActorID == PhotonManager.FindInstance().Runner.LocalPlayer)
+            {
+                animationToPlay = AnimationList.None;
+            }
+        }
+
+
+
+        /*
         //Animation
         if (animationToPlay != AnimationList.None)
         {
@@ -98,6 +120,7 @@ public class EventWheel : NetworkTransform
             animator.SetInteger("AnimationWheel", (int)animationToPlay);
             }
         }
+        */
     }
     /// <summary>
     /// Starts running a new animation.
