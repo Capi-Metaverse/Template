@@ -6,27 +6,35 @@ using TMPro;
 
 public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
 {
-    private GameManager gameManager;
+    //Managers
     private UserManager userManager;
     private PhotonManager photonManager;
+    public CharacterInputHandler inputHandler;
 
+    //Player Info 
     public static NetworkPlayer Local { get; set; }
     [Networked]
     public int avatar { get; set; }
-    public GameObject[] playerPrefabs;
-    public Animator animator;
-    //UI NAME IN GAME
+
     public TextMeshProUGUI playerNicknameTM;
     [Networked]
     public string playfabIdentity { get; set; }
     [Networked(OnChanged = nameof(OnNickNameChanged))]
     public NetworkString<_16> nickname { get; set; }
     public NetworkString<_16> playfabId { get; set; }
-    // Start is called before the first frame update
     [Networked] public int ActorID { get; set; }
 
-    public CharacterInputHandler inputHandler;
 
+    //Avatar Prefabs
+    public GameObject[] playerPrefabs;
+    //Animator
+    public Animator animator;
+ 
+    private void Awake()
+    {
+        userManager = UserManager.FindInstance();
+        photonManager = PhotonManager.FindInstance();
+    }
 
     /// <summary>
     /// Instance the prefab to the user, add Animator componet,add properties to the avatar
@@ -36,37 +44,39 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
       
         var controller = Resources.Load("Animations/Character") as RuntimeAnimatorController;
 
-        
-        //Add animator
+        //Select Avatar
         if (this.avatar == 0) this.avatar = Random.Range(1, 6);
-        Debug.Log(this.avatar);
-        gameManager = GameManager.FindInstance();
-        userManager = UserManager.FindInstance();
-        photonManager = PhotonManager.FindInstance();
-        
-        
         GameObject model = Instantiate(playerPrefabs[this.avatar], gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
         model.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         model.transform.SetAsFirstSibling();
+
+        //Add Animator
         model.AddComponent<Animator>();
         model.GetComponent<Animator>().runtimeAnimatorController = controller;
+
+        //Add Player Tag
         this.gameObject.tag = "Player";
 
+        //Main Player Logic
         if (Object.HasInputAuthority)
         {
+            //Set Manager Info
             photonManager.avatarNumber = avatar;
+            photonManager.CurrentPlayer = this.gameObject;
+
+            //Initialize NetworkPlayer Info
             playfabIdentity = userManager.UserID;
             Local = this;
+
+            //Enabling Input && Camera
             this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
             this.inputHandler.enabled = true;
-            //Looks in scene for the GameManager and store it
-            SetGameManager(GameObject.Find("/Manager").GetComponent<GameManager>());
-            PhotonManager.FindInstance().CurrentPlayer = this.gameObject;
+            
+            //Add LocalPlayer Layer to user
             gameObject.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("LocalPlayer");
             foreach (Transform child in gameObject.transform.GetChild(0))
             {
                 child.gameObject.layer = LayerMask.NameToLayer("LocalPlayer");
-            
             }
         
         }
@@ -105,13 +115,5 @@ public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
 
     }
 
-    /// <summary>
-    /// Setter for GameManager
-    /// </summary>
-    /// <param name="gameManager"></param>
-    public void SetGameManager(GameManager gameManager)
-    {
-        this.gameManager = gameManager;
-    }
 
 }

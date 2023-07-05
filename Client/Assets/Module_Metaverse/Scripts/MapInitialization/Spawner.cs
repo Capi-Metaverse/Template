@@ -4,20 +4,16 @@ using UnityEngine;
 using Fusion;
 using Fusion.Sockets;
 using System;
-using UnityEngine.Diagnostics;
-using Photon.Realtime;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 {
-    public NetworkPlayer playerPrefab;
 
+    [SerializeField]
+    public NetworkPlayer NetworkPlayer;
     //Other components
-    CharacterInputHandler characterInputHandler;
+    CharacterInputHandler CharacterInputHandler { get; set; }
 
-    GameManager gameManager;
     private UserManager userManager;
-    public GameObject Settings;
     PlayerList playerList;
 
     public PhotonManager photonManager;
@@ -26,7 +22,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 
     private void Awake()
     {
-        //gameManager = GameManager.FindInstance();
+   
         userManager = UserManager.FindInstance();
         photonManager = PhotonManager.FindInstance();
     }
@@ -39,15 +35,14 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     /// <param name="player"></param>
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
+        //If the player has joined the game, his character is spawned
         if (player == runner.LocalPlayer)
         {
             GameObject handler = GameObject.Find("NetworkRunnerHandler");
             Debug.Log("Spawning Player");
-            runner.Spawn(playerPrefab, handler.transform.position, Quaternion.identity, player,OnBeforeSpawn);
-            Debug.Log(photonManager.Runner.SessionInfo.ToString());
-        }
 
-        Debug.Log(photonManager.UserStatus);
+            runner.Spawn(NetworkPlayer, handler.transform.position, Quaternion.identity, player,OnBeforeSpawn);
+        }
 
         StartCoroutine(WaitPlayer());
     }
@@ -58,25 +53,28 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     /// <param name="player"></param>
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
+        //I think this update the player list
         StartCoroutine(WaitPlayer());
     }
 
     IEnumerator WaitPlayer()
     {
+        //Needed??
         yield return new WaitForSeconds(2);
         playerList = GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetComponent<PlayerList>();
-        Debug.Log(GameObject.Find("Menus").transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2));
         playerList.ListPlayers();
     }
+
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
+        //It gets the Player Input
        
-        if (characterInputHandler == null && NetworkPlayer.Local != null) 
-            characterInputHandler = NetworkPlayer.Local.GetComponent<CharacterInputHandler>();
+        if (CharacterInputHandler == null && NetworkPlayer.Local != null) 
+            CharacterInputHandler = NetworkPlayer.Local.GetComponent<CharacterInputHandler>();
 
-        if(characterInputHandler != null)
+        if(CharacterInputHandler != null)
         {
-            input.Set(characterInputHandler.GetNetworkInput());
+            input.Set(CharacterInputHandler.GetNetworkInput());
          
         }
     }
@@ -93,6 +91,8 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
         obj.GetComponent<NetworkPlayer>().ActorID = photonManager.Runner.LocalPlayer;
         obj.GetComponent<NetworkPlayer>().nickname = userManager.Username;
         photonManager.CurrentPlayer = obj.gameObject;
+
+        //What's this?
         obj.transform.GetChild(2).gameObject.SetActive(true);
     }
 
