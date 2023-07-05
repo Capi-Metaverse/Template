@@ -7,15 +7,13 @@ using UnityEngine.EventSystems;
 
 public class KeyboardInput : MonoBehaviour
 {
-    
-
-    
 
     public bool canMove = true;
     public Vector3 MoveDirection { get; private set; }
-    Camera _cam;
 
-    public static Action<Vector3> OnMove;
+    private Camera _cam;
+
+    
 
 
     // Start is called before the first frame update
@@ -34,8 +32,6 @@ public class KeyboardInput : MonoBehaviour
         if (Input.GetKey(KeyCode.S)) MoveDirection -= _cam.transform.forward;
         if (Input.GetKey(KeyCode.A)) MoveDirection += _cam.transform.right;
         if (Input.GetKey(KeyCode.D)) MoveDirection -= _cam.transform.right;
-
-        if (MoveDirection != Vector3.zero) OnMove(MoveDirection);
 
     }
 }
