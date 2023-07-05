@@ -132,7 +132,8 @@ public class GameManagerTutorial : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
 
         //Deactive animation
-        animator.SetFloat("Speed", 0);
+        animator.SetBool("Walking", false);
+        animator.SetBool("Running", false);
 
         //Deactive UI && Movement
         playerUI.HideUI();
@@ -154,8 +155,6 @@ public class GameManagerTutorial : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
-            //Active animation
-            animator.SetFloat("Speed", 1);
 
             //Active UI && Movement
             playerUI.ShowUI();

@@ -5229,7 +5229,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh53940
+  m_Name: pb_Mesh45540
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5759,11 +5759,11 @@ PrefabInstance:
       objectReference: {fileID: 2046480096}
     - target: {fileID: 1005528558511805973, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: setAnimation3
+      value: SetAnimation
       objectReference: {fileID: 0}
     - target: {fileID: 1005528558511805973, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EventWheelTutorial, Assembly-CSharp
+      value: EmoteWheel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1561021239355707118, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -5771,11 +5771,11 @@ PrefabInstance:
       objectReference: {fileID: 2046480096}
     - target: {fileID: 1561021239355707118, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: setAnimation2
+      value: SetAnimation
       objectReference: {fileID: 0}
     - target: {fileID: 1561021239355707118, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EventWheelTutorial, Assembly-CSharp
+      value: EmoteWheel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3224069816649126287, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -5783,11 +5783,11 @@ PrefabInstance:
       objectReference: {fileID: 2046480096}
     - target: {fileID: 3224069816649126287, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: setAnimation5
+      value: SetAnimation
       objectReference: {fileID: 0}
     - target: {fileID: 3224069816649126287, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EventWheelTutorial, Assembly-CSharp
+      value: EmoteWheel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3544495151397721251, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_Enabled
@@ -5799,11 +5799,11 @@ PrefabInstance:
       objectReference: {fileID: 2046480096}
     - target: {fileID: 5013486081376714611, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: setAnimation6
+      value: SetAnimation
       objectReference: {fileID: 0}
     - target: {fileID: 5013486081376714611, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EventWheelTutorial, Assembly-CSharp
+      value: EmoteWheel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6129467522659788601, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_Name
@@ -5819,11 +5819,11 @@ PrefabInstance:
       objectReference: {fileID: 2046480096}
     - target: {fileID: 6497282616262040933, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: setAnimation4
+      value: SetAnimation
       objectReference: {fileID: 0}
     - target: {fileID: 6497282616262040933, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EventWheelTutorial, Assembly-CSharp
+      value: EmoteWheel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7667643790682569451, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_RootOrder
@@ -5875,17 +5875,18 @@ PrefabInstance:
       objectReference: {fileID: 2046480096}
     - target: {fileID: 7748884912290255520, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: setAnimation1
+      value: SetAnimation
       objectReference: {fileID: 0}
     - target: {fileID: 7748884912290255520, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EventWheelTutorial, Assembly-CSharp
+      value: EmoteWheel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8814275791443858534, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
       propertyPath: m_CullTransparentMesh
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3544495151397721251, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ab5bbabc4843e634c83f953eb65d859e, type: 3}
 --- !u!4 &2046480094 stripped
 Transform:
@@ -5906,7 +5907,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2046480095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb745fc208b7d5d4095a96fcaa275224, type: 3}
+  m_Script: {fileID: 11500000, guid: 22668721761766d41a5e016d9a340d9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1923614046}
@@ -9480,8 +9481,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bb61d5e0f7b4be4eb7576115e1a9dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WalkingSpeed: 7.5
-  RunningSpeed: 11.5
   canMove: 1
 --- !u!1 &5887144530825114076
 GameObject:
