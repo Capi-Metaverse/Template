@@ -27,10 +27,12 @@ public class CharacterMovementHandler : NetworkBehaviour
     /// </summary>
     public override void FixedUpdateNetwork()
     {
+        //Input Handler (Receives User Input) -> OnInput (Spawner??) -> GetInput (InputHandler) -> ControllerCustom.Move
         if (GetInput(out NetworkInputData networkInputData))
         {
             transform.forward = networkInputData.aimForwardVector;
 
+            //Rotation
             Quaternion rotation = transform.rotation;
             rotation.eulerAngles = new Vector3(0, rotation.eulerAngles.y, rotation.eulerAngles.z);
             transform.rotation = rotation;

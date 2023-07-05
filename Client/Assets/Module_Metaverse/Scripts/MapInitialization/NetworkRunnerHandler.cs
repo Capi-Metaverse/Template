@@ -10,25 +10,29 @@ using System.Linq;
 
 public class NetworkRunnerHandler : MonoBehaviour
 {
+
+    //Network Runner Prefab
     public NetworkRunner networkRunnerPrefab;
 
-    NetworkRunner networkRunner;
-    //GameManager gameManager;
-    PhotonManager photonManager;
+    //Network Runner Script
+    NetworkRunner NetworkRunner;
+    //Photon Manager
+    PhotonManager PhotonManager;
+
+    //Map
     public string map;
 
     private void Awake()
     {
-        //gameManager = GameManager.FindInstance();
-        photonManager = PhotonManager.FindInstance();
+        PhotonManager = PhotonManager.FindInstance();
     }
 
     private void Start()
     {
-        networkRunner = Instantiate(networkRunnerPrefab);
-        networkRunner.name = "Network runner";
+        NetworkRunner = Instantiate(networkRunnerPrefab);
+        NetworkRunner.name = "Network runner";
 
-        var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Shared, NetAddress.Any(), SceneManager.GetActiveScene().buildIndex, null);
+        var clientTask = InitializeNetworkRunner(NetworkRunner, GameMode.Shared, NetAddress.Any(), SceneManager.GetActiveScene().buildIndex, null);
 
        
         Debug.Log("Server NetworkRunner Started");
@@ -59,9 +63,9 @@ public class NetworkRunnerHandler : MonoBehaviour
 
          SessionProps props = new SessionProps();
         props.StartMap = MSceneManager.FindInstance().CurrentScene;
-        props.RoomName = photonManager.RoomName;
+        props.RoomName = PhotonManager.RoomName;
         props.AllowLateJoin = true;
-        props.PlayerLimit = photonManager.PlayerCount;
+        props.PlayerLimit = PhotonManager.PlayerCount;
 
         return runner.StartGame(new StartGameArgs
         {
@@ -69,8 +73,8 @@ public class NetworkRunnerHandler : MonoBehaviour
             Address = address,
             Scene = scene,
             CustomLobbyName = "Lobby_Play",
-            SessionName = photonManager.RoomName + "-" + map,
-            PlayerCount = photonManager.PlayerCount,
+            SessionName = PhotonManager.RoomName + "-" + map,
+            PlayerCount = PhotonManager.PlayerCount,
             Initialized = initialized,
             SceneManager = sceneManager,
             SessionProperties = props.Properties

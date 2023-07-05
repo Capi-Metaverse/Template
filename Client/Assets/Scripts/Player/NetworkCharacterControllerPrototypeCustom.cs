@@ -120,12 +120,15 @@ public class NetworkCharacterControllerPrototypeCustom : NetworkTransform {
   public virtual void Move(Vector3 direction) {
         var deltaTime    = Runner.DeltaTime;
         var previousPos  = transform.position;
+
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         // Press Left Shift to run
         isRunning = Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.S);
         float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
+
+
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
         //Normalize diagonal speed
