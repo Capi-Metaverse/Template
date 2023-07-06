@@ -17,7 +17,9 @@ public class FileSelector: MonoBehaviour
     private GameManager GameManager;
 
     //UI
+    [SerializeField]
     private Presentation Presentation;
+    [SerializeField]
     private TMP_Text LoadingPressCanvas;
 
 
@@ -36,9 +38,7 @@ public class FileSelector: MonoBehaviour
 #endif
 
     void Start()
-    {
-        Presentation = GameObject.Find("Presentation").GetComponent<Presentation>();//Getting the press from scene
-        LoadingPressCanvas = GameObject.Find("LoadingPressCanvas").transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
+    { 
         GameManager = GameManager.FindInstance();
     }
 
@@ -48,6 +48,7 @@ public class FileSelector: MonoBehaviour
     [Obsolete]
     public void OpenFile()
     {
+        Debug.Log(LoadingPressCanvas);
         LoadingPressCanvas.SetText("Loading");
         Screen.lockCursor = false;//Unity and standalone
 

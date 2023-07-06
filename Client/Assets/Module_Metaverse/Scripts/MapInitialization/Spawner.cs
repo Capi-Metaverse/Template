@@ -41,6 +41,9 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
             GameObject handler = GameObject.Find("NetworkRunnerHandler");
             Debug.Log("Spawning Player");
 
+            Debug.Log(NetworkPlayer);
+            Debug.Log(player);
+
             runner.Spawn(NetworkPlayer, handler.transform.position, Quaternion.identity, player,OnBeforeSpawn);
         }
 
