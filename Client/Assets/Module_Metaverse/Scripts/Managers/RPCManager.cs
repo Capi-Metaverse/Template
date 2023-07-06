@@ -87,7 +87,7 @@ public class RPCManager : SimulationBehaviour
         JObject JsonRoutes = JObject.Parse(routes);
         Debug.Log(JsonRoutes.ToString());
 
-        FileSelector fileSelector = GameObject.Find("ChooseFile").GetComponent<FileSelector>();
+        FileSelector fileSelector = GameObject.Find("Presentation").GetComponent<FileSelector>();
         fileSelector.PresentationUpload._json = JsonRoutes;
         fileSelector.PresentationUpload.ClearPresentation();
 
