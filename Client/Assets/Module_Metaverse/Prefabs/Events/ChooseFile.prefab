@@ -83,7 +83,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &3369865205766407877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,4 +114,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: 0
-  LoadingPressCanvas: {fileID: 0}
+  PresentationUpload: {fileID: 0}

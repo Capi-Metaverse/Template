@@ -364,6 +364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4766252298970315507}
   - component: {fileID: 2143715370}
+  - component: {fileID: 3457021785763243700}
   m_Layer: 0
   m_Name: Presentation 1
   m_TagString: Untagged
@@ -405,6 +406,20 @@ MonoBehaviour:
   sprites: []
   renderer: {fileID: 3508178217277665341}
   loadingPressCanvas: {fileID: 0}
+--- !u!114 &3457021785763243700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7420122817405076816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c863f47e1027feb48a1cf433a9d0cff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: 0
+  PresentationUpload: {fileID: 0}
 --- !u!1 &8182559675032434862
 GameObject:
   m_ObjectHideFlags: 0
