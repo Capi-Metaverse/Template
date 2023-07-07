@@ -7,13 +7,14 @@ public class ControlSensitivity : MonoBehaviour
 {
     public Slider slider;
     public float sliderValue;
-    public float sensi;
+    public ControlSensitivityPlayFab controlSensitivityPlayFab;
+    GameManager gameManager;
     
     // Start is called before the first frame update
     void Start()
     {
-        slider.value = PlayerPrefs.GetFloat("Sensitivity", 1f);
-        sensi = slider.value;
+        gameManager = GameManager.FindInstance();
+        slider.value = gameManager.Sensitivity;
         
     }
     /// <summary>
@@ -23,8 +24,8 @@ public class ControlSensitivity : MonoBehaviour
     public void ChangeSlider(float value)
     {
         sliderValue = value;
-        PlayerPrefs.SetFloat("Sensitivity", sliderValue);
-        sensi = slider.value;
+        gameManager.Sensitivity = slider.value;
+        controlSensitivityPlayFab.ChangeSensitivity(gameManager.Sensitivity);
         //Debug.Log(sensi);
     }
 }

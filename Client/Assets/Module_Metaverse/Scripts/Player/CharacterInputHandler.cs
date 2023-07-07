@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class CharacterInputHandler : MonoBehaviour
 {
+    GameManager gameManager;
+
     //Movement
     Vector2 moveInputVector = Vector2.zero;
     Vector2 viewInputVector = Vector2.zero;
@@ -77,6 +79,8 @@ public class CharacterInputHandler : MonoBehaviour
 
     private void Awake()
     {
+        gameManager = GameManager.FindInstance();
+
         inputManager = GameManager.FindInstance().GetComponent<InputManager>();
         photonManager = PhotonManager.FindInstance();
 
@@ -173,7 +177,7 @@ public class CharacterInputHandler : MonoBehaviour
         //This script should only get the inputs (W,A,S,D, Mouse && other keys)
 
         //Just neeeded in camera
-        sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
+
 
         //OK
         if (inputManager.GetButtonDown("MuteVoice") && !pauseManager.IsPaused)
@@ -432,8 +436,8 @@ public class CharacterInputHandler : MonoBehaviour
             if (!localCameraHandler.enabled) localCameraHandler.enabled = true;
             if (!characterMovementHandler.enabled) characterMovementHandler.enabled = true;
             //View input
-            viewInputVector.x = Input.GetAxis("Mouse X") / sensitivity;
-            viewInputVector.y = Input.GetAxis("Mouse Y") * -1 / sensitivity; //Invert the mouse look
+            viewInputVector.x = Input.GetAxis("Mouse X") / gameManager.Sensitivity;
+            viewInputVector.y = Input.GetAxis("Mouse Y") * -1 / gameManager.Sensitivity; //Invert the mouse look
 
             if (Input.GetButton("Jump"))
                 isJumpButtonPressed = true;

@@ -135,9 +135,14 @@ public class LoginPlayFab : MonoBehaviour, ILogin
         requestsCounter++;
         checkRequestCounter();
 
-        Debug.Log("[PlayFab-LoginManager] Username: " + username); // output: "prueba1"
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnSensitivityCorrect, OnError);
+
     }
 
+    private void OnSensitivityCorrect(GetUserDataResult result)
+    {
+        gameManager.Sensitivity = (float)Convert.ToDouble(result.Data["Sensitivity"].Value);
+    }
 
 
     /// <summary>
@@ -230,11 +235,13 @@ public class LoginPlayFab : MonoBehaviour, ILogin
         //We register the achivements in Playfab
         List<Achievement> achievementList = AchievementRegister();
 
+
         var request = new UpdateUserDataRequest
         {
             Data = new Dictionary<string, string>
             {
-                {"Achievements", JsonConvert.SerializeObject(achievementList)}
+                {"Achievements", JsonConvert.SerializeObject(achievementList)},
+                {"Sensitivity", "0.5"}
             }
         };
         PlayFabClientAPI.UpdateUserData(request, OnEndRegister, OnError);

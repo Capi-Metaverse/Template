@@ -15,7 +15,7 @@ public class GameManager :MonoBehaviour
 
     //??
     public GameObject Settings;
-
+    public float Sensitivity;
 
 
     //Static function to get the singleton

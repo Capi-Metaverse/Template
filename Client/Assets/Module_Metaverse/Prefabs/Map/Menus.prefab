@@ -405,7 +405,8 @@ MonoBehaviour:
   _emoteWheel: {fileID: 0}
   _pause: {fileID: 0}
   _settings: {fileID: 0}
-  _pauseObject: {fileID: 0}
+  UICard: {fileID: 0}
+  UICardOtherUser: {fileID: 0}
 --- !u!114 &984036151116265175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,8 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPaused: 0
-  _characterInputHandler: {fileID: 0}
-  _pauseObject: {fileID: 7071691655523480675}
+  _player: {fileID: 0}
 --- !u!1001 &568308342904409067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -928,6 +928,10 @@ PrefabInstance:
       propertyPath: sliderValue
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6252930570896716687, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
+      propertyPath: controlSensitivityPlayFab
+      value: 
+      objectReference: {fileID: 1967437351607705501}
     - target: {fileID: 6316380765104090055, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1002,6 +1006,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5587160888839851944, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
   m_PrefabInstance: {fileID: 9166918225470167995}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3725585322395306977 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5513707294765617242, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
+  m_PrefabInstance: {fileID: 9166918225470167995}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1967437351607705501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3725585322395306977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440b186f1cd1fd4680d682147f47c6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensitivityValue: 0
 --- !u!1 &4570151269735385357 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4637335234425442998, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
@@ -1178,11 +1200,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 556983b212072f64985b2e370fc7bff7, type: 3}
---- !u!1 &7071691655523480675 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2095543376706389882, guid: 556983b212072f64985b2e370fc7bff7, type: 3}
-  m_PrefabInstance: {fileID: 9166918225778438937}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7071691655523480676 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2095543376706389885, guid: 556983b212072f64985b2e370fc7bff7, type: 3}
