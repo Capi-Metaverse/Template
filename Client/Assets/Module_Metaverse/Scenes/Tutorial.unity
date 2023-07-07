@@ -1024,11 +1024,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 169817347}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93c8ab81d0de9d840ab58505a71e7c63, type: 3}
+  m_Script: {fileID: 11500000, guid: bd4035ed1f79faa418c73d7622f103ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   presentation: {fileID: 651365731}
-  triggerDetector: {fileID: 5874118889009996890}
+  triggerDetector: {fileID: 5874118889009996893}
 --- !u!1 &302872217
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,11 +1537,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &399410022 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4385679606799607588, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
-  m_PrefabInstance: {fileID: 564503113}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &408545427
 GameObject:
   m_ObjectHideFlags: 0
@@ -1941,7 +1936,7 @@ PrefabInstance:
     - target: {fileID: 196562611047373809, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1799658160}
+      objectReference: {fileID: 1799658158}
     - target: {fileID: 196562611047373809, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeToPanelKeys
@@ -1961,7 +1956,7 @@ PrefabInstance:
     - target: {fileID: 420626902772440106, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1799658160}
+      objectReference: {fileID: 1799658158}
     - target: {fileID: 420626902772440106, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeToPanelPlayer
@@ -1989,7 +1984,7 @@ PrefabInstance:
     - target: {fileID: 2075409322537589687, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1799658160}
+      objectReference: {fileID: 1799658158}
     - target: {fileID: 2075409322537589687, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeToPanel
@@ -2161,7 +2156,7 @@ PrefabInstance:
     - target: {fileID: 6494533943150960214, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1799658160}
+      objectReference: {fileID: 1799658158}
     - target: {fileID: 6494533943150960214, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -2203,11 +2198,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 9152157433715293231, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
     - {fileID: 8766301412138097931, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
     - {fileID: 3568877231533172023, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
     - {fileID: 1442107820706898414, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
+    - {fileID: 9152157433715293231, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
+--- !u!1 &564503114 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8874203641678117840, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
+  m_PrefabInstance: {fileID: 564503113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &564503116 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5587160888839851944, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
@@ -2551,11 +2551,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 665547063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83fa67bae0d20604b908cad62ba88428, type: 3}
+  m_Script: {fileID: 11500000, guid: f265d6d94d2ff8a468e9b7d04de892b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   presentation: {fileID: 651365731}
-  triggerDetector: {fileID: 5874118889009996890}
+  triggerDetector: {fileID: 5874118889009996893}
 --- !u!1 &733683721
 GameObject:
   m_ObjectHideFlags: 0
@@ -2941,16 +2941,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 851344087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96d8d24c99c62f042ad2a50bf7ac903c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c57280f9ecd7cf44abcf9d8de9c53ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 866192361}
-  fpsController: {fileID: 5874118889009996889}
-  moveTabs: {fileID: 1799658160}
+  fpsController: {fileID: 5874118889009996892}
+  moveTabs: {fileID: 1799658158}
   animator: {fileID: 7843358}
   reShowText: {fileID: 820631548}
   lines:
-  - ' I''m your virtual assistant, Adam.am.'
+  - I'm your virtual assistant, Adam.
   - I'm here to help you with the basics of this application.
   - You can move to any direction with the WASD Keys, Try it!
   textSpeed: 0.2
@@ -3859,7 +3859,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1030233501}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a9e7186d81a9c544bde20334fcb525b, type: 3}
+  m_Script: {fileID: 11500000, guid: f4bd7e67082106d4688cad748a552666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueScript: {fileID: 0}
@@ -5064,7 +5064,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5587160888736372212, guid: 1d2efe467d6d3b84d9080797b07e66a4, type: 3}
   m_PrefabInstance: {fileID: 564503113}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1799658160
+--- !u!114 &1799658158
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5073,17 +5073,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1799658157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a305d28700f4aeb4b8d93f86516fdb95, type: 3}
+  m_Script: {fileID: 11500000, guid: 85bd5f47754896f4587d772a83fe83c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TabPanel: {fileID: 1019194020}
-  TabPanelKeys: {fileID: 399410022}
+  TabPanelKeys: {fileID: 564503114}
   TabPanelPlayers: {fileID: 565938718}
   TabPanelFriends: {fileID: 469436030}
   TabTabPlayers: {fileID: 1697925260}
   Lenguages: {fileID: 0}
   dialogueScript: {fileID: 851344092}
-  triggerDetector: {fileID: 5874118889009996890}
+  triggerDetector: {fileID: 5874118889009996893}
   graphic: {fileID: 2114061403}
   gameManager: {fileID: 1923614046}
   settingsStatus: 0
@@ -5489,12 +5489,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1923614045}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 153aa83fc1352d34e9918029192b2284, type: 3}
+  m_Script: {fileID: 11500000, guid: bd9298f319d21094da59ae6eda33b552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueScript: {fileID: 851344092}
-  fpsController: {fileID: 5874118889009996889}
-  moveTabs: {fileID: 1799658160}
+  fpsController: {fileID: 5874118889009996892}
+  moveTabs: {fileID: 1799658158}
   animator: {fileID: 7843358}
   reShowText: {fileID: 820631548}
   playerUI: {fileID: 1018573549}
@@ -9387,9 +9387,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4535820425268530950}
   - component: {fileID: 5874118889009996888}
-  - component: {fileID: 5874118889009996889}
-  - component: {fileID: 5874118889009996890}
   - component: {fileID: 5874118889009996891}
+  - component: {fileID: 5874118889009996892}
+  - component: {fileID: 5874118889009996893}
   m_Layer: 0
   m_Name: TonyModel
   m_TagString: Player
@@ -9415,60 +9415,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0.1, y: 1, z: 0}
---- !u!114 &5874118889009996889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5874118889009996887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 277d5914ed2c4174fbe9d3621b59632b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkingSpeed: 7.5
-  runningSpeed: 11.5
-  jumpSpeed: 8
-  gravity: 20
-  lookSpeed: 2
-  lookXLimit: 45
-  playerCamera: {fileID: 559153185}
-  sensitivity: 2
-  triggerDetector: {fileID: 5874118889009996890}
-  rayDistance: 3
-  targetTime: 0.5
-  canMove: 1
-  pauseMenu: {fileID: 1030233501}
-  presentationCamera: {fileID: 0}
-  onPresentationCamera: 0
-  playerUI: {fileID: 1018573549}
-  animator: {fileID: 7843358}
-  gameManager: {fileID: 1923614046}
---- !u!114 &5874118889009996890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5874118889009996887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adf3b2a7850ae9440b383099bbbf226e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvasDialogue: {fileID: 851344090}
-  playerUI: {fileID: 1018573549}
-  objective1: {fileID: 733683723}
-  objective2: {fileID: 1454040622}
-  objective3: {fileID: 1224049649}
-  objective4: {fileID: 312076097}
-  outText: {fileID: 1815254630}
-  fPSController: {fileID: 5874118889009996889}
-  tutorialNumber: {fileID: 929373500}
-  emoteWheel: {fileID: 2046480095}
-  isEventWheelOpen: 0
-  animator: {fileID: 7843358}
 --- !u!114 &5874118889009996891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9482,6 +9428,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
+--- !u!114 &5874118889009996892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5874118889009996887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bab4f14c41f8944f9fa21c8c7455c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingSpeed: 7.5
+  runningSpeed: 11.5
+  jumpSpeed: 8
+  gravity: 20
+  lookSpeed: 2
+  lookXLimit: 45
+  playerCamera: {fileID: 559153185}
+  sensitivity: 2
+  triggerDetector: {fileID: 5874118889009996893}
+  rayDistance: 3
+  targetTime: 0.5
+  canMove: 1
+  pauseMenu: {fileID: 1030233501}
+  presentationCamera: {fileID: 0}
+  onPresentationCamera: 0
+  playerUI: {fileID: 1018573549}
+  animator: {fileID: 7843358}
+  gameManager: {fileID: 1923614046}
+--- !u!114 &5874118889009996893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5874118889009996887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1721b96833dba429ab0e5267d2ade1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasDialogue: {fileID: 851344090}
+  playerUI: {fileID: 1018573549}
+  objective1: {fileID: 733683723}
+  objective2: {fileID: 1454040622}
+  objective3: {fileID: 1224049649}
+  objective4: {fileID: 312076097}
+  outText: {fileID: 1815254630}
+  fPSController: {fileID: 5874118889009996892}
+  tutorialNumber: {fileID: 929373500}
+  emoteWheel: {fileID: 2046480095}
+  isEventWheelOpen: 0
+  animator: {fileID: 7843358}
 --- !u!1 &5887144530825114076
 GameObject:
   m_ObjectHideFlags: 0
