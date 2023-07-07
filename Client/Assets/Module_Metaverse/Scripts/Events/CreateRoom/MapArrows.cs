@@ -1,33 +1,36 @@
 using TMPro;
 using UnityEngine;
 
-public class MapArrows : MonoBehaviour, ICreateRoomArrows
+namespace CreateRoom
 {
-    [SerializeField] private TMP_Text map;
-
-    private string[] mapNames = { "Mapa1", "Mapa2", "Oficinas"};
-
-    private int actualMap = 0;
-
-    /// <summary>
-    /// Selecto previous map
-    /// </summary>
-    public void OnLeftClick()
+    public class MapArrows : MonoBehaviour, ICreateRoomArrows
     {
-        if (actualMap > 0)
+        [SerializeField] private TMP_Text map;
+
+        private string[] mapNames = { "Mapa1", "Mapa2", "Oficinas" };
+
+        private int actualMap = 0;
+
+        /// <summary>
+        /// Selecto previous map
+        /// </summary>
+        public void OnLeftClick()
         {
-            map.text = mapNames[--actualMap];
+            if (actualMap > 0)
+            {
+                map.text = mapNames[--actualMap];
+            }
         }
-    }
 
-    /// <summary>
-    /// Select next map
-    /// </summary>
-    public void OnRightClick()
-    {
-        if (actualMap < mapNames.Length - 1)
+        /// <summary>
+        /// Select next map
+        /// </summary>
+        public void OnRightClick()
         {
-            map.text = mapNames[++actualMap];
+            if (actualMap < mapNames.Length - 1)
+            {
+                map.text = mapNames[++actualMap];
+            }
         }
     }
 }

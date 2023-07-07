@@ -2,33 +2,37 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class UserNumberArrows : MonoBehaviour, ICreateRoomArrows
+namespace CreateRoom
 {
-    [SerializeField] private TMP_InputField inputPlayers;
-
-    /// <summary>
-    /// Decrease the number of users that can enter in the room
-    /// </summary>
-    public void OnLeftClick()
+    public class UserNumberArrows : MonoBehaviour, ICreateRoomArrows
     {
-        int userCount = Int32.Parse(inputPlayers.text);
+        [SerializeField] private TMP_InputField inputPlayers;
 
-        if (userCount > 0)
+        /// <summary>
+        /// Decrease the number of users that can enter in the room
+        /// </summary>
+        public void OnLeftClick()
         {
-            inputPlayers.text = (userCount - 1).ToString();
+            int userCount = Int32.Parse(inputPlayers.text);
+
+            if (userCount > 0)
+            {
+                inputPlayers.text = (userCount - 1).ToString();
+            }
         }
-    }
 
-    /// <summary>
-    /// Increase the number of users that can enter in the room
-    /// </summary>
-    public void OnRightClick()
-    {
-        int userCount = Int32.Parse(inputPlayers.text);
-
-        if (userCount < 8)
+        /// <summary>
+        /// Increase the number of users that can enter in the room
+        /// </summary>
+        public void OnRightClick()
         {
-            inputPlayers.text = (userCount + 1).ToString();
+            int userCount = Int32.Parse(inputPlayers.text);
+
+            if (userCount < 8)
+            {
+                inputPlayers.text = (userCount + 1).ToString();
+            }
         }
     }
 }
+

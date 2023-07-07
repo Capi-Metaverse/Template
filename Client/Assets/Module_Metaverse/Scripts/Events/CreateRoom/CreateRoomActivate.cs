@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public class CreateRoomActivate : MonoBehaviour, IMetaEvent
+namespace CreateRoom
 {
-    [SerializeField] private CreateRoomPanelUI createScript;
-    GameObject _eventObject;
-    GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
-
-    public void activate(bool host)
+    public class CreateRoomActivate : MonoBehaviour, IMetaEvent
     {
-        //Open UI
-        createScript.OpenUI();
+        [SerializeField] private CreateRoomPanelUI createScript;
+        GameObject _eventObject;
+        GameObject IMetaEvent.eventObject { get => _eventObject; set => _eventObject = value; }
+
+        public void activate(bool host)
+        {
+            //Open UI
+            createScript.OpenUI();
+        }
     }
 }

@@ -1,34 +1,37 @@
 using RockVR.Video;
 using UnityEngine;
 
-public class PauseRecScript : MonoBehaviour, IMetaEvent
+namespace RecorderMetaverse
 {
-
-    GameObject _eventObject;
-    public GameObject eventObject { get => _eventObject; set => _eventObject = value; }
-
-    private void Awake()
+    public class PauseRecScript : MonoBehaviour, IMetaEvent
     {
-        Application.runInBackground = true;
-    }
-    /// <summary>
-    /// To Pause the recording
-    /// </summary>
-    /// <param name="host"></param>
-    public void activate(bool host)
-    {
-        //Set Pause
-        if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.STARTED)
+
+        GameObject _eventObject;
+        public GameObject eventObject { get => _eventObject; set => _eventObject = value; }
+
+        private void Awake()
         {
-            VideoCaptureCtrl.instance.ToggleCapture();
-
+            Application.runInBackground = true;
         }
-        //Set UnPause
-        else if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.PAUSED)
+        /// <summary>
+        /// To Pause the recording
+        /// </summary>
+        /// <param name="host"></param>
+        public void activate(bool host)
         {
+            //Set Pause
+            if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.STARTED)
+            {
+                VideoCaptureCtrl.instance.ToggleCapture();
 
-            VideoCaptureCtrl.instance.ToggleCapture();
+            }
+            //Set UnPause
+            else if (VideoCaptureCtrl.instance.status == VideoCaptureCtrl.StatusType.PAUSED)
+            {
 
+                VideoCaptureCtrl.instance.ToggleCapture();
+
+            }
         }
     }
 }
