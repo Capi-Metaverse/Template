@@ -13,6 +13,8 @@ public class SC_FPSController : MonoBehaviour
    [SerializeField] private float lookXLimit = 45.0f;
    [SerializeField] private Camera playerCamera;
 
+    [SerializeField] private GameObject infoText;
+
 
     private int jumpCount { get; set; } = 0;
     private int _lastVisibleJump = 0;
@@ -87,6 +89,7 @@ public class SC_FPSController : MonoBehaviour
 
                 if (onPresentationCamera)
                 {
+                    infoText.SetActive(true);
                     presentationCamera.enabled = false;
                     playerCamera.enabled = true;
                     if (gameManager.DialogueStatus!=DialogueStatus.InDialogue)
@@ -96,6 +99,7 @@ public class SC_FPSController : MonoBehaviour
 
                 else
                 {
+                    infoText.SetActive(false);
                     presentationCamera.enabled = true;
                     playerCamera.enabled = false;
                     playerUI.PresentationTextOff();
@@ -231,6 +235,7 @@ public class SC_FPSController : MonoBehaviour
 
             //We deactivate UI
             playerUI.PresentationTextOff();
+         
         }
 
         else
@@ -241,6 +246,8 @@ public class SC_FPSController : MonoBehaviour
             //We activate UI
             if (gameManager.TutorialStatus == TutorialStatus.Presentation || gameManager.TutorialStatus == TutorialStatus.Finished)
                 playerUI.PresentationTextOn();
+
+     
         }
     }
 
