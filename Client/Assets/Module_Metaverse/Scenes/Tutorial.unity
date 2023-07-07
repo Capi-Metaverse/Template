@@ -9783,6 +9783,7 @@ MonoBehaviour:
   lookSpeed: 2
   lookXLimit: 45
   playerCamera: {fileID: 559153185}
+  infoText: {fileID: 1460256132}
   sensitivity: 2
   triggerDetector: {fileID: 5874118889009996893}
   rayDistance: 3
