@@ -1,6 +1,6 @@
 using Fusion;
 using UnityEngine;
-
+using Manager;
 namespace Animation
 {
     public enum AnimationList

@@ -2,7 +2,7 @@ using Fusion;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Manager;
 
 public class DrawLinesOnPlane : NetworkBehaviour
 {

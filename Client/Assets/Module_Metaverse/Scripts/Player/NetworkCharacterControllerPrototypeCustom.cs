@@ -2,7 +2,7 @@ using System;
 using Fusion;
 using Photon.Realtime;
 using UnityEngine;
-
+using Manager;
 [RequireComponent(typeof(CharacterController))]
 [OrderBefore(typeof(NetworkTransform))]
 [DisallowMultipleComponent]

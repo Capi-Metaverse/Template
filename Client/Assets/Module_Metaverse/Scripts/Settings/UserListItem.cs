@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Manager;
 public class UserListItem : MonoBehaviour
 {
     private GameManager gameManager;

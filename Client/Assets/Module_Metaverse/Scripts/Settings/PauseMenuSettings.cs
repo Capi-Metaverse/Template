@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-
+using Manager;
 public class PauseMenuSettings : MonoBehaviour
 {
     private GameManager gameManager;

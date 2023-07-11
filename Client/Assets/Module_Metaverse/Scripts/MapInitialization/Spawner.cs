@@ -4,7 +4,7 @@ using UnityEngine;
 using Fusion;
 using Fusion.Sockets;
 using System;
-
+using Manager;
 public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 {
 

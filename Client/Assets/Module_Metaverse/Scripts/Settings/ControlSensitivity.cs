@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Manager;
 public class ControlSensitivity : MonoBehaviour
 {
     public Slider slider;

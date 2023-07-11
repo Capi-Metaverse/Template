@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using TMPro;
-
+using Manager;
 public class NetworkPlayer : NetworkBehaviour,IPlayerLeft
 {
     //Managers

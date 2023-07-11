@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Manager;
 namespace Event
 {
     public class PrimarySpeaker : MonoBehaviour, IMetaEvent

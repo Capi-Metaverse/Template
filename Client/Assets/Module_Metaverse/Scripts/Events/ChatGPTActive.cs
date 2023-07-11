@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ExitGames.Client.Photon;
 using UnityEngine;
+using Manager;
 
 public class ChatGPTActive : MonoBehaviour, IMetaEvent
 {

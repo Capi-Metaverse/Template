@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using Fusion;
-
+using Manager;
 public class LoginPlayFab : MonoBehaviour, ILogin
 {
     Dictionary<string, bool> roles = new Dictionary<string, bool>();

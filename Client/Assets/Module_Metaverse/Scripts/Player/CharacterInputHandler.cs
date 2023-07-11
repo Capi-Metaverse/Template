@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Manager;
 public class CharacterInputHandler : MonoBehaviour
 {
     GameManager gameManager;

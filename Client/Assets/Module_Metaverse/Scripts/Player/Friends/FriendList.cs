@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 using TMPro;
-
+using Manager;
 using UnityEngine;
 
 public class FriendList : MonoBehaviour

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Fusion;
 using ExitGames.Client.Photon.StructWrapping;
 using static Unity.Collections.Unicode;
-
+using Manager;
 
 public class PlayerItem : NetworkBehaviour, ISpawned
 {

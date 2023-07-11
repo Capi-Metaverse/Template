@@ -7,7 +7,7 @@ using Fusion;
 using Fusion.Sockets;
 using System.Linq;
 using Unity.Entities.UniversalDelegates;
-
+using Manager;
 public class PlayerList : MonoBehaviour
 {
     public GameObject PlayerItemPrefabSettings;

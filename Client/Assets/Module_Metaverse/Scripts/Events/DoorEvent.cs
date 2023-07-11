@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using Fusion;
-
+using Manager;
 namespace Event
 {
     public class DoorEvent : MonoBehaviour, IMetaEvent

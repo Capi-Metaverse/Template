@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
-
+using Manager;
 /// <summary>
 /// Class. Check if the connection is stablished
 /// </summary>

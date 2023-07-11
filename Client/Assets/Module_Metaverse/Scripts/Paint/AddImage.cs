@@ -8,7 +8,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
-
+using Manager;
 public class AddImage : MonoBehaviour
 {
 

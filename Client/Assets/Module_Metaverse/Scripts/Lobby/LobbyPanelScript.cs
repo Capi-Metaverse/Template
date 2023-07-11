@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using Manager;
 public class LobbyPanelScript : MonoBehaviour
 {
  

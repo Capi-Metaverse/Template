@@ -1,6 +1,6 @@
 using Fusion;
 using UnityEngine;
-
+using Manager;
 public class TriggerEntranceDoor : MonoBehaviour
 {
     [SerializeField] private Animator EntranceDoor = null;

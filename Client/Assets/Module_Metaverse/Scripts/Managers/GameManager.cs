@@ -1,46 +1,49 @@
 
 using UnityEngine;
-public class GameManager :MonoBehaviour
+
+namespace Manager
 {
-
-    /*
-     * The game manager is the main of the App, it controls all the user connections.
-     * 
-     * 
-     * 
-     */
-
-    //Needed??
-    [SerializeField] private InputManager inputManager;
-
-    //??
-    public GameObject Settings;
-    public float Sensitivity;
-
-
-    //Static function to get the singleton
-    public static GameManager FindInstance()
+    public class GameManager : MonoBehaviour
     {
-        return FindObjectOfType<GameManager>();
-    }
 
-    //Initialization Correct
-    private void Awake()
-    {
-        //When this component awake, it get the others game managers
-        GameManager[] managers = FindObjectsOfType<GameManager>();
+        /*
+         * The game manager is the main of the App, it controls all the user connections.
+         * 
+         * 
+         * 
+         */
 
-        //Check if there is more managers
-        if (managers != null && managers.Length > 1)
+        //Needed??
+        [SerializeField] private InputManager inputManager;
+
+        //??
+        public GameObject Settings;
+        public float Sensitivity;
+
+
+        //Static function to get the singleton
+        public static GameManager FindInstance()
         {
-            // There should never be more than a single App container in the context of this sample.
-            Destroy(gameObject);
-            return;
+            return FindObjectOfType<GameManager>();
+        }
+
+        //Initialization Correct
+        private void Awake()
+        {
+            //When this component awake, it get the others game managers
+            GameManager[] managers = FindObjectsOfType<GameManager>();
+
+            //Check if there is more managers
+            if (managers != null && managers.Length > 1)
+            {
+                // There should never be more than a single App container in the context of this sample.
+                Destroy(gameObject);
+                return;
+
+            }
 
         }
 
     }
 
 }
-
-

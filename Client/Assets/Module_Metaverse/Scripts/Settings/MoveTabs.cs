@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-
+using Manager;
 public class MoveTabs : MonoBehaviour 
 {
     [SerializeField] private GameObject TabPanel;

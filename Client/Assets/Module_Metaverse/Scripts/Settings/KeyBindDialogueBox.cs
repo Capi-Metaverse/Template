@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Manager;
 public class KeyBindDialogueBox : MonoBehaviour
 {
     InputManager inputManager;

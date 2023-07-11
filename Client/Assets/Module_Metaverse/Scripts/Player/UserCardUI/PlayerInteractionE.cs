@@ -4,7 +4,7 @@ using PlayFab.ClientModels;
 using PlayFab;
 using Newtonsoft.Json;
 using UnityEngine.UI;
-
+using Manager;
 public class PlayerInteractionE : MonoBehaviour 
 {
     GameManager gameManager;
