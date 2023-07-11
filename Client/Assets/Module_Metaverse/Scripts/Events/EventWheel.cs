@@ -1,71 +1,75 @@
 using Fusion;
 using UnityEngine;
 
-public enum AnimationList
+namespace Animation
 {
-    None,
-    Clapping,
-    Waving,
-    Capoeira,
-    Salute,
-    Defeated,
-    TwistedDance
-}
-public class EventWheel : NetworkTransform
-{
-    public Animator animator;
-
-    [Networked]
-    [SerializeField]
-    public AnimationList animationToPlay { get; set; } = AnimationList.None;
-
-    public bool IsPlaying { get; set; } = false;
-
-    private void Start()
+    public enum AnimationList
     {
-        if (animator == null) { animator = this.gameObject.transform.parent.GetComponentInChildren<Animator>(); }
+        None,
+        Clapping,
+        Waving,
+        Capoeira,
+        Salute,
+        Defeated,
+        TwistedDance
     }
-
-    /// <summary>
-    /// Set the animation variable for the EventWheel
-    /// </summary>
-    /// <param name="animation"></param>
-    public void SetAnimation(int animation)
+    public class EventWheel : NetworkTransform
     {
-        animationToPlay = (AnimationList)animation;
-   
-    }
-    /// <summary>
-    /// Runs before the Render
-    /// </summary>
-    public override void FixedUpdateNetwork()
-    {
+        public Animator animator;
 
-        if (animationToPlay != AnimationList.None)
+        [Networked]
+        [SerializeField]
+        public AnimationList animationToPlay { get; set; } = AnimationList.None;
+
+        public bool IsPlaying { get; set; } = false;
+
+        private void Start()
         {
-            if (!IsPlaying) IsPlaying = true;
+            if (animator == null) { animator = this.gameObject.transform.parent.GetComponentInChildren<Animator>(); }
+        }
 
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
+        /// <summary>
+        /// Set the animation variable for the EventWheel
+        /// </summary>
+        /// <param name="animation"></param>
+        public void SetAnimation(int animation)
+        {
+            animationToPlay = (AnimationList)animation;
+
+        }
+        /// <summary>
+        /// Runs before the Render
+        /// </summary>
+        public override void FixedUpdateNetwork()
+        {
+
+            if (animationToPlay != AnimationList.None)
             {
-                IsPlaying = false;
+                if (!IsPlaying) IsPlaying = true;
 
-                if (this.gameObject.transform.parent.GetComponent<NetworkPlayer>().ActorID == PhotonManager.FindInstance().Runner.LocalPlayer)
+                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
                 {
-                    animationToPlay = AnimationList.None;
+                    IsPlaying = false;
+
+                    if (this.gameObject.transform.parent.GetComponent<NetworkPlayer>().ActorID == PhotonManager.FindInstance().Runner.LocalPlayer)
+                    {
+                        animationToPlay = AnimationList.None;
+                    }
+
                 }
 
             }
 
         }
 
-    }
+        /// <summary>
+        /// Controls which animation is being played.
+        /// </summary>
+        public override void Render()
+        {
+            animator.SetInteger("AnimationWheel", (int)animationToPlay);
+        }
 
-    /// <summary>
-    /// Controls which animation is being played.
-    /// </summary>
-    public override void Render()
-    {
-        animator.SetInteger("AnimationWheel", (int)animationToPlay);
     }
 
 }
