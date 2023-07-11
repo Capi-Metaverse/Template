@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using TMPro;
 using UnityEngine;
+using AchievementModule;
 
 public class AchievementList : MonoBehaviour
 {

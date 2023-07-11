@@ -5,6 +5,8 @@ using PlayFab;
 using Newtonsoft.Json;
 using UnityEngine.UI;
 using Manager;
+using AchievementModule;
+
 public class PlayerInteractionE : MonoBehaviour 
 {
     GameManager gameManager;

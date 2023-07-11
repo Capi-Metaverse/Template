@@ -2,6 +2,7 @@ using System.Collections;
 
 using UnityEngine;
 using Manager;
+using AchievementModule;
 
 public class UiUsers : MonoBehaviour ,IMetaEvent
 {

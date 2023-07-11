@@ -8,6 +8,7 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using Fusion;
 using Manager;
+using AchievementModule;
 using static LoginModule.LoginManager;
 
 namespace LoginModule

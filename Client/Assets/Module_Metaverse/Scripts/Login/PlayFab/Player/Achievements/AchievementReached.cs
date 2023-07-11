@@ -3,19 +3,23 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
-public class AchievementReached : MonoBehaviour
+namespace AchievementModule
 {
-    public static void ShowAchievement(string achName, Transform achZone)
+    public class AchievementReached : MonoBehaviour
     {
-        /*
-        string path = "Assets/Module_Metaverse/Prefabs/Achievement/Achievement.prefab";
-        GameObject achPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+        public static void ShowAchievement(string achName, Transform achZone)
+        {
+            /*
+            string path = "Assets/Module_Metaverse/Prefabs/Achievement/Achievement.prefab";
+            GameObject achPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
 
-        Transform child = achPrefab.transform.GetChild(0);
-        string text = child.GetComponent<TMP_Text>().text;
-        text = achName;
+            Transform child = achPrefab.transform.GetChild(0);
+            string text = child.GetComponent<TMP_Text>().text;
+            text = achName;
 
-        Instantiate(achPrefab, achZone);
-        */
+            Instantiate(achPrefab, achZone);
+            */
+        }
     }
 }
+
