@@ -5,34 +5,39 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Manager;
-public class RoomPanelScript : MonoBehaviour
+
+namespace LobbyModule
 {
-    public Button createButton;
-    public TMP_Text sessionNamePanel;
-    public PlayerItem playerItemPrefab;
-    [SerializeField] private Button JoinButton;
-
-    private GameObject LobbyManager;
-
-    private void Start()
+    public class RoomPanelScript : MonoBehaviour
     {
-        LobbyManager = GameObject.Find("LobbyManager");
-    }
+        public Button createButton;
+        public TMP_Text sessionNamePanel;
+        public PlayerItem playerItemPrefab;
+        [SerializeField] private Button JoinButton;
 
-    public void OnClickJoinRoom()
-    {
-        if (LobbyManager.TryGetComponent(out LobbyManager lobbyManager))
+        private GameObject LobbyManager;
+
+        private void Start()
         {
-            JoinButton.interactable = false;
-            lobbyManager.OnJoinRoom(sessionNamePanel.text);
+            LobbyManager = GameObject.Find("LobbyManager");
         }
-    }
-    public void OnClickLeaveSession()
-    {
-        createButton.interactable = true;
-        if (LobbyManager.TryGetComponent(out LobbyManager lobbyManager))
+
+        public void OnClickJoinRoom()
         {
-            lobbyManager.OnLeaveSession();
+            if (LobbyManager.TryGetComponent(out LobbyManager lobbyManager))
+            {
+                JoinButton.interactable = false;
+                lobbyManager.OnJoinRoom(sessionNamePanel.text);
+            }
+        }
+        public void OnClickLeaveSession()
+        {
+            createButton.interactable = true;
+            if (LobbyManager.TryGetComponent(out LobbyManager lobbyManager))
+            {
+                lobbyManager.OnLeaveSession();
+            }
         }
     }
 }
+

@@ -5,40 +5,29 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-/// <summary>
-/// Class. Handle just the PlayfabLogin Method
-/// </summary>
-public class LoginScript : MonoBehaviour
+namespace LoginModule
 {
-    //Inputs
-    public TMP_InputField EmailInput;
-    public TMP_InputField PasswordInput;
-
-    //Login Manager
-    private GameObject LoginManager;
-
-    private void Start()
-    {
-        LoginManager = GameObject.Find("LoginManager");
-    }
-
     /// <summary>
-    /// PlayFab. Sends a request to PlayFab with the login values (Email, Password).
+    /// Class. Handle just the PlayfabLogin Method
     /// </summary>
-    public void LoginButton()
+    public class LoginScript : MonoBehaviour
     {
-        if (LoginManager.TryGetComponent(out LoginPlayFab loginPlayFab))
+        //Inputs
+        public TMP_InputField EmailInput;
+        public TMP_InputField PasswordInput;
+
+        //Login Manager
+        private GameObject LoginManager;
+
+        private void Start()
         {
-            
-            loginPlayFab.Login(EmailInput.text, PasswordInput.text);
-
+            LoginManager = GameObject.Find("LoginManager");
         }
-        //TODO: Add ELSE which will do the login without playfab
-    }
 
-    public void OnPasswordEntered()
-    {
-        if (EventSystem.current.currentSelectedGameObject == PasswordInput.gameObject && Input.GetKey(KeyCode.Return))
+        /// <summary>
+        /// PlayFab. Sends a request to PlayFab with the login values (Email, Password).
+        /// </summary>
+        public void LoginButton()
         {
             if (LoginManager.TryGetComponent(out LoginPlayFab loginPlayFab))
             {
@@ -46,6 +35,21 @@ public class LoginScript : MonoBehaviour
                 loginPlayFab.Login(EmailInput.text, PasswordInput.text);
 
             }
+            //TODO: Add ELSE which will do the login without playfab
+        }
+
+        public void OnPasswordEntered()
+        {
+            if (EventSystem.current.currentSelectedGameObject == PasswordInput.gameObject && Input.GetKey(KeyCode.Return))
+            {
+                if (LoginManager.TryGetComponent(out LoginPlayFab loginPlayFab))
+                {
+
+                    loginPlayFab.Login(EmailInput.text, PasswordInput.text);
+
+                }
+            }
         }
     }
 }
+

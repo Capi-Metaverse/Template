@@ -1,56 +1,60 @@
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
-
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Manager;
-public class LobbyPanelScript : MonoBehaviour
+
+namespace LobbyModule
 {
- 
-    
-    public TMP_Text sessionName;
-    //Lobby panel
-    public  RoomItem roomItemPrefab;
-    public Transform contentObject;
-    public Button createButton;
-    public TMP_InputField roomNameField;
-
-    private GameObject LobbyManager;
-
-    private void Start()
+    public class LobbyPanelScript : MonoBehaviour
     {
-        LobbyManager = GameObject.Find("LobbyManager");
-        EventSystem.current.SetSelectedGameObject(roomNameField.gameObject);
-    }
-    public void OnClickCreateSession()
-    {
-        createButton.interactable = false;
-    
-        if (LobbyManager.TryGetComponent(out LobbyManager lobbyManager))
+
+
+        public TMP_Text sessionName;
+        //Lobby panel
+        public RoomItem roomItemPrefab;
+        public Transform contentObject;
+        public Button createButton;
+        public TMP_InputField roomNameField;
+
+        private GameObject LobbyManager;
+
+        private void Start()
         {
-            lobbyManager.OnCreateSession(sessionName.text);
+            LobbyManager = GameObject.Find("LobbyManager");
+            EventSystem.current.SetSelectedGameObject(roomNameField.gameObject);
         }
-    }
-    public void OnClickJoinSession(SessionInfo sessionInfo)
-    {
-        if (LobbyManager.TryGetComponent(out LobbyManager lobbyManager))
+        public void OnClickCreateSession()
         {
-            lobbyManager.OnJoinSession(sessionInfo);
-        }
-    }
+            createButton.interactable = false;
 
-    public void OnCreateSessionEntered()
-    {
-        if (EventSystem.current.currentSelectedGameObject == roomNameField.gameObject && Input.GetKey(KeyCode.Return) && createButton.IsActive())
-        {
             if (LobbyManager.TryGetComponent(out LobbyManager lobbyManager))
             {
                 lobbyManager.OnCreateSession(sessionName.text);
             }
         }
+        public void OnClickJoinSession(SessionInfo sessionInfo)
+        {
+            if (LobbyManager.TryGetComponent(out LobbyManager lobbyManager))
+            {
+                lobbyManager.OnJoinSession(sessionInfo);
+            }
+        }
+
+        public void OnCreateSessionEntered()
+        {
+            if (EventSystem.current.currentSelectedGameObject == roomNameField.gameObject && Input.GetKey(KeyCode.Return) && createButton.IsActive())
+            {
+                if (LobbyManager.TryGetComponent(out LobbyManager lobbyManager))
+                {
+                    lobbyManager.OnCreateSession(sessionName.text);
+                }
+            }
+        }
+
     }
- 
+
 }
