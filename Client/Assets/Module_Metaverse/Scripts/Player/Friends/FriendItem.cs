@@ -6,43 +6,46 @@ using UnityEngine;
 /// <summary>
 /// This script is used to give properties to the prefac of friends.
 /// </summary>
-public class FriendItem : MonoBehaviour
+namespace Friends
 {
-    private string username;
-    private string id;
-
-    public string Username { get => username; set => username = value; }
-    public string Id { get => id; set => id = value; }
-    /// <summary>
-    /// PlayFab - to remove from the list of confirmed friends
-    /// </summary>
-    public void Removefriends()
+    public class FriendItem : MonoBehaviour
     {
-        ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
+        private string username;
+        private string id;
+
+        public string Username { get => username; set => username = value; }
+        public string Id { get => id; set => id = value; }
+        /// <summary>
+        /// PlayFab - to remove from the list of confirmed friends
+        /// </summary>
+        public void Removefriends()
         {
-            FunctionName = "DenyFriendRequest",
-            FunctionParameter = new { friendplayfabid = id },
-            GeneratePlayStreamEvent = true
-        };
+            ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest
+            {
+                FunctionName = "DenyFriendRequest",
+                FunctionParameter = new { friendplayfabid = id },
+                GeneratePlayStreamEvent = true
+            };
 
-        PlayFabClientAPI.ExecuteCloudScript(request, OnRemoveFriendsSuccess, OnRemoveFriendsFailure);
-    }
+            PlayFabClientAPI.ExecuteCloudScript(request, OnRemoveFriendsSuccess, OnRemoveFriendsFailure);
+        }
 
-    /// <summary>
-    /// Friend Remove Success
-    /// </summary>
-    /// <param name="result"></param>
-    private void OnRemoveFriendsSuccess(ExecuteCloudScriptResult result)
-    {
-        Debug.Log(result);
-        Destroy(this.gameObject);
-    }
-    /// <summary>
-    /// Friend Remove Fail
-    /// </summary>
-    /// <param name="error"></param>
-    private void OnRemoveFriendsFailure(PlayFabError error)
-    {
-        Debug.LogError("Failed to retrieve Friends List: " + error.ErrorMessage);
+        /// <summary>
+        /// Friend Remove Success
+        /// </summary>
+        /// <param name="result"></param>
+        private void OnRemoveFriendsSuccess(ExecuteCloudScriptResult result)
+        {
+            Debug.Log(result);
+            Destroy(this.gameObject);
+        }
+        /// <summary>
+        /// Friend Remove Fail
+        /// </summary>
+        /// <param name="error"></param>
+        private void OnRemoveFriendsFailure(PlayFabError error)
+        {
+            Debug.LogError("Failed to retrieve Friends List: " + error.ErrorMessage);
+        }
     }
 }

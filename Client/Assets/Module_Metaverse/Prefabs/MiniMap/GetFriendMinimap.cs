@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-
+using Friends;
 public class GetFriendMinimap : MonoBehaviour
 {
     [SerializeField] private FriendManager friendManager;

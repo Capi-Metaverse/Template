@@ -5,27 +5,31 @@ using UnityEngine;
 /// <summary>
 /// Interface to CV Edit
 /// </summary>
-public class EditVisionData : MonoBehaviour
+
+namespace UserCard
 {
-    public ImagenData imagedata;
-
-    public TMP_Text UserNameTitle;
-    public TMP_Text TemasText;
-    public TMP_InputField OboutTextInput;
-    public TMP_InputField HobbiesTextInput;
-    public TMP_InputField CVTextInput;
-    public UiUsers uiusers;
-
-    public GameObject OnlyVisionData;
-    public GameObject EditVisionDat;
-
-    public void changeViewDataAndSave()
+    public class EditVisionData : MonoBehaviour
     {
-        uiusers.EditUserData();
-        imagedata.FetchImageData();
-        StartCoroutine(uiusers.LoadInitialData());
-        EditVisionDat.SetActive(false);
-        OnlyVisionData.SetActive(true);
-        
+        public ImagenData imagedata;
+
+        public TMP_Text UserNameTitle;
+        public TMP_Text TemasText;
+        public TMP_InputField OboutTextInput;
+        public TMP_InputField HobbiesTextInput;
+        public TMP_InputField CVTextInput;
+        public UiUsers uiusers;
+
+        public GameObject OnlyVisionData;
+        public GameObject EditVisionDat;
+
+        public void changeViewDataAndSave()
+        {
+            uiusers.EditUserData();
+            imagedata.FetchImageData();
+            StartCoroutine(uiusers.LoadInitialData());
+            EditVisionDat.SetActive(false);
+            OnlyVisionData.SetActive(true);
+
+        }
     }
 }

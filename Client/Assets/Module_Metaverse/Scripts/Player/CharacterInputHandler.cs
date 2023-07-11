@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Manager;
+using Friends;
 namespace Player
 {
     public class CharacterInputHandler : MonoBehaviour

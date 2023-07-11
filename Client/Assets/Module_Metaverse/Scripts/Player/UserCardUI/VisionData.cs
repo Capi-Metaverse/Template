@@ -6,22 +6,26 @@ using UnityEngine.UI;
 /// <summary>
 /// Interface to CV 
 /// </summary>
-public class VisionData : MonoBehaviour
+/// 
+namespace UserCard
 {
-    // Start is called before the first frame update
-    public TMP_Text UserNameTitle;
-    public TMP_Text TemasText;
-    public TMP_Text OboutText;
-    public TMP_Text HobbiesText;
-    public TMP_Text CVText;
-
-    public GameObject OnlyVisionData;
-    public GameObject EditVisionDat;
-    public void changeEditData()
+    public class VisionData : MonoBehaviour
     {
-        EditVisionDat.SetActive(true);
-        OnlyVisionData.SetActive(false);
-    }
+        // Start is called before the first frame update
+        public TMP_Text UserNameTitle;
+        public TMP_Text TemasText;
+        public TMP_Text OboutText;
+        public TMP_Text HobbiesText;
+        public TMP_Text CVText;
 
+        public GameObject OnlyVisionData;
+        public GameObject EditVisionDat;
+        public void changeEditData()
+        {
+            EditVisionDat.SetActive(true);
+            OnlyVisionData.SetActive(false);
+        }
+
+    }
 }
 

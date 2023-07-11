@@ -9,9 +9,13 @@ using PlayFab.ClientModels;
 using UnityEngine;
 
 
+
 /// <summary>
 /// Class and constructor UserUIInfo
 /// </summary>
+
+namespace UserCard
+{
     public class UserUIInfo
     {
         public string name;
@@ -22,18 +26,18 @@ using UnityEngine;
 
 
 
-        public UserUIInfo(string name, string teams, string about, string hobbies,string CV)
+        public UserUIInfo(string name, string teams, string about, string hobbies, string CV)
         {
             this.name = name;
             this.teams = teams;
             this.about = about;
             this.hobbies = hobbies;
-            this.CV=CV;
+            this.CV = CV;
         }
     }
     public class ManageDataUI
     {
-    public UserUIInfo data;
+        public UserUIInfo data;
 
         /// <summary>
         /// Save User Data with key userUICard
@@ -71,20 +75,21 @@ using UnityEngine;
         /// </summary>
         /// <param name="result"></param>
         void OnCharactersDataReceived(GetUserDataResult result)
-        {  
-        Debug.Log("[PlayFab-ManageData] Received characters data!");
-
-        if (result.Data != null && result.Data.ContainsKey("userUICard"))
         {
-            Debug.Log(result.Data["userUICard"].Value);
-            data = JsonConvert.DeserializeObject<UserUIInfo>(result.Data["userUICard"].Value);
+            Debug.Log("[PlayFab-ManageData] Received characters data!");
+
+            if (result.Data != null && result.Data.ContainsKey("userUICard"))
+            {
+                Debug.Log(result.Data["userUICard"].Value);
+                data = JsonConvert.DeserializeObject<UserUIInfo>(result.Data["userUICard"].Value);
+            }
+
         }
 
-    }
-
-    public void OnError(PlayFabError obj)
+        public void OnError(PlayFabError obj)
         {
             Debug.Log("[PlayFab-ManageData] Error");
         }
     }
 
+}
