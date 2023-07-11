@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using Animation;
-
+using Player;
 namespace Tutorial
 {
     /// <summary>

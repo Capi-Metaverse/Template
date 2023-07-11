@@ -2,56 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LocalCameraHandler : MonoBehaviour
+namespace Player
 {
 
-    public Transform cameraAnchorPoint;
 
-
-    Vector2 viewInput;
-
-    float cameraRotationX = 0;
-    float cameraRotationY = 0;
-    //Other component
-    NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
-    Camera localCamera;
-    // Start is called before the first frame update
-
-    private void Awake()
+    public class LocalCameraHandler : MonoBehaviour
     {
-        localCamera = GetComponentInChildren<Camera>();
-        networkCharacterControllerPrototypeCustom = GetComponentInParent<NetworkCharacterControllerPrototypeCustom>();
-    }
-    void Start()
-    {
-        if (localCamera.enabled)
+
+        public Transform cameraAnchorPoint;
+
+
+        Vector2 viewInput;
+
+        float cameraRotationX = 0;
+        float cameraRotationY = 0;
+        //Other component
+        NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
+        Camera localCamera;
+        // Start is called before the first frame update
+
+        private void Awake()
         {
-            localCamera.transform.parent = null;
+            localCamera = GetComponentInChildren<Camera>();
+            networkCharacterControllerPrototypeCustom = GetComponentInParent<NetworkCharacterControllerPrototypeCustom>();
         }
-        
-    }
+        void Start()
+        {
+            if (localCamera.enabled)
+            {
+                localCamera.transform.parent = null;
+            }
 
-    // Update is called once per frame
-    /// <summary>
-    /// Controll of our camera
-    /// </summary>
-    void LateUpdate()
-    {
-        if(cameraAnchorPoint == null) return;
-        
-        if (!localCamera.enabled) return;
+        }
 
-        localCamera.transform.position = cameraAnchorPoint.position;
+        // Update is called once per frame
+        /// <summary>
+        /// Controll of our camera
+        /// </summary>
+        void LateUpdate()
+        {
+            if (cameraAnchorPoint == null) return;
 
-        cameraRotationX += viewInput.y * Time.deltaTime * networkCharacterControllerPrototypeCustom.viewUpDownRotationSpeed;
-        cameraRotationX = Mathf.Clamp(cameraRotationX, -80, 80);
-        cameraRotationY += viewInput.x * Time.deltaTime * networkCharacterControllerPrototypeCustom.viewUpDownRotationSpeed;
+            if (!localCamera.enabled) return;
 
-        localCamera.transform.localRotation = Quaternion.Euler(cameraRotationX, cameraRotationY, 0);
-    }
+            localCamera.transform.position = cameraAnchorPoint.position;
 
-    public void SetViewInputVector(Vector2 viewInput)
-    {
-        this.viewInput = viewInput;
+            cameraRotationX += viewInput.y * Time.deltaTime * networkCharacterControllerPrototypeCustom.viewUpDownRotationSpeed;
+            cameraRotationX = Mathf.Clamp(cameraRotationX, -80, 80);
+            cameraRotationY += viewInput.x * Time.deltaTime * networkCharacterControllerPrototypeCustom.viewUpDownRotationSpeed;
+
+            localCamera.transform.localRotation = Quaternion.Euler(cameraRotationX, cameraRotationY, 0);
+        }
+
+        public void SetViewInputVector(Vector2 viewInput)
+        {
+            this.viewInput = viewInput;
+        }
     }
 }

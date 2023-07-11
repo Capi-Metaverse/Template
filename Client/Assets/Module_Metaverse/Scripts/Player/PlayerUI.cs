@@ -6,119 +6,123 @@ using Manager;
 /// <summary>
 /// Ui from users
 /// </summary>
-public class PlayerUI : MonoBehaviour
+/// 
+namespace Player
 {
-
-    //Private
-
-    [SerializeField] private GameObject mic;
-    [SerializeField] private GameObject crosshair;
-    [SerializeField] private GameObject eventText;
-    [SerializeField] private GameObject presentationText;
-
-
-    //Mic Sprites
-    private Sprite microOn, microOff;
-    private bool isMicOn = false;
-
-
-    //Public
-
-    public GameObject Mic { get => mic; set => mic = value; }
-    public GameObject Crosshair { get => crosshair; set => crosshair = value; }
-    public GameObject EventText { get => eventText; set => eventText = value; }
-    public GameObject PresentationText { get => presentationText; set => presentationText = value; }
-
-
-    
-
-
-    public void Start()
+    public class PlayerUI : MonoBehaviour
     {
-        microOff = Resources.Load<Sprite>("Sprites/UI/micro_off");
-        microOn = Resources.Load<Sprite>("Sprites/UI/micro_on");
 
-        mic.GetComponent<Image>().sprite = microOff;
+        //Private
 
-        UIManager.FindInstance().PlayerUI = this;
-
-    }
-
+        [SerializeField] private GameObject mic;
+        [SerializeField] private GameObject crosshair;
+        [SerializeField] private GameObject eventText;
+        [SerializeField] private GameObject presentationText;
 
 
-    public void MicOff()
-    {
-        mic.SetActive(false);
-       
-    
-    }
+        //Mic Sprites
+        private Sprite microOn, microOff;
+        private bool isMicOn = false;
 
-    public void MicOn()
-    {
-        mic.SetActive(true);
-       
-    }
 
-    public void ChangeMicSprite()
-    {
-        if (isMicOn)
+        //Public
+
+        public GameObject Mic { get => mic; set => mic = value; }
+        public GameObject Crosshair { get => crosshair; set => crosshair = value; }
+        public GameObject EventText { get => eventText; set => eventText = value; }
+        public GameObject PresentationText { get => presentationText; set => presentationText = value; }
+
+
+
+
+
+        public void Start()
         {
-         
+            microOff = Resources.Load<Sprite>("Sprites/UI/micro_off");
+            microOn = Resources.Load<Sprite>("Sprites/UI/micro_on");
+
             mic.GetComponent<Image>().sprite = microOff;
+
+            UIManager.FindInstance().PlayerUI = this;
+
         }
 
-        else
+
+
+        public void MicOff()
         {
-            mic.GetComponent<Image>().sprite = microOn;
+            mic.SetActive(false);
+
+
         }
 
-        isMicOn = !isMicOn;
-    }
+        public void MicOn()
+        {
+            mic.SetActive(true);
+
+        }
+
+        public void ChangeMicSprite()
+        {
+            if (isMicOn)
+            {
+
+                mic.GetComponent<Image>().sprite = microOff;
+            }
+
+            else
+            {
+                mic.GetComponent<Image>().sprite = microOn;
+            }
+
+            isMicOn = !isMicOn;
+        }
 
 
-    public void CrosshairOff()
-    {
-        crosshair.SetActive(false);
-    }
+        public void CrosshairOff()
+        {
+            crosshair.SetActive(false);
+        }
 
-    public void CrosshairOn()
-    {
-        crosshair.SetActive(true);
-    }
+        public void CrosshairOn()
+        {
+            crosshair.SetActive(true);
+        }
 
-    public void EventTextOff()
-    {
-        eventText.SetActive(false);
-    }
+        public void EventTextOff()
+        {
+            eventText.SetActive(false);
+        }
 
-    public void EventTextOn()
-    {
-        eventText.SetActive(true);
-    }
+        public void EventTextOn()
+        {
+            eventText.SetActive(true);
+        }
 
-    public void PresentationTextOff()
-    {
-        presentationText.SetActive(false);
-    }
-    public void PresentationTextOn()
-    {
-        presentationText.SetActive(true);
-    }
+        public void PresentationTextOff()
+        {
+            presentationText.SetActive(false);
+        }
+        public void PresentationTextOn()
+        {
+            presentationText.SetActive(true);
+        }
 
-    public void HideUI()
-    {
-        Debug.Log("All Off");
-        MicOff();
-        CrosshairOff();
-        EventTextOff();
-        PresentationTextOff();
-    }
+        public void HideUI()
+        {
+            Debug.Log("All Off");
+            MicOff();
+            CrosshairOff();
+            EventTextOff();
+            PresentationTextOff();
+        }
 
-    public void ShowUI()
-    {
-        MicOn();
-        CrosshairOn();
-    
-    }
+        public void ShowUI()
+        {
+            MicOn();
+            CrosshairOn();
 
+        }
+
+    }
 }

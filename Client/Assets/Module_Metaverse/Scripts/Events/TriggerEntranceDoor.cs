@@ -1,6 +1,9 @@
 using Fusion;
 using UnityEngine;
 using Manager;
+using Player;
+using NetworkPlayer = Player.NetworkPlayer;
+
 public class TriggerEntranceDoor : MonoBehaviour
 {
     [SerializeField] private Animator EntranceDoor = null;

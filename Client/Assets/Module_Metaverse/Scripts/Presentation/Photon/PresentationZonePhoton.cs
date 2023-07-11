@@ -1,5 +1,6 @@
 using UnityEngine;
 using Manager;
+using Player;
 namespace PresentationModule
 {
     public class PresentationZonePhoton : MonoBehaviour

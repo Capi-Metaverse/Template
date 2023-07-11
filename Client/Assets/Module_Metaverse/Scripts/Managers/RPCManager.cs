@@ -6,6 +6,8 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using PresentationModule;
+using Player;
+using NetworkPlayer = Player.NetworkPlayer;
 
 namespace Manager
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ExitGames.Client.Photon;
 using UnityEngine;
 using Manager;
-
+using Player;
 public class ChatGPTActive : MonoBehaviour, IMetaEvent
 {
     public GameObject CanvasChatGPT;

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using UnityEngine.UI;
 using Manager;
 using AchievementModule;
-
+using Player;
 public class PlayerInteractionE : MonoBehaviour 
 {
     GameManager gameManager;

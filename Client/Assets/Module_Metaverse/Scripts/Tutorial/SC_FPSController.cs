@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using Player;
 namespace Tutorial
 {
     [RequireComponent(typeof(CharacterController))]

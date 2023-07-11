@@ -8,6 +8,9 @@ using Fusion.Sockets;
 using System.Linq;
 using Unity.Entities.UniversalDelegates;
 using Manager;
+using Player;
+using NetworkPlayer = Player.NetworkPlayer;
+
 public class PlayerList : MonoBehaviour
 {
     public GameObject PlayerItemPrefabSettings;

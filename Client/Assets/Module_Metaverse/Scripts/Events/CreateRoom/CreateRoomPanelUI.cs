@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Manager;
+using Player;
 namespace CreateRoom
 {
     public class CreateRoomPanelUI : MonoBehaviour

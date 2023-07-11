@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-public struct NetworkInputData : INetworkInput
+namespace Player
 {
-    public Vector2 movementInput;
-    public Vector3 aimForwardVector;
-    public Vector3 aimRightVector;
-    public NetworkBool isJumpPressed;
-    public NetworkBool isRunning;
-    public float cursorSpeedX;
-    public float cursorSpeedY;
+    public struct NetworkInputData : INetworkInput
+    {
+        public Vector2 movementInput;
+        public Vector3 aimForwardVector;
+        public Vector3 aimRightVector;
+        public NetworkBool isJumpPressed;
+        public NetworkBool isRunning;
+        public float cursorSpeedX;
+        public float cursorSpeedY;
+    }
 }

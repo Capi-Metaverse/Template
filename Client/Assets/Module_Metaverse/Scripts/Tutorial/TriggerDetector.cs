@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cursor = UnityEngine.Cursor;
-
+using Player;
 namespace Tutorial
 {
     public class TriggerDetector : MonoBehaviour
