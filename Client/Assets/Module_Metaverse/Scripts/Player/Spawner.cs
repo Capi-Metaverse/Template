@@ -5,7 +5,7 @@ using Fusion;
 using Fusion.Sockets;
 using System;
 using Manager;
-
+using Settings;
 namespace Player
 {
     public class Spawner : MonoBehaviour, INetworkRunnerCallbacks

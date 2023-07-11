@@ -5,31 +5,34 @@ using PlayFab.ClientModels;
 using PlayFab;
 using UnityEngine;
 
-public class ControlSensitivityPlayFab : MonoBehaviour
+namespace Settings
 {
-    public float sensitivityValue;
-
-    public void ChangeSensitivity(float value)
+    public class ControlSensitivityPlayFab : MonoBehaviour
     {
-        sensitivityValue = value;
-        UpdateUserDataRequest request = new UpdateUserDataRequest
+        public float sensitivityValue;
+
+        public void ChangeSensitivity(float value)
         {
-            Data = new Dictionary<string, string>
+            sensitivityValue = value;
+            UpdateUserDataRequest request = new UpdateUserDataRequest
+            {
+                Data = new Dictionary<string, string>
             {
                 {"Sensitivity", sensitivityValue.ToString()}
             }
-        };
+            };
 
-        PlayFabClientAPI.UpdateUserData(request, OnUpdateUserSensitivity, OnError);
-    }
+            PlayFabClientAPI.UpdateUserData(request, OnUpdateUserSensitivity, OnError);
+        }
 
-    private void OnUpdateUserSensitivity(UpdateUserDataResult result)
-    {
-        Debug.Log("Sensitivity function correct");
-    }
+        private void OnUpdateUserSensitivity(UpdateUserDataResult result)
+        {
+            Debug.Log("Sensitivity function correct");
+        }
 
-    private void OnError(PlayFabError error)
-    {
-        Debug.Log("Sensitivity function error : " + error.GenerateErrorReport());
+        private void OnError(PlayFabError error)
+        {
+            Debug.Log("Sensitivity function error : " + error.GenerateErrorReport());
+        }
     }
 }
