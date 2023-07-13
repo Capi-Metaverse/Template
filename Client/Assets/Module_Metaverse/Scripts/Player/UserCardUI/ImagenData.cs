@@ -24,7 +24,7 @@ namespace UserCard
         /// </summary>
         public void ClickImageAvatar()
         {
-            /*
+            
             string path = UnityEditor.EditorUtility.OpenFilePanel("Seleccionar archivo", "", "png,jpg");
             if (!string.IsNullOrEmpty(path))
             {
@@ -34,7 +34,7 @@ namespace UserCard
             string imagePath = ruta; // Path to your image file
             byte[] imageData = LoadImageAsByteArray(imagePath);
             UploadImageToUser(imageData);
-            */
+            
         }
 
 
