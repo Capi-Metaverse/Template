@@ -55,14 +55,14 @@ namespace Friends
         /// </summary>
         public void InstanceFriendItem()
         {
-            CharacterInputHandler.InitializeAsync();
+            
             CleanFriendsPanel();
 
             for (int i = 0; i < friends.Count; i++)
             {
                 if (friends[i].Tags == "confirmed")
                 {
-
+                    CharacterInputHandler.InitializeAsync();
                     //We create the userItem object
                     GameObject userItem = (GameObject)Instantiate(FriendItemPrefabSettings);
 
@@ -76,6 +76,7 @@ namespace Friends
                     PlayerNameText.text = friends[i].Username;
                     FriendItem.Username = friends[i].Username;
                     FriendItem.Id = friends[i].Id;
+
                 }
 
                 else if (friends[i].Tags == "requester")
