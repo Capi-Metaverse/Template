@@ -49,6 +49,10 @@ namespace Player
 
                 runner.Spawn(NetworkPlayer, handler.transform.position, Quaternion.identity, player, OnBeforeSpawn);
             }
+            else
+            {
+                CharacterInputHandler.InitializeAsync();
+            }
 
             StartCoroutine(WaitPlayer());
         }

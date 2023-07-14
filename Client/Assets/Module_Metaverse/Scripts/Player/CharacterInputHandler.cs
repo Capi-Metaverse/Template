@@ -127,6 +127,7 @@ namespace Player
 
         public async void InitializeAsync()
         {
+            Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             List<Friend> listaAmigos = new List<Friend>();
             try
             {
@@ -180,8 +181,7 @@ namespace Player
             //This script should only get the inputs (W,A,S,D, Mouse && other keys)
 
             //Just neeeded in camera
-
-
+            
             //OK
             if (inputManager.GetButtonDown("MuteVoice") && !pauseManager.IsPaused)
                 voiceChat.MuteAudio(photonManager.UserStatus);

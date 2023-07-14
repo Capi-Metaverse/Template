@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Manager;
 using UnityEngine;
+using Player;
 
 namespace Friends
 {
@@ -14,7 +15,7 @@ namespace Friends
         [SerializeField] private GameObject FriendRequestListSettings;
         [SerializeField] private GameObject FriendItemPrefabSettings;
         [SerializeField] private GameObject FriendListSettings;
-
+        CharacterInputHandler CharacterInputHandler { get; set; }
         private GameManager gameManager;
         private FriendManager FriendManager;
         private FriendItem FriendItem;
@@ -35,6 +36,7 @@ namespace Friends
             gameManager = GameManager.FindInstance();
             FriendManager = gameObject.GetComponent<FriendManager>();
             friends = FriendManager.Friends;
+            CharacterInputHandler = Player.NetworkPlayer.Local.GetComponent<CharacterInputHandler>();
         }
         public void CleanFriendsPanel()
         {
@@ -53,6 +55,7 @@ namespace Friends
         /// </summary>
         public void InstanceFriendItem()
         {
+            CharacterInputHandler.InitializeAsync();
             CleanFriendsPanel();
 
             for (int i = 0; i < friends.Count; i++)

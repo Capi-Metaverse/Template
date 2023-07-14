@@ -3,13 +3,16 @@ using PlayFab;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 /// <summary>
 /// This script is used to give properties to the prefac of friends.
 /// </summary>
 namespace Friends
 {
+
     public class FriendItem : MonoBehaviour
     {
+   
         private string username;
         private string id;
 
@@ -18,6 +21,7 @@ namespace Friends
         /// <summary>
         /// PlayFab - to remove from the list of confirmed friends
         /// </summary>
+        ///  
         public void Removefriends()
         {
             ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest

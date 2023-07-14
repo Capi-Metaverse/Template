@@ -3,6 +3,7 @@ using PlayFab;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 namespace Friends
 {
@@ -13,9 +14,8 @@ namespace Friends
 
         [SerializeField] private FriendList friendList;
         [SerializeField] private GetFriends getFriend;
-
+   
         public string Id { get => id; set => id = value; }
-
         /// <summary>
         /// PlayFab - Accept Friend Request
         /// </summary>
@@ -64,6 +64,7 @@ namespace Friends
         }
         private void OnAddFriendSuccess(ExecuteCloudScriptResult result)
         {
+      
             getFriend.GetFriendsConfirmedList();
         }
 
