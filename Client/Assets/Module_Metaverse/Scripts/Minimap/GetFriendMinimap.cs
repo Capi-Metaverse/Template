@@ -6,6 +6,9 @@ using UnityEngine;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Friends;
+using Player;
+using Unity.Entities.UniversalDelegates;
+
 public class GetFriendMinimap : MonoBehaviour
 {
     [SerializeField] private FriendManager friendManager;
@@ -46,9 +49,17 @@ public class GetFriendMinimap : MonoBehaviour
 
             // Deserialize the JSON response into a list of friend objects
             List<Friend> friendObjects = JsonConvert.DeserializeObject<List<Friend>>(json);
-            friends.AddRange(friendObjects);
-        }
+            for (int i = 0; i < friends.Count; i++)
+            {
+                if (friends[i].Tags == "confirmed")
+                {
 
+                    friendObjects.Add(friends[i]);
+                }
+            }
+
+            
+        }
         return friends;
     }
 }
