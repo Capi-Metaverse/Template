@@ -418,14 +418,17 @@ namespace Player
                     miniMap.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true); //minimapBorder
                     OpenMiniMapPul = true;
                 }
+
+                else if ((inputManager.GetButtonDown("OpenMiniMap")) && OpenMiniMapPul)
+                {
+                    miniMap.transform.GetChild(0).gameObject.SetActive(false); //MinimapMask
+                    miniMap.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false); //minimapRender
+                    miniMap.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false); //minimapBorder
+                    OpenMiniMapPul = false;
+                }
+
             }
 
-            else if ((inputManager.GetButtonDown("OpenMiniMap")) && !OpenMiniMapPul)
-            {
-                miniMap.transform.GetChild(0).gameObject.SetActive(false); //MinimapMask
-                miniMap.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false); //minimapRender
-                miniMap.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false); //minimapBorder
-            }
         }
 
         /// <summary>
