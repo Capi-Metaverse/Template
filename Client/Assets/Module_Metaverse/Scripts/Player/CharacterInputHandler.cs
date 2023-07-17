@@ -151,23 +151,28 @@ namespace Player
             // Recorre cada objeto Character(Clone)
             foreach (GameObject character in characters)
             {
+
                 string nickname = character.GetComponent<NetworkPlayer>().nickname.Value.ToString();
 
-                foreach (Friend friend in listaAmigos)
+                Debug.Log(nickname + " " + UserManager.FindInstance().Username);
+                if (nickname != UserManager.FindInstance().Username)
                 {
+          
+                    character.transform.GetChild(8).transform.gameObject.SetActive(false);
 
-                    // Friend was found
-                    if (nickname == friend.Username)
+                    foreach (Friend friend in listaAmigos)
                     {
-                        Debug.Log(friend.Username + "Model(Clone) encontrado en " + character.name + " activating marker on minimap");
 
-                        //Activate FriendMarker for this friend
-                        character.transform.GetChild(8).transform.gameObject.SetActive(true);
-                    }
+                        // Friend was found
+                        if (nickname == friend.Username)
+                        {
+                            Debug.Log(friend.Username + "Model(Clone) encontrado en " + character.name + " activating marker on minimap");
 
-                    else
-                    {
-                        Debug.Log("Not a friend of yours");
+                            //Activate FriendMarker for this friend
+                            Debug.Log(character.transform.GetChild(8).transform.gameObject);
+                            character.transform.GetChild(8).transform.gameObject.SetActive(true);
+                        }
+
                     }
                 }
             }
@@ -413,10 +418,11 @@ namespace Player
                 //OK but minimap Logic in another script
                 if ((inputManager.GetButtonDown("OpenMiniMap") && !OpenMiniMapPul))
                 {
+                    InitializeAsync();
                     miniMap.transform.GetChild(0).gameObject.SetActive(true); //MinimapMask
                     miniMap.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true); //minimapRender
                     miniMap.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true); //minimapBorder
-                    InitializeAsync();
+                   
                     OpenMiniMapPul = true;
                 }
 

@@ -49,12 +49,13 @@ public class GetFriendMinimap : MonoBehaviour
 
             // Deserialize the JSON response into a list of friend objects
             List<Friend> friendObjects = JsonConvert.DeserializeObject<List<Friend>>(json);
-            for (int i = 0; i < friends.Count; i++)
+            for (int i = 0; i < friendObjects.Count; i++)
             {
-                if (friends[i].Tags == "confirmed")
+                Debug.Log("Sin filtrar" + friendObjects[i]);
+                if (friendObjects[i].Tags == "confirmed")
                 {
-
-                    friendObjects.Add(friends[i]);
+                    Debug.Log("Filtrado" + friendObjects[i]);
+                    friends.Add(friendObjects[i]);
                 }
             }
 
