@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
 using Fusion.Sockets;
+using Fusion.Protocol;
 using System;
 
 namespace Manager
@@ -239,7 +240,7 @@ namespace Manager
             {
                 GameMode = mode,
                 CustomLobbyName = LOBBY_NAME,
-                SceneManager = _runner.AddComponent<NetworkSceneManagerDefault>(),
+                SceneManager = _runner.gameObject.AddComponent<NetworkSceneManagerDefault>(),
                 SessionName = props.RoomName.ToUpper(),
                 PlayerCount = 10,
                 SessionProperties = props.Properties,

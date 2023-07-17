@@ -156,7 +156,9 @@
     "AssembliesToWeave": [
         "Assembly-CSharp",
         "Assembly-CSharp-firstpass",
-        "PhotonVoice.Fusion"
+        "PhotonVoice.Fusion",
+        "Fusion.Editor",
+        "Metaverse.Core"
     ],
     "UseSerializableDictionary": true,
     "NullChecksForNetworkedProperties": true,
