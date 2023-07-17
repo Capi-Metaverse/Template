@@ -127,7 +127,7 @@ namespace Player
 
         public async void InitializeAsync()
         {
-            Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+         
             List<Friend> listaAmigos = new List<Friend>();
             try
             {
@@ -416,6 +416,7 @@ namespace Player
                     miniMap.transform.GetChild(0).gameObject.SetActive(true); //MinimapMask
                     miniMap.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true); //minimapRender
                     miniMap.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true); //minimapBorder
+                    InitializeAsync();
                     OpenMiniMapPul = true;
                 }
 
