@@ -1,7 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:VisualElement name="Request" style="width: 350px; height: 45px; margin-top: 20px; flex-direction: row; justify-content: space-between; align-items: center; padding-left: 15px; padding-right: 15px; background-color: rgb(169, 223, 250); border-top-left-radius: 11px; border-bottom-left-radius: 11px; border-top-right-radius: 11px; border-bottom-right-radius: 11px;">
-        <ui:Label text="Request" display-tooltip-when-elided="true" name="RequestLabel" style="font-size: 25px; color: rgb(0, 43, 78); -unity-text-align: middle-left; -unity-font-style: bold; width: 200px;" />
-        <ui:Button display-tooltip-when-elided="true" name="AcceptButton" style="background-color: rgba(0, 0, 0, 0); border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/PlayFabEditorExtensions/Editor/UI/Images/checkmark.png?fileID=21300000&amp;guid=1f806a850e4ff264eafc4935f65793b8&amp;type=3#checkmark&apos;); width: 30px; height: 30px;" />
-        <ui:Button text="X" display-tooltip-when-elided="true" name="DenyButton" style="background-color: rgba(0, 0, 0, 0); border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); color: rgb(154, 0, 0); -unity-font-style: bold; font-size: 25px;" />
-    </ui:VisualElement>
-</ui:UXML>

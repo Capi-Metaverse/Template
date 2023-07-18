@@ -1,7 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/NewUI/CreateRoomUI/RoomStyle.uss?fileID=7433441132597879392&amp;guid=4c419b5933fede64482448fc16b52140&amp;type=3#RoomStyle" />
-    <ui:VisualElement name="room-container" style="width: 400px; height: 30px; flex-direction: row; align-items: center; justify-content: space-between; background-color: rgb(31, 28, 46); border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; margin-top: 10px;">
-        <ui:Label text="Room&apos;s name" display-tooltip-when-elided="true" name="room-name" style="margin-left: 10px; font-size: 16px; -unity-font-style: bold; width: 75%; color: rgb(221, 221, 221); align-items: center; justify-content: center; -unity-text-align: middle-left;" />
-        <ui:Button text="Join" display-tooltip-when-elided="true" name="join-button" class="join-button" />
-    </ui:VisualElement>
-</ui:UXML>
