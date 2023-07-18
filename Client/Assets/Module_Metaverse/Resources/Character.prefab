@@ -239,17 +239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+  inputHandler: {fileID: 6215556961762079106}
   _avatar: 0
-  playerPrefabs:
-  - {fileID: 0}
-  - {fileID: -3915082565821610680, guid: f473450ed07080c41bc861586d86cc9e, type: 3}
-  - {fileID: -3915082565821610680, guid: e84e19ef6702a544180c220988425940, type: 3}
-  - {fileID: -3915082565821610680, guid: 4d3929c6ae096684d9b13fbb88f9e832, type: 3}
-  - {fileID: -3915082565821610680, guid: a9561826c922a76459b99f2f589cad7e, type: 3}
-  - {fileID: -3915082565821610680, guid: c6004deba5390ed4784fdec07fb6b29e, type: 3}
-  - {fileID: -3915082565821610680, guid: d610150337f0d054b9c1ad13aab73346, type: 3}
-  - {fileID: -3915082565821610680, guid: dcb111c6c372d2d4ba7b94376f44f5dc, type: 3}
-  animator: {fileID: 8161174919126568394, guid: 57f6953ce52c19147b49af395f0446ec, type: 3}
   playerNicknameTM: {fileID: 495725005451376805}
   _playfabIdentity: 
   _nickname:
@@ -257,7 +248,9 @@ MonoBehaviour:
     _data:
       Data: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   _ActorID: 0
-  inputHandler: {fileID: 6215556961762079106}
+  playerPrefabs:
+  - {fileID: -3915082565821610680, guid: 4d3929c6ae096684d9b13fbb88f9e832, type: 3}
+  animator: {fileID: 8161174919126568394, guid: 57f6953ce52c19147b49af395f0446ec, type: 3}
 --- !u!114 &4409362525915276883
 MonoBehaviour:
   m_ObjectHideFlags: 0

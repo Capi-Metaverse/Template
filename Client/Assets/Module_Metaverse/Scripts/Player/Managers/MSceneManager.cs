@@ -41,7 +41,7 @@ namespace Manager
 
         public void LoadMain()
         {
-            CurrentScene = "LobbyOficial";
+            CurrentScene = "Mapa1";
             SceneManager.LoadScene(CurrentScene);
         }
 

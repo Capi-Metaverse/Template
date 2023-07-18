@@ -48,7 +48,7 @@ namespace Player
             var controller = Resources.Load("Animations/Character") as RuntimeAnimatorController;
 
             //Select Avatar
-            if (this.avatar == 0) this.avatar = Random.Range(1, 6);
+            
             GameObject model = Instantiate(playerPrefabs[this.avatar], gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
             model.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             model.transform.SetAsFirstSibling();
